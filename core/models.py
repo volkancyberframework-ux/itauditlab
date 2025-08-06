@@ -38,7 +38,7 @@ class CourseSection(models.Model):
 class CourseSubsection(models.Model):
     section = models.ForeignKey(CourseSection, on_delete=models.CASCADE, related_name='subsections')
     small_title = models.CharField(max_length=255)
-    video_file = models.FileField(upload_to='course_videos/', blank=True, null=True)
+    video_url = models.URLField(blank=True, null=True)
     duration = models.CharField(max_length=20, blank=True, help_text="e.g. 3m 12s")
 
     def __str__(self):

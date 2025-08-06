@@ -127,16 +127,17 @@
                                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body p-0">
-                                              {% if sub.video_file %}
-                                                <video controls class="w-100" style="height: 600px">
-                                                  <source src="{{ sub.video_file.url }}" type="video/mp4">
-                                                  Your browser does not support the video tag.
-                                                </video>
-                                              {% else %}
-                                                <div class="text-center py-5">
-                                                  <p class="text-muted">No video uploaded for this subsection.</p>
-                                                </div>
-                                              {% endif %}
+                                              {% if sub.video_url %}
+                                              <video controls class="w-100" style="height: 600px">
+                                                <source src="{{ sub.video_url }}" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                              </video>
+                                            {% else %}
+                                              <div class="text-center py-5">
+                                                <p class="text-muted">No video available for this subsection.</p>
+                                              </div>
+                                            {% endif %}
+
                                             </div>
                                           </div>
                                         </div>
