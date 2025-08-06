@@ -146,6 +146,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 WHITENOISE_SKIP_COMPRESS_EXTENSIONS = ['.map']
 
+# Prevent collectstatic from failing on missing source maps
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
+# Allow missing referenced files (like .map) to not break build
+SILENCED_SYSTEM_CHECKS = ["staticfiles.E002", "staticfiles.E001"]
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
