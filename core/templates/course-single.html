@@ -198,23 +198,21 @@
                     class="d-flex justify-content-center align-items-center rounded border-white border rounded-3 bg-cover"
                     style="background-image: url('{{ course.image.url }}'); height: 210px">
                     {% if first_video_sub %}
-                      <a class="glightbox icon-shape rounded-circle btn-play icon-xl"
-                         href="{{ first_video_sub.video_url }}"
-                         data-type="video">
+                      <a href="#" class="icon-shape rounded-circle btn-play icon-xl"
+                         data-bs-toggle="modal" data-bs-target="#previewModal">
                         <i class="fe fe-play"></i>
                       </a>
                     {% endif %}
-
                   </div>
-
                 </div>
+
                 <!-- Card body -->
                 <div class="card-body">
                   <!-- Course Title -->
                   <h3 class="mb-3">{{ course.name }}</h3>
                 </div>
-
               </div>
+
               <!-- Card -->
               <div class="card mb-4">
                 <div>
@@ -251,5 +249,27 @@
           </div>
         </div>
       </section>
+
+      <!-- Video Preview Modal -->
+      <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+          <div class="modal-content">
+            <div class="modal-body p-0">
+              {% if first_video_sub.video_url %}
+                <video id="previewVideo" controls autoplay class="w-100" style="height: 600px;">
+                  <source src="{{ first_video_sub.video_url }}" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              {% else %}
+                <div class="text-center py-5">
+                  <p class="text-muted">No video available.</p>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     </main>
 {% endblock %}
