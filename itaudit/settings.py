@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -140,10 +142,6 @@ STATICFILES_DIRS = [
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 WHITENOISE_SKIP_COMPRESS_EXTENSIONS = ['.map']
 
 # Prevent collectstatic from failing on missing source maps
@@ -154,6 +152,14 @@ STATICFILES_FINDERS = [
 
 # Allow missing referenced files (like .map) to not break build
 SILENCED_SYSTEM_CHECKS = ["staticfiles.E002", "staticfiles.E001"]
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dza5fjv6l',
+    'API_KEY': '172272344529628',
+    'API_SECRET': 'CLOUDINARY_URL=cloudinary://172272344529628:**********@dza5fjv6l'
+}
 
 
 
