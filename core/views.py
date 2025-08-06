@@ -90,10 +90,22 @@ def course_single(request, pk):
     course = get_object_or_404(Course, pk=pk)
     sections = course.sections.prefetch_related('subsections')
     faqs = course.faqs.all()
+
+    # 🔍 Get the first subsection in the course with a video_url
+    first_video_sub = None
+    for section in sections:
+        for sub in section.subsections.all():
+            if sub.video_url:
+                first_video_sub = sub
+                break
+        if first_video_sub:
+            break
+
     return render(request, 'course-single.html', {
         'course': course,
         'sections': sections,
-        'faqs': faqs
+        'faqs': faqs,
+        'first_video_sub': first_video_sub,  # ✅ passed to the template
     })
 
 @login_required

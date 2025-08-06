@@ -59,95 +59,109 @@
                                     <div class="row">
                                       {% for course in courses %}
                                       <div class="col-lg-3 col-md-6 col-12">
-                                          <!-- Card -->
-                                          <div class="card mb-4 card-hover">
-                                              <a href="#">
-                                                  <img src="{{ course.image.url }}" alt="{{ course.name }}" class="card-img-top">
-                                              </a>
-
-                                              <!-- Card body -->
-                                              <div class="card-body">
-                                                <h3 class="h4 mb-2 text-truncate-line-2">
-                                                  {% if course in enrolled_courses %}
-                                                    <a href="{% url 'course_single' course.id %}" class="text-inherit">{{ course.name }}</a>
-                                                  {% else %}
-                                                    <span class="text-muted">{{ course.name }}</span>
-                                                  {% endif %}
-                                                </h3>
-                                                  <!-- List inline -->
-                                                  <ul class="mb-3 list-inline">
-                                                      <li class="list-inline-item">
-                                                          <span class="align-middle">
-                                                              <!-- Clock Icon -->
-                                                              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
-                                                                   class="bi bi-clock align-baseline" viewBox="0 0 16 16">
-                                                                  <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
-                                                                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
-                                                              </svg>
-                                                          </span>
-                                                          <span>{{ course.duration }}</span>
-                                                      </li>
-                                                      <li class="list-inline-item">
-                                                          <!-- Difficulty bars -->
-                                                          <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                               xmlns="http://www.w3.org/2000/svg">
-                                                              <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                                                              <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9"></rect>
-                                                              <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                                                          </svg>
-                                                          {{ course.difficulty }}
-                                                      </li>
-                                                  </ul>
-
-                                                  <div class="mt-3 d-flex align-baseline lh-1">
-                                                      <span class="fs-6">
-                                                          {% for i in "12345" %}
-                                                              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
-                                                                   class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
-                                                                  <path
-                                                                      d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                                              </svg>
-                                                          {% endfor %}
-                                                      </span>
-                                                      <span class="text-warning mx-1">{{ course.score }}</span>
-                                                      <span class="fs-6">(100+)</span>
-                                                  </div>
+                                        <!-- Card -->
+                                        <div class="card mb-4 card-hover">
+                                          <!-- Course Image -->
+                                          {% if course in enrolled_courses %}
+                                            <a href="{% url 'course_single' course.id %}">
+                                              <img src="{{ course.image.url }}" alt="{{ course.name }}" class="card-img-top">
+                                            </a>
+                                          {% else %}
+                                            <div class="card-img-top position-relative">
+                                              <img src="{{ course.image.url }}" alt="{{ course.name }}" class="img-fluid opacity-50">
+                                              <div class="position-absolute top-50 start-50 translate-middle text-muted fw-bold fs-6">
+                                                Enroll to access
                                               </div>
+                                            </div>
+                                          {% endif %}
 
-                                              <!-- Card footer -->
-                                              <div class="card-footer">
-                                                <div class="row align-items-center g-0">
-                                                  <div class="col-auto">
-                                                    <div class="avatar-xs rounded-circle bg-primary text-white fw-bold d-flex align-items-center justify-content-center">
-                                                      {{ course.preparer.first_name|slice:":1" }}{{ course.preparer.last_name|slice:":1" }}
-                                                    </div>
-                                                  </div>
-                                                  <div class="col ms-2">
-                                                    <span>{{ course.preparer }}</span>
-                                                  </div>
-                                                  <div class="col-auto">
-                                                    {% if course in enrolled_courses %}
-                                                      <!-- If already enrolled, show "Unenroll" button -->
-                                                      <form method="POST" action="{% url 'unenroll_course' %}" onsubmit="return confirm('Are you sure you want to unenroll?');">
-                                                        {% csrf_token %}
-                                                        <input type="hidden" name="course_id" value="{{ course.id }}">
-                                                        <button class="btn btn-success btn-sm" disabled style="cursor: not-allowed;" title="You are already enrolled in this course.">
-                                                          Enrolled
-                                                        </button>
-                                                      </form>
-                                                    {% else %}
-                                                      <!-- If not enrolled, show "Enroll" button -->
-                                                      <form method="POST" onsubmit="return confirm('Are you sure you want to enroll?');">
-                                                        {% csrf_token %}
-                                                        <input type="hidden" name="course_id" value="{{ course.id }}">
-                                                        <button class="btn btn-primary btn-sm">Enroll</button>
-                                                      </form>
-                                                    {% endif %}
-                                                  </div>
+                                          <!-- Card body -->
+                                          <div class="card-body">
+                                            <h3 class="h4 mb-2 text-truncate-line-2">
+                                              {% if course in enrolled_courses %}
+                                                <a href="{% url 'course_single' course.id %}" class="text-inherit">{{ course.name }}</a>
+                                              {% else %}
+                                                <span class="text-muted">{{ course.name }}</span>
+                                              {% endif %}
+                                            </h3>
+
+                                            <!-- List inline -->
+                                            <ul class="mb-3 list-inline">
+                                              <li class="list-inline-item">
+                                                <span class="align-middle">
+                                                  <!-- Clock Icon -->
+                                                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                                                       class="bi bi-clock align-baseline" viewBox="0 0 16 16">
+                                                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                                                  </svg>
+                                                </span>
+                                                <span>{{ course.duration }}</span>
+                                              </li>
+                                              <li class="list-inline-item">
+                                                <!-- Difficulty bars -->
+                                                <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
+                                                  <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
+                                                  <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9"></rect>
+                                                  <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
+                                                </svg>
+                                                {{ course.difficulty }}
+                                              </li>
+                                            </ul>
+
+                                            <!-- Rating -->
+                                            <div class="mt-3 d-flex align-baseline lh-1">
+                                              <span class="fs-6">
+                                                {% for i in "12345" %}
+                                                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
+                                                       class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                                                    <path
+                                                      d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95
+                                                      l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327
+                                                      4.898.696c.441.062.612.636.282.95l-3.522 3.356.83
+                                                      4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                                  </svg>
+                                                {% endfor %}
+                                              </span>
+                                              <span class="text-warning mx-1">{{ course.score }}</span>
+                                              <span class="fs-6">(100+)</span>
+                                            </div>
+                                          </div>
+
+                                          <!-- Card footer -->
+                                          <div class="card-footer">
+                                            <div class="row align-items-center g-0">
+                                              <div class="col-auto">
+                                                <div class="avatar-xs rounded-circle bg-primary text-white fw-bold d-flex align-items-center justify-content-center">
+                                                  {{ course.preparer.first_name|slice:":1" }}{{ course.preparer.last_name|slice:":1" }}
                                                 </div>
                                               </div>
-
+                                              <div class="col ms-2">
+                                                <span>{{ course.preparer.first_name }} {{ course.preparer.last_name }}</span>
+                                              </div>
+                                              <div class="col-auto">
+                                                {% if course in enrolled_courses %}
+                                                  <!-- Enrolled -->
+                                                  <form method="POST" action="{% url 'unenroll_course' %}" onsubmit="return confirm('Are you sure you want to unenroll?');">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="course_id" value="{{ course.id }}">
+                                                    <button class="btn btn-success btn-sm" disabled style="cursor: not-allowed;" title="You are already enrolled in this course.">
+                                                      Enrolled
+                                                    </button>
+                                                  </form>
+                                                {% else %}
+                                                  <!-- Enroll -->
+                                                  <form method="POST" action="{% url 'enroll_course' %}" onsubmit="return confirm('Are you sure you want to enroll?');">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="course_id" value="{{ course.id }}">
+                                                    <button class="btn btn-primary btn-sm">Enroll</button>
+                                                  </form>
+                                                {% endif %}
+                                              </div>
+                                            </div>
                                           </div>
+                                        </div>
                                       </div>
                                       {% endfor %}
 
@@ -159,7 +173,7 @@
                                     {% for course in enrolled_courses %}
                                     <div class="col-lg-3 col-md-6 col-12">
                                       <div class="card mb-4 card-hover">
-                                        <a href="#"><img src="{{ course.image.url }}" alt="{{ course.name }}" class="card-img-top"></a>
+                                        <a href="{% url 'course_single' course.id %}"><img src="{{ course.image.url }}" alt="{{ course.name }}" class="card-img-top"></a>
                                         <div class="card-body">
                                           <h3 class="h4 mb-2 text-truncate-line-2">
                                             <a href="{% url 'course_single' course.id %}" class="text-inherit">{{ course.name }}</a>
@@ -184,10 +198,12 @@
                                         <div class="card-footer">
                                           <div class="row align-items-center g-0">
                                             <div class="col-auto">
-                                              <img src="{% static 'assets/images/avatar/avatar-3.jpg' %}" class="rounded-circle avatar-xs" alt="avatar">
+                                              <div class="rounded-circle bg-primary text-white fw-bold d-flex align-items-center justify-content-center avatar-xs" style="width: 32px; height: 32px;">
+                                                {{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}
+                                              </div>
                                             </div>
                                             <div class="col ms-2">
-                                              <span>{{ course.preparer }}</span>
+                                              <span>{{ course.preparer.first_name }} {{ course.preparer.last_name }}</span>
                                             </div>
                                             <div class="col-auto">
                                               {% if course in enrolled_courses %}

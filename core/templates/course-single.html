@@ -162,9 +162,6 @@
                         <h3 class="mb-2">Attachments</h3>
 
                         {% if course.attachment %}
-                        <a href="{{ course.attachment }}" target="_blank" class="btn btn-sm btn-outline-primary mt-3">
-                          📄 View PDF
-                        </a>
                         <a href="{{ course.attachment }}" download class="btn btn-sm btn-outline-success mt-3">
                           ⬇️ Download PDF
                         </a>
@@ -200,9 +197,14 @@
                   <div
                     class="d-flex justify-content-center align-items-center rounded border-white border rounded-3 bg-cover"
                     style="background-image: url('{{ course.image.url }}'); height: 210px">
-                    <a class="glightbox icon-shape rounded-circle btn-play icon-xl" href="https://www.youtube.com/watch?v=Nfzi7034Kbg">
-                      <i class="fe fe-play"></i>
-                    </a>
+                    {% if first_video_sub %}
+                      <a class="glightbox icon-shape rounded-circle btn-play icon-xl"
+                         href="{{ first_video_sub.video_url }}"
+                         data-type="video">
+                        <i class="fe fe-play"></i>
+                      </a>
+                    {% endif %}
+
                   </div>
 
                 </div>
