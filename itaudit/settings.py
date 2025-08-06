@@ -37,7 +37,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #ALLOWED_HOSTS = []
 
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = ['itauditlab.onrender.com']
 
@@ -156,12 +156,13 @@ STATICFILES_FINDERS = [
 # Allow missing referenced files (like .map) to not break build
 SILENCED_SYSTEM_CHECKS = ["staticfiles.E002", "staticfiles.E001"]
 
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dza5fjv6l',
-    'API_KEY': '172272344529628',
-    'API_SECRET': 'CLOUDINARY_URL=cloudinary://172272344529628:**********@dza5fjv6l'
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
 }
 
 
