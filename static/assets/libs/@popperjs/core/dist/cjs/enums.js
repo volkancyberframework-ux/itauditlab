@@ -62,4 +62,3 @@ exports.top = top;
 exports.variationPlacements = variationPlacements;
 exports.viewport = viewport;
 exports.write = write;
-//# sourceMappingURL=enums.js.map

@@ -2483,4 +2483,3 @@ tippy.setDefaultProps({
 
 export default tippy;
 export { animateFill, createSingleton, delegate, followCursor, hideAll, inlinePositioning, ROUND_ARROW as roundArrow, sticky };
-//# sourceMappingURL=tippy.esm.js.map
