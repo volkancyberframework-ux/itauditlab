@@ -38,3 +38,5 @@ htmlcov/
 # Render deployment
 runtime.txt
 Procfile
+
+*.map
