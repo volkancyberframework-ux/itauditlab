@@ -1,1 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Django
+db.sqlite3
+*.log
+local_settings.py
 .env
+*.pot
+media/
+staticfiles/
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+.myenv/
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test & coverage
+htmlcov/
+.tox/
+.coverage
+.pytest_cache/
+
+# Render deployment
+runtime.txt
+Procfile
