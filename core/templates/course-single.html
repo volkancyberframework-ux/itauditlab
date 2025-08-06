@@ -161,13 +161,17 @@
                       <div class="mb-4">
                         <h3 class="mb-2">Attachments</h3>
 
-                        {% if course.attachments %}
-                          <a href="{{ course.attachments.url }}" class="btn btn-outline-primary" download>
-                            <i class="fe fe-download me-2"></i>Download Attachment
-                          </a>
-                        {% else %}
-                          <p>No attachments available for this course.</p>
-                        {% endif %}
+                        {% if course.attachment %}
+                        <a href="{{ course.attachment }}" target="_blank" class="btn btn-sm btn-outline-primary mt-3">
+                          📄 View PDF
+                        </a>
+                        <a href="{{ course.attachment }}" download class="btn btn-sm btn-outline-success mt-3">
+                          ⬇️ Download PDF
+                        </a>
+                      {% else %}
+                        <p class="text-muted">No attachment uploaded.</p>
+                      {% endif %}
+
                       </div>
 
                     </div>

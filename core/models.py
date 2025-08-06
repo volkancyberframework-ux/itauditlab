@@ -21,7 +21,7 @@ class Course(models.Model):
     score = models.FloatField(default=0.0)
     preparer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='prepared_courses')
     description = models.TextField()
-    attachments = models.FileField(upload_to='course_attachments/', null=True, blank=True)
+    attachment = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.name
