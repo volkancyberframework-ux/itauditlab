@@ -142,7 +142,7 @@
                                               </div>
                                               <div class="col-auto">
                                                 {% if course in enrolled_courses %}
-                                                  <!-- Enrolled -->
+                                                  <!-- If already enrolled, show "Unenroll" button -->
                                                   <form method="POST" action="{% url 'unenroll_course' %}" onsubmit="return confirm('Are you sure you want to unenroll?');">
                                                     {% csrf_token %}
                                                     <input type="hidden" name="course_id" value="{{ course.id }}">
@@ -151,8 +151,8 @@
                                                     </button>
                                                   </form>
                                                 {% else %}
-                                                  <!-- Enroll -->
-                                                  <form method="POST" action="{% url 'enroll_course' %}" onsubmit="return confirm('Are you sure you want to enroll?');">
+                                                  <!-- If not enrolled, show "Enroll" button -->
+                                                  <form method="POST" onsubmit="return confirm('Are you sure you want to enroll?');">
                                                     {% csrf_token %}
                                                     <input type="hidden" name="course_id" value="{{ course.id }}">
                                                     <button class="btn btn-primary btn-sm">Enroll</button>
@@ -164,8 +164,6 @@
                                         </div>
                                       </div>
                                       {% endfor %}
-
-
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="currentlyLearning" role="tabpanel" aria-labelledby="currentlyLearning-tab">
