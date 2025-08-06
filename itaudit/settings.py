@@ -128,13 +128,14 @@ LOGIN_URL = 'login'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
+# Where collected static files will be stored (Render will serve from here)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Where your raw static files live (e.g., your custom CSS/JS)
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static'),  # ✅ Your actual static folder
 ]
 
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
