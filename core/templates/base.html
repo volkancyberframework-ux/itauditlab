@@ -197,6 +197,65 @@
         });
       </script>
 
+      <div class="modal-body p-0">
+        <video id="previewPlayer"
+               controls muted playsinline preload="metadata"
+               style="width:100%;height:auto;"></video>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+      <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const modal = document.getElementById('previewModal'); // your modal id
+        const url   = "{{ first_video_url|default:'' }}";      // your Direct Play URL
+
+        function loadAndPlay() {
+          const v = document.getElementById('previewPlayer');
+          if (!url || !v) return;
+
+          // HLS (.m3u8) → Safari/iOS native, others via hls.js
+          if (url.endsWith('.m3u8')) {
+            if (v.canPlayType('application/vnd.apple.mpegurl')) {
+              v.src = url;
+              v.play().catch(()=>{});
+            } else if (window.Hls && Hls.isSupported()) {
+              if (v._hls) { v._hls.destroy(); v._hls = null; }
+              const hls = new Hls();
+              v._hls = hls;
+              hls.loadSource(url);
+              hls.attachMedia(v);
+              hls.on(Hls.Events.MANIFEST_PARSED, () => v.play().catch(()=>{}));
+              // debug
+              hls.on(Hls.Events.ERROR, (e, data) => console.warn('HLS error', data));
+            } else {
+              // Last-ditch: try setting src anyway
+              v.src = url;
+              v.play().catch(()=>{});
+            }
+          } else {
+            // MP4 (Direct Play URL)
+            v.src = url;
+            v.play().catch(()=>{});
+          }
+
+          // basic error logging
+          v.addEventListener('error', () => console.warn('video error', v.error));
+        }
+
+        function stopAndCleanup() {
+          const v = document.getElementById('previewPlayer');
+          if (!v) return;
+          try { v.pause(); } catch(e){}
+          if (v._hls) { v._hls.destroy(); v._hls = null; }
+          v.removeAttribute('src'); v.load();
+        }
+
+        modal.addEventListener('shown.bs.modal', loadAndPlay);
+        modal.addEventListener('hidden.bs.modal', stopAndCleanup);
+      });
+      </script>
+
+
 
       <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg">
