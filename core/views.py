@@ -76,7 +76,7 @@ def logout_view(request):
 
 
 def landing_page(request):
-    courses = Course.objects.filter(dashboard_activated=True)
+    courses = Course.objects.filter(main_page_activated=True)
     return render(request, 'index.html', {'courses': courses})
 
 
