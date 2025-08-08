@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
-
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, get_user_model,logout
 from django.contrib.auth.decorators import login_required
@@ -11,13 +10,9 @@ from django.shortcuts import get_object_or_404
 from .models import Course, Enrollment
 from django.http import JsonResponse
 from django.db import models
-
-
-User = get_user_model()
-
+from .utils.bunny import generate_bunny_token
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
-from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
@@ -87,27 +82,40 @@ def pricing_view(request):
 def coming_soon_view(request):
     return render(request, 'coming-soon.html')
 
+from django.conf import settings
+from django.shortcuts import render, get_object_or_404
+from .models import Course
+from .utils.bunny import generate_bunny_token
+
 @login_required
 def course_single(request, pk):
     course = get_object_or_404(Course, pk=pk)
     sections = course.sections.prefetch_related('subsections')
     faqs = course.faqs.all()
 
-    # 🔍 Get the first subsection in the course with a video_url
+    # Find first subsection that has a Bunny video and generate token URLs
     first_video_sub = None
+    first_video_url = None
+
     for section in sections:
         for sub in section.subsections.all():
-            if sub.video_url:
-                first_video_sub = sub
-                break
-        if first_video_sub:
-            break
+            if getattr(sub, "bunny_video_id", None):
+                # Generate a short-lived Bunny token URL and attach it to the object for templates
+                path = f"/{settings.BUNNY_LIBRARY_ID}/{sub.bunny_video_id}/play_720p.mp4"
+                sub.token_url = generate_bunny_token(path, expiry_seconds=3600)
 
-    return render(request, 'course-single.html', {
-        'course': course,
-        'sections': sections,
-        'faqs': faqs,
-        'first_video_sub': first_video_sub,  # ✅ passed to the template
+                if first_video_sub is None:
+                    first_video_sub = sub
+                    first_video_url = sub.token_url
+            else:
+                sub.token_url = None
+
+    return render(request, "course-single.html", {
+        "course": course,
+        "sections": sections,
+        "faqs": faqs,
+        "first_video_sub": first_video_sub,
+        "first_video_url": first_video_url,  # use this in your preview player/modal
     })
 
 @login_required

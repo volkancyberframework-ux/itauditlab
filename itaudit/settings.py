@@ -14,9 +14,6 @@ from pathlib import Path
 import os
 import dj_database_url
 from decouple import config
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
 
 
 AUTH_USER_MODEL = 'core.CustomUser'
@@ -24,11 +21,13 @@ AUTH_USER_MODEL = 'core.CustomUser'
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = "django-insecure-dqiu7*-bt$@^&w&e)m6=z31-z&o5bmxl8w^nhipp9x(s2w%)c1"
 
-SECRET_KEY = config('SECRET_KEY')
+#SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['itauditlab.onrender.com']
+
 
 
 
@@ -42,8 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
-    'cloudinary',
-    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -71,9 +68,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-            "libraries": {
-                "video_extras": "core.templatetags.video_extras",
-            },
         },
     },
 ]
@@ -148,16 +142,9 @@ STATICFILES_FINDERS = [
 # Allow missing referenced files (like .map) to not break build
 SILENCED_SYSTEM_CHECKS = ["staticfiles.E002", "staticfiles.E001"]
 
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
-    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
-}
-
-
+BUNNY_SECURITY_KEY = os.environ.get("BUNNY_SECURITY_KEY")
+BUNNY_STREAM_BASE = os.environ.get("BUNNY_STREAM_BASE", "https://video.bunnycdn.com")
+BUNNY_LIBRARY_ID = os.environ.get("BUNNY_LIBRARY_ID")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

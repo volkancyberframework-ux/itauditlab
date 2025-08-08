@@ -1,17 +1,7 @@
 # core/validators.py
-from urllib.parse import urlparse
-from django.core.exceptions import ValidationError
-
-YOUTUBE_HOSTS = {
-    "youtube.com", "www.youtube.com", "m.youtube.com",
-    "youtu.be", "www.youtu.be",
-    "youtube-nocookie.com", "www.youtube-nocookie.com",
-}
+# Minimal shim so historical migrations keep working.
+# Do NOT add heavy imports here.
 
 def validate_youtube_url(value):
-    try:
-        host = (urlparse(value).hostname or "").lower()
-    except Exception:
-        raise ValidationError("Invalid URL.")
-    if host not in YOUTUBE_HOSTS:
-        raise ValidationError("Only YouTube URLs are allowed.")
+    # No-op: accept anything. Old migration just needs this symbol to exist.
+    return None

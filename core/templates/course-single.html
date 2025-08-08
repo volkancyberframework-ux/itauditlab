@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-{% load video_extras %}
 {% block content %}
 
     <main>
@@ -130,25 +129,19 @@
                                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body p-0">
-                                              {% with yt=sub.video_url|youtube_embed %}
-                                                {% if yt %}
-                                                  <div style="aspect-ratio: 16/9; width: 100%; max-width: 960px; margin: 0 auto;">
-                                                    <iframe
-                                                      src="{{ yt }}{% if '?' in yt %}&{% else %}?{% endif %}autoplay=1&mute=1&rel=0&modestbranding=1"
-                                                      title="{{ sub.small_title }}"
-                                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                                      allowfullscreen
-                                                      style="width: 100%; height: 100%; border: 0;"
-                                                    ></iframe>
-                                                  </div>
-                                                {% else %}
-                                                  <div class="text-center py-5">
-                                                    <p class="text-muted">No video available for this subsection.</p>
-                                                  </div>
-                                                {% endif %}
-                                              {% endwith %}
+                                              {% if sub.token_url %}
+                                                <div style="aspect-ratio: 16/9; width: 100%; max-width: 960px; margin: 0 auto;">
+                                                  <video controls autoplay style="width: 100%; height: 100%;" preload="metadata">
+                                                    <source src="{{ sub.token_url }}" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                  </video>
+                                                </div>
+                                              {% else %}
+                                                <div class="text-center py-5">
+                                                  <p class="text-muted">No video available for this subsection.</p>
+                                                </div>
+                                              {% endif %}
                                             </div>
-
                                           </div>
                                         </div>
                                       </div>
@@ -265,23 +258,18 @@
         <div class="modal-dialog modal-dialog-centered modal-xl">
           <div class="modal-content">
             <div class="modal-body p-0">
-              {% with yt=first_video_sub.video_url|youtube_embed %}
-                {% if yt %}
+              {% if first_video_url %}
                 <div style="aspect-ratio: 16/9; width: 100%; max-width: 960px; margin: 0 auto;">
-                  <iframe
-                    src="{{ yt }}{% if '?' in yt %}&{% else %}?{% endif %}autoplay=1&mute=1&rel=0&modestbranding=1"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen
-                    style="width: 100%; height: 100%; border: 0;"
-                  ></iframe>
+                  <video controls autoplay style="width: 100%; height: 100%;" preload="metadata">
+                    <source src="{{ first_video_url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
-
-                {% else %}
-                  <div class="text-center py-5">
-                    <p class="text-muted">No video available.</p>
-                  </div>
-                {% endif %}
-              {% endwith %}
+              {% else %}
+                <div class="text-center py-5">
+                  <p class="text-muted">No video available.</p>
+                </div>
+              {% endif %}
             </div>
           </div>
         </div>
