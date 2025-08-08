@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from .models import Course, Enrollment
 from django.http import JsonResponse
+from django.db import models
 
 
 User = get_user_model()
