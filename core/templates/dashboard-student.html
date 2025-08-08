@@ -63,18 +63,29 @@
                                         <div class="card mb-4 card-hover">
                                           <!-- Course Image -->
                                           {% if course in enrolled_courses %}
-                                            <a href="{% url 'course_single' course.id %}">
-                                              <img src="{{ course.image.url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="card-img-top">
-                                            </a>
+                                              <a href="{% url 'course_single' course.id %}">
+                                                  {% if course.image %}
+                                                      <img src="{{ course.image.url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="card-img-top">
+                                                  {% else %}
+                                                      <div class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted" style="height: 200px;">
+                                                          No Image
+                                                      </div>
+                                                  {% endif %}
+                                              </a>
                                           {% else %}
-                                            <div class="card-img-top position-relative">
-                                              <img src="{{ course.image.url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="img-fluid opacity-50">
-                                              <div class="position-absolute top-50 start-50 translate-middle text-muted fw-bold fs-6">
-                                                Enroll to access
+                                              <div class="card-img-top position-relative">
+                                                  {% if course.image %}
+                                                      <img src="{{ course.image.url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="img-fluid opacity-50">
+                                                  {% else %}
+                                                      <div class="d-flex align-items-center justify-content-center bg-light text-muted opacity-50" style="height: 200px;">
+                                                          No Image
+                                                      </div>
+                                                  {% endif %}
+                                                  <div class="position-absolute top-50 start-50 translate-middle text-muted fw-bold fs-6">
+                                                      Enroll to access
+                                                  </div>
                                               </div>
-                                            </div>
                                           {% endif %}
-
                                           <!-- Card body -->
                                           <div class="card-body">
                                             <h3 class="h4 mb-2 text-truncate-line-2">
@@ -177,7 +188,13 @@
                                     <div class="col-lg-3 col-md-6 col-12">
                                       <div class="card mb-4 card-hover">
                                         <a href="{% url 'course_single' course.id %}">
-                                          <img src="{{ course.image.url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="card-img-top">
+                                            {% if course.image %}
+                                                <img src="{{ course.image.url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="card-img-top">
+                                            {% else %}
+                                                <div class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted" style="height: 200px;">
+                                                    No Image
+                                                </div>
+                                            {% endif %}
                                         </a>
                                         <div class="card-body">
                                           <h3 class="h4 mb-2 text-truncate-line-2">
