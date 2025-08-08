@@ -18,6 +18,49 @@
 <link href="{% static 'assets/libs/bootstrap-icons/font/bootstrap-icons.min.css' %}" rel="stylesheet" />
 <link href="{% static 'assets/libs/simplebar/dist/simplebar.min.css' %}" rel="stylesheet" />
 
+<style>
+  .glightbox-container,
+  .glightbox-slide iframe {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+  }
+</style>
+
+<style>
+  .modal-dialog,
+  .modal-content,
+  .modal-body {
+    width: 90vw;
+    max-width: 90vw;
+    height: 80vh;
+    max-height: 80vh;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .modal-body iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+</style>
+
+<style>
+  #playPreviewBtn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .position-relative {
+    position: relative;
+  }
+</style>
+
+
 <!-- Theme CSS -->
 <link rel="stylesheet" href="{% static 'assets/css/theme.min.css' %}">
         <link rel="canonical" href="https://geeksui.codescandy.com/geeks/pages/dashboard-student.html">

@@ -95,21 +95,22 @@ from .models import Course
 @login_required
 def course_single(request, pk):
     course = get_object_or_404(Course, pk=pk)
-    sections = course.sections.prefetch_related('subsections')
+    sections = course.sections.prefetch_related('subsections').order_by('id')  # ensure ordering
     faqs = course.faqs.all()
 
     first_video_url = None
 
-    for section in sections:
-        for sub in section.subsections.all():
-            if sub.bunny_video_id:
-                sub.video_url = sub.bunny_video_id  # direct URL
-                if not first_video_url:
-                    first_video_url = sub.video_url
+    # Get the first section
+    first_section = sections.first()
+    if first_section:
+        # Get first subsection of that section
+        first_sub = first_section.subsections.order_by('id').first()
+        if first_sub and first_sub.bunny_video_id:
+            raw = first_sub.bunny_video_id.strip()
+            if raw.startswith("http://") or raw.startswith("https://"):
+                first_video_url = raw
             else:
-                sub.video_url = None
-        if first_video_url:
-            break
+                first_video_url = f"{settings.BUNNY_STREAM_BASE}/{raw}/playlist.m3u8"
 
     return render(request, "course-single.html", {
         "course": course,
@@ -117,6 +118,7 @@ def course_single(request, pk):
         "faqs": faqs,
         "first_video_url": first_video_url,
     })
+
 
 @login_required
 def dashboard_student(request):

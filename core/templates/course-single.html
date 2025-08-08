@@ -207,9 +207,12 @@
                     {% endif %}
 
                     {% if first_video_url %}
-                      <a href="#" id="playPreviewBtn" class="icon-shape rounded-circle btn-play icon-xl">
-                        <i class="fe fe-play"></i>
-                      </a>
+                      <div class="position-relative" style="height: 210px;">
+                        <a href="#" id="playPreviewBtn" class="icon-shape rounded-circle btn-play icon-xl">
+                          <i class="fe fe-play"></i>
+                        </a>
+                      </div>
+
 
                       <!-- Modal HTML -->
                       <div class="modal fade" id="previewModal" tabindex="-1" aria-hidden="true">
@@ -294,38 +297,6 @@
           </div>
         </div>
       </section>
-
-      <!-- Video Preview Modal -->
-      <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-          <div class="modal-content">
-            <div class="modal-body p-0">
-              {% if first_video_url %}
-                <video id="previewPlayer" controls autoplay style="width:100%;height:auto;"></video>
-                <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-                <script>
-                  document.addEventListener('DOMContentLoaded', function () {
-                    const url = "{{ first_video_url }}";
-                    const v = document.getElementById('previewPlayer');
-                    if (v.canPlayType('application/vnd.apple.mpegurl')) {
-                      v.src = url; // Safari/iOS
-                    } else if (Hls.isSupported()) {
-                      const hls = new Hls();
-                      hls.loadSource(url);
-                      hls.attachMedia(v);
-                    } else {
-                      v.src = url; // fallback (for .mp4 links)
-                    }
-                  });
-                </script>
-              {% else %}
-                <div class="text-center py-5"><p class="text-muted">No video available.</p></div>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-
 
     </main>
 {% endblock %}
