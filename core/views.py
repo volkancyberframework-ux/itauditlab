@@ -87,36 +87,44 @@ from django.shortcuts import render, get_object_or_404
 from .models import Course
 from .utils.bunny import generate_bunny_token
 
+# views.py
+from django.conf import settings
+from django.shortcuts import render, get_object_or_404
+from .models import Course
+
 @login_required
 def course_single(request, pk):
     course = get_object_or_404(Course, pk=pk)
     sections = course.sections.prefetch_related('subsections')
     faqs = course.faqs.all()
 
-    # Find first subsection that has a Bunny video and generate token URLs
-    first_video_sub = None
     first_video_url = None
 
     for section in sections:
         for sub in section.subsections.all():
-            if getattr(sub, "bunny_video_id", None):
-                # Generate a short-lived Bunny token URL and attach it to the object for templates
-                path = f"/{settings.BUNNY_LIBRARY_ID}/{sub.bunny_video_id}/play_720p.mp4"
-                sub.token_url = generate_bunny_token(path, expiry_seconds=3600)
+            raw = (sub.bunny_video_id or "").strip()
+            if not raw:
+                sub.hls_url = None
+                continue
 
-                if first_video_sub is None:
-                    first_video_sub = sub
-                    first_video_url = sub.token_url
+            # If it's a full URL, use it as-is; else assume it's a Bunny ID and build HLS URL
+            if raw.startswith("http://") or raw.startswith("https://"):
+                sub.hls_url = raw
             else:
-                sub.token_url = None
+                # Using your CDN base from Bunny
+                # e.g. https://vz-b58ec41d-9d4.b-cdn.net/<video_id>/playlist.m3u8
+                sub.hls_url = f"{settings.BUNNY_STREAM_BASE}/{raw}/playlist.m3u8"
+
+            if not first_video_url:
+                first_video_url = sub.hls_url
 
     return render(request, "course-single.html", {
         "course": course,
         "sections": sections,
         "faqs": faqs,
-        "first_video_sub": first_video_sub,
-        "first_video_url": first_video_url,  # use this in your preview player/modal
+        "first_video_url": first_video_url,
     })
+
 
 @login_required
 def dashboard_student(request):
