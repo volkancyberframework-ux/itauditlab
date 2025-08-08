@@ -102,21 +102,14 @@ def course_single(request, pk):
 
     for section in sections:
         for sub in section.subsections.all():
-            raw = (sub.bunny_video_id or "").strip()
-            if not raw:
-                sub.hls_url = None
-                continue
-
-            # If it's a full URL, use it as-is; else assume it's a Bunny ID and build HLS URL
-            if raw.startswith("http://") or raw.startswith("https://"):
-                sub.hls_url = raw
+            if sub.bunny_video_id:
+                sub.video_url = sub.bunny_video_id  # direct URL
+                if not first_video_url:
+                    first_video_url = sub.video_url
             else:
-                # Using your CDN base from Bunny
-                # e.g. https://vz-b58ec41d-9d4.b-cdn.net/<video_id>/playlist.m3u8
-                sub.hls_url = f"{settings.BUNNY_STREAM_BASE}/{raw}/playlist.m3u8"
-
-            if not first_video_url:
-                first_video_url = sub.hls_url
+                sub.video_url = None
+        if first_video_url:
+            break
 
     return render(request, "course-single.html", {
         "course": course,
@@ -124,7 +117,6 @@ def course_single(request, pk):
         "faqs": faqs,
         "first_video_url": first_video_url,
     })
-
 
 @login_required
 def dashboard_student(request):
