@@ -36,14 +36,16 @@ class Course(models.Model):
     is_turkish = models.BooleanField(default=False)
 
 def __str__(self):
-    return self.english_name
+    return self.turkish_name or self.english_name or f"Course #{self.pk}"
 
 class CourseSection(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='sections')
     big_title = models.CharField(max_length=255)
 
     def __str__(self):
-        return f"{self.course.name} - {self.big_title}"
+        course_name = self.course.turkish_name or self.course.english_name or f"Course #{self.course.pk}"
+        return f"{course_name} - {self.big_title}"
+
 
 
 class CourseSubsection(models.Model):
