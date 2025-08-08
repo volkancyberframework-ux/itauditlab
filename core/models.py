@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from .validators import validate_youtube_url
 
 
 class CustomUser(AbstractUser):
@@ -36,14 +37,17 @@ class CourseSection(models.Model):
 
 
 class CourseSubsection(models.Model):
-    section = models.ForeignKey(CourseSection, on_delete=models.CASCADE, related_name='subsections')
+    section = models.ForeignKey('CourseSection', on_delete=models.CASCADE, related_name='subsections')
     small_title = models.CharField(max_length=255)
-    video_url = models.URLField(blank=True, null=True)
+    video_url = models.URLField(
+        blank=True, null=True,
+        validators=[validate_youtube_url],
+        help_text="Paste a YouTube link (watch, youtu.be, shorts, or embed)."
+    )
     duration = models.CharField(max_length=20, blank=True, help_text="e.g. 3m 12s")
 
     def __str__(self):
         return f"{self.section.big_title} → {self.small_title}"
-
 
 class Enrollment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

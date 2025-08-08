@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-
+{% load video_extras %}
     <main>
       <!-- Page header -->
       <!-- Page header -->
@@ -127,17 +127,21 @@
                                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body p-0">
-                                              {% if sub.video_url %}
-                                              <video controls class="w-100" style="height: 600px">
-                                                <source src="{{ sub.video_url }}" type="video/mp4">
-                                                Your browser does not support the video tag.
-                                              </video>
-                                            {% else %}
-                                              <div class="text-center py-5">
-                                                <p class="text-muted">No video available for this subsection.</p>
-                                              </div>
-                                            {% endif %}
-
+                                              {% if sub.video_url|youtube_embed %}
+                                                <div class="ratio ratio-16x9">
+                                                  <iframe
+                                                    src="{{ sub.video_url|youtube_embed }}"
+                                                    title="{{ sub.small_title }}"
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                    allowfullscreen
+                                                    class="w-100" style="height: 600px"
+                                                  ></iframe>
+                                                </div>
+                                              {% else %}
+                                                <div class="text-center py-5">
+                                                  <p class="text-muted">No video available for this subsection.</p>
+                                                </div>
+                                              {% endif %}
                                             </div>
                                           </div>
                                         </div>
@@ -255,16 +259,24 @@
         <div class="modal-dialog modal-dialog-centered modal-xl">
           <div class="modal-content">
             <div class="modal-body p-0">
-              {% if first_video_sub.video_url %}
-                <video id="previewVideo" controls autoplay class="w-100" style="height: 600px;">
-                  <source src="{{ first_video_sub.video_url }}" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-              {% else %}
-                <div class="text-center py-5">
-                  <p class="text-muted">No video available.</p>
-                </div>
-              {% endif %}
+              {% with yt=first_video_sub.video_url|youtube_embed %}
+                {% if yt %}
+                  <div class="ratio ratio-16x9">
+                    <iframe
+                      id="previewVideo"
+                      src="{{ yt }}{% if '?' in yt %}&{% else %}?{% endif %}autoplay=1&mute=1"
+                      title="{{ first_video_sub.small_title }}"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowfullscreen
+                      class="w-100" style="height: 600px"
+                    ></iframe>
+                  </div>
+                {% else %}
+                  <div class="text-center py-5">
+                    <p class="text-muted">No video available.</p>
+                  </div>
+                {% endif %}
+              {% endwith %}
             </div>
           </div>
         </div>
