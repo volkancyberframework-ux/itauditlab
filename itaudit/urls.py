@@ -8,7 +8,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('bulamazsinki/', admin.site.urls),
     path('', include('core.urls')),
 ]
 
