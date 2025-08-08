@@ -129,13 +129,12 @@
                                             </div>
                                             <div class="modal-body p-0">
                                               {% if sub.video_url|youtube_embed %}
-                                                <div class="ratio ratio-16x9">
+                                                <div style="aspect-ratio: 16/9; width: 100%; max-width: 960px; margin: 0 auto;">
                                                   <iframe
-                                                    src="{{ sub.video_url|youtube_embed }}"
-                                                    title="{{ sub.small_title }}"
+                                                    src="{{ yt }}{% if '?' in yt %}&{% else %}?{% endif %}autoplay=1&mute=1&rel=0&modestbranding=1"
                                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                                     allowfullscreen
-                                                    class="w-600" style="height: 600px"
+                                                    style="width: 100%; height: 100%; border: 0;"
                                                   ></iframe>
                                                 </div>
                                               {% else %}
@@ -262,16 +261,15 @@
             <div class="modal-body p-0">
               {% with yt=first_video_sub.video_url|youtube_embed %}
                 {% if yt %}
-                  <div class="ratio ratio-16x9">
-                    <iframe
-                      id="previewVideo"
-                      src="{{ yt }}{% if '?' in yt %}&{% else %}?{% endif %}autoplay=1&mute=1"
-                      title="{{ first_video_sub.small_title }}"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowfullscreen
-                      class="w-600" style="height: 600px"
-                    ></iframe>
-                  </div>
+                <div style="aspect-ratio: 16/9; width: 100%; max-width: 960px; margin: 0 auto;">
+                  <iframe
+                    src="{{ yt }}{% if '?' in yt %}&{% else %}?{% endif %}autoplay=1&mute=1&rel=0&modestbranding=1"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                    style="width: 100%; height: 100%; border: 0;"
+                  ></iframe>
+                </div>
+
                 {% else %}
                   <div class="text-center py-5">
                     <p class="text-muted">No video available.</p>
