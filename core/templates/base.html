@@ -18,6 +18,17 @@
 <link href="{% static 'assets/libs/bootstrap-icons/font/bootstrap-icons.min.css' %}" rel="stylesheet" />
 <link href="{% static 'assets/libs/simplebar/dist/simplebar.min.css' %}" rel="stylesheet" />
 
+<style>
+
+#playPreviewBtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10; /* Butonun üstte görünmesi için */
+}
+
+</style>
 
 <!-- Theme CSS -->
 <link rel="stylesheet" href="{% static 'assets/css/theme.min.css' %}">
