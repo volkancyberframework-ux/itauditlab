@@ -186,6 +186,26 @@
       <script src="{% static 'assets/libs/glightbox/dist/js/glightbox.min.js' %}"></script>
       <script src="{% static 'assets/js/vendors/glight.js' %}"></script>
 
+      <!-- JS to open modal and load video -->
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const playBtn = document.getElementById('playPreviewBtn');
+          const modal = new bootstrap.Modal(document.getElementById('previewModal'));
+          const iframe = document.getElementById('previewIframe');
+
+          playBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            iframe.src = "{{ first_video_url }}";
+            modal.show();
+          });
+
+          document.getElementById('previewModal').addEventListener('hidden.bs.modal', function () {
+            iframe.src = "";
+          });
+        });
+      </script>
+
+
       <script>
         document.addEventListener('DOMContentLoaded', function () {
           const modals = document.querySelectorAll('.modal');
