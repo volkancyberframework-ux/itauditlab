@@ -24,10 +24,13 @@ AUTH_USER_MODEL = 'core.CustomUser'
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['itauditlab.onrender.com']
+
+
 
 # Application definition
 
@@ -68,6 +71,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            "libraries": {
+                "video_extras": "core.templatetags.video_extras",
+            },
         },
     },
 ]
