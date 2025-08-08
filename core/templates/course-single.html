@@ -132,9 +132,7 @@
                                               {% if sub.bunny_video_id %}
                                                 <iframe
                                                   src="{{ sub.bunny_video_id }}"
-                                                  width="100%"
-                                                  height="600"
-                                                  style="border:0;"
+                                                  style="border:0; width:100%; height:80vh;"
                                                   allow="autoplay; fullscreen"
                                                   allowfullscreen>
                                                 </iframe>
@@ -201,17 +199,21 @@
               <div class="card mb-3 mb-4">
                 <div class="p-1">
                   <div
-                      class="d-flex justify-content-center align-items-center rounded border-white border rounded-3 bg-cover"
-                      style="{% if course.image %}background-image: url('{{ course.image.url }}');{% else %}background-color: #f8f9fa;{% endif %} height: 210px">
-                      {% if not course.image %}
-                          <span class="text-muted">No Image</span>
-                      {% endif %}
-                      {% if first_video_sub %}
-                          <a href="#" class="icon-shape rounded-circle btn-play icon-xl"
-                             data-bs-toggle="modal" data-bs-target="#previewModal">
-                              <i class="fe fe-play"></i>
-                          </a>
-                      {% endif %}
+                    class="d-flex justify-content-center align-items-center rounded border-white border rounded-3 bg-cover"
+                    style="{% if course.image %}background-image: url('{{ course.image.url }}');{% else %}background-color: #f8f9fa;{% endif %} height: 210px">
+
+                    {% if not course.image %}
+                      <span class="text-muted">No Image</span>
+                    {% endif %}
+
+                    {% if first_video_url %}
+                      <a href="{{ first_video_url }}"
+                         class="glightbox icon-shape rounded-circle btn-play icon-xl"
+                         data-type="video"
+                         data-autoplay="true">
+                        <i class="fe fe-play"></i>
+                      </a>
+                    {% endif %}
                   </div>
                 </div>
 

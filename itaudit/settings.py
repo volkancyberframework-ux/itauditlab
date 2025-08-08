@@ -28,7 +28,10 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['itauditlab.onrender.com']
 
-
+CSP_FRAME_SRC = (
+    "'self'",
+    "https://iframe.mediadelivery.net",
+)
 
 
 # Application definition
