@@ -76,8 +76,9 @@ def logout_view(request):
 
 
 def landing_page(request):
-    courses = Course.objects.all()  # You can filter or order if needed
+    courses = Course.objects.filter(dashboard_activated=True)
     return render(request, 'index.html', {'courses': courses})
+
 
 def pricing_view(request):
     return render(request, 'pricing.html')
@@ -116,8 +117,20 @@ def dashboard_student(request):
         Enrollment.objects.get_or_create(user=request.user, course=course)
         return redirect('/dashboard-student/#currentlyLearning')  # go directly to the Enrolled tab
 
-    courses = Course.objects.all()
-    enrolled_courses = Course.objects.filter(enrollment__user=request.user)
+    # Base queryset: only dashboard_activated courses
+    courses = Course.objects.filter(dashboard_activated=True)
+
+    # Filter by language
+    if request.user.is_turkish and not request.user.is_english:
+        courses = courses.filter(is_turkish=True)
+    elif request.user.is_english and not request.user.is_turkish:
+        courses = courses.filter(is_english=True)
+    elif request.user.is_english and request.user.is_turkish:
+        courses = courses.filter(models.Q(is_english=True) | models.Q(is_turkish=True))
+    else:
+        courses = Course.objects.none()  # no matching courses
+
+    enrolled_courses = courses.filter(enrollment__user=request.user)
 
     return render(request, 'dashboard-student.html', {
         'courses': courses,

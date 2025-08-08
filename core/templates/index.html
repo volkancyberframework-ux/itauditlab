@@ -955,7 +955,7 @@
                           </span>
                         </div>
                         <h3 class="mb-0 h4">
-                          <a href="{% url 'login' %}" class="text-inherit">{{ course.name }}</a>
+                          <a href="{% url 'login' %}" class="text-inherit">{{ course.english_name }}</a>
                         </h3>
                         <small class="text-secondary">
                           {{ course.preparer.get_full_name|default:course.preparer.username }}

@@ -6,6 +6,8 @@ from .validators import validate_youtube_url
 
 class CustomUser(AbstractUser):
     is_first_login = models.BooleanField(default=True)
+    is_english = models.BooleanField(default=False)
+    is_turkish = models.BooleanField(default=False)
 
 
 class Course(models.Model):
@@ -15,18 +17,27 @@ class Course(models.Model):
         ('Advanced', 'Advanced'),
     ]
 
-    name = models.CharField(max_length=255)
+    turkish_name = models.CharField(max_length=255)
+    english_name = models.CharField(max_length=255, blank=True, null=True)  # New
     image = models.ImageField(upload_to='course_images/')
     duration = models.DurationField(help_text="Format: hh:mm:ss")
     difficulty = models.CharField(max_length=20, choices=DIFFICULTY_CHOICES)
     score = models.FloatField(default=0.0)
-    preparer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='prepared_courses')
+    preparer = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='prepared_courses'
+    )
     description = models.TextField()
     attachment = models.URLField(blank=True, null=True)
+    dashboard_activated = models.BooleanField(default=False)  # New
+    main_page_activated = models.BooleanField(default=False)  # New
+    is_english = models.BooleanField(default=False)  # New
+    is_turkish = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.name
-
+def __str__(self):
+    return self.english_name
 
 class CourseSection(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='sections')
