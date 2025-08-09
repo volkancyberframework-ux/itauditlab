@@ -12,8 +12,9 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .models import Course, Enrollment,CourseSection,CourseSubsection,CourseFAQ,CustomUser
 from .utils.bunny import generate_bunny_token
-
-
+from core.models import CourseSubsection
+from django.db.models import Prefetch, IntegerField
+from django.db.models.functions import Coalesce
 
 User = get_user_model()
 
@@ -92,12 +93,10 @@ def course_single(request, pk):
         sort_key=Coalesce('order', 'id')
     ).order_by('sort_key', 'id')
 
-    # Preorder subsections the same way
-    from core.models import CourseSubsection
     subsections_prefetch = Prefetch(
         'subsections',
         queryset=CourseSubsection.objects.annotate(
-            sort_key=Coalesce('order', 'id')
+            sort_key=Coalesce('order', 'id', output_field=IntegerField())
         ).order_by('sort_key', 'id')
     )
 
