@@ -278,4 +278,30 @@
       </section>
 
     </main>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Önizleme modalındaki video durdurma
+      const previewModal = document.getElementById('previewModal');
+      const previewIframe = document.getElementById('previewIframe');
+
+      if (previewModal && previewIframe) {
+        previewModal.addEventListener('hidden.bs.modal', function () {
+          previewIframe.src = '';
+        });
+      }
+
+      // Dinamik video modalları için
+      document.querySelectorAll('[id^="videoModal"]').forEach(function (modal) {
+        modal.addEventListener('hidden.bs.modal', function () {
+          const iframe = modal.querySelector('iframe');
+          if (iframe) {
+            iframe.src = '';
+          }
+        });
+      });
+    });
+    </script>
+
 {% endblock %}
