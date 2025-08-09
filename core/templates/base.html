@@ -37,92 +37,94 @@
     </head>
 
     <body>
-       <nav class="navbar navbar-expand-lg">
-  <div class="container-fluid px-0">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid px-0">
 
-      <a href="{% url 'dashboard_student' %}" class="d-flex align-items-center gap-2 text-decoration-none">
-        <img src="{% static 'assets/images/brand/logo/logo.svg' %}" width="250" alt="ITAuditLab logo" />
-    </a>
+          <a href="{% url 'dashboard_student' %}" class="d-flex align-items-center gap-2 text-decoration-none">
+            <img src="{% static 'assets/images/brand/logo/logo.svg' %}" width="250" alt="ITAuditLab logo" />
+        </a>
 
 
-    <!-- Mobile view nav wrap -->
-    <div class="ms-auto d-flex align-items-center order-lg-3">
-      <div class="dropdown">
-        <button class="btn btn-light btn-icon rounded-circle d-flex align-items-center" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
-          <i class="bi theme-icon-active"></i>
-          <span class="visually-hidden bs-theme-text">Toggle theme</span>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bs-theme-text">
-          <li>
-            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
-              <i class="bi theme-icon bi-sun-fill"></i>
-              <span class="ms-2">Light</span>
+        <!-- Mobile view nav wrap -->
+        <div class="ms-auto d-flex align-items-center order-lg-3">
+          <!-- Theme toggle -->
+          <div class="dropdown">
+            <button id="themeToggleBtn" class="btn btn-light btn-icon rounded-circle d-flex align-items-center"
+                    type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Toggle theme (auto)">
+              <i class="bi theme-icon-active"></i>
+              <span class="visually-hidden bs-theme-text">Toggle theme</span>
             </button>
-          </li>
-          <li>
-            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-              <i class="bi theme-icon bi-moon-stars-fill"></i>
-              <span class="ms-2">Dark</span>
-            </button>
-          </li>
-          <li>
-            <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
-              <i class="bi theme-icon bi-circle-half"></i>
-              <span class="ms-2">Auto</span>
-            </button>
-          </li>
-        </ul>
-      </div>
-      <ul class="navbar-nav navbar-right-wrap ms-2 flex-row d-none d-md-block">
-        <li class="dropdown ms-2 d-inline-block position-static">
-          <a class="rounded-circle" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-            <div class="avatar avatar-md avatar-indicators avatar-online bg-primary text-white fw-bold rounded-circle d-flex align-items-center justify-content-center">
-              {{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}
-            </div>
-          </a>
-          <div class="dropdown-menu dropdown-menu-end position-absolute mx-3 my-5">
-            <div class="dropdown-item">
-              <div class="d-flex">
-                <div class="avatar avatar-md avatar-indicators avatar-online bg-primary text-white fw-bold rounded-circle d-flex align-items-center justify-content-center">
-                  {{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}
-                </div>
-                <div class="ms-3 lh-1">
-                  <h5 class="mb-1">{{ user.first_name }} {{ user.last_name }}</h5>
-                  <p class="mb-0">{{ user.email }}</p>
-                </div>
-              </div>
-            </div>
-            <div class="dropdown-divider"></div>
-            <ul class="list-unstyled">
+            <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="themeToggleBtn">
               <li>
-                <a class="dropdown-item" href="{% url 'logout' %}">
-                  <i class="fe fe-power me-2"></i>
-                  Sign Out
-                </a>
+                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
+                  <i class="bi theme-icon bi-sun-fill"></i><span class="ms-2">Light</span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
+                  <i class="bi theme-icon bi-moon-stars-fill"></i><span class="ms-2">Dark</span>
+                </button>
+              </li>
+              <li>
+                <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                  <i class="bi theme-icon bi-circle-half"></i><span class="ms-2">Auto</span>
+                </button>
               </li>
             </ul>
           </div>
-        </li>
-      </ul>
-    </div>
-    <div>
-      <!-- Button -->
-      <button
-        class="navbar-toggler collapsed ms-2"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbar-default"
-        aria-controls="navbar-default"
-        aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span class="icon-bar top-bar mt-0"></span>
-        <span class="icon-bar middle-bar"></span>
-        <span class="icon-bar bottom-bar"></span>
-      </button>
-    </div>
 
-  </div>
-</nav>
+          <!-- REMOVE d-none d-md-block so avatar shows on mobile -->
+          <ul class="navbar-nav navbar-right-wrap ms-2 flex-row">
+            <li class="dropdown ms-2 d-inline-block position-static">
+              <a class="rounded-circle" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                <div class="avatar avatar-md avatar-indicators avatar-online bg-primary text-white fw-bold rounded-circle d-flex align-items-center justify-content-center">
+                  {{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end position-absolute mx-3 my-5">
+                <div class="dropdown-item">
+                  <div class="d-flex">
+                    <div class="avatar avatar-md avatar-indicators avatar-online bg-primary text-white fw-bold rounded-circle d-flex align-items-center justify-content-center">
+                      {{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}
+                    </div>
+                    <div class="ms-3 lh-1">
+                      <h5 class="mb-1">{{ user.first_name }} {{ user.last_name }}</h5>
+                      <p class="mb-0">{{ user.email }}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <ul class="list-unstyled">
+                  <li>
+                    <a class="dropdown-item" href="{% url 'logout' %}">
+                      <i class="fe fe-power me-2"></i>
+                      Sign Out
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <!-- Button -->
+          <button
+            class="navbar-toggler collapsed ms-2"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbar-default"
+            aria-controls="navbar-default"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="icon-bar top-bar mt-0"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+          </button>
+        </div>
+
+      </div>
+    </nav>
 
       {% block content %}
 
@@ -185,6 +187,10 @@
       <script src="{% static 'assets/js/vendors/tooltip.js' %}"></script>
       <script src="{% static 'assets/libs/glightbox/dist/js/glightbox.min.js' %}"></script>
       <script src="{% static 'assets/js/vendors/glight.js' %}"></script>
+
+
+
+
 
       <!-- JS to open modal and load video -->
       <script>
@@ -292,6 +298,48 @@
     </div>
   </div>
 </div>
+
+
+<script>
+(() => {
+  const storedTheme = localStorage.getItem('theme');
+
+  const getPreferredTheme = () => {
+    if (storedTheme) return storedTheme;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  };
+
+  const setTheme = theme => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-bs-theme');
+      document.documentElement.setAttribute('data-bs-theme',
+        window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    } else {
+      document.documentElement.setAttribute('data-bs-theme', theme);
+    }
+    document.querySelectorAll('[data-bs-theme-value]').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-bs-theme-value') === theme);
+      btn.setAttribute('aria-pressed', btn.classList.contains('active'));
+    });
+  };
+
+  setTheme(getPreferredTheme());
+
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    if ((localStorage.getItem('theme') || 'auto') === 'auto') setTheme('auto');
+  });
+
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-bs-theme-value]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const theme = btn.getAttribute('data-bs-theme-value');
+        localStorage.setItem('theme', theme);
+        setTheme(theme);
+      });
+    });
+  });
+})();
+</script>
 
 
 
