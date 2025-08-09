@@ -129,16 +129,15 @@
                                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body p-0">
-                                              {% if sub.bunny_video_id %}
+                                                {% if sub.bunny_iframe_url %}
                                                 <iframe
-                                                  id="sub-iframe-{{ sub.id }}"
-                                                  data-src="{{ sub.bunny_iframe_url }}"  {# build this in the view; see note below #}
+                                                  data-src="{{ sub.bunny_iframe_url }}"
                                                   src=""
                                                   style="border:0; width:100%; height:100vh; max-height:100vh;"
                                                   allow="autoplay; fullscreen; picture-in-picture"
                                                   allowfullscreen>
                                                 </iframe>
-                                              {% else %}
+                                                {% else %}
                                                 <div class="text-center py-5">
                                                   <p class="text-muted">No video available for this subsection.</p>
                                                 </div>
@@ -209,20 +208,25 @@
 
                     {% if first_video_url %}
                       <div class="position-relative" style="height: 210px; width: 100%;">
-                        <a href="#" id="playPreviewBtn" class="icon-shape rounded-circle btn-play icon-xl">
+                        <a href="#"
+                           id="playPreviewBtn"
+                           class="icon-shape rounded-circle btn-play icon-xl"
+                           data-bs-toggle="modal"
+                           data-bs-target="#previewModal"
+                           data-preview-src="{{ first_video_url }}">
                           <i class="fe fe-play"></i>
                         </a>
                       </div>
-                      <!-- Modal HTML -->
+
                       <div class="modal fade" id="previewModal" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-xl modal-dialog-centered">
                           <div class="modal-content bg-dark">
                             <div class="modal-body p-0">
                               <iframe
                                 id="previewIframe"
-                                src=""
+                                src=""                       <!-- leave empty; JS sets it on open -->
                                 style="border:0; width:100%; height:80vh;"
-                                allow="autoplay; fullscreen"
+                                allow="autoplay; fullscreen; picture-in-picture"
                                 allowfullscreen>
                               </iframe>
                             </div>
@@ -230,6 +234,7 @@
                         </div>
                       </div>
                     {% endif %}
+
 
                   </div>
                 </div>
