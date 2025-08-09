@@ -93,13 +93,14 @@ def course_single(request, pk):
     ).order_by('sort_key', 'id')
 
     # Preorder subsections the same way
-    from core.models import Subsection  # adjust import if needed
+    from core.models import CourseSubsection
     subsections_prefetch = Prefetch(
         'subsections',
-        queryset=Subsection.objects.annotate(
+        queryset=CourseSubsection.objects.annotate(
             sort_key=Coalesce('order', 'id')
         ).order_by('sort_key', 'id')
     )
+
 
     sections = sections_qs.prefetch_related(subsections_prefetch)
     faqs = course.faqs.all()
