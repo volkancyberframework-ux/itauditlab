@@ -2,21 +2,18 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-import os
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+from django.views.static import serve
 
 urlpatterns = [
     path('bulamazsinki/', admin.site.urls),
     path('', include('core.urls')),
 ]
 
-# Sadece development için:
+# Static & Media files
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=os.path.join(BASE_DIR, 'static'))
-
-if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 else:
-    urlpatterns += [path("media/<path:path>", serve, {"document_root": settings.MEDIA_ROOT})]
+    urlpatterns += [
+        path("media/<path:path>", serve, {"document_root": settings.MEDIA_ROOT}),
+    ]
