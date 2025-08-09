@@ -55,33 +55,26 @@
               <span class="visually-hidden bs-theme-text">Toggle theme</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="themeToggleBtn">
-              <li>
-                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
-                  <i class="bi theme-icon bi-sun-fill"></i><span class="ms-2">Light</span>
-                </button>
-              </li>
-              <li>
-                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
-                  <i class="bi theme-icon bi-moon-stars-fill"></i><span class="ms-2">Dark</span>
-                </button>
-              </li>
-              <li>
-                <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
-                  <i class="bi theme-icon bi-circle-half"></i><span class="ms-2">Auto</span>
-                </button>
-              </li>
+              <li><button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
+                <i class="bi theme-icon bi-sun-fill"></i><span class="ms-2">Light</span>
+              </button></li>
+              <li><button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
+                <i class="bi theme-icon bi-moon-stars-fill"></i><span class="ms-2">Dark</span>
+              </button></li>
+              <li><button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                <i class="bi theme-icon bi-circle-half"></i><span class="ms-2">Auto</span>
+              </button></li>
             </ul>
           </div>
 
-          <!-- REMOVE d-none d-md-block so avatar shows on mobile -->
           <ul class="navbar-nav navbar-right-wrap ms-2 flex-row">
-            <li class="dropdown ms-2 d-inline-block position-static">
-              <a class="rounded-circle" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+            <li class="nav-item dropdown ms-2"> <!-- CHANGED -->
+              <a class="rounded-circle" href="#" data-bs-toggle="dropdown" aria-expanded="false"> <!-- CHANGED -->
                 <div class="avatar avatar-md avatar-indicators avatar-online bg-primary text-white fw-bold rounded-circle d-flex align-items-center justify-content-center">
                   {{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}
                 </div>
               </a>
-              <div class="dropdown-menu dropdown-menu-end position-absolute mx-3 my-5">
+              <div class="dropdown-menu dropdown-menu-end"> <!-- CHANGED -->
                 <div class="dropdown-item">
                   <div class="d-flex">
                     <div class="avatar avatar-md avatar-indicators avatar-online bg-primary text-white fw-bold rounded-circle d-flex align-items-center justify-content-center">
@@ -106,6 +99,7 @@
             </li>
           </ul>
         </div>
+
 
         <div>
           <!-- Button -->
