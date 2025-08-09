@@ -198,28 +198,45 @@
 
 
       <script>
-        document.addEventListener('DOMContentLoaded', function () {
-          const modals = document.querySelectorAll('.modal');
+      (() => {
+        const storedTheme = localStorage.getItem('theme');
 
-          modals.forEach(modal => {
-            modal.addEventListener('show.bs.modal', function () {
-              const video = modal.querySelector('video');
-              if (video) {
-                video.play();
-              }
-            });
+        const getPreferredTheme = () => {
+          if (storedTheme) return storedTheme;
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        };
 
-            modal.addEventListener('hide.bs.modal', function () {
-              const video = modal.querySelector('video');
-              if (video) {
-                video.pause();
-                video.currentTime = 0;
-              }
+        const setTheme = theme => {
+          if (theme === 'auto') {
+            document.documentElement.removeAttribute('data-bs-theme');
+            document.documentElement.setAttribute('data-bs-theme',
+              window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          } else {
+            document.documentElement.setAttribute('data-bs-theme', theme);
+          }
+          document.querySelectorAll('[data-bs-theme-value]').forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-bs-theme-value') === theme);
+            btn.setAttribute('aria-pressed', btn.classList.contains('active'));
+          });
+        };
+
+        setTheme(getPreferredTheme());
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+          if ((localStorage.getItem('theme') || 'auto') === 'auto') setTheme('auto');
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+          document.querySelectorAll('[data-bs-theme-value]').forEach(btn => {
+            btn.addEventListener('click', () => {
+              const theme = btn.getAttribute('data-bs-theme-value');
+              localStorage.setItem('theme', theme);
+              setTheme(theme);
             });
           });
         });
+      })();
       </script>
-
 
       <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg">
@@ -283,49 +300,6 @@
     </div>
   </div>
 </div>
-
-
-<script>
-(() => {
-  const storedTheme = localStorage.getItem('theme');
-
-  const getPreferredTheme = () => {
-    if (storedTheme) return storedTheme;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  };
-
-  const setTheme = theme => {
-    if (theme === 'auto') {
-      document.documentElement.removeAttribute('data-bs-theme');
-      document.documentElement.setAttribute('data-bs-theme',
-        window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    } else {
-      document.documentElement.setAttribute('data-bs-theme', theme);
-    }
-    document.querySelectorAll('[data-bs-theme-value]').forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-bs-theme-value') === theme);
-      btn.setAttribute('aria-pressed', btn.classList.contains('active'));
-    });
-  };
-
-  setTheme(getPreferredTheme());
-
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-    if ((localStorage.getItem('theme') || 'auto') === 'auto') setTheme('auto');
-  });
-
-  window.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('[data-bs-theme-value]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const theme = btn.getAttribute('data-bs-theme-value');
-        localStorage.setItem('theme', theme);
-        setTheme(theme);
-      });
-    });
-  });
-})();
-</script>
-
 
 
           </body>
