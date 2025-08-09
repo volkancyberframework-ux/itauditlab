@@ -2,8 +2,10 @@ from django.contrib import admin
 from django import forms
 from .models import CustomUser, Course, CourseSection, CourseSubsection, CourseFAQ
 
+
 admin.site.register(CourseFAQ)
 admin.site.register(CustomUser)
+
 
 class CourseAdminForm(forms.ModelForm):
     upload_pdf = forms.FileField(required=False, help_text="Upload/replace course attachment (PDF or any file)")
@@ -28,33 +30,27 @@ class CourseAdminForm(forms.ModelForm):
 class CourseAdmin(admin.ModelAdmin):
     form = CourseAdminForm
     list_display = ("id", "display_course", "difficulty", "duration", "score")
-    search_fields = ("id",)  # keep generic if unsure
+    search_fields = ("id", "description")
     list_filter = ("difficulty",)
 
     def display_course(self, obj):
-        return getattr(obj, "name", None) or getattr(obj, "title", None) or str(obj)
+        return getattr(obj, "name", None) or getattr(obj, "turkish_name", None) or getattr(obj, "english_name", None) or str(obj)
     display_course.short_description = "Course"
 
 
 @admin.register(CourseSection)
 class CourseSectionAdmin(admin.ModelAdmin):
-    list_display = ("id", "course", "display_section", "order")
+    list_display = ("id", "course", "big_title", "order")
     list_editable = ("order",)
     ordering = ("order", "id")
+    search_fields = ("big_title",)
     list_filter = ("course",)
-
-    def display_section(self, obj):
-        return getattr(obj, "title", None) or getattr(obj, "name", None) or str(obj)
-    display_section.short_description = "Section"
 
 
 @admin.register(CourseSubsection)
 class CourseSubsectionAdmin(admin.ModelAdmin):
-    list_display = ("id", "section", "display_subsection", "order")
+    list_display = ("id", "section", "small_title", "order")
     list_editable = ("order",)
     ordering = ("order", "id")
+    search_fields = ("small_title",)
     list_filter = ("section__course", "section")
-
-    def display_subsection(self, obj):
-        return getattr(obj, "title", None) or getattr(obj, "name", None) or str(obj)
-    display_subsection.short_description = "Subsection"
