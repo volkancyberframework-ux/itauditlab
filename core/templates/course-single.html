@@ -166,12 +166,12 @@
                         <h3 class="mb-2">Attachments</h3>
 
                         {% if course.attachment %}
-                        <a href="{{ course.attachment }}" download class="btn btn-sm btn-outline-success mt-3">
-                          ⬇️ Download PDF
-                        </a>
-                      {% else %}
-                        <p class="text-muted">No attachment uploaded.</p>
-                      {% endif %}
+                          <a href="{{ course.attachment.url }}" class="btn btn-outline-primary" download>
+                            Download Attachment
+                          </a>
+                        {% else %}
+                          <p class="text-muted">No attachment uploaded.</p>
+                        {% endif %}
 
                       </div>
 
