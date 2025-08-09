@@ -15,6 +15,13 @@ from .utils.bunny import generate_bunny_token
 from core.models import CourseSubsection
 from django.db.models import Prefetch, IntegerField
 from django.db.models.functions import Coalesce
+from django.shortcuts import render, get_object_or_404
+from django.db.models import Prefetch, IntegerField
+from django.db.models.functions import Coalesce
+from django.views.decorators.cache import never_cache
+from django.conf import settings
+from django.contrib.auth.decorators import login_required
+import logging
 
 User = get_user_model()
 
@@ -90,11 +97,24 @@ def pricing_view(request):
 def coming_soon_view(request):
     return render(request, 'coming-soon.html')
 
+logger = logging.getLogger(__name__)
+
+def _bunny_url_or_none(raw: str) -> str | None:
+    if not raw:
+        return None
+    raw = raw.strip()
+    if raw.startswith(("http://", "https://")):
+        return raw
+    # bunny_video_id given -> build HLS URL
+    base = getattr(settings, "BUNNY_STREAM_BASE", "").rstrip("/")
+    return f"{base}/{raw}/playlist.m3u8" if base else None
+
 @login_required
+@never_cache
 def course_single(request, pk):
     course = get_object_or_404(Course, pk=pk)
 
-    # Sections ordered by 'order' then 'id' (set output_field!)
+    # Sections ordered by 'order' then 'id'
     sections_qs = course.sections.annotate(
         sort_key=Coalesce('order', 'id', output_field=IntegerField())
     ).order_by('sort_key', 'id')
@@ -110,21 +130,29 @@ def course_single(request, pk):
     sections = sections_qs.prefetch_related(subsections_prefetch)
     faqs = course.faqs.all()
 
+    # Find the first available video across all sections/subsections
     first_video_url = None
-    first_section = sections.first()
-    if first_section:
-        first_sub = first_section.subsections.all().first()  # already pre-ordered
-        if first_sub and first_sub.bunny_video_id:
-            raw = first_sub.bunny_video_id.strip()
-            first_video_url = raw if raw.startswith(("http://", "https://")) \
-                else f"{settings.BUNNY_STREAM_BASE}/{raw}/playlist.m3u8"
+    try:
+        for sec in sections:
+            for sub in getattr(sec, "subsections", []).all():
+                url = _bunny_url_or_none(getattr(sub, "bunny_video_id", None))
+                if url:
+                    first_video_url = url
+                    raise StopIteration  # break both loops
+    except StopIteration:
+        pass
+    except Exception as e:
+        logger.exception("Error while resolving first_video_url for course %s: %s", course.id, e)
 
-    return render(request, "course-single.html", {
+    # Always render with safe defaults; never blank page
+    context = {
         "course": course,
         "sections": sections,
         "faqs": faqs,
-        "first_video_url": first_video_url,
-    })
+        "first_video_url": first_video_url or "",
+        "has_content": sections.exists(),  # handy for template fallbacks
+    }
+    return render(request, "course-single.html", context)
 
 
 @login_required

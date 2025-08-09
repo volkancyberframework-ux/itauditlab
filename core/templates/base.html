@@ -175,6 +175,52 @@
 
 
 
+
+
+      <!-- JS to open modal and load video -->
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const playBtn = document.getElementById('playPreviewBtn');
+          const modal = new bootstrap.Modal(document.getElementById('previewModal'));
+          const iframe = document.getElementById('previewIframe');
+
+          playBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            iframe.src = "{{ first_video_url }}";
+            modal.show();
+          });
+
+          document.getElementById('previewModal').addEventListener('hidden.bs.modal', function () {
+            iframe.src = "";
+          });
+        });
+      </script>
+
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const modals = document.querySelectorAll('.modal');
+
+          modals.forEach(modal => {
+            modal.addEventListener('show.bs.modal', function () {
+              const video = modal.querySelector('video');
+              if (video) {
+                video.play();
+              }
+            });
+
+            modal.addEventListener('hide.bs.modal', function () {
+              const video = modal.querySelector('video');
+              if (video) {
+                video.pause();
+                video.currentTime = 0;
+              }
+            });
+          });
+        });
+      </script>
+
+
       <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg">
     <div class="modal-content">
