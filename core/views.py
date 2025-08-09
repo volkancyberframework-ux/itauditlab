@@ -99,15 +99,23 @@ def coming_soon_view(request):
 
 logger = logging.getLogger(__name__)
 
-def _bunny_url_or_none(raw: str) -> str | None:
-    if not raw:
+# Build Bunny's embeddable iframe URL
+def _bunny_iframe_url(video_id: str | None) -> str | None:
+    if not video_id:
         return None
-    raw = raw.strip()
-    if raw.startswith(("http://", "https://")):
-        return raw
-    # bunny_video_id given -> build HLS URL
-    base = getattr(settings, "BUNNY_STREAM_BASE", "").rstrip("/")
-    return f"{base}/{raw}/playlist.m3u8" if base else None
+    video_id = str(video_id).strip()
+    # If already a full URL (custom embed), accept it as-is
+    if video_id.startswith(("http://", "https://")):
+        return video_id
+
+    library_id = getattr(settings, "BUNNY_LIBRARY_ID", "").strip()
+    base = getattr(settings, "BUNNY_IFRAME_BASE", "https://iframe.mediadelivery.net/embed").rstrip("/")
+    if not library_id:
+        logger.warning("BUNNY_LIBRARY_ID not set; cannot build Bunny iframe URL")
+        return None
+
+    # You can tweak params as needed
+    return f"{base}/{library_id}/{video_id}?autoplay=false&muted=false&preload=true"
 
 @login_required
 @never_cache
@@ -119,7 +127,7 @@ def course_single(request, pk):
         sort_key=Coalesce('order', 'id', output_field=IntegerField())
     ).order_by('sort_key', 'id')
 
-    # Preorder subsections the same way
+    # Subsections ordered the same way
     subsections_prefetch = Prefetch(
         'subsections',
         queryset=CourseSubsection.objects.annotate(
@@ -130,27 +138,30 @@ def course_single(request, pk):
     sections = sections_qs.prefetch_related(subsections_prefetch)
     faqs = course.faqs.all()
 
-    # Find the first available video across all sections/subsections
+    # Attach bunny_iframe_url to each subsection and find first video url
     first_video_url = None
     try:
+        found = False
         for sec in sections:
-            for sub in getattr(sec, "subsections", []).all():
-                url = _bunny_url_or_none(getattr(sub, "bunny_video_id", None))
-                if url:
-                    first_video_url = url
-                    raise StopIteration  # break both loops
-    except StopIteration:
-        pass
+            # Ensure we can iterate even if empty
+            subs = getattr(sec, "subsections", []).all()
+            for sub in subs:
+                vid = getattr(sub, "bunny_video_id", None)
+                sub.bunny_iframe_url = _bunny_iframe_url(vid)
+                if not found and sub.bunny_iframe_url:
+                    first_video_url = sub.bunny_iframe_url
+                    found = True
+            if found:
+                break
     except Exception as e:
-        logger.exception("Error while resolving first_video_url for course %s: %s", course.id, e)
+        logger.exception("Error resolving Bunny URLs for course %s: %s", course.id, e)
 
-    # Always render with safe defaults; never blank page
     context = {
         "course": course,
         "sections": sections,
         "faqs": faqs,
         "first_video_url": first_video_url or "",
-        "has_content": sections.exists(),  # handy for template fallbacks
+        "has_content": sections.exists(),
     }
     return render(request, "course-single.html", context)
 

@@ -174,69 +174,59 @@
       <script src="{% static 'assets/js/vendors/glight.js' %}"></script>
 
 
-
-
-
-      <!-- JS to open modal and load video -->
       <script>
-        document.addEventListener('DOMContentLoaded', function () {
-          const playBtn = document.getElementById('playPreviewBtn');
-          const modal = new bootstrap.Modal(document.getElementById('previewModal'));
-          const iframe = document.getElementById('previewIframe');
+      document.addEventListener('DOMContentLoaded', function () {
+        // On open: rebuild iframe and set src (from iframe[data-src] OR trigger[data-preview-src])
+        document.addEventListener('show.bs.modal', function (ev) {
+          const modal = ev.target;
 
-          playBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            iframe.src = "{{ first_video_url }}";
-            modal.show();
-          });
+          // Prefer iframe[data-src] inside the modal
+          let targetSrc = null;
+          let iframe = modal.querySelector('iframe[data-src]');
 
-          document.getElementById('previewModal').addEventListener('hidden.bs.modal', function () {
-            iframe.src = "";
-          });
-        });
-      </script>
-
-
-      <script>
-      (() => {
-        const storedTheme = localStorage.getItem('theme');
-
-        const getPreferredTheme = () => {
-          if (storedTheme) return storedTheme;
-          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        };
-
-        const setTheme = theme => {
-          if (theme === 'auto') {
-            document.documentElement.removeAttribute('data-bs-theme');
-            document.documentElement.setAttribute('data-bs-theme',
-              window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          // If no iframe[data-src], support preview button passing data-preview-src
+          if (!iframe) {
+            const trigger = ev.relatedTarget;
+            if (trigger) {
+              targetSrc = trigger.getAttribute('data-preview-src');
+            }
+            iframe = modal.querySelector('iframe');
           } else {
-            document.documentElement.setAttribute('data-bs-theme', theme);
+            targetSrc = iframe.getAttribute('data-src');
           }
-          document.querySelectorAll('[data-bs-theme-value]').forEach(btn => {
-            btn.classList.toggle('active', btn.getAttribute('data-bs-theme-value') === theme);
-            btn.setAttribute('aria-pressed', btn.classList.contains('active'));
-          });
-        };
 
-        setTheme(getPreferredTheme());
+          if (!iframe || !targetSrc) return;
 
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-          if ((localStorage.getItem('theme') || 'auto') === 'auto') setTheme('auto');
+          // Replace with a fresh node to avoid stale context
+          const fresh = iframe.cloneNode(true);
+          iframe.replaceWith(fresh);
+
+          // Cache-bust to force a clean reload from provider
+          try {
+            const url = new URL(targetSrc, window.location.origin);
+            url.searchParams.set('_ts', Date.now().toString());
+            targetSrc = url.toString();
+          } catch (_) {
+            // targetSrc might already be absolute; ignore errors
+          }
+
+          // Set src on next frame so layout is settled
+          requestAnimationFrame(() => { fresh.src = targetSrc; });
         });
 
-        window.addEventListener('DOMContentLoaded', () => {
-          document.querySelectorAll('[data-bs-theme-value]').forEach(btn => {
-            btn.addEventListener('click', () => {
-              const theme = btn.getAttribute('data-bs-theme-value');
-              localStorage.setItem('theme', theme);
-              setTheme(theme);
-            });
-          });
+        // On close: unload and fully reset iframe
+        document.addEventListener('hidden.bs.modal', function (ev) {
+          const modal = ev.target;
+          const iframe = modal.querySelector('iframe');
+          if (!iframe) return;
+
+          try { iframe.src = 'about:blank'; } catch (e) {}
+          const reset = iframe.cloneNode(true);
+          iframe.replaceWith(reset);
         });
-      })();
+      });
       </script>
+
 
       <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg">

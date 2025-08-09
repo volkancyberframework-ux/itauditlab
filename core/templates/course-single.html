@@ -131,9 +131,11 @@
                                             <div class="modal-body p-0">
                                               {% if sub.bunny_video_id %}
                                                 <iframe
-                                                  src="{{ sub.bunny_video_id }}"
-                                                  style="border:0; width:100%; height:100vh; max-height: 100vh;"
-                                                  allow="autoplay; fullscreen"
+                                                  id="sub-iframe-{{ sub.id }}"
+                                                  data-src="{{ sub.bunny_iframe_url }}"  {# build this in the view; see note below #}
+                                                  src=""
+                                                  style="border:0; width:100%; height:100vh; max-height:100vh;"
+                                                  allow="autoplay; fullscreen; picture-in-picture"
                                                   allowfullscreen>
                                                 </iframe>
                                               {% else %}
@@ -141,7 +143,6 @@
                                                   <p class="text-muted">No video available for this subsection.</p>
                                                 </div>
                                               {% endif %}
-
                                             </div>
                                           </div>
                                         </div>
@@ -279,29 +280,5 @@
 
     </main>
 
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Önizleme modalındaki video durdurma
-      const previewModal = document.getElementById('previewModal');
-      const previewIframe = document.getElementById('previewIframe');
-
-      if (previewModal && previewIframe) {
-        previewModal.addEventListener('hidden.bs.modal', function () {
-          previewIframe.src = '';
-        });
-      }
-
-      // Dinamik video modalları için
-      document.querySelectorAll('[id^="videoModal"]').forEach(function (modal) {
-        modal.addEventListener('hidden.bs.modal', function () {
-          const iframe = modal.querySelector('iframe');
-          if (iframe) {
-            iframe.src = '';
-          }
-        });
-      });
-    });
-    </script>
 
 {% endblock %}
