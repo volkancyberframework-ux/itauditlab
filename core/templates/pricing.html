@@ -45,7 +45,7 @@
                     <span class="align-self-end mb-1 ms-2 toggle-price-content">/Yearly</span>
                   </div>
                   <div class="d-grid">
-                    <a href="#" class="btn btn-primary">Get Full Year Access</a>
+                    <a href="{% url 'coming-soon' %}" class="btn btn-primary">Get Full Year Access</a>
                   </div>
                 </div>
                 <hr class="m-0" />
@@ -121,7 +121,9 @@
                     <span class="h1 fw-bold">Contact Us</span>
                   </div>
                   <div class="d-grid">
-                    <a href="#contact" class="btn btn-outline-primary">Request Team Access</a>
+                    <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#teamAccessModal">
+                      Request Team Access
+                    </a>
                   </div>
                 </div>
                 <hr class="m-0" />
