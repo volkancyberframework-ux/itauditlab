@@ -10,7 +10,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
-from .models import Course, Enrollment
+from .models import Course, Enrollment,CourseSection,CourseSubsection,CourseFAQ,CustomUser
 from .utils.bunny import generate_bunny_token
 
 
