@@ -214,7 +214,7 @@
   <!-- Links -->
   <div class="col-12 col-lg-6">
     <nav class="nav nav-footer justify-content-center justify-content-md-start justify-content-lg-end">
-      <a class="nav-link active" href="{% url 'terms_and_conditions' %}" data-bs-toggle="modal" data-bs-target="#termsModal">Terms and Conditions</a>
+      <a class="nav-link active" href="{% url 'terms_and_conditions' %}" data-bs-toggle="modal">Terms and Conditions</a>
       <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cookiesModal">Cookies Settings</a>
       <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy policy</a>
     </nav>
@@ -245,21 +245,6 @@
 
 <script src="{% static 'assets/libs/odometer/odometer.min.js' %}"></script>
 <script src="{% static 'assets/js/vendors/pricing.js' %}"></script>
-
-<!-- Terms Modal -->
-<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="termsModalLabel">Terms of Use</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Welcome to ITAuditLab. By accessing this platform, you agree to comply with our terms and conditions. Please use the platform for educational and professional purposes only...</p>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- Cookies Modal -->
 <div class="modal fade" id="cookiesModal" tabindex="-1" aria-labelledby="cookiesModalLabel" aria-hidden="true">
