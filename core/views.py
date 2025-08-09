@@ -77,6 +77,12 @@ def landing_page(request):
     courses = Course.objects.filter(main_page_activated=True)
     return render(request, 'index.html', {'courses': courses})
 
+def terms_and_conditions(request):
+    """
+    Render the Terms & Conditions page for ITAuditLab.
+    Uses the shared _terms_body.html partial so the content matches the modal.
+    """
+    return render(request, "terms_page.html")
 
 def pricing_view(request):
     return render(request, 'pricing.html')

@@ -1,0 +1,81 @@
+{% extends "base_index.html" %}
+{% load static %}
+{% block content %}
+
+
+{% load static %}
+
+<main>
+  <section class="py-8">
+    <div class="container my-lg-8">
+      <div class="row">
+        <div class="offset-md-2 col-md-8 col-12">
+
+          <h1 class="display-4 fw-semibold mb-4">Terms & Conditions</h1>
+          <p class="lead mb-5">
+            Welcome to ITAuditLab. These Terms & Conditions govern your use of our website,
+            training materials, and cybersecurity/audit services. By accessing our platform,
+            you agree to comply with these terms in full.
+          </p>
+
+          <h2 class="fw-semibold mt-5">1. Services</h2>
+          <p>
+            ITAuditLab provides educational courses, audit simulations, and consulting
+            resources in the fields of IT Audit, GRC, and cybersecurity. Our content is
+            intended for professional development and educational purposes only.
+          </p>
+
+          <h2 class="fw-semibold mt-5">2. Account & Access</h2>
+          <p>
+            Access to certain materials may require a registered account and active
+            subscription or purchase. You are responsible for keeping your login credentials
+            secure and must not share access with unauthorized individuals.
+          </p>
+
+          <h2 class="fw-semibold mt-5">3. Intellectual Property</h2>
+          <p>
+            All course materials, text, videos, and related content are the intellectual
+            property of ITAuditLab unless otherwise stated. You may not reproduce, distribute,
+            or resell our content without prior written permission.
+          </p>
+
+          <h2 class="fw-semibold mt-5">4. Payment & Refunds</h2>
+          <p>
+            Payments for services or subscriptions are processed via our payment partners.
+            Unless otherwise stated, all sales are final. Refund requests will be considered
+            only in exceptional cases and at our sole discretion.
+          </p>
+
+          <h2 class="fw-semibold mt-5">5. Limitation of Liability</h2>
+          <p>
+            ITAuditLab provides content and services “as is” without any guarantees. We are
+            not liable for any direct or indirect damages resulting from your use of our
+            platform or reliance on our materials.
+          </p>
+
+          <h2 class="fw-semibold mt-5">6. Changes to Terms</h2>
+          <p>
+            We may update these Terms & Conditions at any time. Changes will be posted on
+            this page, and your continued use of our services constitutes acceptance of the
+            updated terms.
+          </p>
+
+          <h2 class="fw-semibold mt-5">7. Contact</h2>
+          <p>
+            For questions about these Terms & Conditions, please contact us at:
+            <a href="mailto:support@siberkobi.co">support@siberkobi.co</a>
+          </p>
+
+          <p class="text-muted mt-5">
+            Last updated: {{ now|date:"F j, Y" }}
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+
+{% endblock %}

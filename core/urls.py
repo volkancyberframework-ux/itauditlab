@@ -23,5 +23,10 @@ urlpatterns = [
     path('unenroll/', views.unenroll_course, name='unenroll_course'),
     path('pricing/', views.pricing_view, name='pricing'),
     path('coming-soon/', views.coming_soon_view, name='coming-soon'),
+    path(
+        "terms-and-conditions/",
+        TemplateView.as_view(template_name="terms_page.html"),
+        name="terms_and_conditions",
+    ),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
