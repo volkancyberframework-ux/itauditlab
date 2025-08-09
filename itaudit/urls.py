@@ -15,3 +15,6 @@ urlpatterns = [
 # Sadece development için:
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=os.path.join(BASE_DIR, 'static'))
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

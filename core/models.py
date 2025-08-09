@@ -29,7 +29,7 @@ class Course(models.Model):
         related_name='prepared_courses'
     )
     description = models.TextField()
-    attachment = models.URLField(blank=True, null=True)
+    attachment = models.FileField(upload_to='course_attachments/', blank=True, null=True)
     dashboard_activated = models.BooleanField(default=False)  # New
     main_page_activated = models.BooleanField(default=False)  # New
     is_english = models.BooleanField(default=False)  # New
