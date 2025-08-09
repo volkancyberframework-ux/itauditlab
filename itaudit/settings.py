@@ -24,8 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/opt/render/project/src/media'
 
+SECRET_KEY = "django-insecure-dqiu7*-bt$@^&w&e)m6=z31-z&o5bmxl8w^nhipp9x(s2w%)c1"
 
-SECRET_KEY = config('SECRET_KEY')
+#SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['itauditlab.onrender.com','www.siberkobi.co','siberkobi.co','itauditlab.siberkobi.co']

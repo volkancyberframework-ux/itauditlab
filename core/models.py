@@ -40,6 +40,7 @@ def __str__(self):
 
 class CourseSection(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='sections')
+    order = models.PositiveIntegerField(null=True, blank=True)
     big_title = models.CharField(max_length=255)
 
     def __str__(self):
@@ -50,6 +51,7 @@ class CourseSection(models.Model):
 
 class CourseSubsection(models.Model):
     section = models.ForeignKey(CourseSection, on_delete=models.CASCADE, related_name='subsections')
+    order = models.PositiveIntegerField(default=0)
     small_title = models.CharField(max_length=255)
     bunny_video_id = models.URLField(blank=True, null=True, help_text="Paste Bunny Direct Play URL (playlist.m3u8 or .mp4) OR just the video ID")
     duration = models.CharField(max_length=20, blank=True, help_text="e.g. 3m 12s")

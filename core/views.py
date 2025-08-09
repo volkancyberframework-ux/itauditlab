@@ -1,18 +1,19 @@
-# views.py
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib import messages
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, get_user_model,logout
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
-from .models import Course, Enrollment
-from django.http import JsonResponse
 from django.db import models
+from django.db.models import Prefetch, IntegerField
+from django.db.models.functions import Coalesce
+from django.http import JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
+
+from .models import Course, Enrollment
 from .utils.bunny import generate_bunny_token
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
+
+
 
 User = get_user_model()
 
@@ -82,35 +83,35 @@ def pricing_view(request):
 def coming_soon_view(request):
     return render(request, 'coming-soon.html')
 
-from django.conf import settings
-from django.shortcuts import render, get_object_or_404
-from .models import Course
-from .utils.bunny import generate_bunny_token
-
-# views.py
-from django.conf import settings
-from django.shortcuts import render, get_object_or_404
-from .models import Course
-
 @login_required
 def course_single(request, pk):
     course = get_object_or_404(Course, pk=pk)
-    sections = course.sections.prefetch_related('subsections').order_by('id')  # ensure ordering
+
+    # Sections ordered by 'order' then 'id'
+    sections_qs = course.sections.annotate(
+        sort_key=Coalesce('order', 'id')
+    ).order_by('sort_key', 'id')
+
+    # Preorder subsections the same way
+    from core.models import Subsection  # adjust import if needed
+    subsections_prefetch = Prefetch(
+        'subsections',
+        queryset=Subsection.objects.annotate(
+            sort_key=Coalesce('order', 'id')
+        ).order_by('sort_key', 'id')
+    )
+
+    sections = sections_qs.prefetch_related(subsections_prefetch)
     faqs = course.faqs.all()
 
     first_video_url = None
-
-    # Get the first section
     first_section = sections.first()
     if first_section:
-        # Get first subsection of that section
-        first_sub = first_section.subsections.order_by('id').first()
+        first_sub = first_section.subsections.all().first()  # already pre-ordered
         if first_sub and first_sub.bunny_video_id:
             raw = first_sub.bunny_video_id.strip()
-            if raw.startswith("http://") or raw.startswith("https://"):
-                first_video_url = raw
-            else:
-                first_video_url = f"{settings.BUNNY_STREAM_BASE}/{raw}/playlist.m3u8"
+            first_video_url = raw if raw.startswith(("http://","https://")) \
+                else f"{settings.BUNNY_STREAM_BASE}/{raw}/playlist.m3u8"
 
     return render(request, "course-single.html", {
         "course": course,
