@@ -88,18 +88,18 @@ def coming_soon_view(request):
 def course_single(request, pk):
     course = get_object_or_404(Course, pk=pk)
 
-    # Sections ordered by 'order' then 'id'
+    # Sections ordered by 'order' then 'id' (set output_field!)
     sections_qs = course.sections.annotate(
-        sort_key=Coalesce('order', 'id')
+        sort_key=Coalesce('order', 'id', output_field=IntegerField())
     ).order_by('sort_key', 'id')
 
+    # Preorder subsections the same way
     subsections_prefetch = Prefetch(
         'subsections',
         queryset=CourseSubsection.objects.annotate(
             sort_key=Coalesce('order', 'id', output_field=IntegerField())
         ).order_by('sort_key', 'id')
     )
-
 
     sections = sections_qs.prefetch_related(subsections_prefetch)
     faqs = course.faqs.all()
@@ -110,7 +110,7 @@ def course_single(request, pk):
         first_sub = first_section.subsections.all().first()  # already pre-ordered
         if first_sub and first_sub.bunny_video_id:
             raw = first_sub.bunny_video_id.strip()
-            first_video_url = raw if raw.startswith(("http://","https://")) \
+            first_video_url = raw if raw.startswith(("http://", "https://")) \
                 else f"{settings.BUNNY_STREAM_BASE}/{raw}/playlist.m3u8"
 
     return render(request, "course-single.html", {
