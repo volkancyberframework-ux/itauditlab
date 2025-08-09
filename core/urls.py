@@ -24,7 +24,4 @@ urlpatterns = [
     path('pricing/', views.pricing_view, name='pricing'),
     path('coming-soon/', views.coming_soon_view, name='coming-soon'),
     path('terms-and-conditions/', views.terms_and_conditions, name='terms_and_conditions'),
-]
-
-
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
