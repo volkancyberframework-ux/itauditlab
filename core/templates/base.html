@@ -47,96 +47,65 @@
             </a>
           </div>
 
-          <!-- Right side: Theme toggle + Avatar/Login -->
-          <div class="ms-auto d-flex align-items-center order-lg-3">
-            <div class="d-flex gap-2 align-items-center">
+          <!-- Right side: Theme toggle + Avatar -->
+          <div class="ms-auto d-flex align-items-center order-lg-3 gap-2">
 
-              <!-- Theme toggle -->
-              <div class="dropdown">
-                <button id="themeToggleBtn"
-                  class="btn btn-outline-secondary btn-icon rounded-circle d-flex align-items-center"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  aria-label="Toggle theme (auto)">
-                  <i class="bi theme-icon-active"></i>
-                  <span class="visually-hidden bs-theme-text">Toggle theme</span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="themeToggleBtn">
-                  <li>
-                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
-                      <i class="bi theme-icon bi-sun-fill"></i><span class="ms-2">Light</span>
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
-                      <i class="bi theme-icon bi-moon-stars-fill"></i><span class="ms-2">Dark</span>
-                    </button>
-                  </li>
-                  <li>
-                    <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
-                      <i class="bi theme-icon bi-circle-half"></i><span class="ms-2">Auto</span>
-                    </button>
-                  </li>
-                </ul>
-              </div>
+            <!-- Theme toggle -->
+            <div class="dropdown">
+              <button id="themeToggleBtn"
+                class="btn btn-outline-secondary btn-icon rounded-circle d-flex align-items-center"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                aria-label="Toggle theme (auto)">
+                <i class="bi theme-icon-active"></i>
+                <span class="visually-hidden bs-theme-text">Toggle theme</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="themeToggleBtn">
+                <li>
+                  <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
+                    <i class="bi theme-icon bi-sun-fill"></i><span class="ms-2">Light</span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
+                    <i class="bi theme-icon bi-moon-stars-fill"></i><span class="ms-2">Dark</span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                    <i class="bi theme-icon bi-circle-half"></i><span class="ms-2">Auto</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
 
-              {% if user.is_authenticated %}
-                <!-- Avatar dropdown -->
-                <div class="dropdown">
-                  <a class="rounded-circle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+            <!-- Avatar dropdown -->
+            <div class="dropdown">
+              <a href="#" class="rounded-circle" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="avatar avatar-md avatar-indicators avatar-online bg-primary text-white fw-bold rounded-circle d-flex align-items-center justify-content-center">
+                  {{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end">
+                <div class="dropdown-item">
+                  <div class="d-flex align-items-center">
                     <div class="avatar avatar-md avatar-indicators avatar-online bg-primary text-white fw-bold rounded-circle d-flex align-items-center justify-content-center">
                       {{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}
                     </div>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-end">
-                    <div class="dropdown-item">
-                      <div class="d-flex align-items-center">
-                        <div class="avatar avatar-md avatar-indicators avatar-online bg-primary text-white fw-bold rounded-circle d-flex align-items-center justify-content-center">
-                          {{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}
-                        </div>
-                        <div class="ms-3 lh-1">
-                          <h5 class="mb-1">{{ user.first_name }} {{ user.last_name }}</h5>
-                          <p class="mb-0">{{ user.email }}</p>
-                        </div>
-                      </div>
+                    <div class="ms-3 lh-1">
+                      <h5 class="mb-1">{{ user.first_name }} {{ user.last_name }}</h5>
+                      <p class="mb-0">{{ user.email }}</p>
                     </div>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'logout' %}">
-                      <i class="fe fe-power me-2"></i> Sign Out
-                    </a>
                   </div>
                 </div>
-              {% else %}
-                <!-- Login button for guests -->
-                <a href="{% url 'login' %}" class="btn btn-outline-dark">Login</a>
-              {% endif %}
-
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'logout' %}">
+                  <i class="fe fe-power me-2"></i> Sign Out
+                </a>
+              </div>
             </div>
-          </div>
 
-          <!-- Mobile toggler -->
-          <div>
-            <button class="navbar-toggler collapsed ms-2" type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbar-default"
-              aria-controls="navbar-default"
-              aria-expanded="false"
-              aria-label="Toggle navigation">
-              <span class="icon-bar top-bar mt-0"></span>
-              <span class="icon-bar middle-bar"></span>
-              <span class="icon-bar bottom-bar"></span>
-            </button>
-          </div>
-
-          <!-- Collapsible menu -->
-          <div class="collapse navbar-collapse" id="navbar-default">
-            <ul class="navbar-nav mt-3 mt-lg-0 mx-xxl-auto">
-              <li class="nav-item"><a class="nav-link" href="{% url 'coming-soon' %}">About</a></li>
-              <li class="nav-item"><a class="nav-link" href="{% url 'pricing' %}">Pricing</a></li>
-              <li class="nav-item"><a class="nav-link" href="{% url 'coming-soon' %}">Join Us</a></li>
-              <li class="nav-item"><a class="nav-link" href="{% url 'coming-soon' %}">Request Demo</a></li>
-            </ul>
           </div>
 
         </div>
