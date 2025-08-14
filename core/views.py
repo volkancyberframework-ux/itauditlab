@@ -97,6 +97,12 @@ def pricing_view(request):
 def coming_soon_view(request):
     return render(request, 'coming-soon.html')
 
+def for_individuals(request):
+    return render(request, "for-individuals.html")
+
+def for_businesses(request):
+    return render(request, "for-businesses.html")
+
 logger = logging.getLogger(__name__)
 
 def _bunny_url_passthrough(val: str | None) -> str | None:

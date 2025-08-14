@@ -97,17 +97,35 @@
     <!-- Collapse -->
     <div class="collapse navbar-collapse" id="navbar-default">
       <ul class="navbar-nav mt-3 mt-lg-0 mx-xxl-auto">
+        <!-- Solutions -->
         <li class="nav-item dropdown">
-          <a class="dropdown-item" href="{% url 'coming-soon' %}">About</a>
+          <a class="nav-link dropdown-toggle" href="#" id="solutionsMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Solutions
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="solutionsMenu">
+            <li><a class="dropdown-item" href="{% url 'for_businesses' %}">For Businesses</a></li>
+            <li><a class="dropdown-item" href="{% url 'for_individuals' %}">For Individuals</a></li>
+          </ul>
         </li>
-        <li class="nav-item dropdown">
-          <a class="dropdown-item" href="{% url 'pricing' %}">Pricing</a>
+
+        <!-- Resources / Learn -->
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'coming-soon' %}">Ressources / Learn</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="dropdown-item" href="{% url 'coming-soon' %}">Join Us</a>
+
+        <!-- About Us -->
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'coming-soon' %}">About Us</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="dropdown-item" href="{% url 'coming-soon' %}">Request Demo</a>
+
+        <!-- Pricing -->
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'pricing' %}">Pricing</a>
+        </li>
+
+        <!-- Contact / Request Demo -->
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'coming-soon' %}">Contact Us</a>
         </li>
       </ul>
     </div>

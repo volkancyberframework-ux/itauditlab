@@ -1,0 +1,240 @@
+{% extends "base_index.html" %}
+{% load static %}
+{% block content %}
+    <!-- Page Content -->
+    <main>
+
+
+      <!-- content -->
+      <section class="pb-8 pt-8 bg-white">
+        <div class="container mb-lg-8">
+          <div class="row">
+            <div class="offset-xl-1 col-xl-10 col-12">
+              <div class="row">
+                <div class="col-xl-7 col-lg-10 col-md-12 col-12">
+                  <!-- heading -->
+                  <span class="text-uppercase text-primary fw-semibold ls-md">ITAuditLab for Teams</span>
+                  <h1 class="display-3 mt-4 mb-4 fw-bold">Train Your Audit Team in Under 2 Hours</h1>
+                  <!-- para -->
+                  <p class="fs-3 mb-5">
+                    Prepare unskilled or junior auditors for your upcoming audits—fast. Tell us the audit name and objective,
+                    and we’ll ready your team in <strong>under two hours</strong> with risk-first scenarios, hands-on simulations,
+                    and control/GRC build exercises based on real-world cases. Result: faster, more accurate risk detection with
+                    less friction with the auditee.
+                  </p>
+                  <a href="{% url 'coming-soon' %}" class="btn btn-primary">Request Team Demo</a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4 col-md-4 col-12">
+                  <!-- counter -->
+                  <div class="border-top pt-4 mt-xl-10 mt-5 mb-md-5">
+                    <h1 class="display-3 fw-bold mb-0">&lt;2h</h1>
+                    <p class="lead">From brief to team-ready</p>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-12">
+                  <!-- counter -->
+                  <div class="border-top pt-4 mt-xl-10 mt-5 mb-md-5">
+                    <h1 class="display-3 fw-bold mb-0">Hands-On</h1>
+                    <p class="lead">Live simulations & exercises</p>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-12">
+                  <!-- counter -->
+                  <div class="border-top pt-4 mt-xl-10 mt-5 mb-md-5">
+                    <h1 class="display-3 fw-bold mb-0">Audit-Ready</h1>
+                    <p class="lead">Risk, Controls & GRC focus</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-8">
+        <!-- container -->
+        <div class="container">
+          <div class="row">
+            <div class="offset-xl-1 col-xl-10 col-md-12 col-12">
+              <div class="row text-center">
+                <div class="col-md-12 px-lg-8 mb-8 mt-6">
+                  <span class="text-uppercase text-primary fw-semibold ls-md">Process</span>
+                  <h2 class="h1 fw-bold mt-3">How It Works</h2>
+                </div>
+              </div>
+              <div class="row gy-6">
+                <!-- step 1 -->
+                <div class="col-md-4 col-12">
+                  <div class="text-center">
+                    <div class="icon-shape icon-lg border border-primary border-2 fs-3 rounded-circle mb-4 process-line text-primary smooth-shadow-md">1</div>
+                    <h3>Purchase Team Licenses</h3>
+                    <p class="mb-0 px-4">As Audit/Controls/GRC manager, you onboard your team. We issue licenses and align on your audit plan and timelines.</p>
+                  </div>
+                </div>
+                <!-- step 2 -->
+                <div class="col-md-4 col-12">
+                  <div class="text-center">
+                    <div class="icon-shape icon-lg border border-primary border-2 fs-3 rounded-circle mb-4 process-line text-primary smooth-shadow-md">2</div>
+                    <h3>We Build Your Scenarios</h3>
+                    <p class="mb-0 px-3">Based on your upcoming audit, we create targeted simulations so your team learns to spot the <em>most important risks</em> quickly—through fully hands-on exercises.</p>
+                  </div>
+                </div>
+                <!-- step 3 -->
+                <div class="col-md-4 col-12">
+                  <div class="text-center">
+                    <div class="icon-shape icon-lg border border-primary border-2 fs-3 rounded-circle mb-4 text-primary smooth-shadow-md">3</div>
+                    <h3>Execute with Confidence</h3>
+                    <p class="mb-0 px-3">In the real audit or control/GRC task, your team detects risks faster and more accurately—reducing confusion and conflict with the auditee.</p>
+                  </div>
+                </div>
+                <!-- button -->
+                <div class="col-12 mt-8 text-center">
+                  <a href="{% url 'coming-soon' %}" class="btn btn-primary">Request Team Access</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-8 bg-white">
+        <!-- container -->
+        <div class="container">
+          <div class="row">
+            <div class="offset-xl-1 col-xl-10 col-12">
+              <div class="row">
+                <div class="col-xl-7 col-lg-10 col-md-12 col-12">
+                  <!-- heading -->
+                  <span class="text-uppercase text-primary fw-semibold ls-md">Why ITAuditLab for Teams</span>
+                  <h1 class="display-4 mt-4 mb-4 fw-bold">Sharper Risk Detection. Less Friction. Better Outcomes.</h1>
+                  <!-- para -->
+                  <p class="fs-3 mb-5">
+                    We train auditors the way they work: hands-on. Teams practice on realistic environments, get instant feedback,
+                    and rehearse reporting and stakeholder communication—so they enter the field prepared and aligned.
+                  </p>
+                </div>
+              </div>
+              <div class="mt-8">
+                <!-- row -->
+                <div class="row align-items-center">
+                  <div class="col-lg-6 col-md-12 col-12">
+                    <div>
+                      <p class="h2 fw-normal mb-6 lh-lg">
+                        “In less than two hours, our juniors went from theory to running effective walkthroughs and pinpointing
+                        control gaps. The simulations reduced back-and-forth with the auditee and shortened fieldwork.”
+                      </p>
+                      <h3 class="mb-1">Head of Internal Audit</h3>
+                      <p class="mb-0">Financial Services</p>
+                    </div>
+                  </div>
+                  <div class="offset-lg-1 col-lg-5 col-md-12 col-12">
+                    <!-- image -->
+                    <div class="mt-6 mt-lg-0">
+                      <img src="{% static 'assets/images/career/employee-pic.jpg' %}" alt="team training" class="img-fluid w-100 rounded-3">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-8">
+        <!-- container -->
+        <div class="container my-lg-8">
+          <div class="row">
+            <div class="offset-xl-1 col-xl-10 col-12">
+              <div class="row">
+                <div class="col-xl-7 col-lg-10 col-md-12 col-12">
+                  <!-- heading -->
+                  <span class="text-uppercase text-primary fw-semibold ls-md">What Your Team Learns</span>
+                  <h1 class="display-4 mt-4 mb-4 fw-bold">Purpose-Built Training for Your Audit Plan</h1>
+                  <!-- para -->
+                  <p class="fs-3 mb-5">
+                    From scoping to reporting, your team practices exactly what they’ll execute—on cases that mirror your
+                    controls, systems, and risks.
+                  </p>
+                </div>
+              </div>
+              <div class="mt-8">
+                <div class="row">
+                  <!-- item -->
+                  <div class="col-lg-6 col-md-6 col-12">
+                    <div class="mb-6 pe-xl-8">
+                      <h3 class="mb-3 fw-bold">Risk-First Scoping</h3>
+                      <p class="mb-0 fs-4">Focus on what matters: inherent risk, control design, key IT dependencies, and impact.</p>
+                    </div>
+                  </div>
+                  <!-- item -->
+                  <div class="col-lg-6 col-md-6 col-12">
+                    <div class="mb-6 pe-xl-8">
+                      <h3 class="mb-3 fw-bold">Hands-On Simulations</h3>
+                      <p class="mb-0 fs-4">Walkthroughs, evidence testing, sampling, and analytics in a safe, guided environment.</p>
+                    </div>
+                  </div>
+                  <!-- item -->
+                  <div class="col-lg-6 col-md-6 col-12">
+                    <div class="mb-6 pe-xl-8">
+                      <h3 class="mb-3 fw-bold">Controls & GRC Buildouts</h3>
+                      <p class="mb-0 fs-4">Design and evaluate controls, map to frameworks, and rehearse GRC configuration exercises.</p>
+                    </div>
+                  </div>
+                  <!-- item -->
+                  <div class="col-lg-6 col-md-6 col-12">
+                    <div class="mb-6 pe-xl-8">
+                      <h3 class="mb-3 fw-bold">Reporting & Communication</h3>
+                      <p class="mb-0 fs-4">Craft clear findings, reduce unnecessary conflict, and align quickly with the auditee.</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- quick benefits -->
+                <div class="row mt-2">
+                  <div class="col-12">
+                    <ul class="fs-5 mb-0">
+                      <li>Faster, more accurate risk detection</li>
+                      <li>Reduced confusion and conflict with auditees/controlled entities</li>
+                      <li>Consistent workpapers and evidence standards across the team</li>
+                      <li>Ready-to-run scenarios tailored to your audit scope</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- cta -->
+      <section class="bg-primary">
+        <div class="container">
+          <!-- row -->
+          <div class="row align-items-center g-0">
+            <div class="col-xl-6 col-lg-6 col-md-12">
+              <!-- heading -->
+              <div class="pt-6 pt-lg-0">
+                <h1 class="text-white display-4 fw-bold pe-lg-8">Get Your Team Audit-Ready This Week</h1>
+                <!-- text -->
+                <p class="text-white-50 mb-4 lead">
+                  Give us the audit name; we’ll handle the rest. Your auditors train on targeted, real-world cases, then execute
+                  with confidence and clarity.
+                </p>
+                <!-- btns -->
+                <a href="{% url 'coming-soon' %}" class="btn btn-dark me-2">Request Demo</a>
+                <a href="{% url 'pricing' %}" class="btn btn-outline-light">See Pricing</a>
+              </div>
+            </div>
+            <!-- img -->
+            <div class="col-xl-6 col-lg-6 col-md-12 text-lg-end text-center pt-6">
+              <img src="{% static 'assets/images/hero/hero-img.png' %}" alt="Team Training Hero" class="img-fluid">
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+
+{% endblock %
