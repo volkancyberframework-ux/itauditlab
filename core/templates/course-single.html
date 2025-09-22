@@ -89,9 +89,9 @@
                        ======================= #}
                     <div class="tab-pane fade show active" id="table" role="tabpanel" aria-labelledby="table-tab">
 
-                      {% if course.is_test or course.course_type == 'test' %}
+                      {% if is_test or course.course_type == 'test' %}
                         {# ---------- TEST MODE: show quiz UI ---------- #}
-                        {% if request.user.has_course_access(course) %}
+                        {% if can_access_test %}
                           <form onsubmit="return false">
                             <!-- One quiz pane example (you can loop dynamically later) -->
                             <div id="test-l-1" role="tabpanel" class="bs-stepper-pane fade show active">

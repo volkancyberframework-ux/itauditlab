@@ -144,11 +144,27 @@ def course_single(request, pk):
             if not first_video_url and sub.bunny_iframe_url:
                 first_video_url = sub.bunny_iframe_url
 
+    # ---- NEW: expose test flags for the template ----
+    # Prefer model property if you have it; else fall back to course_type
+    is_test = getattr(course, "is_test", None)
+    if is_test is None:
+        is_test = (course.course_type == Course.CourseType.TEST)
+
+    if is_test:
+        # For TESTs, allow only explicitly permitted users
+        # (Assumes CustomUser.has_course_access exists)
+        can_access_test = request.user.has_course_access(course)
+    else:
+        # VIDEOs are open to all
+        can_access_test = True
+
     return render(request, "course-single.html", {
         "course": course,
         "sections": sections,
         "faqs": faqs,
         "first_video_url": first_video_url or "",
+        "is_test": is_test,                 # <-- use in template: {% if is_test %}
+        "can_access_test": can_access_test, # <-- use in template: {% if can_access_test %}
     })
 
 
