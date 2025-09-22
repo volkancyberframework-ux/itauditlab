@@ -77,7 +77,9 @@ def unenroll_course(request):
     if request.method == 'POST':
         course_id = request.POST.get('course_id')
         Enrollment.objects.filter(user=request.user, course_id=course_id).delete()
-    return redirect('dashboard_student')  # or the view where the user is listed
+        # keep the Enrolled tab active after POST
+        return redirect('/dashboard-student/#currentlyLearning')
+    return redirect('dashboard_student')
 
 @login_required
 def logout_view(request):

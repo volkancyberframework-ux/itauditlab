@@ -113,15 +113,14 @@
                                                   </div>
                                                   <div class="col-auto">
                                                     {% if course.id in enrolled_course_ids %}
-                                                      <form method="POST" action="{% url 'unenroll_course' %}" onsubmit="return confirm('Are you sure you want to unenroll?');">
+                                                      {# Was disabled before; make it actionable #}
+                                                      <form method="POST" action="{% url 'unenroll_course' %}" onsubmit="return confirm('Unenroll from this course?');">
                                                         {% csrf_token %}
                                                         <input type="hidden" name="course_id" value="{{ course.id }}">
-                                                        <button class="btn btn-success btn-sm" disabled style="cursor: not-allowed;" title="You are already enrolled in this course.">
-                                                          Enrolled
-                                                        </button>
+                                                        <button class="btn btn-outline-danger btn-sm">Unenroll</button>
                                                       </form>
                                                     {% else %}
-                                                      <form method="POST" onsubmit="return confirm('Are you sure you want to enroll?');">
+                                                      <form method="POST" action="{% url 'dashboard_student' %}" onsubmit="return confirm('Enroll to this course?');">
                                                         {% csrf_token %}
                                                         <input type="hidden" name="course_id" value="{{ course.id }}">
                                                         <button class="btn btn-primary btn-sm">Enroll</button>
@@ -130,6 +129,7 @@
                                                   </div>
                                                 </div>
                                               </div>
+
 
                                             </div>
                                           </div>
@@ -175,8 +175,7 @@
                                                   <span>{{ course.preparer.first_name }} {{ course.preparer.last_name }}</span>
                                                 </div>
                                                 <div class="col-auto">
-                                                  <!-- Enrolled sekmesinde zaten kayıtlı; ister "Open" butonu koyun ister "Unenroll" -->
-                                                  <form method="POST" action="{% url 'unenroll_course' %}" onsubmit="return confirm('Are you sure you want to unenroll?');">
+                                                  <form method="POST" action="{% url 'unenroll_course' %}" onsubmit="return confirm('Unenroll from this course?');">
                                                     {% csrf_token %}
                                                     <input type="hidden" name="course_id" value="{{ course.id }}">
                                                     <button class="btn btn-outline-danger btn-sm">Unenroll</button>
@@ -184,6 +183,7 @@
                                                 </div>
                                               </div>
                                             </div>
+
 
                                           </div>
                                         </div>

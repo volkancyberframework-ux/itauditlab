@@ -10,7 +10,8 @@ from .models import (
     CourseSubsection,
     CourseFAQ,
     TestQuestion,
-    TestOption
+    TestOption,
+    Enrollment,   # <-- ADDED
 )
 
 class TestOptionInline(admin.TabularInline):
@@ -45,7 +46,6 @@ class CourseAdminForm(forms.ModelForm):
             instance.save()
         return instance
 
-
 # -----------------------------
 # Course admin
 # -----------------------------
@@ -60,7 +60,6 @@ class CourseAdmin(admin.ModelAdmin):
         return getattr(obj, "turkish_name", None) or getattr(obj, "english_name", None) or str(obj)
     display_course.short_description = "Course"
 
-
 # -----------------------------
 # Sections admins
 # -----------------------------
@@ -72,7 +71,6 @@ class CourseSectionAdmin(admin.ModelAdmin):
     search_fields = ("big_title",)
     list_filter = ("course",)
 
-
 @admin.register(CourseSubsection)
 class CourseSubsectionAdmin(admin.ModelAdmin):
     list_display = ("id", "section", "small_title", "order")
@@ -81,13 +79,21 @@ class CourseSubsectionAdmin(admin.ModelAdmin):
     search_fields = ("small_title",)
     list_filter = ("section__course", "section")
 
-
 @admin.register(CourseFAQ)
 class CourseFAQAdmin(admin.ModelAdmin):
     list_display = ("id", "course", "question")
     search_fields = ("question", "answer", "course__turkish_name", "course__english_name")
     list_filter = ("course",)
 
+# -----------------------------
+# NEW: Enrollment inline (per user)
+# -----------------------------
+class EnrollmentInline(admin.TabularInline):
+    model = Enrollment
+    extra = 0
+    autocomplete_fields = ("course",)
+    verbose_name = "Enrollment"
+    verbose_name_plural = "Enrollments"
 
 # -----------------------------
 # CustomUser admin
@@ -108,3 +114,6 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = UserAdmin.add_fieldsets + (
         (_("Profile flags"), {"classes": ("wide",), "fields": ("is_first_login", "is_english", "is_turkish")}),
     )
+
+    # <-- ADDED: show/edit enrollments on the user page
+    inlines = [EnrollmentInline]
