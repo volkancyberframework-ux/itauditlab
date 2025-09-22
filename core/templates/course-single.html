@@ -79,92 +79,245 @@
                     </ul>
                   </div>
                 </div>
+
                 <!-- Card Body -->
                 <div class="card-body">
                   <div class="tab-content" id="tabContent">
+
+                    {# =======================
+                       CONTENTS TAB
+                       ======================= #}
                     <div class="tab-pane fade show active" id="table" role="tabpanel" aria-labelledby="table-tab">
-                      <!-- Card -->
-                      <div class="accordion" id="courseAccordion">
-                        <div>
-                          <ul class="list-group list-group-flush">
-                            {% for section in sections %}
-                              <li class="list-group-item px-0 {% if forloop.first %}pt-0{% endif %}">
-                                <!-- Toggle -->
-                                <a class="h4 mb-0 d-flex align-items-center {% if forloop.first %}active{% endif %}"
-                                   data-bs-toggle="collapse"
-                                   href="#section{{ section.id }}"
-                                   aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
-                                   aria-controls="section{{ section.id }}">
-                                  <div class="me-auto">{{ section.big_title|default:"Untitled Section" }}</div>
-                                  <!-- Chevron -->
-                                  <span class="chevron-arrow ms-4">
-                                    <i class="fe fe-chevron-down fs-4"></i>
-                                  </span>
-                                </a>
 
-                                <!-- Collapse -->
-                                <div class="collapse {% if forloop.first %}show{% endif %}" id="section{{ section.id }}" data-bs-parent="#courseAccordion">
-                                  <div class="pt-3 pb-2">
-                                    {% for sub in section.subsections.all %}
-                                      <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit"
-                                         data-bs-toggle="modal"
-                                         data-bs-target="#videoModal{{ sub.id }}">
-                                        <div class="text-truncate">
-                                          <span class="icon-shape bg-light icon-sm rounded-circle me-2">
-                                            <i class="fe fe-play fs-6"></i>
-                                          </span>
-                                          <span>{{ sub.small_title|default:"Untitled Video" }}</span>
-                                        </div>
-                                        <div class="text-truncate">
-                                          <span>{{ sub.duration|default:"0:00" }}</span>
-                                        </div>
+                      {% if course.is_test or course.course_type == 'test' %}
+                        {# ---------- TEST MODE: show quiz UI ---------- #}
+                        {% if request.user.has_course_access(course) %}
+                          <form onsubmit="return false">
+                            <!-- One quiz pane example (you can loop dynamically later) -->
+                            <div id="test-l-1" role="tabpanel" class="bs-stepper-pane fade show active">
+                              <div class="card mb-4">
+                                <div class="card-body">
+                                  <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
+                                    <div class="d-flex align-items-center">
+                                      <a href="#">
+                                        {% if course.image %}
+                                          <img src="{{ course.image.url }}" alt="course" class="rounded img-4by3-lg" />
+                                        {% else %}
+                                          <img src="{% static 'images/course-react.jpg' %}" alt="course" class="rounded img-4by3-lg" />
+                                        {% endif %}
                                       </a>
+                                      <div class="ms-3">
+                                        <h3 class="mb-0"><a href="#" class="text-inherit">{{ course.turkish_name|default:course.english_name }}</a></h3>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <span class="text-danger">
+                                        <i class="fe fe-clock me-1 align-middle"></i>
+                                        00:05:55
+                                      </span>
+                                    </div>
+                                  </div>
 
-                                      <!-- Video Modal -->
-                                      <div class="modal fade" id="videoModal{{ sub.id }}" tabindex="-1" aria-labelledby="videoModalLabel{{ sub.id }}" aria-hidden="true">
-                                        <div class="modal-dialog modal-xl modal-dialog-centered">
-                                          <div class="modal-content">
-                                            <div class="modal-header">
-                                              <h5 class="modal-title" id="videoModalLabel{{ sub.id }}">{{ sub.small_title }}</h5>
-                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body p-0">
+                                  <div class="mt-3">
+                                    <div class="d-flex justify-content-between">
+                                      <span>Exam Progress:</span>
+                                      <span>Question 1 out of 5</span>
+                                    </div>
+                                    <div class="mt-2">
+                                      <div class="progress" style="height: 6px">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="mt-5">
+                                    <span>Question 1</span>
+                                    <h3 class="mb-3 mt-1">React is mainly used for building ___.</h3>
+
+                                    <div class="list-group">
+                                      <div class="list-group-item list-group-item-action" aria-current="true">
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                          <label class="form-check-label stretched-link" for="flexRadioDefault1">Database</label>
+                                        </div>
+                                      </div>
+                                      <div class="list-group-item list-group-item-action">
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                          <label class="form-check-label stretched-link" for="flexRadioDefault2">Connectivity</label>
+                                        </div>
+                                      </div>
+                                      <div class="list-group-item list-group-item-action">
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
+                                          <label class="form-check-label stretched-link" for="flexRadioDefault3">User interface</label>
+                                        </div>
+                                      </div>
+                                      <div class="list-group-item list-group-item-action">
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
+                                          <label class="form-check-label stretched-link" for="flexRadioDefault4">Design Platform</label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                </div>
+                              </div>
+
+                              <div class="mt-3 d-flex justify-content-end">
+                                <button
+                                  class="btn btn-primary"
+                                  onclick="checkAnswer({
+                                    groupName: 'flexRadioDefault',
+                                    correctId: 'flexRadioDefault3',
+                                    correctLabel: 'User interface',
+                                    explanation: 'React is a JavaScript library for building user interfaces (UI) using components that render views from state.'
+                                  })"
+                                >
+                                  Next
+                                  <i class="fe fe-arrow-right"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </form>
+
+                          {# Feedback modal (once per page) #}
+                          <div class="modal fade" id="answerModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                <div id="answerModalHeader" class="modal-header">
+                                  <h5 class="modal-title" id="answerModalLabel">Result</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="answerModalBody"></div>
+                                <div class="modal-footer">
+                                  <button type="button" id="answerModalOk" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <script>
+                            function showResultModal({ title, bodyHtml, headerClass }, onClosed) {
+                              const modalEl = document.getElementById('answerModal');
+                              const headerEl = document.getElementById('answerModalHeader');
+                              const titleEl  = document.getElementById('answerModalLabel');
+                              const bodyEl   = document.getElementById('answerModalBody');
+                              headerEl.className = 'modal-header ' + (headerClass || '');
+                              titleEl.textContent = title;
+                              bodyEl.innerHTML = bodyHtml;
+                              const bsModal = new bootstrap.Modal(modalEl);
+                              function handleHidden() {
+                                modalEl.removeEventListener('hidden.bs.modal', handleHidden);
+                                if (typeof onClosed === 'function') onClosed();
+                              }
+                              modalEl.addEventListener('hidden.bs.modal', handleHidden);
+                              bsModal.show();
+                            }
+
+                            function checkAnswer({ groupName, correctId, correctLabel, explanation }) {
+                              const selected = document.querySelector(`input[name="${groupName}"]:checked`);
+                              if (!selected) {
+                                showResultModal({
+                                  title: 'Select an option',
+                                  bodyHtml: 'Please choose an answer before continuing.',
+                                  headerClass: 'bg-warning bg-opacity-25'
+                                });
+                                return;
+                              }
+                              const isCorrect = selected.id === correctId;
+                              const bodyHtml = isCorrect
+                                ? `${explanation}`
+                                : `${explanation}<hr class="my-3"><strong>Correct answer:</strong> ${correctLabel}`;
+                              showResultModal({
+                                title: isCorrect ? 'Correct 🎉' : 'Not quite',
+                                bodyHtml,
+                                headerClass: isCorrect ? 'bg-success bg-opacity-25' : 'bg-danger bg-opacity-25'
+                              });
+                            }
+                          </script>
+                        {% else %}
+                          <div class="alert alert-warning mb-0">
+                            You don’t have access to this test. Please contact the instructor.
+                          </div>
+                        {% endif %}
+
+                      {% else %}
+                        {# ---------- VIDEO MODE: your original accordion ---------- #}
+                        <div class="accordion" id="courseAccordion">
+                          <div>
+                            <ul class="list-group list-group-flush">
+                              {% for section in sections %}
+                                <li class="list-group-item px-0 {% if forloop.first %}pt-0{% endif %}">
+                                  <a class="h4 mb-0 d-flex align-items-center {% if forloop.first %}active{% endif %}"
+                                     data-bs-toggle="collapse"
+                                     href="#section{{ section.id }}"
+                                     aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+                                     aria-controls="section{{ section.id }}">
+                                    <div class="me-auto">{{ section.big_title|default:"Untitled Section" }}</div>
+                                    <span class="chevron-arrow ms-4"><i class="fe fe-chevron-down fs-4"></i></span>
+                                  </a>
+
+                                  <div class="collapse {% if forloop.first %}show{% endif %}" id="section{{ section.id }}" data-bs-parent="#courseAccordion">
+                                    <div class="pt-3 pb-2">
+                                      {% for sub in section.subsections.all %}
+                                        <a href="#" class="mb-2 d-flex justify-content-between align-items-center text-inherit"
+                                           data-bs-toggle="modal"
+                                           data-bs-target="#videoModal{{ sub.id }}">
+                                          <div class="text-truncate">
+                                            <span class="icon-shape bg-light icon-sm rounded-circle me-2">
+                                              <i class="fe fe-play fs-6"></i>
+                                            </span>
+                                            <span>{{ sub.small_title|default:"Untitled Video" }}</span>
+                                          </div>
+                                          <div class="text-truncate">
+                                            <span>{{ sub.duration|default:"0:00" }}</span>
+                                          </div>
+                                        </a>
+
+                                        <div class="modal fade" id="videoModal{{ sub.id }}" tabindex="-1" aria-labelledby="videoModalLabel{{ sub.id }}" aria-hidden="true">
+                                          <div class="modal-dialog modal-xl modal-dialog-centered">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="videoModalLabel{{ sub.id }}">{{ sub.small_title }}</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                              </div>
+                                              <div class="modal-body p-0">
                                                 {% if sub.bunny_iframe_url %}
-                                                <iframe
-                                                  data-src="{{ sub.bunny_iframe_url }}"
-                                                  src=""
-                                                  style="border:0; width:100%; height:100vh; max-height:100vh;"
-                                                  allow="autoplay; fullscreen; picture-in-picture"
-                                                  allowfullscreen>
-                                                </iframe>
+                                                  <iframe data-src="{{ sub.bunny_iframe_url }}" src="" style="border:0; width:100%; height:100vh; max-height:100vh;"
+                                                          allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                                                 {% else %}
-                                                <div class="text-center py-5">
-                                                  <p class="text-muted">No video available for this subsection.</p>
-                                                </div>
-                                              {% endif %}
+                                                  <div class="text-center py-5">
+                                                    <p class="text-muted">No video available for this subsection.</p>
+                                                  </div>
+                                                {% endif %}
+                                              </div>
                                             </div>
                                           </div>
                                         </div>
-                                      </div>
-                                    {% endfor %}
-
+                                      {% endfor %}
+                                    </div>
                                   </div>
-                                </div>
-                              </li>
-                            {% endfor %}
-                          </ul>
+                                </li>
+                              {% endfor %}
+                            </ul>
+                          </div>
                         </div>
-                      </div>
+                      {% endif %}
+
                     </div>
+
+                    {# =======================
+                       DESCRIPTION TAB (always visible)
+                       ======================= #}
                     <div class="tab-pane fade" id="description" role="tabpanel" aria-labelledby="description-tab">
-                      <!-- Description -->
                       <div class="mb-4">
                         <h3 class="mb-2">Course Descriptions</h3>
                         <p>{{ course.description|linebreaks }}</p>
                       </div>
                       <div class="mb-4">
                         <h3 class="mb-2">Attachments</h3>
-
                         {% if course.attachment %}
                           <a href="{{ course.attachment.url }}" class="btn btn-outline-primary" download>
                             Download Attachment
@@ -172,12 +325,13 @@
                         {% else %}
                           <p class="text-muted">No attachment uploaded.</p>
                         {% endif %}
-
                       </div>
-
                     </div>
+
+                    {# =======================
+                       FAQ TAB (always visible)
+                       ======================= #}
                     <div class="tab-pane fade" id="faq" role="tabpanel" aria-labelledby="faq-tab">
-                      <!-- FAQ -->
                       <div>
                         <h3 class="mb-3">Course - Frequently Asked Questions</h3>
                         {% for faq in faqs %}
@@ -190,10 +344,12 @@
                         {% endfor %}
                       </div>
                     </div>
+
                   </div>
                 </div>
               </div>
             </div>
+
             <div class="col-lg-4 col-md-12 col-12 mt-lg-n8">
               <!-- Card -->
               <div class="card mb-3 mb-4">
