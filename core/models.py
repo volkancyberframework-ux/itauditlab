@@ -57,6 +57,31 @@ class Course(models.Model):
 def __str__(self):
     return self.turkish_name or self.english_name or f"Course #{self.pk}"
 
+class TestQuestion(models.Model):
+    SINGLE = "single"
+    MULTIPLE = "multiple"
+    TYPES = [(SINGLE, "Single choice"), (MULTIPLE, "Multiple choice")]
+
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="test_questions")
+    text = models.CharField(max_length=500)
+    explanation = models.TextField(blank=True)
+    question_type = models.CharField(max_length=8, choices=TYPES, default=SINGLE)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"[{self.course_id}] {self.text[:60]}"
+
+class TestOption(models.Model):
+    question = models.ForeignKey(TestQuestion, on_delete=models.CASCADE, related_name="options")
+    text = models.CharField(max_length=300)
+    is_correct = models.BooleanField(default=False)
+
+    def __str__(self):
+        mark = "✔" if self.is_correct else "✖"
+        return f"{mark} {self.text[:60]}"
+
+
+
 class CourseSection(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='sections')
     order = models.PositiveIntegerField(null=True, blank=True)
@@ -119,26 +144,3 @@ class CustomUser(AbstractUser):
         if course.course_type == Course.CourseType.VIDEO:
             return True
         return self.allowed_tests.filter(pk=course.pk).exists()
-
-class TestQuestion(models.Model):
-    SINGLE = "single"
-    MULTIPLE = "multiple"
-    TYPES = [(SINGLE, "Single choice"), (MULTIPLE, "Multiple choice")]
-
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="test_questions")
-    text = models.CharField(max_length=500)
-    explanation = models.TextField(blank=True)
-    question_type = models.CharField(max_length=8, choices=TYPES, default=SINGLE)
-    is_active = models.BooleanField(default=True)
-
-    def __str__(self):
-        return f"[{self.course_id}] {self.text[:60]}"
-
-class TestOption(models.Model):
-    question = models.ForeignKey(TestQuestion, on_delete=models.CASCADE, related_name="options")
-    text = models.CharField(max_length=300)
-    is_correct = models.BooleanField(default=False)
-
-    def __str__(self):
-        mark = "✔" if self.is_correct else "✖"
-        return f"{mark} {self.text[:60]}"
