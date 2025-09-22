@@ -1,3 +1,4 @@
+from __future__ import annotations
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
@@ -10,7 +11,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
-from .models import Course, Enrollment,CourseSection,CourseSubsection,CourseFAQ,CustomUser
+from .models import Course, Enrollment,CourseSection,CourseSubsection,CourseFAQ,CustomUser,TestQuestion,TestOption
 from .utils.bunny import generate_bunny_token
 from core.models import CourseSubsection
 from django.db.models import Prefetch, IntegerField
@@ -22,6 +23,10 @@ from django.views.decorators.cache import never_cache
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 import logging
+import random
+from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseForbidden
+
+
 
 User = get_user_model()
 
@@ -164,27 +169,31 @@ def course_single(request, pk):
     })
 
 
-# --- NEW: JSON endpoint to fetch a random question for a course ---
 @login_required
 def course_random_question(request, pk):
     course = get_object_or_404(Course, pk=pk)
 
-    # Must be a TEST course
-    if course.course_type != Course.CourseType.TEST:
+    # Is this a test course?
+    is_test_course = False
+    if hasattr(Course, "CourseType"):
+      is_test_course = (course.course_type == Course.CourseType.TEST)
+    else:
+      is_test_course = (getattr(course, "course_type", None) == "test")
+    if not is_test_course:
         return HttpResponseBadRequest("Not a test course.")
 
-    # Permission: only allowed users
-    if not request.user.has_course_access(course):
+    # Permission: only allowed users (if method exists)
+    has_access = getattr(request.user, "has_course_access", None)
+    if callable(has_access) and not has_access(course):
         return HttpResponseForbidden("No access to this test.")
 
     qs = TestQuestion.objects.filter(course=course, is_active=True).prefetch_related("options")
     if not qs.exists():
         return JsonResponse({"ok": True, "question": None})
 
-    # random pick (simple and good enough)
+    # random pick
     ids = list(qs.values_list("id", flat=True))
-    qid = random.choice(ids)
-    q = qs.filter(id=qid).first()
+    q = qs.get(id=random.choice(ids))
 
     data = {
         "ok": True,
