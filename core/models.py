@@ -2,31 +2,6 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 
-# =========================
-# Custom user w/ test access
-# =========================
-class CustomUser(AbstractUser):
-    is_first_login = models.BooleanField(default=True)
-    is_english = models.BooleanField(default=False)
-    is_turkish = models.BooleanField(default=False)
-
-    # Pick TEST courses per-user in admin.
-    # NOTE: String 'test' avoids referencing Course before it's defined.
-    allowed_tests = models.ManyToManyField(
-        Course,
-        blank=True,
-        related_name='users_with_test_access',
-        limit_choices_to={'course_type': 'test'},
-    )
-
-    def has_course_access(self, course: Course) -> bool:
-        """Videos are open to all. Tests require explicit selection (or superuser)."""
-        if getattr(self, "is_superuser", False):
-            return True
-        if course.course_type == Course.CourseType.VIDEO:
-            return True
-        return self.allowed_tests.filter(pk=course.pk).exists()
-
 
 class Course(models.Model):
     DIFFICULTY_CHOICES = [
@@ -79,8 +54,6 @@ class Course(models.Model):
     def is_test(self) -> bool:
         return self.course_type == self.CourseType.TEST
 
-
-
 def __str__(self):
     return self.turkish_name or self.english_name or f"Course #{self.pk}"
 
@@ -121,3 +94,28 @@ class CourseFAQ(models.Model):
 
     def __str__(self):
         return f"FAQ: {self.question[:50]}..."
+
+# =========================
+# Custom user w/ test access
+# =========================
+class CustomUser(AbstractUser):
+    is_first_login = models.BooleanField(default=True)
+    is_english = models.BooleanField(default=False)
+    is_turkish = models.BooleanField(default=False)
+
+    # Pick TEST courses per-user in admin.
+    # NOTE: String 'test' avoids referencing Course before it's defined.
+    allowed_tests = models.ManyToManyField(
+        Course,
+        blank=True,
+        related_name='users_with_test_access',
+        limit_choices_to={'course_type': 'test'},
+    )
+
+    def has_course_access(self, course: Course) -> bool:
+        """Videos are open to all. Tests require explicit selection (or superuser)."""
+        if getattr(self, "is_superuser", False):
+            return True
+        if course.course_type == Course.CourseType.VIDEO:
+            return True
+        return self.allowed_tests.filter(pk=course.pk).exists()
