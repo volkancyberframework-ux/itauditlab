@@ -9,7 +9,20 @@ from .models import (
     CourseSection,
     CourseSubsection,
     CourseFAQ,
+    TestQuestion,
+    TestOption
 )
+
+class TestOptionInline(admin.TabularInline):
+    model = TestOption
+    extra = 2
+
+@admin.register(TestQuestion)
+class TestQuestionAdmin(admin.ModelAdmin):
+    list_display = ("id", "course", "question_type", "is_active", "text")
+    list_filter = ("course", "question_type", "is_active")
+    search_fields = ("text",)
+    inlines = [TestOptionInline]
 
 # -----------------------------
 # Course upload form (PDF helper)

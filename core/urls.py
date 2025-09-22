@@ -16,6 +16,7 @@ from .views import (
 urlpatterns = [
     path('', landing_page, name='landing'),
     path('course-single/<int:pk>/', views.course_single, name='course_single'),
+    path("course/<int:pk>/random-question/", views.course_random_question, name="course_random_question"),
     path('login/', views.custom_login_view, name='login'),
     path('force-password-change/', views.force_password_change_popup, name='force_password_change_popup'),
     path('dashboard-student/', dashboard_student, name='dashboard_student'),

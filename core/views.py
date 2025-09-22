@@ -144,29 +144,60 @@ def course_single(request, pk):
             if not first_video_url and sub.bunny_iframe_url:
                 first_video_url = sub.bunny_iframe_url
 
-    # ---- NEW: expose test flags for the template ----
-    # Prefer model property if you have it; else fall back to course_type
+    # NEW: flags for template to avoid calling methods in templates
     is_test = getattr(course, "is_test", None)
     if is_test is None:
         is_test = (course.course_type == Course.CourseType.TEST)
 
+    can_access_test = True
     if is_test:
-        # For TESTs, allow only explicitly permitted users
-        # (Assumes CustomUser.has_course_access exists)
+        # deny if user not allowed
         can_access_test = request.user.has_course_access(course)
-    else:
-        # VIDEOs are open to all
-        can_access_test = True
 
     return render(request, "course-single.html", {
         "course": course,
         "sections": sections,
         "faqs": faqs,
         "first_video_url": first_video_url or "",
-        "is_test": is_test,                 # <-- use in template: {% if is_test %}
-        "can_access_test": can_access_test, # <-- use in template: {% if can_access_test %}
+        "is_test": is_test,
+        "can_access_test": can_access_test,
     })
 
+
+# --- NEW: JSON endpoint to fetch a random question for a course ---
+@login_required
+def course_random_question(request, pk):
+    course = get_object_or_404(Course, pk=pk)
+
+    # Must be a TEST course
+    if course.course_type != Course.CourseType.TEST:
+        return HttpResponseBadRequest("Not a test course.")
+
+    # Permission: only allowed users
+    if not request.user.has_course_access(course):
+        return HttpResponseForbidden("No access to this test.")
+
+    qs = TestQuestion.objects.filter(course=course, is_active=True).prefetch_related("options")
+    if not qs.exists():
+        return JsonResponse({"ok": True, "question": None})
+
+    # random pick (simple and good enough)
+    ids = list(qs.values_list("id", flat=True))
+    qid = random.choice(ids)
+    q = qs.filter(id=qid).first()
+
+    data = {
+        "ok": True,
+        "question": {
+            "id": q.id,
+            "text": q.text,
+            "type": q.question_type,  # "single" | "multiple"
+            "explanation": q.explanation or "",
+            "options": [{"id": o.id, "text": o.text} for o in q.options.all()],
+            "correct_option_ids": list(q.options.filter(is_correct=True).values_list("id", flat=True)),
+        },
+    }
+    return JsonResponse(data)
 
 @login_required
 def dashboard_student(request):
