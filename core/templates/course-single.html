@@ -286,9 +286,93 @@
                         {% else %}
                           <div class="alert alert-warning mb-0">You don’t have access to this test.</div>
                         {% endif %}
-                      {% else %}
-                        {# VIDEO mode: keep your accordion here unchanged #}
-                      {% endif %}
+                        {% else %}
+                          {# VIDEO mode: accordion with sections & video modals #}
+                          <div class="accordion" id="courseAccordion">
+                            <div>
+                              <ul class="list-group list-group-flush">
+                                {% for section in sections %}
+                                  <li class="list-group-item px-0 {% if forloop.first %}pt-0{% endif %}">
+                                    <!-- Toggle -->
+                                    <a class="h4 mb-0 d-flex align-items-center {% if forloop.first %}active{% endif %}"
+                                       data-bs-toggle="collapse"
+                                       href="#section{{ section.id }}"
+                                       aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+                                       aria-controls="section{{ section.id }}">
+                                      <div class="me-auto">{{ section.big_title|default:"Untitled Section" }}</div>
+                                      <span class="chevron-arrow ms-4"><i class="fe fe-chevron-down fs-4"></i></span>
+                                    </a>
+
+                                    <!-- Collapse -->
+                                    <div class="collapse {% if forloop.first %}show{% endif %}" id="section{{ section.id }}" data-bs-parent="#courseAccordion">
+                                      <div class="pt-3 pb-2">
+                                        {% for sub in section.subsections.all %}
+                                          <a href="#"
+                                             class="mb-2 d-flex justify-content-between align-items-center text-inherit"
+                                             data-bs-toggle="modal"
+                                             data-bs-target="#videoModal{{ sub.id }}">
+                                            <div class="text-truncate">
+                                              <span class="icon-shape bg-light icon-sm rounded-circle me-2">
+                                                <i class="fe fe-play fs-6"></i>
+                                              </span>
+                                              <span>{{ sub.small_title|default:"Untitled Video" }}</span>
+                                            </div>
+                                            <div class="text-truncate">
+                                              <span>{{ sub.duration|default:"0:00" }}</span>
+                                            </div>
+                                          </a>
+
+                                          <!-- Video Modal -->
+                                          <div class="modal fade" id="videoModal{{ sub.id }}" tabindex="-1"
+                                               aria-labelledby="videoModalLabel{{ sub.id }}" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl modal-dialog-centered">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="videoModalLabel{{ sub.id }}">{{ sub.small_title }}</h5>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body p-0">
+                                                  {% if sub.bunny_iframe_url %}
+                                                    <iframe
+                                                      data-src="{{ sub.bunny_iframe_url }}"
+                                                      src=""
+                                                      style="border:0; width:100%; height:100vh; max-height:100vh;"
+                                                      allow="autoplay; fullscreen; picture-in-picture"
+                                                      allowfullscreen>
+                                                    </iframe>
+                                                  {% else %}
+                                                    <div class="text-center py-5">
+                                                      <p class="text-muted">No video available for this subsection.</p>
+                                                    </div>
+                                                  {% endif %}
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        {% endfor %}
+                                      </div>
+                                    </div>
+                                  </li>
+                                {% endfor %}
+                              </ul>
+                            </div>
+                          </div>
+
+                          <script>
+                            // Lazy-load Bunny iframe when modal opens; stop it when closes
+                            document.addEventListener('shown.bs.modal', function (ev) {
+                              const modal = ev.target;
+                              const iframe = modal.querySelector('iframe[data-src]');
+                              if (iframe && !iframe.src) iframe.src = iframe.dataset.src;
+                            });
+                            document.addEventListener('hidden.bs.modal', function (ev) {
+                              const modal = ev.target;
+                              const iframe = modal.querySelector('iframe');
+                              if (iframe) iframe.src = '';
+                            });
+                          </script>
+                        {% endif %}
+
 
 
                     </div>
