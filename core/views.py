@@ -129,6 +129,35 @@ def _bunny_url_passthrough(val: str | None) -> str | None:
 def course_single(request, pk):
     course = get_object_or_404(Course, pk=pk)
 
+    # ---- ACCESS CONTROL (deep-link protection) ----
+    # Determine if test
+    is_test = getattr(course, "is_test", None)
+    if is_test is None:
+        # supports both enum and plain string
+        is_test = (
+            getattr(course, "course_type", None) == getattr(Course, "CourseType", None).TEST
+            if hasattr(Course, "CourseType") else
+            getattr(course, "course_type", "") == "test"
+        )
+
+    if is_test:
+        # tests: only for assigned users (unless staff)
+        has_access = getattr(request.user, "has_course_access", None)
+        allowed = bool(request.user.is_staff or request.user.is_superuser)
+        if callable(has_access):
+            allowed = allowed or has_access(course)
+        if not allowed:
+            messages.error(request, "You don’t have access to this test.")
+            return redirect("dashboard_student")
+    else:
+        # videos: require enrollment (unless staff)
+        if not (request.user.is_staff or request.user.is_superuser
+                or Enrollment.objects.filter(user=request.user, course=course).exists()):
+            messages.error(request, "Please enroll to access this course.")
+            # send them to the list; you can keep the tab anchor if you like
+            return redirect("dashboard_student")
+
+    # ---- normal view rendering below (unchanged) ----
     sections_qs = course.sections.annotate(
         sort_key=Coalesce('order', 'id', output_field=IntegerField())
     ).order_by('sort_key', 'id')
@@ -151,16 +180,8 @@ def course_single(request, pk):
             if not first_video_url and sub.bunny_iframe_url:
                 first_video_url = sub.bunny_iframe_url
 
-    # NEW: flags for template to avoid calling methods in templates
-    is_test = getattr(course, "is_test", None)
-    if is_test is None:
-        is_test = (course.course_type == Course.CourseType.TEST)
-
-    can_access_test = True
-    if is_test:
-        # deny if user not allowed
-        can_access_test = request.user.has_course_access(course)
-
+    # Flags for template
+    can_access_test = True if not is_test else True  # passed above
     return render(request, "course-single.html", {
         "course": course,
         "sections": sections,
@@ -169,7 +190,6 @@ def course_single(request, pk):
         "is_test": is_test,
         "can_access_test": can_access_test,
     })
-
 
 @login_required
 def course_random_question(request, pk):
