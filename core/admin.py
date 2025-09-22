@@ -1,12 +1,19 @@
 from django.contrib import admin
 from django import forms
-from .models import CustomUser, Course, CourseSection, CourseSubsection, CourseFAQ
+from django.contrib.auth.admin import UserAdmin
+from django.utils.translation import gettext_lazy as _
 
+from .models import (
+    CustomUser,
+    Course,
+    CourseSection,
+    CourseSubsection,
+    CourseFAQ,
+)
 
-admin.site.register(CourseFAQ)
-admin.site.register(CustomUser)
-
-
+# -----------------------------
+# Course upload form (PDF helper)
+# -----------------------------
 class CourseAdminForm(forms.ModelForm):
     upload_pdf = forms.FileField(required=False, help_text="Upload/replace course attachment (PDF or any file)")
 
@@ -26,18 +33,24 @@ class CourseAdminForm(forms.ModelForm):
         return instance
 
 
+# -----------------------------
+# Course admin
+# -----------------------------
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     form = CourseAdminForm
-    list_display = ("id", "display_course", "difficulty", "duration", "score")
-    search_fields = ("id", "description")
-    list_filter = ("difficulty",)
+    list_display = ("id", "display_course", "course_type", "difficulty", "duration", "score")
+    search_fields = ("id", "description", "turkish_name", "english_name")
+    list_filter = ("course_type", "difficulty", "dashboard_activated", "main_page_activated", "is_english", "is_turkish")
 
     def display_course(self, obj):
-        return getattr(obj, "name", None) or getattr(obj, "turkish_name", None) or getattr(obj, "english_name", None) or str(obj)
+        return getattr(obj, "turkish_name", None) or getattr(obj, "english_name", None) or str(obj)
     display_course.short_description = "Course"
 
 
+# -----------------------------
+# Sections admins
+# -----------------------------
 @admin.register(CourseSection)
 class CourseSectionAdmin(admin.ModelAdmin):
     list_display = ("id", "course", "big_title", "order")
@@ -54,3 +67,31 @@ class CourseSubsectionAdmin(admin.ModelAdmin):
     ordering = ("order", "id")
     search_fields = ("small_title",)
     list_filter = ("section__course", "section")
+
+
+@admin.register(CourseFAQ)
+class CourseFAQAdmin(admin.ModelAdmin):
+    list_display = ("id", "course", "question")
+    search_fields = ("question", "answer", "course__turkish_name", "course__english_name")
+    list_filter = ("course",)
+
+
+# -----------------------------
+# CustomUser admin
+# -----------------------------
+@admin.register(CustomUser)
+class CustomUserAdmin(UserAdmin):
+    list_display = ("username", "email", "is_active", "is_staff", "is_first_login", "is_english", "is_turkish")
+    list_filter = UserAdmin.list_filter + ("is_first_login", "is_english", "is_turkish")
+    search_fields = UserAdmin.search_fields + ("email",)
+
+    # Nice dual-select UI for test access
+    filter_horizontal = ("allowed_tests",)
+
+    fieldsets = UserAdmin.fieldsets + (
+        (_("Profile flags"), {"fields": ("is_first_login", "is_english", "is_turkish")}),
+        (_("Test access"), {"fields": ("allowed_tests",)}),
+    )
+    add_fieldsets = UserAdmin.add_fieldsets + (
+        (_("Profile flags"), {"classes": ("wide",), "fields": ("is_first_login", "is_english", "is_turkish")}),
+    )

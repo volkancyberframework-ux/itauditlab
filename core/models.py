@@ -2,11 +2,30 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 
-
+# =========================
+# Custom user w/ test access
+# =========================
 class CustomUser(AbstractUser):
     is_first_login = models.BooleanField(default=True)
     is_english = models.BooleanField(default=False)
     is_turkish = models.BooleanField(default=False)
+
+    # Pick TEST courses per-user in admin.
+    # NOTE: String 'test' avoids referencing Course before it's defined.
+    allowed_tests = models.ManyToManyField(
+        Course,
+        blank=True,
+        related_name='users_with_test_access',
+        limit_choices_to={'course_type': 'test'},
+    )
+
+    def has_course_access(self, course: Course) -> bool:
+        """Videos are open to all. Tests require explicit selection (or superuser)."""
+        if getattr(self, "is_superuser", False):
+            return True
+        if course.course_type == Course.CourseType.VIDEO:
+            return True
+        return self.allowed_tests.filter(pk=course.pk).exists()
 
 
 class Course(models.Model):
@@ -16,8 +35,12 @@ class Course(models.Model):
         ('Advanced', 'Advanced'),
     ]
 
+    class CourseType(models.TextChoices):
+        VIDEO = 'video', 'Video'
+        TEST  = 'test',  'Test'
+
     turkish_name = models.CharField(max_length=255)
-    english_name = models.CharField(max_length=255, blank=True, null=True)  # New
+    english_name = models.CharField(max_length=255, blank=True, null=True)
     image = models.ImageField(upload_to='course_images/', blank=True, null=True)
     duration = models.DurationField(help_text="Format: hh:mm:ss")
     difficulty = models.CharField(max_length=20, choices=DIFFICULTY_CHOICES)
@@ -30,10 +53,33 @@ class Course(models.Model):
     )
     description = models.TextField()
     attachment = models.FileField(upload_to='course_attachments/', blank=True, null=True)
-    dashboard_activated = models.BooleanField(default=False)  # New
-    main_page_activated = models.BooleanField(default=False)  # New
-    is_english = models.BooleanField(default=False)  # New
+
+    # Visibility / placement flags
+    dashboard_activated = models.BooleanField(default=False)
+    main_page_activated = models.BooleanField(default=False)
+    is_english = models.BooleanField(default=False)
     is_turkish = models.BooleanField(default=False)
+
+    # NEW: course type (Video/Test)
+    course_type = models.CharField(
+        max_length=10,
+        choices=CourseType.choices,
+        default=CourseType.VIDEO,
+        db_index=True,
+    )
+
+    def __str__(self):
+        return self.turkish_name or self.english_name or f"Course #{self.pk}"
+
+    @property
+    def is_video(self) -> bool:
+        return self.course_type == self.CourseType.VIDEO
+
+    @property
+    def is_test(self) -> bool:
+        return self.course_type == self.CourseType.TEST
+
+
 
 def __str__(self):
     return self.turkish_name or self.english_name or f"Course #{self.pk}"
