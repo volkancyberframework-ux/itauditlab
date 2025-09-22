@@ -58,92 +58,9 @@
                                 <div class="tab-pane fade show active" id="bookmarked" role="tabpanel" aria-labelledby="bookmarked-tab">
                                     <div class="row">
                                       {% for course in courses %}
-                                        <div class="col-lg-3 col-md-6 col-12">
-                                          <div class="card mb-4 card-hover">
-
-                                            {% if course.id in enrolled_course_ids %}
-                                              <a href="{% url 'course_single' course.id %}">
-                                                {% if course.image %}
-                                                  <img src="{{ course.image.url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="card-img-top">
-                                                {% else %}
-                                                  <div class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted" style="height: 200px;">
-                                                    No Image
-                                                  </div>
-                                                {% endif %}
-                                              </a>
-                                            {% else %}
-                                              <div class="card-img-top position-relative">
-                                                {% if course.image %}
-                                                  <img src="{{ course.image.url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="img-fluid opacity-50">
-                                                {% else %}
-                                                  <div class="d-flex align-items-center justify-content-center bg-light text-muted opacity-50" style="height: 200px;">
-                                                    No Image
-                                                  </div>
-                                                {% endif %}
-                                                <div class="position-absolute top-50 start-50 translate-middle text-muted fw-bold fs-6">
-                                                  Enroll to access
-                                                </div>
-                                              </div>
-                                            {% endif %}
-
-                                            <div class="card-body">
-                                              <h3 class="h4 mb-2 text-truncate-line-2">
-                                                {% if course.id in enrolled_course_ids %}
-                                                  <a href="{% url 'course_single' course.id %}" class="text-inherit">
-                                                    {{ course.turkish_name|default:course.english_name }}
-                                                  </a>
-                                                {% else %}
-                                                  <span class="text-muted">
-                                                    {{ course.turkish_name|default:course.english_name }}
-                                                  </span>
-                                                {% endif %}
-                                              </h3>
-
-                                              <!-- rest of your card stays the same ... -->
-
-                                              <div class="card-footer">
-                                                <div class="row align-items-center g-0">
-                                                  <div class="col-auto">
-                                                    <div class="avatar-xs rounded-circle bg-primary text-white fw-bold d-flex align-items-center justify-content-center">
-                                                      {{ course.preparer.first_name|slice:":1" }}{{ course.preparer.last_name|slice:":1" }}
-                                                    </div>
-                                                  </div>
-                                                  <div class="col ms-2">
-                                                    <span>{{ course.preparer.first_name }} {{ course.preparer.last_name }}</span>
-                                                  </div>
-                                                  <div class="col-auto">
-                                                    {% if course.id in enrolled_course_ids %}
-                                                      {# Was disabled before; make it actionable #}
-                                                      <form method="POST" action="{% url 'unenroll_course' %}" onsubmit="return confirm('Unenroll from this course?');">
-                                                        {% csrf_token %}
-                                                        <input type="hidden" name="course_id" value="{{ course.id }}">
-                                                        <button class="btn btn-outline-danger btn-sm">Unenroll</button>
-                                                      </form>
-                                                    {% else %}
-                                                      <form method="POST" action="{% url 'dashboard_student' %}" onsubmit="return confirm('Enroll to this course?');">
-                                                        {% csrf_token %}
-                                                        <input type="hidden" name="course_id" value="{{ course.id }}">
-                                                        <button class="btn btn-primary btn-sm">Enroll</button>
-                                                      </form>
-                                                    {% endif %}
-                                                  </div>
-                                                </div>
-                                              </div>
-
-
-                                            </div>
-                                          </div>
-                                        </div>
-                                      {% endfor %}
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="currentlyLearning" role="tabpanel" aria-labelledby="currentlyLearning-tab">
-                                  <div class="row">
-                                    {% if enrolled_courses %}
-                                      {% for course in enrolled_courses %}
-                                        <div class="col-lg-3 col-md-6 col-12">
-                                          <div class="card mb-4 card-hover">
-
+                                      <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="card mb-4 card-hover h-100 d-flex flex-column">
+                                          {% if course.id in enrolled_course_ids %}
                                             <a href="{% url 'course_single' course.id %}">
                                               {% if course.image %}
                                                 <img src="{{ course.image.url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="card-img-top">
@@ -153,40 +70,115 @@
                                                 </div>
                                               {% endif %}
                                             </a>
+                                          {% else %}
+                                            <div class="position-relative">
+                                              {% if course.image %}
+                                                <img src="{{ course.image.url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="card-img-top opacity-50">
+                                              {% else %}
+                                                <div class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted opacity-50" style="height: 200px;">
+                                                  No Image
+                                                </div>
+                                              {% endif %}
+                                              <div class="position-absolute top-50 start-50 translate-middle text-muted fw-bold fs-6">
+                                                Enroll to access
+                                              </div>
+                                            </div>
+                                          {% endif %}
 
-                                            <div class="card-body">
-                                              <h3 class="h4 mb-2 text-truncate-line-2">
+                                          <div class="card-body flex-grow-1">
+                                            <h3 class="h4 mb-2 text-truncate-line-2">
+                                              {% if course.id in enrolled_course_ids %}
                                                 <a href="{% url 'course_single' course.id %}" class="text-inherit">
                                                   {{ course.turkish_name|default:course.english_name }}
                                                 </a>
-                                              </h3>
+                                              {% else %}
+                                                <span class="text-muted">
+                                                  {{ course.turkish_name|default:course.english_name }}
+                                                </span>
+                                              {% endif %}
+                                            </h3>
+                                            {# ... keep any extra body content here ... #}
+                                          </div>
 
-                                              <!-- burada süre/zorluk/puan vb. aynı -->
-                                            </div>
-
-                                            <div class="card-footer">
-                                              <div class="row align-items-center g-0">
-                                                <div class="col-auto">
-                                                  <div class="avatar-xs rounded-circle bg-primary text-white fw-bold d-flex align-items-center justify-content-center">
-                                                    {{ course.preparer.first_name|slice:":1" }}{{ course.preparer.last_name|slice:":1" }}
-                                                  </div>
+                                          <div class="card-footer">
+                                            <div class="row align-items-center g-0">
+                                              <div class="col-auto">
+                                                <div class="avatar-xs rounded-circle bg-primary text-white fw-bold d-flex align-items-center justify-content-center">
+                                                  {{ course.preparer.first_name|slice:":1" }}{{ course.preparer.last_name|slice:":1" }}
                                                 </div>
-                                                <div class="col ms-2">
-                                                  <span>{{ course.preparer.first_name }} {{ course.preparer.last_name }}</span>
-                                                </div>
-                                                <div class="col-auto">
+                                              </div>
+                                              <div class="col ms-2">
+                                                <span>{{ course.preparer.first_name }} {{ course.preparer.last_name }}</span>
+                                              </div>
+                                              <div class="col-auto">
+                                                {% if course.id in enrolled_course_ids %}
                                                   <form method="POST" action="{% url 'unenroll_course' %}" onsubmit="return confirm('Unenroll from this course?');">
                                                     {% csrf_token %}
                                                     <input type="hidden" name="course_id" value="{{ course.id }}">
                                                     <button class="btn btn-outline-danger btn-sm">Unenroll</button>
                                                   </form>
-                                                </div>
+                                                {% else %}
+                                                  <form method="POST" action="{% url 'dashboard_student' %}" onsubmit="return confirm('Enroll to this course?');">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="course_id" value="{{ course.id }}">
+                                                    <button class="btn btn-primary btn-sm">Enroll</button>
+                                                  </form>
+                                                {% endif %}
                                               </div>
                                             </div>
-
-
                                           </div>
                                         </div>
+                                      </div>
+
+                                      {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="currentlyLearning" role="tabpanel" aria-labelledby="currentlyLearning-tab">
+                                  <div class="row">
+                                    {% if enrolled_courses %}
+                                      {% for course in enrolled_courses %}
+                                      <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="card mb-4 card-hover h-100 d-flex flex-column">
+                                          <a href="{% url 'course_single' course.id %}">
+                                            {% if course.image %}
+                                              <img src="{{ course.image.url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="card-img-top">
+                                            {% else %}
+                                              <div class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted" style="height: 200px;">
+                                                No Image
+                                              </div>
+                                            {% endif %}
+                                          </a>
+
+                                          <div class="card-body flex-grow-1">
+                                            <h3 class="h4 mb-2 text-truncate-line-2">
+                                              <a href="{% url 'course_single' course.id %}" class="text-inherit">
+                                                {{ course.turkish_name|default:course.english_name }}
+                                              </a>
+                                            </h3>
+                                            {# ... same optional body content as All Courses ... #}
+                                          </div>
+
+                                          <div class="card-footer">
+                                            <div class="row align-items-center g-0">
+                                              <div class="col-auto">
+                                                <div class="avatar-xs rounded-circle bg-primary text-white fw-bold d-flex align-items-center justify-content-center">
+                                                  {{ course.preparer.first_name|slice:":1" }}{{ course.preparer.last_name|slice:":1" }}
+                                                </div>
+                                              </div>
+                                              <div class="col ms-2">
+                                                <span>{{ course.preparer.first_name }} {{ course.preparer.last_name }}</span>
+                                              </div>
+                                              <div class="col-auto">
+                                                <form method="POST" action="{% url 'unenroll_course' %}" onsubmit="return confirm('Unenroll from this course?');">
+                                                  {% csrf_token %}
+                                                  <input type="hidden" name="course_id" value="{{ course.id }}">
+                                                  <button class="btn btn-outline-danger btn-sm">Unenroll</button>
+                                                </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
                                       {% endfor %}
                                     {% else %}
                                       <div class="col-12">
