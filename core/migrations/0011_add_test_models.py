@@ -21,24 +21,4 @@ class Migration(migrations.Migration):
             name='allowed_tests',
             field=models.ManyToManyField(blank=True, limit_choices_to={'course_type': 'test'}, related_name='users_with_test_access', to='core.course'),
         ),
-        migrations.CreateModel(
-            name='TestQuestion',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('text', models.CharField(max_length=500)),
-                ('explanation', models.TextField(blank=True)),
-                ('question_type', models.CharField(choices=[('single', 'Single choice'), ('multiple', 'Multiple choice')], default='single', max_length=8)),
-                ('is_active', models.BooleanField(default=True)),
-                ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='test_questions', to='core.course')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='TestOption',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('text', models.CharField(max_length=300)),
-                ('is_correct', models.BooleanField(default=False)),
-                ('question', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='options', to='core.testquestion')),
-            ],
-        ),
     ]
