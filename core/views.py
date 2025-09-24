@@ -230,24 +230,26 @@ def course_random_question(request, pk):
     }
     return JsonResponse(data)
 
+@# views.py
+
 @login_required
 def dashboard_student(request):
     user = request.user
 
-    # Enroll işlemi (erişim kuralını da uygula)
+    # ---- ENROLL (POST) ----
     if request.method == 'POST':
         course_id = request.POST.get('course_id')
         course = get_object_or_404(Course, pk=course_id, dashboard_activated=True)
 
-        # Test erişim kuralı: video herkese açık, testler sadece izinli
-        if hasattr(user, "has_course_access") and not user.has_course_access(course):
-            messages.error(request, "Bu teste erişiminiz yok.")
-            return redirect('/dashboard-student/#currentlyLearning')
+        # Enroll izni kontrolü (CustomUser.can_enroll)
+        if not user.can_enroll(course):
+            messages.error(request, "Enroll olamadınız. Uygun Katıl seviyesine yükseltin.")
+            return redirect('/dashboard-student/#allCourses')
 
         Enrollment.objects.get_or_create(user=user, course=course)
         return redirect('/dashboard-student/#currentlyLearning')
 
-    # ---- Görünür kurslar (dashboard_activated + dil + erişim kuralı) ----
+    # ---- GÖRÜNÜRLÜK (dashboard_activated + dil) ----
     base_qs = Course.objects.filter(dashboard_activated=True)
 
     # Dil filtresi
@@ -260,21 +262,16 @@ def dashboard_student(request):
     else:
         base_qs = Course.objects.none()
 
-    # Erişim kuralı (video: herkes, test: sadece allowed_tests)
-    allowed_test_ids = user.allowed_tests.values_list('id', flat=True) if hasattr(user, "allowed_tests") else []
-    courses = base_qs.filter(
-        models.Q(course_type=Course.CourseType.VIDEO) |
-        models.Q(id__in=allowed_test_ids)
-    ).distinct()
+    # ÖNEMLİ: Artık burada allowed_tests ile filtrelemiyoruz.
+    # Tüm uygun kurslar görünsün:
+    courses = base_qs.distinct()
 
-    # ---- Enrolled sekmesi için: sadece kayıtlı + görünür kurslar ----
+    # Enrolled sekmesi: sadece kayıt olunanlar
     enrolled_courses = courses.filter(enrollment__user=user).distinct()
-
-    # Şablonda hızlı kontrol için ID seti
     enrolled_course_ids = set(enrolled_courses.values_list('id', flat=True))
 
     return render(request, 'dashboard-student.html', {
-        'courses': courses,                         # Tüm görünür kurslar
-        'enrolled_courses': enrolled_courses,       # Sadece kayıt olunan görünür kurslar
-        'enrolled_course_ids': enrolled_course_ids  # Üyelik kontrolü için
+        'courses': courses,                         # Herkesin gördüğü kurslar
+        'enrolled_courses': enrolled_courses,       # Kullanıcının kayıt oldukları
+        'enrolled_course_ids': enrolled_course_ids  # Şablonda buton durumu için
     })

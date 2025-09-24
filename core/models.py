@@ -146,3 +146,17 @@ class CustomUser(AbstractUser):
         if course.course_type == Course.CourseType.VIDEO:
             return True
         return self.allowed_tests.filter(pk=course.pk).exists()
+
+    def can_enroll(self, course: "Course") -> bool:
+        """Sadece önceden onaylanan kullanıcılar enroll edebilir.
+        - Süperuser/staff her şeye kayıt olabilir
+        - Test kursları: allowed_tests içinde olmalı
+        - Video kursları: (şimdilik) serbest bırakmak istiyorsan True döndür;
+          sadece onayla diyorsan burada ayrı bir mekanizma eklemelisin.
+        """
+        if getattr(self, "is_superuser", False) or getattr(self, "is_staff", False):
+            return True
+        if course.course_type == Course.CourseType.TEST:
+            return self.allowed_tests.filter(pk=course.pk).exists()
+        # Video’ları da onaylı yapmak istiyorsan burayı False yap ve ayrı whitelist alanı ekle.
+        return True  # Video’lar serbest (mevcut akışla uyumlu)
