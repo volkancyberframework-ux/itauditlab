@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: core
+    runtime: python
+    region: frankfurt          # isteğe bağlı
+    plan: starter
+    branch: main               # repo dalın
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+    startCommand: gunicorn myproject.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: DJANGO_SETTINGS_MODULE
+        value: myproject.settings
+      - key: WEB_CONCURRENCY
+        value: "2"
+      # MEDIA_ROOT'u kodda /data/media yapacağız (aşağıda)
+    disk:                      # Persistent Disk
+      name: data
+      mountPath: /data
+      sizeGB: 10

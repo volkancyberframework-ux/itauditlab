@@ -21,8 +21,8 @@ AUTH_USER_MODEL = 'core.CustomUser'
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-MEDIA_URL = '/data/media'
-MEDIA_ROOT = '/media'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/data/media'
 
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
