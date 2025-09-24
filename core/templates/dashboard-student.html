@@ -109,24 +109,32 @@
                                                 <span>{{ course.preparer.first_name }} {{ course.preparer.last_name }}</span>
                                               </div>
                                               <div class="col-auto">
-                                              {% else %}
-                                                {% with can_enroll=request.user.can_enroll(course) %}
-                                                  <form method="POST" action="{% url 'dashboard_student' %}" onsubmit="return confirm('Enroll to this course?');">
+                                                {% if course.id in enrolled_course_ids %}
+                                                  <form method="POST" action="{% url 'unenroll_course' %}" onsubmit="return confirm('Unenroll from this course?');">
                                                     {% csrf_token %}
                                                     <input type="hidden" name="course_id" value="{{ course.id }}">
-                                                    <button
-                                                      type="submit"
-                                                      class="btn btn-primary btn-sm"
-                                                      {% if not can_enroll %}disabled title="Uygun Katıl seviyesine yükseltin"{% endif %}
-                                                    >Enroll</button>
+                                                    <button class="btn btn-outline-danger btn-sm">Unenroll</button>
                                                   </form>
-                                                  {% if not can_enroll %}
-                                                    <small class="text-muted d-block mt-1">
-                                                      Enroll için uygun Katıl seviyesine yükseltin.
-                                                    </small>
-                                                  {% endif %}
-                                                {% endwith %}
-                                              {% endif %}
+                                                {% else %}
+                                                  {% with can_enroll=request.user.can_enroll(course) %}
+                                                    <form method="POST" action="{% url 'dashboard_student' %}" onsubmit="return confirm('Enroll to this course?');">
+                                                      {% csrf_token %}
+                                                      <input type="hidden" name="course_id" value="{{ course.id }}">
+                                                      <button
+                                                        type="submit"
+                                                        class="btn btn-primary btn-sm"
+                                                        {% if not can_enroll %}disabled title="Uygun Katıl seviyesine yükseltin"{% endif %}
+                                                      >
+                                                        Enroll
+                                                      </button>
+                                                    </form>
+                                                    {% if not can_enroll %}
+                                                      <small class="text-muted d-block mt-1">
+                                                        Enroll için uygun Katıl seviyesine yükseltin.
+                                                      </small>
+                                                    {% endif %}
+                                                  {% endwith %}
+                                                {% endif %}
                                               </div>
                                             </div>
                                           </div>
