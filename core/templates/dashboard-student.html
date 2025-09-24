@@ -121,22 +121,21 @@
                                                     <input type="hidden" name="course_id" value="{{ course.id }}">
                                                     <button class="btn btn-outline-danger btn-sm">Unenroll</button>
                                                   </form>
-                                                {% else %}
-                                                  <form method="POST" action="{% url 'dashboard_student' %}" onsubmit="return confirm('Enroll to this course?');">
-                                                    {% csrf_token %}
-                                                    <input type="hidden" name="course_id" value="{{ course.id }}">
-                                                    <button
-                                                      type="submit"
-                                                      class="btn btn-primary btn-sm"
-                                                      {% if course.id not in can_enroll_ids %}disabled title="Uygun Katıl seviyesine yükseltin"{% endif %}
-                                                    >Enroll</button>
-                                                  </form>
-                                                  {% if course.id not in can_enroll_ids %}
-                                                    <small class="text-muted d-block mt-1">
-                                                      Enroll için uygun Katıl seviyesine yükseltin.
-                                                    </small>
+                                                  {% else %}
+                                                    <form method="POST"
+                                                          action="{% url 'dashboard_student' %}"
+                                                          class="js-enroll-form"
+                                                          data-course-title="{{ course.turkish_name|default:course.english_name }}">
+                                                      {% csrf_token %}
+                                                      <input type="hidden" name="course_id" value="{{ course.id }}">
+                                                      <button
+                                                        type="submit"
+                                                        class="btn btn-primary btn-sm js-enroll-btn"
+                                                        data-allowed="{% if course.id in can_enroll_ids %}true{% else %}false{% endif %}">
+                                                        Enroll
+                                                      </button>
+                                                    </form>
                                                   {% endif %}
-                                                {% endif %}
                                               </div>
                                             </div>
                                           </div>
@@ -222,6 +221,28 @@
                     </div>
                 </div>
             </section>
+
+            <script>
+            document.addEventListener('click', function (e) {
+              const btn = e.target.closest('.js-enroll-btn');
+              if (!btn) return;
+
+              const allowed = (btn.dataset.allowed === 'true');
+              if (allowed) {
+                // izin varsa normal submit
+                return;
+              }
+
+              // izin yoksa: form submit'i engelle ve popup göster
+              e.preventDefault();
+              const form = btn.closest('.js-enroll-form');
+              const title = form?.dataset.courseTitle || 'bu kurs';
+
+              alert(`"${title}" kursuna kayıt olmak için uygun Katıl seviyesine yükseltin.`);
+            });
+            </script>
+
+
         </main>
 
 
