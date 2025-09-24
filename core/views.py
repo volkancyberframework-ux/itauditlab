@@ -230,7 +230,6 @@ def course_random_question(request, pk):
     }
     return JsonResponse(data)
 
-@# views.py
 
 @login_required
 def dashboard_student(request):
