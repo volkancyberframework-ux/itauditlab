@@ -264,6 +264,7 @@ def dashboard_student(request):
     # ÖNEMLİ: Artık burada allowed_tests ile filtrelemiyoruz.
     # Tüm uygun kurslar görünsün:
     courses = base_qs.distinct()
+    can_enroll_ids = {c.id for c in courses if user.can_enroll(c)}
 
     # Enrolled sekmesi: sadece kayıt olunanlar
     enrolled_courses = courses.filter(enrollment__user=user).distinct()
@@ -272,5 +273,5 @@ def dashboard_student(request):
     return render(request, 'dashboard-student.html', {
         'courses': courses,                         # Herkesin gördüğü kurslar
         'enrolled_courses': enrolled_courses,       # Kullanıcının kayıt oldukları
-        'enrolled_course_ids': enrolled_course_ids  # Şablonda buton durumu için
+        'can_enroll_ids': can_enroll_ids,  # Şablonda buton durumu için
     })

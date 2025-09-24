@@ -79,9 +79,15 @@
                                                   No Image
                                                 </div>
                                               {% endif %}
-                                              <div class="position-absolute top-50 start-50 translate-middle text-muted fw-bold fs-6">
-                                                Enroll to access
+                                              <div class="position-absolute top-50 start-50 translate-middle fw-bold fs-6
+                                                          {% if course.id in can_enroll_ids %}text-muted{% else %}text-danger{% endif %}">
+                                                {% if course.id in can_enroll_ids %}
+                                                  Enroll to access
+                                                {% else %}
+                                                  Upgrade required
+                                                {% endif %}
                                               </div>
+
                                             </div>
                                           {% endif %}
 
@@ -116,24 +122,20 @@
                                                     <button class="btn btn-outline-danger btn-sm">Unenroll</button>
                                                   </form>
                                                 {% else %}
-                                                  {% with can_enroll=request.user.can_enroll(course) %}
-                                                    <form method="POST" action="{% url 'dashboard_student' %}" onsubmit="return confirm('Enroll to this course?');">
-                                                      {% csrf_token %}
-                                                      <input type="hidden" name="course_id" value="{{ course.id }}">
-                                                      <button
-                                                        type="submit"
-                                                        class="btn btn-primary btn-sm"
-                                                        {% if not can_enroll %}disabled title="Uygun Katıl seviyesine yükseltin"{% endif %}
-                                                      >
-                                                        Enroll
-                                                      </button>
-                                                    </form>
-                                                    {% if not can_enroll %}
-                                                      <small class="text-muted d-block mt-1">
-                                                        Enroll için uygun Katıl seviyesine yükseltin.
-                                                      </small>
-                                                    {% endif %}
-                                                  {% endwith %}
+                                                  <form method="POST" action="{% url 'dashboard_student' %}" onsubmit="return confirm('Enroll to this course?');">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="course_id" value="{{ course.id }}">
+                                                    <button
+                                                      type="submit"
+                                                      class="btn btn-primary btn-sm"
+                                                      {% if course.id not in can_enroll_ids %}disabled title="Uygun Katıl seviyesine yükseltin"{% endif %}
+                                                    >Enroll</button>
+                                                  </form>
+                                                  {% if course.id not in can_enroll_ids %}
+                                                    <small class="text-muted d-block mt-1">
+                                                      Enroll için uygun Katıl seviyesine yükseltin.
+                                                    </small>
+                                                  {% endif %}
                                                 {% endif %}
                                               </div>
                                             </div>
