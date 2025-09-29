@@ -256,22 +256,23 @@ def dashboard_student(request):
     else:
         courses = Course.objects.none()
 
-    # 🔴 EN ÖNEMLİ KISIM: Enroll olan kurs ID'lerini Enrollment'tan çek
+    # ID'ye göre sıralama (artan)
+    courses = courses.order_by('id')
+
+    # Enroll olan kurs ID'leri
     enrolled_course_ids = list(
         Enrollment.objects.filter(user=user).values_list('course_id', flat=True)
     )
 
-    # Enrolled sekmesi için kurslar (görünürlük filtresiyle)
-    enrolled_courses = courses.filter(id__in=enrolled_course_ids).distinct()
+    # Enrolled sekmesi (görünürlük filtresi + ID sıralı)
+    enrolled_courses = courses.filter(id__in=enrolled_course_ids).order_by('id').distinct()
 
     # İzinli enroll kontrolü için (template'te modal kararı)
-    can_enroll_ids = [
-        c.id for c in courses if user.can_enroll(c)
-    ]
+    can_enroll_ids = [c.id for c in courses if user.can_enroll(c)]
 
     return render(request, 'dashboard-student.html', {
         'courses': courses,
         'enrolled_courses': enrolled_courses,
-        'enrolled_course_ids': enrolled_course_ids,  # ← liste olarak
-        'can_enroll_ids': can_enroll_ids,            # ← liste olarak
+        'enrolled_course_ids': enrolled_course_ids,
+        'can_enroll_ids': can_enroll_ids,
     })
