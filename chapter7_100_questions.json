@@ -1,0 +1,2502 @@
+[
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur?",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder?",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar?",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir?",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder?",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur? (Senaryo 2)",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder? (Senaryo 2)",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar? (Senaryo 2)",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir? (Senaryo 2)",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder? (Senaryo 2)",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur? (Senaryo 3)",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder? (Senaryo 3)",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar? (Senaryo 3)",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir? (Senaryo 3)",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder? (Senaryo 3)",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur? (Senaryo 4)",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder? (Senaryo 4)",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar? (Senaryo 4)",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir? (Senaryo 4)",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder? (Senaryo 4)",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur? (Senaryo 5)",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder? (Senaryo 5)",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar? (Senaryo 5)",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir? (Senaryo 5)",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder? (Senaryo 5)",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur? (Senaryo 6)",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder? (Senaryo 6)",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar? (Senaryo 6)",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir? (Senaryo 6)",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder? (Senaryo 6)",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur? (Senaryo 7)",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder? (Senaryo 7)",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar? (Senaryo 7)",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir? (Senaryo 7)",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder? (Senaryo 7)",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur? (Senaryo 8)",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder? (Senaryo 8)",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar? (Senaryo 8)",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir? (Senaryo 8)",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder? (Senaryo 8)",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur? (Senaryo 9)",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder? (Senaryo 9)",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar? (Senaryo 9)",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir? (Senaryo 9)",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder? (Senaryo 9)",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur? (Senaryo 10)",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder? (Senaryo 10)",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar? (Senaryo 10)",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir? (Senaryo 10)",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder? (Senaryo 10)",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur? (Senaryo 11)",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder? (Senaryo 11)",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar? (Senaryo 11)",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir? (Senaryo 11)",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder? (Senaryo 11)",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur? (Senaryo 12)",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder? (Senaryo 12)",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar? (Senaryo 12)",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir? (Senaryo 12)",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder? (Senaryo 12)",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur? (Senaryo 13)",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder? (Senaryo 13)",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar? (Senaryo 13)",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir? (Senaryo 13)",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder? (Senaryo 13)",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur? (Senaryo 14)",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder? (Senaryo 14)",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar? (Senaryo 14)",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir? (Senaryo 14)",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder? (Senaryo 14)",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur? (Senaryo 15)",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder? (Senaryo 15)",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar? (Senaryo 15)",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir? (Senaryo 15)",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder? (Senaryo 15)",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur? (Senaryo 16)",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder? (Senaryo 16)",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar? (Senaryo 16)",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir? (Senaryo 16)",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder? (Senaryo 16)",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur? (Senaryo 17)",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder? (Senaryo 17)",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar? (Senaryo 17)",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir? (Senaryo 17)",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder? (Senaryo 17)",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur? (Senaryo 18)",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder? (Senaryo 18)",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar? (Senaryo 18)",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir? (Senaryo 18)",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder? (Senaryo 18)",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur? (Senaryo 19)",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder? (Senaryo 19)",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar? (Senaryo 19)",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir? (Senaryo 19)",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder? (Senaryo 19)",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, herkese açık anahtarıyla şifrelenen veriyi sadece kendisi çözebiliyor. Bu hangi asimetrik özellik sayesinde olur? (Senaryo 20)",
+    "explanation": "Asimetrik kriptografi, public/private anahtar çiftine dayanır. Public ile şifrelenen sadece private ile çözülür. Bu gizliliği sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Asimetrik kripto; public ile şifrelenip private ile çözülür",
+        "is_correct": true
+      },
+      {
+        "text": "Simetrik kripto; tek anahtar kullanır",
+        "is_correct": false
+      },
+      {
+        "text": "Hash fonksiyonu; tek yönlüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; bilgiyi gizler",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir kullanıcı, bir belgenin altına dijital imza atıyor. Bu hangi özellikleri garanti eder? (Senaryo 20)",
+    "explanation": "Dijital imza, private key ile oluşturulur, public key ile doğrulanır. Bütünlük, kimlik doğrulama ve inkâr edilememe (non-repudiation) sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Bütünlük, kimlik doğrulama, inkâr edilememe",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece gizlilik",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca performans artışı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri sıkıştırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir şirket CA’dan dijital sertifika alıyor. Bu sertifika neyi ispatlar? (Senaryo 20)",
+    "explanation": "Dijital sertifika, public key’i sahibine bağlar. CA kimlik doğrulaması yapar. Bu güven zincirinin temelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Public key’in belirli bir kişiye/kuruma ait olduğunu",
+        "is_correct": true
+      },
+      {
+        "text": "Verinin her zaman şifrelendiğini",
+        "is_correct": false
+      },
+      {
+        "text": "CA’nın veriyi yedeklediğini",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarın asla süresinin dolmayacağını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir saldırgan, sahte CA sertifikası oluşturarak ortadaki adam saldırısı yapıyor. Bu hangi tehdittir? (Senaryo 20)",
+    "explanation": "Sahte sertifika veya compromised CA, MITM saldırısına yol açar. Tarayıcılar CA köklerini güven listesinde saklar. Güvenlik, köklerin bütünlüğüne dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MITM saldırısı; sahte sertifika ile trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS saldırısı; servisi devre dışı bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta ile kimlik avı",
+        "is_correct": false
+      },
+      {
+        "text": "Replay; eski mesajı yeniden göndermek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 21,
+    "text": "Bir uygulama, oturum anahtarlarını public key ile değiştiriyor; sonraki tüm trafik simetrik anahtarla şifreleniyor. Bu hangi hibrit yaklaşımı ifade eder? (Senaryo 20)",
+    "explanation": "Hybrid cryptosystem: Asimetrik anahtarlarla oturum anahtarı güvenle iletilir; veri aktarımı simetrik ile yapılır. SSL/TLS bu yöntemi kullanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hibrit kripto; oturum anahtarı asimetrik, trafik simetrik",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece simetrik; tüm iletişim tek anahtarla",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece asimetrik; tüm iletişim public/private ile",
+        "is_correct": false
+      },
+      {
+        "text": "Steganografi; mesaj gizlemek",
+        "is_correct": false
+      }
+    ]
+  }
+]

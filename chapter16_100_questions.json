@@ -1,0 +1,2502 @@
+[
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır?",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir?",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir?",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar?",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur?",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır? (Senaryo 2)",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir? (Senaryo 2)",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir? (Senaryo 2)",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar? (Senaryo 2)",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur? (Senaryo 2)",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır? (Senaryo 3)",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir? (Senaryo 3)",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir? (Senaryo 3)",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar? (Senaryo 3)",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur? (Senaryo 3)",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır? (Senaryo 4)",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir? (Senaryo 4)",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir? (Senaryo 4)",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar? (Senaryo 4)",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur? (Senaryo 4)",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır? (Senaryo 5)",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir? (Senaryo 5)",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir? (Senaryo 5)",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar? (Senaryo 5)",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur? (Senaryo 5)",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır? (Senaryo 6)",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir? (Senaryo 6)",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir? (Senaryo 6)",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar? (Senaryo 6)",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur? (Senaryo 6)",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır? (Senaryo 7)",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir? (Senaryo 7)",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir? (Senaryo 7)",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar? (Senaryo 7)",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur? (Senaryo 7)",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır? (Senaryo 8)",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir? (Senaryo 8)",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir? (Senaryo 8)",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar? (Senaryo 8)",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur? (Senaryo 8)",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır? (Senaryo 9)",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir? (Senaryo 9)",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir? (Senaryo 9)",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar? (Senaryo 9)",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur? (Senaryo 9)",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır? (Senaryo 10)",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir? (Senaryo 10)",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir? (Senaryo 10)",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar? (Senaryo 10)",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur? (Senaryo 10)",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır? (Senaryo 11)",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir? (Senaryo 11)",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir? (Senaryo 11)",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar? (Senaryo 11)",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur? (Senaryo 11)",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır? (Senaryo 12)",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir? (Senaryo 12)",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir? (Senaryo 12)",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar? (Senaryo 12)",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur? (Senaryo 12)",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır? (Senaryo 13)",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir? (Senaryo 13)",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir? (Senaryo 13)",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar? (Senaryo 13)",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur? (Senaryo 13)",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır? (Senaryo 14)",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir? (Senaryo 14)",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir? (Senaryo 14)",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar? (Senaryo 14)",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur? (Senaryo 14)",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır? (Senaryo 15)",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir? (Senaryo 15)",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir? (Senaryo 15)",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar? (Senaryo 15)",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur? (Senaryo 15)",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır? (Senaryo 16)",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir? (Senaryo 16)",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir? (Senaryo 16)",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar? (Senaryo 16)",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur? (Senaryo 16)",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır? (Senaryo 17)",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir? (Senaryo 17)",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir? (Senaryo 17)",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar? (Senaryo 17)",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur? (Senaryo 17)",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır? (Senaryo 18)",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir? (Senaryo 18)",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir? (Senaryo 18)",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar? (Senaryo 18)",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur? (Senaryo 18)",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır? (Senaryo 19)",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir? (Senaryo 19)",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir? (Senaryo 19)",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar? (Senaryo 19)",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur? (Senaryo 19)",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir ekip, müşteri verisini bulutta depoluyor ve hizmet sağlayıcı altyapıyı yönetiyor. Ekip yalnız veri sınıflandırma, erişim ve konfigürasyonlardan sorumlu. Bu hangi servis modeline daha çok benzer ve sorumluluk paylaşımı nasıl yorumlanmalıdır? (Senaryo 20)",
+    "explanation": "SaaS/PaaS/IaaS modellerinde sorumluluk dağılımı farklıdır. IaaS’ta müşteri OS, uygulama, veri ve konfigürasyondan; sağlayıcı fiziksel altyapıdan sorumludur. PaaS’ta platform bileşenleri sağlayıcıda, uygulama/veri müşteri sorumluluğunda; SaaS’ta uygulama da sağlayıcıda fakat veri/erişim politikaları müşteridedir. Senaryoda altyapıyı sağlayıcı yönetiyor, ekip veri/konfig ile ilgileniyor; bu PaaS/SaaS çizgisine yakındır; ortak nokta ‘veri sizindir’ ilkesidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "PaaS/SaaS çizgisi: altyapı/uygulama sağlayıcıda, veri/erişim ve bazı konfigürasyon müşteride",
+        "is_correct": true
+      },
+      {
+        "text": "IaaS: tüm fiziksel ve sanal katman müşteri sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "On-prem: tüm sorumluluk her zaman CSP’dedir",
+        "is_correct": false
+      },
+      {
+        "text": "Colocation: veri sorumluluğu CSP’ye devredilir, müşteri yalnız faturayı öder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir kuruluş, çok kiracılı (multi-tenant) bir SaaS kullanıyor. Müşteri verisinin diğer kiracılardan izole kalması kritik. Bu risk için hangi kontrol seti en etkilidir? (Senaryo 20)",
+    "explanation": "Veri ayrıştırma mantığı (tenant isolation) uygulama/DB şeması, erişim politikaları ve kriptografi (müşteri-özel anahtarlar, satır düzeyi şifreleme) ile güçlendirilir. Ayrıca güvenli çoklu kiracılık testleri ve düzenli denetimler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantıksal/kriptografik tenant isolation; müşteri-özel anahtarlar ve erişim politikaları",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ağ katmanı firewall; uygulama katmanı ayrımı gerekmez",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece paylaşımlı admin hesapları; yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Logları kapatmak; gizliliği artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Ekip, bulutta gizli veriyi şifrelemek istiyor. Anahtarları sağlayıcı KMS’de tutmak yerine kendi HSM’lerinde barındırmayı planlıyor. Bu hangi anahtar yönetimi modelidir ve faydası nedir? (Senaryo 20)",
+    "explanation": "Customer-managed keys (CMK) veya customer-supplied keys yaklaşımlarında anahtarın yaşam döngüsü müşteridedir. Bu, ayrışık görev ve risk dağılımı sağlar; ancak operasyonel yük ve entegrasyon karmaşıklığı artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Customer-managed keys; anahtar yaşam döngüsü müşteride, risk ayrıştırma sağlanır",
+        "is_correct": true
+      },
+      {
+        "text": "Provider-managed keys; anahtar kaybı riski tamamen ortadan kalkar",
+        "is_correct": false
+      },
+      {
+        "text": "Hard-coded keys; uygulama içine gömerek yönetimi kolaylaştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Anahtarsız şifreleme; gizlilik için anahtar gerekmez",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir güvenlik ekibi, bulut konfigürasyon hatalarını (açık S3 benzeri depolar, gereksiz izinler) sürekli tespit etmek istiyor. Hangi çözüm en doğrudan fayda sağlar? (Senaryo 20)",
+    "explanation": "CSPM (Cloud Security Posture Management) araçları; yanlış yapılandırmaları, aşırı izinleri ve uyum ihlallerini sürekli tarayıp düzeltici öneriler sunar. CIEM, kimlik izinlerinin envanter/analizine odaklanır; CASB, bulut kullanımını görünür kılar ve politika uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CSPM; konfigürasyon ve izin hatalarını sürekli tarayıp raporlayan çözüm",
+        "is_correct": true
+      },
+      {
+        "text": "CASB; yalnızca cihaz donanım hatalarını onarır",
+        "is_correct": false
+      },
+      {
+        "text": "NAC; bulutta sanal makine hiper-vizörünü değiştirir",
+        "is_correct": false
+      },
+      {
+        "text": "DLP; yalnız bant genişliği kotalarını yönetir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 30,
+    "text": "Bir konteyner ortamında, uygulamalar aynı host üzerinde izole edilerek çalıştırılıyor. Kapsayıcı kaçışı (container escape) riski azaltılmak isteniyor. Hangi iyi uygulama seti en uygundur? (Senaryo 20)",
+    "explanation": "En az ayrıcalık (rootless), imzalı imajlar, görüntü taraması, Namespaces/CGroups sertleştirmesi, SELinux/AppArmor profilleri, pod seviyesinde ağ politikaları ve gizli yönetimi (secrets) ana kontrollerdir. Ayrıca tedarik zinciri güvenliği ve read-only dosya sistemi önemlidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Rootless çalışma, imaj taraması, zorlayıcı profiller ve ağ politikalarıyla sertleştirme",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm kapsayıcılara host root erişimi vermek",
+        "is_correct": false
+      },
+      {
+        "text": "İmajları rastgele depolardan çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Güncelleme ve imza doğrulamayı kapatmak",
+        "is_correct": false
+      }
+    ]
+  }
+]

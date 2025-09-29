@@ -1,0 +1,2502 @@
+[
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir?",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir?",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir?",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar?",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır?",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir? (Senaryo 2)",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir? (Senaryo 2)",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir? (Senaryo 2)",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar? (Senaryo 2)",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır? (Senaryo 2)",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir? (Senaryo 3)",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir? (Senaryo 3)",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir? (Senaryo 3)",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar? (Senaryo 3)",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır? (Senaryo 3)",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir? (Senaryo 4)",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir? (Senaryo 4)",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir? (Senaryo 4)",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar? (Senaryo 4)",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır? (Senaryo 4)",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir? (Senaryo 5)",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir? (Senaryo 5)",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir? (Senaryo 5)",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar? (Senaryo 5)",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır? (Senaryo 5)",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir? (Senaryo 6)",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir? (Senaryo 6)",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir? (Senaryo 6)",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar? (Senaryo 6)",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır? (Senaryo 6)",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir? (Senaryo 7)",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir? (Senaryo 7)",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir? (Senaryo 7)",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar? (Senaryo 7)",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır? (Senaryo 7)",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir? (Senaryo 8)",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir? (Senaryo 8)",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir? (Senaryo 8)",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar? (Senaryo 8)",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır? (Senaryo 8)",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir? (Senaryo 9)",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir? (Senaryo 9)",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir? (Senaryo 9)",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar? (Senaryo 9)",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır? (Senaryo 9)",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir? (Senaryo 10)",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir? (Senaryo 10)",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir? (Senaryo 10)",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar? (Senaryo 10)",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır? (Senaryo 10)",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir? (Senaryo 11)",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir? (Senaryo 11)",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir? (Senaryo 11)",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar? (Senaryo 11)",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır? (Senaryo 11)",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir? (Senaryo 12)",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir? (Senaryo 12)",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir? (Senaryo 12)",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar? (Senaryo 12)",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır? (Senaryo 12)",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir? (Senaryo 13)",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir? (Senaryo 13)",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir? (Senaryo 13)",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar? (Senaryo 13)",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır? (Senaryo 13)",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir? (Senaryo 14)",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir? (Senaryo 14)",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir? (Senaryo 14)",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar? (Senaryo 14)",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır? (Senaryo 14)",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir? (Senaryo 15)",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir? (Senaryo 15)",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir? (Senaryo 15)",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar? (Senaryo 15)",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır? (Senaryo 15)",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir? (Senaryo 16)",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir? (Senaryo 16)",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir? (Senaryo 16)",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar? (Senaryo 16)",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır? (Senaryo 16)",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir? (Senaryo 17)",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir? (Senaryo 17)",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir? (Senaryo 17)",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar? (Senaryo 17)",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır? (Senaryo 17)",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir? (Senaryo 18)",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir? (Senaryo 18)",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir? (Senaryo 18)",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar? (Senaryo 18)",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır? (Senaryo 18)",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir? (Senaryo 19)",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir? (Senaryo 19)",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir? (Senaryo 19)",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar? (Senaryo 19)",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır? (Senaryo 19)",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir kurum, gereksinim aşamasından itibaren tehdit modelleri, güvenli kod incelemeleri ve güvenli kütüphane yönetimi uyguluyor. Bu yaklaşım hangi prensiple özetlenir? (Senaryo 20)",
+    "explanation": "‘Security by design’ ve ‘shift-left’ ilkeleri: güvenlik gereksinimleri daha baştan tanımlanır; tehdit modelleme (STRIDE/PASTA), güvenli kodlama standartları ve bağımlılık yönetimi uygulanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Security by design / shift-left; güvenliği erken aşamalara taşımak",
+        "is_correct": true
+      },
+      {
+        "text": "Only-once testing; sadece canlıda test yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ad-hoc geliştirme; belgeleri kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Geriye dönük güvenlik; ihlal sonrası eklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ödeme uygulaması, kritik fonksiyonlara erişimi aracı katman üzerinden doğruluyor ve doğrudan DB’yi kullanıcıya açmıyor. Bu hangi kontrol desenidir? (Senaryo 20)",
+    "explanation": "Trusted interface/mediator ve input validation ile yetkisiz doğrudan erişim engellenir. Clark-Wilson’ın iyi tanımlanmış işlem fikriyle benzer bir yaklaşım sunar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Güvenilir arayüz/ara katman; denetimli geçiş ve doğrulama",
+        "is_correct": true
+      },
+      {
+        "text": "Her isteği doğrudan DB’ye iletmek; performans için en iyisi",
+        "is_correct": false
+      },
+      {
+        "text": "Kod içinde hard-coded şifreler; pratik çözüm",
+        "is_correct": false
+      },
+      {
+        "text": "Müşteriye admin API vermek; esneklik sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, girdi doğrulamasını istemcide yaptıktan sonra sunucuda atlıyor ve daha sonra SQL enjeksiyonuna yakalanıyor. Hangi ilke ihlal edilmiştir? (Senaryo 20)",
+    "explanation": "Girdi doğrulaması **sunucu tarafında** zorunludur; istemci tarafı kullanıcı deneyimi içindir ve atlanabilir. Parametreli sorgular/ORM kullanımı enjeksiyon riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucu tarafı girdi doğrulaması; istemci doğrulaması tek başına yeterli değildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca istemci doğrulaması; güvenli ve yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Dinamik SQL'i teşvik etmek; bakım kolaylığı sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Hata mesajlarını ayrıntılı göstermek; geliştiriciye yardım eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Kod incelemesinde, geliştiricilerin aynı modül üzerinde dönüşümlü çalıştığı ve birbirlerinin kodunu gözden geçirdiği görülüyor. Bu hangi faydayı sağlar? (Senaryo 20)",
+    "explanation": "Peer code review ve zorunlu onay, hataları erken yakalar; bilgi paylaşımı ve görev ayrılığına katkı sağlar. Statik analiz araçları ile birlikte kullanıldığında daha etkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Peer review; erken hata yakalama ve bilgi paylaşımı",
+        "is_correct": true
+      },
+      {
+        "text": "Kodları yalnızca üretimde gözden geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm logları kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Sürümsüz kodlama; dokümansız ilerlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 29,
+    "text": "Bir ekip, açık kaynak bağımlılıklarında kritik CVE’leri hızlıca tespit edip yamalayan bir süreç kuruyor. Bu hangi uygulamanın kapsamındadır? (Senaryo 20)",
+    "explanation": "Yazılım tedarik zinciri güvenliği: SBOM, dependency scanning, imzalı paketler ve güvenli build süreçleri ile desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dependency scanning / SBOM; tedarik zinciri riskini yönetmek",
+        "is_correct": true
+      },
+      {
+        "text": "Versiyon sabitlemeden rastgele paket çekmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynak kodu herkese açıkta gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnız manuel download ile bağımlılık yönetmek",
+        "is_correct": false
+      }
+    ]
+  }
+]

@@ -1,0 +1,2502 @@
+[
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar?",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir?",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür?",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir?",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır?",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar? (Senaryo 2)",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir? (Senaryo 2)",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür? (Senaryo 2)",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir? (Senaryo 2)",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır? (Senaryo 2)",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar? (Senaryo 3)",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir? (Senaryo 3)",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür? (Senaryo 3)",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir? (Senaryo 3)",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır? (Senaryo 3)",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar? (Senaryo 4)",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir? (Senaryo 4)",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür? (Senaryo 4)",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir? (Senaryo 4)",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır? (Senaryo 4)",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar? (Senaryo 5)",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir? (Senaryo 5)",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür? (Senaryo 5)",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir? (Senaryo 5)",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır? (Senaryo 5)",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar? (Senaryo 6)",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir? (Senaryo 6)",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür? (Senaryo 6)",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir? (Senaryo 6)",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır? (Senaryo 6)",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar? (Senaryo 7)",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir? (Senaryo 7)",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür? (Senaryo 7)",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir? (Senaryo 7)",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır? (Senaryo 7)",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar? (Senaryo 8)",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir? (Senaryo 8)",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür? (Senaryo 8)",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir? (Senaryo 8)",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır? (Senaryo 8)",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar? (Senaryo 9)",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir? (Senaryo 9)",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür? (Senaryo 9)",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir? (Senaryo 9)",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır? (Senaryo 9)",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar? (Senaryo 10)",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir? (Senaryo 10)",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür? (Senaryo 10)",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir? (Senaryo 10)",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır? (Senaryo 10)",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar? (Senaryo 11)",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir? (Senaryo 11)",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür? (Senaryo 11)",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir? (Senaryo 11)",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır? (Senaryo 11)",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar? (Senaryo 12)",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir? (Senaryo 12)",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür? (Senaryo 12)",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir? (Senaryo 12)",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır? (Senaryo 12)",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar? (Senaryo 13)",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir? (Senaryo 13)",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür? (Senaryo 13)",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir? (Senaryo 13)",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır? (Senaryo 13)",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar? (Senaryo 14)",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir? (Senaryo 14)",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür? (Senaryo 14)",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir? (Senaryo 14)",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır? (Senaryo 14)",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar? (Senaryo 15)",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir? (Senaryo 15)",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür? (Senaryo 15)",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir? (Senaryo 15)",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır? (Senaryo 15)",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar? (Senaryo 16)",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir? (Senaryo 16)",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür? (Senaryo 16)",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir? (Senaryo 16)",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır? (Senaryo 16)",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar? (Senaryo 17)",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir? (Senaryo 17)",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür? (Senaryo 17)",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir? (Senaryo 17)",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır? (Senaryo 17)",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar? (Senaryo 18)",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir? (Senaryo 18)",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür? (Senaryo 18)",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir? (Senaryo 18)",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır? (Senaryo 18)",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar? (Senaryo 19)",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir? (Senaryo 19)",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür? (Senaryo 19)",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir? (Senaryo 19)",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır? (Senaryo 19)",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir kurum, iç ağı internetten ayırmak için güvenlik cihazı kullanıyor. Hangi cihaz temel olarak bu görevi yapar? (Senaryo 20)",
+    "explanation": "Firewall, ağlar arası trafiği kurallara göre filtreler. Paket, stateful veya uygulama katmanı olabilir. IDS/IPS saldırı tespit/önleme, VPN şifreleme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Firewall; ağlar arası trafiği kurallara göre filtreleyen cihaz",
+        "is_correct": true
+      },
+      {
+        "text": "IDS; yalnız saldırıyı tespit eder, trafiği engellemez",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; veriyi şifreler ama ağ ayırımı sağlamaz",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; yalnızca LAN yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir şirket, web sunucularını DMZ’ye koyuyor. Bunun amacı nedir? (Senaryo 20)",
+    "explanation": "DMZ, dışarıya açık servisleri iç ağdan ayırır. Böylece saldırgan sunucuya sızsa bile iç ağa geçişi zorlaşır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DMZ; dışa açık sistemleri iç ağdan ayırarak saldırı yüzeyini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; DMZ oluşturur",
+        "is_correct": false
+      },
+      {
+        "text": "Switch; DMZ yerine kullanılır",
+        "is_correct": false
+      },
+      {
+        "text": "IDS; DMZ’nin yerini tutar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, aynı LAN’daki trafiği dinliyor ve şifrelenmemiş parolaları yakalıyor. Bu hangi saldırı türüdür? (Senaryo 20)",
+    "explanation": "Sniffing/paket dinleme saldırısıdır. Çözüm: şifreleme (TLS, SSH), switch port güvenliği.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sniffing; ağ trafiğini dinlemek",
+        "is_correct": true
+      },
+      {
+        "text": "DoS; hizmeti engellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; sahte e-posta",
+        "is_correct": false
+      },
+      {
+        "text": "Spoofing; kimlik sahtekarlığı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir ağda VLAN kullanılıyor. Bunun amacı nedir? (Senaryo 20)",
+    "explanation": "VLAN, ağ segmentasyonu sağlar. Yayılım alanlarını böler, güvenlik ve performans artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "VLAN; segmentasyon sağlayarak yayılım alanını böler",
+        "is_correct": true
+      },
+      {
+        "text": "VPN; uzak erişimi şifreler",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; yalnız trafiği filtreler",
+        "is_correct": false
+      },
+      {
+        "text": "Router; sadece internet yönlendirmesi yapar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 22,
+    "text": "Bir saldırgan, ARP tablolarını zehirleyerek trafiği kendine yönlendiriyor. Bu hangi saldırıdır? (Senaryo 20)",
+    "explanation": "ARP spoofing/poisoning. Çözüm: dinamik ARP koruması, statik ARP girişleri.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "ARP spoofing; sahte ARP mesajlarıyla trafiği yönlendirmek",
+        "is_correct": true
+      },
+      {
+        "text": "DNS spoofing; sahte DNS cevabı göndermek",
+        "is_correct": false
+      },
+      {
+        "text": "DoS; hizmet kesintisi",
+        "is_correct": false
+      },
+      {
+        "text": "Phishing; kullanıcı kandırma",
+        "is_correct": false
+      }
+    ]
+  }
+]

@@ -1,0 +1,2502 @@
+[
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir?",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir?",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur?",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir?",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur?",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir? (Senaryo 2)",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir? (Senaryo 2)",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur? (Senaryo 2)",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir? (Senaryo 2)",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur? (Senaryo 2)",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir? (Senaryo 3)",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir? (Senaryo 3)",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur? (Senaryo 3)",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir? (Senaryo 3)",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur? (Senaryo 3)",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir? (Senaryo 4)",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir? (Senaryo 4)",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur? (Senaryo 4)",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir? (Senaryo 4)",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur? (Senaryo 4)",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir? (Senaryo 5)",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir? (Senaryo 5)",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur? (Senaryo 5)",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir? (Senaryo 5)",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur? (Senaryo 5)",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir? (Senaryo 6)",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir? (Senaryo 6)",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur? (Senaryo 6)",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir? (Senaryo 6)",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur? (Senaryo 6)",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir? (Senaryo 7)",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir? (Senaryo 7)",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur? (Senaryo 7)",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir? (Senaryo 7)",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur? (Senaryo 7)",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir? (Senaryo 8)",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir? (Senaryo 8)",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur? (Senaryo 8)",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir? (Senaryo 8)",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur? (Senaryo 8)",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir? (Senaryo 9)",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir? (Senaryo 9)",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur? (Senaryo 9)",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir? (Senaryo 9)",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur? (Senaryo 9)",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir? (Senaryo 10)",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir? (Senaryo 10)",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur? (Senaryo 10)",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir? (Senaryo 10)",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur? (Senaryo 10)",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir? (Senaryo 11)",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir? (Senaryo 11)",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur? (Senaryo 11)",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir? (Senaryo 11)",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur? (Senaryo 11)",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir? (Senaryo 12)",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir? (Senaryo 12)",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur? (Senaryo 12)",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir? (Senaryo 12)",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur? (Senaryo 12)",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir? (Senaryo 13)",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir? (Senaryo 13)",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur? (Senaryo 13)",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir? (Senaryo 13)",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur? (Senaryo 13)",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir? (Senaryo 14)",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir? (Senaryo 14)",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur? (Senaryo 14)",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir? (Senaryo 14)",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur? (Senaryo 14)",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir? (Senaryo 15)",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir? (Senaryo 15)",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur? (Senaryo 15)",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir? (Senaryo 15)",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur? (Senaryo 15)",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir? (Senaryo 16)",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir? (Senaryo 16)",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur? (Senaryo 16)",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir? (Senaryo 16)",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur? (Senaryo 16)",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir? (Senaryo 17)",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir? (Senaryo 17)",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur? (Senaryo 17)",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir? (Senaryo 17)",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur? (Senaryo 17)",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir? (Senaryo 18)",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir? (Senaryo 18)",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur? (Senaryo 18)",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir? (Senaryo 18)",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur? (Senaryo 18)",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir? (Senaryo 19)",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir? (Senaryo 19)",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur? (Senaryo 19)",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir? (Senaryo 19)",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur? (Senaryo 19)",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Yeni bir veri merkezi için lokasyon seçimi yapılıyor. Sel yatağına yakın, tek enerji hattı olan bir arazi önerildi. Fiziksel süreklilik açısından nasıl değerlendirilmelidir? (Senaryo 20)",
+    "explanation": "Site selection, doğal afet riskleri (sel, deprem), çoklu enerji hatları, taşıyıcı çeşitliliği ve acil durum erişimi gibi kriterlere dayanır. Sel riski yüksek ve tek enerji hattı olan bölge süreklilik için zayıf seçimdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yüksek sel riski ve tek enerji hattı nedeniyle uygun değildir; alternatif altyapı çeşitliliği aranmalıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Sel riski sorun değildir; tek hat yeterlidir",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afetler yalnız siber güvenliği etkiler",
+        "is_correct": false
+      },
+      {
+        "text": "Lokasyon seçiminde yalnız iç dekorasyon önemlidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir binada girişte iki kapılı, arada dar bir bölme olan güvenlik çözümü var; aynı anda bir kişiyi içeri alıyor. Bu hangi fiziksel kontroldür ve amacı nedir? (Senaryo 20)",
+    "explanation": "Mantrap, tek kişilik geçiş sağlayarak tailgating’i önler; kimlik doğrulama ve yetkilendirme daha etkin yapılır. Turnike tek kapılıdır; kapı alarmı tüm geçiş kontrolünü sağlamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Mantrap; tailgating’i önleyen iki kapılı tek kişi geçiş sistemi",
+        "is_correct": true
+      },
+      {
+        "text": "Turnike; iki kapılı ve aynı anda çok kişi geçişine izin verir",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın kapısı; kimlik doğrulama yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Panik bar; erişim kontrolünü güçlendirir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir ofiste yangın söndürme ajanı seçiminde, elektrikli ekipmana zarar vermeden süratle söndürecek bir çözüm aranıyor. Hangi ajan sınıfı daha uygundur? (Senaryo 20)",
+    "explanation": "Temiz ajanlar (clean agent, FM-200/Novec) elektrikle çalışan ekipmanlarda kalıntı bırakmadan söndürme sağlar. Su bazlı çözümler ekipmana zarar verebilir; CO₂ kapalı alanda insan için risklidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clean agent; kalıntı bırakmadan elektrikli ekipmanda etkili söndürme",
+        "is_correct": true
+      },
+      {
+        "text": "Su bazlı sprinkler; elektronikler için en güvenli tercihtir",
+        "is_correct": false
+      },
+      {
+        "text": "Kuru kimyasal; hassas cihazlarda kalıntı sorunu yaratmaz",
+        "is_correct": false
+      },
+      {
+        "text": "CO₂; kapalı ofiste insan sağlığı açısından risksizdir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Bir veri merkezinde sıcak/soğuk koridor tasarımı yapılmasının amacı nedir? (Senaryo 20)",
+    "explanation": "HVAC verimliliği ve ekipman soğutmasını optimize etmek için soğuk hava girişleri ve sıcak hava çıkışları ayrı koridorlarda toplanır. Karışım önlenerek sıcak noktalar azaltılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sıcak/soğuk koridor; hava akışını ayırarak soğutma verimliliğini artırır",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız dekoratif düzenleme sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Yangın algılamayı devre dışı bırakır",
+        "is_correct": false
+      },
+      {
+        "text": "Erişim kontrolüne alternatif olur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 31,
+    "text": "Ziyaretçi yönetiminde, içeri girenlerin kimliklerinin doğrulanması, eşlik edilmesi ve kayıt altına alınması isteniyor. Hangi uygulama seti uygundur? (Senaryo 20)",
+    "explanation": "Ziyaretçi kayıt defteri/sistemi, geçici kartlar, fotoğraflı kimlik doğrulaması, escort policy ve erişim kısıtları fiziksel güvenliğin temel parçalarıdır. Ayrıca kamera ve log bütünlüğü denetimleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ziyaretçi kaydı + geçici kart + eşlik ve kısıtlı erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kapıları açık bırakmak; misafirperverlik sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Kamera olmadan güvenlik sağlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Kayıt tutmamak; mahremiyeti artırır",
+        "is_correct": false
+      }
+    ]
+  }
+]

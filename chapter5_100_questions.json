@@ -1,0 +1,2502 @@
+[
+  {
+    "course": 19,
+    "text": "Bir savunma kurumunda, gizli belgeleri düşük yetkili kullanıcıların görmemesi gerekiyor. Model seçimi yapılırken hangi güvenlik özelliği kritik olarak önceliklendirilmelidir?",
+    "explanation": "Bell-LaPadula modeli gizliliğe odaklanır. Basit güvenlik özelliği (no read up) ve *-özelliği (no write down) ile kullanıcıların yalnızca yetkili oldukları seviyede okuma/yazma yapmasını sağlar. Biba bütünlüğe, Clark-Wilson ticari bütünlüğe odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Gizlilik; Bell-LaPadula modeli ‘no read up’ ve ‘no write down’ kurallarıyla uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bütünlük; Biba modeli ‘no read down’ ve ‘no write up’ kurallarıyla uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Çatışma önleme; Brewer-Nash modeli dinamik erişim ile uygular",
+        "is_correct": false
+      },
+      {
+        "text": "İş ayrılığı; Clark-Wilson modeli denetimli arayüzlerle uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada, yetkisiz kullanıcıların mali kayıtları değiştirmesini engellemek kritik. Bu gereksinimi hangi güvenlik modeli doğrudan ele alır?",
+    "explanation": "Biba modeli bütünlüğe odaklanır. Kuralları: no read down (düşük bütünlükten okunmaz), no write up (yüksek bütünlüğe yazılamaz). Bell-LaPadula gizliliğe, Clark-Wilson ticari bütünlüğe, Brewer-Nash çıkar çatışmalarına odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Biba modeli; bütünlüğü korumak için no read down / no write up uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula modeli; gizlilik için no read up / no write down uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash modeli; dinamik çıkar çatışması kuralı uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Clark-Wilson modeli; iş ayrılığı ve iyi tanımlanmış işlemleri uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir muhasebe sistemi, kullanıcıların yalnızca önceden tanımlanmış işlevlerle işlem yapmasını ve verinin tutarlı kalmasını sağlıyor. Hangi güvenlik modeli bu yaklaşımı en iyi açıklar?",
+    "explanation": "Clark-Wilson modeli ticari bütünlük odaklıdır. İyi tanımlanmış işlemler (well-formed transactions), görev ayrılığı ve denetimli arayüzler temel ilkeleridir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemler ve görev ayrılığı ile ticari bütünlük sağlar",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula; gizlilik için erişim kontrolü uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; sistem bütünlüğünü yüksek/düşük seviyelerle korur",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash; çıkar çatışmalarını dinamik politikalarla engeller",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir danışmanlık firmasında aynı analistin hem rakip A şirketine hem de rakip B şirketine hizmet vermesi çıkar çatışması doğuruyor. Bu risk hangi güvenlik modeli ile yönetilir?",
+    "explanation": "Brewer-Nash modeli (Chinese Wall) dinamik erişim kontrolü ile çıkar çatışmalarını önler. Bir kullanıcı bir veri grubuna erişince rakip grubun verilerine erişimi engellenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Brewer-Nash; dinamik erişim kontrolüyle çıkar çatışmalarını önler",
+        "is_correct": true
+      },
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemlerle bütünlük sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Bell-LaPadula; gizliliği sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; bütünlüğü sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir askeri sistemde, tüm kullanıcıların aynı güvenlik seviyesinde onaylı olduğu mod kullanılıyor. Bu hangi güvenlik modudur?",
+    "explanation": "Güvenlik modları: Dedicated (herkes aynı seviye + tüm veriye erişim yetkisi), System High (herkes en yüksek yetkiye sahip ama need-to-know farklı), Compartmented (bölümlere göre ayrılmış), Multilevel (farklı seviyeler birlikte).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dedicated; tüm kullanıcılar aynı seviyede ve tüm verilere erişim yetkili",
+        "is_correct": true
+      },
+      {
+        "text": "System High; tüm kullanıcılar en yüksek seviyede ama need-to-know ayrımı var",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented; veriler bölümlere ayrılır, farklı anahtarlar gerekir",
+        "is_correct": false
+      },
+      {
+        "text": "Multilevel; farklı güvenlik seviyeleri aynı anda desteklenir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir işletim sisteminde erişim kontrol kararlarının merkezi, değiştirilemez ve denetlenebilir olması isteniyor. Bu hangi kavramdır?",
+    "explanation": "Reference monitor kavramı erişim kararlarını merkezileştirir, değişmez, küçük ve doğrulanabilir olmalıdır. TCB’nin bir parçasıdır. Security kernel bu işlevi uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Reference monitor; merkezi, değişmez ve denetlenebilir erişim karar mekanizması",
+        "is_correct": true
+      },
+      {
+        "text": "Security kernel; yalnızca performansı artırır, güvenlikle ilişkisi yoktur",
+        "is_correct": false
+      },
+      {
+        "text": "Ring levels; donanım seviyeleriyle yalnız performansı tanımlar",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented mode; erişim kontrolü yerine veri saklama yöntemidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir ürünün güvenliği bağımsız laboratuvarca değerlendirilmiş ve EAL4+ sertifikası verilmiş. Bu neyi gösterir?",
+    "explanation": "Common Criteria, IT ürünlerinin güvenlik işlevlerini ve güvence düzeylerini tanımlar. EAL1 en düşük, EAL7 en yüksek güvencedir. EAL4+ pratikte geniş kullanılan, metodolojik olarak test edilmiş ve doğrulanmış seviyedir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ürünün güvenlik işlevlerinin bağımsız laboratuvarca metodolojik testlerle doğrulandığını",
+        "is_correct": true
+      },
+      {
+        "text": "Ürünün her türlü saldırıya mutlak olarak dayanıklı olduğunu",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün yalnızca kaynak kodunun açıldığını",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün sadece üretici tarafından iç test edildiğini",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada saldırganlar monitör kablosundan yayılan sinyalleri dinleyerek ekrandaki bilgileri elde ediyor. Bu hangi risk alanına girer?",
+    "explanation": "Emanasyon güvenliği (TEMPEST) elektromanyetik sızıntılara karşı koruma sağlar. Faraday kafesi, ekranlama ve filtreleme teknikleri kullanılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Emanasyon güvenliği (TEMPEST); elektromanyetik sızıntılara karşı koruma",
+        "is_correct": true
+      },
+      {
+        "text": "Mantıksal erişim kontrolü; yalnızca parola politikalarını kapsar",
+        "is_correct": false
+      },
+      {
+        "text": "İzinsiz yazılım yükleme; sadece lisans riskidir",
+        "is_correct": false
+      },
+      {
+        "text": "Kablo etiketleme; görsel kimliklendirme sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir yazılım ekibi, tasarımda gereksiz karmaşıklıktan kaçınıyor ve basit, anlaşılır modüller geliştiriyor. Hangi güvenlik prensibini uyguluyorlar?",
+    "explanation": "Salt gereklilikleri kapsayan, basitlik ilkesine ‘economy of mechanism’ denir. Basit sistemler denetlenebilir ve daha az hata barındırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Economy of mechanism; basit ve anlaşılır tasarım",
+        "is_correct": true
+      },
+      {
+        "text": "Fail-safe defaults; başarısızlıkta güvenli durumda kalma",
+        "is_correct": false
+      },
+      {
+        "text": "Least privilege; kullanıcıya en az yetki atama",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; birden çok savunma katmanı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir kurumda kriptografik anahtarlar donanım tabanlı cihazlarda saklanıyor. Anahtarlar cihaz dışına çıkarılamıyor. Bu hangi güvenlik çözümüdür?",
+    "explanation": "HSM (Hardware Security Module) veya TPM (Trusted Platform Module) anahtarların güvenli üretimi, saklanması ve kriptografik işlemlerin donanımda yapılmasını sağlar. Anahtar dışarı çıkmaz, saldırı yüzeyi azalır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "HSM/TPM; anahtarları güvenli donanımda üretmek ve saklamak",
+        "is_correct": true
+      },
+      {
+        "text": "Güvenlik yazılımı; anahtarları açık metin dosyada tutmak",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; anahtarları uzaktan taşımak",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; ağ trafiğini filtrelemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir savunma kurumunda, gizli belgeleri düşük yetkili kullanıcıların görmemesi gerekiyor. Model seçimi yapılırken hangi güvenlik özelliği kritik olarak önceliklendirilmelidir? (Senaryo 2)",
+    "explanation": "Bell-LaPadula modeli gizliliğe odaklanır. Basit güvenlik özelliği (no read up) ve *-özelliği (no write down) ile kullanıcıların yalnızca yetkili oldukları seviyede okuma/yazma yapmasını sağlar. Biba bütünlüğe, Clark-Wilson ticari bütünlüğe odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Gizlilik; Bell-LaPadula modeli ‘no read up’ ve ‘no write down’ kurallarıyla uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bütünlük; Biba modeli ‘no read down’ ve ‘no write up’ kurallarıyla uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Çatışma önleme; Brewer-Nash modeli dinamik erişim ile uygular",
+        "is_correct": false
+      },
+      {
+        "text": "İş ayrılığı; Clark-Wilson modeli denetimli arayüzlerle uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada, yetkisiz kullanıcıların mali kayıtları değiştirmesini engellemek kritik. Bu gereksinimi hangi güvenlik modeli doğrudan ele alır? (Senaryo 2)",
+    "explanation": "Biba modeli bütünlüğe odaklanır. Kuralları: no read down (düşük bütünlükten okunmaz), no write up (yüksek bütünlüğe yazılamaz). Bell-LaPadula gizliliğe, Clark-Wilson ticari bütünlüğe, Brewer-Nash çıkar çatışmalarına odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Biba modeli; bütünlüğü korumak için no read down / no write up uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula modeli; gizlilik için no read up / no write down uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash modeli; dinamik çıkar çatışması kuralı uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Clark-Wilson modeli; iş ayrılığı ve iyi tanımlanmış işlemleri uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir muhasebe sistemi, kullanıcıların yalnızca önceden tanımlanmış işlevlerle işlem yapmasını ve verinin tutarlı kalmasını sağlıyor. Hangi güvenlik modeli bu yaklaşımı en iyi açıklar? (Senaryo 2)",
+    "explanation": "Clark-Wilson modeli ticari bütünlük odaklıdır. İyi tanımlanmış işlemler (well-formed transactions), görev ayrılığı ve denetimli arayüzler temel ilkeleridir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemler ve görev ayrılığı ile ticari bütünlük sağlar",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula; gizlilik için erişim kontrolü uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; sistem bütünlüğünü yüksek/düşük seviyelerle korur",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash; çıkar çatışmalarını dinamik politikalarla engeller",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir danışmanlık firmasında aynı analistin hem rakip A şirketine hem de rakip B şirketine hizmet vermesi çıkar çatışması doğuruyor. Bu risk hangi güvenlik modeli ile yönetilir? (Senaryo 2)",
+    "explanation": "Brewer-Nash modeli (Chinese Wall) dinamik erişim kontrolü ile çıkar çatışmalarını önler. Bir kullanıcı bir veri grubuna erişince rakip grubun verilerine erişimi engellenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Brewer-Nash; dinamik erişim kontrolüyle çıkar çatışmalarını önler",
+        "is_correct": true
+      },
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemlerle bütünlük sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Bell-LaPadula; gizliliği sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; bütünlüğü sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir askeri sistemde, tüm kullanıcıların aynı güvenlik seviyesinde onaylı olduğu mod kullanılıyor. Bu hangi güvenlik modudur? (Senaryo 2)",
+    "explanation": "Güvenlik modları: Dedicated (herkes aynı seviye + tüm veriye erişim yetkisi), System High (herkes en yüksek yetkiye sahip ama need-to-know farklı), Compartmented (bölümlere göre ayrılmış), Multilevel (farklı seviyeler birlikte).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dedicated; tüm kullanıcılar aynı seviyede ve tüm verilere erişim yetkili",
+        "is_correct": true
+      },
+      {
+        "text": "System High; tüm kullanıcılar en yüksek seviyede ama need-to-know ayrımı var",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented; veriler bölümlere ayrılır, farklı anahtarlar gerekir",
+        "is_correct": false
+      },
+      {
+        "text": "Multilevel; farklı güvenlik seviyeleri aynı anda desteklenir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir işletim sisteminde erişim kontrol kararlarının merkezi, değiştirilemez ve denetlenebilir olması isteniyor. Bu hangi kavramdır? (Senaryo 2)",
+    "explanation": "Reference monitor kavramı erişim kararlarını merkezileştirir, değişmez, küçük ve doğrulanabilir olmalıdır. TCB’nin bir parçasıdır. Security kernel bu işlevi uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Reference monitor; merkezi, değişmez ve denetlenebilir erişim karar mekanizması",
+        "is_correct": true
+      },
+      {
+        "text": "Security kernel; yalnızca performansı artırır, güvenlikle ilişkisi yoktur",
+        "is_correct": false
+      },
+      {
+        "text": "Ring levels; donanım seviyeleriyle yalnız performansı tanımlar",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented mode; erişim kontrolü yerine veri saklama yöntemidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir ürünün güvenliği bağımsız laboratuvarca değerlendirilmiş ve EAL4+ sertifikası verilmiş. Bu neyi gösterir? (Senaryo 2)",
+    "explanation": "Common Criteria, IT ürünlerinin güvenlik işlevlerini ve güvence düzeylerini tanımlar. EAL1 en düşük, EAL7 en yüksek güvencedir. EAL4+ pratikte geniş kullanılan, metodolojik olarak test edilmiş ve doğrulanmış seviyedir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ürünün güvenlik işlevlerinin bağımsız laboratuvarca metodolojik testlerle doğrulandığını",
+        "is_correct": true
+      },
+      {
+        "text": "Ürünün her türlü saldırıya mutlak olarak dayanıklı olduğunu",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün yalnızca kaynak kodunun açıldığını",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün sadece üretici tarafından iç test edildiğini",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada saldırganlar monitör kablosundan yayılan sinyalleri dinleyerek ekrandaki bilgileri elde ediyor. Bu hangi risk alanına girer? (Senaryo 2)",
+    "explanation": "Emanasyon güvenliği (TEMPEST) elektromanyetik sızıntılara karşı koruma sağlar. Faraday kafesi, ekranlama ve filtreleme teknikleri kullanılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Emanasyon güvenliği (TEMPEST); elektromanyetik sızıntılara karşı koruma",
+        "is_correct": true
+      },
+      {
+        "text": "Mantıksal erişim kontrolü; yalnızca parola politikalarını kapsar",
+        "is_correct": false
+      },
+      {
+        "text": "İzinsiz yazılım yükleme; sadece lisans riskidir",
+        "is_correct": false
+      },
+      {
+        "text": "Kablo etiketleme; görsel kimliklendirme sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir yazılım ekibi, tasarımda gereksiz karmaşıklıktan kaçınıyor ve basit, anlaşılır modüller geliştiriyor. Hangi güvenlik prensibini uyguluyorlar? (Senaryo 2)",
+    "explanation": "Salt gereklilikleri kapsayan, basitlik ilkesine ‘economy of mechanism’ denir. Basit sistemler denetlenebilir ve daha az hata barındırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Economy of mechanism; basit ve anlaşılır tasarım",
+        "is_correct": true
+      },
+      {
+        "text": "Fail-safe defaults; başarısızlıkta güvenli durumda kalma",
+        "is_correct": false
+      },
+      {
+        "text": "Least privilege; kullanıcıya en az yetki atama",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; birden çok savunma katmanı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir kurumda kriptografik anahtarlar donanım tabanlı cihazlarda saklanıyor. Anahtarlar cihaz dışına çıkarılamıyor. Bu hangi güvenlik çözümüdür? (Senaryo 2)",
+    "explanation": "HSM (Hardware Security Module) veya TPM (Trusted Platform Module) anahtarların güvenli üretimi, saklanması ve kriptografik işlemlerin donanımda yapılmasını sağlar. Anahtar dışarı çıkmaz, saldırı yüzeyi azalır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "HSM/TPM; anahtarları güvenli donanımda üretmek ve saklamak",
+        "is_correct": true
+      },
+      {
+        "text": "Güvenlik yazılımı; anahtarları açık metin dosyada tutmak",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; anahtarları uzaktan taşımak",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; ağ trafiğini filtrelemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir savunma kurumunda, gizli belgeleri düşük yetkili kullanıcıların görmemesi gerekiyor. Model seçimi yapılırken hangi güvenlik özelliği kritik olarak önceliklendirilmelidir? (Senaryo 3)",
+    "explanation": "Bell-LaPadula modeli gizliliğe odaklanır. Basit güvenlik özelliği (no read up) ve *-özelliği (no write down) ile kullanıcıların yalnızca yetkili oldukları seviyede okuma/yazma yapmasını sağlar. Biba bütünlüğe, Clark-Wilson ticari bütünlüğe odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Gizlilik; Bell-LaPadula modeli ‘no read up’ ve ‘no write down’ kurallarıyla uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bütünlük; Biba modeli ‘no read down’ ve ‘no write up’ kurallarıyla uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Çatışma önleme; Brewer-Nash modeli dinamik erişim ile uygular",
+        "is_correct": false
+      },
+      {
+        "text": "İş ayrılığı; Clark-Wilson modeli denetimli arayüzlerle uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada, yetkisiz kullanıcıların mali kayıtları değiştirmesini engellemek kritik. Bu gereksinimi hangi güvenlik modeli doğrudan ele alır? (Senaryo 3)",
+    "explanation": "Biba modeli bütünlüğe odaklanır. Kuralları: no read down (düşük bütünlükten okunmaz), no write up (yüksek bütünlüğe yazılamaz). Bell-LaPadula gizliliğe, Clark-Wilson ticari bütünlüğe, Brewer-Nash çıkar çatışmalarına odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Biba modeli; bütünlüğü korumak için no read down / no write up uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula modeli; gizlilik için no read up / no write down uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash modeli; dinamik çıkar çatışması kuralı uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Clark-Wilson modeli; iş ayrılığı ve iyi tanımlanmış işlemleri uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir muhasebe sistemi, kullanıcıların yalnızca önceden tanımlanmış işlevlerle işlem yapmasını ve verinin tutarlı kalmasını sağlıyor. Hangi güvenlik modeli bu yaklaşımı en iyi açıklar? (Senaryo 3)",
+    "explanation": "Clark-Wilson modeli ticari bütünlük odaklıdır. İyi tanımlanmış işlemler (well-formed transactions), görev ayrılığı ve denetimli arayüzler temel ilkeleridir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemler ve görev ayrılığı ile ticari bütünlük sağlar",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula; gizlilik için erişim kontrolü uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; sistem bütünlüğünü yüksek/düşük seviyelerle korur",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash; çıkar çatışmalarını dinamik politikalarla engeller",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir danışmanlık firmasında aynı analistin hem rakip A şirketine hem de rakip B şirketine hizmet vermesi çıkar çatışması doğuruyor. Bu risk hangi güvenlik modeli ile yönetilir? (Senaryo 3)",
+    "explanation": "Brewer-Nash modeli (Chinese Wall) dinamik erişim kontrolü ile çıkar çatışmalarını önler. Bir kullanıcı bir veri grubuna erişince rakip grubun verilerine erişimi engellenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Brewer-Nash; dinamik erişim kontrolüyle çıkar çatışmalarını önler",
+        "is_correct": true
+      },
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemlerle bütünlük sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Bell-LaPadula; gizliliği sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; bütünlüğü sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir askeri sistemde, tüm kullanıcıların aynı güvenlik seviyesinde onaylı olduğu mod kullanılıyor. Bu hangi güvenlik modudur? (Senaryo 3)",
+    "explanation": "Güvenlik modları: Dedicated (herkes aynı seviye + tüm veriye erişim yetkisi), System High (herkes en yüksek yetkiye sahip ama need-to-know farklı), Compartmented (bölümlere göre ayrılmış), Multilevel (farklı seviyeler birlikte).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dedicated; tüm kullanıcılar aynı seviyede ve tüm verilere erişim yetkili",
+        "is_correct": true
+      },
+      {
+        "text": "System High; tüm kullanıcılar en yüksek seviyede ama need-to-know ayrımı var",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented; veriler bölümlere ayrılır, farklı anahtarlar gerekir",
+        "is_correct": false
+      },
+      {
+        "text": "Multilevel; farklı güvenlik seviyeleri aynı anda desteklenir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir işletim sisteminde erişim kontrol kararlarının merkezi, değiştirilemez ve denetlenebilir olması isteniyor. Bu hangi kavramdır? (Senaryo 3)",
+    "explanation": "Reference monitor kavramı erişim kararlarını merkezileştirir, değişmez, küçük ve doğrulanabilir olmalıdır. TCB’nin bir parçasıdır. Security kernel bu işlevi uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Reference monitor; merkezi, değişmez ve denetlenebilir erişim karar mekanizması",
+        "is_correct": true
+      },
+      {
+        "text": "Security kernel; yalnızca performansı artırır, güvenlikle ilişkisi yoktur",
+        "is_correct": false
+      },
+      {
+        "text": "Ring levels; donanım seviyeleriyle yalnız performansı tanımlar",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented mode; erişim kontrolü yerine veri saklama yöntemidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir ürünün güvenliği bağımsız laboratuvarca değerlendirilmiş ve EAL4+ sertifikası verilmiş. Bu neyi gösterir? (Senaryo 3)",
+    "explanation": "Common Criteria, IT ürünlerinin güvenlik işlevlerini ve güvence düzeylerini tanımlar. EAL1 en düşük, EAL7 en yüksek güvencedir. EAL4+ pratikte geniş kullanılan, metodolojik olarak test edilmiş ve doğrulanmış seviyedir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ürünün güvenlik işlevlerinin bağımsız laboratuvarca metodolojik testlerle doğrulandığını",
+        "is_correct": true
+      },
+      {
+        "text": "Ürünün her türlü saldırıya mutlak olarak dayanıklı olduğunu",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün yalnızca kaynak kodunun açıldığını",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün sadece üretici tarafından iç test edildiğini",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada saldırganlar monitör kablosundan yayılan sinyalleri dinleyerek ekrandaki bilgileri elde ediyor. Bu hangi risk alanına girer? (Senaryo 3)",
+    "explanation": "Emanasyon güvenliği (TEMPEST) elektromanyetik sızıntılara karşı koruma sağlar. Faraday kafesi, ekranlama ve filtreleme teknikleri kullanılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Emanasyon güvenliği (TEMPEST); elektromanyetik sızıntılara karşı koruma",
+        "is_correct": true
+      },
+      {
+        "text": "Mantıksal erişim kontrolü; yalnızca parola politikalarını kapsar",
+        "is_correct": false
+      },
+      {
+        "text": "İzinsiz yazılım yükleme; sadece lisans riskidir",
+        "is_correct": false
+      },
+      {
+        "text": "Kablo etiketleme; görsel kimliklendirme sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir yazılım ekibi, tasarımda gereksiz karmaşıklıktan kaçınıyor ve basit, anlaşılır modüller geliştiriyor. Hangi güvenlik prensibini uyguluyorlar? (Senaryo 3)",
+    "explanation": "Salt gereklilikleri kapsayan, basitlik ilkesine ‘economy of mechanism’ denir. Basit sistemler denetlenebilir ve daha az hata barındırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Economy of mechanism; basit ve anlaşılır tasarım",
+        "is_correct": true
+      },
+      {
+        "text": "Fail-safe defaults; başarısızlıkta güvenli durumda kalma",
+        "is_correct": false
+      },
+      {
+        "text": "Least privilege; kullanıcıya en az yetki atama",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; birden çok savunma katmanı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir kurumda kriptografik anahtarlar donanım tabanlı cihazlarda saklanıyor. Anahtarlar cihaz dışına çıkarılamıyor. Bu hangi güvenlik çözümüdür? (Senaryo 3)",
+    "explanation": "HSM (Hardware Security Module) veya TPM (Trusted Platform Module) anahtarların güvenli üretimi, saklanması ve kriptografik işlemlerin donanımda yapılmasını sağlar. Anahtar dışarı çıkmaz, saldırı yüzeyi azalır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "HSM/TPM; anahtarları güvenli donanımda üretmek ve saklamak",
+        "is_correct": true
+      },
+      {
+        "text": "Güvenlik yazılımı; anahtarları açık metin dosyada tutmak",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; anahtarları uzaktan taşımak",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; ağ trafiğini filtrelemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir savunma kurumunda, gizli belgeleri düşük yetkili kullanıcıların görmemesi gerekiyor. Model seçimi yapılırken hangi güvenlik özelliği kritik olarak önceliklendirilmelidir? (Senaryo 4)",
+    "explanation": "Bell-LaPadula modeli gizliliğe odaklanır. Basit güvenlik özelliği (no read up) ve *-özelliği (no write down) ile kullanıcıların yalnızca yetkili oldukları seviyede okuma/yazma yapmasını sağlar. Biba bütünlüğe, Clark-Wilson ticari bütünlüğe odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Gizlilik; Bell-LaPadula modeli ‘no read up’ ve ‘no write down’ kurallarıyla uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bütünlük; Biba modeli ‘no read down’ ve ‘no write up’ kurallarıyla uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Çatışma önleme; Brewer-Nash modeli dinamik erişim ile uygular",
+        "is_correct": false
+      },
+      {
+        "text": "İş ayrılığı; Clark-Wilson modeli denetimli arayüzlerle uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada, yetkisiz kullanıcıların mali kayıtları değiştirmesini engellemek kritik. Bu gereksinimi hangi güvenlik modeli doğrudan ele alır? (Senaryo 4)",
+    "explanation": "Biba modeli bütünlüğe odaklanır. Kuralları: no read down (düşük bütünlükten okunmaz), no write up (yüksek bütünlüğe yazılamaz). Bell-LaPadula gizliliğe, Clark-Wilson ticari bütünlüğe, Brewer-Nash çıkar çatışmalarına odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Biba modeli; bütünlüğü korumak için no read down / no write up uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula modeli; gizlilik için no read up / no write down uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash modeli; dinamik çıkar çatışması kuralı uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Clark-Wilson modeli; iş ayrılığı ve iyi tanımlanmış işlemleri uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir muhasebe sistemi, kullanıcıların yalnızca önceden tanımlanmış işlevlerle işlem yapmasını ve verinin tutarlı kalmasını sağlıyor. Hangi güvenlik modeli bu yaklaşımı en iyi açıklar? (Senaryo 4)",
+    "explanation": "Clark-Wilson modeli ticari bütünlük odaklıdır. İyi tanımlanmış işlemler (well-formed transactions), görev ayrılığı ve denetimli arayüzler temel ilkeleridir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemler ve görev ayrılığı ile ticari bütünlük sağlar",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula; gizlilik için erişim kontrolü uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; sistem bütünlüğünü yüksek/düşük seviyelerle korur",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash; çıkar çatışmalarını dinamik politikalarla engeller",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir danışmanlık firmasında aynı analistin hem rakip A şirketine hem de rakip B şirketine hizmet vermesi çıkar çatışması doğuruyor. Bu risk hangi güvenlik modeli ile yönetilir? (Senaryo 4)",
+    "explanation": "Brewer-Nash modeli (Chinese Wall) dinamik erişim kontrolü ile çıkar çatışmalarını önler. Bir kullanıcı bir veri grubuna erişince rakip grubun verilerine erişimi engellenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Brewer-Nash; dinamik erişim kontrolüyle çıkar çatışmalarını önler",
+        "is_correct": true
+      },
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemlerle bütünlük sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Bell-LaPadula; gizliliği sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; bütünlüğü sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir askeri sistemde, tüm kullanıcıların aynı güvenlik seviyesinde onaylı olduğu mod kullanılıyor. Bu hangi güvenlik modudur? (Senaryo 4)",
+    "explanation": "Güvenlik modları: Dedicated (herkes aynı seviye + tüm veriye erişim yetkisi), System High (herkes en yüksek yetkiye sahip ama need-to-know farklı), Compartmented (bölümlere göre ayrılmış), Multilevel (farklı seviyeler birlikte).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dedicated; tüm kullanıcılar aynı seviyede ve tüm verilere erişim yetkili",
+        "is_correct": true
+      },
+      {
+        "text": "System High; tüm kullanıcılar en yüksek seviyede ama need-to-know ayrımı var",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented; veriler bölümlere ayrılır, farklı anahtarlar gerekir",
+        "is_correct": false
+      },
+      {
+        "text": "Multilevel; farklı güvenlik seviyeleri aynı anda desteklenir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir işletim sisteminde erişim kontrol kararlarının merkezi, değiştirilemez ve denetlenebilir olması isteniyor. Bu hangi kavramdır? (Senaryo 4)",
+    "explanation": "Reference monitor kavramı erişim kararlarını merkezileştirir, değişmez, küçük ve doğrulanabilir olmalıdır. TCB’nin bir parçasıdır. Security kernel bu işlevi uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Reference monitor; merkezi, değişmez ve denetlenebilir erişim karar mekanizması",
+        "is_correct": true
+      },
+      {
+        "text": "Security kernel; yalnızca performansı artırır, güvenlikle ilişkisi yoktur",
+        "is_correct": false
+      },
+      {
+        "text": "Ring levels; donanım seviyeleriyle yalnız performansı tanımlar",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented mode; erişim kontrolü yerine veri saklama yöntemidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir ürünün güvenliği bağımsız laboratuvarca değerlendirilmiş ve EAL4+ sertifikası verilmiş. Bu neyi gösterir? (Senaryo 4)",
+    "explanation": "Common Criteria, IT ürünlerinin güvenlik işlevlerini ve güvence düzeylerini tanımlar. EAL1 en düşük, EAL7 en yüksek güvencedir. EAL4+ pratikte geniş kullanılan, metodolojik olarak test edilmiş ve doğrulanmış seviyedir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ürünün güvenlik işlevlerinin bağımsız laboratuvarca metodolojik testlerle doğrulandığını",
+        "is_correct": true
+      },
+      {
+        "text": "Ürünün her türlü saldırıya mutlak olarak dayanıklı olduğunu",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün yalnızca kaynak kodunun açıldığını",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün sadece üretici tarafından iç test edildiğini",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada saldırganlar monitör kablosundan yayılan sinyalleri dinleyerek ekrandaki bilgileri elde ediyor. Bu hangi risk alanına girer? (Senaryo 4)",
+    "explanation": "Emanasyon güvenliği (TEMPEST) elektromanyetik sızıntılara karşı koruma sağlar. Faraday kafesi, ekranlama ve filtreleme teknikleri kullanılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Emanasyon güvenliği (TEMPEST); elektromanyetik sızıntılara karşı koruma",
+        "is_correct": true
+      },
+      {
+        "text": "Mantıksal erişim kontrolü; yalnızca parola politikalarını kapsar",
+        "is_correct": false
+      },
+      {
+        "text": "İzinsiz yazılım yükleme; sadece lisans riskidir",
+        "is_correct": false
+      },
+      {
+        "text": "Kablo etiketleme; görsel kimliklendirme sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir yazılım ekibi, tasarımda gereksiz karmaşıklıktan kaçınıyor ve basit, anlaşılır modüller geliştiriyor. Hangi güvenlik prensibini uyguluyorlar? (Senaryo 4)",
+    "explanation": "Salt gereklilikleri kapsayan, basitlik ilkesine ‘economy of mechanism’ denir. Basit sistemler denetlenebilir ve daha az hata barındırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Economy of mechanism; basit ve anlaşılır tasarım",
+        "is_correct": true
+      },
+      {
+        "text": "Fail-safe defaults; başarısızlıkta güvenli durumda kalma",
+        "is_correct": false
+      },
+      {
+        "text": "Least privilege; kullanıcıya en az yetki atama",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; birden çok savunma katmanı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir kurumda kriptografik anahtarlar donanım tabanlı cihazlarda saklanıyor. Anahtarlar cihaz dışına çıkarılamıyor. Bu hangi güvenlik çözümüdür? (Senaryo 4)",
+    "explanation": "HSM (Hardware Security Module) veya TPM (Trusted Platform Module) anahtarların güvenli üretimi, saklanması ve kriptografik işlemlerin donanımda yapılmasını sağlar. Anahtar dışarı çıkmaz, saldırı yüzeyi azalır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "HSM/TPM; anahtarları güvenli donanımda üretmek ve saklamak",
+        "is_correct": true
+      },
+      {
+        "text": "Güvenlik yazılımı; anahtarları açık metin dosyada tutmak",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; anahtarları uzaktan taşımak",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; ağ trafiğini filtrelemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir savunma kurumunda, gizli belgeleri düşük yetkili kullanıcıların görmemesi gerekiyor. Model seçimi yapılırken hangi güvenlik özelliği kritik olarak önceliklendirilmelidir? (Senaryo 5)",
+    "explanation": "Bell-LaPadula modeli gizliliğe odaklanır. Basit güvenlik özelliği (no read up) ve *-özelliği (no write down) ile kullanıcıların yalnızca yetkili oldukları seviyede okuma/yazma yapmasını sağlar. Biba bütünlüğe, Clark-Wilson ticari bütünlüğe odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Gizlilik; Bell-LaPadula modeli ‘no read up’ ve ‘no write down’ kurallarıyla uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bütünlük; Biba modeli ‘no read down’ ve ‘no write up’ kurallarıyla uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Çatışma önleme; Brewer-Nash modeli dinamik erişim ile uygular",
+        "is_correct": false
+      },
+      {
+        "text": "İş ayrılığı; Clark-Wilson modeli denetimli arayüzlerle uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada, yetkisiz kullanıcıların mali kayıtları değiştirmesini engellemek kritik. Bu gereksinimi hangi güvenlik modeli doğrudan ele alır? (Senaryo 5)",
+    "explanation": "Biba modeli bütünlüğe odaklanır. Kuralları: no read down (düşük bütünlükten okunmaz), no write up (yüksek bütünlüğe yazılamaz). Bell-LaPadula gizliliğe, Clark-Wilson ticari bütünlüğe, Brewer-Nash çıkar çatışmalarına odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Biba modeli; bütünlüğü korumak için no read down / no write up uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula modeli; gizlilik için no read up / no write down uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash modeli; dinamik çıkar çatışması kuralı uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Clark-Wilson modeli; iş ayrılığı ve iyi tanımlanmış işlemleri uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir muhasebe sistemi, kullanıcıların yalnızca önceden tanımlanmış işlevlerle işlem yapmasını ve verinin tutarlı kalmasını sağlıyor. Hangi güvenlik modeli bu yaklaşımı en iyi açıklar? (Senaryo 5)",
+    "explanation": "Clark-Wilson modeli ticari bütünlük odaklıdır. İyi tanımlanmış işlemler (well-formed transactions), görev ayrılığı ve denetimli arayüzler temel ilkeleridir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemler ve görev ayrılığı ile ticari bütünlük sağlar",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula; gizlilik için erişim kontrolü uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; sistem bütünlüğünü yüksek/düşük seviyelerle korur",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash; çıkar çatışmalarını dinamik politikalarla engeller",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir danışmanlık firmasında aynı analistin hem rakip A şirketine hem de rakip B şirketine hizmet vermesi çıkar çatışması doğuruyor. Bu risk hangi güvenlik modeli ile yönetilir? (Senaryo 5)",
+    "explanation": "Brewer-Nash modeli (Chinese Wall) dinamik erişim kontrolü ile çıkar çatışmalarını önler. Bir kullanıcı bir veri grubuna erişince rakip grubun verilerine erişimi engellenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Brewer-Nash; dinamik erişim kontrolüyle çıkar çatışmalarını önler",
+        "is_correct": true
+      },
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemlerle bütünlük sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Bell-LaPadula; gizliliği sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; bütünlüğü sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir askeri sistemde, tüm kullanıcıların aynı güvenlik seviyesinde onaylı olduğu mod kullanılıyor. Bu hangi güvenlik modudur? (Senaryo 5)",
+    "explanation": "Güvenlik modları: Dedicated (herkes aynı seviye + tüm veriye erişim yetkisi), System High (herkes en yüksek yetkiye sahip ama need-to-know farklı), Compartmented (bölümlere göre ayrılmış), Multilevel (farklı seviyeler birlikte).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dedicated; tüm kullanıcılar aynı seviyede ve tüm verilere erişim yetkili",
+        "is_correct": true
+      },
+      {
+        "text": "System High; tüm kullanıcılar en yüksek seviyede ama need-to-know ayrımı var",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented; veriler bölümlere ayrılır, farklı anahtarlar gerekir",
+        "is_correct": false
+      },
+      {
+        "text": "Multilevel; farklı güvenlik seviyeleri aynı anda desteklenir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir işletim sisteminde erişim kontrol kararlarının merkezi, değiştirilemez ve denetlenebilir olması isteniyor. Bu hangi kavramdır? (Senaryo 5)",
+    "explanation": "Reference monitor kavramı erişim kararlarını merkezileştirir, değişmez, küçük ve doğrulanabilir olmalıdır. TCB’nin bir parçasıdır. Security kernel bu işlevi uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Reference monitor; merkezi, değişmez ve denetlenebilir erişim karar mekanizması",
+        "is_correct": true
+      },
+      {
+        "text": "Security kernel; yalnızca performansı artırır, güvenlikle ilişkisi yoktur",
+        "is_correct": false
+      },
+      {
+        "text": "Ring levels; donanım seviyeleriyle yalnız performansı tanımlar",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented mode; erişim kontrolü yerine veri saklama yöntemidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir ürünün güvenliği bağımsız laboratuvarca değerlendirilmiş ve EAL4+ sertifikası verilmiş. Bu neyi gösterir? (Senaryo 5)",
+    "explanation": "Common Criteria, IT ürünlerinin güvenlik işlevlerini ve güvence düzeylerini tanımlar. EAL1 en düşük, EAL7 en yüksek güvencedir. EAL4+ pratikte geniş kullanılan, metodolojik olarak test edilmiş ve doğrulanmış seviyedir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ürünün güvenlik işlevlerinin bağımsız laboratuvarca metodolojik testlerle doğrulandığını",
+        "is_correct": true
+      },
+      {
+        "text": "Ürünün her türlü saldırıya mutlak olarak dayanıklı olduğunu",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün yalnızca kaynak kodunun açıldığını",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün sadece üretici tarafından iç test edildiğini",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada saldırganlar monitör kablosundan yayılan sinyalleri dinleyerek ekrandaki bilgileri elde ediyor. Bu hangi risk alanına girer? (Senaryo 5)",
+    "explanation": "Emanasyon güvenliği (TEMPEST) elektromanyetik sızıntılara karşı koruma sağlar. Faraday kafesi, ekranlama ve filtreleme teknikleri kullanılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Emanasyon güvenliği (TEMPEST); elektromanyetik sızıntılara karşı koruma",
+        "is_correct": true
+      },
+      {
+        "text": "Mantıksal erişim kontrolü; yalnızca parola politikalarını kapsar",
+        "is_correct": false
+      },
+      {
+        "text": "İzinsiz yazılım yükleme; sadece lisans riskidir",
+        "is_correct": false
+      },
+      {
+        "text": "Kablo etiketleme; görsel kimliklendirme sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir yazılım ekibi, tasarımda gereksiz karmaşıklıktan kaçınıyor ve basit, anlaşılır modüller geliştiriyor. Hangi güvenlik prensibini uyguluyorlar? (Senaryo 5)",
+    "explanation": "Salt gereklilikleri kapsayan, basitlik ilkesine ‘economy of mechanism’ denir. Basit sistemler denetlenebilir ve daha az hata barındırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Economy of mechanism; basit ve anlaşılır tasarım",
+        "is_correct": true
+      },
+      {
+        "text": "Fail-safe defaults; başarısızlıkta güvenli durumda kalma",
+        "is_correct": false
+      },
+      {
+        "text": "Least privilege; kullanıcıya en az yetki atama",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; birden çok savunma katmanı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir kurumda kriptografik anahtarlar donanım tabanlı cihazlarda saklanıyor. Anahtarlar cihaz dışına çıkarılamıyor. Bu hangi güvenlik çözümüdür? (Senaryo 5)",
+    "explanation": "HSM (Hardware Security Module) veya TPM (Trusted Platform Module) anahtarların güvenli üretimi, saklanması ve kriptografik işlemlerin donanımda yapılmasını sağlar. Anahtar dışarı çıkmaz, saldırı yüzeyi azalır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "HSM/TPM; anahtarları güvenli donanımda üretmek ve saklamak",
+        "is_correct": true
+      },
+      {
+        "text": "Güvenlik yazılımı; anahtarları açık metin dosyada tutmak",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; anahtarları uzaktan taşımak",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; ağ trafiğini filtrelemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir savunma kurumunda, gizli belgeleri düşük yetkili kullanıcıların görmemesi gerekiyor. Model seçimi yapılırken hangi güvenlik özelliği kritik olarak önceliklendirilmelidir? (Senaryo 6)",
+    "explanation": "Bell-LaPadula modeli gizliliğe odaklanır. Basit güvenlik özelliği (no read up) ve *-özelliği (no write down) ile kullanıcıların yalnızca yetkili oldukları seviyede okuma/yazma yapmasını sağlar. Biba bütünlüğe, Clark-Wilson ticari bütünlüğe odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Gizlilik; Bell-LaPadula modeli ‘no read up’ ve ‘no write down’ kurallarıyla uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bütünlük; Biba modeli ‘no read down’ ve ‘no write up’ kurallarıyla uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Çatışma önleme; Brewer-Nash modeli dinamik erişim ile uygular",
+        "is_correct": false
+      },
+      {
+        "text": "İş ayrılığı; Clark-Wilson modeli denetimli arayüzlerle uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada, yetkisiz kullanıcıların mali kayıtları değiştirmesini engellemek kritik. Bu gereksinimi hangi güvenlik modeli doğrudan ele alır? (Senaryo 6)",
+    "explanation": "Biba modeli bütünlüğe odaklanır. Kuralları: no read down (düşük bütünlükten okunmaz), no write up (yüksek bütünlüğe yazılamaz). Bell-LaPadula gizliliğe, Clark-Wilson ticari bütünlüğe, Brewer-Nash çıkar çatışmalarına odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Biba modeli; bütünlüğü korumak için no read down / no write up uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula modeli; gizlilik için no read up / no write down uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash modeli; dinamik çıkar çatışması kuralı uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Clark-Wilson modeli; iş ayrılığı ve iyi tanımlanmış işlemleri uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir muhasebe sistemi, kullanıcıların yalnızca önceden tanımlanmış işlevlerle işlem yapmasını ve verinin tutarlı kalmasını sağlıyor. Hangi güvenlik modeli bu yaklaşımı en iyi açıklar? (Senaryo 6)",
+    "explanation": "Clark-Wilson modeli ticari bütünlük odaklıdır. İyi tanımlanmış işlemler (well-formed transactions), görev ayrılığı ve denetimli arayüzler temel ilkeleridir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemler ve görev ayrılığı ile ticari bütünlük sağlar",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula; gizlilik için erişim kontrolü uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; sistem bütünlüğünü yüksek/düşük seviyelerle korur",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash; çıkar çatışmalarını dinamik politikalarla engeller",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir danışmanlık firmasında aynı analistin hem rakip A şirketine hem de rakip B şirketine hizmet vermesi çıkar çatışması doğuruyor. Bu risk hangi güvenlik modeli ile yönetilir? (Senaryo 6)",
+    "explanation": "Brewer-Nash modeli (Chinese Wall) dinamik erişim kontrolü ile çıkar çatışmalarını önler. Bir kullanıcı bir veri grubuna erişince rakip grubun verilerine erişimi engellenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Brewer-Nash; dinamik erişim kontrolüyle çıkar çatışmalarını önler",
+        "is_correct": true
+      },
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemlerle bütünlük sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Bell-LaPadula; gizliliği sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; bütünlüğü sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir askeri sistemde, tüm kullanıcıların aynı güvenlik seviyesinde onaylı olduğu mod kullanılıyor. Bu hangi güvenlik modudur? (Senaryo 6)",
+    "explanation": "Güvenlik modları: Dedicated (herkes aynı seviye + tüm veriye erişim yetkisi), System High (herkes en yüksek yetkiye sahip ama need-to-know farklı), Compartmented (bölümlere göre ayrılmış), Multilevel (farklı seviyeler birlikte).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dedicated; tüm kullanıcılar aynı seviyede ve tüm verilere erişim yetkili",
+        "is_correct": true
+      },
+      {
+        "text": "System High; tüm kullanıcılar en yüksek seviyede ama need-to-know ayrımı var",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented; veriler bölümlere ayrılır, farklı anahtarlar gerekir",
+        "is_correct": false
+      },
+      {
+        "text": "Multilevel; farklı güvenlik seviyeleri aynı anda desteklenir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir işletim sisteminde erişim kontrol kararlarının merkezi, değiştirilemez ve denetlenebilir olması isteniyor. Bu hangi kavramdır? (Senaryo 6)",
+    "explanation": "Reference monitor kavramı erişim kararlarını merkezileştirir, değişmez, küçük ve doğrulanabilir olmalıdır. TCB’nin bir parçasıdır. Security kernel bu işlevi uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Reference monitor; merkezi, değişmez ve denetlenebilir erişim karar mekanizması",
+        "is_correct": true
+      },
+      {
+        "text": "Security kernel; yalnızca performansı artırır, güvenlikle ilişkisi yoktur",
+        "is_correct": false
+      },
+      {
+        "text": "Ring levels; donanım seviyeleriyle yalnız performansı tanımlar",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented mode; erişim kontrolü yerine veri saklama yöntemidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir ürünün güvenliği bağımsız laboratuvarca değerlendirilmiş ve EAL4+ sertifikası verilmiş. Bu neyi gösterir? (Senaryo 6)",
+    "explanation": "Common Criteria, IT ürünlerinin güvenlik işlevlerini ve güvence düzeylerini tanımlar. EAL1 en düşük, EAL7 en yüksek güvencedir. EAL4+ pratikte geniş kullanılan, metodolojik olarak test edilmiş ve doğrulanmış seviyedir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ürünün güvenlik işlevlerinin bağımsız laboratuvarca metodolojik testlerle doğrulandığını",
+        "is_correct": true
+      },
+      {
+        "text": "Ürünün her türlü saldırıya mutlak olarak dayanıklı olduğunu",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün yalnızca kaynak kodunun açıldığını",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün sadece üretici tarafından iç test edildiğini",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada saldırganlar monitör kablosundan yayılan sinyalleri dinleyerek ekrandaki bilgileri elde ediyor. Bu hangi risk alanına girer? (Senaryo 6)",
+    "explanation": "Emanasyon güvenliği (TEMPEST) elektromanyetik sızıntılara karşı koruma sağlar. Faraday kafesi, ekranlama ve filtreleme teknikleri kullanılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Emanasyon güvenliği (TEMPEST); elektromanyetik sızıntılara karşı koruma",
+        "is_correct": true
+      },
+      {
+        "text": "Mantıksal erişim kontrolü; yalnızca parola politikalarını kapsar",
+        "is_correct": false
+      },
+      {
+        "text": "İzinsiz yazılım yükleme; sadece lisans riskidir",
+        "is_correct": false
+      },
+      {
+        "text": "Kablo etiketleme; görsel kimliklendirme sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir yazılım ekibi, tasarımda gereksiz karmaşıklıktan kaçınıyor ve basit, anlaşılır modüller geliştiriyor. Hangi güvenlik prensibini uyguluyorlar? (Senaryo 6)",
+    "explanation": "Salt gereklilikleri kapsayan, basitlik ilkesine ‘economy of mechanism’ denir. Basit sistemler denetlenebilir ve daha az hata barındırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Economy of mechanism; basit ve anlaşılır tasarım",
+        "is_correct": true
+      },
+      {
+        "text": "Fail-safe defaults; başarısızlıkta güvenli durumda kalma",
+        "is_correct": false
+      },
+      {
+        "text": "Least privilege; kullanıcıya en az yetki atama",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; birden çok savunma katmanı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir kurumda kriptografik anahtarlar donanım tabanlı cihazlarda saklanıyor. Anahtarlar cihaz dışına çıkarılamıyor. Bu hangi güvenlik çözümüdür? (Senaryo 6)",
+    "explanation": "HSM (Hardware Security Module) veya TPM (Trusted Platform Module) anahtarların güvenli üretimi, saklanması ve kriptografik işlemlerin donanımda yapılmasını sağlar. Anahtar dışarı çıkmaz, saldırı yüzeyi azalır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "HSM/TPM; anahtarları güvenli donanımda üretmek ve saklamak",
+        "is_correct": true
+      },
+      {
+        "text": "Güvenlik yazılımı; anahtarları açık metin dosyada tutmak",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; anahtarları uzaktan taşımak",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; ağ trafiğini filtrelemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir savunma kurumunda, gizli belgeleri düşük yetkili kullanıcıların görmemesi gerekiyor. Model seçimi yapılırken hangi güvenlik özelliği kritik olarak önceliklendirilmelidir? (Senaryo 7)",
+    "explanation": "Bell-LaPadula modeli gizliliğe odaklanır. Basit güvenlik özelliği (no read up) ve *-özelliği (no write down) ile kullanıcıların yalnızca yetkili oldukları seviyede okuma/yazma yapmasını sağlar. Biba bütünlüğe, Clark-Wilson ticari bütünlüğe odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Gizlilik; Bell-LaPadula modeli ‘no read up’ ve ‘no write down’ kurallarıyla uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bütünlük; Biba modeli ‘no read down’ ve ‘no write up’ kurallarıyla uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Çatışma önleme; Brewer-Nash modeli dinamik erişim ile uygular",
+        "is_correct": false
+      },
+      {
+        "text": "İş ayrılığı; Clark-Wilson modeli denetimli arayüzlerle uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada, yetkisiz kullanıcıların mali kayıtları değiştirmesini engellemek kritik. Bu gereksinimi hangi güvenlik modeli doğrudan ele alır? (Senaryo 7)",
+    "explanation": "Biba modeli bütünlüğe odaklanır. Kuralları: no read down (düşük bütünlükten okunmaz), no write up (yüksek bütünlüğe yazılamaz). Bell-LaPadula gizliliğe, Clark-Wilson ticari bütünlüğe, Brewer-Nash çıkar çatışmalarına odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Biba modeli; bütünlüğü korumak için no read down / no write up uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula modeli; gizlilik için no read up / no write down uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash modeli; dinamik çıkar çatışması kuralı uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Clark-Wilson modeli; iş ayrılığı ve iyi tanımlanmış işlemleri uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir muhasebe sistemi, kullanıcıların yalnızca önceden tanımlanmış işlevlerle işlem yapmasını ve verinin tutarlı kalmasını sağlıyor. Hangi güvenlik modeli bu yaklaşımı en iyi açıklar? (Senaryo 7)",
+    "explanation": "Clark-Wilson modeli ticari bütünlük odaklıdır. İyi tanımlanmış işlemler (well-formed transactions), görev ayrılığı ve denetimli arayüzler temel ilkeleridir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemler ve görev ayrılığı ile ticari bütünlük sağlar",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula; gizlilik için erişim kontrolü uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; sistem bütünlüğünü yüksek/düşük seviyelerle korur",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash; çıkar çatışmalarını dinamik politikalarla engeller",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir danışmanlık firmasında aynı analistin hem rakip A şirketine hem de rakip B şirketine hizmet vermesi çıkar çatışması doğuruyor. Bu risk hangi güvenlik modeli ile yönetilir? (Senaryo 7)",
+    "explanation": "Brewer-Nash modeli (Chinese Wall) dinamik erişim kontrolü ile çıkar çatışmalarını önler. Bir kullanıcı bir veri grubuna erişince rakip grubun verilerine erişimi engellenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Brewer-Nash; dinamik erişim kontrolüyle çıkar çatışmalarını önler",
+        "is_correct": true
+      },
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemlerle bütünlük sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Bell-LaPadula; gizliliği sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; bütünlüğü sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir askeri sistemde, tüm kullanıcıların aynı güvenlik seviyesinde onaylı olduğu mod kullanılıyor. Bu hangi güvenlik modudur? (Senaryo 7)",
+    "explanation": "Güvenlik modları: Dedicated (herkes aynı seviye + tüm veriye erişim yetkisi), System High (herkes en yüksek yetkiye sahip ama need-to-know farklı), Compartmented (bölümlere göre ayrılmış), Multilevel (farklı seviyeler birlikte).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dedicated; tüm kullanıcılar aynı seviyede ve tüm verilere erişim yetkili",
+        "is_correct": true
+      },
+      {
+        "text": "System High; tüm kullanıcılar en yüksek seviyede ama need-to-know ayrımı var",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented; veriler bölümlere ayrılır, farklı anahtarlar gerekir",
+        "is_correct": false
+      },
+      {
+        "text": "Multilevel; farklı güvenlik seviyeleri aynı anda desteklenir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir işletim sisteminde erişim kontrol kararlarının merkezi, değiştirilemez ve denetlenebilir olması isteniyor. Bu hangi kavramdır? (Senaryo 7)",
+    "explanation": "Reference monitor kavramı erişim kararlarını merkezileştirir, değişmez, küçük ve doğrulanabilir olmalıdır. TCB’nin bir parçasıdır. Security kernel bu işlevi uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Reference monitor; merkezi, değişmez ve denetlenebilir erişim karar mekanizması",
+        "is_correct": true
+      },
+      {
+        "text": "Security kernel; yalnızca performansı artırır, güvenlikle ilişkisi yoktur",
+        "is_correct": false
+      },
+      {
+        "text": "Ring levels; donanım seviyeleriyle yalnız performansı tanımlar",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented mode; erişim kontrolü yerine veri saklama yöntemidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir ürünün güvenliği bağımsız laboratuvarca değerlendirilmiş ve EAL4+ sertifikası verilmiş. Bu neyi gösterir? (Senaryo 7)",
+    "explanation": "Common Criteria, IT ürünlerinin güvenlik işlevlerini ve güvence düzeylerini tanımlar. EAL1 en düşük, EAL7 en yüksek güvencedir. EAL4+ pratikte geniş kullanılan, metodolojik olarak test edilmiş ve doğrulanmış seviyedir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ürünün güvenlik işlevlerinin bağımsız laboratuvarca metodolojik testlerle doğrulandığını",
+        "is_correct": true
+      },
+      {
+        "text": "Ürünün her türlü saldırıya mutlak olarak dayanıklı olduğunu",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün yalnızca kaynak kodunun açıldığını",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün sadece üretici tarafından iç test edildiğini",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada saldırganlar monitör kablosundan yayılan sinyalleri dinleyerek ekrandaki bilgileri elde ediyor. Bu hangi risk alanına girer? (Senaryo 7)",
+    "explanation": "Emanasyon güvenliği (TEMPEST) elektromanyetik sızıntılara karşı koruma sağlar. Faraday kafesi, ekranlama ve filtreleme teknikleri kullanılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Emanasyon güvenliği (TEMPEST); elektromanyetik sızıntılara karşı koruma",
+        "is_correct": true
+      },
+      {
+        "text": "Mantıksal erişim kontrolü; yalnızca parola politikalarını kapsar",
+        "is_correct": false
+      },
+      {
+        "text": "İzinsiz yazılım yükleme; sadece lisans riskidir",
+        "is_correct": false
+      },
+      {
+        "text": "Kablo etiketleme; görsel kimliklendirme sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir yazılım ekibi, tasarımda gereksiz karmaşıklıktan kaçınıyor ve basit, anlaşılır modüller geliştiriyor. Hangi güvenlik prensibini uyguluyorlar? (Senaryo 7)",
+    "explanation": "Salt gereklilikleri kapsayan, basitlik ilkesine ‘economy of mechanism’ denir. Basit sistemler denetlenebilir ve daha az hata barındırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Economy of mechanism; basit ve anlaşılır tasarım",
+        "is_correct": true
+      },
+      {
+        "text": "Fail-safe defaults; başarısızlıkta güvenli durumda kalma",
+        "is_correct": false
+      },
+      {
+        "text": "Least privilege; kullanıcıya en az yetki atama",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; birden çok savunma katmanı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir kurumda kriptografik anahtarlar donanım tabanlı cihazlarda saklanıyor. Anahtarlar cihaz dışına çıkarılamıyor. Bu hangi güvenlik çözümüdür? (Senaryo 7)",
+    "explanation": "HSM (Hardware Security Module) veya TPM (Trusted Platform Module) anahtarların güvenli üretimi, saklanması ve kriptografik işlemlerin donanımda yapılmasını sağlar. Anahtar dışarı çıkmaz, saldırı yüzeyi azalır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "HSM/TPM; anahtarları güvenli donanımda üretmek ve saklamak",
+        "is_correct": true
+      },
+      {
+        "text": "Güvenlik yazılımı; anahtarları açık metin dosyada tutmak",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; anahtarları uzaktan taşımak",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; ağ trafiğini filtrelemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir savunma kurumunda, gizli belgeleri düşük yetkili kullanıcıların görmemesi gerekiyor. Model seçimi yapılırken hangi güvenlik özelliği kritik olarak önceliklendirilmelidir? (Senaryo 8)",
+    "explanation": "Bell-LaPadula modeli gizliliğe odaklanır. Basit güvenlik özelliği (no read up) ve *-özelliği (no write down) ile kullanıcıların yalnızca yetkili oldukları seviyede okuma/yazma yapmasını sağlar. Biba bütünlüğe, Clark-Wilson ticari bütünlüğe odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Gizlilik; Bell-LaPadula modeli ‘no read up’ ve ‘no write down’ kurallarıyla uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bütünlük; Biba modeli ‘no read down’ ve ‘no write up’ kurallarıyla uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Çatışma önleme; Brewer-Nash modeli dinamik erişim ile uygular",
+        "is_correct": false
+      },
+      {
+        "text": "İş ayrılığı; Clark-Wilson modeli denetimli arayüzlerle uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada, yetkisiz kullanıcıların mali kayıtları değiştirmesini engellemek kritik. Bu gereksinimi hangi güvenlik modeli doğrudan ele alır? (Senaryo 8)",
+    "explanation": "Biba modeli bütünlüğe odaklanır. Kuralları: no read down (düşük bütünlükten okunmaz), no write up (yüksek bütünlüğe yazılamaz). Bell-LaPadula gizliliğe, Clark-Wilson ticari bütünlüğe, Brewer-Nash çıkar çatışmalarına odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Biba modeli; bütünlüğü korumak için no read down / no write up uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula modeli; gizlilik için no read up / no write down uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash modeli; dinamik çıkar çatışması kuralı uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Clark-Wilson modeli; iş ayrılığı ve iyi tanımlanmış işlemleri uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir muhasebe sistemi, kullanıcıların yalnızca önceden tanımlanmış işlevlerle işlem yapmasını ve verinin tutarlı kalmasını sağlıyor. Hangi güvenlik modeli bu yaklaşımı en iyi açıklar? (Senaryo 8)",
+    "explanation": "Clark-Wilson modeli ticari bütünlük odaklıdır. İyi tanımlanmış işlemler (well-formed transactions), görev ayrılığı ve denetimli arayüzler temel ilkeleridir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemler ve görev ayrılığı ile ticari bütünlük sağlar",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula; gizlilik için erişim kontrolü uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; sistem bütünlüğünü yüksek/düşük seviyelerle korur",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash; çıkar çatışmalarını dinamik politikalarla engeller",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir danışmanlık firmasında aynı analistin hem rakip A şirketine hem de rakip B şirketine hizmet vermesi çıkar çatışması doğuruyor. Bu risk hangi güvenlik modeli ile yönetilir? (Senaryo 8)",
+    "explanation": "Brewer-Nash modeli (Chinese Wall) dinamik erişim kontrolü ile çıkar çatışmalarını önler. Bir kullanıcı bir veri grubuna erişince rakip grubun verilerine erişimi engellenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Brewer-Nash; dinamik erişim kontrolüyle çıkar çatışmalarını önler",
+        "is_correct": true
+      },
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemlerle bütünlük sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Bell-LaPadula; gizliliği sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; bütünlüğü sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir askeri sistemde, tüm kullanıcıların aynı güvenlik seviyesinde onaylı olduğu mod kullanılıyor. Bu hangi güvenlik modudur? (Senaryo 8)",
+    "explanation": "Güvenlik modları: Dedicated (herkes aynı seviye + tüm veriye erişim yetkisi), System High (herkes en yüksek yetkiye sahip ama need-to-know farklı), Compartmented (bölümlere göre ayrılmış), Multilevel (farklı seviyeler birlikte).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dedicated; tüm kullanıcılar aynı seviyede ve tüm verilere erişim yetkili",
+        "is_correct": true
+      },
+      {
+        "text": "System High; tüm kullanıcılar en yüksek seviyede ama need-to-know ayrımı var",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented; veriler bölümlere ayrılır, farklı anahtarlar gerekir",
+        "is_correct": false
+      },
+      {
+        "text": "Multilevel; farklı güvenlik seviyeleri aynı anda desteklenir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir işletim sisteminde erişim kontrol kararlarının merkezi, değiştirilemez ve denetlenebilir olması isteniyor. Bu hangi kavramdır? (Senaryo 8)",
+    "explanation": "Reference monitor kavramı erişim kararlarını merkezileştirir, değişmez, küçük ve doğrulanabilir olmalıdır. TCB’nin bir parçasıdır. Security kernel bu işlevi uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Reference monitor; merkezi, değişmez ve denetlenebilir erişim karar mekanizması",
+        "is_correct": true
+      },
+      {
+        "text": "Security kernel; yalnızca performansı artırır, güvenlikle ilişkisi yoktur",
+        "is_correct": false
+      },
+      {
+        "text": "Ring levels; donanım seviyeleriyle yalnız performansı tanımlar",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented mode; erişim kontrolü yerine veri saklama yöntemidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir ürünün güvenliği bağımsız laboratuvarca değerlendirilmiş ve EAL4+ sertifikası verilmiş. Bu neyi gösterir? (Senaryo 8)",
+    "explanation": "Common Criteria, IT ürünlerinin güvenlik işlevlerini ve güvence düzeylerini tanımlar. EAL1 en düşük, EAL7 en yüksek güvencedir. EAL4+ pratikte geniş kullanılan, metodolojik olarak test edilmiş ve doğrulanmış seviyedir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ürünün güvenlik işlevlerinin bağımsız laboratuvarca metodolojik testlerle doğrulandığını",
+        "is_correct": true
+      },
+      {
+        "text": "Ürünün her türlü saldırıya mutlak olarak dayanıklı olduğunu",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün yalnızca kaynak kodunun açıldığını",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün sadece üretici tarafından iç test edildiğini",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada saldırganlar monitör kablosundan yayılan sinyalleri dinleyerek ekrandaki bilgileri elde ediyor. Bu hangi risk alanına girer? (Senaryo 8)",
+    "explanation": "Emanasyon güvenliği (TEMPEST) elektromanyetik sızıntılara karşı koruma sağlar. Faraday kafesi, ekranlama ve filtreleme teknikleri kullanılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Emanasyon güvenliği (TEMPEST); elektromanyetik sızıntılara karşı koruma",
+        "is_correct": true
+      },
+      {
+        "text": "Mantıksal erişim kontrolü; yalnızca parola politikalarını kapsar",
+        "is_correct": false
+      },
+      {
+        "text": "İzinsiz yazılım yükleme; sadece lisans riskidir",
+        "is_correct": false
+      },
+      {
+        "text": "Kablo etiketleme; görsel kimliklendirme sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir yazılım ekibi, tasarımda gereksiz karmaşıklıktan kaçınıyor ve basit, anlaşılır modüller geliştiriyor. Hangi güvenlik prensibini uyguluyorlar? (Senaryo 8)",
+    "explanation": "Salt gereklilikleri kapsayan, basitlik ilkesine ‘economy of mechanism’ denir. Basit sistemler denetlenebilir ve daha az hata barındırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Economy of mechanism; basit ve anlaşılır tasarım",
+        "is_correct": true
+      },
+      {
+        "text": "Fail-safe defaults; başarısızlıkta güvenli durumda kalma",
+        "is_correct": false
+      },
+      {
+        "text": "Least privilege; kullanıcıya en az yetki atama",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; birden çok savunma katmanı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir kurumda kriptografik anahtarlar donanım tabanlı cihazlarda saklanıyor. Anahtarlar cihaz dışına çıkarılamıyor. Bu hangi güvenlik çözümüdür? (Senaryo 8)",
+    "explanation": "HSM (Hardware Security Module) veya TPM (Trusted Platform Module) anahtarların güvenli üretimi, saklanması ve kriptografik işlemlerin donanımda yapılmasını sağlar. Anahtar dışarı çıkmaz, saldırı yüzeyi azalır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "HSM/TPM; anahtarları güvenli donanımda üretmek ve saklamak",
+        "is_correct": true
+      },
+      {
+        "text": "Güvenlik yazılımı; anahtarları açık metin dosyada tutmak",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; anahtarları uzaktan taşımak",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; ağ trafiğini filtrelemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir savunma kurumunda, gizli belgeleri düşük yetkili kullanıcıların görmemesi gerekiyor. Model seçimi yapılırken hangi güvenlik özelliği kritik olarak önceliklendirilmelidir? (Senaryo 9)",
+    "explanation": "Bell-LaPadula modeli gizliliğe odaklanır. Basit güvenlik özelliği (no read up) ve *-özelliği (no write down) ile kullanıcıların yalnızca yetkili oldukları seviyede okuma/yazma yapmasını sağlar. Biba bütünlüğe, Clark-Wilson ticari bütünlüğe odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Gizlilik; Bell-LaPadula modeli ‘no read up’ ve ‘no write down’ kurallarıyla uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bütünlük; Biba modeli ‘no read down’ ve ‘no write up’ kurallarıyla uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Çatışma önleme; Brewer-Nash modeli dinamik erişim ile uygular",
+        "is_correct": false
+      },
+      {
+        "text": "İş ayrılığı; Clark-Wilson modeli denetimli arayüzlerle uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada, yetkisiz kullanıcıların mali kayıtları değiştirmesini engellemek kritik. Bu gereksinimi hangi güvenlik modeli doğrudan ele alır? (Senaryo 9)",
+    "explanation": "Biba modeli bütünlüğe odaklanır. Kuralları: no read down (düşük bütünlükten okunmaz), no write up (yüksek bütünlüğe yazılamaz). Bell-LaPadula gizliliğe, Clark-Wilson ticari bütünlüğe, Brewer-Nash çıkar çatışmalarına odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Biba modeli; bütünlüğü korumak için no read down / no write up uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula modeli; gizlilik için no read up / no write down uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash modeli; dinamik çıkar çatışması kuralı uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Clark-Wilson modeli; iş ayrılığı ve iyi tanımlanmış işlemleri uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir muhasebe sistemi, kullanıcıların yalnızca önceden tanımlanmış işlevlerle işlem yapmasını ve verinin tutarlı kalmasını sağlıyor. Hangi güvenlik modeli bu yaklaşımı en iyi açıklar? (Senaryo 9)",
+    "explanation": "Clark-Wilson modeli ticari bütünlük odaklıdır. İyi tanımlanmış işlemler (well-formed transactions), görev ayrılığı ve denetimli arayüzler temel ilkeleridir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemler ve görev ayrılığı ile ticari bütünlük sağlar",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula; gizlilik için erişim kontrolü uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; sistem bütünlüğünü yüksek/düşük seviyelerle korur",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash; çıkar çatışmalarını dinamik politikalarla engeller",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir danışmanlık firmasında aynı analistin hem rakip A şirketine hem de rakip B şirketine hizmet vermesi çıkar çatışması doğuruyor. Bu risk hangi güvenlik modeli ile yönetilir? (Senaryo 9)",
+    "explanation": "Brewer-Nash modeli (Chinese Wall) dinamik erişim kontrolü ile çıkar çatışmalarını önler. Bir kullanıcı bir veri grubuna erişince rakip grubun verilerine erişimi engellenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Brewer-Nash; dinamik erişim kontrolüyle çıkar çatışmalarını önler",
+        "is_correct": true
+      },
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemlerle bütünlük sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Bell-LaPadula; gizliliği sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; bütünlüğü sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir askeri sistemde, tüm kullanıcıların aynı güvenlik seviyesinde onaylı olduğu mod kullanılıyor. Bu hangi güvenlik modudur? (Senaryo 9)",
+    "explanation": "Güvenlik modları: Dedicated (herkes aynı seviye + tüm veriye erişim yetkisi), System High (herkes en yüksek yetkiye sahip ama need-to-know farklı), Compartmented (bölümlere göre ayrılmış), Multilevel (farklı seviyeler birlikte).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dedicated; tüm kullanıcılar aynı seviyede ve tüm verilere erişim yetkili",
+        "is_correct": true
+      },
+      {
+        "text": "System High; tüm kullanıcılar en yüksek seviyede ama need-to-know ayrımı var",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented; veriler bölümlere ayrılır, farklı anahtarlar gerekir",
+        "is_correct": false
+      },
+      {
+        "text": "Multilevel; farklı güvenlik seviyeleri aynı anda desteklenir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir işletim sisteminde erişim kontrol kararlarının merkezi, değiştirilemez ve denetlenebilir olması isteniyor. Bu hangi kavramdır? (Senaryo 9)",
+    "explanation": "Reference monitor kavramı erişim kararlarını merkezileştirir, değişmez, küçük ve doğrulanabilir olmalıdır. TCB’nin bir parçasıdır. Security kernel bu işlevi uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Reference monitor; merkezi, değişmez ve denetlenebilir erişim karar mekanizması",
+        "is_correct": true
+      },
+      {
+        "text": "Security kernel; yalnızca performansı artırır, güvenlikle ilişkisi yoktur",
+        "is_correct": false
+      },
+      {
+        "text": "Ring levels; donanım seviyeleriyle yalnız performansı tanımlar",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented mode; erişim kontrolü yerine veri saklama yöntemidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir ürünün güvenliği bağımsız laboratuvarca değerlendirilmiş ve EAL4+ sertifikası verilmiş. Bu neyi gösterir? (Senaryo 9)",
+    "explanation": "Common Criteria, IT ürünlerinin güvenlik işlevlerini ve güvence düzeylerini tanımlar. EAL1 en düşük, EAL7 en yüksek güvencedir. EAL4+ pratikte geniş kullanılan, metodolojik olarak test edilmiş ve doğrulanmış seviyedir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ürünün güvenlik işlevlerinin bağımsız laboratuvarca metodolojik testlerle doğrulandığını",
+        "is_correct": true
+      },
+      {
+        "text": "Ürünün her türlü saldırıya mutlak olarak dayanıklı olduğunu",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün yalnızca kaynak kodunun açıldığını",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün sadece üretici tarafından iç test edildiğini",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada saldırganlar monitör kablosundan yayılan sinyalleri dinleyerek ekrandaki bilgileri elde ediyor. Bu hangi risk alanına girer? (Senaryo 9)",
+    "explanation": "Emanasyon güvenliği (TEMPEST) elektromanyetik sızıntılara karşı koruma sağlar. Faraday kafesi, ekranlama ve filtreleme teknikleri kullanılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Emanasyon güvenliği (TEMPEST); elektromanyetik sızıntılara karşı koruma",
+        "is_correct": true
+      },
+      {
+        "text": "Mantıksal erişim kontrolü; yalnızca parola politikalarını kapsar",
+        "is_correct": false
+      },
+      {
+        "text": "İzinsiz yazılım yükleme; sadece lisans riskidir",
+        "is_correct": false
+      },
+      {
+        "text": "Kablo etiketleme; görsel kimliklendirme sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir yazılım ekibi, tasarımda gereksiz karmaşıklıktan kaçınıyor ve basit, anlaşılır modüller geliştiriyor. Hangi güvenlik prensibini uyguluyorlar? (Senaryo 9)",
+    "explanation": "Salt gereklilikleri kapsayan, basitlik ilkesine ‘economy of mechanism’ denir. Basit sistemler denetlenebilir ve daha az hata barındırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Economy of mechanism; basit ve anlaşılır tasarım",
+        "is_correct": true
+      },
+      {
+        "text": "Fail-safe defaults; başarısızlıkta güvenli durumda kalma",
+        "is_correct": false
+      },
+      {
+        "text": "Least privilege; kullanıcıya en az yetki atama",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; birden çok savunma katmanı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir kurumda kriptografik anahtarlar donanım tabanlı cihazlarda saklanıyor. Anahtarlar cihaz dışına çıkarılamıyor. Bu hangi güvenlik çözümüdür? (Senaryo 9)",
+    "explanation": "HSM (Hardware Security Module) veya TPM (Trusted Platform Module) anahtarların güvenli üretimi, saklanması ve kriptografik işlemlerin donanımda yapılmasını sağlar. Anahtar dışarı çıkmaz, saldırı yüzeyi azalır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "HSM/TPM; anahtarları güvenli donanımda üretmek ve saklamak",
+        "is_correct": true
+      },
+      {
+        "text": "Güvenlik yazılımı; anahtarları açık metin dosyada tutmak",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; anahtarları uzaktan taşımak",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; ağ trafiğini filtrelemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir savunma kurumunda, gizli belgeleri düşük yetkili kullanıcıların görmemesi gerekiyor. Model seçimi yapılırken hangi güvenlik özelliği kritik olarak önceliklendirilmelidir? (Senaryo 10)",
+    "explanation": "Bell-LaPadula modeli gizliliğe odaklanır. Basit güvenlik özelliği (no read up) ve *-özelliği (no write down) ile kullanıcıların yalnızca yetkili oldukları seviyede okuma/yazma yapmasını sağlar. Biba bütünlüğe, Clark-Wilson ticari bütünlüğe odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Gizlilik; Bell-LaPadula modeli ‘no read up’ ve ‘no write down’ kurallarıyla uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bütünlük; Biba modeli ‘no read down’ ve ‘no write up’ kurallarıyla uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Çatışma önleme; Brewer-Nash modeli dinamik erişim ile uygular",
+        "is_correct": false
+      },
+      {
+        "text": "İş ayrılığı; Clark-Wilson modeli denetimli arayüzlerle uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada, yetkisiz kullanıcıların mali kayıtları değiştirmesini engellemek kritik. Bu gereksinimi hangi güvenlik modeli doğrudan ele alır? (Senaryo 10)",
+    "explanation": "Biba modeli bütünlüğe odaklanır. Kuralları: no read down (düşük bütünlükten okunmaz), no write up (yüksek bütünlüğe yazılamaz). Bell-LaPadula gizliliğe, Clark-Wilson ticari bütünlüğe, Brewer-Nash çıkar çatışmalarına odaklanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Biba modeli; bütünlüğü korumak için no read down / no write up uygular",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula modeli; gizlilik için no read up / no write down uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash modeli; dinamik çıkar çatışması kuralı uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Clark-Wilson modeli; iş ayrılığı ve iyi tanımlanmış işlemleri uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir muhasebe sistemi, kullanıcıların yalnızca önceden tanımlanmış işlevlerle işlem yapmasını ve verinin tutarlı kalmasını sağlıyor. Hangi güvenlik modeli bu yaklaşımı en iyi açıklar? (Senaryo 10)",
+    "explanation": "Clark-Wilson modeli ticari bütünlük odaklıdır. İyi tanımlanmış işlemler (well-formed transactions), görev ayrılığı ve denetimli arayüzler temel ilkeleridir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemler ve görev ayrılığı ile ticari bütünlük sağlar",
+        "is_correct": true
+      },
+      {
+        "text": "Bell-LaPadula; gizlilik için erişim kontrolü uygular",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; sistem bütünlüğünü yüksek/düşük seviyelerle korur",
+        "is_correct": false
+      },
+      {
+        "text": "Brewer-Nash; çıkar çatışmalarını dinamik politikalarla engeller",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir danışmanlık firmasında aynı analistin hem rakip A şirketine hem de rakip B şirketine hizmet vermesi çıkar çatışması doğuruyor. Bu risk hangi güvenlik modeli ile yönetilir? (Senaryo 10)",
+    "explanation": "Brewer-Nash modeli (Chinese Wall) dinamik erişim kontrolü ile çıkar çatışmalarını önler. Bir kullanıcı bir veri grubuna erişince rakip grubun verilerine erişimi engellenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Brewer-Nash; dinamik erişim kontrolüyle çıkar çatışmalarını önler",
+        "is_correct": true
+      },
+      {
+        "text": "Clark-Wilson; iyi tanımlı işlemlerle bütünlük sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Bell-LaPadula; gizliliği sağlar",
+        "is_correct": false
+      },
+      {
+        "text": "Biba; bütünlüğü sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir askeri sistemde, tüm kullanıcıların aynı güvenlik seviyesinde onaylı olduğu mod kullanılıyor. Bu hangi güvenlik modudur? (Senaryo 10)",
+    "explanation": "Güvenlik modları: Dedicated (herkes aynı seviye + tüm veriye erişim yetkisi), System High (herkes en yüksek yetkiye sahip ama need-to-know farklı), Compartmented (bölümlere göre ayrılmış), Multilevel (farklı seviyeler birlikte).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Dedicated; tüm kullanıcılar aynı seviyede ve tüm verilere erişim yetkili",
+        "is_correct": true
+      },
+      {
+        "text": "System High; tüm kullanıcılar en yüksek seviyede ama need-to-know ayrımı var",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented; veriler bölümlere ayrılır, farklı anahtarlar gerekir",
+        "is_correct": false
+      },
+      {
+        "text": "Multilevel; farklı güvenlik seviyeleri aynı anda desteklenir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir işletim sisteminde erişim kontrol kararlarının merkezi, değiştirilemez ve denetlenebilir olması isteniyor. Bu hangi kavramdır? (Senaryo 10)",
+    "explanation": "Reference monitor kavramı erişim kararlarını merkezileştirir, değişmez, küçük ve doğrulanabilir olmalıdır. TCB’nin bir parçasıdır. Security kernel bu işlevi uygular.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Reference monitor; merkezi, değişmez ve denetlenebilir erişim karar mekanizması",
+        "is_correct": true
+      },
+      {
+        "text": "Security kernel; yalnızca performansı artırır, güvenlikle ilişkisi yoktur",
+        "is_correct": false
+      },
+      {
+        "text": "Ring levels; donanım seviyeleriyle yalnız performansı tanımlar",
+        "is_correct": false
+      },
+      {
+        "text": "Compartmented mode; erişim kontrolü yerine veri saklama yöntemidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir ürünün güvenliği bağımsız laboratuvarca değerlendirilmiş ve EAL4+ sertifikası verilmiş. Bu neyi gösterir? (Senaryo 10)",
+    "explanation": "Common Criteria, IT ürünlerinin güvenlik işlevlerini ve güvence düzeylerini tanımlar. EAL1 en düşük, EAL7 en yüksek güvencedir. EAL4+ pratikte geniş kullanılan, metodolojik olarak test edilmiş ve doğrulanmış seviyedir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ürünün güvenlik işlevlerinin bağımsız laboratuvarca metodolojik testlerle doğrulandığını",
+        "is_correct": true
+      },
+      {
+        "text": "Ürünün her türlü saldırıya mutlak olarak dayanıklı olduğunu",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün yalnızca kaynak kodunun açıldığını",
+        "is_correct": false
+      },
+      {
+        "text": "Ürünün sadece üretici tarafından iç test edildiğini",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir bankada saldırganlar monitör kablosundan yayılan sinyalleri dinleyerek ekrandaki bilgileri elde ediyor. Bu hangi risk alanına girer? (Senaryo 10)",
+    "explanation": "Emanasyon güvenliği (TEMPEST) elektromanyetik sızıntılara karşı koruma sağlar. Faraday kafesi, ekranlama ve filtreleme teknikleri kullanılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Emanasyon güvenliği (TEMPEST); elektromanyetik sızıntılara karşı koruma",
+        "is_correct": true
+      },
+      {
+        "text": "Mantıksal erişim kontrolü; yalnızca parola politikalarını kapsar",
+        "is_correct": false
+      },
+      {
+        "text": "İzinsiz yazılım yükleme; sadece lisans riskidir",
+        "is_correct": false
+      },
+      {
+        "text": "Kablo etiketleme; görsel kimliklendirme sağlar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir yazılım ekibi, tasarımda gereksiz karmaşıklıktan kaçınıyor ve basit, anlaşılır modüller geliştiriyor. Hangi güvenlik prensibini uyguluyorlar? (Senaryo 10)",
+    "explanation": "Salt gereklilikleri kapsayan, basitlik ilkesine ‘economy of mechanism’ denir. Basit sistemler denetlenebilir ve daha az hata barındırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Economy of mechanism; basit ve anlaşılır tasarım",
+        "is_correct": true
+      },
+      {
+        "text": "Fail-safe defaults; başarısızlıkta güvenli durumda kalma",
+        "is_correct": false
+      },
+      {
+        "text": "Least privilege; kullanıcıya en az yetki atama",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; birden çok savunma katmanı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 19,
+    "text": "Bir kurumda kriptografik anahtarlar donanım tabanlı cihazlarda saklanıyor. Anahtarlar cihaz dışına çıkarılamıyor. Bu hangi güvenlik çözümüdür? (Senaryo 10)",
+    "explanation": "HSM (Hardware Security Module) veya TPM (Trusted Platform Module) anahtarların güvenli üretimi, saklanması ve kriptografik işlemlerin donanımda yapılmasını sağlar. Anahtar dışarı çıkmaz, saldırı yüzeyi azalır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "HSM/TPM; anahtarları güvenli donanımda üretmek ve saklamak",
+        "is_correct": true
+      },
+      {
+        "text": "Güvenlik yazılımı; anahtarları açık metin dosyada tutmak",
+        "is_correct": false
+      },
+      {
+        "text": "VPN; anahtarları uzaktan taşımak",
+        "is_correct": false
+      },
+      {
+        "text": "Firewall; ağ trafiğini filtrelemek",
+        "is_correct": false
+      }
+    ]
+  }
+]

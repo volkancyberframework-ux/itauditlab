@@ -1,0 +1,2502 @@
+[
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür?",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir?",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür?",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir?",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir?",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür? (Senaryo 2)",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir? (Senaryo 2)",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür? (Senaryo 2)",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir? (Senaryo 2)",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir? (Senaryo 2)",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür? (Senaryo 3)",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir? (Senaryo 3)",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür? (Senaryo 3)",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir? (Senaryo 3)",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir? (Senaryo 3)",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür? (Senaryo 4)",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir? (Senaryo 4)",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür? (Senaryo 4)",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir? (Senaryo 4)",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir? (Senaryo 4)",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür? (Senaryo 5)",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir? (Senaryo 5)",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür? (Senaryo 5)",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir? (Senaryo 5)",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir? (Senaryo 5)",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür? (Senaryo 6)",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir? (Senaryo 6)",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür? (Senaryo 6)",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir? (Senaryo 6)",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir? (Senaryo 6)",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür? (Senaryo 7)",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir? (Senaryo 7)",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür? (Senaryo 7)",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir? (Senaryo 7)",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir? (Senaryo 7)",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür? (Senaryo 8)",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir? (Senaryo 8)",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür? (Senaryo 8)",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir? (Senaryo 8)",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir? (Senaryo 8)",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür? (Senaryo 9)",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir? (Senaryo 9)",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür? (Senaryo 9)",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir? (Senaryo 9)",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir? (Senaryo 9)",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür? (Senaryo 10)",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir? (Senaryo 10)",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür? (Senaryo 10)",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir? (Senaryo 10)",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir? (Senaryo 10)",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür? (Senaryo 11)",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir? (Senaryo 11)",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür? (Senaryo 11)",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir? (Senaryo 11)",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir? (Senaryo 11)",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür? (Senaryo 12)",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir? (Senaryo 12)",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür? (Senaryo 12)",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir? (Senaryo 12)",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir? (Senaryo 12)",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür? (Senaryo 13)",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir? (Senaryo 13)",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür? (Senaryo 13)",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir? (Senaryo 13)",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir? (Senaryo 13)",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür? (Senaryo 14)",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir? (Senaryo 14)",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür? (Senaryo 14)",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir? (Senaryo 14)",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir? (Senaryo 14)",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür? (Senaryo 15)",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir? (Senaryo 15)",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür? (Senaryo 15)",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir? (Senaryo 15)",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir? (Senaryo 15)",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür? (Senaryo 16)",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir? (Senaryo 16)",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür? (Senaryo 16)",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir? (Senaryo 16)",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir? (Senaryo 16)",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür? (Senaryo 17)",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir? (Senaryo 17)",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür? (Senaryo 17)",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir? (Senaryo 17)",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir? (Senaryo 17)",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür? (Senaryo 18)",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir? (Senaryo 18)",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür? (Senaryo 18)",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir? (Senaryo 18)",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir? (Senaryo 18)",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür? (Senaryo 19)",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir? (Senaryo 19)",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür? (Senaryo 19)",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir? (Senaryo 19)",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir? (Senaryo 19)",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kullanıcı sisteme girişte kullanıcı adı ve şifre giriyor. Bu hangi kimlik doğrulama faktörüdür? (Senaryo 20)",
+    "explanation": "Bilgiye dayalı kimlik doğrulama (something you know). Diğerleri: something you have (kart, token), something you are (biyometrik).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Something you know; kullanıcı adı/şifre",
+        "is_correct": true
+      },
+      {
+        "text": "Something you have; akıllı kart",
+        "is_correct": false
+      },
+      {
+        "text": "Something you are; parmak izi",
+        "is_correct": false
+      },
+      {
+        "text": "Somewhere you are; konum",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir sistemde kullanıcıya yalnızca görevini yapmak için gerekli minimum yetkiler veriliyor. Bu hangi prensiptir? (Senaryo 20)",
+    "explanation": "Least privilege: kullanıcıya sadece işi için gerekli en az yetki verilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": true
+      },
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Defense in depth; katmanlı güvenlik",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir banka çalışanı işlemleri başlatabiliyor, başka bir çalışan onaylıyor. Bu hangi kontrol türüdür? (Senaryo 20)",
+    "explanation": "Separation of duties (SoD), hata/suiistimali azaltmak için görev ayrılığıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Separation of duties; görev ayrılığı",
+        "is_correct": true
+      },
+      {
+        "text": "Least privilege; minimum yetki",
+        "is_correct": false
+      },
+      {
+        "text": "Need-to-know; bilmesi gereken",
+        "is_correct": false
+      },
+      {
+        "text": "Mandatory vacations; izin zorunluluğu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir kurumda erişimler role göre tanımlanıyor. Bu hangi yetkilendirme yöntemidir? (Senaryo 20)",
+    "explanation": "RBAC (Role-Based Access Control).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RBAC; role dayalı erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı erişim kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 25,
+    "text": "Bir güvenlik modeli, kaynakların sınıflandırma etiketlerine göre erişimi kontrol ediyor. Bu hangi modeldir? (Senaryo 20)",
+    "explanation": "Mandatory Access Control (MAC), kaynakların sınıflandırma etiketlerine göre erişimi kontrol eder.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MAC; zorunlu erişim kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "DAC; isteğe bağlı erişim kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "RBAC; role dayalı",
+        "is_correct": false
+      },
+      {
+        "text": "ABAC; öznitelik bazlı",
+        "is_correct": false
+      }
+    ]
+  }
+]
