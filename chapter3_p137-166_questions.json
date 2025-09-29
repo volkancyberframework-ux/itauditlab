@@ -1,0 +1,2502 @@
+[
+  {
+    "course": 17,
+    "text": "BCP (İş Sürekliliği Planı) ile DRP (Felaket Kurtarma Planı) arasındaki temel fark aşağıdakilerden hangisidir?",
+    "explanation": "BCP, kritik iş süreçlerinin kesinti sırasında ve sonrasında kabul edilebilir seviyede devamını güvence altına alan üst şemsiye yaklaşımdır. Süreç, insanlar, tesisler ve teknoloji boyutlarını kapsar. DRP ise BCP’nin bir alt planı olup özellikle BT altyapısının (sunucular, ağ, depolama) felaket sonrası toparlanmasına odaklanır. Dolayısıyla BCP iş odaklı süreklilik vizyonunu; DRP ise teknoloji odaklı toparlamayı ele alır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "BCP yalnız BT altyapısını kapsar; DRP tüm süreçleri kapsar",
+        "is_correct": false
+      },
+      {
+        "text": "BCP finans, DRP hukuk biriminin sorumluluğundadır",
+        "is_correct": false
+      },
+      {
+        "text": "BCP iş süreçlerinin sürekliliğini; DRP BT altyapısının toparlanmasını odak alır",
+        "is_correct": true
+      },
+      {
+        "text": "Aralarında anlamlı bir fark yoktur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "RTO (Recovery Time Objective) ile RPO (Recovery Point Objective) arasındaki ilişkiyi en doğru ifade eden seçenek hangisidir?",
+    "explanation": "RTO, kritik bir hizmetin kabul edilebilir maksimum kesinti süresidir (ne kadar sürede ayağa kalkmalıyız). RPO ise kabul edilebilir maksimum veri kaybı miktarını ifade eder (ne kadar geriden geri yükleyebiliriz). Kısa RTO hızlı hizmet geri dönüşünü, kısa RPO sık yedeklemeyi/replikasyonu gerektirir. İkisi BIA çıktılarıdır ve teknoloji/iş stratejilerini belirler.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RTO veri kaybı, RPO hizmet kesinti süresidir",
+        "is_correct": false
+      },
+      {
+        "text": "RTO hizmetin toparlanma süresi; RPO kabul edilebilir veri kaybıdır",
+        "is_correct": true
+      },
+      {
+        "text": "Her ikisi de yalnızca hukuk tarafından belirlenir",
+        "is_correct": false
+      },
+      {
+        "text": "RPO sadece fiziksel felaketlerde ölçülür",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "MTD (Maximum Tolerable Downtime) kavramı aşağıdakilerden hangisini ifade eder?",
+    "explanation": "MTD, bir süreç ya da hizmetin organizasyon için tolere edilebilir maksimum kesinti süresidir. MTD aşıldığında kurumsal yaşamsallık tehlikeye girer. Genellikle MTD >= RTO’dur; RTO, MTD’yi ihlal etmeyecek şekilde belirlenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yıllık beklenen kayıp tutarı",
+        "is_correct": false
+      },
+      {
+        "text": "Kabul edilebilir maksimum veri kaybı",
+        "is_correct": false
+      },
+      {
+        "text": "Tolere edilebilir en uzun kesinti süresi",
+        "is_correct": true
+      },
+      {
+        "text": "Yedekleme döngüsü sayısı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Aşağıdakilerden hangisi BIA (İş Etki Analizi) aşamasının bir çıktısı değildir?",
+    "explanation": "BIA; kritik süreçlerin önceliklendirilmesi, bağımlılıkların haritalanması, RTO/RPO ve MTD gibi eşiklerin belirlenmesi ile gelir/itibar/uyum etkilerinin sayısallaştırılmasını üretir. Penetrasyon testi planı BIA’nın değil, güvenlik test planlamasının konusudur.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Kritik süreç envanteri ve önceliklendirme",
+        "is_correct": false
+      },
+      {
+        "text": "RTO ve RPO hedefleri",
+        "is_correct": false
+      },
+      {
+        "text": "MTD (maximum tolerable downtime)",
+        "is_correct": false
+      },
+      {
+        "text": "Penetrasyon testi planı",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Aşağıdaki alternatif işlem sahası türlerinden hangisi en hızlı devreye alınabilir?",
+    "explanation": "Hot site (sıcak site), gerekli donanım ve çoğu zaman veri replikasyonu hazır olduğu için en hızlı devreye alınabilir. Warm site kısmen hazırdır ve kısa sürede devreye girer; cold site yalnızca alan ve temel altyapı sunar, kurulum süresi uzundur.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Cold site",
+        "is_correct": false
+      },
+      {
+        "text": "Warm site",
+        "is_correct": false
+      },
+      {
+        "text": "Hot site",
+        "is_correct": true
+      },
+      {
+        "text": "Mobile site",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Yedekleme stratejilerinde GFS (Grandfather–Father–Son) neyi ifade eder?",
+    "explanation": "GFS, yedeklerin döngüsel tutulduğu bir şemadır: günlük (son), haftalık (baba) ve aylık (dede) yedekler belirli bir rotasyonla saklanır. Amaç hem kısa dönem hızlı geri dönüşü hem de uzun dönem saklama gereksinimlerini dengelemektir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yalnızca diferansiyel yedeklerin tutulması",
+        "is_correct": false
+      },
+      {
+        "text": "Günlük/haftalık/aylık rotasyon şeması",
+        "is_correct": true
+      },
+      {
+        "text": "MTD hesaplama yöntemi",
+        "is_correct": false
+      },
+      {
+        "text": "Replikasyonun şifreleme standardı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BCP test türlerinden hangisi en düşük operasyonel risk taşır?",
+    "explanation": "Tabletop (masaüstü) egzersizler senaryo üzerinden rol ve adımların konuşulduğu, sistemlere dokunulmayan testlerdir; bu nedenle operasyonel riski en düşüktür. Parallel (simülasyon) testleri daha risklidir; full-interruption (tam kesinti) en riskli olandır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Full-interruption testi",
+        "is_correct": false
+      },
+      {
+        "text": "Parallel/simülasyon testi",
+        "is_correct": false
+      },
+      {
+        "text": "Tabletop egzersiz",
+        "is_correct": true
+      },
+      {
+        "text": "Canlı üretim üzerinde kesme testi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Fault tolerance ile high availability arasındaki ilişkiyi en iyi açıklayan seçenek hangisidir?",
+    "explanation": "High availability (HA), hizmet kesintisini minimize etmek için bileşen yedekliliği ve hızlı yeniden başlatma tekniklerini kullanır. Fault tolerance ise bileşen hatası olduğunda bile hizmeti kesmeden çalışmaya devam etme yeteneğidir (örn. çift güç kaynağı, RAID, N+1). Fault tolerance, HA hedeflerine ulaşmanın bir yoludur.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "HA yalnız güvenliği artırır, çalışabilirliği etkilemez",
+        "is_correct": false
+      },
+      {
+        "text": "Fault tolerance, HA hedeflerini destekleyen teknik bir yaklaşımdır",
+        "is_correct": true
+      },
+      {
+        "text": "İkisi tamamen ilgisizdir",
+        "is_correct": false
+      },
+      {
+        "text": "HA sadece felaketlerde çalışır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BCP’de kriz iletişim planı neden kritik kabul edilir?",
+    "explanation": "Kriz iletişimi; iç/dış paydaşlara kimin, neyi, ne zaman, hangi kanaldan söyleyeceğini belirler. Yanlış/gecikmiş iletişim itibar kaybını büyütür, regülasyon bildirim sürelerinin kaçırılmasına ve güven erozyonuna neden olabilir. Önceden onaylı şablonlar ve sözcüler belirlenmelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yalnız BT ekiplerinin moralini yükseltir",
+        "is_correct": false
+      },
+      {
+        "text": "Hukuki ve itibari riskleri yönetmek için net bir çerçeve sağlar",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece çağrı merkezi kapasitesini artırır",
+        "is_correct": false
+      },
+      {
+        "text": "Teknik kurtarma adımlarını ortadan kaldırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Diferansiyel yedekleme ile artımlı (incremental) yedekleme arasındaki fark nedir?",
+    "explanation": "Artımlı yedekleme, son yedekten sonra değişenleri alır ve yedek zinciri genellikle daha küçüktür; geri dönmek için tam yedek + tüm artımlılar gerekir. Diferansiyel yedekleme, son tam yedekten bu yana değişenleri alır; geri dönüş için tam yedek + tek bir diferansiyel yeterlidir, ancak diferansiyel boyut zamanla büyür.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Artımlı, son tam yedekten bu yana değişiklikleri alır; diferansiyel son yedekten sonrakileri alır",
+        "is_correct": false
+      },
+      {
+        "text": "Diferansiyel, son tam yedekten bu yana değişenleri alır; artımlı son yedekten sonrakileri alır",
+        "is_correct": true
+      },
+      {
+        "text": "Aralarında fark yoktur",
+        "is_correct": false
+      },
+      {
+        "text": "Diferansiyel yalnızca veritabanları içindir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BIA’nın (İş Etki Analizi) temel amacı aşağıdakilerden hangisidir?",
+    "explanation": "BIA kritik süreçleri, bağımlılıkları ve kesintinin iş/uyum/itibar etkisini ortaya koyar. RTO, RPO ve MTD gibi eşikler BIA çıktısıdır; teknik çözüm seçimi değil, önceliklendirme sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yasal cezaları hesaplamak",
+        "is_correct": false
+      },
+      {
+        "text": "Teknik ürün seçmek",
+        "is_correct": false
+      },
+      {
+        "text": "Kritik süreçleri ve etkiyi belirlemek",
+        "is_correct": true
+      },
+      {
+        "text": "Kod incelemesi yapmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Order of Restoration (geri yükleme sırası) neden gereklidir?",
+    "explanation": "Bağımlılıkları olan hizmetler için yanlış sırada toparlama, ek kesinti ve veri tutarsızlıklarına yol açar. Geri yükleme sırası, CMDB/BIA bağımlılık haritasına dayanmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Daha fazla log üretmek için",
+        "is_correct": false
+      },
+      {
+        "text": "Rastgele seçim için",
+        "is_correct": false
+      },
+      {
+        "text": "Bağımlılıkları gözeterek kesintiyi kısaltmak için",
+        "is_correct": true
+      },
+      {
+        "text": "Kriz iletişimini atlamak için",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Single Point of Failure (SPOF) en iyi nasıl tanımlanır?",
+    "explanation": "SPOF, arızalanması durumunda hizmeti tamamen durdurabilecek tekil bileşendir. HA mimarilerinin hedefi SPOF’ları ortadan kaldırmaktır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yedekli bileşen",
+        "is_correct": false
+      },
+      {
+        "text": "Tek bir arıza noktası",
+        "is_correct": true
+      },
+      {
+        "text": "Performans optimizasyonu",
+        "is_correct": false
+      },
+      {
+        "text": "Güvenlik duvarı kuralı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Active–Active ve Active–Passive HA desenleri arasındaki fark nedir?",
+    "explanation": "Active–Active’de yük birden çok düğüm arasında paylaşılır; failover genellikle şeffaftır. Active–Passive’de ikincil düğüm yedekte bekler; failover anında devreye girer.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Her ikisi de tüm düğümleri pasif tutar",
+        "is_correct": false
+      },
+      {
+        "text": "Active–Passive yük paylaşır",
+        "is_correct": false
+      },
+      {
+        "text": "Active–Active yükü paralel taşır",
+        "is_correct": true
+      },
+      {
+        "text": "Aralarında fark yoktur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "3-2-1 yedekleme kuralı hangi prensibi ifade eder?",
+    "explanation": "En az 3 kopya, 2 farklı ortam, 1 kopya offsite. Amaç aynı riskin tüm kopyaları etkilemesini önlemektir (hırsızlık, yangın, ransomware).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "3 kopya, 2 ortam, 1 offsite",
+        "is_correct": true
+      },
+      {
+        "text": "3 ortam, 2 kopya, 1 online",
+        "is_correct": false
+      },
+      {
+        "text": "3 kopya, 2 cloud, 1 tape",
+        "is_correct": false
+      },
+      {
+        "text": "3 offsite, 2 disk, 1 NAS",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Immutable (değiştirilemez) yedekler neden önemlidir?",
+    "explanation": "Ransomware saldırılarında saldırganlar yedekleri şifreleyebilir/silebilir. Değiştirilemez (WORM/immutable) yedekler geri dönüş güvencesini artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Daha ucuz oldukları için",
+        "is_correct": false
+      },
+      {
+        "text": "Yedekleri silmeyi kolaylaştırdığı için",
+        "is_correct": false
+      },
+      {
+        "text": "Ransomware’e karşı yedek bütünlüğünü koruduğu için",
+        "is_correct": true
+      },
+      {
+        "text": "Performansı her zaman artırdığı için",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Senkron ve asenkron replikasyon arasındaki temel fark nedir?",
+    "explanation": "Senkron replikasyonda yazma işlemi her iki tarafta onaylanır; RPO ≈ 0’a yaklaşır fakat gecikme artabilir. Asenkron düşük gecikmelidir ama RPO pozitif olabilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Senkron her zaman daha ucuzdur",
+        "is_correct": false
+      },
+      {
+        "text": "Asenkron RPO’yu sıfırlar",
+        "is_correct": false
+      },
+      {
+        "text": "Senkron RPO’yu minimize eder, gecikme artabilir",
+        "is_correct": true
+      },
+      {
+        "text": "Aralarında fark yoktur",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Backup doğrulama (restore test) neden zorunludur?",
+    "explanation": "Yedek almak kadar geri yükleyebilmek de kritiktir. Düzenli restore testleri, yedeklerin gerçekten işe yarar olduğunu kanıtlar ve kurtarma süresini ölçer.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Depolamayı doldurmak için",
+        "is_correct": false
+      },
+      {
+        "text": "Uyum raporlarını süslemek için",
+        "is_correct": false
+      },
+      {
+        "text": "Geri yüklenebilirliği ve RTO’yu doğrulamak için",
+        "is_correct": true
+      },
+      {
+        "text": "Ağ trafiğini artırmak için",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Tabletop, Simülasyon ve Full-Interruption testleri risk açısından nasıl sıralanır? (düşük→yüksek)",
+    "explanation": "Tabletop en düşük risk; Simülasyon (parallel) orta; Full-Interruption en yüksek operasyonel riske sahiptir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Simülasyon < Tabletop < Full",
+        "is_correct": false
+      },
+      {
+        "text": "Tabletop < Simülasyon < Full",
+        "is_correct": true
+      },
+      {
+        "text": "Full < Simülasyon < Tabletop",
+        "is_correct": false
+      },
+      {
+        "text": "Hepsi eşit risklidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Kriz iletişiminde ‘tek seslilik’ (single voice) neyi amaçlar?",
+    "explanation": "Resmi sözcü/mesaj çerçevesi belirlemek tutarlılığı artırır, yanlış bilgi ve itibar kaybını azaltır. Dağınık mesajlar güven erozyonu yaratır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sadece BT’nin konuşmasını",
+        "is_correct": false
+      },
+      {
+        "text": "Kimsenin konuşmamasını",
+        "is_correct": false
+      },
+      {
+        "text": "Tutarlı ve onaylı mesaj akışını",
+        "is_correct": true
+      },
+      {
+        "text": "Anonim paylaşımları",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "MBCO (Minimum Business Continuity Objective) neyi tanımlar?",
+    "explanation": "MBCO, süreçlerin kriz anında sürdürülecek asgari performans seviyesidir; BIA ile belirlenir ve kaynak tahsisini yönlendirir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yedekleme medyası",
+        "is_correct": false
+      },
+      {
+        "text": "Denetim planı",
+        "is_correct": false
+      },
+      {
+        "text": "RPO’nun teknik adı",
+        "is_correct": false
+      },
+      {
+        "text": "Kesinti sırasında kabul edilebilir minimum hizmet/çıktı seviyesi",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "MAO (Maximum Acceptable Outage) hangi kavramla en çok örtüşür?",
+    "explanation": "MAO/MTD, bir sürecin tolere edebileceği en uzun kesinti süresidir; aşıldığında varlığın yaşamsallığı tehlikeye girer.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MTD (Maximum Tolerable Downtime)",
+        "is_correct": true
+      },
+      {
+        "text": "EF",
+        "is_correct": false
+      },
+      {
+        "text": "RPO",
+        "is_correct": false
+      },
+      {
+        "text": "SLE",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Runbook ile Playbook arasındaki farkı en iyi anlatan ifade hangisidir?",
+    "explanation": "Runbook teknik operasyon adımlarını ayrıntılar; playbook ‘eğer/ise’ senaryo karar ağacıdır (IR/BCP’de birlikte kullanılır).",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Playbook yalnız ağ ekiplerine özgüdür",
+        "is_correct": false
+      },
+      {
+        "text": "Runbook sistem/işlem adımlarını; playbook senaryoya göre karar akışını tarif eder",
+        "is_correct": true
+      },
+      {
+        "text": "Runbook sadece iletişimi kapsar",
+        "is_correct": false
+      },
+      {
+        "text": "İkisi de yalnız kod içerir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "DNS failover neden kritik bir DR tekniğidir?",
+    "explanation": "Sağlık kontrolleriyle (health-check) bağlantılı DNS failover, bölgesel veya veri merkezi kesintilerinde hizmet sürekliliğini hızla sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sunucuya RAM ekler",
+        "is_correct": false
+      },
+      {
+        "text": "TLS sürümünü yükseltir",
+        "is_correct": false
+      },
+      {
+        "text": "Logları sıkıştırır",
+        "is_correct": false
+      },
+      {
+        "text": "Trafiği alternatif lokasyona yönlendirmeyi otomatikleştirir",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Çeşitli taşıyıcılarla hat çeşitlendirme (carrier diversity) neyi azaltır?",
+    "explanation": "Fiziksel ve idari bağımsız bağlantılar, ortak güzergâh arızalarında aynı anda kesinti yaşanmasını engeller.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Uygulama hatalarını",
+        "is_correct": false
+      },
+      {
+        "text": "Kullanıcı eğitim ihtiyacını",
+        "is_correct": false
+      },
+      {
+        "text": "Depolama maliyetini",
+        "is_correct": false
+      },
+      {
+        "text": "Aynı altyapıdaki ortak arıza nedeniyle oluşan bağlantı kesintisi riskini",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "UPS + Jeneratör ikilisinin amacı nedir?",
+    "explanation": "UPS milisaniyeler içinde devreye girer; jeneratör uzun süreli kesintilerde yükü alır. Birlikte MTD/RTO hedeflerine katkı sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sadece enerji maliyetini düşürmek",
+        "is_correct": false
+      },
+      {
+        "text": "Veritabanı replikasyonu yapmak",
+        "is_correct": false
+      },
+      {
+        "text": "Ağ performansını artırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Kısa ve uzun süreli enerji kesintilerine karşı kesintisiz güç sağlamak",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Yakıt tedarik sözleşmeleri BCP kapsamında neden önemlidir?",
+    "explanation": "Krizde yakıt bulunamaması BCP’yi boşa çıkarır; önceden yapılmış kontratlar süreklilik için kritiktir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Jeneratörlerin uzun süre çalışabilmesi için süreklilik ve SLA sağlar",
+        "is_correct": true
+      },
+      {
+        "text": "RPO’yu sıfırlar",
+        "is_correct": false
+      },
+      {
+        "text": "DNS kayıtlarını günceller",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm riskleri sigortaya devreder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "İş gücü sürekliliği için ‘yedek rol’ (backup role) planlaması neyi hedefler?",
+    "explanation": "Tek kişiye bağımlılık (key person risk) süreklilik riski doğurur; çapraz eğitim ve yedek atamalar gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Kritik kişilere bağımlılığı azaltmak",
+        "is_correct": true
+      },
+      {
+        "text": "CMDB’yi silmek",
+        "is_correct": false
+      },
+      {
+        "text": "Denetimleri durdurmak",
+        "is_correct": false
+      },
+      {
+        "text": "Eğitimi kaldırmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Alternatif tedarikçi (dual sourcing) hangi riski azaltır?",
+    "explanation": "Kritik girdiler için birden fazla tedarikçi, arz kesintisi ve pazarlık gücü risklerini düşürür.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Tek tedarikçiye bağımlılık nedeniyle oluşabilecek kesinti",
+        "is_correct": true
+      },
+      {
+        "text": "Şifre karma zorluğunu",
+        "is_correct": false
+      },
+      {
+        "text": "Siber sigorta primini",
+        "is_correct": false
+      },
+      {
+        "text": "Kod kalitesini",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Sözleşmelerde ‘force majeure’ maddeleri BCP ile nasıl ilişkilidir?",
+    "explanation": "BCP ile hizalı hukuki çerçeve, tarafların kriz anındaki yükümlülüklerini ve istisnalarını düzenler.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Pen-test kapsamını belirler",
+        "is_correct": false
+      },
+      {
+        "text": "Şifre politikasını tanımlar",
+        "is_correct": false
+      },
+      {
+        "text": "Doğal afet/pandemi gibi olağanüstü durumlarda yükümlülükleri ve sorumlulukları netler",
+        "is_correct": true
+      },
+      {
+        "text": "RPO’yu teknik olarak uygular",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Pandemi planları neden klasik DR planlarından farklıdır?",
+    "explanation": "Pandemi uzun süreli ve yaygın etkiler doğurur; uzaktan çalışma, vardiya, personel sağlığı ve lojistik tedbirleri gerektirir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sadece depremi kapsar",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece veri merkezini kapsar",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece ağ cihazlarını kapsar",
+        "is_correct": false
+      },
+      {
+        "text": "Tesis değil iş gücü ve tedarik devamlılığı ön plandadır",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Call tree yerine acil bildirim platformları (mass notification) kullanmanın avantajı nedir?",
+    "explanation": "Çağrı zincirleri gecikebilir; modern platformlar çok kanallı uyarı, teslimat takibi ve geri bildirim toplama sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Daha uzun bildirim süresi",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece e-posta ile çalışır",
+        "is_correct": false
+      },
+      {
+        "text": "Maliyetleri her durumda artırır",
+        "is_correct": false
+      },
+      {
+        "text": "Eşzamanlı, kanıtlanabilir ve çok kanallı bildirim",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "CMT (Crisis Management Team) ile IR (Incident Response) ekibi arasındaki fark nedir?",
+    "explanation": "Kriz yönetimi üst düzey koordinasyon ve iletişime odaklanırken, IR teknik analizi ve toparlamayı yürütür; birlikte çalışırlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CMT iş/itibar/iletişimi yönetir; IR teknik olay müdahalesini yürütür",
+        "is_correct": true
+      },
+      {
+        "text": "CMT sadece yedekleme yapar",
+        "is_correct": false
+      },
+      {
+        "text": "IR sadece finansla ilgilenir",
+        "is_correct": false
+      },
+      {
+        "text": "İkisi de yalnız hukuk departmanıdır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "COOP (Continuity of Operations Plan) hangi odağa sahiptir?",
+    "explanation": "COOP, özellikle kamu ve kritik altyapılarda temel görevlerin kesintisiz sürdürülmesini hedefler.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sadece denetim planı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece ağ anahtarlama",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazılım testi",
+        "is_correct": false
+      },
+      {
+        "text": "Temel kamu/hayati operasyonların sürekliliği",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Hangi metrik doğrudan veri kaybı toleransını ölçer?",
+    "explanation": "RPO kabul edilebilir maksimum veri kaybıdır; yedekleme sıklığı ve replikasyon topolojisiyle ilişkilidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "MBCO",
+        "is_correct": false
+      },
+      {
+        "text": "RTO",
+        "is_correct": false
+      },
+      {
+        "text": "MTD",
+        "is_correct": false
+      },
+      {
+        "text": "RPO",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Hangi metrik doğrudan hizmetin ne kadar sürede ayağa kalkması gerektiğini ölçer?",
+    "explanation": "RTO toparlanma süresi hedefidir; teknoloji seçimleri ve süreç organizasyonu bu metriğe göre yapılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "SLE",
+        "is_correct": false
+      },
+      {
+        "text": "RPO",
+        "is_correct": false
+      },
+      {
+        "text": "RTO",
+        "is_correct": true
+      },
+      {
+        "text": "EF",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "EF (Exposure Factor) hangi hesapta kullanılır?",
+    "explanation": "EF, varlık değerinin olay başına yüzde kaybını gösterir; SLE hesaplanır ve nicel analizde ALE’ye yol açar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RTO hesaplaması",
+        "is_correct": false
+      },
+      {
+        "text": "RPO hesaplaması",
+        "is_correct": false
+      },
+      {
+        "text": "SLE = AV × EF",
+        "is_correct": true
+      },
+      {
+        "text": "ALE = SLE × ARO",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Sıcak sahaya (hot site) en iyi örnek aşağıdakilerden hangisidir?",
+    "explanation": "Hot site yüksek maliyet ama düşük RTO sunar; özellikle 7/24 kritik hizmetler için uygundur.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Neredeyse anında devralabilecek, veri replikasyonu güncel tutulan site",
+        "is_correct": true
+      },
+      {
+        "text": "Kısmen hazır ekipmanlı alan",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece boş alanı olan depo",
+        "is_correct": false
+      },
+      {
+        "text": "Mobil jeneratör kamyonu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Warm site’ın tipik özelliği hangisidir?",
+    "explanation": "Warm site, hot’a göre ucuz; cold’a göre hızlı toparlama dengesini sağlar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sadece bina ve güç var",
+        "is_correct": false
+      },
+      {
+        "text": "Çoğu sistem/konfigürasyon hazır; kısa sürede devreye alınabilir",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnız ofis oturma planı var",
+        "is_correct": false
+      },
+      {
+        "text": "Tamamen hazır ve canlı yedek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Cold site için en doğru ifade hangisidir?",
+    "explanation": "Cold site seçeneklerin en ucuzu fakat toparlama süresi uzundur; ekipman ve veri taşınması gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Veri her zaman günceldir",
+        "is_correct": false
+      },
+      {
+        "text": "Anında devralır",
+        "is_correct": false
+      },
+      {
+        "text": "Tam otomatik failover vardır",
+        "is_correct": false
+      },
+      {
+        "text": "Altyapı alanı hazırdır ancak sistem kurulumu gerektirir; RTO yüksektir",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Süreklilik planlarında veri sınıflandırma neden önemlidir?",
+    "explanation": "Kritik verinin yedekleme sıklığı, şifreleme ve saklama stratejileri sınıflandırma ile belirlenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yedekleri şifrelememek için",
+        "is_correct": false
+      },
+      {
+        "text": "Denetimleri iptal etmek için",
+        "is_correct": false
+      },
+      {
+        "text": "Logları azaltmak için",
+        "is_correct": false
+      },
+      {
+        "text": "Kaynakları en kritik veriye yönlendirmek için",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Air-gapped kopyalar hangi riske karşı özellikle etkilidir?",
+    "explanation": "Ağdan izole, çevrimdışı kopyalar kötü niyetli yayılmayı engeller; düzenli test ve rotasyon gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DNS kaçırma",
+        "is_correct": false
+      },
+      {
+        "text": "Ransomware’in yedeklere bulaşması",
+        "is_correct": true
+      },
+      {
+        "text": "Kötü şifre politikası",
+        "is_correct": false
+      },
+      {
+        "text": "Disk arızası",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Synthetic full backup nedir?",
+    "explanation": "Ağ trafiğini azaltırken periyodik tam yedek avantajı sunar; geri dönüş hızını iyileştirebilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sadece veritabanı anlık görüntüsü",
+        "is_correct": false
+      },
+      {
+        "text": "Değişmez (immutable) medya",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece bulutta çalışan replikasyon",
+        "is_correct": false
+      },
+      {
+        "text": "Artımlı/diferansiyel yedeklerden depoda yeniden birleştirilmiş tam yedek",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "DR runbook’larında ‘en az ayrıcalık’ prensibi neden vurgulanır?",
+    "explanation": "Kriz anında acele yetki genişletmeleri kalıcı risk doğurabilir; geçici, denetlenebilir yetkiler kullanılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Ekiplerin sayısını azaltmak için",
+        "is_correct": false
+      },
+      {
+        "text": "Uyum raporunu kısaltmak için",
+        "is_correct": false
+      },
+      {
+        "text": "Kurtarma sırasında gereksiz geniş yetkilerin kötüye kullanımını önlemek için",
+        "is_correct": true
+      },
+      {
+        "text": "Maliyet hesabı için",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Cihaz yapılandırmalarının düzenli yedeklenmesi süreklilikte neden önemlidir?",
+    "explanation": "Network/firewall/uygulama konfigürasyonlarının yedeği, hızlı restore ve uyumluluk için elzemdir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Kullanıcı eğitim ihtiyacını kaldırır",
+        "is_correct": false
+      },
+      {
+        "text": "Lisans maliyetini sıfırlar",
+        "is_correct": false
+      },
+      {
+        "text": "İz kayıtlarını siler",
+        "is_correct": false
+      },
+      {
+        "text": "Hızlı yeniden kurulum ve tutarlı güvenlik politikası sağlamak için",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Çapraz bölge (multi-region) mimarisi hangi risklere dayanıklılığı artırır?",
+    "explanation": "Bağımsız arıza alanları arasında dağıtım, coğrafi felaketlere karşı sürekliliği güçlendirir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Kullanıcı hatası",
+        "is_correct": false
+      },
+      {
+        "text": "Uygulama hatası",
+        "is_correct": false
+      },
+      {
+        "text": "Sosyal mühendislik",
+        "is_correct": false
+      },
+      {
+        "text": "Bölgesel afet ve veri merkezi genel kesintileri",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "RTO hedefi gerçekçi belirlenmezse en olası sonuç nedir?",
+    "explanation": "RTO iş hedefiyle ve bütçeyle dengelenmelidir; aksi halde ya aşırı maliyet ya da başarısız toparlama yaşanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RPO otomatik sıfır olur",
+        "is_correct": false
+      },
+      {
+        "text": "Denetimler durur",
+        "is_correct": false
+      },
+      {
+        "text": "Eğitim ihtiyacı biter",
+        "is_correct": false
+      },
+      {
+        "text": "Maliyet ve mimari gereksinimler planlanandan çok daha yüksek çıkar veya hedef tutturulamaz",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Kriz sonrası ‘lessons learned’ oturumlarının amacı nedir?",
+    "explanation": "Sürekli iyileştirme (PDCA) kültürünün bir parçasıdır; plan ve runbook’lar güncellenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yedekleri silmek",
+        "is_correct": false
+      },
+      {
+        "text": "Suçlu aramak",
+        "is_correct": false
+      },
+      {
+        "text": "CMDB’yi kapatmak",
+        "is_correct": false
+      },
+      {
+        "text": "Süreci iyileştirmek için kök neden ve iyileştirme aksiyonlarını kayda almak",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Emergency change (acil değişiklik) süreci neden ayrı tanımlanır?",
+    "explanation": "CAB onayı hızlandırılır, risk değerlendirmesi kısaltılmış şablonla yapılır; iz kayıtları ve geri dönüş planı şarttır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Kriz anında hızlı ama kontrollü değişiklik yapılabilsin diye",
+        "is_correct": true
+      },
+      {
+        "text": "Değişiklikleri gizlemek için",
+        "is_correct": false
+      },
+      {
+        "text": "Yetkisizlere açık kapı için",
+        "is_correct": false
+      },
+      {
+        "text": "Denetimi atlamak için",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Kurtarma önceliklendirmesinde önce hangi bileşen odaklı yaklaşım doğrudur?",
+    "explanation": "Bağımlılıklar gereği temel servisler (DNS, AD, ağ) olmadan üst katmanlar çalışamaz.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Uçlar → uygulama → veri → altyapı",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece kullanıcı cihazları",
+        "is_correct": false
+      },
+      {
+        "text": "Altyapı temel servisleri → veri katmanı → uygulama katmanı → uçlar",
+        "is_correct": true
+      },
+      {
+        "text": "Önemsiz sistemler önce",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BIA sırasında bağımlılık eşlemesi (dependency mapping) neden yapılır?",
+    "explanation": "Doğru toparlama sırası ve kritik yol belirleme bağımlılık haritasına dayanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yedekleri şifrelememek için",
+        "is_correct": false
+      },
+      {
+        "text": "Hangi sistemlerin hangi diğerlerine bağlı olduğunu görmek için",
+        "is_correct": true
+      },
+      {
+        "text": "Güvenlik duvarını kapatmak için",
+        "is_correct": false
+      },
+      {
+        "text": "Denetimi atlamak için",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Test sıklığı nasıl belirlenmelidir?",
+    "explanation": "Dinamik risk ortamında sabit periyotlar yetersiz olabilir; risk iştahına göre planlanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Kritiklik, regülasyon ve değişim hızına göre risk temelli",
+        "is_correct": true
+      },
+      {
+        "text": "Asla test etmemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yılda bir sabit",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece üretime çıktıktan sonra",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Kriz iletişiminde paydaş analizi ne sağlar?",
+    "explanation": "Müşteri, regülatör, medya, tedarikçi gibi gruplara göre mesajı ve kanalı uyarlamak gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Doğru mesajın doğru zamanda doğru kanalla iletilmesini",
+        "is_correct": true
+      },
+      {
+        "text": "Şifre politikasının uzamasını",
+        "is_correct": false
+      },
+      {
+        "text": "RPO’nun düşmesini",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece teknik logların toplanmasını",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "SLA’lerde ‘kurtarma hedefleri’ni belirtmek neden önemlidir?",
+    "explanation": "RTO/RPO hedefleri sözleşmesel hale gelince izleme ve yaptırım mümkün olur.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yedeklemeyi gereksiz kılmak için",
+        "is_correct": false
+      },
+      {
+        "text": "Uygulamayı daha hızlı yapmak için",
+        "is_correct": false
+      },
+      {
+        "text": "Denetimi iptal etmek için",
+        "is_correct": false
+      },
+      {
+        "text": "Beklentilerin netleşmesi ve sözleşmeye dayalı hesap verilebilirlik için",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Çok bulut (multi-cloud) stratejisinin DR’ye katkısı nedir?",
+    "explanation": "Taşıyıcı bağımsızlığı ve farklı arıza alanlarıyla süreklilik artar; maliyet/karmaşıklık dengelenmelidir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Maliyetleri her zaman düşürür",
+        "is_correct": false
+      },
+      {
+        "text": "Sağlayıcı bağımlılığı ve bölgesel kesinti riskini azaltır",
+        "is_correct": true
+      },
+      {
+        "text": "Eğitimi gereksiz kılar",
+        "is_correct": false
+      },
+      {
+        "text": "Uygulama hatalarını yok eder",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Backup şifrelemesi neden zorunludur?",
+    "explanation": "Yedekler de üretim verisi kadar hassastır; anahtar yönetimi planlanmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yedek medyanın çalınması veya yetkisiz erişimine karşı gizliliği korumak için",
+        "is_correct": true
+      },
+      {
+        "text": "Yedeklemeyi hızlandırmak için",
+        "is_correct": false
+      },
+      {
+        "text": "RPO’yu yükseltmek için",
+        "is_correct": false
+      },
+      {
+        "text": "Logları azaltmak için",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Offsite yedekler için en iyi uygulama hangisidir?",
+    "explanation": "Yerel afetlerde aynı konumdaki kopyalar işe yaramaz; erişim ve şifreleme şarttır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Şifrelemeden buluta atmak",
+        "is_correct": false
+      },
+      {
+        "text": "Coğrafi olarak ayrık ve erişim kontrollü bir konumda saklamak",
+        "is_correct": true
+      },
+      {
+        "text": "Sosyal medya hesabında paylaşmak",
+        "is_correct": false
+      },
+      {
+        "text": "Aynı odada tutmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "N+1 kapasite planlaması neyi garanti eder?",
+    "explanation": "Yedekli bir ünite (N+1) arıza toleransı sağlar; büyük ortamlarda N+2, 2N de görülebilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Her zaman sınırsız ölçekleme",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece maliyet düşüşü",
+        "is_correct": false
+      },
+      {
+        "text": "Bir bileşen arızalansa bile hizmetin sürmesi",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece enerji tasarrufu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "RTO hedefi 30 dakika olan bir sistemde hangi çözüm daha olasıdır?",
+    "explanation": "Kısa RTO sıkı mimari gerektirir; manuel restore genelde hedefi kaçırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Haftalık tape yedekleriyle manuel restore",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece cold site",
+        "is_correct": false
+      },
+      {
+        "text": "Aylık diferansiyeller",
+        "is_correct": false
+      },
+      {
+        "text": "Hot/warm site ve otomatik failover",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "RPO hedefi 0 olan bir veritabanı için hangi replikasyon uygundur?",
+    "explanation": "Senkron yazımlarda veri kaybı toleransı minimumdur; gecikme ve maliyet artar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Haftalık incremental",
+        "is_correct": false
+      },
+      {
+        "text": "Senkron replikasyon",
+        "is_correct": true
+      },
+      {
+        "text": "Asenkron replikasyon",
+        "is_correct": false
+      },
+      {
+        "text": "Günlük tam yedek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BCP’de ‘stratejik alternatif iş süreçleri’ ne işe yarar?",
+    "explanation": "Manuel süreçler veya alternatif akışlar, teknoloji toparlanana kadar MBCO’yu sağlayabilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Şifre politikasını gevşetmek",
+        "is_correct": false
+      },
+      {
+        "text": "Denetimi atlamak",
+        "is_correct": false
+      },
+      {
+        "text": "Yedeklemeyi iptal etmek",
+        "is_correct": false
+      },
+      {
+        "text": "Teknoloji yokken bile kritik iş çıktısını asgari düzeyde sürdürmek",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "İşlevsel toparlama testlerinde başarı ölçütü ne olmalıdır?",
+    "explanation": "Zamana ve veri bütünlüğüne ilişkin hedefler sağlanmalı; kullanıcı kabul testleri yapılmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Katılımcı sayısı",
+        "is_correct": false
+      },
+      {
+        "text": "RTO/RPO hedeflerine uyum ve çıktının doğruluğu",
+        "is_correct": true
+      },
+      {
+        "text": "Ekran görüntüsü sayısı",
+        "is_correct": false
+      },
+      {
+        "text": "Toplam log boyutu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Kriz sonrası regülasyon bildirimi pencereleri neden kritik?",
+    "explanation": "Bazı düzenlemeler belirli saat/gün içinde bildirim ister; iletişim playbook’unda yer almalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yedekleri hızlandırmak için",
+        "is_correct": false
+      },
+      {
+        "text": "Yasal ceza ve itibar kaybını azaltmak için süreye uyulmalı",
+        "is_correct": true
+      },
+      {
+        "text": "Denetimi kapatmak için",
+        "is_correct": false
+      },
+      {
+        "text": "Logları silmek için",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Üretim ve DR ortamı arasında ‘konfigürasyon sürüklenmesi’ neden tehlikelidir?",
+    "explanation": "Konfigürasyonların versiyonlanması ve düzenli eşitleme gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Maliyeti sıfırlar",
+        "is_correct": false
+      },
+      {
+        "text": "RPO’yu otomatik sıfırlar",
+        "is_correct": false
+      },
+      {
+        "text": "Failover anında beklenmeyen davranış ve başarısız toparlamaya yol açar",
+        "is_correct": true
+      },
+      {
+        "text": "Eğitimi gereksiz kılar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Kurtarma tatbikatlarında ‘zaman kutulaması’ (time-box) ne sağlar?",
+    "explanation": "Gerçek hayattaki stres ve zaman sınırlaması simüle edilir; darboğazlar ortaya çıkar.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Daha az belge üretmek",
+        "is_correct": false
+      },
+      {
+        "text": "Gerçekçi RTO baskısı altında işlemeyi denemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sınırsız deneme hakkı",
+        "is_correct": false
+      },
+      {
+        "text": "Denetimi iptal etmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BCP sponsorluğu en uygun kimdedir?",
+    "explanation": "Kurumsal öncelik ve bütçe gerektirir; üst düzey sahiplik şarttır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Üst yönetim/iş birimi liderliği",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece helpdesk",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece ağ yöneticisi",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece geliştirici",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Süreklilik risk değerlendirmesinde ‘lokasyon bağımlılığı’ neden analiz edilir?",
+    "explanation": "Coğrafi yakınlık, aynı anda çoklu hizmet kaybına yol açabilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "SSH anahtarlarını dağıtmak için",
+        "is_correct": false
+      },
+      {
+        "text": "Ekran çözünürlüğü ayarı için",
+        "is_correct": false
+      },
+      {
+        "text": "Aynı bölgede toplanmış varlıkların ortak afet riskini görmek için",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece lisans sayısını bulmak için",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Kritik tedarikçiler için ‘denetim hakkı’ maddesi neyi kolaylaştırır?",
+    "explanation": "Sözleşmesel güvence olmadan güvenlik beklentileri uygulanamaz kalabilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Kontrollerin doğrulanması ve düzeltici eylemlerin takibi",
+        "is_correct": true
+      },
+      {
+        "text": "Jeneratör kurulumunu",
+        "is_correct": false
+      },
+      {
+        "text": "RPO’nun otomatik düşmesi",
+        "is_correct": false
+      },
+      {
+        "text": "DNS yönetimini",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "DR planlarında ‘kişisel güvenlik’ (personnel safety) neden ilk önceliktir?",
+    "explanation": "Tahliye, toplanma alanları ve iletişim güvenliği en başta yer alır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "CPU kullanımını düşürmek için",
+        "is_correct": false
+      },
+      {
+        "text": "İnsan güvenliği olmadan operasyonel toparlama ikincildir",
+        "is_correct": true
+      },
+      {
+        "text": "Yedekleri artırmak için",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece finans hedefleri için",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Kurtarma veri bütünlüğünü doğrulamak için hangi adım şarttır?",
+    "explanation": "Veri doğru dönmezse hizmet ‘çalışıyor’ sayılamaz; bütünlük ve fonksiyon testleri gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sadece CPU’ya bakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Checksum/hash ve işlevsel doğrulama testleri",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece uptime ölçmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece ping atmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Failback neden planlanmalıdır?",
+    "explanation": "Failover kadar failback adımları, veri eşitleme ve kesinti planı net olmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Geçici DR ortamından üretime güvenli geri dönüş için",
+        "is_correct": true
+      },
+      {
+        "text": "RPO’yu artırmak için",
+        "is_correct": false
+      },
+      {
+        "text": "DNS’yi iptal etmek için",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece testleri uzatmak için",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Çok katmanlı uygulamalarda hangi katman genellikle önce ayağa kaldırılmalıdır?",
+    "explanation": "Uygulama katmanları veri ve servis bağımlıdır; sıralama bunu yansıtmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "UI bileşenleri",
+        "is_correct": false
+      },
+      {
+        "text": "Veritabanı ve temel servisler",
+        "is_correct": true
+      },
+      {
+        "text": "Masaüstü kısayolları",
+        "is_correct": false
+      },
+      {
+        "text": "İstemci uygulamaları",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Kriz iletişiminde ‘dark site’ (önceden hazırlanmış kriz sayfası) ne sağlar?",
+    "explanation": "Hazır şablon ve içerikler hız ve tutarlılık sağlar; etkinleştirme koşulları önceden tanımlanır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DNS bozulması",
+        "is_correct": false
+      },
+      {
+        "text": "Yoğun trafik ve bilgi ihtiyacında hızlı, onaylı bilgilendirme",
+        "is_correct": true
+      },
+      {
+        "text": "SEO cezası",
+        "is_correct": false
+      },
+      {
+        "text": "Yedekleme süresinin düşmesi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Süreklilik metrik panolarında en faydalı gösterge seti hangisidir?",
+    "explanation": "Karar verici odaklı, ölçülebilir ve trendlenebilir metrikler gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Toplam e-posta sayısı",
+        "is_correct": false
+      },
+      {
+        "text": "Sunum slayt sayısı",
+        "is_correct": false
+      },
+      {
+        "text": "RTO/RPO uyumu, test başarısı, açık aksiyonlar, yedek doğrulama oranı",
+        "is_correct": true
+      },
+      {
+        "text": "Kahve tüketimi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "RTO hedefi gereğinden gevşek belirlenirse ne olabilir?",
+    "explanation": "Gerçek iş ihtiyacının altında hedefler müşteri ve uyum riskini artırır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "İtibar hep artar",
+        "is_correct": false
+      },
+      {
+        "text": "Gereksizce yüksek kesinti riski ve müşteri memnuniyetsizliği",
+        "is_correct": true
+      },
+      {
+        "text": "RPO otomatik sıfır olur",
+        "is_correct": false
+      },
+      {
+        "text": "Maliyet her durumda artar",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BCP doküman kontrolü neden önemlidir?",
+    "explanation": "Numaralandırma, versiyon ve dağıtım listeleri kriz anında yanlış yönerge riskini azaltır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Sayfa sayısını artırmak için",
+        "is_correct": false
+      },
+      {
+        "text": "Son versiyonun sahada olduğundan emin olmak için",
+        "is_correct": true
+      },
+      {
+        "text": "Erişimi engellemek için",
+        "is_correct": false
+      },
+      {
+        "text": "Logları silmek için",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Çalışan temas bilgileri güncel değilse en olası sonuç nedir?",
+    "explanation": "Çağrı ağacının çalışması güncel veriyle mümkündür; düzenli doğrulama gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "DNS hızlanır",
+        "is_correct": false
+      },
+      {
+        "text": "Yedek boyutu artar",
+        "is_correct": false
+      },
+      {
+        "text": "RPO düşer",
+        "is_correct": false
+      },
+      {
+        "text": "Acil durumda bildirim başarısız olur",
+        "is_correct": true
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "DR sözleşmelerinde ‘test etme hakkı’ maddesi neden gereklidir?",
+    "explanation": "Test izni olmadan kâğıt üzerindeki taahhütler pratikte çalışmayabilir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Gerçek felaket beklenmeden kabiliyetin kanıtlanması için",
+        "is_correct": true
+      },
+      {
+        "text": "Eğitimi kaldırmak için",
+        "is_correct": false
+      },
+      {
+        "text": "Logları azaltmak için",
+        "is_correct": false
+      },
+      {
+        "text": "Maliyet raporu gizlemek için",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Uygulama lisanslarının DR ortamında çalışmaması hangi planlama eksiğini gösterir?",
+    "explanation": "Lisans koşulları, node sayısı ve taşınabilirlik önceden doğrulanmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "UPS kapasitesinin düşük olması",
+        "is_correct": false
+      },
+      {
+        "text": "Ağ VLAN sayısı",
+        "is_correct": false
+      },
+      {
+        "text": "Lisans/aktivasyon gereksinimlerinin BCP kapsamına alınmaması",
+        "is_correct": true
+      },
+      {
+        "text": "DNS TTL’lerinin uzun olması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Kurtarma merkezindeki kullanıcı erişimleri nasıl yönetilmelidir?",
+    "explanation": "Krizde geniş yetki verilebilir; kayıt, onay ve süre sınırlaması şarttır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Hiç izin vermeyerek",
+        "is_correct": false
+      },
+      {
+        "text": "Paylaşımlı hesaplarla",
+        "is_correct": false
+      },
+      {
+        "text": "Geçici fakat denetlenebilir ve en az ayrıcalıklı izinlerle",
+        "is_correct": true
+      },
+      {
+        "text": "Kalıcı tam yetki vererek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Kılavuz dökümanlarda görsel akış diyagramları neden faydalıdır?",
+    "explanation": "Akışlar karmaşayı azaltır; rol bazlı bölümlerle desteklenir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Uyumu düşürür",
+        "is_correct": false
+      },
+      {
+        "text": "Eğitimi gereksiz kılar",
+        "is_correct": false
+      },
+      {
+        "text": "Zaman baskısında hızlı karar ve adım takibi sağlar",
+        "is_correct": true
+      },
+      {
+        "text": "Sayfa sayısını artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Yedeklerin coğrafi yakınlığı hangi riski artırır?",
+    "explanation": "Ayrık arıza alanlarına dağıtım gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Aynı afetin tüm kopyaları etkilemesi",
+        "is_correct": true
+      },
+      {
+        "text": "Performansın her zaman artması",
+        "is_correct": false
+      },
+      {
+        "text": "RPO’nun sıfır olması",
+        "is_correct": false
+      },
+      {
+        "text": "Lisans uyumu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "RPO 4 saat ise minimum yedekleme sıklığı ne olmalıdır?",
+    "explanation": "RPO, kopyalar arası maksimum boşluğu sınırlar; plan buna göre yapılır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Günde bir",
+        "is_correct": false
+      },
+      {
+        "text": "Haftada bir",
+        "is_correct": false
+      },
+      {
+        "text": "4 saatten daha sık",
+        "is_correct": true
+      },
+      {
+        "text": "Ayda bir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Kritik süreçlerde manuel alternatif prosedürlerin belgelendirilmesi ne sağlar?",
+    "explanation": "İş akış kartları ve formlar önceden hazırlanmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Uyum cezasını artırır",
+        "is_correct": false
+      },
+      {
+        "text": "RTO’yu sonsuz yapar",
+        "is_correct": false
+      },
+      {
+        "text": "Teknoloji yokken bile MBCO’yu tutturma şansı",
+        "is_correct": true
+      },
+      {
+        "text": "Maliyetleri her zaman artırır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Paylaşımlı hesap kullanımı DR’de neden risklidir?",
+    "explanation": "Bireysel izleme ve geri alma için kişisel hesap + kırmızı ekip erişimleri loglanmalıdır.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Performansı artırır",
+        "is_correct": false
+      },
+      {
+        "text": "Sorumluluk izinin kaybolmasına neden olur",
+        "is_correct": true
+      },
+      {
+        "text": "Maliyetleri sıfırlar",
+        "is_correct": false
+      },
+      {
+        "text": "RPO’yu düşürür",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "Kurtarma sırasında değişiklik kayıtlarının (change log) tutulmaması neye yol açar?",
+    "explanation": "Krizde de izlenebilirlik zorunludur; denetim izi gerekir.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "Yedek boyutunun düşmesine",
+        "is_correct": false
+      },
+      {
+        "text": "RPO’nun sıfırlanmasına",
+        "is_correct": false
+      },
+      {
+        "text": "Sonradan hataların izini sürmeyi ve failback’i zorlaştırır",
+        "is_correct": true
+      },
+      {
+        "text": "DNS hızının artmasına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BCP kavram kontrolü #1: RTO ve RPO farkı nedir?",
+    "explanation": "RTO toparlanma süresi, RPO veri kaybı toleransıdır. BIA çıktılarıdır ve teknoloji ile süreç hedeflerini belirler.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RTO süre, RPO veri kaybı",
+        "is_correct": true
+      },
+      {
+        "text": "RTO veri kaybı, RPO süre",
+        "is_correct": false
+      },
+      {
+        "text": "İkisi aynıdır",
+        "is_correct": false
+      },
+      {
+        "text": "Her ikisi de sadece hukuk terimidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BCP kavram kontrolü #2: RTO ve RPO farkı nedir?",
+    "explanation": "RTO toparlanma süresi, RPO veri kaybı toleransıdır. BIA çıktılarıdır ve teknoloji ile süreç hedeflerini belirler.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RTO süre, RPO veri kaybı",
+        "is_correct": true
+      },
+      {
+        "text": "RTO veri kaybı, RPO süre",
+        "is_correct": false
+      },
+      {
+        "text": "İkisi aynıdır",
+        "is_correct": false
+      },
+      {
+        "text": "Her ikisi de sadece hukuk terimidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BCP kavram kontrolü #3: RTO ve RPO farkı nedir?",
+    "explanation": "RTO toparlanma süresi, RPO veri kaybı toleransıdır. BIA çıktılarıdır ve teknoloji ile süreç hedeflerini belirler.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RTO süre, RPO veri kaybı",
+        "is_correct": true
+      },
+      {
+        "text": "RTO veri kaybı, RPO süre",
+        "is_correct": false
+      },
+      {
+        "text": "İkisi aynıdır",
+        "is_correct": false
+      },
+      {
+        "text": "Her ikisi de sadece hukuk terimidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BCP kavram kontrolü #4: RTO ve RPO farkı nedir?",
+    "explanation": "RTO toparlanma süresi, RPO veri kaybı toleransıdır. BIA çıktılarıdır ve teknoloji ile süreç hedeflerini belirler.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RTO süre, RPO veri kaybı",
+        "is_correct": true
+      },
+      {
+        "text": "RTO veri kaybı, RPO süre",
+        "is_correct": false
+      },
+      {
+        "text": "İkisi aynıdır",
+        "is_correct": false
+      },
+      {
+        "text": "Her ikisi de sadece hukuk terimidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BCP kavram kontrolü #5: RTO ve RPO farkı nedir?",
+    "explanation": "RTO toparlanma süresi, RPO veri kaybı toleransıdır. BIA çıktılarıdır ve teknoloji ile süreç hedeflerini belirler.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RTO süre, RPO veri kaybı",
+        "is_correct": true
+      },
+      {
+        "text": "RTO veri kaybı, RPO süre",
+        "is_correct": false
+      },
+      {
+        "text": "İkisi aynıdır",
+        "is_correct": false
+      },
+      {
+        "text": "Her ikisi de sadece hukuk terimidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BCP kavram kontrolü #6: RTO ve RPO farkı nedir?",
+    "explanation": "RTO toparlanma süresi, RPO veri kaybı toleransıdır. BIA çıktılarıdır ve teknoloji ile süreç hedeflerini belirler.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RTO süre, RPO veri kaybı",
+        "is_correct": true
+      },
+      {
+        "text": "RTO veri kaybı, RPO süre",
+        "is_correct": false
+      },
+      {
+        "text": "İkisi aynıdır",
+        "is_correct": false
+      },
+      {
+        "text": "Her ikisi de sadece hukuk terimidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BCP kavram kontrolü #7: RTO ve RPO farkı nedir?",
+    "explanation": "RTO toparlanma süresi, RPO veri kaybı toleransıdır. BIA çıktılarıdır ve teknoloji ile süreç hedeflerini belirler.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RTO süre, RPO veri kaybı",
+        "is_correct": true
+      },
+      {
+        "text": "RTO veri kaybı, RPO süre",
+        "is_correct": false
+      },
+      {
+        "text": "İkisi aynıdır",
+        "is_correct": false
+      },
+      {
+        "text": "Her ikisi de sadece hukuk terimidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BCP kavram kontrolü #8: RTO ve RPO farkı nedir?",
+    "explanation": "RTO toparlanma süresi, RPO veri kaybı toleransıdır. BIA çıktılarıdır ve teknoloji ile süreç hedeflerini belirler.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RTO süre, RPO veri kaybı",
+        "is_correct": true
+      },
+      {
+        "text": "RTO veri kaybı, RPO süre",
+        "is_correct": false
+      },
+      {
+        "text": "İkisi aynıdır",
+        "is_correct": false
+      },
+      {
+        "text": "Her ikisi de sadece hukuk terimidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BCP kavram kontrolü #9: RTO ve RPO farkı nedir?",
+    "explanation": "RTO toparlanma süresi, RPO veri kaybı toleransıdır. BIA çıktılarıdır ve teknoloji ile süreç hedeflerini belirler.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RTO süre, RPO veri kaybı",
+        "is_correct": true
+      },
+      {
+        "text": "RTO veri kaybı, RPO süre",
+        "is_correct": false
+      },
+      {
+        "text": "İkisi aynıdır",
+        "is_correct": false
+      },
+      {
+        "text": "Her ikisi de sadece hukuk terimidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BCP kavram kontrolü #10: RTO ve RPO farkı nedir?",
+    "explanation": "RTO toparlanma süresi, RPO veri kaybı toleransıdır. BIA çıktılarıdır ve teknoloji ile süreç hedeflerini belirler.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RTO süre, RPO veri kaybı",
+        "is_correct": true
+      },
+      {
+        "text": "RTO veri kaybı, RPO süre",
+        "is_correct": false
+      },
+      {
+        "text": "İkisi aynıdır",
+        "is_correct": false
+      },
+      {
+        "text": "Her ikisi de sadece hukuk terimidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BCP kavram kontrolü #11: RTO ve RPO farkı nedir?",
+    "explanation": "RTO toparlanma süresi, RPO veri kaybı toleransıdır. BIA çıktılarıdır ve teknoloji ile süreç hedeflerini belirler.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RTO süre, RPO veri kaybı",
+        "is_correct": true
+      },
+      {
+        "text": "RTO veri kaybı, RPO süre",
+        "is_correct": false
+      },
+      {
+        "text": "İkisi aynıdır",
+        "is_correct": false
+      },
+      {
+        "text": "Her ikisi de sadece hukuk terimidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BCP kavram kontrolü #12: RTO ve RPO farkı nedir?",
+    "explanation": "RTO toparlanma süresi, RPO veri kaybı toleransıdır. BIA çıktılarıdır ve teknoloji ile süreç hedeflerini belirler.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RTO süre, RPO veri kaybı",
+        "is_correct": true
+      },
+      {
+        "text": "RTO veri kaybı, RPO süre",
+        "is_correct": false
+      },
+      {
+        "text": "İkisi aynıdır",
+        "is_correct": false
+      },
+      {
+        "text": "Her ikisi de sadece hukuk terimidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BCP kavram kontrolü #13: RTO ve RPO farkı nedir?",
+    "explanation": "RTO toparlanma süresi, RPO veri kaybı toleransıdır. BIA çıktılarıdır ve teknoloji ile süreç hedeflerini belirler.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RTO süre, RPO veri kaybı",
+        "is_correct": true
+      },
+      {
+        "text": "RTO veri kaybı, RPO süre",
+        "is_correct": false
+      },
+      {
+        "text": "İkisi aynıdır",
+        "is_correct": false
+      },
+      {
+        "text": "Her ikisi de sadece hukuk terimidir",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "course": 17,
+    "text": "BCP kavram kontrolü #14: RTO ve RPO farkı nedir?",
+    "explanation": "RTO toparlanma süresi, RPO veri kaybı toleransıdır. BIA çıktılarıdır ve teknoloji ile süreç hedeflerini belirler.",
+    "question_type": "single",
+    "is_active": true,
+    "options": [
+      {
+        "text": "RTO süre, RPO veri kaybı",
+        "is_correct": true
+      },
+      {
+        "text": "RTO veri kaybı, RPO süre",
+        "is_correct": false
+      },
+      {
+        "text": "İkisi aynıdır",
+        "is_correct": false
+      },
+      {
+        "text": "Her ikisi de sadece hukuk terimidir",
+        "is_correct": false
+      }
+    ]
+  }
+]
