@@ -1,0 +1,2802 @@
+[
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sağlık kuruluşu Leuven veri merkezinde donanım bileşenlerini denetleyen bir IS auditor, donanım bakım programının temel amacı olarak neyi kontrol etmelidir?",
+      "explanation": "Doğru cevap: Donanım izleme ve arızaların önceden tespiti. Donanım programı süreklilik ve güvenilirlik sağlar. Yanlış: Lisans fiyatı operasyonel bakımın konusu değildir. Yanlış: Vardiya takibi donanım bakımına ilişkin değildir. Yanlış: Dekorasyon donanım güvenilirliğiyle ilgili değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kritik bileşenlerin izlenmesi ve arızaların önceden tespit edilmesi",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm yazılım lisanslarının fiyatını öğrenmek",
+        "is_correct": false
+      },
+      {
+        "text": "Çalışanların vardiya sayısını takip etmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece bina dekorasyonunu incelemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir lojistik firması, Leuven lokasyonunda batch işlemleri için otomatik iş zamanlayıcı kullanıyor. Bunun başlıca avantajı nedir?",
+      "explanation": "Doğru cevap: İşlerin zamanında ve doğru sırada çalışması. Job scheduling otomasyon sağlar, insan hatasını azaltır. Yanlış: Manuel testler verimliliği düşürür. Yanlış: Dokümansız süreçler kontrolsüzdür. Yanlış: Toner kontrolü iş zamanlaması değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İşlerin doğru sırada ve zamanında çalışmasını sağlamak",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm testleri manuel kullanıcıya bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Her süreci tamamen dokümansız yürütmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcıların toner durumunu kontrol etmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir banka, Hanoi operasyonlarında sistem arayüzlerini denetlerken en büyük risk nedir?",
+      "explanation": "Doğru cevap: Veri bütünlüğü ve yetkisiz erişim. Arayüzler sistemler arası güvenli veri aktarımı riskini taşır. Yanlış: Mola süreleri operasyonel riske doğrudan etki etmez. Yanlış: Yemekhane menüsü iş riski değildir. Yanlış: İş ilanı sayısı arayüz kontrolüyle ilgili değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Veri bütünlüğünün bozulması ve yetkisiz erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kullanıcıların mola süreleri",
+        "is_correct": false
+      },
+      {
+        "text": "Yemekhane menüsünün zayıf olması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece iş ilanlarının sayısı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir e-ticaret firması, Brüksel lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sağlık kuruluşu New York ofisinde kapasite yönetimi yapılmazsa en olası risk nedir?",
+      "explanation": "Doğru cevap: Performans düşüşü ve kesinti. Kapasite yönetimi talep artışlarını karşılamada kritik rol oynar. Yanlış: Kıyafetler kapasite yönetimiyle ilgisizdir. Yanlış: Logo rengi kapasiteye bağlı değildir. Yanlış: Yazıcı markaları kapasite yönetimi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Sistem performans düşüşü ve hizmet kesintileri",
+        "is_correct": true
+      },
+      {
+        "text": "Çalışanların iş kıyafetlerini karıştırması",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kurum logosunun renk değiştirmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcı markalarının farklı olması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir e-ticaret firması, İstanbul lokasyonunda olay yönetimi sürecini test ediyor. En önemli ilk adım nedir?",
+      "explanation": "Doğru cevap: Olayın tespiti ve kaydı. Etkin olay yönetimi hızlı tanımlama ve doğru kayıtla başlar. Yanlış: Olayları gizlemek riskleri artırır. Yanlış: Şüpheli suçlaması adil değildir; kök neden analizi gerekir. Yanlış: Yöneticiye bildirmemek süreçleri geciktirir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Olayı tespit etmek, kayda almak ve sınıflandırmak",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm olayları gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca şüpheli kişileri suçlamak",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yöneticiye haber vermeden beklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sağlık kuruluşu Singapur ofisinde kritik sistemlere yama uygulanıyor. Denetçi neyi kontrol etmelidir?",
+      "explanation": "Doğru cevap: Yama test ve onay süreçleri. Bu uygulama güvenilirlik ve süreklilik için şarttır. Yanlış: Test edilmeden uygulama risklidir. Yanlış: Sadece kullanıcı talebi yama yönetimi değildir. Yanlış: Takip olmadan yamalar güvence sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Yamaların test edilip onaylandıktan sonra canlıya alınması",
+        "is_correct": true
+      },
+      {
+        "text": "Yamaların test edilmeden doğrudan uygulanması",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm yamaların sadece kullanıcıların talebine göre yapılması",
+        "is_correct": false
+      },
+      {
+        "text": "Yamaların takibinin tamamen unutulması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sağlık kuruluşu, İstanbul lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sigorta şirketi, Ankara lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir kamu kurumu Ankara lokasyonunda BIA çalışması yapıyor. BIA'nın temel amacı nedir?",
+      "explanation": "Doğru cevap: Kritik süreçler ve toleranslar. BIA kesintilerin iş etkisini anlamak için yapılır. Yanlış: Tatil takvimi BIA’nın konusu değildir. Yanlış: Yemek listesi iş etkisini ölçmez. Yanlış: Fotoğraflar iş sürekliliğini etkilemez.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kritik süreçleri ve kesinti toleranslarını belirlemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece tatil takvimini görmek",
+        "is_correct": false
+      },
+      {
+        "text": "Yemekhane yemek listesini güncellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca çalışan fotoğraflarını toplamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir kamu kurumu, Singapur lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir lojistik firması, Hanoi ofisinde günlük yedekleme yapıyor. Bu hangi kontrol tipine girer?",
+      "explanation": "Doğru cevap: Corrective. Yedekleme, veri kaybı sonrası etkiyi azaltır. Yanlış: Önleyici değildir; kaybı engellemez sadece düzeltir. Yanlış: Fiziksel kontrol değil; teknik düzeltici kontroldür. Yanlış: Sadece idari prosedür değildir; teknik uygulamadır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Düzeltici (corrective) kontrol",
+        "is_correct": true
+      },
+      {
+        "text": "Önleyici (preventive) kontrol",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca fiziksel kontrol",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece idari prosedür",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sağlık kuruluşu, New York lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir telekom operatörü, İstanbul lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir banka Brüksel veri merkezinde donanım bileşenlerini denetleyen bir IS auditor, donanım bakım programının temel amacı olarak neyi kontrol etmelidir?",
+      "explanation": "Doğru cevap: Donanım izleme ve arızaların önceden tespiti. Donanım programı süreklilik ve güvenilirlik sağlar. Yanlış: Lisans fiyatı operasyonel bakımın konusu değildir. Yanlış: Vardiya takibi donanım bakımına ilişkin değildir. Yanlış: Dekorasyon donanım güvenilirliğiyle ilgili değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kritik bileşenlerin izlenmesi ve arızaların önceden tespit edilmesi",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm yazılım lisanslarının fiyatını öğrenmek",
+        "is_correct": false
+      },
+      {
+        "text": "Çalışanların vardiya sayısını takip etmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece bina dekorasyonunu incelemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sigorta şirketi, Singapur lokasyonunda batch işlemleri için otomatik iş zamanlayıcı kullanıyor. Bunun başlıca avantajı nedir?",
+      "explanation": "Doğru cevap: İşlerin zamanında ve doğru sırada çalışması. Job scheduling otomasyon sağlar, insan hatasını azaltır. Yanlış: Manuel testler verimliliği düşürür. Yanlış: Dokümansız süreçler kontrolsüzdür. Yanlış: Toner kontrolü iş zamanlaması değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İşlerin doğru sırada ve zamanında çalışmasını sağlamak",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm testleri manuel kullanıcıya bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Her süreci tamamen dokümansız yürütmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcıların toner durumunu kontrol etmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir lojistik firması, Ankara operasyonlarında sistem arayüzlerini denetlerken en büyük risk nedir?",
+      "explanation": "Doğru cevap: Veri bütünlüğü ve yetkisiz erişim. Arayüzler sistemler arası güvenli veri aktarımı riskini taşır. Yanlış: Mola süreleri operasyonel riske doğrudan etki etmez. Yanlış: Yemekhane menüsü iş riski değildir. Yanlış: İş ilanı sayısı arayüz kontrolüyle ilgili değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Veri bütünlüğünün bozulması ve yetkisiz erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kullanıcıların mola süreleri",
+        "is_correct": false
+      },
+      {
+        "text": "Yemekhane menüsünün zayıf olması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece iş ilanlarının sayısı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir telekom operatörü, New York lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir kamu kurumu Ankara ofisinde kapasite yönetimi yapılmazsa en olası risk nedir?",
+      "explanation": "Doğru cevap: Performans düşüşü ve kesinti. Kapasite yönetimi talep artışlarını karşılamada kritik rol oynar. Yanlış: Kıyafetler kapasite yönetimiyle ilgisizdir. Yanlış: Logo rengi kapasiteye bağlı değildir. Yanlış: Yazıcı markaları kapasite yönetimi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Sistem performans düşüşü ve hizmet kesintileri",
+        "is_correct": true
+      },
+      {
+        "text": "Çalışanların iş kıyafetlerini karıştırması",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kurum logosunun renk değiştirmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcı markalarının farklı olması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sağlık kuruluşu, Ankara lokasyonunda olay yönetimi sürecini test ediyor. En önemli ilk adım nedir?",
+      "explanation": "Doğru cevap: Olayın tespiti ve kaydı. Etkin olay yönetimi hızlı tanımlama ve doğru kayıtla başlar. Yanlış: Olayları gizlemek riskleri artırır. Yanlış: Şüpheli suçlaması adil değildir; kök neden analizi gerekir. Yanlış: Yöneticiye bildirmemek süreçleri geciktirir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Olayı tespit etmek, kayda almak ve sınıflandırmak",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm olayları gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca şüpheli kişileri suçlamak",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yöneticiye haber vermeden beklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir telekom operatörü Brüksel ofisinde kritik sistemlere yama uygulanıyor. Denetçi neyi kontrol etmelidir?",
+      "explanation": "Doğru cevap: Yama test ve onay süreçleri. Bu uygulama güvenilirlik ve süreklilik için şarttır. Yanlış: Test edilmeden uygulama risklidir. Yanlış: Sadece kullanıcı talebi yama yönetimi değildir. Yanlış: Takip olmadan yamalar güvence sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Yamaların test edilip onaylandıktan sonra canlıya alınması",
+        "is_correct": true
+      },
+      {
+        "text": "Yamaların test edilmeden doğrudan uygulanması",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm yamaların sadece kullanıcıların talebine göre yapılması",
+        "is_correct": false
+      },
+      {
+        "text": "Yamaların takibinin tamamen unutulması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir banka, Brüksel lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sigorta şirketi, New York lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir kamu kurumu Singapur lokasyonunda BIA çalışması yapıyor. BIA'nın temel amacı nedir?",
+      "explanation": "Doğru cevap: Kritik süreçler ve toleranslar. BIA kesintilerin iş etkisini anlamak için yapılır. Yanlış: Tatil takvimi BIA’nın konusu değildir. Yanlış: Yemek listesi iş etkisini ölçmez. Yanlış: Fotoğraflar iş sürekliliğini etkilemez.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kritik süreçleri ve kesinti toleranslarını belirlemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece tatil takvimini görmek",
+        "is_correct": false
+      },
+      {
+        "text": "Yemekhane yemek listesini güncellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca çalışan fotoğraflarını toplamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir lojistik firması, New York lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir e-ticaret firması, Leuven ofisinde günlük yedekleme yapıyor. Bu hangi kontrol tipine girer?",
+      "explanation": "Doğru cevap: Corrective. Yedekleme, veri kaybı sonrası etkiyi azaltır. Yanlış: Önleyici değildir; kaybı engellemez sadece düzeltir. Yanlış: Fiziksel kontrol değil; teknik düzeltici kontroldür. Yanlış: Sadece idari prosedür değildir; teknik uygulamadır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Düzeltici (corrective) kontrol",
+        "is_correct": true
+      },
+      {
+        "text": "Önleyici (preventive) kontrol",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca fiziksel kontrol",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece idari prosedür",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sağlık kuruluşu, Singapur lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sağlık kuruluşu, Singapur lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir banka Leuven veri merkezinde donanım bileşenlerini denetleyen bir IS auditor, donanım bakım programının temel amacı olarak neyi kontrol etmelidir?",
+      "explanation": "Doğru cevap: Donanım izleme ve arızaların önceden tespiti. Donanım programı süreklilik ve güvenilirlik sağlar. Yanlış: Lisans fiyatı operasyonel bakımın konusu değildir. Yanlış: Vardiya takibi donanım bakımına ilişkin değildir. Yanlış: Dekorasyon donanım güvenilirliğiyle ilgili değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kritik bileşenlerin izlenmesi ve arızaların önceden tespit edilmesi",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm yazılım lisanslarının fiyatını öğrenmek",
+        "is_correct": false
+      },
+      {
+        "text": "Çalışanların vardiya sayısını takip etmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece bina dekorasyonunu incelemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir enerji şirketi, Leuven lokasyonunda batch işlemleri için otomatik iş zamanlayıcı kullanıyor. Bunun başlıca avantajı nedir?",
+      "explanation": "Doğru cevap: İşlerin zamanında ve doğru sırada çalışması. Job scheduling otomasyon sağlar, insan hatasını azaltır. Yanlış: Manuel testler verimliliği düşürür. Yanlış: Dokümansız süreçler kontrolsüzdür. Yanlış: Toner kontrolü iş zamanlaması değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İşlerin doğru sırada ve zamanında çalışmasını sağlamak",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm testleri manuel kullanıcıya bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Her süreci tamamen dokümansız yürütmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcıların toner durumunu kontrol etmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir e-ticaret firması, Ankara operasyonlarında sistem arayüzlerini denetlerken en büyük risk nedir?",
+      "explanation": "Doğru cevap: Veri bütünlüğü ve yetkisiz erişim. Arayüzler sistemler arası güvenli veri aktarımı riskini taşır. Yanlış: Mola süreleri operasyonel riske doğrudan etki etmez. Yanlış: Yemekhane menüsü iş riski değildir. Yanlış: İş ilanı sayısı arayüz kontrolüyle ilgili değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Veri bütünlüğünün bozulması ve yetkisiz erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kullanıcıların mola süreleri",
+        "is_correct": false
+      },
+      {
+        "text": "Yemekhane menüsünün zayıf olması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece iş ilanlarının sayısı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir enerji şirketi, New York lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sağlık kuruluşu New York ofisinde kapasite yönetimi yapılmazsa en olası risk nedir?",
+      "explanation": "Doğru cevap: Performans düşüşü ve kesinti. Kapasite yönetimi talep artışlarını karşılamada kritik rol oynar. Yanlış: Kıyafetler kapasite yönetimiyle ilgisizdir. Yanlış: Logo rengi kapasiteye bağlı değildir. Yanlış: Yazıcı markaları kapasite yönetimi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Sistem performans düşüşü ve hizmet kesintileri",
+        "is_correct": true
+      },
+      {
+        "text": "Çalışanların iş kıyafetlerini karıştırması",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kurum logosunun renk değiştirmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcı markalarının farklı olması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir enerji şirketi, Brüksel lokasyonunda olay yönetimi sürecini test ediyor. En önemli ilk adım nedir?",
+      "explanation": "Doğru cevap: Olayın tespiti ve kaydı. Etkin olay yönetimi hızlı tanımlama ve doğru kayıtla başlar. Yanlış: Olayları gizlemek riskleri artırır. Yanlış: Şüpheli suçlaması adil değildir; kök neden analizi gerekir. Yanlış: Yöneticiye bildirmemek süreçleri geciktirir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Olayı tespit etmek, kayda almak ve sınıflandırmak",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm olayları gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca şüpheli kişileri suçlamak",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yöneticiye haber vermeden beklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir kamu kurumu Hanoi ofisinde kritik sistemlere yama uygulanıyor. Denetçi neyi kontrol etmelidir?",
+      "explanation": "Doğru cevap: Yama test ve onay süreçleri. Bu uygulama güvenilirlik ve süreklilik için şarttır. Yanlış: Test edilmeden uygulama risklidir. Yanlış: Sadece kullanıcı talebi yama yönetimi değildir. Yanlış: Takip olmadan yamalar güvence sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Yamaların test edilip onaylandıktan sonra canlıya alınması",
+        "is_correct": true
+      },
+      {
+        "text": "Yamaların test edilmeden doğrudan uygulanması",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm yamaların sadece kullanıcıların talebine göre yapılması",
+        "is_correct": false
+      },
+      {
+        "text": "Yamaların takibinin tamamen unutulması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir telekom operatörü, Singapur lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir kamu kurumu, Hanoi lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir kamu kurumu Ankara lokasyonunda BIA çalışması yapıyor. BIA'nın temel amacı nedir?",
+      "explanation": "Doğru cevap: Kritik süreçler ve toleranslar. BIA kesintilerin iş etkisini anlamak için yapılır. Yanlış: Tatil takvimi BIA’nın konusu değildir. Yanlış: Yemek listesi iş etkisini ölçmez. Yanlış: Fotoğraflar iş sürekliliğini etkilemez.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kritik süreçleri ve kesinti toleranslarını belirlemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece tatil takvimini görmek",
+        "is_correct": false
+      },
+      {
+        "text": "Yemekhane yemek listesini güncellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca çalışan fotoğraflarını toplamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sigorta şirketi, New York lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sigorta şirketi, Leuven ofisinde günlük yedekleme yapıyor. Bu hangi kontrol tipine girer?",
+      "explanation": "Doğru cevap: Corrective. Yedekleme, veri kaybı sonrası etkiyi azaltır. Yanlış: Önleyici değildir; kaybı engellemez sadece düzeltir. Yanlış: Fiziksel kontrol değil; teknik düzeltici kontroldür. Yanlış: Sadece idari prosedür değildir; teknik uygulamadır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Düzeltici (corrective) kontrol",
+        "is_correct": true
+      },
+      {
+        "text": "Önleyici (preventive) kontrol",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca fiziksel kontrol",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece idari prosedür",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir kamu kurumu, İstanbul lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir banka, Singapur lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir banka İstanbul veri merkezinde donanım bileşenlerini denetleyen bir IS auditor, donanım bakım programının temel amacı olarak neyi kontrol etmelidir?",
+      "explanation": "Doğru cevap: Donanım izleme ve arızaların önceden tespiti. Donanım programı süreklilik ve güvenilirlik sağlar. Yanlış: Lisans fiyatı operasyonel bakımın konusu değildir. Yanlış: Vardiya takibi donanım bakımına ilişkin değildir. Yanlış: Dekorasyon donanım güvenilirliğiyle ilgili değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kritik bileşenlerin izlenmesi ve arızaların önceden tespit edilmesi",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm yazılım lisanslarının fiyatını öğrenmek",
+        "is_correct": false
+      },
+      {
+        "text": "Çalışanların vardiya sayısını takip etmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece bina dekorasyonunu incelemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sigorta şirketi, Brüksel lokasyonunda batch işlemleri için otomatik iş zamanlayıcı kullanıyor. Bunun başlıca avantajı nedir?",
+      "explanation": "Doğru cevap: İşlerin zamanında ve doğru sırada çalışması. Job scheduling otomasyon sağlar, insan hatasını azaltır. Yanlış: Manuel testler verimliliği düşürür. Yanlış: Dokümansız süreçler kontrolsüzdür. Yanlış: Toner kontrolü iş zamanlaması değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İşlerin doğru sırada ve zamanında çalışmasını sağlamak",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm testleri manuel kullanıcıya bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Her süreci tamamen dokümansız yürütmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcıların toner durumunu kontrol etmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir kamu kurumu, Singapur operasyonlarında sistem arayüzlerini denetlerken en büyük risk nedir?",
+      "explanation": "Doğru cevap: Veri bütünlüğü ve yetkisiz erişim. Arayüzler sistemler arası güvenli veri aktarımı riskini taşır. Yanlış: Mola süreleri operasyonel riske doğrudan etki etmez. Yanlış: Yemekhane menüsü iş riski değildir. Yanlış: İş ilanı sayısı arayüz kontrolüyle ilgili değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Veri bütünlüğünün bozulması ve yetkisiz erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kullanıcıların mola süreleri",
+        "is_correct": false
+      },
+      {
+        "text": "Yemekhane menüsünün zayıf olması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece iş ilanlarının sayısı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir enerji şirketi, Brüksel lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir telekom operatörü İstanbul ofisinde kapasite yönetimi yapılmazsa en olası risk nedir?",
+      "explanation": "Doğru cevap: Performans düşüşü ve kesinti. Kapasite yönetimi talep artışlarını karşılamada kritik rol oynar. Yanlış: Kıyafetler kapasite yönetimiyle ilgisizdir. Yanlış: Logo rengi kapasiteye bağlı değildir. Yanlış: Yazıcı markaları kapasite yönetimi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Sistem performans düşüşü ve hizmet kesintileri",
+        "is_correct": true
+      },
+      {
+        "text": "Çalışanların iş kıyafetlerini karıştırması",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kurum logosunun renk değiştirmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcı markalarının farklı olması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir e-ticaret firması, Leuven lokasyonunda olay yönetimi sürecini test ediyor. En önemli ilk adım nedir?",
+      "explanation": "Doğru cevap: Olayın tespiti ve kaydı. Etkin olay yönetimi hızlı tanımlama ve doğru kayıtla başlar. Yanlış: Olayları gizlemek riskleri artırır. Yanlış: Şüpheli suçlaması adil değildir; kök neden analizi gerekir. Yanlış: Yöneticiye bildirmemek süreçleri geciktirir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Olayı tespit etmek, kayda almak ve sınıflandırmak",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm olayları gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca şüpheli kişileri suçlamak",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yöneticiye haber vermeden beklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir lojistik firması Ankara ofisinde kritik sistemlere yama uygulanıyor. Denetçi neyi kontrol etmelidir?",
+      "explanation": "Doğru cevap: Yama test ve onay süreçleri. Bu uygulama güvenilirlik ve süreklilik için şarttır. Yanlış: Test edilmeden uygulama risklidir. Yanlış: Sadece kullanıcı talebi yama yönetimi değildir. Yanlış: Takip olmadan yamalar güvence sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Yamaların test edilip onaylandıktan sonra canlıya alınması",
+        "is_correct": true
+      },
+      {
+        "text": "Yamaların test edilmeden doğrudan uygulanması",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm yamaların sadece kullanıcıların talebine göre yapılması",
+        "is_correct": false
+      },
+      {
+        "text": "Yamaların takibinin tamamen unutulması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sigorta şirketi, Ankara lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sigorta şirketi, İstanbul lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir banka Singapur lokasyonunda BIA çalışması yapıyor. BIA'nın temel amacı nedir?",
+      "explanation": "Doğru cevap: Kritik süreçler ve toleranslar. BIA kesintilerin iş etkisini anlamak için yapılır. Yanlış: Tatil takvimi BIA’nın konusu değildir. Yanlış: Yemek listesi iş etkisini ölçmez. Yanlış: Fotoğraflar iş sürekliliğini etkilemez.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kritik süreçleri ve kesinti toleranslarını belirlemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece tatil takvimini görmek",
+        "is_correct": false
+      },
+      {
+        "text": "Yemekhane yemek listesini güncellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca çalışan fotoğraflarını toplamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir e-ticaret firması, Leuven lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir lojistik firması, Singapur ofisinde günlük yedekleme yapıyor. Bu hangi kontrol tipine girer?",
+      "explanation": "Doğru cevap: Corrective. Yedekleme, veri kaybı sonrası etkiyi azaltır. Yanlış: Önleyici değildir; kaybı engellemez sadece düzeltir. Yanlış: Fiziksel kontrol değil; teknik düzeltici kontroldür. Yanlış: Sadece idari prosedür değildir; teknik uygulamadır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Düzeltici (corrective) kontrol",
+        "is_correct": true
+      },
+      {
+        "text": "Önleyici (preventive) kontrol",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca fiziksel kontrol",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece idari prosedür",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir lojistik firması, İstanbul lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir banka, İstanbul lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir banka Ankara veri merkezinde donanım bileşenlerini denetleyen bir IS auditor, donanım bakım programının temel amacı olarak neyi kontrol etmelidir?",
+      "explanation": "Doğru cevap: Donanım izleme ve arızaların önceden tespiti. Donanım programı süreklilik ve güvenilirlik sağlar. Yanlış: Lisans fiyatı operasyonel bakımın konusu değildir. Yanlış: Vardiya takibi donanım bakımına ilişkin değildir. Yanlış: Dekorasyon donanım güvenilirliğiyle ilgili değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kritik bileşenlerin izlenmesi ve arızaların önceden tespit edilmesi",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm yazılım lisanslarının fiyatını öğrenmek",
+        "is_correct": false
+      },
+      {
+        "text": "Çalışanların vardiya sayısını takip etmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece bina dekorasyonunu incelemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir telekom operatörü, Hanoi lokasyonunda batch işlemleri için otomatik iş zamanlayıcı kullanıyor. Bunun başlıca avantajı nedir?",
+      "explanation": "Doğru cevap: İşlerin zamanında ve doğru sırada çalışması. Job scheduling otomasyon sağlar, insan hatasını azaltır. Yanlış: Manuel testler verimliliği düşürür. Yanlış: Dokümansız süreçler kontrolsüzdür. Yanlış: Toner kontrolü iş zamanlaması değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İşlerin doğru sırada ve zamanında çalışmasını sağlamak",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm testleri manuel kullanıcıya bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Her süreci tamamen dokümansız yürütmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcıların toner durumunu kontrol etmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir kamu kurumu, Singapur operasyonlarında sistem arayüzlerini denetlerken en büyük risk nedir?",
+      "explanation": "Doğru cevap: Veri bütünlüğü ve yetkisiz erişim. Arayüzler sistemler arası güvenli veri aktarımı riskini taşır. Yanlış: Mola süreleri operasyonel riske doğrudan etki etmez. Yanlış: Yemekhane menüsü iş riski değildir. Yanlış: İş ilanı sayısı arayüz kontrolüyle ilgili değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Veri bütünlüğünün bozulması ve yetkisiz erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kullanıcıların mola süreleri",
+        "is_correct": false
+      },
+      {
+        "text": "Yemekhane menüsünün zayıf olması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece iş ilanlarının sayısı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir lojistik firması, İstanbul lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sigorta şirketi Leuven ofisinde kapasite yönetimi yapılmazsa en olası risk nedir?",
+      "explanation": "Doğru cevap: Performans düşüşü ve kesinti. Kapasite yönetimi talep artışlarını karşılamada kritik rol oynar. Yanlış: Kıyafetler kapasite yönetimiyle ilgisizdir. Yanlış: Logo rengi kapasiteye bağlı değildir. Yanlış: Yazıcı markaları kapasite yönetimi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Sistem performans düşüşü ve hizmet kesintileri",
+        "is_correct": true
+      },
+      {
+        "text": "Çalışanların iş kıyafetlerini karıştırması",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kurum logosunun renk değiştirmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcı markalarının farklı olması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sigorta şirketi, New York lokasyonunda olay yönetimi sürecini test ediyor. En önemli ilk adım nedir?",
+      "explanation": "Doğru cevap: Olayın tespiti ve kaydı. Etkin olay yönetimi hızlı tanımlama ve doğru kayıtla başlar. Yanlış: Olayları gizlemek riskleri artırır. Yanlış: Şüpheli suçlaması adil değildir; kök neden analizi gerekir. Yanlış: Yöneticiye bildirmemek süreçleri geciktirir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Olayı tespit etmek, kayda almak ve sınıflandırmak",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm olayları gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca şüpheli kişileri suçlamak",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yöneticiye haber vermeden beklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir e-ticaret firması New York ofisinde kritik sistemlere yama uygulanıyor. Denetçi neyi kontrol etmelidir?",
+      "explanation": "Doğru cevap: Yama test ve onay süreçleri. Bu uygulama güvenilirlik ve süreklilik için şarttır. Yanlış: Test edilmeden uygulama risklidir. Yanlış: Sadece kullanıcı talebi yama yönetimi değildir. Yanlış: Takip olmadan yamalar güvence sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Yamaların test edilip onaylandıktan sonra canlıya alınması",
+        "is_correct": true
+      },
+      {
+        "text": "Yamaların test edilmeden doğrudan uygulanması",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm yamaların sadece kullanıcıların talebine göre yapılması",
+        "is_correct": false
+      },
+      {
+        "text": "Yamaların takibinin tamamen unutulması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir enerji şirketi, New York lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sigorta şirketi, Singapur lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir banka Hanoi lokasyonunda BIA çalışması yapıyor. BIA'nın temel amacı nedir?",
+      "explanation": "Doğru cevap: Kritik süreçler ve toleranslar. BIA kesintilerin iş etkisini anlamak için yapılır. Yanlış: Tatil takvimi BIA’nın konusu değildir. Yanlış: Yemek listesi iş etkisini ölçmez. Yanlış: Fotoğraflar iş sürekliliğini etkilemez.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kritik süreçleri ve kesinti toleranslarını belirlemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece tatil takvimini görmek",
+        "is_correct": false
+      },
+      {
+        "text": "Yemekhane yemek listesini güncellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca çalışan fotoğraflarını toplamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sağlık kuruluşu, New York lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir e-ticaret firması, Hanoi ofisinde günlük yedekleme yapıyor. Bu hangi kontrol tipine girer?",
+      "explanation": "Doğru cevap: Corrective. Yedekleme, veri kaybı sonrası etkiyi azaltır. Yanlış: Önleyici değildir; kaybı engellemez sadece düzeltir. Yanlış: Fiziksel kontrol değil; teknik düzeltici kontroldür. Yanlış: Sadece idari prosedür değildir; teknik uygulamadır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Düzeltici (corrective) kontrol",
+        "is_correct": true
+      },
+      {
+        "text": "Önleyici (preventive) kontrol",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca fiziksel kontrol",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece idari prosedür",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir kamu kurumu, İstanbul lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sağlık kuruluşu, Leuven lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir lojistik firması Singapur veri merkezinde donanım bileşenlerini denetleyen bir IS auditor, donanım bakım programının temel amacı olarak neyi kontrol etmelidir?",
+      "explanation": "Doğru cevap: Donanım izleme ve arızaların önceden tespiti. Donanım programı süreklilik ve güvenilirlik sağlar. Yanlış: Lisans fiyatı operasyonel bakımın konusu değildir. Yanlış: Vardiya takibi donanım bakımına ilişkin değildir. Yanlış: Dekorasyon donanım güvenilirliğiyle ilgili değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kritik bileşenlerin izlenmesi ve arızaların önceden tespit edilmesi",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm yazılım lisanslarının fiyatını öğrenmek",
+        "is_correct": false
+      },
+      {
+        "text": "Çalışanların vardiya sayısını takip etmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece bina dekorasyonunu incelemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir enerji şirketi, Ankara lokasyonunda batch işlemleri için otomatik iş zamanlayıcı kullanıyor. Bunun başlıca avantajı nedir?",
+      "explanation": "Doğru cevap: İşlerin zamanında ve doğru sırada çalışması. Job scheduling otomasyon sağlar, insan hatasını azaltır. Yanlış: Manuel testler verimliliği düşürür. Yanlış: Dokümansız süreçler kontrolsüzdür. Yanlış: Toner kontrolü iş zamanlaması değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İşlerin doğru sırada ve zamanında çalışmasını sağlamak",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm testleri manuel kullanıcıya bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Her süreci tamamen dokümansız yürütmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcıların toner durumunu kontrol etmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sağlık kuruluşu, Brüksel operasyonlarında sistem arayüzlerini denetlerken en büyük risk nedir?",
+      "explanation": "Doğru cevap: Veri bütünlüğü ve yetkisiz erişim. Arayüzler sistemler arası güvenli veri aktarımı riskini taşır. Yanlış: Mola süreleri operasyonel riske doğrudan etki etmez. Yanlış: Yemekhane menüsü iş riski değildir. Yanlış: İş ilanı sayısı arayüz kontrolüyle ilgili değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Veri bütünlüğünün bozulması ve yetkisiz erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kullanıcıların mola süreleri",
+        "is_correct": false
+      },
+      {
+        "text": "Yemekhane menüsünün zayıf olması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece iş ilanlarının sayısı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir banka, Leuven lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sağlık kuruluşu Hanoi ofisinde kapasite yönetimi yapılmazsa en olası risk nedir?",
+      "explanation": "Doğru cevap: Performans düşüşü ve kesinti. Kapasite yönetimi talep artışlarını karşılamada kritik rol oynar. Yanlış: Kıyafetler kapasite yönetimiyle ilgisizdir. Yanlış: Logo rengi kapasiteye bağlı değildir. Yanlış: Yazıcı markaları kapasite yönetimi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Sistem performans düşüşü ve hizmet kesintileri",
+        "is_correct": true
+      },
+      {
+        "text": "Çalışanların iş kıyafetlerini karıştırması",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kurum logosunun renk değiştirmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcı markalarının farklı olması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir enerji şirketi, New York lokasyonunda olay yönetimi sürecini test ediyor. En önemli ilk adım nedir?",
+      "explanation": "Doğru cevap: Olayın tespiti ve kaydı. Etkin olay yönetimi hızlı tanımlama ve doğru kayıtla başlar. Yanlış: Olayları gizlemek riskleri artırır. Yanlış: Şüpheli suçlaması adil değildir; kök neden analizi gerekir. Yanlış: Yöneticiye bildirmemek süreçleri geciktirir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Olayı tespit etmek, kayda almak ve sınıflandırmak",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm olayları gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca şüpheli kişileri suçlamak",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yöneticiye haber vermeden beklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir kamu kurumu Leuven ofisinde kritik sistemlere yama uygulanıyor. Denetçi neyi kontrol etmelidir?",
+      "explanation": "Doğru cevap: Yama test ve onay süreçleri. Bu uygulama güvenilirlik ve süreklilik için şarttır. Yanlış: Test edilmeden uygulama risklidir. Yanlış: Sadece kullanıcı talebi yama yönetimi değildir. Yanlış: Takip olmadan yamalar güvence sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Yamaların test edilip onaylandıktan sonra canlıya alınması",
+        "is_correct": true
+      },
+      {
+        "text": "Yamaların test edilmeden doğrudan uygulanması",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm yamaların sadece kullanıcıların talebine göre yapılması",
+        "is_correct": false
+      },
+      {
+        "text": "Yamaların takibinin tamamen unutulması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sağlık kuruluşu, Brüksel lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir e-ticaret firması, Singapur lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sağlık kuruluşu Singapur lokasyonunda BIA çalışması yapıyor. BIA'nın temel amacı nedir?",
+      "explanation": "Doğru cevap: Kritik süreçler ve toleranslar. BIA kesintilerin iş etkisini anlamak için yapılır. Yanlış: Tatil takvimi BIA’nın konusu değildir. Yanlış: Yemek listesi iş etkisini ölçmez. Yanlış: Fotoğraflar iş sürekliliğini etkilemez.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kritik süreçleri ve kesinti toleranslarını belirlemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece tatil takvimini görmek",
+        "is_correct": false
+      },
+      {
+        "text": "Yemekhane yemek listesini güncellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca çalışan fotoğraflarını toplamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sigorta şirketi, İstanbul lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir e-ticaret firması, Hanoi ofisinde günlük yedekleme yapıyor. Bu hangi kontrol tipine girer?",
+      "explanation": "Doğru cevap: Corrective. Yedekleme, veri kaybı sonrası etkiyi azaltır. Yanlış: Önleyici değildir; kaybı engellemez sadece düzeltir. Yanlış: Fiziksel kontrol değil; teknik düzeltici kontroldür. Yanlış: Sadece idari prosedür değildir; teknik uygulamadır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Düzeltici (corrective) kontrol",
+        "is_correct": true
+      },
+      {
+        "text": "Önleyici (preventive) kontrol",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca fiziksel kontrol",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece idari prosedür",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir e-ticaret firması, Ankara lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sigorta şirketi, New York lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir lojistik firması Brüksel veri merkezinde donanım bileşenlerini denetleyen bir IS auditor, donanım bakım programının temel amacı olarak neyi kontrol etmelidir?",
+      "explanation": "Doğru cevap: Donanım izleme ve arızaların önceden tespiti. Donanım programı süreklilik ve güvenilirlik sağlar. Yanlış: Lisans fiyatı operasyonel bakımın konusu değildir. Yanlış: Vardiya takibi donanım bakımına ilişkin değildir. Yanlış: Dekorasyon donanım güvenilirliğiyle ilgili değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kritik bileşenlerin izlenmesi ve arızaların önceden tespit edilmesi",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm yazılım lisanslarının fiyatını öğrenmek",
+        "is_correct": false
+      },
+      {
+        "text": "Çalışanların vardiya sayısını takip etmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece bina dekorasyonunu incelemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir sağlık kuruluşu, Ankara lokasyonunda batch işlemleri için otomatik iş zamanlayıcı kullanıyor. Bunun başlıca avantajı nedir?",
+      "explanation": "Doğru cevap: İşlerin zamanında ve doğru sırada çalışması. Job scheduling otomasyon sağlar, insan hatasını azaltır. Yanlış: Manuel testler verimliliği düşürür. Yanlış: Dokümansız süreçler kontrolsüzdür. Yanlış: Toner kontrolü iş zamanlaması değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İşlerin doğru sırada ve zamanında çalışmasını sağlamak",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm testleri manuel kullanıcıya bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Her süreci tamamen dokümansız yürütmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcıların toner durumunu kontrol etmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir banka, Brüksel operasyonlarında sistem arayüzlerini denetlerken en büyük risk nedir?",
+      "explanation": "Doğru cevap: Veri bütünlüğü ve yetkisiz erişim. Arayüzler sistemler arası güvenli veri aktarımı riskini taşır. Yanlış: Mola süreleri operasyonel riske doğrudan etki etmez. Yanlış: Yemekhane menüsü iş riski değildir. Yanlış: İş ilanı sayısı arayüz kontrolüyle ilgili değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Veri bütünlüğünün bozulması ve yetkisiz erişim",
+        "is_correct": true
+      },
+      {
+        "text": "Kullanıcıların mola süreleri",
+        "is_correct": false
+      },
+      {
+        "text": "Yemekhane menüsünün zayıf olması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece iş ilanlarının sayısı",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir kamu kurumu, New York lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir banka New York ofisinde kapasite yönetimi yapılmazsa en olası risk nedir?",
+      "explanation": "Doğru cevap: Performans düşüşü ve kesinti. Kapasite yönetimi talep artışlarını karşılamada kritik rol oynar. Yanlış: Kıyafetler kapasite yönetimiyle ilgisizdir. Yanlış: Logo rengi kapasiteye bağlı değildir. Yanlış: Yazıcı markaları kapasite yönetimi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Sistem performans düşüşü ve hizmet kesintileri",
+        "is_correct": true
+      },
+      {
+        "text": "Çalışanların iş kıyafetlerini karıştırması",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kurum logosunun renk değiştirmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcı markalarının farklı olması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir enerji şirketi, Singapur lokasyonunda olay yönetimi sürecini test ediyor. En önemli ilk adım nedir?",
+      "explanation": "Doğru cevap: Olayın tespiti ve kaydı. Etkin olay yönetimi hızlı tanımlama ve doğru kayıtla başlar. Yanlış: Olayları gizlemek riskleri artırır. Yanlış: Şüpheli suçlaması adil değildir; kök neden analizi gerekir. Yanlış: Yöneticiye bildirmemek süreçleri geciktirir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Olayı tespit etmek, kayda almak ve sınıflandırmak",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm olayları gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca şüpheli kişileri suçlamak",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yöneticiye haber vermeden beklemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir banka Leuven ofisinde kritik sistemlere yama uygulanıyor. Denetçi neyi kontrol etmelidir?",
+      "explanation": "Doğru cevap: Yama test ve onay süreçleri. Bu uygulama güvenilirlik ve süreklilik için şarttır. Yanlış: Test edilmeden uygulama risklidir. Yanlış: Sadece kullanıcı talebi yama yönetimi değildir. Yanlış: Takip olmadan yamalar güvence sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Yamaların test edilip onaylandıktan sonra canlıya alınması",
+        "is_correct": true
+      },
+      {
+        "text": "Yamaların test edilmeden doğrudan uygulanması",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm yamaların sadece kullanıcıların talebine göre yapılması",
+        "is_correct": false
+      },
+      {
+        "text": "Yamaların takibinin tamamen unutulması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir kamu kurumu, Ankara lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir e-ticaret firması, İstanbul lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir banka Leuven lokasyonunda BIA çalışması yapıyor. BIA'nın temel amacı nedir?",
+      "explanation": "Doğru cevap: Kritik süreçler ve toleranslar. BIA kesintilerin iş etkisini anlamak için yapılır. Yanlış: Tatil takvimi BIA’nın konusu değildir. Yanlış: Yemek listesi iş etkisini ölçmez. Yanlış: Fotoğraflar iş sürekliliğini etkilemez.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kritik süreçleri ve kesinti toleranslarını belirlemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece tatil takvimini görmek",
+        "is_correct": false
+      },
+      {
+        "text": "Yemekhane yemek listesini güncellemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca çalışan fotoğraflarını toplamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir banka, New York lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir kamu kurumu, Leuven ofisinde günlük yedekleme yapıyor. Bu hangi kontrol tipine girer?",
+      "explanation": "Doğru cevap: Corrective. Yedekleme, veri kaybı sonrası etkiyi azaltır. Yanlış: Önleyici değildir; kaybı engellemez sadece düzeltir. Yanlış: Fiziksel kontrol değil; teknik düzeltici kontroldür. Yanlış: Sadece idari prosedür değildir; teknik uygulamadır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Düzeltici (corrective) kontrol",
+        "is_correct": true
+      },
+      {
+        "text": "Önleyici (preventive) kontrol",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca fiziksel kontrol",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece idari prosedür",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir banka, Ankara lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir enerji şirketi, Ankara lokasyonunda DRP hazırlıyor. RTO'nun tanımı nedir?",
+      "explanation": "Doğru cevap: RTO sistemin toparlanma süresidir. İş sürekliliğinde kritik bir metriktir. Yanlış: Veri kaybıyla ilgili metrik RPO’dur; RTO değildir. Yanlış: Sigorta fiyatı DRP tanımı değildir. Yanlış: Boya rengi iş sürekliliğiyle ilgisizdir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bir kesinti sonrası sistemlerin en geç ne kadar sürede çalışır hale gelmesi gerektiği",
+        "is_correct": true
+      },
+      {
+        "text": "Verilerin hiç kaybolmaması için alınan önlem",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sigorta poliçelerinin fiyatı",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca binanın boya rengi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir lojistik firması İstanbul veri merkezinde donanım bileşenlerini denetleyen bir IS auditor, donanım bakım programının temel amacı olarak neyi kontrol etmelidir?",
+      "explanation": "Doğru cevap: Donanım izleme ve arızaların önceden tespiti. Donanım programı süreklilik ve güvenilirlik sağlar. Yanlış: Lisans fiyatı operasyonel bakımın konusu değildir. Yanlış: Vardiya takibi donanım bakımına ilişkin değildir. Yanlış: Dekorasyon donanım güvenilirliğiyle ilgili değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kritik bileşenlerin izlenmesi ve arızaların önceden tespit edilmesi",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm yazılım lisanslarının fiyatını öğrenmek",
+        "is_correct": false
+      },
+      {
+        "text": "Çalışanların vardiya sayısını takip etmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece bina dekorasyonunu incelemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 204,
+      "text": "Bir enerji şirketi, Singapur lokasyonunda batch işlemleri için otomatik iş zamanlayıcı kullanıyor. Bunun başlıca avantajı nedir?",
+      "explanation": "Doğru cevap: İşlerin zamanında ve doğru sırada çalışması. Job scheduling otomasyon sağlar, insan hatasını azaltır. Yanlış: Manuel testler verimliliği düşürür. Yanlış: Dokümansız süreçler kontrolsüzdür. Yanlış: Toner kontrolü iş zamanlaması değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İşlerin doğru sırada ve zamanında çalışmasını sağlamak",
+        "is_correct": true
+      },
+      {
+        "text": "Tüm testleri manuel kullanıcıya bırakmak",
+        "is_correct": false
+      },
+      {
+        "text": "Her süreci tamamen dokümansız yürütmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcıların toner durumunu kontrol etmek",
+        "is_correct": false
+      }
+    ]
+  }
+]

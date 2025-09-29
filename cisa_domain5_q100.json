@@ -1,0 +1,2802 @@
+[
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üretim şirketi, Hong Kong lokasyonunda bilgi güvenliği programı kuruyor. Bu programın en önemli amacı aşağıdakilerden hangisidir?",
+      "explanation": "Doğru cevap: Kurumsal hedeflerle uyumlu varlık koruması. Güvenlik programı stratejik uyum ve risk azaltmayı sağlar. Yanlış: Mola süreleri güvenlik programının konusu değildir. Yanlış: Logo renkleri bilgi güvenliğiyle ilgisizdir. Yanlış: Tüm kararların güvenliğe devri pratik değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kurumsal hedeflerle uyumlu bilgi varlıklarının korunması",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece çalışanların mola sürelerini düzenlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kurum logosunun renklerini değiştirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm iş kararlarını güvenlik ekibine devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir banka, Leuven ofisinde kritik sistemlere erişim için çok faktörlü kimlik doğrulama uyguluyor. Bu hangi kontrolün örneğidir?",
+      "explanation": "Doğru cevap: Kimlik doğrulama kontrolü. Çok faktörlü doğrulama, kullanıcı kimliğini kanıtlamanın güçlü yoludur. Yanlış: Fiziksel güvenlik farklı bir katmandır. Yanlış: Sosyal etkinlik kontrolleri bilgi güvenliği değildir. Yanlış: Muhasebe kontrolleri mali süreçlerle ilgilidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kimlik doğrulama kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca fiziksel güvenlik kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sosyal etkinlik kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece muhasebe kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir kamu kurumu, Leuven veri merkezinde ağ güvenliği denetimi yapılıyor. Ağ segmentasyonu uygulanmazsa en büyük risk nedir?",
+      "explanation": "Doğru cevap: Saldırganların yayılması. Segmentasyon güvenlik ihlallerinin yayılmasını sınırlar. Yanlış: Yemeklerin soğuması bilgi güvenliği riski değildir. Yanlış: Çalışanların geç gelmesi ağ segmentasyonu ile ilgili değildir. Yanlış: Yazıcı markaları segmentasyon kontrolü değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Saldırganların bir sistemden diğerine kolayca yayılması",
+        "is_correct": true
+      },
+      {
+        "text": "Yemekhanede yemeklerin soğuması",
+        "is_correct": false
+      },
+      {
+        "text": "Çalışanların geç gelmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcı markalarının farklı olması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir telekom operatörü, Hanoi şubesinde müşteri verilerini şifrelemek için AES kullanıyor. Bu hangi tip algoritmadır?",
+      "explanation": "Doğru cevap: Simetrik şifreleme. AES gizlilik için yaygın kullanılan blok şifrelemedir. Yanlış: Asimetrik algoritmalar farklı anahtar çifti kullanır. Yanlış: Hash algoritmaları şifreleme değil tek yönlü özet üretir. Yanlış: Fiziksel kilitler kriptografi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Simetrik şifreleme algoritması",
+        "is_correct": true
+      },
+      {
+        "text": "Asimetrik şifreleme algoritması",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca hash algoritması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece fiziksel kilit sistemi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir telekom operatörü, Hanoi bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üniversite, Hanoi bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir fintech startup, Hong Kong bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir telekom operatörü, Brüksel bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir telekom operatörü, Brüksel bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir fintech startup, Hong Kong ofisinde fidye yazılımı saldırısına uğruyor. Olay müdahalesinde ilk adım nedir?",
+      "explanation": "Doğru cevap: Olayı tespit ve tanımlama. IR süreci olayın doğrulanmasıyla başlar. Yanlış: Fidye ödemek önerilen ilk adım değildir. Yanlış: Saldırganla iletişim risklidir. Yanlış: Hiçbir şey yapmamak daha büyük zararlara yol açar.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Olayı tespit edip tanımlamak",
+        "is_correct": true
+      },
+      {
+        "text": "Hemen fidyeyi ödemek",
+        "is_correct": false
+      },
+      {
+        "text": "Saldırganla doğrudan iletişime geçmek",
+        "is_correct": false
+      },
+      {
+        "text": "Hiçbir şey yapmamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üniversite, Brüksel bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üniversite, Leuven bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üretim şirketi, Hanoi bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üniversite, Brüksel bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir kamu kurumu, New York lokasyonunda bilgi güvenliği programı kuruyor. Bu programın en önemli amacı aşağıdakilerden hangisidir?",
+      "explanation": "Doğru cevap: Kurumsal hedeflerle uyumlu varlık koruması. Güvenlik programı stratejik uyum ve risk azaltmayı sağlar. Yanlış: Mola süreleri güvenlik programının konusu değildir. Yanlış: Logo renkleri bilgi güvenliğiyle ilgisizdir. Yanlış: Tüm kararların güvenliğe devri pratik değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kurumsal hedeflerle uyumlu bilgi varlıklarının korunması",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece çalışanların mola sürelerini düzenlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kurum logosunun renklerini değiştirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm iş kararlarını güvenlik ekibine devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir e-ticaret platformu, İstanbul ofisinde kritik sistemlere erişim için çok faktörlü kimlik doğrulama uyguluyor. Bu hangi kontrolün örneğidir?",
+      "explanation": "Doğru cevap: Kimlik doğrulama kontrolü. Çok faktörlü doğrulama, kullanıcı kimliğini kanıtlamanın güçlü yoludur. Yanlış: Fiziksel güvenlik farklı bir katmandır. Yanlış: Sosyal etkinlik kontrolleri bilgi güvenliği değildir. Yanlış: Muhasebe kontrolleri mali süreçlerle ilgilidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kimlik doğrulama kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca fiziksel güvenlik kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sosyal etkinlik kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece muhasebe kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üretim şirketi, İstanbul veri merkezinde ağ güvenliği denetimi yapılıyor. Ağ segmentasyonu uygulanmazsa en büyük risk nedir?",
+      "explanation": "Doğru cevap: Saldırganların yayılması. Segmentasyon güvenlik ihlallerinin yayılmasını sınırlar. Yanlış: Yemeklerin soğuması bilgi güvenliği riski değildir. Yanlış: Çalışanların geç gelmesi ağ segmentasyonu ile ilgili değildir. Yanlış: Yazıcı markaları segmentasyon kontrolü değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Saldırganların bir sistemden diğerine kolayca yayılması",
+        "is_correct": true
+      },
+      {
+        "text": "Yemekhanede yemeklerin soğuması",
+        "is_correct": false
+      },
+      {
+        "text": "Çalışanların geç gelmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcı markalarının farklı olması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üniversite, Leuven şubesinde müşteri verilerini şifrelemek için AES kullanıyor. Bu hangi tip algoritmadır?",
+      "explanation": "Doğru cevap: Simetrik şifreleme. AES gizlilik için yaygın kullanılan blok şifrelemedir. Yanlış: Asimetrik algoritmalar farklı anahtar çifti kullanır. Yanlış: Hash algoritmaları şifreleme değil tek yönlü özet üretir. Yanlış: Fiziksel kilitler kriptografi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Simetrik şifreleme algoritması",
+        "is_correct": true
+      },
+      {
+        "text": "Asimetrik şifreleme algoritması",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca hash algoritması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece fiziksel kilit sistemi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir e-ticaret platformu, Ankara bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üniversite, Ankara bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir sigorta firması, Brüksel bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir sigorta firması, Leuven bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir banka, Leuven bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir fintech startup, İstanbul ofisinde fidye yazılımı saldırısına uğruyor. Olay müdahalesinde ilk adım nedir?",
+      "explanation": "Doğru cevap: Olayı tespit ve tanımlama. IR süreci olayın doğrulanmasıyla başlar. Yanlış: Fidye ödemek önerilen ilk adım değildir. Yanlış: Saldırganla iletişim risklidir. Yanlış: Hiçbir şey yapmamak daha büyük zararlara yol açar.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Olayı tespit edip tanımlamak",
+        "is_correct": true
+      },
+      {
+        "text": "Hemen fidyeyi ödemek",
+        "is_correct": false
+      },
+      {
+        "text": "Saldırganla doğrudan iletişime geçmek",
+        "is_correct": false
+      },
+      {
+        "text": "Hiçbir şey yapmamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir banka, Brüksel bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir telekom operatörü, İstanbul bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir fintech startup, Hanoi bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir kamu kurumu, Ankara bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üretim şirketi, New York lokasyonunda bilgi güvenliği programı kuruyor. Bu programın en önemli amacı aşağıdakilerden hangisidir?",
+      "explanation": "Doğru cevap: Kurumsal hedeflerle uyumlu varlık koruması. Güvenlik programı stratejik uyum ve risk azaltmayı sağlar. Yanlış: Mola süreleri güvenlik programının konusu değildir. Yanlış: Logo renkleri bilgi güvenliğiyle ilgisizdir. Yanlış: Tüm kararların güvenliğe devri pratik değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kurumsal hedeflerle uyumlu bilgi varlıklarının korunması",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece çalışanların mola sürelerini düzenlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kurum logosunun renklerini değiştirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm iş kararlarını güvenlik ekibine devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir sigorta firması, Brüksel ofisinde kritik sistemlere erişim için çok faktörlü kimlik doğrulama uyguluyor. Bu hangi kontrolün örneğidir?",
+      "explanation": "Doğru cevap: Kimlik doğrulama kontrolü. Çok faktörlü doğrulama, kullanıcı kimliğini kanıtlamanın güçlü yoludur. Yanlış: Fiziksel güvenlik farklı bir katmandır. Yanlış: Sosyal etkinlik kontrolleri bilgi güvenliği değildir. Yanlış: Muhasebe kontrolleri mali süreçlerle ilgilidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kimlik doğrulama kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca fiziksel güvenlik kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sosyal etkinlik kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece muhasebe kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir kamu kurumu, Hong Kong veri merkezinde ağ güvenliği denetimi yapılıyor. Ağ segmentasyonu uygulanmazsa en büyük risk nedir?",
+      "explanation": "Doğru cevap: Saldırganların yayılması. Segmentasyon güvenlik ihlallerinin yayılmasını sınırlar. Yanlış: Yemeklerin soğuması bilgi güvenliği riski değildir. Yanlış: Çalışanların geç gelmesi ağ segmentasyonu ile ilgili değildir. Yanlış: Yazıcı markaları segmentasyon kontrolü değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Saldırganların bir sistemden diğerine kolayca yayılması",
+        "is_correct": true
+      },
+      {
+        "text": "Yemekhanede yemeklerin soğuması",
+        "is_correct": false
+      },
+      {
+        "text": "Çalışanların geç gelmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcı markalarının farklı olması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir banka, Leuven şubesinde müşteri verilerini şifrelemek için AES kullanıyor. Bu hangi tip algoritmadır?",
+      "explanation": "Doğru cevap: Simetrik şifreleme. AES gizlilik için yaygın kullanılan blok şifrelemedir. Yanlış: Asimetrik algoritmalar farklı anahtar çifti kullanır. Yanlış: Hash algoritmaları şifreleme değil tek yönlü özet üretir. Yanlış: Fiziksel kilitler kriptografi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Simetrik şifreleme algoritması",
+        "is_correct": true
+      },
+      {
+        "text": "Asimetrik şifreleme algoritması",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca hash algoritması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece fiziksel kilit sistemi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir sigorta firması, Leuven bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üniversite, Hong Kong bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir kamu kurumu, Leuven bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir banka, Hong Kong bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir e-ticaret platformu, Leuven bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir banka, Hong Kong ofisinde fidye yazılımı saldırısına uğruyor. Olay müdahalesinde ilk adım nedir?",
+      "explanation": "Doğru cevap: Olayı tespit ve tanımlama. IR süreci olayın doğrulanmasıyla başlar. Yanlış: Fidye ödemek önerilen ilk adım değildir. Yanlış: Saldırganla iletişim risklidir. Yanlış: Hiçbir şey yapmamak daha büyük zararlara yol açar.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Olayı tespit edip tanımlamak",
+        "is_correct": true
+      },
+      {
+        "text": "Hemen fidyeyi ödemek",
+        "is_correct": false
+      },
+      {
+        "text": "Saldırganla doğrudan iletişime geçmek",
+        "is_correct": false
+      },
+      {
+        "text": "Hiçbir şey yapmamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir e-ticaret platformu, New York bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir banka, Leuven bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir kamu kurumu, Brüksel bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir kamu kurumu, New York bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir e-ticaret platformu, Hong Kong lokasyonunda bilgi güvenliği programı kuruyor. Bu programın en önemli amacı aşağıdakilerden hangisidir?",
+      "explanation": "Doğru cevap: Kurumsal hedeflerle uyumlu varlık koruması. Güvenlik programı stratejik uyum ve risk azaltmayı sağlar. Yanlış: Mola süreleri güvenlik programının konusu değildir. Yanlış: Logo renkleri bilgi güvenliğiyle ilgisizdir. Yanlış: Tüm kararların güvenliğe devri pratik değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kurumsal hedeflerle uyumlu bilgi varlıklarının korunması",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece çalışanların mola sürelerini düzenlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kurum logosunun renklerini değiştirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm iş kararlarını güvenlik ekibine devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üretim şirketi, New York ofisinde kritik sistemlere erişim için çok faktörlü kimlik doğrulama uyguluyor. Bu hangi kontrolün örneğidir?",
+      "explanation": "Doğru cevap: Kimlik doğrulama kontrolü. Çok faktörlü doğrulama, kullanıcı kimliğini kanıtlamanın güçlü yoludur. Yanlış: Fiziksel güvenlik farklı bir katmandır. Yanlış: Sosyal etkinlik kontrolleri bilgi güvenliği değildir. Yanlış: Muhasebe kontrolleri mali süreçlerle ilgilidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kimlik doğrulama kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca fiziksel güvenlik kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sosyal etkinlik kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece muhasebe kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir telekom operatörü, İstanbul veri merkezinde ağ güvenliği denetimi yapılıyor. Ağ segmentasyonu uygulanmazsa en büyük risk nedir?",
+      "explanation": "Doğru cevap: Saldırganların yayılması. Segmentasyon güvenlik ihlallerinin yayılmasını sınırlar. Yanlış: Yemeklerin soğuması bilgi güvenliği riski değildir. Yanlış: Çalışanların geç gelmesi ağ segmentasyonu ile ilgili değildir. Yanlış: Yazıcı markaları segmentasyon kontrolü değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Saldırganların bir sistemden diğerine kolayca yayılması",
+        "is_correct": true
+      },
+      {
+        "text": "Yemekhanede yemeklerin soğuması",
+        "is_correct": false
+      },
+      {
+        "text": "Çalışanların geç gelmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcı markalarının farklı olması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir telekom operatörü, Hanoi şubesinde müşteri verilerini şifrelemek için AES kullanıyor. Bu hangi tip algoritmadır?",
+      "explanation": "Doğru cevap: Simetrik şifreleme. AES gizlilik için yaygın kullanılan blok şifrelemedir. Yanlış: Asimetrik algoritmalar farklı anahtar çifti kullanır. Yanlış: Hash algoritmaları şifreleme değil tek yönlü özet üretir. Yanlış: Fiziksel kilitler kriptografi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Simetrik şifreleme algoritması",
+        "is_correct": true
+      },
+      {
+        "text": "Asimetrik şifreleme algoritması",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca hash algoritması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece fiziksel kilit sistemi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üniversite, Ankara bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir banka, New York bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir kamu kurumu, New York bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir sigorta firması, Leuven bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir kamu kurumu, Ankara bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir banka, İstanbul ofisinde fidye yazılımı saldırısına uğruyor. Olay müdahalesinde ilk adım nedir?",
+      "explanation": "Doğru cevap: Olayı tespit ve tanımlama. IR süreci olayın doğrulanmasıyla başlar. Yanlış: Fidye ödemek önerilen ilk adım değildir. Yanlış: Saldırganla iletişim risklidir. Yanlış: Hiçbir şey yapmamak daha büyük zararlara yol açar.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Olayı tespit edip tanımlamak",
+        "is_correct": true
+      },
+      {
+        "text": "Hemen fidyeyi ödemek",
+        "is_correct": false
+      },
+      {
+        "text": "Saldırganla doğrudan iletişime geçmek",
+        "is_correct": false
+      },
+      {
+        "text": "Hiçbir şey yapmamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üretim şirketi, Hong Kong bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir sigorta firması, Hanoi bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir banka, Hong Kong bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üretim şirketi, Brüksel bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir telekom operatörü, İstanbul lokasyonunda bilgi güvenliği programı kuruyor. Bu programın en önemli amacı aşağıdakilerden hangisidir?",
+      "explanation": "Doğru cevap: Kurumsal hedeflerle uyumlu varlık koruması. Güvenlik programı stratejik uyum ve risk azaltmayı sağlar. Yanlış: Mola süreleri güvenlik programının konusu değildir. Yanlış: Logo renkleri bilgi güvenliğiyle ilgisizdir. Yanlış: Tüm kararların güvenliğe devri pratik değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kurumsal hedeflerle uyumlu bilgi varlıklarının korunması",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece çalışanların mola sürelerini düzenlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kurum logosunun renklerini değiştirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm iş kararlarını güvenlik ekibine devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir e-ticaret platformu, Hanoi ofisinde kritik sistemlere erişim için çok faktörlü kimlik doğrulama uyguluyor. Bu hangi kontrolün örneğidir?",
+      "explanation": "Doğru cevap: Kimlik doğrulama kontrolü. Çok faktörlü doğrulama, kullanıcı kimliğini kanıtlamanın güçlü yoludur. Yanlış: Fiziksel güvenlik farklı bir katmandır. Yanlış: Sosyal etkinlik kontrolleri bilgi güvenliği değildir. Yanlış: Muhasebe kontrolleri mali süreçlerle ilgilidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kimlik doğrulama kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca fiziksel güvenlik kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sosyal etkinlik kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece muhasebe kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir telekom operatörü, İstanbul veri merkezinde ağ güvenliği denetimi yapılıyor. Ağ segmentasyonu uygulanmazsa en büyük risk nedir?",
+      "explanation": "Doğru cevap: Saldırganların yayılması. Segmentasyon güvenlik ihlallerinin yayılmasını sınırlar. Yanlış: Yemeklerin soğuması bilgi güvenliği riski değildir. Yanlış: Çalışanların geç gelmesi ağ segmentasyonu ile ilgili değildir. Yanlış: Yazıcı markaları segmentasyon kontrolü değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Saldırganların bir sistemden diğerine kolayca yayılması",
+        "is_correct": true
+      },
+      {
+        "text": "Yemekhanede yemeklerin soğuması",
+        "is_correct": false
+      },
+      {
+        "text": "Çalışanların geç gelmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcı markalarının farklı olması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir telekom operatörü, New York şubesinde müşteri verilerini şifrelemek için AES kullanıyor. Bu hangi tip algoritmadır?",
+      "explanation": "Doğru cevap: Simetrik şifreleme. AES gizlilik için yaygın kullanılan blok şifrelemedir. Yanlış: Asimetrik algoritmalar farklı anahtar çifti kullanır. Yanlış: Hash algoritmaları şifreleme değil tek yönlü özet üretir. Yanlış: Fiziksel kilitler kriptografi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Simetrik şifreleme algoritması",
+        "is_correct": true
+      },
+      {
+        "text": "Asimetrik şifreleme algoritması",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca hash algoritması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece fiziksel kilit sistemi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üretim şirketi, Leuven bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir kamu kurumu, Brüksel bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir telekom operatörü, Leuven bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir kamu kurumu, Ankara bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir fintech startup, İstanbul bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir telekom operatörü, Hanoi ofisinde fidye yazılımı saldırısına uğruyor. Olay müdahalesinde ilk adım nedir?",
+      "explanation": "Doğru cevap: Olayı tespit ve tanımlama. IR süreci olayın doğrulanmasıyla başlar. Yanlış: Fidye ödemek önerilen ilk adım değildir. Yanlış: Saldırganla iletişim risklidir. Yanlış: Hiçbir şey yapmamak daha büyük zararlara yol açar.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Olayı tespit edip tanımlamak",
+        "is_correct": true
+      },
+      {
+        "text": "Hemen fidyeyi ödemek",
+        "is_correct": false
+      },
+      {
+        "text": "Saldırganla doğrudan iletişime geçmek",
+        "is_correct": false
+      },
+      {
+        "text": "Hiçbir şey yapmamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üretim şirketi, Hanoi bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir fintech startup, Ankara bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir telekom operatörü, Hanoi bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir sigorta firması, İstanbul bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir fintech startup, Brüksel lokasyonunda bilgi güvenliği programı kuruyor. Bu programın en önemli amacı aşağıdakilerden hangisidir?",
+      "explanation": "Doğru cevap: Kurumsal hedeflerle uyumlu varlık koruması. Güvenlik programı stratejik uyum ve risk azaltmayı sağlar. Yanlış: Mola süreleri güvenlik programının konusu değildir. Yanlış: Logo renkleri bilgi güvenliğiyle ilgisizdir. Yanlış: Tüm kararların güvenliğe devri pratik değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kurumsal hedeflerle uyumlu bilgi varlıklarının korunması",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece çalışanların mola sürelerini düzenlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kurum logosunun renklerini değiştirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm iş kararlarını güvenlik ekibine devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir e-ticaret platformu, New York ofisinde kritik sistemlere erişim için çok faktörlü kimlik doğrulama uyguluyor. Bu hangi kontrolün örneğidir?",
+      "explanation": "Doğru cevap: Kimlik doğrulama kontrolü. Çok faktörlü doğrulama, kullanıcı kimliğini kanıtlamanın güçlü yoludur. Yanlış: Fiziksel güvenlik farklı bir katmandır. Yanlış: Sosyal etkinlik kontrolleri bilgi güvenliği değildir. Yanlış: Muhasebe kontrolleri mali süreçlerle ilgilidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kimlik doğrulama kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca fiziksel güvenlik kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sosyal etkinlik kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece muhasebe kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir telekom operatörü, Ankara veri merkezinde ağ güvenliği denetimi yapılıyor. Ağ segmentasyonu uygulanmazsa en büyük risk nedir?",
+      "explanation": "Doğru cevap: Saldırganların yayılması. Segmentasyon güvenlik ihlallerinin yayılmasını sınırlar. Yanlış: Yemeklerin soğuması bilgi güvenliği riski değildir. Yanlış: Çalışanların geç gelmesi ağ segmentasyonu ile ilgili değildir. Yanlış: Yazıcı markaları segmentasyon kontrolü değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Saldırganların bir sistemden diğerine kolayca yayılması",
+        "is_correct": true
+      },
+      {
+        "text": "Yemekhanede yemeklerin soğuması",
+        "is_correct": false
+      },
+      {
+        "text": "Çalışanların geç gelmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcı markalarının farklı olması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir e-ticaret platformu, İstanbul şubesinde müşteri verilerini şifrelemek için AES kullanıyor. Bu hangi tip algoritmadır?",
+      "explanation": "Doğru cevap: Simetrik şifreleme. AES gizlilik için yaygın kullanılan blok şifrelemedir. Yanlış: Asimetrik algoritmalar farklı anahtar çifti kullanır. Yanlış: Hash algoritmaları şifreleme değil tek yönlü özet üretir. Yanlış: Fiziksel kilitler kriptografi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Simetrik şifreleme algoritması",
+        "is_correct": true
+      },
+      {
+        "text": "Asimetrik şifreleme algoritması",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca hash algoritması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece fiziksel kilit sistemi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir e-ticaret platformu, İstanbul bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir sigorta firması, New York bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üniversite, Ankara bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir sigorta firması, Brüksel bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üniversite, Brüksel bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir kamu kurumu, İstanbul ofisinde fidye yazılımı saldırısına uğruyor. Olay müdahalesinde ilk adım nedir?",
+      "explanation": "Doğru cevap: Olayı tespit ve tanımlama. IR süreci olayın doğrulanmasıyla başlar. Yanlış: Fidye ödemek önerilen ilk adım değildir. Yanlış: Saldırganla iletişim risklidir. Yanlış: Hiçbir şey yapmamak daha büyük zararlara yol açar.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Olayı tespit edip tanımlamak",
+        "is_correct": true
+      },
+      {
+        "text": "Hemen fidyeyi ödemek",
+        "is_correct": false
+      },
+      {
+        "text": "Saldırganla doğrudan iletişime geçmek",
+        "is_correct": false
+      },
+      {
+        "text": "Hiçbir şey yapmamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir fintech startup, İstanbul bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir e-ticaret platformu, İstanbul bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üniversite, Ankara bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üretim şirketi, Hong Kong bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üretim şirketi, Hanoi lokasyonunda bilgi güvenliği programı kuruyor. Bu programın en önemli amacı aşağıdakilerden hangisidir?",
+      "explanation": "Doğru cevap: Kurumsal hedeflerle uyumlu varlık koruması. Güvenlik programı stratejik uyum ve risk azaltmayı sağlar. Yanlış: Mola süreleri güvenlik programının konusu değildir. Yanlış: Logo renkleri bilgi güvenliğiyle ilgisizdir. Yanlış: Tüm kararların güvenliğe devri pratik değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kurumsal hedeflerle uyumlu bilgi varlıklarının korunması",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece çalışanların mola sürelerini düzenlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kurum logosunun renklerini değiştirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm iş kararlarını güvenlik ekibine devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üniversite, Hong Kong ofisinde kritik sistemlere erişim için çok faktörlü kimlik doğrulama uyguluyor. Bu hangi kontrolün örneğidir?",
+      "explanation": "Doğru cevap: Kimlik doğrulama kontrolü. Çok faktörlü doğrulama, kullanıcı kimliğini kanıtlamanın güçlü yoludur. Yanlış: Fiziksel güvenlik farklı bir katmandır. Yanlış: Sosyal etkinlik kontrolleri bilgi güvenliği değildir. Yanlış: Muhasebe kontrolleri mali süreçlerle ilgilidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kimlik doğrulama kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca fiziksel güvenlik kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sosyal etkinlik kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece muhasebe kontrolü",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir e-ticaret platformu, İstanbul veri merkezinde ağ güvenliği denetimi yapılıyor. Ağ segmentasyonu uygulanmazsa en büyük risk nedir?",
+      "explanation": "Doğru cevap: Saldırganların yayılması. Segmentasyon güvenlik ihlallerinin yayılmasını sınırlar. Yanlış: Yemeklerin soğuması bilgi güvenliği riski değildir. Yanlış: Çalışanların geç gelmesi ağ segmentasyonu ile ilgili değildir. Yanlış: Yazıcı markaları segmentasyon kontrolü değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Saldırganların bir sistemden diğerine kolayca yayılması",
+        "is_correct": true
+      },
+      {
+        "text": "Yemekhanede yemeklerin soğuması",
+        "is_correct": false
+      },
+      {
+        "text": "Çalışanların geç gelmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece yazıcı markalarının farklı olması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üretim şirketi, New York şubesinde müşteri verilerini şifrelemek için AES kullanıyor. Bu hangi tip algoritmadır?",
+      "explanation": "Doğru cevap: Simetrik şifreleme. AES gizlilik için yaygın kullanılan blok şifrelemedir. Yanlış: Asimetrik algoritmalar farklı anahtar çifti kullanır. Yanlış: Hash algoritmaları şifreleme değil tek yönlü özet üretir. Yanlış: Fiziksel kilitler kriptografi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Simetrik şifreleme algoritması",
+        "is_correct": true
+      },
+      {
+        "text": "Asimetrik şifreleme algoritması",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca hash algoritması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece fiziksel kilit sistemi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir telekom operatörü, Leuven bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üretim şirketi, Leuven bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üretim şirketi, Leuven bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir telekom operatörü, Leuven bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir fintech startup, Hong Kong bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir kamu kurumu, İstanbul ofisinde fidye yazılımı saldırısına uğruyor. Olay müdahalesinde ilk adım nedir?",
+      "explanation": "Doğru cevap: Olayı tespit ve tanımlama. IR süreci olayın doğrulanmasıyla başlar. Yanlış: Fidye ödemek önerilen ilk adım değildir. Yanlış: Saldırganla iletişim risklidir. Yanlış: Hiçbir şey yapmamak daha büyük zararlara yol açar.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Olayı tespit edip tanımlamak",
+        "is_correct": true
+      },
+      {
+        "text": "Hemen fidyeyi ödemek",
+        "is_correct": false
+      },
+      {
+        "text": "Saldırganla doğrudan iletişime geçmek",
+        "is_correct": false
+      },
+      {
+        "text": "Hiçbir şey yapmamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir e-ticaret platformu, Leuven bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir telekom operatörü, Leuven bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir fintech startup, İstanbul bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üretim şirketi, Hanoi bulut hizmeti sağlayıcısı seçiyor. Denetçi üçüncü taraf güvenliği için ilk olarak neye bakmalıdır?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporları. Bu raporlar sağlayıcının kontrollerine güvence verir. Yanlış: Logo güvenlik değerlendirmesi sağlamaz. Yanlış: Kahve makinesi sayısı ilgisizdir. Yanlış: Tatil politikaları güvenlik güvencesi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Hizmet sağlayıcının bağımsız denetim raporlarına (ör. SOC 2)",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece şirket logosuna",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kahve makinelerinin sayısına",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca tatil politikalarına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir üretim şirketi, İstanbul lokasyonunda bilgi güvenliği programı kuruyor. Bu programın en önemli amacı aşağıdakilerden hangisidir?",
+      "explanation": "Doğru cevap: Kurumsal hedeflerle uyumlu varlık koruması. Güvenlik programı stratejik uyum ve risk azaltmayı sağlar. Yanlış: Mola süreleri güvenlik programının konusu değildir. Yanlış: Logo renkleri bilgi güvenliğiyle ilgisizdir. Yanlış: Tüm kararların güvenliğe devri pratik değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kurumsal hedeflerle uyumlu bilgi varlıklarının korunması",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece çalışanların mola sürelerini düzenlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kurum logosunun renklerini değiştirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm iş kararlarını güvenlik ekibine devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 205,
+      "text": "Bir kamu kurumu, Ankara ofisinde kritik sistemlere erişim için çok faktörlü kimlik doğrulama uyguluyor. Bu hangi kontrolün örneğidir?",
+      "explanation": "Doğru cevap: Kimlik doğrulama kontrolü. Çok faktörlü doğrulama, kullanıcı kimliğini kanıtlamanın güçlü yoludur. Yanlış: Fiziksel güvenlik farklı bir katmandır. Yanlış: Sosyal etkinlik kontrolleri bilgi güvenliği değildir. Yanlış: Muhasebe kontrolleri mali süreçlerle ilgilidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Kimlik doğrulama kontrolü",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca fiziksel güvenlik kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece sosyal etkinlik kontrolü",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece muhasebe kontrolü",
+        "is_correct": false
+      }
+    ]
+  }
+]

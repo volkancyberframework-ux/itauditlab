@@ -1,0 +1,2802 @@
+[
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Brüksel merkezli Bir banka IT yönetişim çerçevesini kuruyor. Kurumsal IT yönetişiminin temel amacı aşağıdakilerden hangisidir?",
+      "explanation": "Doğru cevap: IT yatırımlarının iş hedefleriyle uyumlu yönetilmesi. EGIT'in amacı, teknoloji kaynaklarının iş stratejisine katkı sağlamasıdır. Yanlış: Maliyetleri kısmak tek başına yönetişim değildir; değer yaratma ve risk yönetimi de gerekir. Yanlış: Kararların sadece CIO’ya bırakılması iyi yönetişim değil, tek noktaya bağımlılıktır. Yanlış: Tüm kontrolleri denetçilere bırakmak yönetişim değil, aşırı kontrolcülüktür.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "IT yatırımlarının iş hedefleriyle uyumlu ve değer yaratan şekilde yönetilmesi",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece IT maliyetlerinin en düşük seviyede tutulması",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm teknolojik kararların sadece CIO tarafından verilmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Her projede tüm kontrollerin denetçiler tarafından belirlenmesi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir e-ticaret firması, New York ofisinde IT süreçlerini iyileştirmek istiyor. COBIT veya ITIL gibi frameworklerin en önemli faydası nedir?",
+      "explanation": "Doğru cevap: Süreçlerin standardizasyonu. Frameworkler kurumlar arası kıyaslama, olgunluk değerlendirmesi ve iyi uygulamalar için referans sağlar. Yanlış: İç prosedürleri gizlemek framework amacı değildir. Yanlış: Denetim bulgularını yok saymak çerçevenin ruhuna aykırıdır. Yanlış: Outsourcing kararı frameworklerin amacı değildir; sadece bir stratejidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Uluslararası kabul görmüş iyi uygulamalarla süreçleri standardize etmek",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca şirketin iç prosedürlerini gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Denetim bulgularını rapordan tamamen kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm yazılım geliştirmeyi dış kaynaklara devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir telekom operatörü bilgi güvenliği politikasını güncelliyor. Politika belgesi ile prosedür arasındaki temel fark nedir?",
+      "explanation": "Doğru cevap: Politika yüksek seviyede prensiplerdir; prosedürler ise uygulanabilir detayları tanımlar. Bu ayrım sayesinde hem yönetim vizyonu hem de operasyonel adımlar netleşir. Yanlış: Politika teknik detay içermez; bu prosedürün işidir. Yanlış: Politikalar tüm organizasyon için bağlayıcıdır; sadece IT için değil. Yanlış: Politika gizli değildir; paydaşlara açıklanır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Politika üst düzey yönlendirici prensipler sunar; prosedür ise adım adım uygulamayı tanımlar",
+        "is_correct": true
+      },
+      {
+        "text": "Politika ayrıntılı teknik yönergeleri içerir; prosedür sadece vizyonu gösterir",
+        "is_correct": false
+      },
+      {
+        "text": "Politika yalnızca IT departmanı için geçerlidir; prosedür herkes için",
+        "is_correct": false
+      },
+      {
+        "text": "Politika gizli tutulur; prosedür kamuya açıklanır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir e-ticaret firması New York ofisinde görevler ayrılığı prensibini uygularsa temel amaç nedir?",
+      "explanation": "Doğru cevap: Görevler ayrılığı hataları ve suistimalleri engeller. Yetki ve sorumluluk farklı kişiler arasında bölünerek iç kontrol güçlendirilir. Yanlış: İzin yönetimi görevler ayrılığıyla ilgili değildir. Yanlış: Bütçe onaylarını IT’ye devretmek bağımsızlığı azaltır. Yanlış: Raporlamayı sadece denetime bağlamak yönetişimde dengesizlik yaratır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Tek bir kişinin hem işlemi başlatıp hem onaylamasını engelleyerek hata ve kötüye kullanımı azaltmak",
+        "is_correct": true
+      },
+      {
+        "text": "Çalışanların tüm izinlerini aynı kişiye kullandırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Bütçe onaylarını tamamen IT departmanına devretmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm raporlamayı sadece denetim ekibine bağlamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir banka Leuven ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir üretim fabrikası, Brüksel lokasyonunda kurumsal risk yönetim süreci oluşturuyor. İlk adım hangi faaliyettir?",
+      "explanation": "Doğru cevap: Risk yönetiminin ilk adımı varlıkları tanımlamaktır. Hangi varlıklar korunacak bilinmeden tehditler ve zafiyetler değerlendirilemez. Yanlış: Risk cevap planı varlık ve tehditler belirlendikten sonra gelir. Yanlış: Kontrol etkinliği ölçümü sonraki adımdır. Yanlış: Raporlama en son safhadır; önce risk analizi yapılır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Varlıkların ve kritik kaynakların tanımlanması",
+        "is_correct": true
+      },
+      {
+        "text": "Risk cevap planlarının uygulanması",
+        "is_correct": false
+      },
+      {
+        "text": "Mevcut kontrollerin etkinliğinin ölçülmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm risklerin rapora yazılması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir banka İstanbul ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir kamu kurumu Brüksel ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir üretim fabrikası Singapur ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir enerji şirketi İstanbul ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir banka Leuven ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir e-ticaret firması Hanoi ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir telekom operatörü Ankara ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Brüksel merkezli Bir banka IT yönetişim çerçevesini kuruyor. Kurumsal IT yönetişiminin temel amacı aşağıdakilerden hangisidir?",
+      "explanation": "Doğru cevap: IT yatırımlarının iş hedefleriyle uyumlu yönetilmesi. EGIT'in amacı, teknoloji kaynaklarının iş stratejisine katkı sağlamasıdır. Yanlış: Maliyetleri kısmak tek başına yönetişim değildir; değer yaratma ve risk yönetimi de gerekir. Yanlış: Kararların sadece CIO’ya bırakılması iyi yönetişim değil, tek noktaya bağımlılıktır. Yanlış: Tüm kontrolleri denetçilere bırakmak yönetişim değil, aşırı kontrolcülüktür.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "IT yatırımlarının iş hedefleriyle uyumlu ve değer yaratan şekilde yönetilmesi",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece IT maliyetlerinin en düşük seviyede tutulması",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm teknolojik kararların sadece CIO tarafından verilmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Her projede tüm kontrollerin denetçiler tarafından belirlenmesi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir fintech girişimi, Ankara ofisinde IT süreçlerini iyileştirmek istiyor. COBIT veya ITIL gibi frameworklerin en önemli faydası nedir?",
+      "explanation": "Doğru cevap: Süreçlerin standardizasyonu. Frameworkler kurumlar arası kıyaslama, olgunluk değerlendirmesi ve iyi uygulamalar için referans sağlar. Yanlış: İç prosedürleri gizlemek framework amacı değildir. Yanlış: Denetim bulgularını yok saymak çerçevenin ruhuna aykırıdır. Yanlış: Outsourcing kararı frameworklerin amacı değildir; sadece bir stratejidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Uluslararası kabul görmüş iyi uygulamalarla süreçleri standardize etmek",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca şirketin iç prosedürlerini gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Denetim bulgularını rapordan tamamen kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm yazılım geliştirmeyi dış kaynaklara devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir banka bilgi güvenliği politikasını güncelliyor. Politika belgesi ile prosedür arasındaki temel fark nedir?",
+      "explanation": "Doğru cevap: Politika yüksek seviyede prensiplerdir; prosedürler ise uygulanabilir detayları tanımlar. Bu ayrım sayesinde hem yönetim vizyonu hem de operasyonel adımlar netleşir. Yanlış: Politika teknik detay içermez; bu prosedürün işidir. Yanlış: Politikalar tüm organizasyon için bağlayıcıdır; sadece IT için değil. Yanlış: Politika gizli değildir; paydaşlara açıklanır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Politika üst düzey yönlendirici prensipler sunar; prosedür ise adım adım uygulamayı tanımlar",
+        "is_correct": true
+      },
+      {
+        "text": "Politika ayrıntılı teknik yönergeleri içerir; prosedür sadece vizyonu gösterir",
+        "is_correct": false
+      },
+      {
+        "text": "Politika yalnızca IT departmanı için geçerlidir; prosedür herkes için",
+        "is_correct": false
+      },
+      {
+        "text": "Politika gizli tutulur; prosedür kamuya açıklanır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir kamu kurumu İstanbul ofisinde görevler ayrılığı prensibini uygularsa temel amaç nedir?",
+      "explanation": "Doğru cevap: Görevler ayrılığı hataları ve suistimalleri engeller. Yetki ve sorumluluk farklı kişiler arasında bölünerek iç kontrol güçlendirilir. Yanlış: İzin yönetimi görevler ayrılığıyla ilgili değildir. Yanlış: Bütçe onaylarını IT’ye devretmek bağımsızlığı azaltır. Yanlış: Raporlamayı sadece denetime bağlamak yönetişimde dengesizlik yaratır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Tek bir kişinin hem işlemi başlatıp hem onaylamasını engelleyerek hata ve kötüye kullanımı azaltmak",
+        "is_correct": true
+      },
+      {
+        "text": "Çalışanların tüm izinlerini aynı kişiye kullandırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Bütçe onaylarını tamamen IT departmanına devretmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm raporlamayı sadece denetim ekibine bağlamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir banka Brüksel ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir telekom operatörü, Hanoi lokasyonunda kurumsal risk yönetim süreci oluşturuyor. İlk adım hangi faaliyettir?",
+      "explanation": "Doğru cevap: Risk yönetiminin ilk adımı varlıkları tanımlamaktır. Hangi varlıklar korunacak bilinmeden tehditler ve zafiyetler değerlendirilemez. Yanlış: Risk cevap planı varlık ve tehditler belirlendikten sonra gelir. Yanlış: Kontrol etkinliği ölçümü sonraki adımdır. Yanlış: Raporlama en son safhadır; önce risk analizi yapılır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Varlıkların ve kritik kaynakların tanımlanması",
+        "is_correct": true
+      },
+      {
+        "text": "Risk cevap planlarının uygulanması",
+        "is_correct": false
+      },
+      {
+        "text": "Mevcut kontrollerin etkinliğinin ölçülmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm risklerin rapora yazılması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir fintech girişimi Brüksel ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir fintech girişimi New York ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir banka New York ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir sigorta şirketi Brüksel ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir fintech girişimi İstanbul ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir üretim fabrikası Ankara ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir telekom operatörü New York ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Singapur merkezli Bir telekom operatörü IT yönetişim çerçevesini kuruyor. Kurumsal IT yönetişiminin temel amacı aşağıdakilerden hangisidir?",
+      "explanation": "Doğru cevap: IT yatırımlarının iş hedefleriyle uyumlu yönetilmesi. EGIT'in amacı, teknoloji kaynaklarının iş stratejisine katkı sağlamasıdır. Yanlış: Maliyetleri kısmak tek başına yönetişim değildir; değer yaratma ve risk yönetimi de gerekir. Yanlış: Kararların sadece CIO’ya bırakılması iyi yönetişim değil, tek noktaya bağımlılıktır. Yanlış: Tüm kontrolleri denetçilere bırakmak yönetişim değil, aşırı kontrolcülüktür.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "IT yatırımlarının iş hedefleriyle uyumlu ve değer yaratan şekilde yönetilmesi",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece IT maliyetlerinin en düşük seviyede tutulması",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm teknolojik kararların sadece CIO tarafından verilmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Her projede tüm kontrollerin denetçiler tarafından belirlenmesi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir fintech girişimi, Hanoi ofisinde IT süreçlerini iyileştirmek istiyor. COBIT veya ITIL gibi frameworklerin en önemli faydası nedir?",
+      "explanation": "Doğru cevap: Süreçlerin standardizasyonu. Frameworkler kurumlar arası kıyaslama, olgunluk değerlendirmesi ve iyi uygulamalar için referans sağlar. Yanlış: İç prosedürleri gizlemek framework amacı değildir. Yanlış: Denetim bulgularını yok saymak çerçevenin ruhuna aykırıdır. Yanlış: Outsourcing kararı frameworklerin amacı değildir; sadece bir stratejidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Uluslararası kabul görmüş iyi uygulamalarla süreçleri standardize etmek",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca şirketin iç prosedürlerini gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Denetim bulgularını rapordan tamamen kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm yazılım geliştirmeyi dış kaynaklara devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir telekom operatörü bilgi güvenliği politikasını güncelliyor. Politika belgesi ile prosedür arasındaki temel fark nedir?",
+      "explanation": "Doğru cevap: Politika yüksek seviyede prensiplerdir; prosedürler ise uygulanabilir detayları tanımlar. Bu ayrım sayesinde hem yönetim vizyonu hem de operasyonel adımlar netleşir. Yanlış: Politika teknik detay içermez; bu prosedürün işidir. Yanlış: Politikalar tüm organizasyon için bağlayıcıdır; sadece IT için değil. Yanlış: Politika gizli değildir; paydaşlara açıklanır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Politika üst düzey yönlendirici prensipler sunar; prosedür ise adım adım uygulamayı tanımlar",
+        "is_correct": true
+      },
+      {
+        "text": "Politika ayrıntılı teknik yönergeleri içerir; prosedür sadece vizyonu gösterir",
+        "is_correct": false
+      },
+      {
+        "text": "Politika yalnızca IT departmanı için geçerlidir; prosedür herkes için",
+        "is_correct": false
+      },
+      {
+        "text": "Politika gizli tutulur; prosedür kamuya açıklanır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir banka New York ofisinde görevler ayrılığı prensibini uygularsa temel amaç nedir?",
+      "explanation": "Doğru cevap: Görevler ayrılığı hataları ve suistimalleri engeller. Yetki ve sorumluluk farklı kişiler arasında bölünerek iç kontrol güçlendirilir. Yanlış: İzin yönetimi görevler ayrılığıyla ilgili değildir. Yanlış: Bütçe onaylarını IT’ye devretmek bağımsızlığı azaltır. Yanlış: Raporlamayı sadece denetime bağlamak yönetişimde dengesizlik yaratır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Tek bir kişinin hem işlemi başlatıp hem onaylamasını engelleyerek hata ve kötüye kullanımı azaltmak",
+        "is_correct": true
+      },
+      {
+        "text": "Çalışanların tüm izinlerini aynı kişiye kullandırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Bütçe onaylarını tamamen IT departmanına devretmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm raporlamayı sadece denetim ekibine bağlamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir kamu kurumu Singapur ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir e-ticaret firması, Leuven lokasyonunda kurumsal risk yönetim süreci oluşturuyor. İlk adım hangi faaliyettir?",
+      "explanation": "Doğru cevap: Risk yönetiminin ilk adımı varlıkları tanımlamaktır. Hangi varlıklar korunacak bilinmeden tehditler ve zafiyetler değerlendirilemez. Yanlış: Risk cevap planı varlık ve tehditler belirlendikten sonra gelir. Yanlış: Kontrol etkinliği ölçümü sonraki adımdır. Yanlış: Raporlama en son safhadır; önce risk analizi yapılır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Varlıkların ve kritik kaynakların tanımlanması",
+        "is_correct": true
+      },
+      {
+        "text": "Risk cevap planlarının uygulanması",
+        "is_correct": false
+      },
+      {
+        "text": "Mevcut kontrollerin etkinliğinin ölçülmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm risklerin rapora yazılması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir sigorta şirketi İstanbul ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir üretim fabrikası Brüksel ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir telekom operatörü Ankara ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir fintech girişimi Leuven ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir üretim fabrikası Ankara ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir enerji şirketi Hanoi ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir e-ticaret firması New York ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Ankara merkezli Bir üretim fabrikası IT yönetişim çerçevesini kuruyor. Kurumsal IT yönetişiminin temel amacı aşağıdakilerden hangisidir?",
+      "explanation": "Doğru cevap: IT yatırımlarının iş hedefleriyle uyumlu yönetilmesi. EGIT'in amacı, teknoloji kaynaklarının iş stratejisine katkı sağlamasıdır. Yanlış: Maliyetleri kısmak tek başına yönetişim değildir; değer yaratma ve risk yönetimi de gerekir. Yanlış: Kararların sadece CIO’ya bırakılması iyi yönetişim değil, tek noktaya bağımlılıktır. Yanlış: Tüm kontrolleri denetçilere bırakmak yönetişim değil, aşırı kontrolcülüktür.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "IT yatırımlarının iş hedefleriyle uyumlu ve değer yaratan şekilde yönetilmesi",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece IT maliyetlerinin en düşük seviyede tutulması",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm teknolojik kararların sadece CIO tarafından verilmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Her projede tüm kontrollerin denetçiler tarafından belirlenmesi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir üretim fabrikası, İstanbul ofisinde IT süreçlerini iyileştirmek istiyor. COBIT veya ITIL gibi frameworklerin en önemli faydası nedir?",
+      "explanation": "Doğru cevap: Süreçlerin standardizasyonu. Frameworkler kurumlar arası kıyaslama, olgunluk değerlendirmesi ve iyi uygulamalar için referans sağlar. Yanlış: İç prosedürleri gizlemek framework amacı değildir. Yanlış: Denetim bulgularını yok saymak çerçevenin ruhuna aykırıdır. Yanlış: Outsourcing kararı frameworklerin amacı değildir; sadece bir stratejidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Uluslararası kabul görmüş iyi uygulamalarla süreçleri standardize etmek",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca şirketin iç prosedürlerini gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Denetim bulgularını rapordan tamamen kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm yazılım geliştirmeyi dış kaynaklara devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir telekom operatörü bilgi güvenliği politikasını güncelliyor. Politika belgesi ile prosedür arasındaki temel fark nedir?",
+      "explanation": "Doğru cevap: Politika yüksek seviyede prensiplerdir; prosedürler ise uygulanabilir detayları tanımlar. Bu ayrım sayesinde hem yönetim vizyonu hem de operasyonel adımlar netleşir. Yanlış: Politika teknik detay içermez; bu prosedürün işidir. Yanlış: Politikalar tüm organizasyon için bağlayıcıdır; sadece IT için değil. Yanlış: Politika gizli değildir; paydaşlara açıklanır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Politika üst düzey yönlendirici prensipler sunar; prosedür ise adım adım uygulamayı tanımlar",
+        "is_correct": true
+      },
+      {
+        "text": "Politika ayrıntılı teknik yönergeleri içerir; prosedür sadece vizyonu gösterir",
+        "is_correct": false
+      },
+      {
+        "text": "Politika yalnızca IT departmanı için geçerlidir; prosedür herkes için",
+        "is_correct": false
+      },
+      {
+        "text": "Politika gizli tutulur; prosedür kamuya açıklanır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir banka Singapur ofisinde görevler ayrılığı prensibini uygularsa temel amaç nedir?",
+      "explanation": "Doğru cevap: Görevler ayrılığı hataları ve suistimalleri engeller. Yetki ve sorumluluk farklı kişiler arasında bölünerek iç kontrol güçlendirilir. Yanlış: İzin yönetimi görevler ayrılığıyla ilgili değildir. Yanlış: Bütçe onaylarını IT’ye devretmek bağımsızlığı azaltır. Yanlış: Raporlamayı sadece denetime bağlamak yönetişimde dengesizlik yaratır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Tek bir kişinin hem işlemi başlatıp hem onaylamasını engelleyerek hata ve kötüye kullanımı azaltmak",
+        "is_correct": true
+      },
+      {
+        "text": "Çalışanların tüm izinlerini aynı kişiye kullandırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Bütçe onaylarını tamamen IT departmanına devretmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm raporlamayı sadece denetim ekibine bağlamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir sigorta şirketi Leuven ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir enerji şirketi, Hanoi lokasyonunda kurumsal risk yönetim süreci oluşturuyor. İlk adım hangi faaliyettir?",
+      "explanation": "Doğru cevap: Risk yönetiminin ilk adımı varlıkları tanımlamaktır. Hangi varlıklar korunacak bilinmeden tehditler ve zafiyetler değerlendirilemez. Yanlış: Risk cevap planı varlık ve tehditler belirlendikten sonra gelir. Yanlış: Kontrol etkinliği ölçümü sonraki adımdır. Yanlış: Raporlama en son safhadır; önce risk analizi yapılır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Varlıkların ve kritik kaynakların tanımlanması",
+        "is_correct": true
+      },
+      {
+        "text": "Risk cevap planlarının uygulanması",
+        "is_correct": false
+      },
+      {
+        "text": "Mevcut kontrollerin etkinliğinin ölçülmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm risklerin rapora yazılması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir fintech girişimi İstanbul ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir kamu kurumu Hanoi ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir fintech girişimi Leuven ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir fintech girişimi Ankara ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir banka İstanbul ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir fintech girişimi İstanbul ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir banka Brüksel ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Singapur merkezli Bir üretim fabrikası IT yönetişim çerçevesini kuruyor. Kurumsal IT yönetişiminin temel amacı aşağıdakilerden hangisidir?",
+      "explanation": "Doğru cevap: IT yatırımlarının iş hedefleriyle uyumlu yönetilmesi. EGIT'in amacı, teknoloji kaynaklarının iş stratejisine katkı sağlamasıdır. Yanlış: Maliyetleri kısmak tek başına yönetişim değildir; değer yaratma ve risk yönetimi de gerekir. Yanlış: Kararların sadece CIO’ya bırakılması iyi yönetişim değil, tek noktaya bağımlılıktır. Yanlış: Tüm kontrolleri denetçilere bırakmak yönetişim değil, aşırı kontrolcülüktür.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "IT yatırımlarının iş hedefleriyle uyumlu ve değer yaratan şekilde yönetilmesi",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece IT maliyetlerinin en düşük seviyede tutulması",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm teknolojik kararların sadece CIO tarafından verilmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Her projede tüm kontrollerin denetçiler tarafından belirlenmesi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir sigorta şirketi, Leuven ofisinde IT süreçlerini iyileştirmek istiyor. COBIT veya ITIL gibi frameworklerin en önemli faydası nedir?",
+      "explanation": "Doğru cevap: Süreçlerin standardizasyonu. Frameworkler kurumlar arası kıyaslama, olgunluk değerlendirmesi ve iyi uygulamalar için referans sağlar. Yanlış: İç prosedürleri gizlemek framework amacı değildir. Yanlış: Denetim bulgularını yok saymak çerçevenin ruhuna aykırıdır. Yanlış: Outsourcing kararı frameworklerin amacı değildir; sadece bir stratejidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Uluslararası kabul görmüş iyi uygulamalarla süreçleri standardize etmek",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca şirketin iç prosedürlerini gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Denetim bulgularını rapordan tamamen kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm yazılım geliştirmeyi dış kaynaklara devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir telekom operatörü bilgi güvenliği politikasını güncelliyor. Politika belgesi ile prosedür arasındaki temel fark nedir?",
+      "explanation": "Doğru cevap: Politika yüksek seviyede prensiplerdir; prosedürler ise uygulanabilir detayları tanımlar. Bu ayrım sayesinde hem yönetim vizyonu hem de operasyonel adımlar netleşir. Yanlış: Politika teknik detay içermez; bu prosedürün işidir. Yanlış: Politikalar tüm organizasyon için bağlayıcıdır; sadece IT için değil. Yanlış: Politika gizli değildir; paydaşlara açıklanır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Politika üst düzey yönlendirici prensipler sunar; prosedür ise adım adım uygulamayı tanımlar",
+        "is_correct": true
+      },
+      {
+        "text": "Politika ayrıntılı teknik yönergeleri içerir; prosedür sadece vizyonu gösterir",
+        "is_correct": false
+      },
+      {
+        "text": "Politika yalnızca IT departmanı için geçerlidir; prosedür herkes için",
+        "is_correct": false
+      },
+      {
+        "text": "Politika gizli tutulur; prosedür kamuya açıklanır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir e-ticaret firması Hanoi ofisinde görevler ayrılığı prensibini uygularsa temel amaç nedir?",
+      "explanation": "Doğru cevap: Görevler ayrılığı hataları ve suistimalleri engeller. Yetki ve sorumluluk farklı kişiler arasında bölünerek iç kontrol güçlendirilir. Yanlış: İzin yönetimi görevler ayrılığıyla ilgili değildir. Yanlış: Bütçe onaylarını IT’ye devretmek bağımsızlığı azaltır. Yanlış: Raporlamayı sadece denetime bağlamak yönetişimde dengesizlik yaratır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Tek bir kişinin hem işlemi başlatıp hem onaylamasını engelleyerek hata ve kötüye kullanımı azaltmak",
+        "is_correct": true
+      },
+      {
+        "text": "Çalışanların tüm izinlerini aynı kişiye kullandırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Bütçe onaylarını tamamen IT departmanına devretmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm raporlamayı sadece denetim ekibine bağlamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir e-ticaret firması Hanoi ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir üretim fabrikası, Singapur lokasyonunda kurumsal risk yönetim süreci oluşturuyor. İlk adım hangi faaliyettir?",
+      "explanation": "Doğru cevap: Risk yönetiminin ilk adımı varlıkları tanımlamaktır. Hangi varlıklar korunacak bilinmeden tehditler ve zafiyetler değerlendirilemez. Yanlış: Risk cevap planı varlık ve tehditler belirlendikten sonra gelir. Yanlış: Kontrol etkinliği ölçümü sonraki adımdır. Yanlış: Raporlama en son safhadır; önce risk analizi yapılır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Varlıkların ve kritik kaynakların tanımlanması",
+        "is_correct": true
+      },
+      {
+        "text": "Risk cevap planlarının uygulanması",
+        "is_correct": false
+      },
+      {
+        "text": "Mevcut kontrollerin etkinliğinin ölçülmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm risklerin rapora yazılması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir e-ticaret firması Ankara ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir telekom operatörü Ankara ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir telekom operatörü Ankara ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir telekom operatörü Ankara ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir üretim fabrikası Brüksel ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir fintech girişimi Ankara ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir üretim fabrikası Leuven ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Ankara merkezli Bir üretim fabrikası IT yönetişim çerçevesini kuruyor. Kurumsal IT yönetişiminin temel amacı aşağıdakilerden hangisidir?",
+      "explanation": "Doğru cevap: IT yatırımlarının iş hedefleriyle uyumlu yönetilmesi. EGIT'in amacı, teknoloji kaynaklarının iş stratejisine katkı sağlamasıdır. Yanlış: Maliyetleri kısmak tek başına yönetişim değildir; değer yaratma ve risk yönetimi de gerekir. Yanlış: Kararların sadece CIO’ya bırakılması iyi yönetişim değil, tek noktaya bağımlılıktır. Yanlış: Tüm kontrolleri denetçilere bırakmak yönetişim değil, aşırı kontrolcülüktür.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "IT yatırımlarının iş hedefleriyle uyumlu ve değer yaratan şekilde yönetilmesi",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece IT maliyetlerinin en düşük seviyede tutulması",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm teknolojik kararların sadece CIO tarafından verilmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Her projede tüm kontrollerin denetçiler tarafından belirlenmesi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir kamu kurumu, Leuven ofisinde IT süreçlerini iyileştirmek istiyor. COBIT veya ITIL gibi frameworklerin en önemli faydası nedir?",
+      "explanation": "Doğru cevap: Süreçlerin standardizasyonu. Frameworkler kurumlar arası kıyaslama, olgunluk değerlendirmesi ve iyi uygulamalar için referans sağlar. Yanlış: İç prosedürleri gizlemek framework amacı değildir. Yanlış: Denetim bulgularını yok saymak çerçevenin ruhuna aykırıdır. Yanlış: Outsourcing kararı frameworklerin amacı değildir; sadece bir stratejidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Uluslararası kabul görmüş iyi uygulamalarla süreçleri standardize etmek",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca şirketin iç prosedürlerini gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Denetim bulgularını rapordan tamamen kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm yazılım geliştirmeyi dış kaynaklara devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir e-ticaret firması bilgi güvenliği politikasını güncelliyor. Politika belgesi ile prosedür arasındaki temel fark nedir?",
+      "explanation": "Doğru cevap: Politika yüksek seviyede prensiplerdir; prosedürler ise uygulanabilir detayları tanımlar. Bu ayrım sayesinde hem yönetim vizyonu hem de operasyonel adımlar netleşir. Yanlış: Politika teknik detay içermez; bu prosedürün işidir. Yanlış: Politikalar tüm organizasyon için bağlayıcıdır; sadece IT için değil. Yanlış: Politika gizli değildir; paydaşlara açıklanır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Politika üst düzey yönlendirici prensipler sunar; prosedür ise adım adım uygulamayı tanımlar",
+        "is_correct": true
+      },
+      {
+        "text": "Politika ayrıntılı teknik yönergeleri içerir; prosedür sadece vizyonu gösterir",
+        "is_correct": false
+      },
+      {
+        "text": "Politika yalnızca IT departmanı için geçerlidir; prosedür herkes için",
+        "is_correct": false
+      },
+      {
+        "text": "Politika gizli tutulur; prosedür kamuya açıklanır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir kamu kurumu Brüksel ofisinde görevler ayrılığı prensibini uygularsa temel amaç nedir?",
+      "explanation": "Doğru cevap: Görevler ayrılığı hataları ve suistimalleri engeller. Yetki ve sorumluluk farklı kişiler arasında bölünerek iç kontrol güçlendirilir. Yanlış: İzin yönetimi görevler ayrılığıyla ilgili değildir. Yanlış: Bütçe onaylarını IT’ye devretmek bağımsızlığı azaltır. Yanlış: Raporlamayı sadece denetime bağlamak yönetişimde dengesizlik yaratır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Tek bir kişinin hem işlemi başlatıp hem onaylamasını engelleyerek hata ve kötüye kullanımı azaltmak",
+        "is_correct": true
+      },
+      {
+        "text": "Çalışanların tüm izinlerini aynı kişiye kullandırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Bütçe onaylarını tamamen IT departmanına devretmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm raporlamayı sadece denetim ekibine bağlamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir enerji şirketi Singapur ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir e-ticaret firması, New York lokasyonunda kurumsal risk yönetim süreci oluşturuyor. İlk adım hangi faaliyettir?",
+      "explanation": "Doğru cevap: Risk yönetiminin ilk adımı varlıkları tanımlamaktır. Hangi varlıklar korunacak bilinmeden tehditler ve zafiyetler değerlendirilemez. Yanlış: Risk cevap planı varlık ve tehditler belirlendikten sonra gelir. Yanlış: Kontrol etkinliği ölçümü sonraki adımdır. Yanlış: Raporlama en son safhadır; önce risk analizi yapılır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Varlıkların ve kritik kaynakların tanımlanması",
+        "is_correct": true
+      },
+      {
+        "text": "Risk cevap planlarının uygulanması",
+        "is_correct": false
+      },
+      {
+        "text": "Mevcut kontrollerin etkinliğinin ölçülmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm risklerin rapora yazılması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir banka New York ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir telekom operatörü Hanoi ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir sigorta şirketi İstanbul ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir sigorta şirketi New York ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir telekom operatörü Brüksel ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir kamu kurumu Hanoi ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir üretim fabrikası Hanoi ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Singapur merkezli Bir e-ticaret firması IT yönetişim çerçevesini kuruyor. Kurumsal IT yönetişiminin temel amacı aşağıdakilerden hangisidir?",
+      "explanation": "Doğru cevap: IT yatırımlarının iş hedefleriyle uyumlu yönetilmesi. EGIT'in amacı, teknoloji kaynaklarının iş stratejisine katkı sağlamasıdır. Yanlış: Maliyetleri kısmak tek başına yönetişim değildir; değer yaratma ve risk yönetimi de gerekir. Yanlış: Kararların sadece CIO’ya bırakılması iyi yönetişim değil, tek noktaya bağımlılıktır. Yanlış: Tüm kontrolleri denetçilere bırakmak yönetişim değil, aşırı kontrolcülüktür.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "IT yatırımlarının iş hedefleriyle uyumlu ve değer yaratan şekilde yönetilmesi",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece IT maliyetlerinin en düşük seviyede tutulması",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm teknolojik kararların sadece CIO tarafından verilmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Her projede tüm kontrollerin denetçiler tarafından belirlenmesi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir kamu kurumu, New York ofisinde IT süreçlerini iyileştirmek istiyor. COBIT veya ITIL gibi frameworklerin en önemli faydası nedir?",
+      "explanation": "Doğru cevap: Süreçlerin standardizasyonu. Frameworkler kurumlar arası kıyaslama, olgunluk değerlendirmesi ve iyi uygulamalar için referans sağlar. Yanlış: İç prosedürleri gizlemek framework amacı değildir. Yanlış: Denetim bulgularını yok saymak çerçevenin ruhuna aykırıdır. Yanlış: Outsourcing kararı frameworklerin amacı değildir; sadece bir stratejidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Uluslararası kabul görmüş iyi uygulamalarla süreçleri standardize etmek",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca şirketin iç prosedürlerini gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Denetim bulgularını rapordan tamamen kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm yazılım geliştirmeyi dış kaynaklara devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir telekom operatörü bilgi güvenliği politikasını güncelliyor. Politika belgesi ile prosedür arasındaki temel fark nedir?",
+      "explanation": "Doğru cevap: Politika yüksek seviyede prensiplerdir; prosedürler ise uygulanabilir detayları tanımlar. Bu ayrım sayesinde hem yönetim vizyonu hem de operasyonel adımlar netleşir. Yanlış: Politika teknik detay içermez; bu prosedürün işidir. Yanlış: Politikalar tüm organizasyon için bağlayıcıdır; sadece IT için değil. Yanlış: Politika gizli değildir; paydaşlara açıklanır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Politika üst düzey yönlendirici prensipler sunar; prosedür ise adım adım uygulamayı tanımlar",
+        "is_correct": true
+      },
+      {
+        "text": "Politika ayrıntılı teknik yönergeleri içerir; prosedür sadece vizyonu gösterir",
+        "is_correct": false
+      },
+      {
+        "text": "Politika yalnızca IT departmanı için geçerlidir; prosedür herkes için",
+        "is_correct": false
+      },
+      {
+        "text": "Politika gizli tutulur; prosedür kamuya açıklanır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir banka Singapur ofisinde görevler ayrılığı prensibini uygularsa temel amaç nedir?",
+      "explanation": "Doğru cevap: Görevler ayrılığı hataları ve suistimalleri engeller. Yetki ve sorumluluk farklı kişiler arasında bölünerek iç kontrol güçlendirilir. Yanlış: İzin yönetimi görevler ayrılığıyla ilgili değildir. Yanlış: Bütçe onaylarını IT’ye devretmek bağımsızlığı azaltır. Yanlış: Raporlamayı sadece denetime bağlamak yönetişimde dengesizlik yaratır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Tek bir kişinin hem işlemi başlatıp hem onaylamasını engelleyerek hata ve kötüye kullanımı azaltmak",
+        "is_correct": true
+      },
+      {
+        "text": "Çalışanların tüm izinlerini aynı kişiye kullandırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Bütçe onaylarını tamamen IT departmanına devretmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm raporlamayı sadece denetim ekibine bağlamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir kamu kurumu Leuven ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir banka, Brüksel lokasyonunda kurumsal risk yönetim süreci oluşturuyor. İlk adım hangi faaliyettir?",
+      "explanation": "Doğru cevap: Risk yönetiminin ilk adımı varlıkları tanımlamaktır. Hangi varlıklar korunacak bilinmeden tehditler ve zafiyetler değerlendirilemez. Yanlış: Risk cevap planı varlık ve tehditler belirlendikten sonra gelir. Yanlış: Kontrol etkinliği ölçümü sonraki adımdır. Yanlış: Raporlama en son safhadır; önce risk analizi yapılır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Varlıkların ve kritik kaynakların tanımlanması",
+        "is_correct": true
+      },
+      {
+        "text": "Risk cevap planlarının uygulanması",
+        "is_correct": false
+      },
+      {
+        "text": "Mevcut kontrollerin etkinliğinin ölçülmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm risklerin rapora yazılması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir fintech girişimi New York ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir fintech girişimi Brüksel ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir telekom operatörü New York ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir banka İstanbul ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir üretim fabrikası New York ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir kamu kurumu Brüksel ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir e-ticaret firması Hanoi ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "İstanbul merkezli Bir üretim fabrikası IT yönetişim çerçevesini kuruyor. Kurumsal IT yönetişiminin temel amacı aşağıdakilerden hangisidir?",
+      "explanation": "Doğru cevap: IT yatırımlarının iş hedefleriyle uyumlu yönetilmesi. EGIT'in amacı, teknoloji kaynaklarının iş stratejisine katkı sağlamasıdır. Yanlış: Maliyetleri kısmak tek başına yönetişim değildir; değer yaratma ve risk yönetimi de gerekir. Yanlış: Kararların sadece CIO’ya bırakılması iyi yönetişim değil, tek noktaya bağımlılıktır. Yanlış: Tüm kontrolleri denetçilere bırakmak yönetişim değil, aşırı kontrolcülüktür.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "IT yatırımlarının iş hedefleriyle uyumlu ve değer yaratan şekilde yönetilmesi",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece IT maliyetlerinin en düşük seviyede tutulması",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm teknolojik kararların sadece CIO tarafından verilmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Her projede tüm kontrollerin denetçiler tarafından belirlenmesi",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir üretim fabrikası, Ankara ofisinde IT süreçlerini iyileştirmek istiyor. COBIT veya ITIL gibi frameworklerin en önemli faydası nedir?",
+      "explanation": "Doğru cevap: Süreçlerin standardizasyonu. Frameworkler kurumlar arası kıyaslama, olgunluk değerlendirmesi ve iyi uygulamalar için referans sağlar. Yanlış: İç prosedürleri gizlemek framework amacı değildir. Yanlış: Denetim bulgularını yok saymak çerçevenin ruhuna aykırıdır. Yanlış: Outsourcing kararı frameworklerin amacı değildir; sadece bir stratejidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Uluslararası kabul görmüş iyi uygulamalarla süreçleri standardize etmek",
+        "is_correct": true
+      },
+      {
+        "text": "Yalnızca şirketin iç prosedürlerini gizlemek",
+        "is_correct": false
+      },
+      {
+        "text": "Denetim bulgularını rapordan tamamen kaldırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm yazılım geliştirmeyi dış kaynaklara devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir sigorta şirketi bilgi güvenliği politikasını güncelliyor. Politika belgesi ile prosedür arasındaki temel fark nedir?",
+      "explanation": "Doğru cevap: Politika yüksek seviyede prensiplerdir; prosedürler ise uygulanabilir detayları tanımlar. Bu ayrım sayesinde hem yönetim vizyonu hem de operasyonel adımlar netleşir. Yanlış: Politika teknik detay içermez; bu prosedürün işidir. Yanlış: Politikalar tüm organizasyon için bağlayıcıdır; sadece IT için değil. Yanlış: Politika gizli değildir; paydaşlara açıklanır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Politika üst düzey yönlendirici prensipler sunar; prosedür ise adım adım uygulamayı tanımlar",
+        "is_correct": true
+      },
+      {
+        "text": "Politika ayrıntılı teknik yönergeleri içerir; prosedür sadece vizyonu gösterir",
+        "is_correct": false
+      },
+      {
+        "text": "Politika yalnızca IT departmanı için geçerlidir; prosedür herkes için",
+        "is_correct": false
+      },
+      {
+        "text": "Politika gizli tutulur; prosedür kamuya açıklanır",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir enerji şirketi İstanbul ofisinde görevler ayrılığı prensibini uygularsa temel amaç nedir?",
+      "explanation": "Doğru cevap: Görevler ayrılığı hataları ve suistimalleri engeller. Yetki ve sorumluluk farklı kişiler arasında bölünerek iç kontrol güçlendirilir. Yanlış: İzin yönetimi görevler ayrılığıyla ilgili değildir. Yanlış: Bütçe onaylarını IT’ye devretmek bağımsızlığı azaltır. Yanlış: Raporlamayı sadece denetime bağlamak yönetişimde dengesizlik yaratır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Tek bir kişinin hem işlemi başlatıp hem onaylamasını engelleyerek hata ve kötüye kullanımı azaltmak",
+        "is_correct": true
+      },
+      {
+        "text": "Çalışanların tüm izinlerini aynı kişiye kullandırmak",
+        "is_correct": false
+      },
+      {
+        "text": "Bütçe onaylarını tamamen IT departmanına devretmek",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm raporlamayı sadece denetim ekibine bağlamak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir üretim fabrikası Brüksel ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir telekom operatörü, Ankara lokasyonunda kurumsal risk yönetim süreci oluşturuyor. İlk adım hangi faaliyettir?",
+      "explanation": "Doğru cevap: Risk yönetiminin ilk adımı varlıkları tanımlamaktır. Hangi varlıklar korunacak bilinmeden tehditler ve zafiyetler değerlendirilemez. Yanlış: Risk cevap planı varlık ve tehditler belirlendikten sonra gelir. Yanlış: Kontrol etkinliği ölçümü sonraki adımdır. Yanlış: Raporlama en son safhadır; önce risk analizi yapılır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Varlıkların ve kritik kaynakların tanımlanması",
+        "is_correct": true
+      },
+      {
+        "text": "Risk cevap planlarının uygulanması",
+        "is_correct": false
+      },
+      {
+        "text": "Mevcut kontrollerin etkinliğinin ölçülmesi",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm risklerin rapora yazılması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir e-ticaret firması İstanbul ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir enerji şirketi New York ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 202,
+      "text": "Bir banka İstanbul ofisinde dış kaynaklı hizmet alıyor. Denetçi üçüncü taraf riskini en iyi nasıl değerlendirir?",
+      "explanation": "Doğru cevap: Bağımsız denetim raporlarını incelemektir. Bu raporlar kontrollerin etkinliğine objektif güvence sağlar. Yanlış: Sözlü güvence denetlenebilirlik sağlamaz. Yanlış: Sözleşme gerekli ama tek başına risk değerlendirmesi değildir. Yanlış: Sorumluluğu tamamen devretmek regülasyonlara aykırı olabilir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Bağımsız üçüncü taraf denetim raporlarını (ör. SOC 2) incelemek",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece sözlü güvenceye dayanmak",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca sözleşme imzalamak, başka kontrol yapmamak",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm sorumluluğu hizmet sağlayıcıya devretmek",
+        "is_correct": false
+      }
+    ]
+  }
+]

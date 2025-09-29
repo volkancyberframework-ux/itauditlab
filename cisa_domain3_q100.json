@@ -1,0 +1,2802 @@
+[
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir fintech startup, Leuven lokasyonunda büyük bir IT dönüşüm projesi başlatıyor. Denetçinin proje yönetişimine bakarken ilk odak noktası ne olmalıdır?",
+      "explanation": "Doğru cevap: İş hedefleriyle uyum ve sponsor onayı. Proje yönetişiminin özü, iş gerekçesi ve hedeflerle uyumun sağlanmasıdır. Yanlış: Kullanıcıların giriş çıkış saatleri yönetişimle ilgili değildir. Yanlış: Bütçe kalemleri önemlidir ama tek başına yönetişimi göstermez. Yanlış: Ofis düzeni proje başarısı için kritik bir yönetişim kriteri değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Projenin iş hedefleriyle uyumlu olup olmadığını ve sponsor onayını doğrulamak",
+        "is_correct": true
+      },
+      {
+        "text": "Projedeki tüm kullanıcıların günlük giriş çıkış saatlerini kontrol etmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece proje bütçesindeki küçük kalemleri incelemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca projenin ofis düzenini denetlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir sigorta firması, Brüksel merkezinde yeni bir finansal sistem geliştirmek istiyor. Denetçi iş gerekçesi incelemesinde hangi faktöre en çok dikkat etmelidir?",
+      "explanation": "Doğru cevap: İş değeri ve maliyet-fayda analizi. Feasibility çalışmaları yatırımın gerekçesini destekler. Yanlış: Kişisel tercihler objektif gerekçe sağlamaz. Yanlış: Programlama dili seçimi kritik olabilir ama feasibility’nin ana konusu değildir. Yanlış: Rakiplerin ERP seçimi bağlam sağlar ama ana kriter değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Beklenen iş değeri ve maliyet-fayda analizi",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece geliştiricilerin kişisel tercihlerine",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan programlama diline",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm rakiplerin hangi ERP’yi kullandığına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir devlet kurumu, Brüksel ofisinde hızlı prototip geliştirme yaklaşımı seçti. Bu hangi SDLC modelinin örneğidir?",
+      "explanation": "Doğru cevap: RAD modeli. Hızlı prototip geliştirme ve kullanıcı geri bildirimi RAD’ın temelidir. Yanlış: Waterfall aşamalı ve katıdır; hızlı prototip yoktur. Yanlış: Test odaklı geliştirme RAD’ın yerine geçmez. Yanlış: Belgesiz yaklaşım SDLC modeli sayılmaz; risklidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Rapid Application Development (RAD) modeli",
+        "is_correct": true
+      },
+      {
+        "text": "Klasik waterfall modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece test odaklı geliştirme modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Tamamen belgesiz kaotik model",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir lojistik şirketi, Hanoi merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir devlet kurumu, Leuven merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir üretim fabrikası, Leuven merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir lojistik şirketi, İstanbul lokasyonunda yeni CRM sistemini canlıya almadan önce kullanıcı kabul testleri yapıyor. Bu hangi test aşamasıdır?",
+      "explanation": "Doğru cevap: UAT aşaması. Kullanıcıların sistemi iş süreçlerine göre test ettiği aşamadır. Yanlış: Unit test geliştiriciler tarafından yapılır; kullanıcı değil. Yanlış: Regression test eski işlevleri korumayı denetler; UAT değildir. Yanlış: Code review geliştirme kontrolüdür; kullanıcı testi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "User Acceptance Testing (UAT) aşaması",
+        "is_correct": true
+      },
+      {
+        "text": "Unit test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece regression test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece code review aşaması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir fintech startup, Leuven merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir banka Leuven ofisinde eski sistemden yeni ERP’ye geçiş yapıyor. En güvenli geçiş yöntemi hangisidir?",
+      "explanation": "Doğru cevap: Paralel geçiş. Eski sistemle eş zamanlı çalışma en güvenli geçiş yöntemidir. Yanlış: Ani geçiş test yapılmazsa ciddi riskler taşır. Yanlış: Kullanıcıları zorla geçirmek değişim yönetimini ihmal eder. Yanlış: Manuel kopyalama hata ve veri kaybı riskini artırır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Paralel geçiş yöntemi (eski ve yeni sistemin aynı anda bir süre çalıştırılması)",
+        "is_correct": true
+      },
+      {
+        "text": "Hiç test yapmadan ani geçiş",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm kullanıcıları aynı anda zorla yeni sisteme geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Veri taşımayı manuel kopyala-yapıştır ile yapmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir devlet kurumu, Ankara merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir kamu hastanesi, Ankara lokasyonunda büyük bir IT dönüşüm projesi başlatıyor. Denetçinin proje yönetişimine bakarken ilk odak noktası ne olmalıdır?",
+      "explanation": "Doğru cevap: İş hedefleriyle uyum ve sponsor onayı. Proje yönetişiminin özü, iş gerekçesi ve hedeflerle uyumun sağlanmasıdır. Yanlış: Kullanıcıların giriş çıkış saatleri yönetişimle ilgili değildir. Yanlış: Bütçe kalemleri önemlidir ama tek başına yönetişimi göstermez. Yanlış: Ofis düzeni proje başarısı için kritik bir yönetişim kriteri değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Projenin iş hedefleriyle uyumlu olup olmadığını ve sponsor onayını doğrulamak",
+        "is_correct": true
+      },
+      {
+        "text": "Projedeki tüm kullanıcıların günlük giriş çıkış saatlerini kontrol etmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece proje bütçesindeki küçük kalemleri incelemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca projenin ofis düzenini denetlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir lojistik şirketi, Brüksel merkezinde yeni bir finansal sistem geliştirmek istiyor. Denetçi iş gerekçesi incelemesinde hangi faktöre en çok dikkat etmelidir?",
+      "explanation": "Doğru cevap: İş değeri ve maliyet-fayda analizi. Feasibility çalışmaları yatırımın gerekçesini destekler. Yanlış: Kişisel tercihler objektif gerekçe sağlamaz. Yanlış: Programlama dili seçimi kritik olabilir ama feasibility’nin ana konusu değildir. Yanlış: Rakiplerin ERP seçimi bağlam sağlar ama ana kriter değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Beklenen iş değeri ve maliyet-fayda analizi",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece geliştiricilerin kişisel tercihlerine",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan programlama diline",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm rakiplerin hangi ERP’yi kullandığına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir üretim fabrikası, Hong Kong ofisinde hızlı prototip geliştirme yaklaşımı seçti. Bu hangi SDLC modelinin örneğidir?",
+      "explanation": "Doğru cevap: RAD modeli. Hızlı prototip geliştirme ve kullanıcı geri bildirimi RAD’ın temelidir. Yanlış: Waterfall aşamalı ve katıdır; hızlı prototip yoktur. Yanlış: Test odaklı geliştirme RAD’ın yerine geçmez. Yanlış: Belgesiz yaklaşım SDLC modeli sayılmaz; risklidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Rapid Application Development (RAD) modeli",
+        "is_correct": true
+      },
+      {
+        "text": "Klasik waterfall modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece test odaklı geliştirme modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Tamamen belgesiz kaotik model",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir telekom operatörü, İstanbul merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir fintech startup, Leuven merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir telekom operatörü, Hong Kong merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir lojistik şirketi, Hong Kong lokasyonunda yeni CRM sistemini canlıya almadan önce kullanıcı kabul testleri yapıyor. Bu hangi test aşamasıdır?",
+      "explanation": "Doğru cevap: UAT aşaması. Kullanıcıların sistemi iş süreçlerine göre test ettiği aşamadır. Yanlış: Unit test geliştiriciler tarafından yapılır; kullanıcı değil. Yanlış: Regression test eski işlevleri korumayı denetler; UAT değildir. Yanlış: Code review geliştirme kontrolüdür; kullanıcı testi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "User Acceptance Testing (UAT) aşaması",
+        "is_correct": true
+      },
+      {
+        "text": "Unit test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece regression test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece code review aşaması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir üretim fabrikası, Ankara merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir kamu hastanesi Brüksel ofisinde eski sistemden yeni ERP’ye geçiş yapıyor. En güvenli geçiş yöntemi hangisidir?",
+      "explanation": "Doğru cevap: Paralel geçiş. Eski sistemle eş zamanlı çalışma en güvenli geçiş yöntemidir. Yanlış: Ani geçiş test yapılmazsa ciddi riskler taşır. Yanlış: Kullanıcıları zorla geçirmek değişim yönetimini ihmal eder. Yanlış: Manuel kopyalama hata ve veri kaybı riskini artırır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Paralel geçiş yöntemi (eski ve yeni sistemin aynı anda bir süre çalıştırılması)",
+        "is_correct": true
+      },
+      {
+        "text": "Hiç test yapmadan ani geçiş",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm kullanıcıları aynı anda zorla yeni sisteme geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Veri taşımayı manuel kopyala-yapıştır ile yapmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir lojistik şirketi, Leuven merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir fintech startup, Hanoi lokasyonunda büyük bir IT dönüşüm projesi başlatıyor. Denetçinin proje yönetişimine bakarken ilk odak noktası ne olmalıdır?",
+      "explanation": "Doğru cevap: İş hedefleriyle uyum ve sponsor onayı. Proje yönetişiminin özü, iş gerekçesi ve hedeflerle uyumun sağlanmasıdır. Yanlış: Kullanıcıların giriş çıkış saatleri yönetişimle ilgili değildir. Yanlış: Bütçe kalemleri önemlidir ama tek başına yönetişimi göstermez. Yanlış: Ofis düzeni proje başarısı için kritik bir yönetişim kriteri değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Projenin iş hedefleriyle uyumlu olup olmadığını ve sponsor onayını doğrulamak",
+        "is_correct": true
+      },
+      {
+        "text": "Projedeki tüm kullanıcıların günlük giriş çıkış saatlerini kontrol etmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece proje bütçesindeki küçük kalemleri incelemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca projenin ofis düzenini denetlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir kamu hastanesi, Brüksel merkezinde yeni bir finansal sistem geliştirmek istiyor. Denetçi iş gerekçesi incelemesinde hangi faktöre en çok dikkat etmelidir?",
+      "explanation": "Doğru cevap: İş değeri ve maliyet-fayda analizi. Feasibility çalışmaları yatırımın gerekçesini destekler. Yanlış: Kişisel tercihler objektif gerekçe sağlamaz. Yanlış: Programlama dili seçimi kritik olabilir ama feasibility’nin ana konusu değildir. Yanlış: Rakiplerin ERP seçimi bağlam sağlar ama ana kriter değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Beklenen iş değeri ve maliyet-fayda analizi",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece geliştiricilerin kişisel tercihlerine",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan programlama diline",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm rakiplerin hangi ERP’yi kullandığına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir telekom operatörü, Leuven ofisinde hızlı prototip geliştirme yaklaşımı seçti. Bu hangi SDLC modelinin örneğidir?",
+      "explanation": "Doğru cevap: RAD modeli. Hızlı prototip geliştirme ve kullanıcı geri bildirimi RAD’ın temelidir. Yanlış: Waterfall aşamalı ve katıdır; hızlı prototip yoktur. Yanlış: Test odaklı geliştirme RAD’ın yerine geçmez. Yanlış: Belgesiz yaklaşım SDLC modeli sayılmaz; risklidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Rapid Application Development (RAD) modeli",
+        "is_correct": true
+      },
+      {
+        "text": "Klasik waterfall modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece test odaklı geliştirme modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Tamamen belgesiz kaotik model",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir fintech startup, İstanbul merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir sigorta firması, İstanbul merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir sigorta firması, Leuven merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir üretim fabrikası, Hong Kong lokasyonunda yeni CRM sistemini canlıya almadan önce kullanıcı kabul testleri yapıyor. Bu hangi test aşamasıdır?",
+      "explanation": "Doğru cevap: UAT aşaması. Kullanıcıların sistemi iş süreçlerine göre test ettiği aşamadır. Yanlış: Unit test geliştiriciler tarafından yapılır; kullanıcı değil. Yanlış: Regression test eski işlevleri korumayı denetler; UAT değildir. Yanlış: Code review geliştirme kontrolüdür; kullanıcı testi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "User Acceptance Testing (UAT) aşaması",
+        "is_correct": true
+      },
+      {
+        "text": "Unit test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece regression test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece code review aşaması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir kamu hastanesi, Brüksel merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir fintech startup Ankara ofisinde eski sistemden yeni ERP’ye geçiş yapıyor. En güvenli geçiş yöntemi hangisidir?",
+      "explanation": "Doğru cevap: Paralel geçiş. Eski sistemle eş zamanlı çalışma en güvenli geçiş yöntemidir. Yanlış: Ani geçiş test yapılmazsa ciddi riskler taşır. Yanlış: Kullanıcıları zorla geçirmek değişim yönetimini ihmal eder. Yanlış: Manuel kopyalama hata ve veri kaybı riskini artırır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Paralel geçiş yöntemi (eski ve yeni sistemin aynı anda bir süre çalıştırılması)",
+        "is_correct": true
+      },
+      {
+        "text": "Hiç test yapmadan ani geçiş",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm kullanıcıları aynı anda zorla yeni sisteme geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Veri taşımayı manuel kopyala-yapıştır ile yapmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir banka, New York merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir kamu hastanesi, Hong Kong lokasyonunda büyük bir IT dönüşüm projesi başlatıyor. Denetçinin proje yönetişimine bakarken ilk odak noktası ne olmalıdır?",
+      "explanation": "Doğru cevap: İş hedefleriyle uyum ve sponsor onayı. Proje yönetişiminin özü, iş gerekçesi ve hedeflerle uyumun sağlanmasıdır. Yanlış: Kullanıcıların giriş çıkış saatleri yönetişimle ilgili değildir. Yanlış: Bütçe kalemleri önemlidir ama tek başına yönetişimi göstermez. Yanlış: Ofis düzeni proje başarısı için kritik bir yönetişim kriteri değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Projenin iş hedefleriyle uyumlu olup olmadığını ve sponsor onayını doğrulamak",
+        "is_correct": true
+      },
+      {
+        "text": "Projedeki tüm kullanıcıların günlük giriş çıkış saatlerini kontrol etmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece proje bütçesindeki küçük kalemleri incelemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca projenin ofis düzenini denetlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir fintech startup, New York merkezinde yeni bir finansal sistem geliştirmek istiyor. Denetçi iş gerekçesi incelemesinde hangi faktöre en çok dikkat etmelidir?",
+      "explanation": "Doğru cevap: İş değeri ve maliyet-fayda analizi. Feasibility çalışmaları yatırımın gerekçesini destekler. Yanlış: Kişisel tercihler objektif gerekçe sağlamaz. Yanlış: Programlama dili seçimi kritik olabilir ama feasibility’nin ana konusu değildir. Yanlış: Rakiplerin ERP seçimi bağlam sağlar ama ana kriter değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Beklenen iş değeri ve maliyet-fayda analizi",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece geliştiricilerin kişisel tercihlerine",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan programlama diline",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm rakiplerin hangi ERP’yi kullandığına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir devlet kurumu, New York ofisinde hızlı prototip geliştirme yaklaşımı seçti. Bu hangi SDLC modelinin örneğidir?",
+      "explanation": "Doğru cevap: RAD modeli. Hızlı prototip geliştirme ve kullanıcı geri bildirimi RAD’ın temelidir. Yanlış: Waterfall aşamalı ve katıdır; hızlı prototip yoktur. Yanlış: Test odaklı geliştirme RAD’ın yerine geçmez. Yanlış: Belgesiz yaklaşım SDLC modeli sayılmaz; risklidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Rapid Application Development (RAD) modeli",
+        "is_correct": true
+      },
+      {
+        "text": "Klasik waterfall modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece test odaklı geliştirme modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Tamamen belgesiz kaotik model",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir devlet kurumu, Leuven merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir telekom operatörü, Brüksel merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir telekom operatörü, Leuven merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir lojistik şirketi, Brüksel lokasyonunda yeni CRM sistemini canlıya almadan önce kullanıcı kabul testleri yapıyor. Bu hangi test aşamasıdır?",
+      "explanation": "Doğru cevap: UAT aşaması. Kullanıcıların sistemi iş süreçlerine göre test ettiği aşamadır. Yanlış: Unit test geliştiriciler tarafından yapılır; kullanıcı değil. Yanlış: Regression test eski işlevleri korumayı denetler; UAT değildir. Yanlış: Code review geliştirme kontrolüdür; kullanıcı testi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "User Acceptance Testing (UAT) aşaması",
+        "is_correct": true
+      },
+      {
+        "text": "Unit test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece regression test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece code review aşaması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir devlet kurumu, İstanbul merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir sigorta firması Brüksel ofisinde eski sistemden yeni ERP’ye geçiş yapıyor. En güvenli geçiş yöntemi hangisidir?",
+      "explanation": "Doğru cevap: Paralel geçiş. Eski sistemle eş zamanlı çalışma en güvenli geçiş yöntemidir. Yanlış: Ani geçiş test yapılmazsa ciddi riskler taşır. Yanlış: Kullanıcıları zorla geçirmek değişim yönetimini ihmal eder. Yanlış: Manuel kopyalama hata ve veri kaybı riskini artırır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Paralel geçiş yöntemi (eski ve yeni sistemin aynı anda bir süre çalıştırılması)",
+        "is_correct": true
+      },
+      {
+        "text": "Hiç test yapmadan ani geçiş",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm kullanıcıları aynı anda zorla yeni sisteme geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Veri taşımayı manuel kopyala-yapıştır ile yapmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir devlet kurumu, Brüksel merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir kamu hastanesi, Ankara lokasyonunda büyük bir IT dönüşüm projesi başlatıyor. Denetçinin proje yönetişimine bakarken ilk odak noktası ne olmalıdır?",
+      "explanation": "Doğru cevap: İş hedefleriyle uyum ve sponsor onayı. Proje yönetişiminin özü, iş gerekçesi ve hedeflerle uyumun sağlanmasıdır. Yanlış: Kullanıcıların giriş çıkış saatleri yönetişimle ilgili değildir. Yanlış: Bütçe kalemleri önemlidir ama tek başına yönetişimi göstermez. Yanlış: Ofis düzeni proje başarısı için kritik bir yönetişim kriteri değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Projenin iş hedefleriyle uyumlu olup olmadığını ve sponsor onayını doğrulamak",
+        "is_correct": true
+      },
+      {
+        "text": "Projedeki tüm kullanıcıların günlük giriş çıkış saatlerini kontrol etmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece proje bütçesindeki küçük kalemleri incelemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca projenin ofis düzenini denetlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir lojistik şirketi, Hanoi merkezinde yeni bir finansal sistem geliştirmek istiyor. Denetçi iş gerekçesi incelemesinde hangi faktöre en çok dikkat etmelidir?",
+      "explanation": "Doğru cevap: İş değeri ve maliyet-fayda analizi. Feasibility çalışmaları yatırımın gerekçesini destekler. Yanlış: Kişisel tercihler objektif gerekçe sağlamaz. Yanlış: Programlama dili seçimi kritik olabilir ama feasibility’nin ana konusu değildir. Yanlış: Rakiplerin ERP seçimi bağlam sağlar ama ana kriter değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Beklenen iş değeri ve maliyet-fayda analizi",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece geliştiricilerin kişisel tercihlerine",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan programlama diline",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm rakiplerin hangi ERP’yi kullandığına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir sigorta firması, Hanoi ofisinde hızlı prototip geliştirme yaklaşımı seçti. Bu hangi SDLC modelinin örneğidir?",
+      "explanation": "Doğru cevap: RAD modeli. Hızlı prototip geliştirme ve kullanıcı geri bildirimi RAD’ın temelidir. Yanlış: Waterfall aşamalı ve katıdır; hızlı prototip yoktur. Yanlış: Test odaklı geliştirme RAD’ın yerine geçmez. Yanlış: Belgesiz yaklaşım SDLC modeli sayılmaz; risklidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Rapid Application Development (RAD) modeli",
+        "is_correct": true
+      },
+      {
+        "text": "Klasik waterfall modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece test odaklı geliştirme modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Tamamen belgesiz kaotik model",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir sigorta firması, Hanoi merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir telekom operatörü, İstanbul merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir fintech startup, New York merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir lojistik şirketi, New York lokasyonunda yeni CRM sistemini canlıya almadan önce kullanıcı kabul testleri yapıyor. Bu hangi test aşamasıdır?",
+      "explanation": "Doğru cevap: UAT aşaması. Kullanıcıların sistemi iş süreçlerine göre test ettiği aşamadır. Yanlış: Unit test geliştiriciler tarafından yapılır; kullanıcı değil. Yanlış: Regression test eski işlevleri korumayı denetler; UAT değildir. Yanlış: Code review geliştirme kontrolüdür; kullanıcı testi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "User Acceptance Testing (UAT) aşaması",
+        "is_correct": true
+      },
+      {
+        "text": "Unit test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece regression test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece code review aşaması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir kamu hastanesi, Brüksel merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir telekom operatörü Brüksel ofisinde eski sistemden yeni ERP’ye geçiş yapıyor. En güvenli geçiş yöntemi hangisidir?",
+      "explanation": "Doğru cevap: Paralel geçiş. Eski sistemle eş zamanlı çalışma en güvenli geçiş yöntemidir. Yanlış: Ani geçiş test yapılmazsa ciddi riskler taşır. Yanlış: Kullanıcıları zorla geçirmek değişim yönetimini ihmal eder. Yanlış: Manuel kopyalama hata ve veri kaybı riskini artırır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Paralel geçiş yöntemi (eski ve yeni sistemin aynı anda bir süre çalıştırılması)",
+        "is_correct": true
+      },
+      {
+        "text": "Hiç test yapmadan ani geçiş",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm kullanıcıları aynı anda zorla yeni sisteme geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Veri taşımayı manuel kopyala-yapıştır ile yapmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir telekom operatörü, İstanbul merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir lojistik şirketi, Leuven lokasyonunda büyük bir IT dönüşüm projesi başlatıyor. Denetçinin proje yönetişimine bakarken ilk odak noktası ne olmalıdır?",
+      "explanation": "Doğru cevap: İş hedefleriyle uyum ve sponsor onayı. Proje yönetişiminin özü, iş gerekçesi ve hedeflerle uyumun sağlanmasıdır. Yanlış: Kullanıcıların giriş çıkış saatleri yönetişimle ilgili değildir. Yanlış: Bütçe kalemleri önemlidir ama tek başına yönetişimi göstermez. Yanlış: Ofis düzeni proje başarısı için kritik bir yönetişim kriteri değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Projenin iş hedefleriyle uyumlu olup olmadığını ve sponsor onayını doğrulamak",
+        "is_correct": true
+      },
+      {
+        "text": "Projedeki tüm kullanıcıların günlük giriş çıkış saatlerini kontrol etmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece proje bütçesindeki küçük kalemleri incelemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca projenin ofis düzenini denetlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir kamu hastanesi, Brüksel merkezinde yeni bir finansal sistem geliştirmek istiyor. Denetçi iş gerekçesi incelemesinde hangi faktöre en çok dikkat etmelidir?",
+      "explanation": "Doğru cevap: İş değeri ve maliyet-fayda analizi. Feasibility çalışmaları yatırımın gerekçesini destekler. Yanlış: Kişisel tercihler objektif gerekçe sağlamaz. Yanlış: Programlama dili seçimi kritik olabilir ama feasibility’nin ana konusu değildir. Yanlış: Rakiplerin ERP seçimi bağlam sağlar ama ana kriter değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Beklenen iş değeri ve maliyet-fayda analizi",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece geliştiricilerin kişisel tercihlerine",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan programlama diline",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm rakiplerin hangi ERP’yi kullandığına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir telekom operatörü, Leuven ofisinde hızlı prototip geliştirme yaklaşımı seçti. Bu hangi SDLC modelinin örneğidir?",
+      "explanation": "Doğru cevap: RAD modeli. Hızlı prototip geliştirme ve kullanıcı geri bildirimi RAD’ın temelidir. Yanlış: Waterfall aşamalı ve katıdır; hızlı prototip yoktur. Yanlış: Test odaklı geliştirme RAD’ın yerine geçmez. Yanlış: Belgesiz yaklaşım SDLC modeli sayılmaz; risklidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Rapid Application Development (RAD) modeli",
+        "is_correct": true
+      },
+      {
+        "text": "Klasik waterfall modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece test odaklı geliştirme modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Tamamen belgesiz kaotik model",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir fintech startup, İstanbul merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir sigorta firması, Ankara merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir lojistik şirketi, Hong Kong merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir kamu hastanesi, Brüksel lokasyonunda yeni CRM sistemini canlıya almadan önce kullanıcı kabul testleri yapıyor. Bu hangi test aşamasıdır?",
+      "explanation": "Doğru cevap: UAT aşaması. Kullanıcıların sistemi iş süreçlerine göre test ettiği aşamadır. Yanlış: Unit test geliştiriciler tarafından yapılır; kullanıcı değil. Yanlış: Regression test eski işlevleri korumayı denetler; UAT değildir. Yanlış: Code review geliştirme kontrolüdür; kullanıcı testi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "User Acceptance Testing (UAT) aşaması",
+        "is_correct": true
+      },
+      {
+        "text": "Unit test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece regression test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece code review aşaması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir telekom operatörü, Hanoi merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir devlet kurumu Leuven ofisinde eski sistemden yeni ERP’ye geçiş yapıyor. En güvenli geçiş yöntemi hangisidir?",
+      "explanation": "Doğru cevap: Paralel geçiş. Eski sistemle eş zamanlı çalışma en güvenli geçiş yöntemidir. Yanlış: Ani geçiş test yapılmazsa ciddi riskler taşır. Yanlış: Kullanıcıları zorla geçirmek değişim yönetimini ihmal eder. Yanlış: Manuel kopyalama hata ve veri kaybı riskini artırır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Paralel geçiş yöntemi (eski ve yeni sistemin aynı anda bir süre çalıştırılması)",
+        "is_correct": true
+      },
+      {
+        "text": "Hiç test yapmadan ani geçiş",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm kullanıcıları aynı anda zorla yeni sisteme geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Veri taşımayı manuel kopyala-yapıştır ile yapmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir telekom operatörü, Hong Kong merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir üretim fabrikası, Brüksel lokasyonunda büyük bir IT dönüşüm projesi başlatıyor. Denetçinin proje yönetişimine bakarken ilk odak noktası ne olmalıdır?",
+      "explanation": "Doğru cevap: İş hedefleriyle uyum ve sponsor onayı. Proje yönetişiminin özü, iş gerekçesi ve hedeflerle uyumun sağlanmasıdır. Yanlış: Kullanıcıların giriş çıkış saatleri yönetişimle ilgili değildir. Yanlış: Bütçe kalemleri önemlidir ama tek başına yönetişimi göstermez. Yanlış: Ofis düzeni proje başarısı için kritik bir yönetişim kriteri değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Projenin iş hedefleriyle uyumlu olup olmadığını ve sponsor onayını doğrulamak",
+        "is_correct": true
+      },
+      {
+        "text": "Projedeki tüm kullanıcıların günlük giriş çıkış saatlerini kontrol etmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece proje bütçesindeki küçük kalemleri incelemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca projenin ofis düzenini denetlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir lojistik şirketi, Ankara merkezinde yeni bir finansal sistem geliştirmek istiyor. Denetçi iş gerekçesi incelemesinde hangi faktöre en çok dikkat etmelidir?",
+      "explanation": "Doğru cevap: İş değeri ve maliyet-fayda analizi. Feasibility çalışmaları yatırımın gerekçesini destekler. Yanlış: Kişisel tercihler objektif gerekçe sağlamaz. Yanlış: Programlama dili seçimi kritik olabilir ama feasibility’nin ana konusu değildir. Yanlış: Rakiplerin ERP seçimi bağlam sağlar ama ana kriter değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Beklenen iş değeri ve maliyet-fayda analizi",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece geliştiricilerin kişisel tercihlerine",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan programlama diline",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm rakiplerin hangi ERP’yi kullandığına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir kamu hastanesi, Brüksel ofisinde hızlı prototip geliştirme yaklaşımı seçti. Bu hangi SDLC modelinin örneğidir?",
+      "explanation": "Doğru cevap: RAD modeli. Hızlı prototip geliştirme ve kullanıcı geri bildirimi RAD’ın temelidir. Yanlış: Waterfall aşamalı ve katıdır; hızlı prototip yoktur. Yanlış: Test odaklı geliştirme RAD’ın yerine geçmez. Yanlış: Belgesiz yaklaşım SDLC modeli sayılmaz; risklidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Rapid Application Development (RAD) modeli",
+        "is_correct": true
+      },
+      {
+        "text": "Klasik waterfall modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece test odaklı geliştirme modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Tamamen belgesiz kaotik model",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir sigorta firması, Brüksel merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir sigorta firması, İstanbul merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir kamu hastanesi, Ankara merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir fintech startup, İstanbul lokasyonunda yeni CRM sistemini canlıya almadan önce kullanıcı kabul testleri yapıyor. Bu hangi test aşamasıdır?",
+      "explanation": "Doğru cevap: UAT aşaması. Kullanıcıların sistemi iş süreçlerine göre test ettiği aşamadır. Yanlış: Unit test geliştiriciler tarafından yapılır; kullanıcı değil. Yanlış: Regression test eski işlevleri korumayı denetler; UAT değildir. Yanlış: Code review geliştirme kontrolüdür; kullanıcı testi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "User Acceptance Testing (UAT) aşaması",
+        "is_correct": true
+      },
+      {
+        "text": "Unit test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece regression test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece code review aşaması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir sigorta firması, Leuven merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir lojistik şirketi Ankara ofisinde eski sistemden yeni ERP’ye geçiş yapıyor. En güvenli geçiş yöntemi hangisidir?",
+      "explanation": "Doğru cevap: Paralel geçiş. Eski sistemle eş zamanlı çalışma en güvenli geçiş yöntemidir. Yanlış: Ani geçiş test yapılmazsa ciddi riskler taşır. Yanlış: Kullanıcıları zorla geçirmek değişim yönetimini ihmal eder. Yanlış: Manuel kopyalama hata ve veri kaybı riskini artırır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Paralel geçiş yöntemi (eski ve yeni sistemin aynı anda bir süre çalıştırılması)",
+        "is_correct": true
+      },
+      {
+        "text": "Hiç test yapmadan ani geçiş",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm kullanıcıları aynı anda zorla yeni sisteme geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Veri taşımayı manuel kopyala-yapıştır ile yapmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir fintech startup, Hanoi merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir lojistik şirketi, Ankara lokasyonunda büyük bir IT dönüşüm projesi başlatıyor. Denetçinin proje yönetişimine bakarken ilk odak noktası ne olmalıdır?",
+      "explanation": "Doğru cevap: İş hedefleriyle uyum ve sponsor onayı. Proje yönetişiminin özü, iş gerekçesi ve hedeflerle uyumun sağlanmasıdır. Yanlış: Kullanıcıların giriş çıkış saatleri yönetişimle ilgili değildir. Yanlış: Bütçe kalemleri önemlidir ama tek başına yönetişimi göstermez. Yanlış: Ofis düzeni proje başarısı için kritik bir yönetişim kriteri değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Projenin iş hedefleriyle uyumlu olup olmadığını ve sponsor onayını doğrulamak",
+        "is_correct": true
+      },
+      {
+        "text": "Projedeki tüm kullanıcıların günlük giriş çıkış saatlerini kontrol etmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece proje bütçesindeki küçük kalemleri incelemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca projenin ofis düzenini denetlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir üretim fabrikası, Brüksel merkezinde yeni bir finansal sistem geliştirmek istiyor. Denetçi iş gerekçesi incelemesinde hangi faktöre en çok dikkat etmelidir?",
+      "explanation": "Doğru cevap: İş değeri ve maliyet-fayda analizi. Feasibility çalışmaları yatırımın gerekçesini destekler. Yanlış: Kişisel tercihler objektif gerekçe sağlamaz. Yanlış: Programlama dili seçimi kritik olabilir ama feasibility’nin ana konusu değildir. Yanlış: Rakiplerin ERP seçimi bağlam sağlar ama ana kriter değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Beklenen iş değeri ve maliyet-fayda analizi",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece geliştiricilerin kişisel tercihlerine",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan programlama diline",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm rakiplerin hangi ERP’yi kullandığına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir fintech startup, New York ofisinde hızlı prototip geliştirme yaklaşımı seçti. Bu hangi SDLC modelinin örneğidir?",
+      "explanation": "Doğru cevap: RAD modeli. Hızlı prototip geliştirme ve kullanıcı geri bildirimi RAD’ın temelidir. Yanlış: Waterfall aşamalı ve katıdır; hızlı prototip yoktur. Yanlış: Test odaklı geliştirme RAD’ın yerine geçmez. Yanlış: Belgesiz yaklaşım SDLC modeli sayılmaz; risklidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Rapid Application Development (RAD) modeli",
+        "is_correct": true
+      },
+      {
+        "text": "Klasik waterfall modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece test odaklı geliştirme modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Tamamen belgesiz kaotik model",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir fintech startup, İstanbul merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir üretim fabrikası, Ankara merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir fintech startup, New York merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir fintech startup, İstanbul lokasyonunda yeni CRM sistemini canlıya almadan önce kullanıcı kabul testleri yapıyor. Bu hangi test aşamasıdır?",
+      "explanation": "Doğru cevap: UAT aşaması. Kullanıcıların sistemi iş süreçlerine göre test ettiği aşamadır. Yanlış: Unit test geliştiriciler tarafından yapılır; kullanıcı değil. Yanlış: Regression test eski işlevleri korumayı denetler; UAT değildir. Yanlış: Code review geliştirme kontrolüdür; kullanıcı testi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "User Acceptance Testing (UAT) aşaması",
+        "is_correct": true
+      },
+      {
+        "text": "Unit test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece regression test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece code review aşaması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir telekom operatörü, Hanoi merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir sigorta firması Hanoi ofisinde eski sistemden yeni ERP’ye geçiş yapıyor. En güvenli geçiş yöntemi hangisidir?",
+      "explanation": "Doğru cevap: Paralel geçiş. Eski sistemle eş zamanlı çalışma en güvenli geçiş yöntemidir. Yanlış: Ani geçiş test yapılmazsa ciddi riskler taşır. Yanlış: Kullanıcıları zorla geçirmek değişim yönetimini ihmal eder. Yanlış: Manuel kopyalama hata ve veri kaybı riskini artırır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Paralel geçiş yöntemi (eski ve yeni sistemin aynı anda bir süre çalıştırılması)",
+        "is_correct": true
+      },
+      {
+        "text": "Hiç test yapmadan ani geçiş",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm kullanıcıları aynı anda zorla yeni sisteme geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Veri taşımayı manuel kopyala-yapıştır ile yapmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir sigorta firması, Ankara merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir fintech startup, Leuven lokasyonunda büyük bir IT dönüşüm projesi başlatıyor. Denetçinin proje yönetişimine bakarken ilk odak noktası ne olmalıdır?",
+      "explanation": "Doğru cevap: İş hedefleriyle uyum ve sponsor onayı. Proje yönetişiminin özü, iş gerekçesi ve hedeflerle uyumun sağlanmasıdır. Yanlış: Kullanıcıların giriş çıkış saatleri yönetişimle ilgili değildir. Yanlış: Bütçe kalemleri önemlidir ama tek başına yönetişimi göstermez. Yanlış: Ofis düzeni proje başarısı için kritik bir yönetişim kriteri değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Projenin iş hedefleriyle uyumlu olup olmadığını ve sponsor onayını doğrulamak",
+        "is_correct": true
+      },
+      {
+        "text": "Projedeki tüm kullanıcıların günlük giriş çıkış saatlerini kontrol etmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece proje bütçesindeki küçük kalemleri incelemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca projenin ofis düzenini denetlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir banka, Brüksel merkezinde yeni bir finansal sistem geliştirmek istiyor. Denetçi iş gerekçesi incelemesinde hangi faktöre en çok dikkat etmelidir?",
+      "explanation": "Doğru cevap: İş değeri ve maliyet-fayda analizi. Feasibility çalışmaları yatırımın gerekçesini destekler. Yanlış: Kişisel tercihler objektif gerekçe sağlamaz. Yanlış: Programlama dili seçimi kritik olabilir ama feasibility’nin ana konusu değildir. Yanlış: Rakiplerin ERP seçimi bağlam sağlar ama ana kriter değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Beklenen iş değeri ve maliyet-fayda analizi",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece geliştiricilerin kişisel tercihlerine",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan programlama diline",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm rakiplerin hangi ERP’yi kullandığına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir devlet kurumu, Brüksel ofisinde hızlı prototip geliştirme yaklaşımı seçti. Bu hangi SDLC modelinin örneğidir?",
+      "explanation": "Doğru cevap: RAD modeli. Hızlı prototip geliştirme ve kullanıcı geri bildirimi RAD’ın temelidir. Yanlış: Waterfall aşamalı ve katıdır; hızlı prototip yoktur. Yanlış: Test odaklı geliştirme RAD’ın yerine geçmez. Yanlış: Belgesiz yaklaşım SDLC modeli sayılmaz; risklidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Rapid Application Development (RAD) modeli",
+        "is_correct": true
+      },
+      {
+        "text": "Klasik waterfall modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece test odaklı geliştirme modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Tamamen belgesiz kaotik model",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir lojistik şirketi, Brüksel merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir telekom operatörü, Ankara merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir lojistik şirketi, Ankara merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir kamu hastanesi, Hong Kong lokasyonunda yeni CRM sistemini canlıya almadan önce kullanıcı kabul testleri yapıyor. Bu hangi test aşamasıdır?",
+      "explanation": "Doğru cevap: UAT aşaması. Kullanıcıların sistemi iş süreçlerine göre test ettiği aşamadır. Yanlış: Unit test geliştiriciler tarafından yapılır; kullanıcı değil. Yanlış: Regression test eski işlevleri korumayı denetler; UAT değildir. Yanlış: Code review geliştirme kontrolüdür; kullanıcı testi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "User Acceptance Testing (UAT) aşaması",
+        "is_correct": true
+      },
+      {
+        "text": "Unit test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece regression test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece code review aşaması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir sigorta firması, New York merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir banka Brüksel ofisinde eski sistemden yeni ERP’ye geçiş yapıyor. En güvenli geçiş yöntemi hangisidir?",
+      "explanation": "Doğru cevap: Paralel geçiş. Eski sistemle eş zamanlı çalışma en güvenli geçiş yöntemidir. Yanlış: Ani geçiş test yapılmazsa ciddi riskler taşır. Yanlış: Kullanıcıları zorla geçirmek değişim yönetimini ihmal eder. Yanlış: Manuel kopyalama hata ve veri kaybı riskini artırır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Paralel geçiş yöntemi (eski ve yeni sistemin aynı anda bir süre çalıştırılması)",
+        "is_correct": true
+      },
+      {
+        "text": "Hiç test yapmadan ani geçiş",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm kullanıcıları aynı anda zorla yeni sisteme geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Veri taşımayı manuel kopyala-yapıştır ile yapmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir telekom operatörü, Ankara merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir telekom operatörü, Hong Kong lokasyonunda büyük bir IT dönüşüm projesi başlatıyor. Denetçinin proje yönetişimine bakarken ilk odak noktası ne olmalıdır?",
+      "explanation": "Doğru cevap: İş hedefleriyle uyum ve sponsor onayı. Proje yönetişiminin özü, iş gerekçesi ve hedeflerle uyumun sağlanmasıdır. Yanlış: Kullanıcıların giriş çıkış saatleri yönetişimle ilgili değildir. Yanlış: Bütçe kalemleri önemlidir ama tek başına yönetişimi göstermez. Yanlış: Ofis düzeni proje başarısı için kritik bir yönetişim kriteri değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Projenin iş hedefleriyle uyumlu olup olmadığını ve sponsor onayını doğrulamak",
+        "is_correct": true
+      },
+      {
+        "text": "Projedeki tüm kullanıcıların günlük giriş çıkış saatlerini kontrol etmek",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece proje bütçesindeki küçük kalemleri incelemek",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca projenin ofis düzenini denetlemek",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir devlet kurumu, Ankara merkezinde yeni bir finansal sistem geliştirmek istiyor. Denetçi iş gerekçesi incelemesinde hangi faktöre en çok dikkat etmelidir?",
+      "explanation": "Doğru cevap: İş değeri ve maliyet-fayda analizi. Feasibility çalışmaları yatırımın gerekçesini destekler. Yanlış: Kişisel tercihler objektif gerekçe sağlamaz. Yanlış: Programlama dili seçimi kritik olabilir ama feasibility’nin ana konusu değildir. Yanlış: Rakiplerin ERP seçimi bağlam sağlar ama ana kriter değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Beklenen iş değeri ve maliyet-fayda analizi",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece geliştiricilerin kişisel tercihlerine",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan programlama diline",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm rakiplerin hangi ERP’yi kullandığına",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir telekom operatörü, Ankara ofisinde hızlı prototip geliştirme yaklaşımı seçti. Bu hangi SDLC modelinin örneğidir?",
+      "explanation": "Doğru cevap: RAD modeli. Hızlı prototip geliştirme ve kullanıcı geri bildirimi RAD’ın temelidir. Yanlış: Waterfall aşamalı ve katıdır; hızlı prototip yoktur. Yanlış: Test odaklı geliştirme RAD’ın yerine geçmez. Yanlış: Belgesiz yaklaşım SDLC modeli sayılmaz; risklidir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Rapid Application Development (RAD) modeli",
+        "is_correct": true
+      },
+      {
+        "text": "Klasik waterfall modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece test odaklı geliştirme modeli",
+        "is_correct": false
+      },
+      {
+        "text": "Tamamen belgesiz kaotik model",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir banka, Leuven merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir banka, Hong Kong merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir lojistik şirketi, Ankara merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir devlet kurumu, Hong Kong lokasyonunda yeni CRM sistemini canlıya almadan önce kullanıcı kabul testleri yapıyor. Bu hangi test aşamasıdır?",
+      "explanation": "Doğru cevap: UAT aşaması. Kullanıcıların sistemi iş süreçlerine göre test ettiği aşamadır. Yanlış: Unit test geliştiriciler tarafından yapılır; kullanıcı değil. Yanlış: Regression test eski işlevleri korumayı denetler; UAT değildir. Yanlış: Code review geliştirme kontrolüdür; kullanıcı testi değildir.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "User Acceptance Testing (UAT) aşaması",
+        "is_correct": true
+      },
+      {
+        "text": "Unit test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece regression test aşaması",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece code review aşaması",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir devlet kurumu, İstanbul merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir lojistik şirketi Brüksel ofisinde eski sistemden yeni ERP’ye geçiş yapıyor. En güvenli geçiş yöntemi hangisidir?",
+      "explanation": "Doğru cevap: Paralel geçiş. Eski sistemle eş zamanlı çalışma en güvenli geçiş yöntemidir. Yanlış: Ani geçiş test yapılmazsa ciddi riskler taşır. Yanlış: Kullanıcıları zorla geçirmek değişim yönetimini ihmal eder. Yanlış: Manuel kopyalama hata ve veri kaybı riskini artırır.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "Paralel geçiş yöntemi (eski ve yeni sistemin aynı anda bir süre çalıştırılması)",
+        "is_correct": true
+      },
+      {
+        "text": "Hiç test yapmadan ani geçiş",
+        "is_correct": false
+      },
+      {
+        "text": "Tüm kullanıcıları aynı anda zorla yeni sisteme geçirmek",
+        "is_correct": false
+      },
+      {
+        "text": "Veri taşımayı manuel kopyala-yapıştır ile yapmak",
+        "is_correct": false
+      }
+    ]
+  },
+  {
+    "model": "core.testquestion",
+    "fields": {
+      "course": 203,
+      "text": "Bir üretim fabrikası, İstanbul merkezinde yeni sistem uygulamasını tamamladı. Denetçinin post-implementation review sırasında öncelikle hangi konuyu değerlendirmesi gerekir?",
+      "explanation": "Doğru cevap: İş hedeflerinin gerçekleşip faydanın sağlanması. Post-implementation review’un ana amacı budur. Yanlış: Tatil planları denetim kapsamı dışındadır. Yanlış: Lisans fiyatları önemli olabilir ama tek başına faydayı ölçmez. Yanlış: Donanım odası dekoru iş faydasına katkı sağlamaz.",
+      "question_type": "single",
+      "is_active": true
+    },
+    "options": [
+      {
+        "text": "İş hedeflerinin gerçekleşip gerçekleşmediğini ve fayda elde edilip edilmediğini",
+        "is_correct": true
+      },
+      {
+        "text": "Sadece ekipteki kişilerin tatil planlarını",
+        "is_correct": false
+      },
+      {
+        "text": "Yalnızca kullanılan yazılım lisanslarının fiyatını",
+        "is_correct": false
+      },
+      {
+        "text": "Sadece donanım odasının dekorunu",
+        "is_correct": false
+      }
+    ]
+  }
+]
