@@ -1,25 +1,24 @@
 {% load static %}
 <!doctype html>
-<html lang="en">
+<html lang="tr">
     <head>
-        <!-- Required meta tags -->
+        <!-- Gerekli meta etiketler -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="author" content="Codescandy" />
 
-<!-- Favicon icon-->
+<!-- Favicon -->
 <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/favicon/favicon.ico' %}" />
 
-<!-- darkmode js -->
+<!-- Karanlık mod js -->
 <script src="{% static 'assets/js/vendors/darkMode.js' %}"></script>
 
-<!-- Libs CSS -->
+<!-- Kütüphane CSS -->
 <link href="{% static 'assets/fonts/feather/feather.css' %}" rel="stylesheet" />
 <link href="{% static 'assets/libs/bootstrap-icons/font/bootstrap-icons.min.css' %}" rel="stylesheet" />
 <link href="{% static 'assets/libs/simplebar/dist/simplebar.min.css' %}" rel="stylesheet" />
 
 <style>
-
 #playPreviewBtn {
   position: absolute;
   top: 50%;
@@ -27,13 +26,12 @@
   transform: translate(-50%, -50%);
   z-index: 10; /* Butonun üstte görünmesi için */
 }
-
 </style>
 
-<!-- Theme CSS -->
+<!-- Tema CSS -->
 <link rel="stylesheet" href="{% static 'assets/css/theme.min.css' %}">
-        <link rel="canonical" href="https://geeksui.codescandy.com/geeks/pages/dashboard-student.html">
-        <title>Siberkobi | Hands-On IT Audit & GRC Learning Platform</title>
+<link rel="canonical" href="https://geeksui.codescandy.com/geeks/pages/dashboard-student.html">
+<title>Siberkobi | Uygulamalı BT Denetimi ve GRC Öğrenme Platformu</title>
     </head>
 
     <body>
@@ -43,44 +41,44 @@
           <!-- Logo -->
           <div>
             <a href="{% url 'landing' %}">
-              <img src="{% static 'assets/images/brand/logo/logo.svg' %}" width="250" alt="Siberkobi logo" />
+              <img src="{% static 'assets/images/brand/logo/logo.svg' %}" width="250" alt="Siberkobi logosu" />
             </a>
           </div>
 
-          <!-- Right side: Theme toggle + Avatar -->
+          <!-- Sağ kısım: Tema değiştir + Avatar -->
           <div class="ms-auto d-flex align-items-center order-lg-3 gap-2">
 
-            <!-- Theme toggle -->
+            <!-- Tema değiştir -->
             <div class="dropdown">
               <button id="themeToggleBtn"
                 class="btn btn-outline-secondary btn-icon rounded-circle d-flex align-items-center"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-                aria-label="Toggle theme (auto)">
+                aria-label="Temayı değiştir (otomatik)">
                 <i class="bi theme-icon-active"></i>
-                <span class="visually-hidden bs-theme-text">Toggle theme</span>
+                <span class="visually-hidden bs-theme-text">Temayı değiştir</span>
               </button>
               <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="themeToggleBtn">
                 <li>
                   <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
-                    <i class="bi theme-icon bi-sun-fill"></i><span class="ms-2">Light</span>
+                    <i class="bi theme-icon bi-sun-fill"></i><span class="ms-2">Açık</span>
                   </button>
                 </li>
                 <li>
                   <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
-                    <i class="bi theme-icon bi-moon-stars-fill"></i><span class="ms-2">Dark</span>
+                    <i class="bi theme-icon bi-moon-stars-fill"></i><span class="ms-2">Koyu</span>
                   </button>
                 </li>
                 <li>
                   <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
-                    <i class="bi theme-icon bi-circle-half"></i><span class="ms-2">Auto</span>
+                    <i class="bi theme-icon bi-circle-half"></i><span class="ms-2">Otomatik</span>
                   </button>
                 </li>
               </ul>
             </div>
 
-            <!-- Avatar dropdown -->
+            <!-- Kullanıcı menüsü -->
             <div class="dropdown">
               <a href="#" class="rounded-circle" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="avatar avatar-md avatar-indicators avatar-online bg-primary text-white fw-bold rounded-circle d-flex align-items-center justify-content-center">
@@ -101,7 +99,7 @@
                 </div>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{% url 'logout' %}">
-                  <i class="fe fe-power me-2"></i> Sign Out
+                  <i class="fe fe-power me-2"></i> Çıkış Yap
                 </a>
               </div>
             </div>
@@ -115,12 +113,11 @@
 
       {% endblock %}
 
-              <!-- Footer -->
-                <!-- Footer -->
+      <!-- Alt bilgi -->
       <footer class="footer">
           <div class="container">
               <div class="row align-items-center g-0 border-top py-2">
-                  <!-- Desc -->
+                  <!-- Açıklama -->
                   <div class="col-md-6 col-12 text-center text-md-start">
                       <span>
                           ©
@@ -129,97 +126,68 @@
                                   document.getElementById("copyright").appendChild(document.createTextNode(new Date().getFullYear()));
                               </script>
                           </span>
-                          Siberkobi. All Rights Reserved.
+                          Siberkobi. Tüm hakları saklıdır.
                       </span>
                   </div>
-                  <!-- Links -->
+                  <!-- Bağlantılar -->
                   <div class="col-12 col-md-6">
                     <nav class="nav nav-footer justify-content-center justify-content-md-end">
-                      <a class="nav-link active ps-0" href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy</a>
-                      <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms</a>
-                      <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#feedbackModal">Feedback</a>
-                      <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#supportModal">Support</a>
+                      <a class="nav-link active ps-0" href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Gizlilik</a>
+                      <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Şartlar</a>
+                      <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#feedbackModal">Geri Bildirim</a>
+                      <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#supportModal">Destek</a>
                     </nav>
                   </div>
               </div>
           </div>
       </footer>
 
-
-              <!-- Scroll top -->
-              <div class="btn-scroll-top">
+      <!-- Yukarı dön butonu -->
+      <div class="btn-scroll-top">
           <svg class="progress-square svg-content" width="100%" height="100%" viewBox="0 0 40 40">
               <path d="M8 1H32C35.866 1 39 4.13401 39 8V32C39 35.866 35.866 39 32 39H8C4.13401 39 1 35.866 1 32V8C1 4.13401 4.13401 1 8 1Z" />
           </svg>
       </div>
 
-      <!-- Scripts -->
-      <!-- Libs JS -->
+      <!-- Scriptler -->
       <script src="{% static 'assets/libs/@popperjs/core/dist/umd/popper.min.js' %}"></script>
       <script src="{% static 'assets/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
       <script src="{% static 'assets/libs/simplebar/dist/simplebar.min.js' %}"></script>
-
-      <!-- Theme JS -->
       <script src="{% static 'assets/js/theme.min.js' %}"></script>
-
-      <!-- Theme JS -->
-      <script src="{% static 'assets/js/theme.min.js' %}"></script>
-
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
       <script src="{% static 'assets/libs/tippy.js/dist/tippy-bundle.umd.min.js' %}"></script>
-
       <script src="{% static 'assets/js/vendors/tooltip.js' %}"></script>
       <script src="{% static 'assets/libs/glightbox/dist/js/glightbox.min.js' %}"></script>
       <script src="{% static 'assets/js/vendors/glight.js' %}"></script>
 
-
       <script>
       document.addEventListener('DOMContentLoaded', function () {
-        // On open: rebuild iframe and set src (from iframe[data-src] OR trigger[data-preview-src])
         document.addEventListener('show.bs.modal', function (ev) {
           const modal = ev.target;
-
-          // Prefer iframe[data-src] inside the modal
           let targetSrc = null;
           let iframe = modal.querySelector('iframe[data-src]');
-
-          // If no iframe[data-src], support preview button passing data-preview-src
           if (!iframe) {
             const trigger = ev.relatedTarget;
-            if (trigger) {
-              targetSrc = trigger.getAttribute('data-preview-src');
-            }
+            if (trigger) targetSrc = trigger.getAttribute('data-preview-src');
             iframe = modal.querySelector('iframe');
           } else {
             targetSrc = iframe.getAttribute('data-src');
           }
-
           if (!iframe || !targetSrc) return;
-
-          // Replace with a fresh node to avoid stale context
           const fresh = iframe.cloneNode(true);
           iframe.replaceWith(fresh);
-
-          // Cache-bust to force a clean reload from provider
           try {
             const url = new URL(targetSrc, window.location.origin);
             url.searchParams.set('_ts', Date.now().toString());
             targetSrc = url.toString();
-          } catch (_) {
-            // targetSrc might already be absolute; ignore errors
-          }
-
-          // Set src on next frame so layout is settled
+          } catch (_) {}
           requestAnimationFrame(() => { fresh.src = targetSrc; });
         });
 
-        // On close: unload and fully reset iframe
         document.addEventListener('hidden.bs.modal', function (ev) {
           const modal = ev.target;
           const iframe = modal.querySelector('iframe');
           if (!iframe) return;
-
           try { iframe.src = 'about:blank'; } catch (e) {}
           const reset = iframe.cloneNode(true);
           iframe.replaceWith(reset);
@@ -227,70 +195,72 @@
       });
       </script>
 
-
+      <!-- Gizlilik Modalı -->
       <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="privacyModalLabel">Privacy Policy</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="privacyModalLabel">Gizlilik Politikası</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+              Gizliliğinize saygı duyuyoruz. Siberkobi yalnızca giriş ve kişiselleştirme için gerekli temel kullanıcı verilerini toplar. Verileriniz güvenli bir şekilde saklanır ve izniniz olmadan üçüncü kişilerle paylaşılmaz. Detaylı bilgi için Gizlilik Belgelerimizi inceleyebilirsiniz.
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-        We respect your privacy. Siberkobi collects only essential user data for login and personalization. Your data is stored securely and never shared with third parties without consent. For full details, visit our Privacy Documentation.
-      </div>
-    </div>
-  </div>
-</div>
 
-<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="termsModalLabel">Terms & Conditions</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <!-- Şartlar Modalı -->
+      <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="termsModalLabel">Kullanım Şartları</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+              Siberkobi’yi kullanarak, kurs içeriklerimizi yeniden dağıtmamayı ve giriş bilgilerinizi paylaşmamayı kabul etmiş olursunuz. Yetkisiz erişim veya içerik kopyalama kesinlikle yasaktır. Tüm haklar platform sahibine aittir.
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-        By using Siberkobi, you agree not to redistribute our course content or share login credentials. Unauthorized access or copying of materials is strictly prohibited. All rights reserved to the platform creator.
+
+      <!-- Geri Bildirim Modalı -->
+      <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header bg-primary text-white">
+              <h5 class="modal-title mb-0" id="feedbackModalLabel">Yardım mı gerekiyor?</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body text-center py-5">
+              <i class="fe fe-mail fs-1 text-primary mb-3"></i>
+              <p class="mb-3 fs-5">Bir sorunuz mu var veya bir sorun mu bildirmek istiyorsunuz?</p>
+              <p class="mb-4">Bize şu adresten ulaşabilirsiniz:</p>
+              <a href="mailto:support@siberkobi.co" class="btn btn-outline-primary px-4 py-2">
+                support@siberkobi.co
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
 
-<div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content border-0 shadow-lg">
-      <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title mb-0" id="feedbackModalLabel">Need Help?</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      <!-- Destek Modalı -->
+      <div class="modal fade" id="supportModal" tabindex="-1" aria-labelledby="supportModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="supportModalLabel">Destek</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+              Teknik sorunlar, sorular veya platformu kullanma konusunda yardıma ihtiyacınız varsa,
+              lütfen <a href="mailto:support@siberkobi.co">support@siberkobi.co</a> adresine e-posta gönderin
+              veya kontrol panelindeki iletişim formunu doldurun.
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="modal-body text-center py-5">
-        <i class="fe fe-mail fs-1 text-primary mb-3"></i>
-        <p class="mb-3 fs-5">Have a question or want to report an issue?</p>
-        <p class="mb-4">Reach out to us at:</p>
-        <a href="mailto:support@siberkobi.co" class="btn btn-outline-primary px-4 py-2">
-          support@siberkobi.co
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
 
-
-
-<div class="modal fade" id="supportModal" tabindex="-1" aria-labelledby="supportModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="supportModalLabel">Support</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        For technical issues, questions, or help using the platform, please email us at <a href="mailto:support@siberkobi.co">support@siberkobi.co</a> or fill in the contact form on the dashboard.
-      </div>
-    </div>
-  </div>
-</div>
-
-
-          </body>
-      </html>
+    </body>
+</html>

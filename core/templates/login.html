@@ -1,16 +1,16 @@
 {% load static %}
 <!doctype html>
-<html lang="en">
+<html lang="tr">
   <head>
-    <!-- Required meta tags -->
+    <!-- Gerekli meta etiketleri -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="author" content="Codescandy" />
 
-<!-- Favicon icon-->
+<!-- Favicon -->
 <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/favicon/favicon.ico' %}" />
 
-<!-- darkmode js -->
+<!-- Karanlık mod js -->
 <script src="{% static 'assets/js/vendors/darkMode.js' %}"></script>
 
 <!-- Libs CSS -->
@@ -18,30 +18,30 @@
 <link href="{% static 'assets/libs/bootstrap-icons/font/bootstrap-icons.min.css' %}" rel="stylesheet" />
 <link href="{% static 'assets/libs/simplebar/dist/simplebar.min.css' %}" rel="stylesheet" />
 
-<!-- Theme CSS -->
+<!-- Tema CSS -->
 <link rel="stylesheet" href="{% static 'assets/css/theme.min.css' %}">
     <link rel="canonical" href="https://geeksui.codescandy.com/geeks/pages/sign-in.html" />
-    <title>Siberkobi | Hands-On IT Audit & GRC Learning Platform</title>
+    <title>Siberkobi | Uygulamalı BT Denetimi & GRC Öğrenme Platformu</title>
   </head>
 
   <body>
-    <!-- Page content -->
+    <!-- Sayfa içeriği -->
     <main>
       <section class="container d-flex flex-column vh-100">
         <div class="row align-items-center justify-content-center g-0 h-lg-100 py-8">
           <div class="col-lg-5 col-md-8 py-8 py-xl-0">
-            <!-- Card -->
+            <!-- Kart -->
             <div class="card shadow">
-              <!-- Card body -->
+              <!-- Kart gövdesi -->
               <div class="card-body p-6 d-flex flex-column gap-4">
                 <div>
                   <a href="{% url 'landing' %}"><img src="{% static 'assets/images/brand/logo/logo-icon.svg' %}" width="100" class="mb-4" alt="logo-icon" /></a>
                   <div class="d-flex flex-column gap-1">
-                    <h1 class="mb-0 fw-bold">Sign in</h1>
+                    <h1 class="mb-0 fw-bold">Giriş yap</h1>
                     <small class="text-muted">
-                      Note: You cannot access any content as an individual user before purchasing.
-                      If you are part of a company or audit team and would like a demo,
-                      please contact us through the <a href="{% url 'pricing' %}" class="text-decoration-underline">pricing form</a>.
+                      Not: Bireysel kullanıcı olarak satın alma yapmadan hiçbir içeriğe erişemezsiniz.
+                      Bir şirkette veya denetim ekibinde yer alıyorsanız ve demo talep etmek isterseniz,
+                      lütfen <a href="{% url 'pricing' %}" class="text-decoration-underline">fiyatlandırma formu</a> üzerinden bizimle iletişime geçin.
                     </small>
                   </div>
 
@@ -50,37 +50,37 @@
                 <form method="post" class="needs-validation" novalidate>
                  {% csrf_token %}
 
-                 <!-- Error message -->
+                 <!-- Hata mesajı -->
                  {% if error %}
                    <div class="alert alert-danger">{{ error }}</div>
                  {% endif %}
 
-                 <!-- Email -->
+                 <!-- E-posta -->
                  <div class="mb-3">
-                     <label for="signInEmail" class="form-label">Email</label>
-                     <input type="email" id="signInEmail" class="form-control" name="email" placeholder="Email address here" required />
-                     <div class="invalid-feedback">Please enter a valid email.</div>
+                     <label for="signInEmail" class="form-label">E-posta</label>
+                     <input type="email" id="signInEmail" class="form-control" name="email" placeholder="E-posta adresinizi yazın" required />
+                     <div class="invalid-feedback">Lütfen geçerli bir e-posta girin.</div>
                  </div>
 
-                 <!-- Password -->
+                 <!-- Parola -->
                  <div class="mb-3">
-                     <label for="signInPassword" class="form-label">Password</label>
+                     <label for="signInPassword" class="form-label">Parola</label>
                      <input type="password" id="signInPassword" class="form-control" name="password" placeholder="**************" required />
-                     <div class="invalid-feedback">Please enter a valid password.</div>
+                     <div class="invalid-feedback">Lütfen geçerli bir parola girin.</div>
                  </div>
 
-                 <!-- Remember me (just for UI; not used in backend here) -->
+                 <!-- Beni hatırla (yalnızca UI; backend'de kullanılmıyor) -->
                  <div class="d-lg-flex justify-content-between align-items-center mb-4">
                      <div class="form-check">
                          <input type="checkbox" class="form-check-input" id="rememberme" />
-                         <label class="form-check-label" for="rememberme">Remember me</label>
+                         <label class="form-check-label" for="rememberme">Beni hatırla</label>
                      </div>
 
                  </div>
 
-                 <!-- Submit button -->
+                 <!-- Gönder -->
                  <div class="d-grid">
-                     <button type="submit" class="btn btn-primary">Sign in</button>
+                     <button type="submit" class="btn btn-primary">Giriş yap</button>
                  </div>
              </form>
 
@@ -96,27 +96,27 @@
               <form method="post" action="{% url 'force_password_change_popup' %}">
                 {% csrf_token %}
                 <div class="modal-header">
-                  <h5 class="modal-title" id="firstLoginModalLabel">Change Your Password</h5>
+                  <h5 class="modal-title" id="firstLoginModalLabel">Parolanızı Değiştirin</h5>
                 </div>
                 <div class="modal-body">
                   <div class="mb-3">
-                    <label>New Password</label>
+                    <label>Yeni Parola</label>
                     <input type="password" name="new_password" class="form-control" required>
                   </div>
                   <div class="mb-3">
-                    <label>Confirm Password</label>
+                    <label>Parolayı Doğrulayın</label>
                     <input type="password" name="confirm_password" class="form-control" required>
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary">Update Password</button>
+                  <button type="submit" class="btn btn-primary">Parolayı Güncelle</button>
                 </div>
               </form>
             </div>
           </div>
         </div>
 
-        <!-- Backdrop to disable background -->
+        <!-- Arka planı devre dışı bırakma -->
         <div class="modal-backdrop fade show"></div>
         {% endif %}
 
@@ -124,40 +124,40 @@
 
       <div class="position-absolute bottom-0 m-4">
         <div class="dropdown">
-          <button class="btn btn-light btn-icon rounded-circle d-flex align-items-center" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+          <button class="btn btn-light btn-icon rounded-circle d-flex align-items-center" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Temayı değiştir (otomatik)">
             <i class="bi theme-icon-active"></i>
-            <span class="visually-hidden bs-theme-text">Toggle theme</span>
+            <span class="visually-hidden bs-theme-text">Temayı değiştir</span>
           </button>
           <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bs-theme-text">
             <li>
               <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
                 <i class="bi theme-icon bi-sun-fill"></i>
-                <span class="ms-2">Light</span>
+                <span class="ms-2">Açık</span>
               </button>
             </li>
             <li>
               <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
                 <i class="bi theme-icon bi-moon-stars-fill"></i>
-                <span class="ms-2">Dark</span>
+                <span class="ms-2">Koyu</span>
               </button>
             </li>
             <li>
               <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
                 <i class="bi theme-icon bi-circle-half"></i>
-                <span class="ms-2">Auto</span>
+                <span class="ms-2">Otomatik</span>
               </button>
             </li>
           </ul>
         </div>
       </div>
     </main>
-    <!-- Scripts -->
+    <!-- Scriptler -->
     <!-- Libs JS -->
 <script src="{% static 'assets/libs/@popperjs/core/dist/umd/popper.min.js' %}"></script>
 <script src="{% static 'assets/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'assets/libs/simplebar/dist/simplebar.min.js' %}"></script>
 
-<!-- Theme JS -->
+<!-- Tema JS -->
 <script src="{% static 'assets/js/theme.min.js' %}"></script>
 
     <script src="{% static 'assets/js/vendors/validation.js' %}"></script>

@@ -94,48 +94,34 @@
         <span class="icon-bar bottom-bar"></span>
       </button>
     </div>
-    <!-- Collapse -->
+
     <div class="collapse navbar-collapse" id="navbar-default">
       <ul class="navbar-nav mt-3 mt-lg-0 mx-xxl-auto">
-        <!-- Solutions -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="solutionsMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Solutions
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="solutionsMenu">
-            <li><a class="dropdown-item" href="{% url 'for_businesses' %}">For Businesses</a></li>
-            <li><a class="dropdown-item" href="{% url 'for_individuals' %}">For Individuals</a></li>
-          </ul>
-        </li>
 
         <!-- Resources / Learn -->
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'coming-soon' %}">Ressources</a>
+          <a class="nav-link" href="{% url 'coming-soon' %}">Ekibimiz</a>
         </li>
 
         <!-- About Us -->
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'coming-soon' %}">About</a>
+          <a class="nav-link" href="{% url 'coming-soon' %}">Neden Siberkobi?</a>
         </li>
 
         <!-- Pricing -->
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'pricing' %}">Pricing</a>
-        </li>
-
-        <!-- Contact / Request Demo -->
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'coming-soon' %}">Contact</a>
+          <a class="nav-link" href="{% url 'pricing' %}">Fiyatlandırma</a>
         </li>
       </ul>
     </div>
+
+
   </div>
 </nav>
 
 {% block content %}
 
 {% endblock %}
-
 
 <!-- Footer -->
 <footer class="footer bg-dark-stable py-8">
@@ -144,9 +130,9 @@
   <div class="col-xl-3 col-lg-12 col-md-6 col-12">
     <div class="d-flex flex-column gap-4">
       <div>
-        <img src="{% static 'assets/images/svg/white.svg' %}" width="250" alt="Siberkobi logo" />
+        <img src="{% static 'assets/images/svg/white.svg' %}" width="250" alt="Siberkobi logosu" />
       </div>
-      <p class="mb-0">Practical cybersecurity and audit training platform. Built by professionals for professionals.</p>
+      <p class="mb-0">Uygulamalı siber güvenlik ve denetim eğitim platformu. Profesyoneller tarafından profesyoneller için tasarlandı.</p>
       <div class="d-flex gap-2">
         <a href="#langaugeModal" class="btn btn-outline-secondary" data-bs-toggle="modal">
           <span>
@@ -155,7 +141,7 @@
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m7.5-6.923c-.67.204-1.335.82-1.887 1.855A8 8 0 0 0 5.145 4H7.5zM4.09 4a9.3 9.3 0 0 1 .64-1.539 7 7 0 0 1 .597-.933A7.03 7.03 0 0 0 2.255 4zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a7 7 0 0 0-.656 2.5zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5zM8.5 5v2.5h2.99a12.5 12.5 0 0 0-.337-2.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5zM5.145 12q.208.58.468 1.068c.552 1.035 1.218 1.65 1.887 1.855V12zm.182 2.472a7 7 0 0 1-.597-.933A9.3 9.3 0 0 1 4.09 12H2.255a7 7 0 0 0 3.072 2.472M3.82 11a13.7 13.7 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5zm6.853 3.472A7 7 0 0 0 13.745 12H11.91a9.3 9.3 0 0 1-.64 1.539 7 7 0 0 1-.597.933M8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855q.26-.487.468-1.068zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.7 13.7 0 0 1-.312 2.5m2.802-3.5a7 7 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7 7 0 0 0-3.072-2.472c.218.284.418.598.597.933M10.855 4a8 8 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4z" />
             </svg>
           </span>
-          <span class="ms-2">English</span>
+          <span class="ms-2">Türkçe</span>
         </a>
         <div class="dropdown">
           <button
@@ -163,27 +149,27 @@
             type="button"
             aria-expanded="false"
             data-bs-toggle="dropdown"
-            aria-label="Toggle theme (auto)">
+            aria-label="Temayı değiştir (otomatik)">
             <i class="bi theme-icon-active"></i>
-            <span class="visually-hidden bs-theme-text">Toggle theme</span>
+            <span class="visually-hidden bs-theme-text">Temayı değiştir</span>
           </button>
           <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bs-theme-text" data-bs-theme="dark">
             <li>
               <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
                 <i class="bi theme-icon bi-sun-fill"></i>
-                <span class="ms-2">Light</span>
+                <span class="ms-2">Açık</span>
               </button>
             </li>
             <li>
               <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
                 <i class="bi theme-icon bi-moon-stars-fill"></i>
-                <span class="ms-2">Dark</span>
+                <span class="ms-2">Koyu</span>
               </button>
             </li>
             <li>
               <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
                 <i class="bi theme-icon bi-circle-half"></i>
-                <span class="ms-2">Auto</span>
+                <span class="ms-2">Otomatik</span>
               </button>
             </li>
           </ul>
@@ -200,16 +186,16 @@
   <div class="col-xl-3 col-lg-3 col-md-6 col-12">
     <div class="d-flex flex-column gap-5">
       <div class="d-flex flex-column gap-3">
-        <span class="text-white-stable">Contact</span>
+        <span class="text-white-stable">İletişim</span>
         <ul class="list-unstyled mb-0 d-flex flex-column nav nav-footer nav-x-0 text-white-50">
-          <li>Email:
+          <li>E-posta:
             <span class="fw-semibold">support@siberkobi.co</span>
           </li>
-          <li>Location:
+          <li>Konum:
             <span class="fw-semibold">Leuven, Belgium</span>
           </li>
-          <li>Hours:
-            <span class="fw-semibold">Mon–Fri, 9:00–17:00 CET</span>
+          <li>Çalışma Saatleri:
+            <span class="fw-semibold">Pzt–Cum, 9:00–17:00 CET</span>
           </li>
         </ul>
       </div>
@@ -226,17 +212,17 @@
           document.getElementById("copyright").appendChild(document.createTextNode(new Date().getFullYear()));
         </script>
       </span>
-      Siberkobi. All Rights Reserved.
+      Siberkobi. Tüm hakları saklıdır.
     </span>
   </div>
   <!-- Links -->
   <div class="col-12 col-lg-6">
     <nav class="nav nav-footer justify-content-center justify-content-md-start justify-content-lg-end">
       <a class="nav-link active" href="{% url 'terms_and_conditions' %}">
-        Terms and Conditions
+        Şartlar ve Koşullar
       </a>
-      <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cookiesModal">Cookies Settings</a>
-      <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy policy</a>
+      <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cookiesModal">Çerez Ayarları</a>
+      <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Gizlilik Politikası</a>
     </nav>
   </div>
 </div>
@@ -271,11 +257,11 @@
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="cookiesModalLabel">Cookies Settings</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="cookiesModalLabel">Çerez Ayarları</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
       </div>
       <div class="modal-body">
-        <p>We don't use cookies to enhance your experience and analyze platform usage. You may control cookie preferences in your browser settings. Essential cookies are not necessary for site functionality.</p>
+        <p>Deneyiminizi geliştirmek ve platform kullanımını analiz etmek için çerezleri kullanmıyoruz. Çerez tercihlerini tarayıcı ayarlarınızdan kontrol edebilirsiniz. Temel çerezler site işlevselliği için gerekli değildir.</p>
       </div>
     </div>
   </div>
@@ -286,11 +272,11 @@
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="privacyModalLabel">Privacy Policy</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="privacyModalLabel">Gizlilik Politikası</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
       </div>
       <div class="modal-body">
-        <p>At Siberkobi, we value your privacy. Any data you provide, such as email or course activity, is securely stored and never shared with third parties without consent. You can request data deletion by contacting us at support@siberkobi.co...</p>
+        <p>Siberkobi olarak gizliliğinize değer veriyoruz. E-posta veya kurs etkinliği gibi sağladığınız tüm veriler güvenli bir şekilde saklanır ve izniniz olmadan üçüncü taraflarla paylaşılmaz. support@siberkobi.co adresinden bizimle iletişime geçerek veri silme talebinde bulunabilirsiniz...</p>
       </div>
     </div>
   </div>
@@ -302,19 +288,19 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h5 class="modal-title" id="teamAccessModalLabel">Request Team Access</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="teamAccessModalLabel">Takım Erişimi Talep Et</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
       </div>
 
       <div class="modal-body">
-        Please contact us via email at
+        Lütfen e-posta ile bizimle iletişime geçin:
         <a href="mailto:support@siberkobi.co">support@siberkobi.co</a>.
-        Our team will provide you with all the necessary information and next steps.
+        Ekibimiz size gerekli tüm bilgileri ve sonraki adımları sağlayacaktır.
       </div>
 
       <div class="modal-footer">
-        <a href="mailto:support@siberkobi.co" class="btn btn-primary">Send Email</a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a href="mailto:support@siberkobi.co" class="btn btn-primary">E-posta Gönder</a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
       </div>
 
     </div>
