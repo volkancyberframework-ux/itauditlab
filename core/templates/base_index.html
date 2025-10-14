@@ -72,9 +72,9 @@
         </div>
 
         {% if user.is_authenticated %}
-            <a href="{% url 'dashboard_student' %}" class="btn btn-outline-dark">Dashboard</a>
+            <a href="{% url 'dashboard_student' %}" class="btn btn-outline-dark">Panel</a>
         {% else %}
-            <a href="{% url 'login' %}" class="btn btn-outline-dark">Login</a>
+            <a href="{% url 'login' %}" class="btn btn-outline-dark">Giriş</a>
         {% endif %}
 
       </div>

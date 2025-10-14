@@ -55,8 +55,8 @@
                   </ul>
                 </div>
                 <div class="d-grid d-md-flex flex-row gap-2">
-                  <a href="{% url 'pricing' %}" class="btn btn-primary btn-lg">Bugün Başla — Aylık ₺200’den başlayan fiyatlar</a>
-                  <a href="{% url 'login' %}" class="btn btn-outline-secondary btn-lg">Deneyerek Öğren</a>
+                  <a href="{% url 'pricing' %}" class="btn btn-primary btn-lg">Aylık ₺200’den Başla</a>
+                  <a href="{% url 'login' %}" class="btn btn-outline-secondary btn-lg">Hemen Başla</a>
                 </div>
               </div>
             </div>
@@ -934,7 +934,7 @@
               </li>
             </ul>
             <div class="sliderFirst py-3">
-              {% for course in Kurs %}
+              {% for course in courses %}
                 <div class="item">
                   <div class="card card-lift">
                     {% if course.image %}
