@@ -24,100 +24,123 @@
 
     <link rel="stylesheet" href="{% static 'assets/libs/tiny-slider/dist/tiny-slider.css' %}" />
     <title>Siberkobi | Hands-On IT Audit & GRC Learning Platform</title>
+
+<style>
+
+/* Genel: header daha kompakt olsun */
+.navbar { padding-top: .4rem; padding-bottom: .4rem; }
+
+/* Mobil header düzeltmeleri */
+@media (max-width: 576px){
+
+/* Tek satırda kalsın, taşma olmasın */
+.navbar .container{
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: .5rem;
+}
+
+/* Logo küçült (wordmark zaten tek görsel) */
+.navbar .brand-logo{
+  width: 180px !important;   /* gerekirse 160/150 yapabilirsin */
+  height: auto !important;
+  display: block;
+}
+
+/* Sağ araçlar: tek satır hizalama ve dar padding */
+.nav-tools{
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+.nav-tools .btn-login{
+  padding: .3rem .55rem !important;
+  line-height: 1.1 !important;
+  font-size: .9rem !important;
+  border-radius: .5rem;
+}
+
+/* Toggler ufalt ve iç boşlukları sıkılaştır */
+.navbar-toggler{
+  padding: .25rem .4rem !important;
+  margin-left: .1rem !important;
+}
+
+/* Dropdown rozet/menü taşmalarını engelle */
+.dropdown-menu{
+  max-width: 80vw;
+}
+}
+
+/* iOS “safe area” üst çentik sorunlarında taşma yaşarsan:
+body { padding-top: env(safe-area-inset-top); }  */
+
+</style>
+
   </head>
 
   <body class="bg-white">
     <!-- Page Content -->
     <nav class="navbar navbar-expand-lg">
-  <div class="container px-0">
-    <div>
-      <a href="{% url 'landing' %}">
-        <img src="{% static 'assets/images/brand/logo/logo.svg' %}" width="250" alt="Siberkobi logo" />
-      </a>
-    </div>
+      <div class="container px-0">
 
-    <!-- Mobile view nav wrap -->
-    <div class="ms-auto d-flex align-items-center order-lg-3">
-      <div class="d-flex gap-2 align-items-center">
-        <div class="dropdown">
-          <button
-            class="btn btn-outline-secondary btn-icon rounded-circle d-flex align-items-center"
-            type="button"
-            aria-expanded="false"
-            data-bs-toggle="dropdown"
-            aria-label="Toggle theme (auto)">
-            <i class="bi theme-icon-active"></i>
-            <span class="visually-hidden bs-theme-text">Toggle theme</span>
+        <!-- Brand -->
+        <div>
+          <a href="{% url 'landing' %}" class="navbar-brand m-0 p-0">
+            <img src="{% static 'assets/images/brand/logo/logo.svg' %}"
+                 class="brand-logo" width="250" alt="Siberkobi logo"/>
+          </a>
+        </div>
+
+        <!-- Sağ araçlar + Toggler (tek grup) -->
+        <div class="ms-auto d-flex align-items-center gap-2 nav-tools order-lg-3">
+
+          <!-- Tema menüsü -->
+          <div class="dropdown">
+            <button class="btn btn-outline-secondary btn-icon rounded-circle d-flex align-items-center"
+                    type="button" data-bs-toggle="dropdown" aria-label="Temayı değiştir (otomatik)">
+              <i class="bi theme-icon-active"></i>
+              <span class="visually-hidden bs-theme-text">Temayı değiştir</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow" data-bs-theme="dark">
+              <li><button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
+                <i class="bi theme-icon bi-sun-fill"></i><span class="ms-2">Açık</span></button></li>
+              <li><button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
+                <i class="bi theme-icon bi-moon-stars-fill"></i><span class="ms-2">Koyu</span></button></li>
+              <li><button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto">
+                <i class="bi theme-icon bi-circle-half"></i><span class="ms-2">Otomatik</span></button></li>
+            </ul>
+          </div>
+
+          {% if user.is_authenticated %}
+            <a href="{% url 'dashboard_student' %}" class="btn btn-outline-dark btn-login">Panel</a>
+          {% else %}
+            <a href="{% url 'login' %}" class="btn btn-outline-dark btn-login">Giriş</a>
+          {% endif %}
+
+          <!-- Toggler burada -->
+          <button class="navbar-toggler ms-1" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#navbar-default"
+                  aria-controls="navbar-default" aria-expanded="false" aria-label="Menü">
+            <span class="icon-bar top-bar mt-0"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
           </button>
-          <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bs-theme-text" data-bs-theme="dark">
-            <li>
-              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
-                <i class="bi theme-icon bi-sun-fill"></i>
-                <span class="ms-2">Light</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-                <i class="bi theme-icon bi-moon-stars-fill"></i>
-                <span class="ms-2">Dark</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
-                <i class="bi theme-icon bi-circle-half"></i>
-                <span class="ms-2">Auto</span>
-              </button>
-            </li>
+        </div>
+
+        <!-- Çökebilir menü -->
+        <div class="collapse navbar-collapse" id="navbar-default">
+          <ul class="navbar-nav mt-3 mt-lg-0 mx-xxl-auto">
+            <li class="nav-item"><a class="nav-link" href="{% url 'coming-soon' %}">Ekibimiz</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'coming-soon' %}">Neden Siberkobi?</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'pricing' %}">Fiyatlandırma</a></li>
           </ul>
         </div>
 
-        {% if user.is_authenticated %}
-            <a href="{% url 'dashboard_student' %}" class="btn btn-outline-dark">Panel</a>
-        {% else %}
-            <a href="{% url 'login' %}" class="btn btn-outline-dark">Giriş</a>
-        {% endif %}
-
       </div>
-    </div>
-    <div>
-      <!-- Button -->
-      <button
-        class="navbar-toggler collapsed ms-2"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbar-default"
-        aria-controls="navbar-default"
-        aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span class="icon-bar top-bar mt-0"></span>
-        <span class="icon-bar middle-bar"></span>
-        <span class="icon-bar bottom-bar"></span>
-      </button>
-    </div>
+    </nav>
 
-    <div class="collapse navbar-collapse" id="navbar-default">
-      <ul class="navbar-nav mt-3 mt-lg-0 mx-xxl-auto">
-
-        <!-- Resources / Learn -->
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'coming-soon' %}">Ekibimiz</a>
-        </li>
-
-        <!-- About Us -->
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'coming-soon' %}">Neden Siberkobi?</a>
-        </li>
-
-        <!-- Pricing -->
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'pricing' %}">Fiyatlandırma</a>
-        </li>
-      </ul>
-    </div>
-
-
-  </div>
-</nav>
 
 {% block content %}
 
