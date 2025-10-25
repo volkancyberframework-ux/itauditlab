@@ -27,4 +27,5 @@ urlpatterns = [
     path('terms-and-conditions/', views.terms_and_conditions, name='terms_and_conditions'),
     path("for-individuals/", views.for_individuals, name="for_individuals"),
     path("for-businesses/", views.for_businesses, name="for_businesses"),
+    path("about/", views.about_view, name="about"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

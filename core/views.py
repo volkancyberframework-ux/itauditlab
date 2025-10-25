@@ -30,6 +30,10 @@ from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseForbid
 
 User = get_user_model()
 
+def about_view(request):
+    return render(request, "about.html")
+
+
 def custom_login_view(request):
     if request.method == 'POST':
         email = request.POST.get('email')

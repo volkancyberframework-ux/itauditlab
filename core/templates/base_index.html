@@ -132,9 +132,29 @@ body { padding-top: env(safe-area-inset-top); }  */
         <!-- Çökebilir menü -->
         <div class="collapse navbar-collapse" id="navbar-default">
           <ul class="navbar-nav mt-3 mt-lg-0 mx-xxl-auto">
-            <li class="nav-item"><a class="nav-link" href="{% url 'coming-soon' %}">Ekibimiz</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'coming-soon' %}">Neden Siberkobi?</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'pricing' %}">Fiyatlandırma</a></li>
+            {# Aktif sekmeyi vurgulamak için mevcut url_name'i alalım #}
+            {% with url_name=request.resolver_match.url_name %}
+              <li class="nav-item">
+                <a class="nav-link {% if url_name == 'about' %}active fw-semibold{% endif %}" href="{% url 'about' %}" aria-label="Hikayem">
+                  ✈️ Hikayem
+                </a>
+              </li>
+
+              <li class="nav-item">
+                {# Ürün sayfanızın URL name'ini 'digital-products' olarak varsaydım; farklıysa değiştirin #}
+                <a class="nav-link {% if url_name == 'coming-soon' %}active fw-semibold{% endif %}" href="{% url 'coming-soon' %}" aria-label="Dijital Ürünler">
+                  🛒 Dijital Ürünler
+                  <span class="badge rounded-pill bg-info-subtle text-info-emphasis ms-1 align-middle">Yeni</span>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link {% if url_name == 'pricing' %}active fw-semibold{% endif %}" href="{% url 'pricing' %}" aria-label="Fiyatlandırma">
+                  💳 Fiyatlandırma
+                </a>
+              </li>
+            {% endwith %}
+
           </ul>
         </div>
 
