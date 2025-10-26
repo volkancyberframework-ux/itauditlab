@@ -76,6 +76,32 @@
 /* iOS “safe area” üst çentik sorunlarında taşma yaşarsan:
 body { padding-top: env(safe-area-inset-top); }  */
 
+/* Sabit renkli logoyu dark-mode filtrelerinden muaf tut */
+.brand-logo-fixed {
+  height: 28px;
+  width: auto;
+  filter: none !important;
+  -webkit-filter: none !important;
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+}
+
+/* Eğer temanda dark modda logolara invert/brighness uygulanıyorsa,
+   sadece .brand-logo için uygula, .brand-logo-fixed hariç tut. */
+:root[data-bs-theme="dark"] img.brand-logo {
+  filter: invert(1) brightness(1.1) contrast(1) !important; /* mevcut davranış */
+}
+:root[data-bs-theme="dark"] img.brand-logo-fixed {
+  filter: none !important;
+}
+
+/* Mobilde boyutlar */
+@media (max-width: 576px){
+  .brand-logo { width: 180px !important; }
+  .brand-logo-fixed { height: 22px; }
+}
+
+
 </style>
 
   </head>
@@ -86,12 +112,20 @@ body { padding-top: env(safe-area-inset-top); }  */
       <div class="container px-0">
 
         <!-- Brand -->
-        <div>
+        <div class="d-flex align-items-center gap-2">
+          <!-- Dark moddan etkilenmeyen sabit renkli logo -->
+          <a href="{% url 'landing' %}" class="navbar-brand m-0 p-0">
+            <img src="{% static 'assets/images/brand/logo/partner.svg' %}"
+                 class="brand-logo-fixed" height="28" alt="Partner logo">
+          </a>
+
+          <!-- Tema ile renk değiştiren mevcut logo -->
           <a href="{% url 'landing' %}" class="navbar-brand m-0 p-0">
             <img src="{% static 'assets/images/brand/logo/logo.svg' %}"
-                 class="brand-logo" width="250" alt="Siberkobi logo"/>
+                 class="brand-logo" width="250" alt="Siberkobi logo">
           </a>
         </div>
+
 
         <!-- Sağ araçlar + Toggler (tek grup) -->
         <div class="ms-auto d-flex align-items-center gap-2 nav-tools order-lg-3">
