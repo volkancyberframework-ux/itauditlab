@@ -1,0 +1,264 @@
+{% extends "base_index.html" %}
+{% load static %}
+{% block content %}
+<main>
+  <!-- Header -->
+  <section class="py-4 py-lg-6 bg-primary">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="text-white mb-1 display-4">Dijital Ürünler</h1>
+          <p class="mb-0 text-white lead">PDF kitler, cheat-sheetler ve daha fazlası.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grid -->
+  <section class="py-7">
+    <div class="container">
+      <div class="row">
+        {% for p in products %}
+        <div class="col-lg-3 col-md-6 col-12">
+          <div class="card mb-4 card-hover product-card" data-slug="{{ p.slug }}">
+            <a href="javascript:void(0)" class="open-product" data-slug="{{ p.slug }}">
+              <img src="{{ p.image.url if p.image else static 'assets/images/course/course-javascript.jpg' }}"
+                   alt="{{ p.title }}" class="card-img-top" />
+            </a>
+
+            <div class="card-body">
+              <h3 class="h5 mb-2 text-truncate-line-2">
+                <a href="javascript:void(0)" class="text-inherit open-product" data-slug="{{ p.slug }}">{{ p.title }}</a>
+              </h3>
+
+              <ul class="mb-3 list-inline">
+                {% if p.duration %}
+                <li class="list-inline-item">
+                  <span class="me-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                         fill="currentColor" class="bi bi-clock align-baseline" viewBox="0 0 16 16">
+                      <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                      <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
+                    </svg>
+                  </span>
+                  <span>{{ p.duration }}</span>
+                </li>
+                {% endif %}
+                <li class="list-inline-item">
+                  <svg class="me-1 mt-n1" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                       xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
+                    <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9"></rect>
+                    <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
+                  </svg>
+                  {{ p.difficulty }}
+                </li>
+              </ul>
+
+              <div class="lh-1 mb-2">
+                <span class="align-text-top me-1">
+                  {% for i in "12345" %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"
+                       fill="currentColor" class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327
+                             4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8
+                             13.187l-4.389 2.256z"/>
+                  </svg>
+                  {% endfor %}
+                </span>
+                <span class="text-warning">{{ p.rating }}</span>
+                <span class="fs-6">({{ p.reviews_count }})</span>
+              </div>
+
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="fw-semibold">{{ p.price_display }}</div>
+                <a class="btn btn-sm btn-outline-primary open-product" data-slug="{{ p.slug }}" href="javascript:void(0)">
+                  İncele
+                </a>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <div class="row align-items-center g-0">
+                <div class="col-auto">
+                  <img src="{{ p.static_avatar.url if p.static_avatar else static 'assets/images/avatar/avatar-3.jpg' }}"
+                       class="rounded-circle avatar-xs" alt="avatar">
+                </div>
+                <div class="col ms-2">
+                  <span>{{ p.uploader_name }}</span>
+                </div>
+                <div class="col-auto">
+                  <span class="text-muted small">Dijital Ürün</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Modal -->
+<div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="pmTitle">Ürün</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row g-4">
+          <div class="col-md-5">
+            <img id="pmImage" src="" class="img-fluid rounded" alt="product">
+            <div class="mt-2 text-muted small">
+              <span id="pmDuration"></span> · <span id="pmDifficulty"></span>
+            </div>
+            <div class="mt-1">
+              <span class="badge bg-warning text-dark"><span id="pmRating"></span> ★</span>
+              <span class="text-muted">(<span id="pmReviews"></span>)</span>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <p id="pmDesc" class="mb-3"></p>
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <div class="h5 mb-0" id="pmPrice"></div>
+              <div class="text-muted">Hazırlayan: <span id="pmUploader"></span></div>
+            </div>
+
+            <form id="buyForm" class="border rounded p-3">
+              {% csrf_token %}
+              <input type="hidden" name="slug" id="pmSlug">
+              <div class="mb-2">
+                <label for="email" class="form-label">Satın almak için e-posta adresiniz</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
+              </div>
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" value="" id="agree" required>
+                <label class="form-check-label" for="agree">
+                  Satın al’a bastığımda Ruul.io ödeme sayfasına yönlendirileceğim. Ödeme tamamlanınca Ruul’da
+                  PDF <strong>şifrem</strong> gösterilecek; aynı şifre ile indirdiğim dosya açılacaktır.
+                </label>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary" id="payBtn">Ruul ile Öde</button>
+                <a href="#" id="successLink" class="btn btn-outline-success d-none">Ödemeyi tamamladım — Dosyamı indir</a>
+              </div>
+
+              <div class="small text-muted mt-2">
+                * Gerçek kurulumda ödeme <strong>webhook</strong> ile doğrulanmalıdır.
+              </div>
+            </form>
+
+            <div id="pmAlert" class="alert alert-danger d-none mt-3"></div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-light" data-bs-dismiss="modal">Kapat</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function(){
+  const modalEl = document.getElementById('productModal');
+  let productModal = null;
+  document.addEventListener('DOMContentLoaded', function(){
+    productModal = new bootstrap.Modal(modalEl);
+  });
+
+  function csrfToken(){
+    const el = document.querySelector('#buyForm input[name=csrfmiddlewaretoken]');
+    return el ? el.value : '';
+  }
+
+  async function openProduct(slug){
+    const url = `/store/${slug}/detail.json`;
+    const resp = await fetch(url);
+    const data = await resp.json();
+    if(!data.ok) return;
+
+    const p = data.product;
+    document.getElementById('pmTitle').innerText = p.title;
+    document.getElementById('pmDesc').innerText = p.description || '';
+    document.getElementById('pmDifficulty').innerText = p.difficulty || '';
+    document.getElementById('pmDuration').innerText = p.duration || '';
+    document.getElementById('pmRating').innerText = (p.rating || 0).toFixed(1);
+    document.getElementById('pmReviews').innerText = p.reviews || 0;
+    document.getElementById('pmUploader').innerText = p.uploader_name || '';
+    document.getElementById('pmPrice').innerText = p.price_display || '';
+    document.getElementById('pmImage').src = p.image_url || "{% static 'assets/images/course/course-javascript.jpg' %}";
+    document.getElementById('pmSlug').value = slug;
+    document.getElementById('pmAlert').classList.add('d-none');
+    document.getElementById('successLink').classList.add('d-none');
+
+    productModal.show();
+  }
+
+  // Kart ve başlık tıklamaları
+  document.addEventListener('click', function(e){
+    const a = e.target.closest('.open-product');
+    if(a){
+      const slug = a.getAttribute('data-slug');
+      if(slug) openProduct(slug);
+    }
+  });
+
+  // Satın alma intent’i oluştur ve Ruul’a gönder
+  const buyForm = document.getElementById('buyForm');
+  buyForm && buyForm.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const slug = document.getElementById('pmSlug').value;
+    const email = document.getElementById('email').value;
+    const agree = document.getElementById('agree').checked;
+    const alertBox = document.getElementById('pmAlert');
+    alertBox.classList.add('d-none');
+
+    if(!agree) {
+      alertBox.innerText = "Lütfen bilgilendirmeyi onaylayın.";
+      alertBox.classList.remove('d-none');
+      return;
+    }
+
+    const resp = await fetch(`/store/${slug}/intent/`, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': csrfToken(),
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({email})
+    });
+
+    const data = await resp.json();
+    if(!data.ok){
+      alertBox.innerText = data.error || "Bir hata oluştu.";
+      alertBox.classList.remove('d-none');
+      return;
+    }
+
+    // Ruul ödeme linkini yeni sekmede aç
+    const payUrl = data.pay_url;
+    const successUrl = data.success_url;
+
+    if(payUrl) window.open(payUrl, '_blank');
+
+    // Kullanıcı ödeme sonrası bu linke basarak dosyayı indirecek (webhook yoksa)
+    const successLink = document.getElementById('successLink');
+    successLink.href = successUrl;
+    successLink.classList.remove('d-none');
+  });
+})();
+</script>
+{% endblock %}

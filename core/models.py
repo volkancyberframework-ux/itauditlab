@@ -2,7 +2,98 @@ from __future__ import annotations
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.utils.text import slugify
 
+class Currency(models.TextChoices):
+    USD = "USD", "USD"
+    EUR = "EUR", "EUR"
+    TRY = "TRY", "TRY"
+
+DIFFICULTY_CHOICES = [
+    ("Beginner", "Beginner"),
+    ("Intermediate", "Intermediate"),
+    ("Advanced", "Advanced"),
+]
+
+class DigitalProduct(models.Model):
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=280, unique=True, blank=True)
+    image = models.ImageField(upload_to="digital_products/images/", blank=True, null=True)
+    description = models.TextField(blank=True)
+
+    # Görünürlük ve sınıflandırma
+    duration = models.CharField(max_length=32, blank=True, help_text="e.g. 3h 56m")
+    difficulty = models.CharField(max_length=20, choices=DIFFICULTY_CHOICES, default="Beginner")
+    rating = models.DecimalField(max_digits=3, decimal_places=1, default=0)  # 4.5
+    reviews_count = models.PositiveIntegerField(default=0)
+
+    uploader_name = models.CharField(max_length=120, default="ITAuditLab")
+    static_avatar = models.ImageField(
+        upload_to="digital_products/avatars/", blank=True, null=True,
+        help_text="Kartta görünecek statik avatar"
+    )
+
+    # Fiyatlandırma
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    currency = models.CharField(max_length=3, choices=Currency.choices, default=Currency.USD)
+
+    # Ödeme & lisans
+    ruul_pay_link = models.URLField(
+        blank=True,
+        help_text="Ruul.io ürün/checkout linki (kullanıcı buraya yönlendirilecek)"
+    )
+    license_password = models.CharField(
+        max_length=64,
+        help_text="Ödeme sonrası kullanıcıya gösterilecek PDF şifresi (Ruul'da da yazdığın metinle aynı olsun)"
+    )
+
+    # Orijinal ve üretilmiş pdf
+    source_pdf = models.FileField(upload_to="digital_products/source_pdf/", blank=True, null=True)
+
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self) -> str:
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base = slugify(self.title)[:50]
+            s = base
+            i = 1
+            while DigitalProduct.objects.filter(slug=s).exclude(pk=self.pk).exists():
+                i += 1
+                s = f"{base}-{i}"
+            self.slug = s
+        super().save(*args, **kwargs)
+
+    @property
+    def currency_symbol(self) -> str:
+        return {"USD": "$", "EUR": "€", "TRY": "₺"}.get(self.currency, "")
+
+    def price_display(self) -> str:
+        # 12.90 € gibi
+        sym = self.currency_symbol
+        if self.currency in ("USD", "TRY"):
+            return f"{sym}{self.price}"
+        return f"{self.price} {sym}"
+
+
+# Ödeme niyeti / geçici kayıt (webhook gelene kadar)
+import uuid
+
+class PurchaseIntent(models.Model):
+    token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False, db_index=True)
+    product = models.ForeignKey(DigitalProduct, on_delete=models.CASCADE, related_name="purchase_intents")
+    email = models.EmailField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_paid = models.BooleanField(default=False)  # Ruul webhook geldikten sonra True yap
+
+    def __str__(self):
+        return f"{self.email} -> {self.product.title} ({'PAID' if self.is_paid else 'PENDING'})"
 
 
 class Course(models.Model):
