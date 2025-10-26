@@ -101,6 +101,49 @@ body { padding-top: env(safe-area-inset-top); }  */
   .brand-logo-fixed { height: 22px; }
 }
 
+/* Navbar brand img'lerde Bootstrap'ın olası max-height sınırını kaldır */
+.navbar-brand img { max-height: none !important; display: block; line-height: 1; }
+
+/* İki logoya da aynı yükseklik ver: masaüstü */
+.brand-logo-fixed,
+.brand-logo {
+  height: 30px;     /* aynı yükseklik -> orantı korunur */
+  width: auto;
+}
+
+/* Mobilde biraz küçült */
+@media (max-width: 576px){
+  .brand-logo-fixed,
+  .brand-logo {
+    height: 24px;
+  }
+}
+
+/* ---- DARK MODE DAVRANIŞI ---- */
+
+/* Ana logo tema ile uyumlu kalsın (invert) */
+:root[data-bs-theme="dark"] img.theme-adaptive {
+  filter: invert(1) brightness(1.1) contrast(1) !important;
+}
+:root[data-bs-theme="light"] img.theme-adaptive {
+  filter: none !important;
+}
+
+/* Partner logo kesinlikle etkilenmesin */
+img.brand-logo-fixed {
+  filter: none !important;
+  -webkit-filter: none !important;
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+}
+
+/* Eğer teman dark modda TUM navbar'a (veya body'e) filter: invert(1) uyguluyorsa,
+   çocukta 'none' yazmak yetmez. Bu durumda partner logoya karşı-invert uygula.
+   Aşağıdaki satırı ETKİNLEŞTİR ve yukarıdaki 'none' kuralını bırak: çift invert -> normal görünüm. */
+:root[data-bs-theme="dark"] .navbar img.brand-logo-fixed {
+  filter: invert(1) !important;  /* <- sadece gerekirse bırak, çoğu temada 'none' yeter */
+}
+
 
 </style>
 
@@ -113,18 +156,23 @@ body { padding-top: env(safe-area-inset-top); }  */
 
         <!-- Brand -->
         <div class="d-flex align-items-center gap-2">
-          <!-- Dark moddan etkilenmeyen sabit renkli logo -->
+          <!-- Dark moddan etkilenmemesi gereken logo -->
           <a href="{% url 'landing' %}" class="navbar-brand m-0 p-0">
-            <img src="{% static 'assets/images/brand/logo/partner.svg' %}"
-                 class="brand-logo-fixed" height="28" alt="Partner logo">
+            <img
+              src="{% static 'assets/images/brand/logo/partner.svg' %}"
+              class="brand-logo-fixed"
+              alt="Partner logo">
           </a>
 
-          <!-- Tema ile renk değiştiren mevcut logo -->
+          <!-- Tema ile uyumlu (invert edilen) ana logo -->
           <a href="{% url 'landing' %}" class="navbar-brand m-0 p-0">
-            <img src="{% static 'assets/images/brand/logo/logo.svg' %}"
-                 class="brand-logo" width="250" alt="Siberkobi logo">
+            <img
+              src="{% static 'assets/images/brand/logo/logo.svg' %}"
+              class="brand-logo theme-adaptive"
+              alt="Siberkobi logo">
           </a>
         </div>
+
 
 
         <!-- Sağ araçlar + Toggler (tek grup) -->
