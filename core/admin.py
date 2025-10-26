@@ -16,25 +16,6 @@ from .models import (
     PurchaseIntent,
 )
 
-@admin.register(DigitalProduct)
-class DigitalProductAdmin(admin.ModelAdmin):
-    list_display = ("title", "price", "currency", "difficulty", "rating", "reviews_count", "is_active")
-    list_filter = ("is_active", "currency", "difficulty")
-    search_fields = ("title", "description", "uploader_name", "slug")
-    prepopulated_fields = {"slug": ("title",)}
-    fieldsets = (
-        ("Genel", {"fields": ("title", "slug", "image", "description", "is_active")}),
-        ("Görsel/İçerik", {"fields": ("duration", "difficulty", "rating", "reviews_count", "uploader_name", "static_avatar")}),
-        ("Fiyat & Ödeme", {"fields": ("price", "currency", "ruul_pay_link", "license_password")}),
-        ("Dosya", {"fields": ("source_pdf",)}),
-    )
-
-@admin.register(PurchaseIntent)
-class PurchaseIntentAdmin(admin.ModelAdmin):
-    list_display = ("email", "product", "created_at", "is_paid", "token")
-    list_filter = ("is_paid", "created_at", "product")
-    search_fields = ("email", "product__title", "token")
-
 
 @admin.register(DigitalProduct)
 class DigitalProductAdmin(admin.ModelAdmin):
