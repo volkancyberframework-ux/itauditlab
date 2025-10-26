@@ -6,6 +6,18 @@ from django.utils.text import slugify
 from django.core.validators import MinValueValidator
 from decimal import Decimal
 
+class Currency(models.TextChoices):
+    USD = "USD", "USD"
+    EUR = "EUR", "EUR"
+    TRY = "TRY", "TRY"
+
+DIFFICULTY_CHOICES = [
+    ("Beginner", "Beginner"),
+    ("Intermediate", "Intermediate"),
+    ("Advanced", "Advanced"),
+]
+
+
 class DigitalProduct(models.Model):
     # ... (mevcut alanlar)
     price = models.DecimalField(                # İNDİRİMLİ fiyat
@@ -45,17 +57,6 @@ class DigitalProduct(models.Model):
         base = self.original_price if self.original_price is not None else (self.price or Decimal("0")) * Decimal("4")
         return self._fmt(base)
 
-
-class Currency(models.TextChoices):
-    USD = "USD", "USD"
-    EUR = "EUR", "EUR"
-    TRY = "TRY", "TRY"
-
-DIFFICULTY_CHOICES = [
-    ("Beginner", "Beginner"),
-    ("Intermediate", "Intermediate"),
-    ("Advanced", "Advanced"),
-]
 
 
 # Ödeme niyeti / geçici kayıt (webhook gelene kadar)
