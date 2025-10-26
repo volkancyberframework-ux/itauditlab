@@ -3,183 +3,68 @@
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="author" content="Codescandy" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Codescandy" />
 
-<!-- Favicon icon-->
-<link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/favicon/favicon.ico' %}" />
+    <!-- Favicon icon-->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/favicon/favicon.ico' %}" />
 
-<!-- darkmode js -->
-<script src="{% static 'assets/js/vendors/darkMode.js' %}"></script>
+    <!-- darkmode js -->
+    <script src="{% static 'assets/js/vendors/darkMode.js' %}"></script>
 
-<!-- Libs CSS -->
-<link href="{% static 'assets/fonts/feather/feather.css' %}" rel="stylesheet" />
-<link href="{% static 'assets/libs/bootstrap-icons/font/bootstrap-icons.min.css' %}" rel="stylesheet" />
-<link href="{% static 'assets/libs/simplebar/dist/simplebar.min.css' %}" rel="stylesheet" />
+    <!-- Libs CSS -->
+    <link href="{% static 'assets/fonts/feather/feather.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/libs/bootstrap-icons/font/bootstrap-icons.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/libs/simplebar/dist/simplebar.min.css' %}" rel="stylesheet" />
 
-<!-- Theme CSS -->
-<link rel="stylesheet" href="{% static 'assets/css/theme.min.css' %}">
-    <link rel="canonical" href="https://geeksui.codescandy.com/geeks/pages/course-single.html" />
-
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/theme.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/libs/tiny-slider/dist/tiny-slider.css' %}" />
     <title>Siberkobi | Hands-On IT Audit & GRC Learning Platform</title>
 
-<style>
+    <style>
+      /* Header daha kompakt */
+      .navbar{padding-top:.4rem;padding-bottom:.4rem}
 
-/* Genel: header daha kompakt olsun */
-.navbar { padding-top: .4rem; padding-bottom: .4rem; }
+      /* -------- LOGO DÜZELTMESİ -------- */
 
-/* Mobil header düzeltmeleri */
-@media (max-width: 576px){
+      /* İkili logo kapsayıcısı: ikon + kelime */
+      .brand-pair{display:flex;align-items:center;gap:.5rem}
 
-/* Tek satırda kalsın, taşma olmasın */
-.navbar .container{
-  flex-wrap: nowrap !important;
-  align-items: center !important;
-  gap: .5rem;
-}
+      /* Partner ikon: KOYU MODDAN ETKİLENMEZ */
+      .brand-partner{
+        height:28px; width:auto; display:block;
+        filter:none !important; -webkit-filter:none !important;
+        mix-blend-mode:normal !important; opacity:1 !important;
+      }
 
-/* Logo küçült (wordmark zaten tek görsel) */
-.navbar .brand-logo{
-  width: 180px !important;   /* gerekirse 160/150 yapabilirsin */
-  height: auto !important;
-  display: block;
-}
+      /* Kelime logosu: temaya göre uyarlanır */
+      .brand-word{height:28px;width:auto;display:block}
+      :root[data-bs-theme="dark"] .brand-word{
+        filter:invert(1) brightness(1.1) contrast(1) !important;
+      }
+      :root[data-bs-theme="light"] .brand-word{filter:none !important}
 
-/* Sağ araçlar: tek satır hizalama ve dar padding */
-.nav-tools{
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  gap: .4rem;
-}
-.nav-tools .btn-login{
-  padding: .3rem .55rem !important;
-  line-height: 1.1 !important;
-  font-size: .9rem !important;
-  border-radius: .5rem;
-}
+      /* Bazı temalarda .navbar-brand img geneline filter uygulanabiliyor.
+         Partner ikonun MUTLAKA sabit kalması için özgüllüğü arttıralım. */
+      :root[data-bs-theme="dark"] nav.navbar .navbar-brand img.brand-partner{
+        filter:none !important;
+      }
 
-/* Toggler ufalt ve iç boşlukları sıkılaştır */
-.navbar-toggler{
-  padding: .25rem .4rem !important;
-  margin-left: .1rem !important;
-}
+      /* Mobil header düzeni */
+      @media (max-width:576px){
+        .navbar .container{flex-wrap:nowrap !important;align-items:center !important;gap:.5rem}
+        .brand-partner,.brand-word{height:24px}
+        .nav-tools{flex:0 0 auto;display:flex;align-items:center;gap:.4rem}
+        .nav-tools .btn-login{padding:.3rem .55rem !important;line-height:1.1 !important;font-size:.9rem !important;border-radius:.5rem}
+        .navbar-toggler{padding:.25rem .4rem !important;margin-left:.1rem !important}
+        .dropdown-menu{max-width:80vw}
+      }
 
-/* Dropdown rozet/menü taşmalarını engelle */
-.dropdown-menu{
-  max-width: 80vw;
-}
-}
-
-/* iOS “safe area” üst çentik sorunlarında taşma yaşarsan:
-body { padding-top: env(safe-area-inset-top); }  */
-
-/* Sabit renkli logoyu dark-mode filtrelerinden muaf tut */
-.brand-logo-fixed {
-  height: 28px;
-  width: auto;
-  filter: none !important;
-  -webkit-filter: none !important;
-  mix-blend-mode: normal !important;
-  opacity: 1 !important;
-}
-
-/* Eğer temanda dark modda logolara invert/brighness uygulanıyorsa,
-   sadece .brand-logo için uygula, .brand-logo-fixed hariç tut. */
-:root[data-bs-theme="dark"] img.brand-logo {
-  filter: invert(1) brightness(1.1) contrast(1) !important; /* mevcut davranış */
-}
-:root[data-bs-theme="dark"] img.brand-logo-fixed {
-  filter: none !important;
-}
-
-/* Mobilde boyutlar */
-@media (max-width: 576px){
-  .brand-logo { width: 180px !important; }
-  .brand-logo-fixed { height: 22px; }
-}
-
-/* Navbar brand img'lerde Bootstrap'ın olası max-height sınırını kaldır */
-.navbar-brand img { max-height: none !important; display: block; line-height: 1; }
-
-/* İki logoya da aynı yükseklik ver: masaüstü */
-.brand-logo-fixed,
-.brand-logo {
-  height: 30px;     /* aynı yükseklik -> orantı korunur */
-  width: auto;
-}
-
-/* Mobilde biraz küçült */
-@media (max-width: 576px){
-  .brand-logo-fixed,
-  .brand-logo {
-    height: 24px;
-  }
-}
-
-/* ---- DARK MODE DAVRANIŞI ---- */
-
-/* Ana logo tema ile uyumlu kalsın (invert) */
-:root[data-bs-theme="dark"] img.theme-adaptive {
-  filter: invert(1) brightness(1.1) contrast(1) !important;
-}
-:root[data-bs-theme="light"] img.theme-adaptive {
-  filter: none !important;
-}
-
-/* Partner logo kesinlikle etkilenmesin */
-img.brand-logo-fixed {
-  filter: none !important;
-  -webkit-filter: none !important;
-  mix-blend-mode: normal !important;
-  opacity: 1 !important;
-}
-
-/* Eğer teman dark modda TUM navbar'a (veya body'e) filter: invert(1) uyguluyorsa,
-   çocukta 'none' yazmak yetmez. Bu durumda partner logoya karşı-invert uygula.
-   Aşağıdaki satırı ETKİNLEŞTİR ve yukarıdaki 'none' kuralını bırak: çift invert -> normal görünüm. */
-:root[data-bs-theme="dark"] .navbar img.brand-logo-fixed {
-  filter: invert(1) !important;  /* <- sadece gerekirse bırak, çoğu temada 'none' yeter */
-}
-
-/* Her iki logoyu da aynı yükseklik ve hizaya getir */
-.navbar-brand img { display: inline-block; vertical-align: middle; line-height: 1; }
-.brand-logo-fixed,
-.brand-logo { height: 32px; width: auto; }
-
-@media (max-width: 576px){
-  .brand-logo-fixed, .brand-logo { height: 26px; }
-}
-
-/* ---- DARK MODE davranışı ---- */
-/* Sadece kelime logosu tema ile uyumlu olarak invert edilsin */
-:root[data-bs-theme="dark"] img.theme-adaptive { filter: invert(1) brightness(1.1) contrast(1) !important; }
-:root[data-bs-theme="light"] img.theme-adaptive { filter: none !important; }
-
-/* Partner logo kesinlikle renk değiştirmesin */
-img.brand-logo-fixed {
-  filter: none !important;
-  -webkit-filter: none !important;
-  mix-blend-mode: normal !important;
-  opacity: 1 !important;
-  image-rendering: auto;
-}
-
-/* Bazı temalar NAVBAR'a komple invert uygular.
-   Bu durumda çocukta 'none' yetmez; ÇİFT-INVERT ile rengi geri al. */
-:root[data-bs-theme="dark"] nav.navbar img.brand-logo-fixed {
-  filter: invert(1) !important;    /* parent invert + child invert = normal renk */
-}
-
-/* Olası genel img kurallarını override etmek için ek güvenlik (yüksek özgüllük) */
-:root[data-bs-theme="dark"] nav.navbar .navbar-brand img.brand-logo-fixed { filter: invert(1) !important; }
-
-
-
-</style>
-
+      /* Olası max-height kısıtlarını kaldır */
+      .navbar-brand img{max-height:none !important;line-height:1;display:block}
+    </style>
   </head>
 
   <body class="bg-white">
@@ -187,23 +72,24 @@ img.brand-logo-fixed {
     <nav class="navbar navbar-expand-lg">
       <div class="container px-0">
 
-        <div class="d-flex align-items-center gap-2 align-middle">
-          <!-- Renk değiştirmemesi gereken logo -->
-          <a href="{% url 'landing' %}" class="navbar-brand m-0 p-0">
-            <img src="{% static 'assets/images/brand/logo/partner.svg' %}"
-                 class="brand-logo-fixed" alt="Partner logo">
-          </a>
+        <!-- Brand (YALNIZCA BURASI DEĞİŞTİ) -->
+        <a href="{% url 'landing' %}" class="navbar-brand m-0 p-0 brand-pair" aria-label="Siberkobi Ana Sayfa">
+          <!-- Dark moddan etkilenmemesi gereken partner ikonu -->
+          <img
+            src="{% static 'assets/images/brand/logo/partner.svg' %}"
+            alt="Partner"
+            class="brand-partner" />
 
           <!-- Tema ile uyumlu (invert edilen) kelime logosu -->
-          <a href="{% url 'landing' %}" class="navbar-brand m-0 p-0">
-            <img src="{% static 'assets/images/brand/logo/logo.svg' %}"
-                 class="brand-logo theme-adaptive" alt="Siberkobi logo">
-          </a>
-        </div>
+          <img
+            src="{% static 'assets/images/brand/logo/logo.svg' %}"
+            alt="siberkobi"
+            class="brand-word" />
+        </a>
+        <!-- /Brand -->
 
         <!-- Sağ araçlar + Toggler (tek grup) -->
         <div class="ms-auto d-flex align-items-center gap-2 nav-tools order-lg-3">
-
           <!-- Tema menüsü -->
           <div class="dropdown">
             <button class="btn btn-outline-secondary btn-icon rounded-circle d-flex align-items-center"
@@ -227,7 +113,6 @@ img.brand-logo-fixed {
             <a href="{% url 'login' %}" class="btn btn-outline-dark btn-login">Giriş</a>
           {% endif %}
 
-          <!-- Toggler burada -->
           <button class="navbar-toggler ms-1" type="button"
                   data-bs-toggle="collapse" data-bs-target="#navbar-default"
                   aria-controls="navbar-default" aria-expanded="false" aria-label="Menü">
@@ -240,232 +125,151 @@ img.brand-logo-fixed {
         <!-- Çökebilir menü -->
         <div class="collapse navbar-collapse" id="navbar-default">
           <ul class="navbar-nav mt-3 mt-lg-0 mx-xxl-auto">
-            {# Aktif sekmeyi vurgulamak için mevcut url_name'i alalım #}
             {% with url_name=request.resolver_match.url_name %}
               <li class="nav-item">
                 <a class="nav-link {% if url_name == 'about' %}active fw-semibold{% endif %}" href="{% url 'about' %}" aria-label="Hikayem">
                   ✈️ Hikayem
                 </a>
               </li>
-
               <li class="nav-item">
-                {# Ürün sayfanızın URL name'ini 'digital-products' olarak varsaydım; farklıysa değiştirin #}
                 <a class="nav-link {% if url_name == 'product_list' %}active fw-semibold{% endif %}" href="{% url 'product_list' %}" aria-label="Dijital Ürünler">
                   🛒 Dijital Ürünler
                   <span class="badge rounded-pill bg-info-subtle text-info-emphasis ms-1 align-middle">Yeni</span>
                 </a>
               </li>
-
               <li class="nav-item">
                 <a class="nav-link {% if url_name == 'pricing' %}active fw-semibold{% endif %}" href="{% url 'pricing' %}" aria-label="Fiyatlandırma">
                   💳 Fiyatlandırma
                 </a>
               </li>
             {% endwith %}
-
           </ul>
         </div>
 
       </div>
     </nav>
 
+    {% block content %}{% endblock %}
 
-{% block content %}
+    <!-- Footer -->
+    <footer class="footer bg-dark-stable py-8">
+      <div class="container">
+        <div class="row gy-6 gy-xl-0 pb-8">
+          <div class="col-xl-3 col-lg-12 col-md-6 col-12">
+            <div class="d-flex flex-column gap-4">
+              <div>
+                <img src="{% static 'assets/images/svg/white.svg' %}" width="250" alt="Siberkobi logosu" />
+              </div>
+              <p class="mb-0">Uygulamalı siber güvenlik ve denetim eğitim platformu. Profesyoneller tarafından profesyoneller için tasarlandı.</p>
+              <div class="d-flex gap-2">
+                <a href="#langaugeModal" class="btn btn-outline-secondary" data-bs-toggle="modal">
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-globe" viewBox="0 0 16 16">
+                      <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m7.5-6.923c-.67.204-1.335.82-1.887 1.855A8 8 0 0 0 5.145 4H7.5zM4.09 4a9.3 9.3 0 0 1 .64-1.539 7 7 0 0 1 .597-.933A7.03 7.03 0 0 0 2.255 4zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a7 7 0 0 0-.656 2.5zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5zM8.5 5v2.5h2.99a12.5 12.5 0 0 0-.337-2.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5zM5.145 12q.208.58.468 1.068c.552 1.035 1.218 1.65 1.887 1.855V12zm.182 2.472a7 7 0 0 1-.597-.933A9.3 9.3 0 0 1 4.09 12H2.255a7 7 0 0 0 3.072 2.472M3.82 11a13.7 13.7 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5zm6.853 3.472A7 7 0 0 0 13.745 12H11.91a9.3 9.3 0 0 1-.64 1.539 7 7 0 0 1-.597.933M8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855q.26-.487.468-1.068zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.7 13.7 0 0 1-.312 2.5m2.802-3.5a7 7 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7 7 0 0 0-3.072-2.472c.218.284.418.598.597.933M10.855 4a8 8 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4z" />
+                    </svg>
+                  </span>
+                  <span class="ms-2">Türkçe</span>
+                </a>
+                <div class="dropdown">
+                  <button class="btn btn-outline-secondary btn-icon rounded-circle d-flex align-items-center" type="button"
+                          aria-expanded="false" data-bs-toggle="dropdown" aria-label="Temayı değiştir (otomatik)">
+                    <i class="bi theme-icon-active"></i>
+                    <span class="visually-hidden bs-theme-text">Temayı değiştir</span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bs-theme-text" data-bs-theme="dark">
+                    <li><button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"><i class="bi theme-icon bi-sun-fill"></i><span class="ms-2">Açık</span></button></li>
+                    <li><button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"><i class="bi theme-icon bi-moon-stars-fill"></i><span class="ms-2">Koyu</span></button></li>
+                    <li><button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto"><i class="bi theme-icon bi-circle-half"></i><span class="ms-2">Otomatik</span></button></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-2 col-md-3 col-6"></div>
+          <div class="col-xl-2 col-md-3 col-6"></div>
+          <div class="col-xl-2 col-md-3 col-12"></div>
+          <div class="col-xl-3 col-lg-3 col-md-6 col-12">
+            <div class="d-flex flex-column gap-5">
+              <div class="d-flex flex-column gap-3">
+                <span class="text-white-stable">İletişim</span>
+                <ul class="list-unstyled mb-0 d-flex flex-column nav nav-footer nav-x-0 text-white-50">
+                  <li>E-posta: <span class="fw-semibold">support@siberkobi.co</span></li>
+                  <li>Konum: <span class="fw-semibold">Leuven, Belgium</span></li>
+                  <li>Çalışma Saatleri: <span class="fw-semibold">Pzt–Cum, 9:00–17:00 CET</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
 
-{% endblock %}
-
-<!-- Footer -->
-<footer class="footer bg-dark-stable py-8">
-<div class="container">
-<div class="row gy-6 gy-xl-0 pb-8">
-  <div class="col-xl-3 col-lg-12 col-md-6 col-12">
-    <div class="d-flex flex-column gap-4">
-      <div>
-        <img src="{% static 'assets/images/svg/white.svg' %}" width="250" alt="Siberkobi logosu" />
+        <div class="row align-items-center g-0 border-top border-gray-800 pt-3 flex-column gap-1 flex-lg-row gap-lg-0">
+          <div class="col-lg-6 col-12 text-center text-md-start">
+            <span>© <span id="copyright"><script>document.getElementById("copyright").appendChild(document.createTextNode(new Date().getFullYear()));</script></span> Siberkobi. Tüm hakları saklıdır.</span>
+          </div>
+          <div class="col-12 col-lg-6">
+            <nav class="nav nav-footer justify-content-center justify-content-md-start justify-content-lg-end">
+              <a class="nav-link active" href="{% url 'terms_and_conditions' %}">Şartlar ve Koşullar</a>
+              <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cookiesModal">Çerez Ayarları</a>
+              <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Gizlilik Politikası</a>
+            </nav>
+          </div>
+        </div>
       </div>
-      <p class="mb-0">Uygulamalı siber güvenlik ve denetim eğitim platformu. Profesyoneller tarafından profesyoneller için tasarlandı.</p>
-      <div class="d-flex gap-2">
-        <a href="#langaugeModal" class="btn btn-outline-secondary" data-bs-toggle="modal">
-          <span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-globe" viewBox="0 0 16 16">
-              <path
-                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m7.5-6.923c-.67.204-1.335.82-1.887 1.855A8 8 0 0 0 5.145 4H7.5zM4.09 4a9.3 9.3 0 0 1 .64-1.539 7 7 0 0 1 .597-.933A7.03 7.03 0 0 0 2.255 4zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a7 7 0 0 0-.656 2.5zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5zM8.5 5v2.5h2.99a12.5 12.5 0 0 0-.337-2.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5zM5.145 12q.208.58.468 1.068c.552 1.035 1.218 1.65 1.887 1.855V12zm.182 2.472a7 7 0 0 1-.597-.933A9.3 9.3 0 0 1 4.09 12H2.255a7 7 0 0 0 3.072 2.472M3.82 11a13.7 13.7 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5zm6.853 3.472A7 7 0 0 0 13.745 12H11.91a9.3 9.3 0 0 1-.64 1.539 7 7 0 0 1-.597.933M8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855q.26-.487.468-1.068zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.7 13.7 0 0 1-.312 2.5m2.802-3.5a7 7 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7 7 0 0 0-3.072-2.472c.218.284.418.598.597.933M10.855 4a8 8 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4z" />
-            </svg>
-          </span>
-          <span class="ms-2">Türkçe</span>
-        </a>
-        <div class="dropdown">
-          <button
-            class="btn btn-outline-secondary btn-icon rounded-circle d-flex align-items-center"
-            type="button"
-            aria-expanded="false"
-            data-bs-toggle="dropdown"
-            aria-label="Temayı değiştir (otomatik)">
-            <i class="bi theme-icon-active"></i>
-            <span class="visually-hidden bs-theme-text">Temayı değiştir</span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bs-theme-text" data-bs-theme="dark">
-            <li>
-              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
-                <i class="bi theme-icon bi-sun-fill"></i>
-                <span class="ms-2">Açık</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-                <i class="bi theme-icon bi-moon-stars-fill"></i>
-                <span class="ms-2">Koyu</span>
-              </button>
-            </li>
-            <li>
-              <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
-                <i class="bi theme-icon bi-circle-half"></i>
-                <span class="ms-2">Otomatik</span>
-              </button>
-            </li>
-          </ul>
+    </footer>
+
+    <!-- Scroll top -->
+    <div class="btn-scroll-top">
+      <svg class="progress-square svg-content" width="100%" height="100%" viewBox="0 0 40 40">
+        <path d="M8 1H32C35.866 1 39 4.13401 39 8V32C39 35.866 35.866 39 32 39H8C4.13401 39 1 35.866 1 32V8C1 4.13401 4.13401 1 8 1Z" />
+      </svg>
+    </div>
+
+    <!-- Libs JS -->
+    <script src="{% static 'assets/libs/@popperjs/core/dist/umd/popper.min.js' %}"></script>
+    <script src="{% static 'assets/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/libs/simplebar/dist/simplebar.min.js' %}"></script>
+
+    <!-- Theme JS -->
+    <script src="{% static 'assets/js/theme.min.js' %}"></script>
+    <script src="{% static 'assets/libs/tiny-slider/dist/min/tiny-slider.js' %}"></script>
+    <script src="{% static 'assets/js/vendors/tnsSlider.js' %}"></script>
+    <script src="{% static 'assets/libs/odometer/odometer.min.js' %}"></script>
+    <script src="{% static 'assets/js/vendors/pricing.js' %}"></script>
+
+    <!-- Cookies Modal -->
+    <div class="modal fade" id="cookiesModal" tabindex="-1" aria-labelledby="cookiesModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header"><h5 class="modal-title" id="cookiesModalLabel">Çerez Ayarları</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button></div>
+          <div class="modal-body"><p>Deneyiminizi geliştirmek ve platform kullanımını analiz etmek için çerezleri kullanmıyoruz. Çerez tercihlerini tarayıcı ayarlarınızdan kontrol edebilirsiniz. Temel çerezler site işlevselliği için gerekli değildir.</p></div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-xl-2 col-md-3 col-6">
-  </div>
-  <div class="col-xl-2 col-md-3 col-6">
-  </div>
-  <div class="col-xl-2 col-md-3 col-12">
-  </div>
-  <div class="col-xl-3 col-lg-3 col-md-6 col-12">
-    <div class="d-flex flex-column gap-5">
-      <div class="d-flex flex-column gap-3">
-        <span class="text-white-stable">İletişim</span>
-        <ul class="list-unstyled mb-0 d-flex flex-column nav nav-footer nav-x-0 text-white-50">
-          <li>E-posta:
-            <span class="fw-semibold">support@siberkobi.co</span>
-          </li>
-          <li>Konum:
-            <span class="fw-semibold">Leuven, Belgium</span>
-          </li>
-          <li>Çalışma Saatleri:
-            <span class="fw-semibold">Pzt–Cum, 9:00–17:00 CET</span>
-          </li>
-        </ul>
+
+    <!-- Privacy Modal -->
+    <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header"><h5 class="modal-title" id="privacyModalLabel">Gizlilik Politikası</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button></div>
+          <div class="modal-body"><p>Siberkobi olarak gizliliğinize değer veriyoruz. E-posta veya kurs etkinliği gibi sağladığınız tüm veriler güvenli bir şekilde saklanır ve izniniz olmadan üçüncü taraflarla paylaşılmaz. support@siberkobi.co adresinden bizimle iletişime geçerek veri silme talebinde bulunabilirsiniz...</p></div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="row align-items-center g-0 border-top border-gray-800 pt-3 flex-column gap-1 flex-lg-row gap-lg-0">
-  <!-- Desc -->
-  <div class="col-lg-6 col-12 text-center text-md-start">
-    <span>
-      ©
-      <span id="copyright">
-        <script>
-          document.getElementById("copyright").appendChild(document.createTextNode(new Date().getFullYear()));
-        </script>
-      </span>
-      Siberkobi. Tüm hakları saklıdır.
-    </span>
-  </div>
-  <!-- Links -->
-  <div class="col-12 col-lg-6">
-    <nav class="nav nav-footer justify-content-center justify-content-md-start justify-content-lg-end">
-      <a class="nav-link active" href="{% url 'terms_and_conditions' %}">
-        Şartlar ve Koşullar
-      </a>
-      <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cookiesModal">Çerez Ayarları</a>
-      <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Gizlilik Politikası</a>
-    </nav>
-  </div>
-</div>
-</div>
-</footer>
 
-
-<!-- Scroll top -->
-<div class="btn-scroll-top">
-<svg class="progress-square svg-content" width="100%" height="100%" viewBox="0 0 40 40">
-    <path d="M8 1H32C35.866 1 39 4.13401 39 8V32C39 35.866 35.866 39 32 39H8C4.13401 39 1 35.866 1 32V8C1 4.13401 4.13401 1 8 1Z" />
-</svg>
-</div>
-
-<!-- Scripts -->
-<!-- Libs JS -->
-<script src="{% static 'assets/libs/@popperjs/core/dist/umd/popper.min.js' %}"></script>
-<script src="{% static 'assets/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'assets/libs/simplebar/dist/simplebar.min.js' %}"></script>
-
-<!-- Theme JS -->
-<script src="{% static 'assets/js/theme.min.js' %}"></script>
-
-<script src="{% static 'assets/libs/tiny-slider/dist/min/tiny-slider.js' %}"></script>
-<script src="{% static 'assets/js/vendors/tnsSlider.js' %}"></script>
-
-<script src="{% static 'assets/libs/odometer/odometer.min.js' %}"></script>
-<script src="{% static 'assets/js/vendors/pricing.js' %}"></script>
-
-<!-- Cookies Modal -->
-<div class="modal fade" id="cookiesModal" tabindex="-1" aria-labelledby="cookiesModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="cookiesModalLabel">Çerez Ayarları</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
-      </div>
-      <div class="modal-body">
-        <p>Deneyiminizi geliştirmek ve platform kullanımını analiz etmek için çerezleri kullanmıyoruz. Çerez tercihlerini tarayıcı ayarlarınızdan kontrol edebilirsiniz. Temel çerezler site işlevselliği için gerekli değildir.</p>
+    <!-- Team Access Modal -->
+    <div class="modal fade" id="teamAccessModal" tabindex="-1" aria-labelledby="teamAccessModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header"><h5 class="modal-title" id="teamAccessModalLabel">Takım Erişimi Talep Et</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button></div>
+          <div class="modal-body">Lütfen e-posta ile bizimle iletişime geçin: <a href="mailto:support@siberkobi.co">support@siberkobi.co</a>. Ekibimiz size gerekli tüm bilgileri ve sonraki adımları sağlayacaktır.</div>
+          <div class="modal-footer"><a href="mailto:support@siberkobi.co" class="btn btn-primary">E-posta Gönder</a><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button></div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- Privacy Modal -->
-<div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="privacyModalLabel">Gizlilik Politikası</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
-      </div>
-      <div class="modal-body">
-        <p>Siberkobi olarak gizliliğinize değer veriyoruz. E-posta veya kurs etkinliği gibi sağladığınız tüm veriler güvenli bir şekilde saklanır ve izniniz olmadan üçüncü taraflarla paylaşılmaz. support@siberkobi.co adresinden bizimle iletişime geçerek veri silme talebinde bulunabilirsiniz...</p>
-      </div>
-    </div>
-  </div>
-</div>
+    <!-- Bootstrap JS (Modal vb. için şart) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
-<!-- Team Access Modal -->
-<div class="modal fade" id="teamAccessModal" tabindex="-1" aria-labelledby="teamAccessModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h5 class="modal-title" id="teamAccessModalLabel">Takım Erişimi Talep Et</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
-      </div>
-
-      <div class="modal-body">
-        Lütfen e-posta ile bizimle iletişime geçin:
-        <a href="mailto:support@siberkobi.co">support@siberkobi.co</a>.
-        Ekibimiz size gerekli tüm bilgileri ve sonraki adımları sağlayacaktır.
-      </div>
-
-      <div class="modal-footer">
-        <a href="mailto:support@siberkobi.co" class="btn btn-primary">E-posta Gönder</a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-
-
-</body>
-
-<!-- Bootstrap JS (Modal vb. için şart) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
-
-{% block extra_js %}{% endblock %}
-
+    {% block extra_js %}{% endblock %}
+  </body>
 </html>
