@@ -84,8 +84,11 @@
             <div class="card-footer">
               <div class="row align-items-center g-0">
                 <div class="col-auto">
-                  <img src="{{ p.static_avatar.url if p.static_avatar else static 'assets/images/avatar/avatar-3.jpg' }}"
-                       class="rounded-circle avatar-xs" alt="avatar">
+                  {% if p.static_avatar %}
+                    <img src="{{ p.static_avatar.url }}" class="rounded-circle avatar-xs" alt="avatar">
+                  {% else %}
+                    <img src="{% static 'assets/images/avatar/avatar-3.jpg' %}" class="rounded-circle avatar-xs" alt="avatar">
+                  {% endif %}
                 </div>
                 <div class="col ms-2">
                   <span>{{ p.uploader_name }}</span>
