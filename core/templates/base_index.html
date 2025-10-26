@@ -24,47 +24,31 @@
     <title>Siberkobi | Hands-On IT Audit & GRC Learning Platform</title>
 
     <style>
-      /* Header daha kompakt */
-      .navbar{padding-top:.4rem;padding-bottom:.4rem}
+    /* Navbar biraz ferah */
+    .navbar{ padding-top:.7rem; padding-bottom:.7rem; }
 
-      /* -------- LOGO DÜZELTMESİ -------- */
-
-      /* İkili logo kapsayıcısı: ikon + kelime */
-      .brand-pair{display:flex;align-items:center;gap:.5rem}
-
-      /* Partner ikon: KOYU MODDAN ETKİLENMEZ */
-      .brand-partner{
-        height:28px; width:auto; display:block;
-        filter:none !important; -webkit-filter:none !important;
-        mix-blend-mode:normal !important; opacity:1 !important;
+    /* Mobil (≤992px) menü: satır yüksekliği ve boşluklar */
+    @media (max-width: 991.98px){
+      #navbar-default{ padding:.5rem 0; }
+      .navbar-nav .nav-link{
+        padding:.65rem 0;     /* tıklaması kolay */
+        font-size:1rem;       /* okunabilir */
       }
-
-      /* Kelime logosu: temaya göre uyarlanır */
-      .brand-word{height:28px;width:auto;display:block}
-      :root[data-bs-theme="dark"] .brand-word{
-        filter:invert(1) brightness(1.1) contrast(1) !important;
+      .navbar .container{
+        flex-wrap:nowrap !important;
+        align-items:center !important;
+        gap:.5rem;
       }
-      :root[data-bs-theme="light"] .brand-word{filter:none !important}
-
-      /* Bazı temalarda .navbar-brand img geneline filter uygulanabiliyor.
-         Partner ikonun MUTLAKA sabit kalması için özgüllüğü arttıralım. */
-      :root[data-bs-theme="dark"] nav.navbar .navbar-brand img.brand-partner{
-        filter:none !important;
+      .nav-tools{
+        flex:0 0 auto;
+        display:flex; align-items:center; gap:.4rem;
       }
-
-      /* Mobil header düzeni */
-      @media (max-width:576px){
-        .navbar .container{flex-wrap:nowrap !important;align-items:center !important;gap:.5rem}
-        .brand-partner,.brand-word{height:24px}
-        .nav-tools{flex:0 0 auto;display:flex;align-items:center;gap:.4rem}
-        .nav-tools .btn-login{padding:.3rem .55rem !important;line-height:1.1 !important;font-size:.9rem !important;border-radius:.5rem}
-        .navbar-toggler{padding:.25rem .4rem !important;margin-left:.1rem !important}
-        .dropdown-menu{max-width:80vw}
+      .navbar-toggler{
+        padding:.35rem .5rem !important;
       }
-
-      /* Olası max-height kısıtlarını kaldır */
-      .navbar-brand img{max-height:none !important;line-height:1;display:block}
+    }
     </style>
+
   </head>
 
   <body class="bg-white">
@@ -72,21 +56,12 @@
     <nav class="navbar navbar-expand-lg">
       <div class="container px-0">
 
-        <!-- Brand (YALNIZCA BURASI DEĞİŞTİ) -->
-        <a href="{% url 'landing' %}" class="navbar-brand m-0 p-0 brand-pair" aria-label="Siberkobi Ana Sayfa">
-          <!-- Dark moddan etkilenmemesi gereken partner ikonu -->
-          <img
-            src="{% static 'assets/images/brand/logo/partner.svg' %}"
-            alt="Partner"
-            class="brand-partner" />
-
-          <!-- Tema ile uyumlu (invert edilen) kelime logosu -->
-          <img
-            src="{% static 'assets/images/brand/logo/logo.svg' %}"
-            alt="siberkobi"
-            class="brand-word" />
+        <!-- Brand -->
+        <a href="{% url 'landing' %}" class="navbar-brand m-0 p-0" aria-label="Siberkobi Ana Sayfa">
+          <img src="{% static 'assets/images/brand/logo/logo.svg' %}" alt="siberkobi" class="brand-word" />
         </a>
         <!-- /Brand -->
+
 
         <!-- Sağ araçlar + Toggler (tek grup) -->
         <div class="ms-auto d-flex align-items-center gap-2 nav-tools order-lg-3">
@@ -267,9 +242,67 @@
       </div>
     </div>
 
+    <script>
+    (() => {
+      const STORAGE_KEY = 'theme';
+      const prefersDark = () =>
+        window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      const getPreferred = () => localStorage.getItem(STORAGE_KEY) || 'auto';
+
+      const setIcon = (computed) => {
+        const icon = document.querySelector('.theme-icon-active');
+        if (!icon) return;
+        icon.classList.remove('bi-sun-fill','bi-moon-stars-fill','bi-circle-half');
+        icon.classList.add(
+          computed === 'dark' ? 'bi-moon-stars-fill' :
+          computed === 'light' ? 'bi-sun-fill' : 'bi-circle-half'
+        );
+      };
+
+      const setActiveState = (value) => {
+        document.querySelectorAll('[data-bs-theme-value]').forEach(btn => {
+          const isActive = btn.getAttribute('data-bs-theme-value') === value;
+          btn.classList.toggle('active', isActive);
+          btn.setAttribute('aria-pressed', String(isActive));
+        });
+      };
+
+      const applyTheme = (value) => {
+        // value: 'light' | 'dark' | 'auto'
+        const computed = value === 'auto' ? (prefersDark() ? 'dark' : 'light') : value;
+        document.documentElement.setAttribute('data-bs-theme', computed);
+        setIcon(computed);
+        setActiveState(value);
+      };
+
+      // İlk yükleme
+      applyTheme(getPreferred());
+
+      // Sistem teması değişirse ve 'auto' seçiliyse güncelle
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (getPreferred() === 'auto') applyTheme('auto');
+      });
+
+      // Dropdown’daki butonlar
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-bs-theme-value]');
+        if (!btn) return;
+        const val = btn.getAttribute('data-bs-theme-value');
+        localStorage.setItem(STORAGE_KEY, val);
+        applyTheme(val);
+      });
+    })();
+    </script>
+
+
+
     <!-- Bootstrap JS (Modal vb. için şart) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
     {% block extra_js %}{% endblock %}
+
+
+
   </body>
 </html>
