@@ -12,6 +12,8 @@ from .views import (
     pricing_view,
     coming_soon_view
 )
+from . import views_store
+
 
 urlpatterns = [
     path('', landing_page, name='landing'),
