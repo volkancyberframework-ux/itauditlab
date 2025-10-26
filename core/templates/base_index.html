@@ -24,30 +24,91 @@
     <title>Siberkobi | Hands-On IT Audit & GRC Learning Platform</title>
 
     <style>
-    /* Navbar biraz ferah */
-    .navbar{ padding-top:.7rem; padding-bottom:.7rem; }
+    /* ---------- NAVBAR GENEL ---------- */
+    .navbar{
+      padding-top:.7rem;   /* biraz nefes */
+      padding-bottom:.7rem;
+    }
 
-    /* Mobil (≤992px) menü: satır yüksekliği ve boşluklar */
+    /* Logo (sadece logo.svg kullanıyoruz) */
+    .navbar-brand .brand-word{
+      height:34px !important;   /* masaüstü ideal */
+      width:auto !important;
+      display:inline-block;
+    }
+    .navbar-brand img{
+      max-height:40px !important;  /* şişmeyi engelle */
+      height:auto;
+      width:auto;
+      display:block;
+    }
+
+    /* Tema ile uyumlu renk (dark’ta invert) */
+    :root[data-bs-theme="dark"] img.theme-adaptive{
+      filter: invert(1) brightness(1.1) contrast(1) !important;
+    }
+    :root[data-bs-theme="light"] img.theme-adaptive{
+      filter: none !important;
+    }
+
+    /* Sağ araçlar */
+    .nav-tools{
+      display:flex; align-items:center; gap:.5rem;
+    }
+    .nav-tools .btn-login{
+      padding:.35rem .7rem !important;
+      line-height:1.1 !important;
+      border-radius:.6rem;
+    }
+
+    /* ---------- MOBİL / TABLET (≤992px) ---------- */
     @media (max-width: 991.98px){
-      #navbar-default{ padding:.5rem 0; }
-      .navbar-nav .nav-link{
-        padding:.65rem 0;     /* tıklaması kolay */
-        font-size:1rem;       /* okunabilir */
-      }
+      /* üst sıra düzeni */
       .navbar .container{
         flex-wrap:nowrap !important;
         align-items:center !important;
         gap:.5rem;
       }
-      .nav-tools{
-        flex:0 0 auto;
-        display:flex; align-items:center; gap:.4rem;
-      }
+      /* toggler */
       .navbar-toggler{
         padding:.35rem .5rem !important;
+        line-height:1;
+      }
+
+      /* logo biraz küçülsün */
+      .navbar-brand .brand-word{ height:28px !important; }
+      .navbar-brand img{ max-height:32px !important; }
+
+      /* açılan menü iç boşlukları */
+      #navbar-default{ padding:.5rem 0; }
+
+      /* menü linkleri: tıklaması kolay, düzgün satır yüksekliği */
+      .navbar-nav .nav-link{
+        display:flex;
+        align-items:center;
+        gap:.5rem;
+        padding:.65rem 0;         /* parmak dostu */
+        font-size:1rem;           /* okunabilir */
+        line-height:1.3;
+      }
+      /* nav içindeki küçük rozetler */
+      .navbar-nav .badge{
+        margin-left:.35rem;
+      }
+
+      /* tema düğmesi mobilde de rahat tıklansın */
+      .nav-tools .btn-icon{
+        width:2.25rem; height:2.25rem;
+        display:inline-flex; align-items:center; justify-content:center;
+      }
+
+      /* dropdown taşması olmasın */
+      .dropdown-menu{
+        max-width:90vw;
       }
     }
     </style>
+
 
   </head>
 
@@ -294,8 +355,6 @@
       });
     })();
     </script>
-
-
 
     <!-- Bootstrap JS (Modal vb. için şart) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

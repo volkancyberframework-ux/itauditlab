@@ -12,9 +12,9 @@ class Currency(models.TextChoices):
     TRY = "TRY", "TRY"
 
 DIFFICULTY_CHOICES = [
-    ("Beginner", "Beginner"),
-    ("Intermediate", "Intermediate"),
-    ("Advanced", "Advanced"),
+    ("Beginner", "🌱 Temel"),
+    ("Intermediate", "📚 Orta"),
+    ("Advanced", "🔥 Zor"),
 ]
 
 
