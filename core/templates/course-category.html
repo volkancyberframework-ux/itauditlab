@@ -21,7 +21,7 @@
         {% for p in products %}
         <div class="col-lg-3 col-md-6 col-12">
           <div class="card mb-4 card-hover product-card" data-slug="{{ p.slug }}">
-            <a href="javascript:void(0)" class="open-product" data-slug="{{ p.slug }}">
+            <a href="#" class="open-product d-block" data-slug="{{ p.slug }}" style="cursor:pointer">
               {% if p.image %}
                 <img src="{{ p.image.url }}" alt="{{ p.title }}" class="card-img-top" />
               {% else %}
@@ -31,7 +31,9 @@
 
             <div class="card-body">
               <h3 class="h5 mb-2 text-truncate-line-2">
-                <a href="javascript:void(0)" class="text-inherit open-product" data-slug="{{ p.slug }}">{{ p.title }}</a>
+                <a href="#" class="text-inherit open-product" data-slug="{{ p.slug }}" style="cursor:pointer">
+                  {{ p.title }}
+                </a>
               </h3>
 
               <ul class="mb-3 list-inline">
@@ -75,7 +77,7 @@
 
               <div class="d-flex align-items-center justify-content-between">
                 <div class="fw-semibold">{{ p.price_display }}</div>
-                <a class="btn btn-sm btn-outline-primary open-product" data-slug="{{ p.slug }}" href="javascript:void(0)">
+                <a class="btn btn-sm btn-outline-primary open-product" data-slug="{{ p.slug }}" href="#" style="cursor:pointer">
                   İncele
                 </a>
               </div>
@@ -173,58 +175,79 @@
     </div>
   </div>
 </div>
-
 {% endblock %}
 
 {% block extra_js %}
 <script>
-(function(){
+(function () {
+  // Bootstrap yüklü mü, modal var mı → patlamasın
   const modalEl = document.getElementById('productModal');
   let productModal = null;
-  document.addEventListener('DOMContentLoaded', function(){
-    productModal = new bootstrap.Modal(modalEl);
+
+  function bootstrapReady() {
+    return !!(window.bootstrap && window.bootstrap.Modal);
+  }
+
+  function ensureModal() {
+    if (!productModal && bootstrapReady() && modalEl) {
+      productModal = new bootstrap.Modal(modalEl);
+    }
+    return productModal;
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    ensureModal();
   });
 
-  function csrfToken(){
+  // CSRF
+  function csrfToken() {
     const el = document.querySelector('#buyForm input[name=csrfmiddlewaretoken]');
     return el ? el.value : '';
   }
 
-  async function openProduct(slug){
-    const url = `/store/${slug}/detail.json`;
-    const resp = await fetch(url);
-    const data = await resp.json();
-    if(!data.ok) return;
+  async function openProduct(slug) {
+    try {
+      const resp = await fetch(`/store/${slug}/detail.json`, { credentials: 'same-origin' });
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      const data = await resp.json();
+      if (!data.ok) throw new Error('Response not ok');
 
-    const p = data.product;
-    document.getElementById('pmTitle').innerText = p.title;
-    document.getElementById('pmDesc').innerText = p.description || '';
-    document.getElementById('pmDifficulty').innerText = p.difficulty || '';
-    document.getElementById('pmDuration').innerText = p.duration || '';
-    document.getElementById('pmRating').innerText = (p.rating || 0).toFixed(1);
-    document.getElementById('pmReviews').innerText = p.reviews || 0;
-    document.getElementById('pmUploader').innerText = p.uploader_name || '';
-    document.getElementById('pmPrice').innerText = p.price_display || '';
-    document.getElementById('pmImage').src = p.image_url || "{% static 'assets/images/course/course-javascript.jpg' %}";
-    document.getElementById('pmSlug').value = slug;
-    document.getElementById('pmAlert').classList.add('d-none');
-    document.getElementById('successLink').classList.add('d-none');
+      const p = data.product;
+      document.getElementById('pmTitle').innerText = p.title || '';
+      document.getElementById('pmDesc').innerText = p.description || '';
+      document.getElementById('pmDifficulty').innerText = p.difficulty || '';
+      document.getElementById('pmDuration').innerText = p.duration || '';
+      document.getElementById('pmRating').innerText = (p.rating || 0).toFixed(1);
+      document.getElementById('pmReviews').innerText = p.reviews || 0;
+      document.getElementById('pmUploader').innerText = p.uploader_name || '';
+      document.getElementById('pmPrice').innerText = p.price_display || '';
+      document.getElementById('pmImage').src = p.image_url || "{% static 'assets/images/course/course-javascript.jpg' %}";
+      document.getElementById('pmSlug').value = slug;
+      document.getElementById('pmAlert').classList.add('d-none');
+      document.getElementById('successLink').classList.add('d-none');
 
-    productModal.show();
+      const m = ensureModal();
+      if (m) m.show();
+      else alert(p.title + "\\n\\n(Bootstrap JS yüklenmediği için modal yerine uyarı gösterildi.)");
+    } catch (e) {
+      console.error(e);
+      alert("Ürün bilgisi yüklenemedi.");
+    }
   }
 
-  // Kart ve başlık tıklamaları
-  document.addEventListener('click', function(e){
+  // Delegated click: .open-product
+  document.addEventListener('click', function (e) {
     const a = e.target.closest('.open-product');
-    if(a){
+    if (a) {
+      e.preventDefault();
       const slug = a.getAttribute('data-slug');
-      if(slug) openProduct(slug);
+      if (slug) openProduct(slug);
     }
   });
 
-  // Satın alma intent’i oluştur ve Ruul’a gönder
+  // Satın alma intent
   const buyForm = document.getElementById('buyForm');
-  buyForm && buyForm.addEventListener('submit', async function(e){
+  buyForm && buyForm.addEventListener('submit', async function (e) {
     e.preventDefault();
     const slug = document.getElementById('pmSlug').value;
     const email = document.getElementById('email').value;
@@ -232,38 +255,39 @@
     const alertBox = document.getElementById('pmAlert');
     alertBox.classList.add('d-none');
 
-    if(!agree) {
+    if (!agree) {
       alertBox.innerText = "Lütfen bilgilendirmeyi onaylayın.";
       alertBox.classList.remove('d-none');
       return;
     }
 
-    const resp = await fetch(`/store/${slug}/intent/`, {
-      method: 'POST',
-      headers: {
-        'X-CSRFToken': csrfToken(),
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({email})
-    });
-
-    const data = await resp.json();
-    if(!data.ok){
-      alertBox.innerText = data.error || "Bir hata oluştu.";
+    try {
+      const resp = await fetch(`/store/${slug}/intent/`, {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': csrfToken(),
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({ email }),
+        credentials: 'same-origin'
+      });
+      const data = await resp.json();
+      if (!data.ok) {
+        alertBox.innerText = data.error || "Bir hata oluştu.";
+        alertBox.classList.remove('d-none');
+        return;
+      }
+      if (data.pay_url) window.open(data.pay_url, '_blank');
+      const successLink = document.getElementById('successLink');
+      if (successLink) {
+        successLink.href = data.success_url;
+        successLink.classList.remove('d-none');
+      }
+    } catch (err) {
+      console.error(err);
+      alertBox.innerText = "İstek başarısız.";
       alertBox.classList.remove('d-none');
-      return;
     }
-
-    // Ruul ödeme linkini yeni sekmede aç
-    const payUrl = data.pay_url;
-    const successUrl = data.success_url;
-
-    if(payUrl) window.open(payUrl, '_blank');
-
-    // Kullanıcı ödeme sonrası bu linke basarak dosyayı indirecek (webhook yoksa)
-    const successLink = document.getElementById('successLink');
-    successLink.href = successUrl;
-    successLink.classList.remove('d-none');
   });
 })();
 </script>
