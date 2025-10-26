@@ -76,11 +76,19 @@
               </div>
 
               <div class="d-flex align-items-center justify-content-between">
-                <div class="fw-semibold">{{ p.price_display }}</div>
+                <div>
+                  <span class="text-muted text-decoration-line-through me-2">
+                    {{ p.original_price_display }}
+                  </span>
+                  <span class="fw-semibold">
+                    {{ p.price_display }}
+                  </span>
+                </div>
                 <a class="btn btn-sm btn-outline-primary open-product" data-slug="{{ p.slug }}" href="#" style="cursor:pointer">
                   İncele
                 </a>
               </div>
+
             </div>
 
             <div class="card-footer">
@@ -231,7 +239,9 @@
     document.getElementById('pmRating').innerText  = (p.rating || 0).toFixed(1);
     document.getElementById('pmReviews').innerText = p.reviews || 0;
     document.getElementById('pmUploader').innerText= p.uploader_name || '';
-    document.getElementById('pmPrice').innerText   = p.price_display || '';
+    document.getElementById('pmPrice').innerHTML =
+    `<span class="text-muted text-decoration-line-through me-2">${p.original_price_display || ""}</span>
+    <span class="fw-semibold">${p.price_display || ""}</span>`;
     document.getElementById('pmImage').src         = p.image_url || "{% static 'assets/images/course/course-javascript.jpg' %}";
     document.getElementById('pmSlug').value        = slug;
     document.getElementById('pmAlert').classList.add('d-none');

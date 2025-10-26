@@ -28,7 +28,8 @@ def product_detail_json(request, slug):
         "duration": p.duration,
         "rating": float(p.rating),
         "reviews": p.reviews_count,
-        "price_display": p.price_display(),
+        "price_display": p.price_display(),                 # indirimli
+        "original_price_display": p.original_price_display(),  # asıl (üstü çizik)
         "currency": p.currency,
         "ruul_pay_link": p.ruul_pay_link,
         "uploader_name": p.uploader_name,
