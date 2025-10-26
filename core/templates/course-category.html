@@ -109,7 +109,7 @@
   </section>
 </main>
 
-<!-- Modal -->
+<!-- Ürün Modal -->
 <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
@@ -145,26 +145,22 @@
                 <label for="email" class="form-label">Satın almak için e-posta adresiniz</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
               </div>
-              <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" value="" id="agree" required>
-                <label class="form-check-label" for="agree">
-                  Satın al’a bastığımda Ruul.io ödeme sayfasına yönlendirileceğim. Ödeme tamamlanınca Ruul’da
-                  PDF <strong>şifrem</strong> gösterilecek; aynı şifre ile indirdiğim dosya açılacaktır.
-                </label>
-              </div>
 
-              <div class="d-flex gap-2">
+              <div class="d-flex flex-column gap-2">
                 <button type="submit" class="btn btn-primary" id="payBtn">Ruul ile Öde</button>
-                <a href="#" id="successLink" class="btn btn-outline-success d-none">Ödemeyi tamamladım — Dosyamı indir</a>
-              </div>
 
-              <div class="small text-muted mt-2">
-                * Gerçek kurulumda ödeme <strong>webhook</strong> ile doğrulanmalıdır.
+                <button type="button" class="btn btn-outline-secondary" id="downloadEncryptedBtn">
+                  Şifreli dosyayı indir
+                </button>
+
+                <div class="form-text">
+                  Ödeme sırasında Ruul'da size özel <strong>PDF şifresi</strong> gösterilecek.
+                  Dosyayı indirip bu şifre ile açtığınızda, adınıza lisanslı kopya oluşur.
+                </div>
               </div>
             </form>
 
             <div id="pmAlert" class="alert alert-danger d-none mt-3"></div>
-
           </div>
         </div>
       </div>
@@ -175,118 +171,153 @@
     </div>
   </div>
 </div>
+
+<!-- İndirme onayı Modal -->
+<div class="modal fade" id="downloadConfirmModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title">Şifreli PDF İndir</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+      </div>
+      <div class="modal-body">
+        Ödemeniz tamamlandığında Ruul.io üzerinde size özel <strong>şifre</strong> gösterilecek.
+        İndireceğiniz bu PDF <em>şifreli</em>dir; bu şifre ile açıp <strong>adınıza lisanslı</strong> kopyayı kullanabilirsiniz.
+        Devam etmek istiyor musunuz?
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-light" data-bs-dismiss="modal">Vazgeç</button>
+        <button class="btn btn-success" id="confirmDownloadBtn">Devam et ve indir</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 {% block extra_js %}
 <script>
 (function () {
-  // Bootstrap yüklü mü, modal var mı → patlamasın
+  // ---- helpers ----
   const modalEl = document.getElementById('productModal');
-  let productModal = null;
-
-  function bootstrapReady() {
-    return !!(window.bootstrap && window.bootstrap.Modal);
-  }
-
-  function ensureModal() {
-    if (!productModal && bootstrapReady() && modalEl) {
-      productModal = new bootstrap.Modal(modalEl);
+  const dlModalEl = document.getElementById('downloadConfirmModal');
+  let productModal = null, downloadModal = null;
+  let lastSuccessURL = null;   // intent sonrası indirilecek URL
+  let currentSlug = null;      // aktif ürün
+  function readyBootstrap() { return !!(window.bootstrap && window.bootstrap.Modal); }
+  function ensureModals() {
+    if (readyBootstrap()) {
+      if (!productModal && modalEl)  productModal  = new bootstrap.Modal(modalEl);
+      if (!downloadModal && dlModalEl) downloadModal = new bootstrap.Modal(dlModalEl);
     }
-    return productModal;
   }
+  document.addEventListener('DOMContentLoaded', ensureModals);
 
-  document.addEventListener('DOMContentLoaded', function () {
-    ensureModal();
-  });
-
-  // CSRF
   function csrfToken() {
     const el = document.querySelector('#buyForm input[name=csrfmiddlewaretoken]');
     return el ? el.value : '';
   }
 
+  async function fetchProduct(slug) {
+    const resp = await fetch(`/store/${slug}/detail.json`, { credentials: 'same-origin' });
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    return resp.json();
+  }
+
+  function fillProduct(p, slug) {
+    document.getElementById('pmTitle').innerText   = p.title || '';
+    document.getElementById('pmDesc').innerText    = p.description || '';
+    document.getElementById('pmDifficulty').innerText = p.difficulty || '';
+    document.getElementById('pmDuration').innerText   = p.duration || '';
+    document.getElementById('pmRating').innerText  = (p.rating || 0).toFixed(1);
+    document.getElementById('pmReviews').innerText = p.reviews || 0;
+    document.getElementById('pmUploader').innerText= p.uploader_name || '';
+    document.getElementById('pmPrice').innerText   = p.price_display || '';
+    document.getElementById('pmImage').src         = p.image_url || "{% static 'assets/images/course/course-javascript.jpg' %}";
+    document.getElementById('pmSlug').value        = slug;
+    document.getElementById('pmAlert').classList.add('d-none');
+    lastSuccessURL = null;
+    currentSlug = slug;
+  }
+
   async function openProduct(slug) {
     try {
-      const resp = await fetch(`/store/${slug}/detail.json`, { credentials: 'same-origin' });
-      if (!resp.ok) throw new Error('HTTP ' + resp.status);
-      const data = await resp.json();
+      const data = await fetchProduct(slug);
       if (!data.ok) throw new Error('Response not ok');
-
-      const p = data.product;
-      document.getElementById('pmTitle').innerText = p.title || '';
-      document.getElementById('pmDesc').innerText = p.description || '';
-      document.getElementById('pmDifficulty').innerText = p.difficulty || '';
-      document.getElementById('pmDuration').innerText = p.duration || '';
-      document.getElementById('pmRating').innerText = (p.rating || 0).toFixed(1);
-      document.getElementById('pmReviews').innerText = p.reviews || 0;
-      document.getElementById('pmUploader').innerText = p.uploader_name || '';
-      document.getElementById('pmPrice').innerText = p.price_display || '';
-      document.getElementById('pmImage').src = p.image_url || "{% static 'assets/images/course/course-javascript.jpg' %}";
-      document.getElementById('pmSlug').value = slug;
-      document.getElementById('pmAlert').classList.add('d-none');
-      document.getElementById('successLink').classList.add('d-none');
-
-      const m = ensureModal();
-      if (m) m.show();
-      else alert(p.title + "\\n\\n(Bootstrap JS yüklenmediği için modal yerine uyarı gösterildi.)");
+      fillProduct(data.product, slug);
+      ensureModals(); productModal && productModal.show();
     } catch (e) {
-      console.error(e);
-      alert("Ürün bilgisi yüklenemedi.");
+      console.error(e); alert("Ürün bilgisi yüklenemedi.");
     }
   }
 
-  // Delegated click: .open-product
+  // kart / başlık tıkla → modal
   document.addEventListener('click', function (e) {
     const a = e.target.closest('.open-product');
-    if (a) {
-      e.preventDefault();
-      const slug = a.getAttribute('data-slug');
-      if (slug) openProduct(slug);
-    }
+    if (a) { e.preventDefault(); const slug = a.getAttribute('data-slug'); if (slug) openProduct(slug); }
   });
 
-  // Satın alma intent
+  // ortak: intent oluştur (email validasyonu ile)
+  async function createIntent(slug, email) {
+    const resp = await fetch(`/store/${slug}/intent/`, {
+      method: 'POST',
+      headers: { 'X-CSRFToken': csrfToken(), 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ email }),
+      credentials: 'same-origin'
+    });
+    const data = await resp.json();
+    if (!data.ok) throw new Error(data.error || 'İşlem başarısız');
+    lastSuccessURL = data.success_url; // indir URL'si cache
+    return data;
+  }
+
+  // 1) RUUL ile ÖDE → aynı sekmede redirect
   const buyForm = document.getElementById('buyForm');
   buyForm && buyForm.addEventListener('submit', async function (e) {
     e.preventDefault();
     const slug = document.getElementById('pmSlug').value;
-    const email = document.getElementById('email').value;
-    const agree = document.getElementById('agree').checked;
-    const alertBox = document.getElementById('pmAlert');
-    alertBox.classList.add('d-none');
+    const email = (document.getElementById('email').value || '').trim().toLowerCase();
+    const alertBox = document.getElementById('pmAlert'); alertBox.classList.add('d-none');
 
-    if (!agree) {
-      alertBox.innerText = "Lütfen bilgilendirmeyi onaylayın.";
-      alertBox.classList.remove('d-none');
-      return;
-    }
+    if (!email) { alertBox.innerText = "E-posta gerekli."; alertBox.classList.remove('d-none'); return; }
 
     try {
-      const resp = await fetch(`/store/${slug}/intent/`, {
-        method: 'POST',
-        headers: {
-          'X-CSRFToken': csrfToken(),
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({ email }),
-        credentials: 'same-origin'
-      });
-      const data = await resp.json();
-      if (!data.ok) {
-        alertBox.innerText = data.error || "Bir hata oluştu.";
-        alertBox.classList.remove('d-none');
-        return;
-      }
-      if (data.pay_url) window.open(data.pay_url, '_blank');
-      const successLink = document.getElementById('successLink');
-      if (successLink) {
-        successLink.href = data.success_url;
-        successLink.classList.remove('d-none');
-      }
+      const data = await createIntent(slug, email);
+      // aynı sekmede ödeme sayfasına git
+      if (data.pay_url) window.location.href = data.pay_url;
+      else throw new Error("Ödeme linki alınamadı.");
     } catch (err) {
-      console.error(err);
-      alertBox.innerText = "İstek başarısız.";
-      alertBox.classList.remove('d-none');
+      console.error(err); alertBox.innerText = err.message || "Bir hata oluştu."; alertBox.classList.remove('d-none');
+    }
+  });
+
+  // 2) ŞİFRELİ DOSYAYI İNDİR → uyarı pop-up + indir
+  const downloadBtn = document.getElementById('downloadEncryptedBtn');
+  const confirmBtn  = document.getElementById('confirmDownloadBtn');
+
+  downloadBtn && downloadBtn.addEventListener('click', async function () {
+    const slug = document.getElementById('pmSlug').value || currentSlug;
+    const email = (document.getElementById('email').value || '').trim().toLowerCase();
+    const alertBox = document.getElementById('pmAlert'); alertBox.classList.add('d-none');
+    if (!email) { alertBox.innerText = "E-posta gerekli."; alertBox.classList.remove('d-none'); return; }
+
+    try {
+      // intent yoksa oluştur; varsa (lastSuccessURL) tekrar istemeyebiliriz
+      if (!lastSuccessURL) {
+        const data = await createIntent(slug, email);
+        lastSuccessURL = data.success_url;
+      }
+      ensureModals(); downloadModal && downloadModal.show();
+    } catch (err) {
+      console.error(err); alertBox.innerText = err.message || "Bir hata oluştu."; alertBox.classList.remove('d-none');
+    }
+  });
+
+  confirmBtn && confirmBtn.addEventListener('click', function () {
+    if (lastSuccessURL) {
+      // indirmeyi başlat
+      window.location.href = lastSuccessURL;
+      // popup’ı kapat
+      downloadModal && downloadModal.hide();
     }
   });
 })();
