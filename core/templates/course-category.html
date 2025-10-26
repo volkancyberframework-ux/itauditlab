@@ -234,7 +234,7 @@
   function fillProduct(p, slug) {
     document.getElementById('pmTitle').innerText   = p.title || '';
     document.getElementById('pmDesc').innerText    = p.description || '';
-    document.getElementById('pmDifficulty').innerText = p.difficulty || '';
+    document.getElementById('pmDifficulty').innerText = p.get_difficulty_display || '';
     document.getElementById('pmDuration').innerText   = p.duration || '';
     document.getElementById('pmRating').innerText  = (p.rating || 0).toFixed(1);
     document.getElementById('pmReviews').innerText = p.reviews || 0;
