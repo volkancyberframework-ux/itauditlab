@@ -19,25 +19,61 @@ DIFFICULTY_CHOICES = [
 
 
 class DigitalProduct(models.Model):
-    # ... (mevcut alanlar)
-    price = models.DecimalField(                # İNDİRİMLİ fiyat
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=280, unique=True, blank=True)
+
+    image = models.ImageField(upload_to="digital_products/images/", blank=True, null=True)
+    description = models.TextField(blank=True)
+
+    duration = models.CharField(max_length=32, blank=True, help_text="e.g. 3h 56m")
+    difficulty = models.CharField(max_length=20, choices=DIFFICULTY_CHOICES, default="Beginner")
+    rating = models.DecimalField(max_digits=3, decimal_places=1, default=0)
+    reviews_count = models.PositiveIntegerField(default=0)
+
+    uploader_name = models.CharField(max_length=120, default="ITAuditLab")
+    static_avatar = models.ImageField(upload_to="digital_products/avatars/", blank=True, null=True)
+
+    # fiyatlar
+    price = models.DecimalField(
         max_digits=10, decimal_places=2,
         validators=[MinValueValidator(Decimal("0.0"))],
         default=0
     )
-    original_price = models.DecimalField(       # ASIL fiyat (liste fiyatı)
+    original_price = models.DecimalField(
         max_digits=10, decimal_places=2,
         validators=[MinValueValidator(Decimal("0.0"))],
         blank=True, null=True,
-        help_text="Boş bırakılırsa price * 4 olarak otomatik ayarlanır."
+        help_text="Boşsa price * 4 olarak otomatik ayarlanır."
     )
     currency = models.CharField(max_length=3, choices=Currency.choices, default=Currency.USD)
-    # ... (diğer alanlar)
+
+    ruul_pay_link = models.URLField(blank=True)
+    license_password = models.CharField(max_length=64, help_text="PDF şifresi (Ruul gösterir)")
+    source_pdf = models.FileField(upload_to="digital_products/source_pdf/", blank=True, null=True)
+
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return self.title
 
     def save(self, *args, **kwargs):
-        # original_price boşsa otomatik: 4 × indirimli fiyat
-        if (self.original_price is None) and self.price is not None:
+        if not self.slug:
+            base = slugify(self.title)[:50]
+            s = base
+            i = 1
+            while DigitalProduct.objects.filter(slug=s).exclude(pk=self.pk).exists():
+                i += 1
+                s = f"{base}-{i}"
+            self.slug = s
+
+        # original_price boşsa 4x
+        if self.original_price is None and self.price is not None:
             self.original_price = (self.price or Decimal("0")) * Decimal("4")
+
         super().save(*args, **kwargs)
 
     @property
@@ -46,9 +82,9 @@ class DigitalProduct(models.Model):
 
     def _fmt(self, amount: Decimal) -> str:
         sym = self.currency_symbol
-        if self.currency in ("USD", "TRY"):  # $20.00, ₺199.99
+        if self.currency in ("USD", "TRY"):
             return f"{sym}{amount}"
-        return f"{amount} {sym}"             # 20.00 €
+        return f"{amount} {sym}"
 
     def price_display(self) -> str:
         return self._fmt(self.price or Decimal("0"))
@@ -56,7 +92,6 @@ class DigitalProduct(models.Model):
     def original_price_display(self) -> str:
         base = self.original_price if self.original_price is not None else (self.price or Decimal("0")) * Decimal("4")
         return self._fmt(base)
-
 
 
 # Ödeme niyeti / geçici kayıt (webhook gelene kadar)
