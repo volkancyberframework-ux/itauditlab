@@ -148,6 +148,11 @@ class Course(models.Model):
         db_index=True,
     )
 
+    intro_video_url = models.URLField(
+        blank=True,
+        null=True,
+        help_text="TEST kursları için sağ üst kapakta açılacak tanıtım videosu"
+    )
     def __str__(self):
         return self.turkish_name or self.english_name or f"Course #{self.pk}"
 
