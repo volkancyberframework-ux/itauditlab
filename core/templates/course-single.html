@@ -430,8 +430,7 @@
                       <span class="text-muted">No Image</span>
                     {% endif %}
 
-                    {# 👇 SADECE BU IF DEĞİŞTİ #}
-                    {% if first_video_url or (is_test and course.intro_video_url) %}
+                    {% if first_video_url or is_test and course.intro_video_url %}
                       <div class="position-relative" style="height: 210px; width: 100%;">
                         <a href="#"
                            class="icon-shape rounded-circle btn-play icon-xl"
@@ -442,7 +441,6 @@
                         </a>
                       </div>
 
-                      <!-- SAME MODAL – UNCHANGED -->
                       <div class="modal fade" id="previewModal" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-lg modal-dialog-centered">
                           <div class="modal-content bg-dark">
@@ -459,6 +457,7 @@
                         </div>
                       </div>
                     {% endif %}
+
 
                   </div>
                 </div>
