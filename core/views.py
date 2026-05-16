@@ -35,11 +35,6 @@ from .models import (
 )
 
 
-
-
-User = get_user_model()
-
-
 @require_POST
 def newsletter_lead_create(request):
     email = (request.POST.get("email") or "").strip().lower()
@@ -60,13 +55,19 @@ def newsletter_lead_create(request):
                 data={"chat_id": chat_id, "text": text},
                 timeout=5
             )
-        except Exception:
-            pass
+        except Exception as e:
+            print("Telegram error:", e)
 
     return JsonResponse({
         "ok": True,
-        "message": "Teşekkürler! support@siberkobi.co üzerinden bize ulaşın, testinizi ileteceğiz."
+        "message": "support@siberkobi.co adresine ulaşın, testinizi ileteceğiz."
     })
+
+User = get_user_model()
+
+
+
+
 
 def about_view(request):
     return render(request, "about.html")
