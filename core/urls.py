@@ -35,6 +35,6 @@ urlpatterns = [
     path("store/<slug:slug>/detail.json", views_store.product_detail_json, name="product_detail_json"),
     path("store/<slug:slug>/intent/", views_store.create_purchase_intent, name="create_purchase_intent"),
     path("store/success/<uuid:token>/", views_store.purchase_success, name="purchase_success"),
-
+    path("newsletter-lead/", views.newsletter_lead_create, name="newsletter_lead_create"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

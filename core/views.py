@@ -26,9 +26,47 @@ import logging
 import random
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseForbidden
 
+from django.views.decorators.http import require_POST
+import requests
+
+from .models import (
+    Course, Enrollment, CourseSection, CourseSubsection, CourseFAQ,
+    CustomUser, TestQuestion, TestOption, NewsletterLead
+)
+
+
 
 
 User = get_user_model()
+
+
+@require_POST
+def newsletter_lead_create(request):
+    email = (request.POST.get("email") or "").strip().lower()
+
+    if not email:
+        return JsonResponse({"ok": False, "error": "Email zorunlu."}, status=400)
+
+    lead, created = NewsletterLead.objects.get_or_create(email=email)
+
+    bot_token = getattr(settings, "TELEGRAM_BOT_TOKEN", "")
+    chat_id = getattr(settings, "TELEGRAM_CHAT_ID", "")
+
+    if bot_token and chat_id and created:
+        text = f"Yeni Siberkobi test talebi:\nEmail: {email}"
+        try:
+            requests.post(
+                f"https://api.telegram.org/bot{bot_token}/sendMessage",
+                data={"chat_id": chat_id, "text": text},
+                timeout=5
+            )
+        except Exception:
+            pass
+
+    return JsonResponse({
+        "ok": True,
+        "message": "Teşekkürler! support@siberkobi.co üzerinden bize ulaşın, testinizi ileteceğiz."
+    })
 
 def about_view(request):
     return render(request, "about.html")

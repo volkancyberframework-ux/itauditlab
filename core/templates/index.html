@@ -1323,6 +1323,83 @@
       </section>
       <!--Coding and Hiring-->
 
+      <div id="cyberFitPopup" class="position-fixed top-0 start-0 w-100 h-100 d-none"
+           style="background: rgba(0,0,0,.55); z-index: 9999;">
+        <div class="d-flex align-items-center justify-content-center h-100 px-3">
+          <div class="bg-white rounded-4 shadow-lg p-4 p-md-5 position-relative" style="max-width: 520px; width: 100%;">
+            <button type="button" id="cyberFitClose" class="btn-close position-absolute top-0 end-0 m-3"></button>
+
+            <div id="cyberFitFormArea">
+              <h3 class="fw-bold mb-3">Hangi Siber Güvenlik Alanına Uygunsun?</h3>
+              <p class="mb-4">
+                Volkan Güler tarafından hazırlanmış, normalde <strong>200 TL</strong> değerindeki ücretsiz
+                “Hangi Siber Güvenlik Alanına Uygunum?” testini almak isteyenler ücretsiz bültenimize kaydolabilir.
+              </p>
+
+              <form id="cyberFitForm">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <input type="email" name="email" class="form-control form-control-lg"
+                         placeholder="Email adresiniz" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg w-100">
+                  Ücretsiz Testi Al
+                </button>
+              </form>
+            </div>
+
+            <div id="cyberFitSuccess" class="d-none text-center">
+              <h4 class="fw-bold mb-3">Tamam ✅</h4>
+              <p class="mb-0">
+                support@siberkobi.co adresine ulaşın, testinizi ileteceğiz.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const popup = document.getElementById("cyberFitPopup");
+        const closeBtn = document.getElementById("cyberFitClose");
+        const form = document.getElementById("cyberFitForm");
+        const formArea = document.getElementById("cyberFitFormArea");
+        const successArea = document.getElementById("cyberFitSuccess");
+
+        if (!localStorage.getItem("cyberFitPopupSeen")) {
+          setTimeout(() => popup.classList.remove("d-none"), 800);
+        }
+
+        function closePopup() {
+          popup.classList.add("d-none");
+          localStorage.setItem("cyberFitPopupSeen", "1");
+        }
+
+        closeBtn.addEventListener("click", closePopup);
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          fetch("{% url 'newsletter_lead_create' %}", {
+            method: "POST",
+            body: new FormData(form),
+            headers: {
+              "X-Requested-With": "XMLHttpRequest"
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.ok) {
+              formArea.classList.add("d-none");
+              successArea.classList.remove("d-none");
+              localStorage.setItem("cyberFitPopupSeen", "1");
+              setTimeout(closePopup, 3500);
+            }
+          });
+        });
+      });
+      </script>
+
 
     </main>
 

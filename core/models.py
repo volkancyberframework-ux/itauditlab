@@ -6,6 +6,15 @@ from django.utils.text import slugify
 from django.core.validators import MinValueValidator
 from decimal import Decimal
 
+
+class NewsletterLead(models.Model):
+    email = models.EmailField(unique=True)
+    source = models.CharField(max_length=100, default="cybersecurity_fit_test_popup")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email
+
 class Currency(models.TextChoices):
     USD = "USD", "USD"
     EUR = "EUR", "EUR"

@@ -16,6 +16,11 @@ import dj_database_url
 from decouple import config
 
 
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+
+
+
 AUTH_USER_MODEL = 'core.CustomUser'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
