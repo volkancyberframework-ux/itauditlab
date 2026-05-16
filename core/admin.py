@@ -17,12 +17,15 @@ from .models import (
 )
 
 
+from django.contrib import admin
+from .models import NewsletterLead
+
+
 @admin.register(NewsletterLead)
 class NewsletterLeadAdmin(admin.ModelAdmin):
     list_display = ("id", "email", "created_at")
     search_fields = ("email",)
     ordering = ("-created_at",)
-
     
 @admin.register(DigitalProduct)
 class DigitalProductAdmin(admin.ModelAdmin):
