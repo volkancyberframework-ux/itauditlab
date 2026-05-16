@@ -2,7 +2,7 @@ import csv
 import os
 import django
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "yourproject.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "itaudit.settings")
 django.setup()
 
 from core.models import Course, TestQuestion, TestOption
