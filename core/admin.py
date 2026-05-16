@@ -16,6 +16,17 @@ from .models import (
     PurchaseIntent,
 )
 
+from django.contrib import admin
+from .models import NewsletterLead
+
+
+@admin.register(NewsletterLead)
+class NewsletterLeadAdmin(admin.ModelAdmin):
+    list_display = ("email", "source", "created_at")
+    search_fields = ("email",)
+    list_filter = ("source", "created_at")
+    ordering = ("-created_at",)
+
 
 @admin.register(DigitalProduct)
 class DigitalProductAdmin(admin.ModelAdmin):
