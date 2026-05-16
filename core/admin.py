@@ -20,13 +20,14 @@ from .models import (
 from django.contrib import admin
 from .models import NewsletterLead
 
+from django.contrib import admin
+from .models import NewsletterLead
+
 
 @admin.register(NewsletterLead)
 class NewsletterLeadAdmin(admin.ModelAdmin):
-    list_display = ("id", "email", "created_at")
-    search_fields = ("email",)
-    ordering = ("-created_at",)
-    
+    pass
+
 @admin.register(DigitalProduct)
 class DigitalProductAdmin(admin.ModelAdmin):
     list_display = ("title", "price", "original_price", "currency", "difficulty", "rating", "reviews_count", "is_active")
