@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -692,28 +693,12 @@
 <body>
   <nav class="nav">
     <div class="container nav-inner">
-      <a class="brand" href="#">
-        <span class="brand-svg" aria-hidden="true">
-          <svg width="48" height="48" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="6" y="6" width="52" height="52" rx="18" fill="url(#g1)"/>
-            <path d="M22 32C22 24.8 26.9 20 34.4 20C39 20 42.6 21.5 45.2 24.1L40.9 29C39.2 27.4 37.3 26.6 34.7 26.6C31 26.6 28.6 28.7 28.6 32C28.6 35.3 31 37.4 34.7 37.4C37.3 37.4 39.2 36.6 40.9 35L45.2 39.9C42.6 42.5 39 44 34.4 44C26.9 44 22 39.2 22 32Z" fill="white"/>
-            <path d="M17 21H13V43H17" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-            <path d="M47 21H51V43H47" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
-            <circle cx="48" cy="16" r="4" fill="#FDD46B"/>
-            <defs>
-              <linearGradient id="g1" x1="6" y1="6" x2="58" y2="58" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#5DCDF1"/>
-                <stop offset="0.55" stop-color="#1B56FF"/>
-                <stop offset="1" stop-color="#C9B1FB"/>
-              </linearGradient>
-            </defs>
-          </svg>
-        </span>
-
-        <span class="brand-text">
-          <strong>[s]iberkobi</strong>
-          <small>Volkan Güler ile</small>
-        </span>
+      <a class="brand" href="/">
+        <img
+          src="{% static 'assets/images/brand/logo/logo-academy.png' %}"
+          alt="Volkan Güler Akademi Logo"
+          class="brand-logo"
+        />
       </a>
       <div class="nav-links">
         <a href="#program">Program</a>
@@ -951,6 +936,153 @@
             <div class="testimonial-user">
               <strong>Mahmut</strong>
               <span>IT Audit & GRC</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              “Siber güvenlik alanında yıllardır içerik tüketiyorum ama ilk defa gerçekten sektörün içinden biriyle karşılaştım.
+              Volkan Güler sadece teori anlatmıyor; bankalarda, gerçek denetimlerde ve gerçek krizlerde yaşanan şeyleri gösteriyor.
+              Bu bakış açısı benim düşünme şeklimi tamamen değiştirdi.”
+            </p>
+            <div class="testimonial-user">
+              <strong>Emirhan</strong>
+              <span>Cybersecurity Analyst</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              “Özellikle risk düşünme yaklaşımı beni çok geliştirdi.
+              Eskiden sadece teknik açıklara odaklanıyordum ama şimdi bir bulgunun iş tarafındaki etkisini de değerlendirebiliyorum.
+              Bu bakış açısı mülakatlarda ciddi fark yaratıyor.”
+            </p>
+            <div class="testimonial-user">
+              <strong>Mert</strong>
+              <span>GRC Consultant</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              “En sevdiğim tarafı her şeyin gerçek hayat odaklı olması.
+              Evidence review, audit finding yazımı, vendor risk değerlendirmesi gibi konuların bu kadar detaylı işlendiği başka bir topluluk görmedim.”
+            </p>
+            <div class="testimonial-user">
+              <strong>Ayşenur</strong>
+              <span>IT Risk Intern</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              “Sadece teknik bilgi değil kariyer tarafında da çok şey öğrendim.
+              Hangi alana yönelmem gerektiğini, hangi sertifikaların gerçekten değer kattığını ve sektörün perde arkasını burada öğrendim.”
+            </p>
+            <div class="testimonial-user">
+              <strong>Furkan</strong>
+              <span>Cybersecurity Student</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              “CISA sürecinde en çok zorlandığım şey konuları gerçek dünyaya bağlayamamaktı.
+              Buradaki örnekler sayesinde ezber yerine mantığı anlamaya başladım.
+              Özellikle vaka çalışmaları sınav performansımı ciddi yükseltti.”
+            </p>
+            <div class="testimonial-user">
+              <strong>Burak</strong>
+              <span>CISA Candidate</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              “Volkan abi sektörü romantikleştirmeden anlatıyor.
+              Gerçekleri, şirket içi dinamikleri, kariyer risklerini ve fırsatları açık açık anlatması bana çok güven verdi.”
+            </p>
+            <div class="testimonial-user">
+              <strong>Yusuf</strong>
+              <span>Junior Pentester</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              “Buradaki topluluk hissi gerçekten çok güçlü.
+              İnsan sadece eğitim almıyor; aynı zamanda motive oluyor, network oluşturuyor ve farklı bakış açıları kazanıyor.”
+            </p>
+            <div class="testimonial-user">
+              <strong>Elif</strong>
+              <span>Security Operations Center</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              “Kariyerimde uzun süredir sıkışmış hissediyordum.
+              Buradaki içerikler sayesinde teknik roller dışında audit, risk ve yönetişim tarafının da bana uygun olduğunu fark ettim.”
+            </p>
+            <div class="testimonial-user">
+              <strong>Onur</strong>
+              <span>IT Compliance Specialist</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              “En büyük fark birebir yönlendirme kısmıydı.
+              Birçok eğitim platformunda içerik var ama gerçekten insanın gelişimini takip eden çok az kişi var.”
+            </p>
+            <div class="testimonial-user">
+              <strong>Kaan</strong>
+              <span>Cybersecurity Engineer</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              “Gerçek banka denetimlerinden örnekler görmek benim için inanılmaz değerliydi.
+              Özellikle audit mindset geliştirmek isteyen herkesin deneyimlemesi gereken bir platform.”
+            </p>
+            <div class="testimonial-user">
+              <strong>Serhat</strong>
+              <span>IT Auditor</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              “Teknik tarafta yıllardır çalışıyordum ama iş tarafını hiç anlamıyordum.
+              Buradaki eğitimler sayesinde artık yönetime nasıl konuşulması gerektiğini daha iyi anlayabiliyorum.”
+            </p>
+            <div class="testimonial-user">
+              <strong>Can</strong>
+              <span>Cloud Security Engineer</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              “Gerçek hayat senaryoları sayesinde teorik bilgilerin neden önemli olduğunu ilk defa hissettim.
+              Özellikle risk analizi ve kontrol değerlendirme süreçleri çok profesyonel hazırlanmış.”
+            </p>
+            <div class="testimonial-user">
+              <strong>Mehmet Ali</strong>
+              <span>Information Security Intern</span>
             </div>
           </div>
 
