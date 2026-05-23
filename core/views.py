@@ -35,6 +35,11 @@ from .models import (
 )
 
 
+from django.shortcuts import render
+
+def akademi(request):
+    return render(request, "akademi.html")
+
 @require_POST
 def newsletter_lead_create(request):
     email = (request.POST.get("email") or "").strip().lower()

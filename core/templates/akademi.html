@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cyber Career Academy | Siberkobi Career OS</title>
+  <meta name="description" content="Siber güvenlikte doğru yön, nitelikli sertifikasyon, gerçek dünya vakaları ve birebir mentorlukla kariyer sistemi kur." />
+
+  <style>
+    :root {
+      --bg: #fffaf3;
+      --bg-soft: #f7efe5;
+      --card: #ffffff;
+      --dark: #171321;
+      --muted: #696374;
+      --primary: #5dcdf1;
+      --orange: #fd976d;
+      --yellow: #fdd46b;
+      --purple: #c9b1fb;
+      --green: #79d287;
+      --border: #eadfd4;
+      --shadow: 0 28px 70px rgba(40, 30, 20, 0.12);
+      --radius-lg: 32px;
+      --radius-md: 20px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(255, 250, 243, 0.82);
+      border-bottom: 1px solid rgba(234, 223, 212, 0.8);
+    }
+
+    .nav-inner {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      font-size: 20px;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--purple));
+      display: grid;
+      place-items: center;
+      box-shadow: 0 12px 30px rgba(93, 205, 241, 0.35);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 0;
+      border-radius: 999px;
+      padding: 15px 24px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--dark);
+      color: white;
+      box-shadow: 0 16px 35px rgba(23, 19, 33, 0.24);
+    }
+
+    .btn-primary:hover { transform: translateY(-3px); }
+
+    .btn-secondary {
+      background: white;
+      color: var(--dark);
+      border: 1px solid var(--border);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 84px 0 64px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -220px -120px auto auto;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: rgba(93, 205, 241, 0.25);
+      filter: blur(20px);
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.04fr 0.96fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 13px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: 0 10px 25px rgba(40, 30, 20, 0.06);
+    }
+
+    h1, h2, h3 { line-height: 1.02; letter-spacing: -0.055em; }
+
+    h1 {
+      font-size: clamp(48px, 7vw, 92px);
+      margin: 22px 0 18px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #128db8, #7c55d6, #e36d43);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: clamp(18px, 2vw, 22px);
+      max-width: 650px;
+      margin: 0 0 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .trust-pill {
+      background: rgba(255,255,255,0.78);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 12px;
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: var(--shadow);
+      transform: rotate(1.4deg);
+    }
+
+    .mock-window {
+      border-radius: 24px;
+      background: #1b1624;
+      overflow: hidden;
+      color: white;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+    }
+
+    .window-top {
+      display: flex;
+      gap: 8px;
+      padding: 18px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--orange); }
+    .dot:nth-child(2) { background: var(--yellow); }
+    .dot:nth-child(3) { background: var(--green); }
+
+    .window-body { padding: 26px; }
+
+    .mentor-box {
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .avatar {
+      width: 84px;
+      height: 84px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, var(--primary), var(--orange));
+      display: grid;
+      place-items: center;
+      font-size: 34px;
+      font-weight: 900;
+    }
+
+    .mini-label { color: rgba(255,255,255,0.6); font-weight: 700; font-size: 13px; }
+    .mentor-title { font-size: 22px; font-weight: 900; margin: 3px 0; }
+
+    .progress-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 16px;
+      margin: 12px 0;
+    }
+
+    .progress-line {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.13);
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .progress-line span {
+      display: block;
+      height: 100%;
+      width: var(--w);
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--primary), var(--green));
+    }
+
+    section { padding: 76px 0; }
+
+    .section-head {
+      max-width: 760px;
+      margin: 0 auto 38px;
+      text-align: center;
+    }
+
+    .section-head h2 {
+      font-size: clamp(36px, 5vw, 64px);
+      margin: 0 0 16px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 19px;
+      margin: 0;
+    }
+
+    .problem-grid, .outcome-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .stat-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 18px 45px rgba(40, 30, 20, 0.06);
+      text-align: center;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: clamp(36px, 5vw, 58px);
+      letter-spacing: -0.06em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-card span {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 26px;
+      box-shadow: 0 18px 45px rgba(40, 30, 20, 0.06);
+      transition: 0.2s ease;
+    }
+
+    .card:hover { transform: translateY(-7px); box-shadow: var(--shadow); }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 17px;
+      display: grid;
+      place-items: center;
+      font-size: 25px;
+      margin-bottom: 18px;
+    }
+
+    .blue { background: rgba(93,205,241,.25); }
+    .orange { background: rgba(253,151,109,.25); }
+    .yellow { background: rgba(253,212,107,.35); }
+    .purple { background: rgba(201,177,251,.35); }
+    .green { background: rgba(121,210,135,.25); }
+
+    .card h3 { font-size: 24px; margin: 0 0 10px; }
+    .card p { color: var(--muted); margin: 0; }
+
+    .timeline-wrap {
+      background: var(--dark);
+      color: white;
+      border-radius: 42px;
+      padding: clamp(26px, 5vw, 56px);
+      box-shadow: var(--shadow);
+    }
+
+    .timeline-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    .timeline-head h2 {
+      font-size: clamp(36px, 5vw, 62px);
+      margin: 0;
+      max-width: 700px;
+    }
+
+    .timeline-head p {
+      color: rgba(255,255,255,0.68);
+      max-width: 360px;
+      margin: 0;
+    }
+
+    .month-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .month {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 20px;
+      align-items: start;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 22px;
+      padding: 22px;
+    }
+
+    .month-badge {
+      display: inline-flex;
+      width: fit-content;
+      border-radius: 999px;
+      padding: 9px 13px;
+      background: var(--yellow);
+      color: var(--dark);
+      font-weight: 900;
+    }
+
+    .month h3 { margin: 0 0 6px; font-size: 25px; }
+    .month p { margin: 0; color: rgba(255,255,255,0.72); }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .feature-box {
+      background: var(--bg-soft);
+      border-radius: 36px;
+      padding: clamp(28px, 5vw, 52px);
+      border: 1px solid var(--border);
+    }
+
+    .feature-box h2 {
+      font-size: clamp(36px, 5vw, 62px);
+      margin: 0 0 18px;
+    }
+
+    .check-list {
+      list-style: none;
+      padding: 0;
+      margin: 24px 0 0;
+      display: grid;
+      gap: 14px;
+    }
+
+    .check-list li {
+      display: flex;
+      gap: 12px;
+      align-items: start;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .check-list li::before {
+      content: "✓";
+      flex: 0 0 28px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--green);
+      color: var(--dark);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+    }
+
+    .pricing {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 36px;
+      box-shadow: var(--shadow);
+      padding: 34px;
+    }
+
+    .price-tag {
+      display: flex;
+      align-items: end;
+      gap: 8px;
+      margin: 18px 0;
+    }
+
+    .price-tag strong {
+      font-size: clamp(42px, 6vw, 68px);
+      letter-spacing: -0.06em;
+      line-height: 1;
+    }
+
+    .price-tag span { color: var(--muted); font-weight: 800; margin-bottom: 8px; }
+
+    .bonus-strip {
+      background: linear-gradient(90deg, var(--primary), var(--purple), var(--orange));
+      color: white;
+      border-radius: 30px;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 22px;
+      align-items: center;
+      margin-top: 26px;
+    }
+
+    .bonus-strip h3 { font-size: 30px; margin: 0 0 5px; }
+    .bonus-strip p { margin: 0; opacity: .92; font-weight: 700; }
+
+    details {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px 22px;
+      box-shadow: 0 14px 35px rgba(40, 30, 20, 0.05);
+    }
+
+    details + details { margin-top: 12px; }
+    summary { cursor: pointer; font-weight: 900; font-size: 18px; }
+    details p { color: var(--muted); margin: 12px 0 0; }
+
+    .final-cta {
+      text-align: center;
+      background: var(--dark);
+      color: white;
+      border-radius: 44px;
+      padding: clamp(38px, 7vw, 78px);
+      box-shadow: var(--shadow);
+    }
+
+    .final-cta h2 {
+      font-size: clamp(42px, 6vw, 78px);
+      margin: 0 0 16px;
+    }
+
+    .final-cta p {
+      color: rgba(255,255,255,0.72);
+      font-size: 20px;
+      max-width: 740px;
+      margin: 0 auto 28px;
+    }
+
+    footer {
+      padding: 34px 0;
+      color: var(--muted);
+      font-weight: 700;
+      text-align: center;
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid, .split, .timeline-head { grid-template-columns: 1fr; display: grid; }
+      .problem-grid, .outcome-grid, .stats-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hero-card { transform: none; }
+      .bonus-strip { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      .container { width: min(100% - 24px, var(--max)); }
+      .hero { padding-top: 52px; }
+      .month { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .hero-actions { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#">
+        <span class="brand-mark">🔐</span>
+        <span>Siberkobi Career OS</span>
+      </a>
+      <div class="nav-links">
+        <a href="#program">Program</a>
+        <a href="#outcomes">Çıktılar</a>
+        <a href="#pricing">Fiyat</a>
+        <a href="#faq">SSS</a>
+      </div>
+      <a class="btn btn-primary" href="#apply">Başvuru Yap</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">🚀 Sertifikasyon + Vaka + Mentorluk Sistemi</div>
+        <h1>Siber güvenlikte <span class="gradient-text">doğru yöne</span> odaklan.</h1>
+        <p class="lead">
+          Siber güvenlikte çok insan yanlış tarafta kendini geliştiriyor. Teknik beceri önemli; ama bugünün dünyasında teknikle birlikte nitelikli sertifikasyon, gerçek dünya vakaları ve problemi doğru okuma becerisi çok daha değerli.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#apply">Programa Başvur</a>
+          <a class="btn btn-secondary" href="#program">Programı İncele</a>
+        </div>
+        <div class="trust-row">
+          <span class="trust-pill">CISA / CISM / CISSP Yolu</span>
+          <span class="trust-pill">Gerçek Dünya Vakaları</span>
+          <span class="trust-pill">Birebir Takip + Community</span>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="mock-window">
+          <div class="window-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="window-body">
+            <div class="mentor-box">
+              <div class="avatar">VG</div>
+              <div>
+                <div class="mini-label">Mentor</div>
+                <div class="mentor-title">Volkan Güler</div>
+                <div class="mini-label">IT Audit • Cybersecurity • Avrupa Bankacılık Deneyimi</div>
+              </div>
+            </div>
+            <div class="progress-card">
+              <strong>Yön belirleme & doğru alan seçimi</strong>
+              <div class="progress-line"><span style="--w: 94%"></span></div>
+            </div>
+            <div class="progress-card">
+              <strong>Laboratuvarlar, vakalar ve problem çözme</strong>
+              <div class="progress-line"><span style="--w: 82%"></span></div>
+            </div>
+            <div class="progress-card">
+              <strong>Sertifika yolu, portföy ve mülakat hazırlığı</strong>
+              <div class="progress-line"><span style="--w: 76%"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <h2>Teknik bilmek yetmiyor. Doğru alana odaklanmak gerekiyor.</h2>
+        <p>Türkiye’de ve dünyada teknik olarak iyi çok genç var. Farkı yaratan şey; teknik bilgiyi sertifikasyon, vaka analizi, raporlama ve gerçek iş problemlerini anlama becerisiyle birleştirmek.</p>
+      </div>
+      <div class="problem-grid">
+        <div class="card"><div class="icon orange">🧭</div><h3>Yanlış tarafa çalışma riski</h3><p>Herkes teknik araçlara yükleniyor; ama GRC, audit, risk, compliance ve sertifikasyon tarafında büyük fırsatlar gözden kaçıyor.</p></div>
+        <div class="card"><div class="icon blue">📁</div><h3>Gerçek vaka tecrübesi yok</h3><p>Sertifika ezberi değil; evidence review, risk rating, finding yazma ve raporlama gibi gerçek dünya pratikleri gerekir.</p></div>
+        <div class="card"><div class="icon purple">🎯</div><h3>Sektörün dili bilinmiyor</h3><p>Bugünkü dünya sadece “hangi tool’u biliyorsun?” diye bakmıyor. Problemi anlayan, riski anlatan ve iş etkisini yazabilen kişi öne çıkıyor.</p></div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><strong>850+</strong><span>kişi Volkan Güler'in programlarına dahil oldu</span></div>
+        <div class="stat-card"><strong>70+</strong><span>kişi bootcamp programlarını tamamladı</span></div>
+        <div class="stat-card"><strong>100.000+</strong><span>dünyada az bilinen siber güvenlik koltuğu boş</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="program">
+    <div class="container">
+      <div class="timeline-wrap">
+        <div class="timeline-head">
+          <h2>Önce yönünü belirle, sonra sertifikasyon ve vakalarla geliş</h2>
+          <p>Program boyunca birebir görüşmeler, laboratuvarlar, gerçek vakalar ve sürekli takip ile sistemin içinde kalırsın.</p>
+        </div>
+        <div class="month-list">
+          <div class="month"><div class="month-badge">1. Ay</div><div><h3>Yön Belirleme ve Kariyer Haritası</h3><p>Önce hangi tarafta değer üreteceğini belirliyoruz: GRC, IT audit, SOC, cloud security, web security veya sertifikasyon odaklı yol. Hedef rol, ülke ve çalışma planı netleşir.</p></div></div>
+          <div class="month"><div class="month-badge">2–3. Ay</div><div><h3>Sertifikasyon Yolu + Teknik Temel</h3><p>CISA, CISM veya CISSP gibi yollardan biri seçilir. Seçilen sertifika rotasına göre teknik temel, kavramlar, laboratuvarlar ve bol bol mini vaka çalışılır.</p></div></div>
+          <div class="month"><div class="month-badge">4. Ay</div><div><h3>Gerçek Dünya Vaka Simülasyonları</h3><p>FINBridge benzeri gerçekçi senaryolarla evidence review, finding yazma, risk rating, kontrol değerlendirme ve rapor hazırlama pratiği yapılır.</p></div></div>
+          <div class="month"><div class="month-badge">5. Ay</div><div><h3>İş ve Pozisyon Stratejisi</h3><p>CV, LinkedIn, başvuru stratejisi, mülakat simülasyonu, Avrupa/Türkiye/remote iş stratejisi ve referanssız öne çıkma yöntemleri çalışılır.</p></div></div>
+          <div class="month"><div class="month-badge">6. Ay</div><div><h3>Portföy, Sertifika Planı ve İlk Teklif</h3><p>Profesyonel raporlar, sertifika çalışma planı, mülakat hazırlığı ve freelance/audit hizmet teklifi gibi somut çıktılar hazırlanır.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="outcomes">
+    <div class="container">
+      <div class="section-head">
+        <h2>Program sonunda elinde ne olacak?</h2>
+        <p>Bu programda amaç sadece bilgi vermek değil; seni vaka çözen, rapor yazan, sertifika yolunu bilen ve iş görüşmesinde kendini anlatabilen biri haline getirmek.</p>
+      </div>
+      <div class="outcome-grid">
+        <div class="card"><div class="icon green">✅</div><h3>10+ Profesyonel denetim raporu</h3><p>Gerçek iş hayatına benzeyen bir denetim senaryosundan hazırlanmış rapor.</p></div>
+        <div class="card"><div class="icon blue">🛡️</div><h3>Security assessment</h3><p>Riskleri, bulguları ve aksiyonları anlatan güvenlik değerlendirme çıktısı.</p></div>
+        <div class="card"><div class="icon yellow">💼</div><h3>CV + LinkedIn paketi</h3><p>Hedef role göre düzenlenmiş, daha profesyonel görünen başvuru paketi.</p></div>
+        <div class="card"><div class="icon purple">🎓</div><h3>Sertifika çalışma planı</h3><p>CISA, CISM veya CISSP hedeflerinden birine göre kişisel çalışma rotası.</p></div>
+        <div class="card"><div class="icon orange">🎙️</div><h3>Mülakat simülasyonu</h3><p>Teknik ve davranışsal sorularla gerçek iş görüşmesine hazırlık.</p></div>
+        <div class="card"><div class="icon green">💸</div><h3>Freelance teklif paketi</h3><p>İlk küçük güvenlik/audit hizmetini nasıl sunacağını gösteren teklif şablonu.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container split">
+
+      <!-- COMMUNITY CARD -->
+      <div class="pricing">
+        <div class="eyebrow">🔥 Özel Community</div>
+
+        <h2 style="font-size: clamp(34px, 4vw, 54px); margin: 20px 0 8px;">
+          Community Erişimi
+        </h2>
+
+        <p style="color: var(--muted); margin: 0;">
+          Sektörde işinde iyi insanların bulunduğu özel community’ye dahil ol.
+          İstediğin kadar soru sor, deneyimlerden öğren ve doğru insanlarla aynı ortamda kal.
+        </p>
+
+        <div class="price-tag">
+          <strong>10.000 TL</strong>
+          <span>/ ömür boyu erişim</span>
+        </div>
+
+        <ul class="check-list">
+          <li>Ömür boyu community erişimi</li>
+          <li>Sektörde çalışan insanlardan gerçek deneyim öğren</li>
+          <li>İstediğin kadar soru sor, yalnız ilerleme</li>
+          <li>Gerçek kariyer deneyimlerine eriş</li>
+          <li>Doğru çevrenin içinde kal</li>
+        </ul>
+
+        <a class="btn btn-secondary"
+           style="width:100%; margin-top:24px;"
+           href="#apply">
+           Community’ye Katıl
+        </a>
+      </div>
+
+      <!-- PROGRAM CARD -->
+      <div class="pricing" id="pricing">
+        <div class="eyebrow">🔥 Cyber Career Academy</div>
+
+        <h2 style="font-size: clamp(34px, 4vw, 54px); margin: 20px 0 8px;">
+          Program Paketi
+        </h2>
+
+        <p style="color: var(--muted); margin: 0;">
+          Yön belirleme, sertifikasyon rotası, vakalar,
+          laboratuvarlar ve birebir takip içeren kariyer geliştirme paketi.
+        </p>
+
+        <div class="price-tag">
+          <strong>20.000 TL</strong>
+          <span>/ paket</span>
+        </div>
+
+        <ul class="check-list">
+          <li>Yön belirleme ve kişisel kariyer rotası</li>
+          <li>CISA / CISM / CISSP yollarından birine odaklanma</li>
+          <li>Laboratuvarlar ve bol bol gerçek dünya vakası</li>
+          <li>Bol bol birebir görüşme ve sürekli takip</li>
+        </ul>
+
+        <a class="btn btn-primary"
+           style="width:100%; margin-top:24px;"
+           href="#apply">
+           Programa Başvur
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  
+  <section id="faq">
+    <div class="container">
+      <div class="section-head">
+        <h2>Sık sorulan sorular</h2>
+        <p>Programla ilgili en sık gelen sorular.</p>
+      </div>
+      <details open><summary>Bu program iş garantisi veriyor mu?</summary><p>Hayır. Program iş garantisi vermez. Ama doğru yön seçimi, sertifikasyon rotası, vaka pratiği, portföy, CV/LinkedIn ve mülakat hazırlığı ile şansını artırmayı hedefler.</p></details>
+      <details><summary>Teknik bilgim azsa katılabilir miyim?</summary><p>Evet. Teknikte çok ileri olmak şart değil. Önce yönünü belirliyoruz, sonra seçilen sertifikasyon ve kariyer yoluna göre teknik temel, vaka ve laboratuvarlarla ilerliyoruz.</p></details>
+      <details><summary>Hangi alanlara hazırlanabilirim?</summary><p>GRC, IT audit, SOC, cloud security, web security ve CISA/CISM/CISSP gibi sertifikasyon odaklı kariyer yolları için yapı oluşturulur.</p></details>
+      <details><summary>Community paketi nedir?</summary><p>Tek seferlik 10.000 TL ile sektörde işinde iyi insanların bulunduğu community’ye dahil olursun. Sorularını sorabilir, deneyimlerden öğrenebilir ve yalnız ilerlemek yerine doğru çevrenin içinde kalabilirsin.</p></details>
+    </div>
+  </section>
+
+  <section id="apply">
+    <div class="container">
+      <div class="final-cta">
+        <h2>Siber güvenlikte yanlış yerde zaman kaybetme.</h2>
+        <p>Önce yönünü belirleyelim. Sonra CISA, CISM veya CISSP gibi güçlü bir sertifikasyon rotası seçip laboratuvarlar, vakalar ve birebir görüşmelerle seni gerçek dünya problemlerine hazırlayalım.</p>
+        <a class="btn" style="background: var(--yellow); color: var(--dark);" href="mailto:support@siberkobi.co?subject=Cyber%20Career%20Academy%20Başvuru">Başvuru Maili Gönder</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">© 2026 Siberkobi Career OS · Cyber Career Academy</div>
+  </footer>
+</body>
+</html>

@@ -30,7 +30,7 @@ MEDIA_ROOT = '/data/media'
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['itauditlab.onrender.com','www.siberkobi.co','siberkobi.co','itauditlab.siberkobi.co']
+ALLOWED_HOSTS = ['itauditlab.onrender.com','www.siberkobi.co','siberkobi.co','itauditlab.siberkobi.co',"akademi.siberkobi.co"]
 
 CSP_FRAME_SRC = (
     "'self'",
