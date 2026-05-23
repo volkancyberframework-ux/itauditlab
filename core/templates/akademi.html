@@ -688,6 +688,43 @@
       filter: drop-shadow(0 12px 24px rgba(93,205,241,.28));
     }
 
+    .brand-logo {
+  width: 220px;
+  max-width: 220px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.brand {
+  flex-shrink: 0;
+}
+
+@media (max-width: 920px) {
+  .brand-logo {
+    width: 170px;
+    max-width: 170px;
+  }
+}
+
+@media (max-width: 620px) {
+  .nav-inner {
+    height: 68px;
+    gap: 12px;
+  }
+
+  .brand-logo {
+    width: 145px;
+    max-width: 145px;
+  }
+
+  .nav .btn {
+    padding: 11px 15px;
+    font-size: 13px;
+    width: auto;
+  }
+}
+
   </style>
 
 
