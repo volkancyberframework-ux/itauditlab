@@ -694,6 +694,47 @@
       object-fit: contain;
     }
 
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .brand-logo{
+      height:42px;
+      width:auto;
+    }
+
+    /* Desktop */
+    .nav-links{
+      display:flex;
+      gap:24px;
+      align-items:center;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px){
+
+      .nav-inner{
+        padding:12px 0;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+      .btn{
+        padding:10px 14px;
+        font-size:14px;
+        white-space:nowrap;
+      }
+
+      .brand-logo{
+        height:34px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -712,7 +753,7 @@
         <a href="#pricing">Fiyat</a>
         <a href="#faq">SSS</a>
       </div>
-      <a class="btn btn-primary" href="#apply">Başvur</a>
+      <a class="btn btn-primary" href="#apply">Başvuru Yap</a>
     </div>
   </nav>
 
