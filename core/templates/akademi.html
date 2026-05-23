@@ -599,13 +599,117 @@
       letter-spacing: -0.01em;
     }
 
+    .testimonials{
+      overflow:hidden;
+      padding:90px 0;
+    }
+
+    .testimonial-slider{
+      overflow:hidden;
+      position:relative;
+    }
+
+    .testimonial-track{
+      display:flex;
+      gap:24px;
+      width:max-content;
+      animation: scrollTestimonials 38s linear infinite;
+    }
+
+    .testimonial-card{
+      width:420px;
+      background:white;
+      border:1px solid var(--border);
+      border-radius:30px;
+      padding:32px;
+      box-shadow:0 18px 45px rgba(40,30,20,.06);
+      flex-shrink:0;
+    }
+
+    .testimonial-card p{
+      font-size:18px;
+      line-height:1.8;
+      color:var(--dark);
+      margin:18px 0 28px;
+    }
+
+    .stars{
+      color:#ffb400;
+      font-size:24px;
+      letter-spacing:2px;
+    }
+
+    .testimonial-user{
+      display:flex;
+      flex-direction:column;
+    }
+
+    .testimonial-user strong{
+      font-size:17px;
+      font-weight:900;
+    }
+
+    .testimonial-user span{
+      color:var(--muted);
+      font-size:14px;
+      font-weight:700;
+    }
+
+    @keyframes scrollTestimonials{
+      from{
+        transform:translateX(0);
+      }
+
+      to{
+        transform:translateX(-50%);
+      }
+    }
+
+    .testimonial-track:hover{
+      animation-play-state:paused;
+    }
+
+    @media(max-width:768px){
+
+      .testimonial-card{
+        width:320px;
+      }
+
+    }
+
+    .brand-svg{
+      width:48px;
+      height:48px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+      filter: drop-shadow(0 12px 24px rgba(93,205,241,.28));
+    }
+
   </style>
 </head>
 <body>
   <nav class="nav">
     <div class="container nav-inner">
       <a class="brand" href="#">
-        <span class="brand-mark">[s]</span>
+        <span class="brand-svg" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="52" height="52" rx="18" fill="url(#g1)"/>
+            <path d="M22 32C22 24.8 26.9 20 34.4 20C39 20 42.6 21.5 45.2 24.1L40.9 29C39.2 27.4 37.3 26.6 34.7 26.6C31 26.6 28.6 28.7 28.6 32C28.6 35.3 31 37.4 34.7 37.4C37.3 37.4 39.2 36.6 40.9 35L45.2 39.9C42.6 42.5 39 44 34.4 44C26.9 44 22 39.2 22 32Z" fill="white"/>
+            <path d="M17 21H13V43H17" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M47 21H51V43H47" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="48" cy="16" r="4" fill="#FDD46B"/>
+            <defs>
+              <linearGradient id="g1" x1="6" y1="6" x2="58" y2="58" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#5DCDF1"/>
+                <stop offset="0.55" stop-color="#1B56FF"/>
+                <stop offset="1" stop-color="#C9B1FB"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+
         <span class="brand-text">
           <strong>[s]iberkobi</strong>
           <small>Volkan Güler ile</small>
@@ -640,6 +744,8 @@
         </div>
       </div>
 
+
+
       <div class="hero-card">
         <div class="mock-window">
           <div class="window-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
@@ -649,7 +755,7 @@
               <div>
                 <div class="mini-label">Mentor</div>
                 <div class="mentor-title">Volkan Güler</div>
-                <div class="mini-label">IT Audit • Cybersecurity • Avrupa Bankacılık Deneyimi</div>
+                <div class="mini-label">IT Audit • Cybersecurity • 7 Ülkede Bankacılık Deneyimi</div>
               </div>
             </div>
             <div class="progress-card">
@@ -795,7 +901,77 @@
     </div>
   </section>
 
+  <section class="testimonials">
+    <div class="container">
 
+      <div class="section-head">
+        <h2>Katılımcılar Ne Diyor?</h2>
+        <p>
+          Siberkobi programlarına katılan insanların gerçek deneyimleri.
+        </p>
+      </div>
+
+      <div class="testimonial-slider">
+
+        <div class="testimonial-track">
+
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              “Volkan Güler sayesinde siber güvenlikte sadece teknik kasmanın yeterli olmadığını fark ettim.
+              Özellikle gerçek dünya vakaları, audit bakış açısı ve risk düşünme yaklaşımı kariyerime inanılmaz katkı sağladı.
+              Şu an Hollanda’da IT Auditor olarak çalışıyorum ve mülakatlarda burada öğrendiğim bakış açısı ciddi fark yarattı.”
+            </p>
+            <div class="testimonial-user">
+              <strong>Hakan</strong>
+              <span>IT Auditor • Hollanda</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              “Üniversite döneminde neye odaklanacağımı bilmiyordum.
+              Volkan abi bana sadece teknik değil, sektörün nasıl çalıştığını da öğretti.
+              Gerçek vaka çalışmaları sayesinde birçok kişiden ayrıştım ve çok değerli bir staj fırsatı yakaladım.”
+            </p>
+            <div class="testimonial-user">
+              <strong>Batuhan</strong>
+              <span>Cybersecurity Intern</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              “Bugüne kadar birçok eğitim aldım ama çoğu teoride kaldı.
+              Burada ise gerçekten evidence review, finding yazımı, risk değerlendirmesi gibi gerçek dünya süreçlerini öğrendim.
+              Özellikle vaka bazlı ilerlemek çok büyük fark yaratıyor.”
+            </p>
+            <div class="testimonial-user">
+              <strong>Mahmut</strong>
+              <span>IT Audit & GRC</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p>
+              “Volkan Güler’in en büyük farkı sadece bilgi vermesi değil.
+              Sürekli yönlendirmesi, birebir destek olması ve doğru alanı seçmeme yardımcı olmasıydı.
+              Şu an kariyerime çok daha stratejik bakabiliyorum.”
+            </p>
+            <div class="testimonial-user">
+              <strong>Berk</strong>
+              <span>Cybersecurity Student</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
 
   <section id="faq">
     <div class="container">
