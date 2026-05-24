@@ -725,6 +725,300 @@
   }
 }
 
+
+    /* --- Ek detay bölümleri: mevcut logo, navbar ve mobil yapı bozulmadan eklenmiştir --- */
+    .deep-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .deep-section::before {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: rgba(201, 177, 251, 0.22);
+      filter: blur(25px);
+      left: -160px;
+      top: 40px;
+      pointer-events: none;
+    }
+
+    .dark-panel {
+      background: var(--dark);
+      color: white;
+      border-radius: 44px;
+      padding: clamp(30px, 6vw, 64px);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dark-panel::after {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      right: -160px;
+      top: -160px;
+      border-radius: 50%;
+      background: rgba(93, 205, 241, 0.16);
+      filter: blur(12px);
+      pointer-events: none;
+    }
+
+    .dark-panel > * { position: relative; z-index: 1; }
+
+    .dark-panel .section-head p,
+    .dark-panel p {
+      color: rgba(255,255,255,.72);
+    }
+
+    .deep-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .deep-card {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 26px;
+      padding: 26px;
+      min-height: 240px;
+    }
+
+    .deep-card.light {
+      background: white;
+      color: var(--dark);
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 45px rgba(40,30,20,.06);
+    }
+
+    .deep-card h3 {
+      font-size: 25px;
+      margin: 14px 0 10px;
+    }
+
+    .deep-card p {
+      margin: 0;
+      line-height: 1.75;
+    }
+
+    .deep-card.light p { color: var(--muted); }
+
+    .number-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      background: var(--yellow);
+      color: var(--dark);
+      font-weight: 950;
+      font-size: 18px;
+    }
+
+    .story-wrap {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 34px;
+      align-items: stretch;
+    }
+
+    .story-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 34px;
+      padding: clamp(28px, 5vw, 52px);
+      box-shadow: var(--shadow);
+    }
+
+    .story-card h2 {
+      font-size: clamp(36px, 5vw, 62px);
+      margin: 0 0 18px;
+    }
+
+    .story-card p {
+      color: var(--muted);
+      font-size: 18px;
+      margin: 0 0 16px;
+    }
+
+    .story-points {
+      display: grid;
+      gap: 14px;
+    }
+
+    .story-point {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 20px;
+    }
+
+    .story-point strong {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 6px;
+      letter-spacing: -0.03em;
+    }
+
+    .story-point span {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .matrix-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 18px 45px rgba(40,30,20,.06);
+    }
+
+    .matrix-card h3 {
+      font-size: 28px;
+      margin: 0 0 12px;
+    }
+
+    .matrix-card p {
+      color: var(--muted);
+      margin: 0 0 18px;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .mini-list li {
+      display: flex;
+      gap: 10px;
+      color: var(--muted);
+      font-weight: 750;
+      align-items: flex-start;
+    }
+
+    .mini-list li::before {
+      content: "•";
+      color: var(--orange);
+      font-weight: 950;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .deliverable-board {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 38px;
+      padding: clamp(28px, 5vw, 54px);
+      box-shadow: var(--shadow);
+    }
+
+    .deliverable-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .deliverable-row {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 20px;
+      align-items: start;
+      padding: 22px;
+      border-radius: 24px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+    }
+
+    .deliverable-row strong {
+      font-size: 19px;
+      letter-spacing: -0.03em;
+    }
+
+    .deliverable-row p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 30px;
+    }
+
+    .comparison-card {
+      border-radius: 32px;
+      padding: 32px;
+      border: 1px solid var(--border);
+      background: white;
+      box-shadow: 0 18px 45px rgba(40,30,20,.06);
+    }
+
+    .comparison-card.good {
+      background: #f0fff3;
+      border-color: rgba(121,210,135,.45);
+    }
+
+    .comparison-card.bad {
+      background: #fff4ee;
+      border-color: rgba(253,151,109,.45);
+    }
+
+    .comparison-card h3 {
+      font-size: 30px;
+      margin: 0 0 18px;
+    }
+
+    .founder-note {
+      background: linear-gradient(135deg, var(--primary), var(--purple), var(--orange));
+      color: white;
+      border-radius: 42px;
+      padding: clamp(30px, 6vw, 62px);
+      box-shadow: var(--shadow);
+    }
+
+    .founder-note h2 {
+      font-size: clamp(38px, 5vw, 66px);
+      margin: 0 0 18px;
+    }
+
+    .founder-note p {
+      font-size: 19px;
+      max-width: 900px;
+      margin: 0 0 16px;
+      color: rgba(255,255,255,.92);
+      font-weight: 700;
+    }
+
+    @media (max-width: 920px) {
+      .deep-grid,
+      .story-wrap,
+      .matrix-grid,
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .deliverable-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
   </style>
 
 
@@ -819,6 +1113,68 @@
     </div>
   </section>
 
+  <section class="deep-section">
+    <div class="container">
+      <div class="dark-panel">
+        <div class="section-head" style="margin-bottom: 22px;">
+          <h2>Neden çoğu kişi yıllarca çalışmasına rağmen sektörde güçlü bir yere gelemiyor?</h2>
+          <p>Çünkü siber güvenlikte sorun genelde çalışmamak değil; neye, hangi sırayla ve hangi iş sonucu için çalışacağını bilmemek.</p>
+        </div>
+        <div class="deep-grid">
+          <div class="deep-card">
+            <div class="number-badge">1</div>
+            <h3>Dağınık öğrenme</h3>
+            <p>YouTube videoları, kurslar, notlar, sertifika kaynakları ve araçlar arasında sürekli zıplamak; kişiyi meşgul eder ama çoğu zaman ölçülebilir bir çıktıya götürmez.</p>
+          </div>
+          <div class="deep-card">
+            <div class="number-badge">2</div>
+            <h3>Ezber sertifika yaklaşımı</h3>
+            <p>Sadece sınav geçmeye odaklanan kişi, gerçek iş görüşmesinde “bunu şirkette nasıl uygularsın?” sorusu gelince zorlanır. Biz kavramı vaka ile bağlarız.</p>
+          </div>
+          <div class="deep-card">
+            <div class="number-badge">3</div>
+            <h3>Gerçek iş çıktısı yokluğu</h3>
+            <p>Birçok kişi teknik bilgi biriktirir ama elinde rapor, risk matrisi, kontrol değerlendirmesi, vaka analizi veya profesyonel portföy bulunmaz.</p>
+          </div>
+          <div class="deep-card">
+            <div class="number-badge">4</div>
+            <h3>Yanlış rol hedefi</h3>
+            <p>Herkes aynı işi kovalamak zorunda değil. Bazı kişiler denetim, risk, yönetişim, uyum ve danışmanlık tarafında çok daha hızlı değer üretebilir.</p>
+          </div>
+          <div class="deep-card">
+            <div class="number-badge">5</div>
+            <h3>İş dili eksikliği</h3>
+            <p>Şirketler sadece açık bulan insan aramaz. Riski anlatan, yönetime açıklayan, aksiyon planı çıkaran ve iş etkisini yazabilen insan arar.</p>
+          </div>
+          <div class="deep-card">
+            <div class="number-badge">6</div>
+            <h3>Yalnız ilerleme</h3>
+            <p>En büyük kayıplardan biri yalnız çalışmaktır. Doğru çevre, gerçek geri bildirim ve düzenli yönlendirme olmadan motivasyon kolayca dağılır.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container story-wrap">
+      <div class="story-card">
+        <div class="eyebrow">👋 Kurucudan</div>
+        <h2>Bu programı klasik bir eğitim gibi değil, kariyer sistemi gibi tasarladım.</h2>
+        <p>Benim için mesele sadece video izletmek değil. İnsanların neye çalışacağını, nasıl düşüneceğini, ne üreteceğini ve iş görüşmesinde kendini nasıl anlatacağını netleştirmek.</p>
+        <p>Avrupa’da bankacılık, IT denetim, siber güvenlik, risk ve kontrol tarafında çalışırken gördüğüm şey şuydu: Teknik bilgi önemli ama tek başına yeterli değil. Şirketler problemi uçtan uca okuyabilen insanları daha değerli görüyor.</p>
+        <p>Bu yüzden burada öğrenciyi sadece “öğrenen” kişi olarak değil; rapor yazan, vaka çözen, risk anlatan, sertifika yolunu bilen ve kariyerini stratejik yöneten biri olarak geliştiriyoruz.</p>
+      </div>
+      <div class="story-points">
+        <div class="story-point"><strong>Gerçek iş bakış açısı</strong><span>Denetim, risk, kontrol, bulgu, kanıt ve yönetim raporlaması gibi şirket içinde gerçekten kullanılan kavramlara odaklanılır.</span></div>
+        <div class="story-point"><strong>Sertifikayı ezberden çıkarma</strong><span>CISA, CISM ve CISSP gibi sertifika konuları sadece sınav başlığı olarak değil, gerçek şirket senaryoları üzerinden işlenir.</span></div>
+        <div class="story-point"><strong>Somut çıktı üretme</strong><span>Katılımcı sadece bilgi almaz; rapor, risk analizi, kontrol değerlendirmesi, kariyer planı ve başvuru dosyası üretir.</span></div>
+        <div class="story-point"><strong>Doğru alana yönelme</strong><span>Herkese aynı rota verilmez. Kişinin geçmişi, İngilizcesi, teknik seviyesi, hedef ülkesi ve kariyer isteğine göre yön belirlenir.</span></div>
+      </div>
+    </div>
+  </section>
+
+
   <section id="program">
     <div class="container">
       <div class="timeline-wrap">
@@ -837,6 +1193,59 @@
     </div>
   </section>
 
+
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <h2>Siberkobi yöntemi: önce düşünme biçimi, sonra teknik, sonra iş çıktısı.</h2>
+        <p>Bu yapı, öğrencinin sadece bilgi toplamasını değil; profesyonel hayatta karşılığı olan bir çalışma dosyası oluşturmasını hedefler.</p>
+      </div>
+      <div class="matrix-grid">
+        <div class="matrix-card">
+          <h3>1. Yön ve alan seçimi</h3>
+          <p>Önce kişinin hangi siber güvenlik alanında daha hızlı değer üretebileceği anlaşılır.</p>
+          <ul class="mini-list">
+            <li>Teknik seviye değerlendirmesi</li>
+            <li>İngilizce ve iletişim seviyesi</li>
+            <li>Hedef rol ve hedef ülke analizi</li>
+            <li>GRC, denetim, SOC, bulut güvenliği veya web güvenliği ayrımı</li>
+          </ul>
+        </div>
+        <div class="matrix-card">
+          <h3>2. Sertifikasyon omurgası</h3>
+          <p>CISA, CISM veya CISSP gibi güçlü sertifikasyon yolları kariyer stratejisine bağlanır.</p>
+          <ul class="mini-list">
+            <li>Alanına uygun sertifika seçimi</li>
+            <li>Konuları ezber yerine vaka ile anlama</li>
+            <li>Sınav mantığı ve soru çözme disiplini</li>
+            <li>Gerçek iş hayatındaki karşılığını görme</li>
+          </ul>
+        </div>
+        <div class="matrix-card">
+          <h3>3. Gerçek vaka pratiği</h3>
+          <p>Şirketlerde karşılaşılabilecek kanıtlar, eksikler, riskler ve bulgular üzerinden çalışma yapılır.</p>
+          <ul class="mini-list">
+            <li>Kanıt inceleme alışkanlığı</li>
+            <li>Kontrol tasarımı ve kontrol etkinliği değerlendirme</li>
+            <li>Risk derecelendirme</li>
+            <li>Profesyonel bulgu ve rapor yazımı</li>
+          </ul>
+        </div>
+        <div class="matrix-card">
+          <h3>4. Kariyer ve görünürlük</h3>
+          <p>Bilgiyi işe, mülakata, LinkedIn profiline ve güven veren bir portföye dönüştürme tarafı çalışılır.</p>
+          <ul class="mini-list">
+            <li>CV ve LinkedIn düzenleme</li>
+            <li>Mülakat soru-cevap hazırlığı</li>
+            <li>Başvuru stratejisi</li>
+            <li>Küçük danışmanlık/freelance teklif dosyası</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="outcomes">
     <div class="container">
       <div class="section-head">
@@ -850,6 +1259,68 @@
         <div class="card"><div class="icon purple">🎓</div><h3>Sertifika çalışma planı</h3><p>CISA, CISM veya CISSP hedeflerinden birine göre kişisel çalışma rotası.</p></div>
         <div class="card"><div class="icon orange">🎙️</div><h3>Mülakat simülasyonu</h3><p>Teknik ve davranışsal sorularla gerçek iş görüşmesine hazırlık.</p></div>
         <div class="card"><div class="icon green">💸</div><h3>Freelance teklif paketi</h3><p>İlk küçük güvenlik/audit hizmetini nasıl sunacağını gösteren teklif şablonu.</p></div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section>
+    <div class="container">
+      <div class="deliverable-board">
+        <div class="eyebrow">📦 Somut Çıktılar</div>
+        <h2 style="font-size: clamp(36px, 5vw, 62px); margin: 18px 0 12px;">Bu programda sadece ders değil, kullanılabilir kariyer dosyaları çıkar.</h2>
+        <p style="color: var(--muted); font-size: 19px; max-width: 860px; margin: 0;">Amaç “çok şey izledim” demek değil. Amaç; elinde gösterebileceğin, konuşabileceğin, mülakatta anlatabileceğin ve kariyer yönünü netleştirecek materyallerle ilerlemek.</p>
+        <div class="deliverable-list">
+          <div class="deliverable-row"><strong>Kişisel kariyer haritası</strong><p>Hangi alana neden odaklanacağın, hangi sertifikaya çalışacağın, hangi projeleri yapacağın ve 90 günlük çalışma planın netleşir.</p></div>
+          <div class="deliverable-row"><strong>Denetim raporu örnekleri</strong><p>Kanıt inceleme, kontrol değerlendirme, risk açıklaması, bulgu yazımı ve aksiyon önerisi içeren profesyonel rapor yapısı oluşturulur.</p></div>
+          <div class="deliverable-row"><strong>Risk ve kontrol matrisi</strong><p>Bir sistem, süreç veya tedarikçi için riskleri, kontrolleri, eksikleri ve önerileri tablo halinde anlatmayı öğrenirsin.</p></div>
+          <div class="deliverable-row"><strong>Başvuru dosyası</strong><p>CV, LinkedIn açıklamaları, hedef rol anahtar kelimeleri ve mülakatta anlatılacak hikâyeler hazırlanır.</p></div>
+          <div class="deliverable-row"><strong>Sertifika çalışma planı</strong><p>CISA, CISM veya CISSP için hangi sırayla, hangi mantıkla ve hangi soru çözme disipliniyle çalışacağın belirlenir.</p></div>
+          <div class="deliverable-row"><strong>Mini hizmet teklif paketi</strong><p>Küçük şirketlere sunulabilecek temel güvenlik değerlendirmesi, denetim veya risk analizi hizmeti için teklif iskeleti hazırlanır.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <h2>Bu program kimler için uygun, kimler için uygun değil?</h2>
+        <p>Doğru beklenti çok önemli. Bu yapı disiplinli çalışan, çıktı üretmek isteyen ve kariyerine ciddi bakan kişiler için tasarlandı.</p>
+      </div>
+      <div class="comparison-grid">
+        <div class="comparison-card good">
+          <h3>Uygun olabilir</h3>
+          <ul class="check-list">
+            <li>Siber güvenlikte hangi alana yöneleceğini netleştirmek istiyorsan</li>
+            <li>Teknik bilginin yanında risk, denetim ve iş tarafını da öğrenmek istiyorsan</li>
+            <li>CISA, CISM veya CISSP gibi sertifikalara daha anlamlı hazırlanmak istiyorsan</li>
+            <li>CV, LinkedIn, mülakat ve portföy tarafında gerçek destek istiyorsan</li>
+            <li>Gerçek vakalarla düşünme becerini geliştirmek istiyorsan</li>
+          </ul>
+        </div>
+        <div class="comparison-card bad">
+          <h3>Uygun olmayabilir</h3>
+          <ul class="mini-list">
+            <li>Hiç çalışmadan hızlı sonuç bekliyorsan</li>
+            <li>Sadece video izleyip hiçbir çıktı üretmek istemiyorsan</li>
+            <li>Geri bildirim almak ve kendini geliştirmek konusunda kapalıysan</li>
+            <li>İş garantisi veya kısa yoldan başarı vaadi arıyorsan</li>
+            <li>Sadece saldırı araçları öğrenmek istiyor, risk ve iş tarafını önemsemiyorsan</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="founder-note">
+        <h2>Benim bu programdaki temel vaadim şu:</h2>
+        <p>Sana pembe tablo çizmek yerine sektörün gerçeklerini göstermek. Nerede fırsat var, nerede zaman kaybı var, hangi beceri iş görüşmesinde işe yarar, hangi sertifika hangi role hizmet eder; bunları açık açık konuşmak.</p>
+        <p>Bu programda amaç seni bir anda “uzman” ilan etmek değil. Ama doğru yöne bakan, ne çalışacağını bilen, vaka çözebilen, rapor yazabilen ve kendini profesyonelce anlatabilen bir aday haline getirmek.</p>
+        <p>İyi kariyer çoğu zaman tek bir kurstan değil; doğru yön, disiplinli çalışma, gerçek geri bildirim ve doğru çevre birleşiminden çıkar.</p>
       </div>
     </div>
   </section>
@@ -1154,6 +1625,15 @@
       <details><summary>Teknik bilgim azsa katılabilir miyim?</summary><p>Evet. Teknikte çok ileri olmak şart değil. Önce yönünü belirliyoruz, sonra seçilen sertifikasyon ve kariyer yoluna göre teknik temel, vaka ve laboratuvarlarla ilerliyoruz.</p></details>
       <details><summary>Hangi alanlara hazırlanabilirim?</summary><p>GRC, IT audit, SOC, cloud security, web security ve CISA/CISM/CISSP gibi sertifikasyon odaklı kariyer yolları için yapı oluşturulur.</p></details>
       <details><summary>Community paketi nedir?</summary><p>Tek seferlik 10.000 TL ile sektörde işinde iyi insanların bulunduğu community’ye dahil olursun. Sorularını sorabilir, deneyimlerden öğrenebilir ve yalnız ilerlemek yerine doğru çevrenin içinde kalabilirsin.</p></details>
+
+      <details><summary>Program tamamen Türkçe mi?</summary><p>Evet. Anlatım Türkçedir. Ancak sektörde kullanılan İngilizce terimler gerektiğinde açıklanır; çünkü iş ilanlarında, sertifika kaynaklarında ve şirket dokümanlarında bu kelimelerle karşılaşacaksın.</p></details>
+      <details><summary>Sadece üniversite öğrencileri için mi?</summary><p>Hayır. Üniversite öğrencileri, yeni mezunlar, teknik rolden yönetişim/risk tarafına geçmek isteyenler veya kariyerini yeniden konumlandırmak isteyen profesyoneller için uygundur.</p></details>
+      <details><summary>CISA, CISM ve CISSP arasında nasıl seçim yapacağım?</summary><p>Önce hedef rolün, geçmişin ve kariyer yönün değerlendirilir. Denetim ve kontrol tarafı için CISA, güvenlik yönetimi ve yönetişim tarafı için CISM, daha geniş güvenlik mimarisi ve yönetim bakışı için CISSP değerlendirilebilir.</p></details>
+      <details><summary>Programda birebir görüşme var mı?</summary><p>Evet. Programın ana farklarından biri birebir yönlendirme ve takip yaklaşımıdır. Amaç sadece içerik vermek değil, kişinin doğru alana odaklanmasını sağlamaktır.</p></details>
+      <details><summary>Hiç teknik geçmişim yoksa zorlanır mıyım?</summary><p>Başlangıçta zorlanman normaldir. Bu nedenle önce temel kavramlar ve yön belirleme yapılır. Ancak düzenli çalışmaya ve çıktı üretmeye istekli olman gerekir.</p></details>
+      <details><summary>Avrupa’da iş bulmak isteyenler için faydalı mı?</summary><p>Evet, özellikle IT denetim, risk, yönetişim, uyum ve siber güvenlik yönetimi gibi alanlarda Avrupa iş piyasasında kullanılan düşünme biçimi ve mülakat dili üzerinde durulur.</p></details>
+      <details><summary>Program sonunda portföyümde ne gösterebilirim?</summary><p>Örnek denetim raporları, risk ve kontrol matrisi, vaka analizleri, sertifika çalışma planı, CV/LinkedIn düzenlemeleri ve hedef role göre anlatabileceğin proje hikâyeleri oluşur.</p></details>
+      <details><summary>Bu program teknik sızma testi eğitimi mi?</summary><p>Hayır, sadece sızma testi odaklı bir program değildir. Teknik temel önemlidir ancak ana vurgu kariyer yönü, sertifikasyon, risk, denetim, vaka analizi ve profesyonel iş çıktılarıdır.</p></details>
     </div>
   </section>
 
