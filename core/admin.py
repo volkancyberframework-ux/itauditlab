@@ -3,7 +3,7 @@ from urllib.parse import quote
 from django import forms
 from django.contrib import admin, messages
 from django.contrib.auth.admin import UserAdmin
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.urls import path
 from django.utils.translation import gettext_lazy as _
 
@@ -31,7 +31,10 @@ class NewsletterLeadAdmin(admin.ModelAdmin):
 
 @admin.register(DigitalProduct)
 class DigitalProductAdmin(admin.ModelAdmin):
-    list_display = ("title", "price", "original_price", "currency", "difficulty", "rating", "reviews_count", "is_active")
+    list_display = (
+        "title", "price", "original_price", "currency",
+        "difficulty", "rating", "reviews_count", "is_active"
+    )
     list_filter = ("is_active", "currency", "difficulty")
     search_fields = ("title", "description", "uploader_name", "slug")
     prepopulated_fields = {"slug": ("title",)}
@@ -58,7 +61,10 @@ class TestQuestionAdmin(admin.ModelAdmin):
 
 
 class CourseAdminForm(forms.ModelForm):
-    upload_pdf = forms.FileField(required=False, help_text="Upload/replace course attachment")
+    upload_pdf = forms.FileField(
+        required=False,
+        help_text="Upload/replace course attachment"
+    )
 
     class Meta:
         model = Course
@@ -67,21 +73,30 @@ class CourseAdminForm(forms.ModelForm):
     def save(self, commit=True):
         instance = super().save(commit=False)
         pdf_file = self.cleaned_data.get("upload_pdf")
+
         if pdf_file:
             if instance.pk and getattr(instance, "attachment", None):
                 instance.attachment.delete(save=False)
             instance.attachment.save(pdf_file.name, pdf_file, save=False)
+
         if commit:
             instance.save()
+
         return instance
 
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     form = CourseAdminForm
-    list_display = ("id", "display_course", "course_type", "difficulty", "duration", "score")
+    list_display = (
+        "id", "display_course", "course_type",
+        "difficulty", "duration", "score"
+    )
     search_fields = ("id", "description", "turkish_name", "english_name")
-    list_filter = ("course_type", "difficulty", "dashboard_activated", "main_page_activated", "is_english", "is_turkish")
+    list_filter = (
+        "course_type", "difficulty", "dashboard_activated",
+        "main_page_activated", "is_english", "is_turkish"
+    )
 
     def display_course(self, obj):
         return obj.turkish_name or obj.english_name or str(obj)
@@ -110,7 +125,10 @@ class CourseSubsectionAdmin(admin.ModelAdmin):
 @admin.register(CourseFAQ)
 class CourseFAQAdmin(admin.ModelAdmin):
     list_display = ("id", "course", "question")
-    search_fields = ("question", "answer", "course__turkish_name", "course__english_name")
+    search_fields = (
+        "question", "answer",
+        "course__turkish_name", "course__english_name"
+    )
     list_filter = ("course",)
 
 
@@ -146,8 +164,13 @@ class QuickStudentCreateForm(forms.Form):
 
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
-    list_display = ("username", "email", "is_active", "is_staff", "is_first_login", "is_english", "is_turkish")
-    list_filter = UserAdmin.list_filter + ("is_first_login", "is_english", "is_turkish")
+    list_display = (
+        "username", "email", "is_active", "is_staff",
+        "is_first_login", "is_english", "is_turkish"
+    )
+    list_filter = UserAdmin.list_filter + (
+        "is_first_login", "is_english", "is_turkish"
+    )
     search_fields = UserAdmin.search_fields + ("email",)
     filter_horizontal = ("allowed_tests",)
     inlines = [EnrollmentInline]
@@ -155,12 +178,19 @@ class CustomUserAdmin(UserAdmin):
     change_list_template = "admin/customuser_changelist.html"
 
     fieldsets = UserAdmin.fieldsets + (
-        (_("Profile flags"), {"fields": ("is_first_login", "is_english", "is_turkish")}),
-        (_("Test access"), {"fields": ("allowed_tests",)}),
+        (_("Profile flags"), {
+            "fields": ("is_first_login", "is_english", "is_turkish")
+        }),
+        (_("Test access"), {
+            "fields": ("allowed_tests",)
+        }),
     )
 
     add_fieldsets = UserAdmin.add_fieldsets + (
-        (_("Profile flags"), {"classes": ("wide",), "fields": ("is_first_login", "is_english", "is_turkish")}),
+        (_("Profile flags"), {
+            "classes": ("wide",),
+            "fields": ("is_first_login", "is_english", "is_turkish")
+        }),
     )
 
     def get_urls(self):
@@ -204,41 +234,86 @@ class CustomUserAdmin(UserAdmin):
                     if course.course_type == Course.CourseType.TEST:
                         user.allowed_tests.add(course)
 
-                course_lines = "\n".join([f"- {course.turkish_name or course.english_name}" for course in courses])
+                course_lines = "\n".join(
+                    [
+                        f"✅ {course.turkish_name or course.english_name}"
+                        for course in courses
+                    ]
+                )
+
                 if not course_lines:
-                    course_lines = "- Henüz içerik tanımlanmadı."
+                    course_lines = "✅ İçerikler kısa süre içinde hesabınıza tanımlanacaktır."
 
                 meeting_text = ""
+
                 if has_meeting:
                     meeting_text = f"""
 
-Volkan ile konuştuğunuz gün ve saatte aşağıdaki linkten görüşmeye katılınız.
+📅 Birebir Görüşme Bilgisi
 
-Link:
+Volkan ile planladığınız gün ve saatte aşağıdaki link üzerinden görüşmeye katılabilirsiniz.
+
+🔗 Görüşme Linki:
 {meeting_link}
+
+Görüşmeye katılmadan önce mümkünse platforma giriş yapıp size tanımlanan içeriklere göz atmanızı öneririm.
 """
 
-                subject = "Siberkobi Kampına Hoş Geldiniz"
+                subject = "🎓 Siberkobi Siber Güvenlik Kampına Hoş Geldiniz"
 
                 body = f"""Merhaba,
 
-Volkan Güler ile Siberkobi üzerinden Siber Güvenlik Kampına hoş geldiniz.
+🎓 Volkan Güler ile Siberkobi üzerinden Siber Güvenlik Kampına hoş geldiniz.
 
-Kullanıcı adı: e-posta adresiniz.
-Parola ilk giriş: {DEFAULT_PASSWORD}
+Bu süreçte size sadece video izleteceğimiz bir sistem değil; gerçek iş hayatına daha yakın, uygulamalı, soru odaklı ve kariyer gelişiminizi destekleyen bir öğrenme deneyimi sunmayı hedefliyoruz.
 
-Size şimdilik tanımlanan içerikler:
+Aşağıda sizin için oluşturulan hesap bilgilerini bulabilirsiniz.
+
+━━━━━━━━━━━━━━━━━━━━
+🔐 Giriş Bilgileriniz
+━━━━━━━━━━━━━━━━━━━━
+
+🌐 Platform: https://siberkobi.co
+👤 Kullanıcı adı: {email}
+🔑 İlk giriş parolası: {DEFAULT_PASSWORD}
+
+İlk girişinizden sonra güvenliğiniz için parolanızı değiştirmenizi öneririm.
+
+━━━━━━━━━━━━━━━━━━━━
+📚 Size Tanımlanan İçerikler
+━━━━━━━━━━━━━━━━━━━━
+
 {course_lines}
 
-Lütfen giriniz, videoyu izleyip, soruları çözüp eklerini indiriniz.
+Bu içeriklerde ilerlerken lütfen:
+
+✅ Videoları dikkatlice izleyin
+✅ Soruları çözün
+✅ Ekleri ve dokümanları indirin
+✅ Anlamadığınız yerleri not alın
+✅ Takıldığınız konularda iletişime geçmekten çekinmeyin
+
+Bu kampın amacı sadece teorik bilgi vermek değil; aynı zamanda siber güvenlik, IT audit, GRC ve kariyer yolculuğunuzda daha net, daha güçlü ve daha özgüvenli ilerlemenize destek olmaktır.
 {meeting_text}
+━━━━━━━━━━━━━━━━━━━━
+💬 İletişim ve Destek
+━━━━━━━━━━━━━━━━━━━━
+
 Her türlü ihtiyacınızda birebir Volkan ile iletişime geçebilirsiniz. Lütfen bundan çekinmeyin.
+
+Takıldığınız bir konu, anlamadığınız bir bölüm, kariyerle ilgili bir soru veya platformla ilgili teknik bir problem olursa bana ulaşabilirsiniz.
+
+Başarılar dilerim. Bu sürecin sizin için gerçekten faydalı ve dönüştürücü olmasını umuyorum. 🚀
 
 Volkan Güler
 Siberkobi
 """
 
-                mailto_url = f"mailto:{quote(email)}?subject={quote(subject)}&body={quote(body)}"
+                mailto_url = (
+                    f"mailto:{quote(email)}"
+                    f"?subject={quote(subject)}"
+                    f"&body={quote(body)}"
+                )
 
                 messages.success(request, f"{email} için hesap hazırlandı.")
 
