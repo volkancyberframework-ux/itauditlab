@@ -1,0 +1,23 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+  <h1>Öğrenci hazırlandı</h1>
+
+  <p><strong>E-posta:</strong> {{ email }}</p>
+
+  <p>
+    <a class="button default" href="{{ mailto_url }}">
+      Varsayılan mail uygulamasında aç
+    </a>
+  </p>
+
+  <h2>Email içeriği</h2>
+
+  <textarea style="width:100%; height:420px;">{{ body }}</textarea>
+
+  <br><br>
+
+  <a class="button" href="../quick-create-student/">
+    Yeni öğrenci oluştur
+  </a>
+{% endblock %}

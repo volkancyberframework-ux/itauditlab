@@ -1,6 +1,10 @@
-from django.contrib import admin
+from urllib.parse import quote
+
 from django import forms
+from django.contrib import admin, messages
 from django.contrib.auth.admin import UserAdmin
+from django.shortcuts import render, redirect
+from django.urls import path
 from django.utils.translation import gettext_lazy as _
 
 from .models import (
@@ -14,19 +18,16 @@ from .models import (
     Enrollment,
     DigitalProduct,
     PurchaseIntent,
+    NewsletterLead,
 )
 
-
-from django.contrib import admin
-from .models import NewsletterLead
-
-from django.contrib import admin
-from .models import NewsletterLead
+DEFAULT_PASSWORD = "Siberkobi1234"
 
 
 @admin.register(NewsletterLead)
 class NewsletterLeadAdmin(admin.ModelAdmin):
     pass
+
 
 @admin.register(DigitalProduct)
 class DigitalProductAdmin(admin.ModelAdmin):
@@ -34,7 +35,6 @@ class DigitalProductAdmin(admin.ModelAdmin):
     list_filter = ("is_active", "currency", "difficulty")
     search_fields = ("title", "description", "uploader_name", "slug")
     prepopulated_fields = {"slug": ("title",)}
-
 
 
 @admin.register(PurchaseIntent)
@@ -48,6 +48,7 @@ class TestOptionInline(admin.TabularInline):
     model = TestOption
     extra = 2
 
+
 @admin.register(TestQuestion)
 class TestQuestionAdmin(admin.ModelAdmin):
     list_display = ("id", "course", "question_type", "is_active", "text")
@@ -55,11 +56,9 @@ class TestQuestionAdmin(admin.ModelAdmin):
     search_fields = ("text",)
     inlines = [TestOptionInline]
 
-# -----------------------------
-# Course upload form (PDF helper)
-# -----------------------------
+
 class CourseAdminForm(forms.ModelForm):
-    upload_pdf = forms.FileField(required=False, help_text="Upload/replace course attachment (PDF or any file)")
+    upload_pdf = forms.FileField(required=False, help_text="Upload/replace course attachment")
 
     class Meta:
         model = Course
@@ -76,9 +75,7 @@ class CourseAdminForm(forms.ModelForm):
             instance.save()
         return instance
 
-# -----------------------------
-# Course admin
-# -----------------------------
+
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     form = CourseAdminForm
@@ -87,12 +84,11 @@ class CourseAdmin(admin.ModelAdmin):
     list_filter = ("course_type", "difficulty", "dashboard_activated", "main_page_activated", "is_english", "is_turkish")
 
     def display_course(self, obj):
-        return getattr(obj, "turkish_name", None) or getattr(obj, "english_name", None) or str(obj)
+        return obj.turkish_name or obj.english_name or str(obj)
+
     display_course.short_description = "Course"
 
-# -----------------------------
-# Sections admins
-# -----------------------------
+
 @admin.register(CourseSection)
 class CourseSectionAdmin(admin.ModelAdmin):
     list_display = ("id", "course", "big_title", "order")
@@ -100,6 +96,7 @@ class CourseSectionAdmin(admin.ModelAdmin):
     ordering = ("order", "id")
     search_fields = ("big_title",)
     list_filter = ("course",)
+
 
 @admin.register(CourseSubsection)
 class CourseSubsectionAdmin(admin.ModelAdmin):
@@ -109,15 +106,14 @@ class CourseSubsectionAdmin(admin.ModelAdmin):
     search_fields = ("small_title",)
     list_filter = ("section__course", "section")
 
+
 @admin.register(CourseFAQ)
 class CourseFAQAdmin(admin.ModelAdmin):
     list_display = ("id", "course", "question")
     search_fields = ("question", "answer", "course__turkish_name", "course__english_name")
     list_filter = ("course",)
 
-# -----------------------------
-# NEW: Enrollment inline (per user)
-# -----------------------------
+
 class EnrollmentInline(admin.TabularInline):
     model = Enrollment
     extra = 0
@@ -125,25 +121,140 @@ class EnrollmentInline(admin.TabularInline):
     verbose_name = "Enrollment"
     verbose_name_plural = "Enrollments"
 
-# -----------------------------
-# CustomUser admin
-# -----------------------------
+
+class QuickStudentCreateForm(forms.Form):
+    email = forms.EmailField(label="Öğrenci e-posta adresi")
+
+    courses = forms.ModelMultipleChoiceField(
+        queryset=Course.objects.all().order_by("id"),
+        required=False,
+        widget=forms.CheckboxSelectMultiple,
+        label="Tanımlanacak içerikler",
+    )
+
+    has_meeting = forms.BooleanField(
+        required=False,
+        label="Meeting var mı?",
+    )
+
+    meeting_link = forms.URLField(
+        required=False,
+        label="Meeting linki",
+        initial="https://meet.google.com/vza-zmpe-fjf",
+    )
+
+
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
     list_display = ("username", "email", "is_active", "is_staff", "is_first_login", "is_english", "is_turkish")
     list_filter = UserAdmin.list_filter + ("is_first_login", "is_english", "is_turkish")
     search_fields = UserAdmin.search_fields + ("email",)
-
-    # Nice dual-select UI for test access
     filter_horizontal = ("allowed_tests",)
+    inlines = [EnrollmentInline]
+
+    change_list_template = "admin/customuser_changelist.html"
 
     fieldsets = UserAdmin.fieldsets + (
         (_("Profile flags"), {"fields": ("is_first_login", "is_english", "is_turkish")}),
         (_("Test access"), {"fields": ("allowed_tests",)}),
     )
+
     add_fieldsets = UserAdmin.add_fieldsets + (
         (_("Profile flags"), {"classes": ("wide",), "fields": ("is_first_login", "is_english", "is_turkish")}),
     )
 
-    # <-- ADDED: show/edit enrollments on the user page
-    inlines = [EnrollmentInline]
+    def get_urls(self):
+        urls = super().get_urls()
+        custom_urls = [
+            path(
+                "quick-create-student/",
+                self.admin_site.admin_view(self.quick_create_student),
+                name="quick_create_student",
+            ),
+        ]
+        return custom_urls + urls
+
+    def quick_create_student(self, request):
+        if request.method == "POST":
+            form = QuickStudentCreateForm(request.POST)
+
+            if form.is_valid():
+                email = form.cleaned_data["email"].strip().lower()
+                courses = form.cleaned_data["courses"]
+                has_meeting = form.cleaned_data["has_meeting"]
+                meeting_link = form.cleaned_data["meeting_link"]
+
+                user, created = CustomUser.objects.get_or_create(
+                    email=email,
+                    defaults={
+                        "username": email,
+                        "is_first_login": True,
+                        "is_turkish": True,
+                        "is_english": False,
+                    },
+                )
+
+                if created:
+                    user.set_password(DEFAULT_PASSWORD)
+                    user.save()
+
+                for course in courses:
+                    Enrollment.objects.get_or_create(user=user, course=course)
+
+                    if course.course_type == Course.CourseType.TEST:
+                        user.allowed_tests.add(course)
+
+                course_lines = "\n".join([f"- {course.turkish_name or course.english_name}" for course in courses])
+                if not course_lines:
+                    course_lines = "- Henüz içerik tanımlanmadı."
+
+                meeting_text = ""
+                if has_meeting:
+                    meeting_text = f"""
+
+Volkan ile konuştuğunuz gün ve saatte aşağıdaki linkten görüşmeye katılınız.
+
+Link:
+{meeting_link}
+"""
+
+                subject = "Siberkobi Kampına Hoş Geldiniz"
+
+                body = f"""Merhaba,
+
+Volkan Güler ile Siberkobi üzerinden Siber Güvenlik Kampına hoş geldiniz.
+
+Kullanıcı adı: e-posta adresiniz.
+Parola ilk giriş: {DEFAULT_PASSWORD}
+
+Size şimdilik tanımlanan içerikler:
+{course_lines}
+
+Lütfen giriniz, videoyu izleyip, soruları çözüp eklerini indiriniz.
+{meeting_text}
+Her türlü ihtiyacınızda birebir Volkan ile iletişime geçebilirsiniz. Lütfen bundan çekinmeyin.
+
+Volkan Güler
+Siberkobi
+"""
+
+                mailto_url = f"mailto:{quote(email)}?subject={quote(subject)}&body={quote(body)}"
+
+                messages.success(request, f"{email} için hesap hazırlandı.")
+
+                return render(
+                    request,
+                    "admin/quick_create_student_result.html",
+                    {
+                        "email": email,
+                        "subject": subject,
+                        "body": body,
+                        "mailto_url": mailto_url,
+                        "created": created,
+                    },
+                )
+
+        else:
+            form = QuickStudentCreateForm()
+
+        return render(request, "admin/quick_create_student.html", {"form": form})
