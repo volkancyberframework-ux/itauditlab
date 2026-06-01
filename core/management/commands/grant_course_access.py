@@ -1,49 +1,37 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
-
-from core.models import Course, Enrollment
-
-User = get_user_model()
+from core.models import Course
 
 
 class Command(BaseCommand):
-    help = "Grant course access to a user by email and course id"
+    help = "Kullanıcıya test course access verir."
 
     def add_arguments(self, parser):
-        parser.add_argument("--email", required=True, type=str)
-        parser.add_argument("--course-id", required=True, type=int)
+        parser.add_argument("--email", required=True)
+        parser.add_argument("--course-id", type=int, required=True)
 
     def handle(self, *args, **options):
         email = options["email"].strip().lower()
         course_id = options["course_id"]
 
+        User = get_user_model()
+
         try:
-            user = User.objects.get(email=email)
+            user = User.objects.get(email__iexact=email)
         except User.DoesNotExist:
-            raise CommandError(f"User not found: {email}")
+            self.stderr.write(self.style.ERROR(f"Kullanıcı bulunamadı: {email}"))
+            return
 
         try:
             course = Course.objects.get(id=course_id)
         except Course.DoesNotExist:
-            raise CommandError(f"Course not found: {course_id}")
+            self.stderr.write(self.style.ERROR(f"Course bulunamadı: {course_id}"))
+            return
 
-        enrollment, created = Enrollment.objects.get_or_create(
-            user=user,
-            course=course
+        user.allowed_tests.add(course)
+
+        self.stdout.write(
+            self.style.SUCCESS(
+                f"Access verildi: {email} -> {course.turkish_name} (ID: {course.id})"
+            )
         )
-
-        if course.course_type == Course.CourseType.TEST:
-            user.allowed_tests.add(course)
-
-        if created:
-            self.stdout.write(
-                self.style.SUCCESS(
-                    f"Access granted: {email} -> {course.turkish_name or course.english_name}"
-                )
-            )
-        else:
-            self.stdout.write(
-                self.style.WARNING(
-                    f"Access already exists: {email} -> {course.turkish_name or course.english_name}"
-                )
-            )
