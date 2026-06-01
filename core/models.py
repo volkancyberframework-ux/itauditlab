@@ -277,3 +277,43 @@ class CustomUser(AbstractUser):
             return self.allowed_tests.filter(pk=course.pk).exists()
         # Video’ları da onaylı yapmak istiyorsan burayı False yap ve ayrı whitelist alanı ekle.
         return True  # Video’lar serbest (mevcut akışla uyumlu)
+
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+import requests
+
+
+@receiver(post_save, sender=Enrollment)
+def enrollment_telegram_notification(sender, instance, created, **kwargs):
+    if not created:
+        return
+
+    bot_token = getattr(settings, "TELEGRAM_BOT_TOKEN", "")
+    chat_id = getattr(settings, "TELEGRAM_CHAT_ID", "")
+
+    if not bot_token or not chat_id:
+        return
+
+    try:
+        requests.post(
+            f"https://api.telegram.org/bot{bot_token}/sendMessage",
+            data={
+                "chat_id": chat_id,
+                "text": f"""
+🎓 Yeni Enrollment
+
+👤 Kullanıcı:
+{instance.user.email}
+
+📚 Kurs:
+{instance.course.turkish_name}
+
+🆔 Course ID:
+{instance.course.id}
+"""
+            },
+            timeout=5,
+        )
+    except Exception as e:
+        print("Telegram enrollment notification error:", e)
