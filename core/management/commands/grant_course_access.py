@@ -1,51 +1,49 @@
-import os
-import django
-import argparse
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "itaudit.settings")
-django.setup()
-
+from django.core.management.base import BaseCommand, CommandError
 from django.contrib.auth import get_user_model
+
 from core.models import Course, Enrollment
 
-
-def main():
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument("--email", required=True)
-    parser.add_argument("--course-id", required=True, type=int)
-
-    args = parser.parse_args()
-
-    User = get_user_model()
-
-    try:
-        user = User.objects.get(email__iexact=args.email)
-    except User.DoesNotExist:
-        print(f"User not found: {args.email}")
-        return
-
-    try:
-        course = Course.objects.get(id=args.course_id)
-    except Course.DoesNotExist:
-        print(f"Course not found: {args.course_id}")
-        return
-
-    enrollment, created = Enrollment.objects.get_or_create(
-        user=user,
-        course=course,
-        defaults={"is_active": True}
-    )
-
-    if not created:
-        enrollment.is_active = True
-        enrollment.save()
-
-    print(
-        f"SUCCESS: {user.email} granted access to "
-        f"{course.name if hasattr(course,'name') else course.title}"
-    )
+User = get_user_model()
 
 
-if __name__ == "__main__":
-    main()
+class Command(BaseCommand):
+    help = "Grant course access to a user by email and course id"
+
+    def add_arguments(self, parser):
+        parser.add_argument("--email", required=True, type=str)
+        parser.add_argument("--course-id", required=True, type=int)
+
+    def handle(self, *args, **options):
+        email = options["email"].strip().lower()
+        course_id = options["course_id"]
+
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            raise CommandError(f"User not found: {email}")
+
+        try:
+            course = Course.objects.get(id=course_id)
+        except Course.DoesNotExist:
+            raise CommandError(f"Course not found: {course_id}")
+
+        enrollment, created = Enrollment.objects.get_or_create(
+            user=user,
+            course=course
+        )
+
+        if course.course_type == Course.CourseType.TEST:
+            user.allowed_tests.add(course)
+
+        if created:
+            self.stdout.write(
+                self.style.SUCCESS(
+                    f"Access granted: {email} -> {course.turkish_name or course.english_name}"
+                )
+            )
+        else:
+            self.stdout.write(
+                self.style.WARNING(
+                    f"Access already exists: {email} -> {course.turkish_name or course.english_name}"
+                )
+            )
