@@ -1390,72 +1390,232 @@
     </div>
   </section>
 
+
+  <style>
+    .pricing-grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      align-items:stretch;
+      margin-bottom:24px;
+    }
+
+    .pricing-grid-2 > .pricing{
+      display:flex;
+      flex-direction:column;
+      height:100%;
+    }
+
+    .pricing-card-body{
+      display:flex;
+      flex-direction:column;
+      flex:1;
+    }
+
+    .pricing-card-spacer{
+      flex:1;
+    }
+
+    .support-box,
+    .guarantee-box{
+      margin:24px 0;
+      padding:18px;
+      border-radius:16px;
+      min-height:132px;
+    }
+
+    .support-box{
+      border:1px solid rgba(34,197,94,.22);
+      background:rgba(34,197,94,.045);
+    }
+
+    .guarantee-box{
+      border:1px solid rgba(34,197,94,.35);
+      background:rgba(34,197,94,.08);
+    }
+
+    .featured{
+      border:2px solid #facc15;
+      position:relative;
+    }
+
+    .featured::before{
+      content:"EN SEÇİCİ PROGRAM";
+      position:absolute;
+      top:-14px;
+      right:20px;
+      background:#facc15;
+      color:#000;
+      padding:5px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .community-wide{
+      margin-top:24px;
+    }
+
+    .community-layout{
+      display:grid;
+      grid-template-columns:1.4fr 1fr;
+      gap:40px;
+      align-items:center;
+    }
+
+    @media(max-width:900px){
+      .pricing-grid-2,
+      .community-layout{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+
   <section>
-    <div class="container split">
+    <div class="container">
 
-      <!-- COMMUNITY CARD -->
-      <div class="pricing">
-        <div class="eyebrow">🔥 Özel Community</div>
+      <div class="pricing-grid-2">
 
-        <h2 style="font-size: clamp(34px, 4vw, 54px); margin: 20px 0 8px;">
-          Community Erişimi
-        </h2>
+        <!-- CYBER CAREER ACADEMY -->
+        <div class="pricing">
+          <div class="eyebrow">🎓 Cyber Career Academy</div>
 
-        <p style="color: var(--muted); margin: 0;">
-          Sektörde işinde iyi insanların bulunduğu özel community’ye dahil ol.
-          İstediğin kadar soru sor, deneyimlerden öğren ve doğru insanlarla aynı ortamda kal.
-        </p>
+          <h2 style="font-size: clamp(34px, 4vw, 54px); margin: 20px 0 8px;">
+            Program Paketi
+          </h2>
 
-        <div class="price-tag">
-          <strong>10.000 TL</strong>
-          <span>/ ömür boyu erişim</span>
+          <p style="color: var(--muted); margin: 0;">
+            Sertifikasyon, laboratuvarlar, gerçek dünya vakaları ve birebir mentorluk ile kariyerini hızlandır.
+          </p>
+
+          <div class="price-tag">
+            <strong>40.000 TL</strong>
+            <span>/ tek seferlik paket</span>
+          </div>
+
+          <div class="support-box">
+            <strong style="font-size:18px;">
+              🎓 Öğrenci & Yeni Mezun Desteği
+            </strong>
+
+            <p style="margin:10px 0 0; color: var(--muted);">
+              Öğrenci ve yeni mezunlara çok ciddi destek, indirim ve ödeme kolaylığı sağlanır.
+            </p>
+          </div>
+
+          <div class="pricing-card-body">
+            <ul class="check-list">
+              <li>🧭 Kişisel kariyer yol haritası</li>
+              <li>🎯 CISA / CISM / CISSP uzmanlaşma rotaları</li>
+              <li>🧪 Gerçek dünya laboratuvarları</li>
+              <li>📚 Vaka analizleri ve workshoplar</li>
+              <li>🤝 Düzenli birebir görüşmeler</li>
+              <li>🚀 CV, LinkedIn ve mülakat desteği</li>
+            </ul>
+
+            <div class="pricing-card-spacer"></div>
+
+            <a class="btn btn-primary"
+               style="width:100%; margin-top:24px;"
+               href="#apply">
+              Programa Başvur
+            </a>
+          </div>
         </div>
 
-        <ul class="check-list">
-          <li>Ömür boyu community erişimi</li>
-          <li>Sektörde çalışan insanlardan gerçek deneyim öğren</li>
-          <li>İstediğin kadar soru sor, yalnız ilerleme</li>
-          <li>Gerçek kariyer deneyimlerine eriş</li>
-          <li>Doğru çevrenin içinde kal</li>
-        </ul>
+        <!-- JOB GUARANTEE BOOTCAMP -->
+        <div class="pricing featured">
+          <div class="eyebrow">🔥 Kabul Oranı %10'dan Düşük</div>
 
-        <a class="btn btn-secondary"
-           style="width:100%; margin-top:24px;"
-           href="#apply">
-           Community’ye Katıl
-        </a>
+          <h2 style="font-size: clamp(34px, 4vw, 54px); margin: 20px 0 8px;">
+            İş Garantili Bootcamp
+          </h2>
+
+          <p style="color: var(--muted); margin: 0;">
+            Herkese açık değildir. Öğrencilerimi birebir değerlendirip uygun gördüklerimi bu sınıfa kendim geçiriyorum.
+          </p>
+
+          <div class="price-tag">
+            <strong>Başvuru ile</strong>
+            <span>/ sınırlı kontenjan</span>
+          </div>
+
+          <div class="guarantee-box">
+            <strong style="font-size:18px;">
+              💰 12 Ay İş Garantisi
+            </strong>
+
+            <p style="margin:10px 0 0; color: var(--muted);">
+              Belirlenen yol haritasını takip etmenize rağmen 12 ay içerisinde iş bulamazsanız program ücretinizin %100'ü iade edilir.
+            </p>
+          </div>
+
+          <div class="pricing-card-body">
+            <ul class="check-list">
+              <li>🎯 Kişiye özel kariyer planı</li>
+              <li>📚 Sertifikasyon hazırlıkları</li>
+              <li>🧪 Premium laboratuvarlar</li>
+              <li>🤝 Sürekli birebir mentorluk</li>
+              <li>📄 CV ve LinkedIn optimizasyonu</li>
+              <li>🎤 Teknik ve İK mülakat hazırlıkları</li>
+              <li>🌍 Türkiye ve yurtdışı iş başvuru desteği</li>
+              <li>🚀 İşe yerleşene kadar takip</li>
+            </ul>
+
+            <div class="pricing-card-spacer"></div>
+
+            <a class="btn btn-primary"
+               style="width:100%; margin-top:24px;"
+               href="#apply">
+              Ön Başvuru Yap
+            </a>
+          </div>
+        </div>
+
       </div>
 
-      <!-- PROGRAM CARD -->
-      <div class="pricing" id="pricing">
-        <div class="eyebrow">🔥 Cyber Career Academy</div>
+      <!-- SKOOL COMMUNITY -->
+      <div class="pricing community-wide">
+        <div class="community-layout">
 
-        <h2 style="font-size: clamp(34px, 4vw, 54px); margin: 20px 0 8px;">
-          Program Paketi
-        </h2>
+          <div>
+            <div class="eyebrow">🌍 Global Community</div>
 
-        <p style="color: var(--muted); margin: 0;">
-          Yön belirleme, sertifikasyon rotası, vakalar,
-          laboratuvarlar ve birebir takip içeren kariyer geliştirme paketi.
-        </p>
+            <h2 style="font-size: clamp(34px, 4vw, 54px); margin: 20px 0 8px;">
+              Skool Topluluğu
+            </h2>
 
-        <div class="price-tag">
-          <strong>60.000 TL</strong>
-          <span>/ paket</span>
+            <p style="color: var(--muted); margin: 0;">
+              Siber güvenlik, kariyer, audit, risk ve global çalışma hedefleri olan insanlarla aynı ortamda ol.
+              Her gün öğren, network kur, soru sor ve yalnız ilerleme.
+            </p>
+
+            <div class="price-tag">
+              <strong>99 USD</strong>
+              <span>/ tek ödeme · ömür boyu erişim</span>
+            </div>
+          </div>
+
+          <div>
+            <ul class="check-list">
+              <li>☕ Her gün 21:30 canlı sınıf: Gece Kahvesi</li>
+              <li>📌 Haftalık gerçek dünya vakaları</li>
+              <li>🌍 Dünyanın her yerinden profesyonellerle tanışma şansı</li>
+              <li>💬 İstediğin kadar soru sorabileceğin özel community</li>
+              <li>🎯 Siber güvenlik, audit, risk ve kariyer odaklı içerikler</li>
+              <li>♾️ Tek ödeme, ömür boyu erişim</li>
+            </ul>
+
+            <a class="btn btn-secondary"
+               style="width:100%; margin-top:24px;"
+               href="https://www.skool.com/volkan-guler-9286/about"
+               target="_blank"
+               rel="noopener noreferrer">
+              Skool Topluluğuna Katıl
+            </a>
+          </div>
+
         </div>
-
-        <ul class="check-list">
-          <li>Yön belirleme ve kişisel kariyer rotası</li>
-          <li>CISA / CISM / CISSP yollarından birine odaklanma</li>
-          <li>Laboratuvarlar ve bol bol gerçek dünya vakası</li>
-          <li>Bol bol birebir görüşme ve sürekli takip</li>
-        </ul>
-
-        <a class="btn btn-primary"
-           style="width:100%; margin-top:24px;"
-           href="#apply">
-           Programa Başvur
-        </a>
       </div>
 
     </div>
