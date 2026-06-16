@@ -31,7 +31,7 @@ urlpatterns = [
     path("for-individuals/", views.for_individuals, name="for_individuals"),
     path("for-businesses/", views.for_businesses, name="for_businesses"),
     path("about/", views.about_view, name="about"),
-
+    path("deneme/", views.deneme, name="deneme"),
     path("store/", views_store.product_list_view, name="product_list"),
     path("store/<slug:slug>/detail.json", views_store.product_detail_json, name="product_detail_json"),
     path("store/<slug:slug>/intent/", views_store.create_purchase_intent, name="create_purchase_intent"),

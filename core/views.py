@@ -37,6 +37,9 @@ from .models import (
 
 from django.shortcuts import render
 
+def deneme(request):
+    return render(request, "index_b2b_siberkobi.html")
+
 def akademi(request):
     return render(request, "akademi.html")
 
