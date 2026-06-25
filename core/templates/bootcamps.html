@@ -160,8 +160,6 @@ html[data-bs-theme="dark"] .btn-close {
     <div class="container">
       <div class="row g-4">
 
-        {% load humanize %}
-
         {% for b in bootcamps %}
         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
           <div class="bootcamp-card h-100 d-flex flex-column position-relative">
@@ -195,7 +193,7 @@ html[data-bs-theme="dark"] .btn-close {
               <div class="bootcamp-value-box mb-4">
                 <div class="small">Program Ücreti</div>
                 <div class="price-box">
-                  {{ b.price|intcomma }} {{ b.currency }}
+                  {{ b.price_display }} {{ b.currency }}
                 </div>
               </div>
 
@@ -262,7 +260,7 @@ html[data-bs-theme="dark"] .btn-close {
                     <div class="pay-summary">
                       <div class="small opacity-75 mb-1">Ödenecek Tutar</div>
                       <div class="display-6 fw-bold mb-3">
-                        {{ b.price|intcomma }} {{ b.currency }}
+                        {{ b.price_display }} {{ b.currency }}
                       </div>
 
                       <div class="d-flex justify-content-between mb-2">
