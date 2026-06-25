@@ -160,58 +160,62 @@ html[data-bs-theme="dark"] .btn-close {
     <div class="container">
       <div class="row g-4">
 
+        {% load humanize %}
+
         {% for b in bootcamps %}
         <div class="col-xl-4 col-lg-4 col-md-6 col-12">
-          <div class="bootcamp-card h-100 d-flex flex-column">
+          <div class="bootcamp-card h-100 d-flex flex-column position-relative">
+
+            <div class="bootcamp-top-strip"></div>
 
             {% if b.image %}
               <img src="{{ b.image.url }}" alt="{{ b.title }}" class="bootcamp-img">
+            {% else %}
+              <div class="bootcamp-img bootcamp-img-placeholder">
+                <span>{{ b.title|slice:":2" }}</span>
+              </div>
             {% endif %}
 
             <div class="card-body p-4 d-flex flex-column">
-              <div class="mb-3">
-                <span class="bootcamp-badge">Bootcamp</span>
+
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="bootcamp-badge">Canlı Bootcamp</span>
+                <span class="bootcamp-mini-badge">3 Ay</span>
               </div>
 
               <h3 class="bootcamp-title mb-3">{{ b.title }}</h3>
 
+              <div class="bootcamp-highlights mb-4">
+                <div>🧪 Lab ortamı</div>
+                <div>📚 Soru çözümü</div>
+                <div>🎯 Gerçek vaka</div>
+                <div>👨‍🏫 Birebir mentorluk</div>
+              </div>
 
-              <div class="mb-4">
-                <span class="feature-pill">⏱ {{ b.duration }}</span>
-                <span class="feature-pill">📊 {{ b.level }}</span>
-                <span class="feature-pill">👤 Birebir destek</span>
-                <span class="feature-pill">🧪 Lab ortamı</span>
+              <div class="bootcamp-value-box mb-4">
+                <div class="small">Program Ücreti</div>
+                <div class="price-box">
+                  {{ b.price|intcomma }} {{ b.currency }}
+                </div>
               </div>
 
               <div class="mt-auto">
-                <div class="mb-3">
-                  <div class="price-label small">Program Ücreti</div>
-                  <div class="price-box">{{ b.price }} {{ b.currency }}</div>
-                </div>
-
                 <button
                   type="button"
-                  class="btn btn-primary w-100 py-2 fw-bold"
+                  class="btn btn-primary w-100 py-3 fw-bold bootcamp-main-btn"
                   data-bs-toggle="modal"
                   data-bs-target="#bootcampModal{{ b.id }}">
-                  Detayları Gör ve Öde
+                  Detayları İncele ve Katıl
                 </button>
               </div>
             </div>
 
             <div class="bootcamp-footer p-4">
-              <div class="row align-items-center g-0">
-                <div class="col-auto">
-                  <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold"
-                       style="width:36px;height:36px;">
-                    VG
-                  </div>
-                </div>
-                <div class="col ms-2">
-                  <span class="fw-semibold">Volkan Güler</span>
-                </div>
-                <div class="col-auto">
-                  <span class="price-label small">Mentor</span>
+              <div class="d-flex align-items-center">
+                <div class="mentor-avatar">VG</div>
+                <div class="ms-3">
+                  <div class="fw-bold">Volkan Güler</div>
+                  <div class="small price-label">Mentor • Birebir destek</div>
                 </div>
               </div>
             </div>
@@ -225,7 +229,7 @@ html[data-bs-theme="dark"] .btn-close {
 
               <div class="modal-header px-4 pt-4">
                 <div>
-                  <span class="bootcamp-badge mb-2">Bootcamp</span>
+                  <span class="bootcamp-badge mb-2">Premium Bootcamp</span>
                   <h3 class="modal-title fw-bold mb-0">{{ b.title }}</h3>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
@@ -234,7 +238,7 @@ html[data-bs-theme="dark"] .btn-close {
               <div class="modal-body px-4">
                 <div class="row g-4">
                   <div class="col-lg-7">
-                    <div class="bootcamp-description mb-3">
+                    <div class="bootcamp-description mb-4">
                       {{ b.description|linebreaksbr }}
                     </div>
 
@@ -244,20 +248,22 @@ html[data-bs-theme="dark"] .btn-close {
                       <span class="feature-pill">✓ Birebir çalışma</span>
                       <span class="feature-pill">✓ Gerçek vaka çalışmaları</span>
                       <span class="feature-pill">✓ Laboratuvar ortamı</span>
-                      <span class="feature-pill">✓ CISA soru çözümü</span>
+                      <span class="feature-pill">✓ Soru çözümü</span>
                       <span class="feature-pill">✓ Deneme sınavları</span>
                       <span class="feature-pill">✓ CV ve mülakat desteği</span>
                     </div>
 
                     <p class="mb-0 fw-semibold" style="color:var(--bc-title);">
-                      Sadece sınava değil, işe hazırlan.
+                      Sadece eğitim değil, kariyer hazırlığı.
                     </p>
                   </div>
 
                   <div class="col-lg-5">
                     <div class="pay-summary">
                       <div class="small opacity-75 mb-1">Ödenecek Tutar</div>
-                      <div class="display-6 fw-bold mb-3">{{ b.price }} {{ b.currency }}</div>
+                      <div class="display-6 fw-bold mb-3">
+                        {{ b.price|intcomma }} {{ b.currency }}
+                      </div>
 
                       <div class="d-flex justify-content-between mb-2">
                         <span>Süre</span>
@@ -289,6 +295,7 @@ html[data-bs-theme="dark"] .btn-close {
             </div>
           </div>
         </div>
+
         {% empty %}
         <div class="col-12">
           <div class="bootcamp-card p-5 text-center">
