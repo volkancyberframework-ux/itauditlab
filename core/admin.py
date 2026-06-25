@@ -28,6 +28,40 @@ from django.contrib import admin
 from .models import Bootcamp
 
 
+@admin.register(PageVisit)
+class PageVisitAdmin(admin.ModelAdmin):
+    list_display = (
+        "created_at",
+        "user",
+        "ip_address",
+        "path",
+    )
+
+    search_fields = (
+        "path",
+        "ip_address",
+        "user__email",
+        "user__username",
+    )
+
+    list_filter = (
+        "path",
+        "created_at",
+    )
+
+    readonly_fields = (
+        "created_at",
+        "user",
+        "ip_address",
+        "path",
+    )
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
 @admin.register(Bootcamp)
 class BootcampAdmin(admin.ModelAdmin):
     list_display = ("title", "price", "currency", "duration", "level", "is_active", "order", "created_at")
