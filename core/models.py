@@ -10,6 +10,12 @@ from decimal import Decimal
 from django.db import models
 from django.utils.text import slugify
 
+class PageVisit(models.Model):
+    path = models.CharField(max_length=255)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
+    created_at = models.DateTimeField(auto_now_add=True)
+
 class Bootcamp(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=220, unique=True, blank=True)

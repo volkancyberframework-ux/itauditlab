@@ -37,48 +37,19 @@ from .models import (
 
 from django.shortcuts import render
 
+from .models import Bootcamp, PageVisit
+
 def bootcamps_view(request):
-    bootcamps = [
-        {
-            "title": "SOC Analyst Bootcamp",
-            "description": "SIEM, log analizi, incident response ve gerçek vaka çalışmalarıyla SOC kariyerine giriş programı.",
-            "duration": "8 Saat",
-            "level": "Başlangıç - Orta",
-            "price": "10.000 TL",
-            "image": "assets/images/course/course-javascript.jpg",
-            "link": "https://wa.me/905XXXXXXXXX?text=SOC%20Analyst%20Bootcamp%20hakkında%20bilgi%20almak%20istiyorum"
-        },
-        {
-            "title": "CISA Bootcamp",
-            "description": "CISA sınavına hazırlık, audit mantığı, domain bazlı çalışma ve soru çözüm odaklı program.",
-            "duration": "Canlı Eğitim",
-            "level": "Orta",
-            "price": "10.000 TL",
-            "image": "assets/images/course/course-javascript.jpg",
-            "link": "https://wa.me/905XXXXXXXXX?text=CISA%20Bootcamp%20hakkında%20bilgi%20almak%20istiyorum"
-        },
-        {
-            "title": "GRC & IT Audit Bootcamp",
-            "description": "ISO 27001, risk yönetimi, kontrol testleri, denetim raporlama ve GRC kariyer hazırlığı.",
-            "duration": "Canlı Eğitim",
-            "level": "Başlangıç - Orta",
-            "price": "10.000 TL",
-            "image": "assets/images/course/course-javascript.jpg",
-            "link": "https://wa.me/905XXXXXXXXX?text=GRC%20ve%20IT%20Audit%20Bootcamp%20hakkında%20bilgi%20almak%20istiyorum"
-        },
-        {
-            "title": "Blue Team Bootcamp",
-            "description": "Threat hunting, detection engineering, log korelasyonu ve savunma odaklı siber güvenlik programı.",
-            "duration": "Canlı Eğitim",
-            "level": "Orta",
-            "price": "10.000 TL",
-            "image": "assets/images/course/course-javascript.jpg",
-            "link": "https://wa.me/905XXXXXXXXX?text=Blue%20Team%20Bootcamp%20hakkında%20bilgi%20almak%20istiyorum"
-        },
-    ]
+    ip = request.META.get("HTTP_X_FORWARDED_FOR", "").split(",")[0] or request.META.get("REMOTE_ADDR")
 
+    PageVisit.objects.create(
+        path=request.path,
+        ip_address=ip,
+        user=request.user if request.user.is_authenticated else None
+    )
+
+    bootcamps = Bootcamp.objects.filter(is_active=True)
     return render(request, "bootcamps.html", {"bootcamps": bootcamps})
-
 def deneme(request):
     return render(request, "index_b2b_siberkobi.html")
 
