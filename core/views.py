@@ -10,7 +10,7 @@ from django.db.models.functions import Coalesce
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
-
+from .models import Bootcamp, BootcampInterest
 from .models import Course, Enrollment,CourseSection,CourseSubsection,CourseFAQ,CustomUser,TestQuestion,TestOption
 from .utils.bunny import generate_bunny_token
 from core.models import CourseSubsection
@@ -385,15 +385,28 @@ def bootcamp_checkout(request, slug):
     else:
         email = request.POST.get("email", "").strip().lower()
 
+    # Bootcamp interest kaydı
+    try:
+        BootcampInterest.objects.create(
+            bootcamp=bootcamp,
+            user=request.user if request.user.is_authenticated else None,
+            email=email,
+            ip_address=get_client_ip(request),
+        )
+        print(f"BOOTCAMP INTEREST LOG: {bootcamp.title} | {email} | {get_client_ip(request)}")
+    except Exception as e:
+        print("BootcampInterest create error:", e)
+
     bot_token = getattr(settings, "TELEGRAM_BOT_TOKEN", "")
     chat_id = getattr(settings, "TELEGRAM_CHAT_ID", "")
 
-    if bot_token and chat_id and request.user.is_authenticated:
+    if bot_token and chat_id:
         text = (
             "🚀 Bootcamp Katıl Butonuna Basıldı\n\n"
             f"Bootcamp: {bootcamp.title}\n"
             f"Kullanıcı: {username}\n"
-            f"Email: {email}\n"
+            f"Email: {email or 'Yok'}\n"
+            f"IP: {get_client_ip(request)}\n"
             f"Fiyat: {bootcamp.price} {bootcamp.currency}"
         )
 
