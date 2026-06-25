@@ -2,46 +2,79 @@
 {% load static %}
 {% block content %}
 
-{% with monthly_stripe_url="https://buy.stripe.com/AYLIK_STRIPE_LINKINI_BURAYA_YAPISTIR" yearly_stripe_url="https://buy.stripe.com/YILLIK_STRIPE_LINKINI_BURAYA_YAPISTIR" %}
-
 <style>
-  html[data-bs-theme="dark"] body,
-  html[data-bs-theme="dark"] main {
-    background: #ffffff !important;
-    color: #111827 !important;
+  :root {
+    --sk-bg: #ffffff;
+    --sk-bg-soft: #f8f7ff;
+    --sk-surface: #ffffff;
+    --sk-surface-2: #fbfbff;
+    --sk-text: #111827;
+    --sk-muted: #6b7280;
+    --sk-border: rgba(117, 79, 254, .14);
+    --sk-shadow: 0 30px 90px rgba(31, 41, 55, .12);
+    --sk-primary: #754ffe;
+    --sk-success: #139a74;
+    --sk-hero-gradient:
+      radial-gradient(circle at top left, rgba(117, 79, 254, .16), transparent 34%),
+      radial-gradient(circle at bottom right, rgba(19, 154, 116, .16), transparent 32%),
+      linear-gradient(180deg, #ffffff 0%, #f8f7ff 100%);
+    --sk-card-gradient: linear-gradient(180deg, #ffffff, #fbfbff);
   }
 
-  html[data-bs-theme="dark"] .text-muted,
-  html[data-bs-theme="dark"] .text-gray-500 {
-    color: #6b7280 !important;
+  html[data-bs-theme="dark"] {
+    --sk-bg: #0f172a;
+    --sk-bg-soft: #111827;
+    --sk-surface: #1e293b;
+    --sk-surface-2: #172033;
+    --sk-text: #f8fafc;
+    --sk-muted: #cbd5e1;
+    --sk-border: rgba(148, 163, 184, .24);
+    --sk-shadow: 0 30px 90px rgba(0, 0, 0, .28);
+    --sk-hero-gradient:
+      radial-gradient(circle at top left, rgba(117, 79, 254, .28), transparent 34%),
+      radial-gradient(circle at bottom right, rgba(19, 154, 116, .22), transparent 32%),
+      linear-gradient(180deg, #0f172a 0%, #111827 100%);
+    --sk-card-gradient: linear-gradient(180deg, #1e293b, #172033);
   }
 
-  html[data-bs-theme="dark"] .card,
-  html[data-bs-theme="dark"] .modal-content,
-  html[data-bs-theme="dark"] .bg-white {
-    background-color: #ffffff !important;
-    color: #111827 !important;
+  .sk-page {
+    background: var(--sk-bg);
+    color: var(--sk-text);
+  }
+
+  .sk-page h1,
+  .sk-page h2,
+  .sk-page h3,
+  .sk-page h4,
+  .sk-page h5,
+  .sk-page h6,
+  .sk-page .text-dark,
+  .sk-page .fw-bold,
+  .sk-page .fw-bolder {
+    color: var(--sk-text) !important;
+  }
+
+  .sk-page .text-muted,
+  .sk-page .text-gray-500 {
+    color: var(--sk-muted) !important;
   }
 
   .sk-hero {
     position: relative;
     overflow: hidden;
-    background:
-      radial-gradient(circle at top left, rgba(117, 79, 254, .16), transparent 34%),
-      radial-gradient(circle at bottom right, rgba(19, 154, 116, .16), transparent 32%),
-      linear-gradient(180deg, #ffffff 0%, #f8f7ff 100%);
+    background: var(--sk-hero-gradient);
   }
 
   .sk-pill {
     display: inline-flex;
     align-items: center;
     gap: .5rem;
-    border: 1px solid rgba(117, 79, 254, .18);
-    background: rgba(117, 79, 254, .08);
-    color: #754ffe;
+    border: 1px solid rgba(117, 79, 254, .28);
+    background: rgba(117, 79, 254, .10);
+    color: #8b5cf6 !important;
     padding: .55rem .85rem;
     border-radius: 999px;
-    font-weight: 700;
+    font-weight: 800;
   }
 
   .sk-gradient-text {
@@ -58,16 +91,16 @@
     align-items: center;
     justify-content: center;
     border-radius: 999px;
-    background: rgba(19, 154, 116, .12);
-    color: #139a74;
+    background: rgba(19, 154, 116, .14);
+    color: var(--sk-success);
   }
 
   .sk-visual-card,
   .sk-glass-card {
     border-radius: 2rem;
-    background: rgba(255,255,255,.84);
-    border: 1px solid rgba(117, 79, 254, .12);
-    box-shadow: 0 30px 90px rgba(31, 41, 55, .12);
+    background: color-mix(in srgb, var(--sk-surface) 86%, transparent);
+    border: 1px solid var(--sk-border);
+    box-shadow: var(--sk-shadow);
     backdrop-filter: blur(18px);
   }
 
@@ -85,15 +118,20 @@
   .sk-floating {
     position: absolute;
     z-index: 3;
-    background: #fff;
-    border: 1px solid rgba(0,0,0,.06);
+    background: var(--sk-surface);
+    border: 1px solid var(--sk-border);
     border-radius: 1rem;
     box-shadow: 0 20px 50px rgba(15, 23, 42, .13);
     padding: .75rem 1rem;
   }
 
+  .sk-mini-box {
+    background: var(--sk-surface) !important;
+    border: 1px solid var(--sk-border);
+  }
+
   .sk-section-soft {
-    background: linear-gradient(180deg, #ffffff, #f8f7ff);
+    background: linear-gradient(180deg, var(--sk-bg), var(--sk-bg-soft));
   }
 
   .sk-section-dark {
@@ -103,16 +141,27 @@
     color: #fff;
   }
 
+  .sk-section-dark h2,
+  .sk-section-dark .fw-bold,
+  .sk-section-dark .fw-bolder {
+    color: #fff !important;
+  }
+
+  .sk-section-dark p {
+    color: rgba(255,255,255,.72) !important;
+  }
+
   .sk-category-card,
   .sk-price-card,
   .sk-story-card,
   .sk-step-card {
     height: 100%;
-    border: 1px solid rgba(117, 79, 254, .12);
+    border: 1px solid var(--sk-border);
     border-radius: 1.4rem;
     transition: all .25s ease;
     overflow: hidden;
-    background: linear-gradient(180deg, #ffffff, #fbfbff);
+    background: var(--sk-card-gradient);
+    color: var(--sk-text);
   }
 
   .sk-category-card:hover,
@@ -120,8 +169,8 @@
   .sk-story-card:hover,
   .sk-step-card:hover {
     transform: translateY(-7px);
-    box-shadow: 0 25px 60px rgba(15, 23, 42, .10);
-    border-color: rgba(117, 79, 254, .35);
+    box-shadow: var(--sk-shadow);
+    border-color: rgba(117, 79, 254, .50);
   }
 
   .sk-icon {
@@ -132,32 +181,36 @@
     align-items: center;
     justify-content: center;
     font-size: 1.55rem;
-    background: rgba(117, 79, 254, .10);
+    background: rgba(117, 79, 254, .12);
   }
 
   .sk-price-card.featured {
-    border: 2px solid #754ffe;
-    background: linear-gradient(180deg, #ffffff, #f6f3ff);
+    border: 2px solid var(--sk-primary);
+    background:
+      radial-gradient(circle at top right, rgba(117, 79, 254, .18), transparent 38%),
+      var(--sk-card-gradient);
   }
 
   .sk-tabs .nav-link {
     border-radius: 999px;
     font-weight: 700;
-    color: #4b5563;
+    color: var(--sk-muted);
+    border: 1px solid var(--sk-border);
   }
 
   .sk-tabs .nav-link.active {
-    background: #754ffe;
-    color: #fff;
+    background: var(--sk-primary);
+    color: #fff !important;
+    border-color: var(--sk-primary);
   }
 
   .sk-story-badge {
     display: inline-flex;
     padding: .35rem .7rem;
     border-radius: 999px;
-    background: rgba(117,79,254,.1);
-    color: #754ffe;
-    font-weight: 700;
+    background: rgba(117,79,254,.12);
+    color: #8b5cf6 !important;
+    font-weight: 800;
     font-size: .85rem;
   }
 
@@ -168,13 +221,52 @@
     padding: 1.25rem;
   }
 
+  .sk-modal .modal-content {
+    background: var(--sk-surface) !important;
+    color: var(--sk-text) !important;
+  }
+
+  .sk-modal .btn-close {
+    filter: none;
+  }
+
+  html[data-bs-theme="dark"] .sk-modal .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+  }
+
+  html[data-bs-theme="dark"] .alert-success {
+    background-color: rgba(19, 154, 116, .14) !important;
+    color: #bbf7d0 !important;
+    border-color: rgba(19, 154, 116, .24) !important;
+  }
+
+  html[data-bs-theme="dark"] .btn-outline-secondary {
+    color: #cbd5e1 !important;
+    border-color: #64748b !important;
+  }
+
+  html[data-bs-theme="dark"] .btn-outline-secondary:hover {
+    color: #fff !important;
+    background: #334155 !important;
+  }
+
+  html[data-bs-theme="dark"] .btn-outline-primary {
+    color: #a78bfa !important;
+    border-color: #8b5cf6 !important;
+  }
+
+  html[data-bs-theme="dark"] .btn-outline-primary:hover {
+    color: #fff !important;
+    background: #754ffe !important;
+  }
+
   @media (max-width: 767.98px) {
-    .sk-hero-title { font-size: 2.4rem; }
+    .sk-hero-title { font-size: 2.35rem; }
     .sk-floating { position: static; margin-bottom: .75rem; }
   }
 </style>
 
-<main>
+<main class="sk-page">
 
   <section class="sk-hero py-xl-9 py-7">
     <div class="container py-xl-5">
@@ -223,12 +315,12 @@
         <div class="col-lg-6 col-12">
           <div class="sk-visual-card p-4 position-relative">
             <div class="sk-floating top-0 start-0 mt-4 ms-4 d-none d-md-block">
-              <div class="fw-bold text-dark">50+ İçerik</div>
+              <div class="fw-bold">50+ İçerik</div>
               <div class="small text-muted">Video, test, lab ve vaka</div>
             </div>
 
             <div class="sk-floating bottom-0 end-0 mb-4 me-4 d-none d-md-block">
-              <div class="fw-bold text-dark">Kariyer Odaklı</div>
+              <div class="fw-bold">Kariyer Odaklı</div>
               <div class="small text-muted">Sınav, mülakat ve iş pratiği</div>
             </div>
 
@@ -245,11 +337,11 @@
               </div>
             </div>
 
-            <div class="bg-white rounded-4 p-3 mt-3 shadow-sm">
+            <div class="sk-mini-box rounded-4 p-3 mt-3 shadow-sm">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <div class="text-dark fw-bold fs-4">Gerçek Vaka Sistemi</div>
-                  <div class="text-gray-500">Sadece anlatım değil, uygulama ve üretim.</div>
+                  <div class="fw-bold fs-4">Gerçek Vaka Sistemi</div>
+                  <div class="text-muted">Sadece anlatım değil, uygulama ve üretim.</div>
                 </div>
                 <span class="badge bg-success-subtle text-success-emphasis rounded-pill">Aktif</span>
               </div>
@@ -472,7 +564,7 @@
 
 </main>
 
-<div class="modal fade" id="membershipModal" tabindex="-1" aria-labelledby="membershipModalLabel" aria-hidden="true">
+<div class="modal fade sk-modal" id="membershipModal" tabindex="-1" aria-labelledby="membershipModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content border-0 rounded-4 overflow-hidden">
       <div class="modal-header border-0 pb-0">
@@ -509,7 +601,7 @@
                 <li><i class="bi bi-check-circle-fill text-success me-2"></i>Birebir görüşmeler ve yönlendirme</li>
               </ul>
 
-              <a href="{{ monthly_stripe_url }}" class="btn btn-outline-primary w-100">
+              <a href="{% url 'create_membership_checkout' 'monthly' %}" class="btn btn-outline-primary w-100">
                 Stripe ile Aylık Üyeliği Başlat
               </a>
             </div>
@@ -543,7 +635,7 @@
                 <li><i class="bi bi-check-circle-fill text-success me-2"></i>Sürekli etkileşimli üretim</li>
               </ul>
 
-              <a href="{{ yearly_stripe_url }}" class="btn btn-primary w-100">
+              <a href="{% url 'create_membership_checkout' 'yearly' %}" class="btn btn-primary w-100">
                 Stripe ile Yıllık Üyeliği Başlat
               </a>
             </div>
@@ -555,12 +647,4 @@
   </div>
 </div>
 
-{% endwith %}
-{% endblock %}
-
-{% block extra_js %}
-<script>
-  document.documentElement.setAttribute('data-bs-theme', 'light');
-  localStorage.setItem('theme', 'light');
-</script>
 {% endblock %}
