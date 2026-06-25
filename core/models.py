@@ -31,9 +31,13 @@ class PageVisit(models.Model):
     def __str__(self):
         return f"{self.path} - {self.user or self.ip_address}"
 
-
 class BootcampInterest(models.Model):
-    bootcamp = models.ForeignKey("Bootcamp", on_delete=models.CASCADE)
+    bootcamp = models.ForeignKey(
+        "Bootcamp",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL
+    )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         null=True,
@@ -48,7 +52,8 @@ class BootcampInterest(models.Model):
         ordering = ["-created_at"]
 
     def __str__(self):
-        return f"{self.bootcamp.title} - {self.user or self.email or self.ip_address}"
+        bootcamp_title = self.bootcamp.title if self.bootcamp else "Bootcamp deleted"
+        return f"{bootcamp_title} - {self.user or self.email or self.ip_address}"
 class Bootcamp(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=220, unique=True, blank=True)
