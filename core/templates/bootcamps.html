@@ -2,78 +2,224 @@
 {% load static %}
 
 {% block content %}
+<style>
+.bootcamp-card{
+  border:1px solid #e6eaf2;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 18px 45px rgba(16,24,40,.08);
+  transition:.25s ease;
+  background:#fff;
+}
+.bootcamp-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 24px 60px rgba(16,24,40,.14);
+}
+.bootcamp-img{
+  height:180px;
+  width:100%;
+  object-fit:cover;
+}
+.bootcamp-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:7px 12px;
+  border-radius:999px;
+  background:#f3efff;
+  color:#7047ff;
+  font-weight:700;
+  font-size:13px;
+}
+.bootcamp-title{
+  font-size:22px;
+  line-height:1.25;
+  font-weight:800;
+  color:#1f2937;
+}
+.bootcamp-desc{
+  color:#475569;
+  line-height:1.7;
+  font-size:15px;
+}
+.feature-pill{
+  display:inline-block;
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:13px;
+  margin:3px 3px 3px 0;
+  color:#334155;
+}
+.price-box{
+  font-size:28px;
+  font-weight:900;
+  color:#111827;
+}
+.modal-content{
+  border-radius:24px;
+  border:0;
+}
+.modal-header{
+  border-bottom:0;
+}
+.modal-footer{
+  border-top:0;
+}
+.pay-summary{
+  background:linear-gradient(135deg,#7047ff,#8b5cf6);
+  color:#fff;
+  border-radius:18px;
+  padding:20px;
+}
+</style>
+
 <main>
-  <section class="py-4 py-lg-6 bg-primary">
+  <section class="py-5 py-lg-6 bg-primary">
     <div class="container">
-      <h1 class="text-white mb-1 display-4">Bootcampler</h1>
-      <p class="mb-0 text-white lead">Canlı eğitimler, gerçek vakalar ve kariyer odaklı programlar.</p>
+      <h1 class="text-white mb-2 display-4 fw-bold">Bootcampler</h1>
+      <p class="mb-0 text-white lead">
+        Canlı eğitimler, gerçek vakalar, lablar ve birebir kariyer desteği.
+      </p>
     </div>
   </section>
 
-  <section class="py-7">
+  <section class="py-7 bg-light">
     <div class="container">
-      <div class="row">
+      <div class="row g-4">
         {% for b in bootcamps %}
-        <div class="col-lg-3 col-md-6 col-12">
-          <div class="card mb-4 card-hover h-100">
+        <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+          <div class="bootcamp-card h-100 d-flex flex-column">
 
-            <form method="post" action="{% url 'bootcamp_checkout' b.slug %}">
-                {% csrf_token %}
-                <button type="submit" class="border-0 p-0 bg-transparent w-100">
-                    {% if b.image %}
-                        <img src="{{ b.image.url }}" alt="{{ b.title }}" class="card-img-top" />
-                    {% endif %}
-                </button>
-            </form>
+            {% if b.image %}
+              <img src="{{ b.image.url }}" alt="{{ b.title }}" class="bootcamp-img">
+            {% endif %}
 
-            <div class="card-body">
-              <h3 class="h5 mb-2 text-truncate-line-2">
-                <form method="post" action="{% url 'bootcamp_checkout' b.slug %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-link text-start p-0 text-decoration-none text-inherit">
-                        {{ b.title }}
-                    </button>
-                </form>
-              </h3>
+            <div class="card-body p-4 d-flex flex-column">
+              <div class="mb-3">
+                <span class="bootcamp-badge">Bootcamp</span>
+              </div>
 
-              <p class="mb-3 text-muted">
+              <h3 class="bootcamp-title mb-3">{{ b.title }}</h3>
+
+              <p class="bootcamp-desc mb-3">
                 {{ b.description }}
               </p>
 
-              <ul class="mb-3 list-inline">
-                <li class="list-inline-item">
-                  ⏱ {{ b.duration }}
-                </li>
-                <li class="list-inline-item">
-                  📊 {{ b.level }}
-                </li>
-              </ul>
+              <div class="mb-4">
+                <span class="feature-pill">⏱ {{ b.duration }}</span>
+                <span class="feature-pill">📊 {{ b.level }}</span>
+                <span class="feature-pill">👤 Birebir destek</span>
+                <span class="feature-pill">🧪 Lab ortamı</span>
+              </div>
 
-              <div class="d-flex align-items-center justify-content-between">
-                <span class="fw-semibold">{{ b.price }}</span>
-                <form method="post" action="{% url 'bootcamp_checkout' b.slug %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-sm btn-primary">
-                        Stripe ile Öde
-                    </button>
-                </form>
+              <div class="mt-auto">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <div>
+                    <div class="text-muted small">Program Ücreti</div>
+                    <div class="price-box">{{ b.price }}</div>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  class="btn btn-primary w-100 py-2 fw-bold"
+                  data-bs-toggle="modal"
+                  data-bs-target="#bootcampModal{{ b.id }}">
+                  Detayları Gör ve Öde
+                </button>
               </div>
             </div>
 
-            <div class="card-footer">
+            <div class="card-footer bg-white p-4">
               <div class="row align-items-center g-0">
                 <div class="col-auto">
                   <img src="{% static 'assets/images/avatar/avatar-3.jpg' %}" class="rounded-circle avatar-xs" alt="avatar">
                 </div>
                 <div class="col ms-2">
-                  <span>Volkan Güler</span>
+                  <span class="fw-semibold">Volkan Güler</span>
                 </div>
                 <div class="col-auto">
-                  <span class="text-muted small">Bootcamp</span>
+                  <span class="text-muted small">Mentor</span>
                 </div>
               </div>
             </div>
 
+          </div>
+        </div>
+
+        <div class="modal fade" id="bootcampModal{{ b.id }}" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+              <div class="modal-header px-4 pt-4">
+                <div>
+                  <span class="bootcamp-badge mb-2">Bootcamp</span>
+                  <h3 class="modal-title fw-bold mb-0">{{ b.title }}</h3>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+              </div>
+
+              <div class="modal-body px-4">
+                <div class="row g-4">
+                  <div class="col-lg-7">
+                    <p class="text-muted mb-3">
+                      {{ b.description }}
+                    </p>
+
+                    <div class="mb-3">
+                      <span class="feature-pill">✓ 3 ay program</span>
+                      <span class="feature-pill">✓ Her zaman başlanabilir</span>
+                      <span class="feature-pill">✓ Birebir çalışma</span>
+                      <span class="feature-pill">✓ Gerçek vaka çalışmaları</span>
+                      <span class="feature-pill">✓ Laboratuvar ortamı</span>
+                      <span class="feature-pill">✓ CISA soru çözümü</span>
+                      <span class="feature-pill">✓ Deneme sınavları</span>
+                      <span class="feature-pill">✓ CV ve mülakat desteği</span>
+                    </div>
+
+                    <p class="mb-0 fw-semibold">
+                      Sadece sınava değil, işe hazırlan.
+                    </p>
+                  </div>
+
+                  <div class="col-lg-5">
+                    <div class="pay-summary">
+                      <div class="small opacity-75 mb-1">Ödenecek Tutar</div>
+                      <div class="display-6 fw-bold mb-3">{{ b.price }}</div>
+
+                      <div class="d-flex justify-content-between mb-2">
+                        <span>Süre</span>
+                        <strong>{{ b.duration }}</strong>
+                      </div>
+                      <div class="d-flex justify-content-between mb-2">
+                        <span>Seviye</span>
+                        <strong>{{ b.level }}</strong>
+                      </div>
+                      <div class="d-flex justify-content-between">
+                        <span>Ödeme</span>
+                        <strong>Stripe</strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-footer px-4 pb-4">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                  Vazgeç
+                </button>
+
+                <form method="post" action="{% url 'bootcamp_checkout' b.slug %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-primary px-4 fw-bold">
+                    Stripe ile Öde
+                  </button>
+                </form>
+              </div>
+
+            </div>
           </div>
         </div>
         {% endfor %}
