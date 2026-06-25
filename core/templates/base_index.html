@@ -1,150 +1,204 @@
 {% load static %}
 <!doctype html>
-<html lang="en">
+<html lang="tr">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="Codescandy" />
+    <meta name="author" content="Siberkobi" />
 
-    <!-- Favicon icon-->
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/favicon/favicon.ico' %}" />
 
-    <!-- darkmode js -->
     <script src="{% static 'assets/js/vendors/darkMode.js' %}"></script>
 
-    <!-- Libs CSS -->
     <link href="{% static 'assets/fonts/feather/feather.css' %}" rel="stylesheet" />
     <link href="{% static 'assets/libs/bootstrap-icons/font/bootstrap-icons.min.css' %}" rel="stylesheet" />
     <link href="{% static 'assets/libs/simplebar/dist/simplebar.min.css' %}" rel="stylesheet" />
-
-    <!-- Theme CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/theme.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/libs/tiny-slider/dist/tiny-slider.css' %}" />
-    <title>Siberkobi | Hands-On IT Audit & GRC Learning Platform</title>
+
+    <title>Siberkobi | Siber Güvenlik, IT Audit & GRC Bootcampleri</title>
 
     <style>
-    /* ---------- NAVBAR GENEL ---------- */
-    .navbar{
-      padding-top:.7rem;   /* biraz nefes */
-      padding-bottom:.7rem;
-    }
-
-    /* Logo (sadece logo.svg kullanıyoruz) */
-    .navbar-brand .brand-word{
-      height:34px !important;   /* masaüstü ideal */
-      width:auto !important;
-      display:inline-block;
-    }
-    .navbar-brand img{
-      max-height:40px !important;  /* şişmeyi engelle */
-      height:auto;
-      width:auto;
-      display:block;
-    }
-
-    /* Tema ile uyumlu renk (dark’ta invert) */
-    :root[data-bs-theme="dark"] img.theme-adaptive{
-      filter: invert(1) brightness(1.1) contrast(1) !important;
-    }
-    :root[data-bs-theme="light"] img.theme-adaptive{
-      filter: none !important;
-    }
-
-    /* Sağ araçlar */
-    .nav-tools{
-      display:flex; align-items:center; gap:.5rem;
-    }
-    .nav-tools .btn-login{
-      padding:.35rem .7rem !important;
-      line-height:1.1 !important;
-      border-radius:.6rem;
-    }
-
-    /* ---------- MOBİL / TABLET (≤992px) ---------- */
-    @media (max-width: 991.98px){
-      /* üst sıra düzeni */
-      .navbar .container{
-        flex-wrap:nowrap !important;
-        align-items:center !important;
-        gap:.5rem;
-      }
-      /* toggler */
-      .navbar-toggler{
-        padding:.35rem .5rem !important;
-        line-height:1;
+      .navbar {
+        padding-top: .75rem;
+        padding-bottom: .75rem;
+        border-bottom: 1px solid rgba(0,0,0,.06);
+        background: rgba(255,255,255,.92);
+        backdrop-filter: blur(14px);
+        position: sticky;
+        top: 0;
+        z-index: 1030;
       }
 
-      /* logo biraz küçülsün */
-      .navbar-brand .brand-word{ height:28px !important; }
-      .navbar-brand img{ max-height:32px !important; }
-
-      /* açılan menü iç boşlukları */
-      #navbar-default{ padding:.5rem 0; }
-
-      /* menü linkleri: tıklaması kolay, düzgün satır yüksekliği */
-      .navbar-nav .nav-link{
-        display:flex;
-        align-items:center;
-        gap:.5rem;
-        padding:.65rem 0;         /* parmak dostu */
-        font-size:1rem;           /* okunabilir */
-        line-height:1.3;
-      }
-      /* nav içindeki küçük rozetler */
-      .navbar-nav .badge{
-        margin-left:.35rem;
+      :root[data-bs-theme="dark"] .navbar {
+        background: rgba(15, 23, 42, .92);
+        border-bottom-color: rgba(255,255,255,.08);
       }
 
-      /* tema düğmesi mobilde de rahat tıklansın */
-      .nav-tools .btn-icon{
-        width:2.25rem; height:2.25rem;
-        display:inline-flex; align-items:center; justify-content:center;
+      .navbar-brand .brand-word {
+        height: 34px !important;
+        width: auto !important;
+        display: inline-block;
       }
 
-      /* dropdown taşması olmasın */
-      .dropdown-menu{
-        max-width:90vw;
+      .navbar-brand img {
+        max-height: 40px !important;
+        height: auto;
+        width: auto;
+        display: block;
       }
-    }
-    /* Tek ikon render fix */
-    .theme-icon-active::before {
+
+      :root[data-bs-theme="dark"] img.theme-adaptive {
+        filter: invert(1) brightness(1.1) contrast(1) !important;
+      }
+
+      :root[data-bs-theme="light"] img.theme-adaptive {
+        filter: none !important;
+      }
+
+      .navbar-nav .nav-link {
+        border-radius: .75rem;
+        padding-left: .8rem;
+        padding-right: .8rem;
+      }
+
+      .navbar-nav .nav-link:hover,
+      .navbar-nav .nav-link.active {
+        background: rgba(117,79,254,.09);
+        color: #754ffe;
+      }
+
+      .nav-tools {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+      }
+
+      .nav-tools .btn-login {
+        padding: .42rem .85rem !important;
+        line-height: 1.1 !important;
+        border-radius: .75rem;
+      }
+
+      .theme-icon-active::before {
         display: none !important;
-    }
+      }
 
+      .footer {
+        color: rgba(255,255,255,.72);
+      }
+
+      .footer a {
+        color: rgba(255,255,255,.72);
+        text-decoration: none;
+      }
+
+      .footer a:hover {
+        color: #fff;
+      }
+
+      .footer-title {
+        color: #fff;
+        font-weight: 700;
+        margin-bottom: 1rem;
+      }
+
+      .footer-link-list li {
+        margin-bottom: .65rem;
+      }
+
+      .footer-logo {
+        max-width: 230px;
+        height: auto;
+      }
+
+      .footer-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: .4rem;
+        padding: .45rem .7rem;
+        border: 1px solid rgba(255,255,255,.14);
+        border-radius: 999px;
+        color: rgba(255,255,255,.8);
+        font-size: .85rem;
+      }
+
+      .footer-cta {
+        background: linear-gradient(135deg, rgba(117,79,254,.22), rgba(13,202,240,.12));
+        border: 1px solid rgba(255,255,255,.12);
+        border-radius: 1.25rem;
+        padding: 1rem;
+      }
+
+      @media (max-width: 991.98px) {
+        .navbar .container {
+          flex-wrap: nowrap !important;
+          align-items: center !important;
+          gap: .5rem;
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        .navbar-toggler {
+          padding: .35rem .5rem !important;
+          line-height: 1;
+        }
+
+        .navbar-brand .brand-word {
+          height: 28px !important;
+        }
+
+        .navbar-brand img {
+          max-height: 32px !important;
+        }
+
+        #navbar-default {
+          padding: .75rem 0;
+        }
+
+        .navbar-nav .nav-link {
+          display: flex;
+          align-items: center;
+          gap: .5rem;
+          padding: .7rem .8rem;
+          font-size: 1rem;
+          line-height: 1.3;
+        }
+
+        .nav-tools .btn-icon {
+          width: 2.25rem;
+          height: 2.25rem;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .dropdown-menu {
+          max-width: 90vw;
+        }
+      }
     </style>
-
-
   </head>
 
   <body class="bg-white">
-    <!-- Page Content -->
     <nav class="navbar navbar-expand-lg">
       <div class="container px-0">
 
-        <!-- Brand -->
         <a href="{% url 'landing' %}" class="navbar-brand m-0 p-0" aria-label="Siberkobi Ana Sayfa">
-          <img src="{% static 'assets/images/brand/logo/logo.svg' %}" alt="siberkobi" class="brand-word" />
+          <img src="{% static 'assets/images/brand/logo/logo.svg' %}" alt="Siberkobi" class="brand-word" />
         </a>
-        <!-- /Brand -->
 
-
-        <!-- Sağ araçlar + Toggler (tek grup) -->
         <div class="ms-auto d-flex align-items-center gap-2 nav-tools order-lg-3">
-          <!-- Tema menüsü -->
           <div class="dropdown">
             <button class="btn btn-outline-secondary btn-icon rounded-circle d-flex align-items-center"
-                    type="button" data-bs-toggle="dropdown" aria-label="Temayı değiştir (otomatik)">
+                    type="button" data-bs-toggle="dropdown" aria-label="Temayı değiştir">
               <i class="bi theme-icon-active"></i>
               <span class="visually-hidden bs-theme-text">Temayı değiştir</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end shadow" data-bs-theme="dark">
-              <li><button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
-                <i class="bi theme-icon bi-sun-fill"></i><span class="ms-2">Açık</span></button></li>
-              <li><button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
-                <i class="bi theme-icon bi-moon-stars-fill"></i><span class="ms-2">Koyu</span></button></li>
-              <li><button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto">
-                <i class="bi theme-icon bi-circle-half"></i><span class="ms-2">Otomatik</span></button></li>
+              <li><button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"><i class="bi theme-icon bi-sun-fill"></i><span class="ms-2">Açık</span></button></li>
+              <li><button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"><i class="bi theme-icon bi-moon-stars-fill"></i><span class="ms-2">Koyu</span></button></li>
+              <li><button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto"><i class="bi theme-icon bi-circle-half"></i><span class="ms-2">Otomatik</span></button></li>
             </ul>
           </div>
 
@@ -163,7 +217,6 @@
           </button>
         </div>
 
-        <!-- Çökebilir menü -->
         <div class="collapse navbar-collapse" id="navbar-default">
           <ul class="navbar-nav mt-3 mt-lg-0 mx-xxl-auto">
             {% with url_name=request.resolver_match.url_name %}
@@ -172,15 +225,11 @@
                   ✈️ Hikayem
                 </a>
               </li>
+
               <li class="nav-item">
-                <a class="nav-link {% if url_name == 'product_list' %}active fw-semibold{% endif %}" href="{% url 'product_list' %}" aria-label="Dijital Ürünler">
-                  🛒 Dijital Ürünler
+                <a class="nav-link {% if url_name == 'bootcamps' %}active fw-semibold{% endif %}" href="{% url 'bootcamps' %}" aria-label="Bootcampler">
+                  🎓 Bootcampler
                   <span class="badge rounded-pill bg-info-subtle text-info-emphasis ms-1 align-middle">Yeni</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link {% if url_name == 'pricing' %}active fw-semibold{% endif %}" href="{% url 'pricing' %}" aria-label="Fiyatlandırma">
-                  💳 Fiyatlandırma
                 </a>
               </li>
             {% endwith %}
@@ -192,61 +241,85 @@
 
     {% block content %}{% endblock %}
 
-    <!-- Footer -->
     <footer class="footer bg-dark-stable py-8">
       <div class="container">
-        <div class="row gy-6 gy-xl-0 pb-8">
-          <div class="col-xl-3 col-lg-12 col-md-6 col-12">
+        <div class="row gy-6 pb-7">
+
+          <div class="col-xl-4 col-lg-5 col-md-12">
             <div class="d-flex flex-column gap-4">
-              <div>
-                <img src="{% static 'assets/images/svg/white.svg' %}" width="250" alt="Siberkobi logosu" />
+              <img src="{% static 'assets/images/svg/white.svg' %}" class="footer-logo" alt="Siberkobi logosu" />
+
+              <p class="mb-0">
+                Siberkobi; siber güvenlik, IT audit, GRC ve kariyer gelişimi alanlarında canlı bootcampler,
+                vaka çalışmaları ve uygulamalı eğitimler sunar.
+              </p>
+
+              <div class="d-flex flex-wrap gap-2">
+                <span class="footer-badge">🎓 Canlı Bootcamp</span>
+                <span class="footer-badge">🧪 Lab & Vaka</span>
+                <span class="footer-badge">🌍 Global Kariyer</span>
               </div>
-              <p class="mb-0">Uygulamalı siber güvenlik ve denetim eğitim platformu. Profesyoneller tarafından profesyoneller için tasarlandı.</p>
-              <div class="d-flex gap-2">
-                <a href="#langaugeModal" class="btn btn-outline-secondary" data-bs-toggle="modal">
-                  <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-globe" viewBox="0 0 16 16">
-                      <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m7.5-6.923c-.67.204-1.335.82-1.887 1.855A8 8 0 0 0 5.145 4H7.5zM4.09 4a9.3 9.3 0 0 1 .64-1.539 7 7 0 0 1 .597-.933A7.03 7.03 0 0 0 2.255 4zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a7 7 0 0 0-.656 2.5zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5zM8.5 5v2.5h2.99a12.5 12.5 0 0 0-.337-2.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5zM5.145 12q.208.58.468 1.068c.552 1.035 1.218 1.65 1.887 1.855V12zm.182 2.472a7 7 0 0 1-.597-.933A9.3 9.3 0 0 1 4.09 12H2.255a7 7 0 0 0 3.072 2.472M3.82 11a13.7 13.7 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5zm6.853 3.472A7 7 0 0 0 13.745 12H11.91a9.3 9.3 0 0 1-.64 1.539 7 7 0 0 1-.597.933M8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855q.26-.487.468-1.068zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.7 13.7 0 0 1-.312 2.5m2.802-3.5a7 7 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7 7 0 0 0-3.072-2.472c.218.284.418.598.597.933M10.855 4a8 8 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4z" />
-                    </svg>
-                  </span>
-                  <span class="ms-2">Türkçe</span>
+            </div>
+          </div>
+
+          <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+            <h6 class="footer-title">Platform</h6>
+            <ul class="list-unstyled footer-link-list mb-0">
+              <li><a href="{% url 'landing' %}">Ana Sayfa</a></li>
+              <li><a href="{% url 'about' %}">Hikayem</a></li>
+              <li><a href="{% url 'bootcamps' %}">Bootcampler</a></li>
+              {% if user.is_authenticated %}
+                <li><a href="{% url 'dashboard_student' %}">Öğrenci Paneli</a></li>
+              {% else %}
+                <li><a href="{% url 'login' %}">Giriş Yap</a></li>
+              {% endif %}
+            </ul>
+          </div>
+
+          <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+            <h6 class="footer-title">Bootcampler</h6>
+            <ul class="list-unstyled footer-link-list mb-0">
+              <li><a href="{% url 'bootcamps' %}">SOC Analyst</a></li>
+              <li><a href="{% url 'bootcamps' %}">CISA</a></li>
+              <li><a href="{% url 'bootcamps' %}">GRC & IT Audit</a></li>
+              <li><a href="{% url 'bootcamps' %}">Blue Team</a></li>
+            </ul>
+          </div>
+
+          <div class="col-xl-4 col-lg-12 col-md-4 col-12">
+            <div class="footer-cta">
+              <h6 class="footer-title mb-2">Doğru bootcamp’i seçmek ister misin?</h6>
+              <p class="mb-3 small">
+                Seviyene ve hedeflediğin role göre en uygun programı birlikte netleştirebiliriz.
+              </p>
+
+              <div class="d-flex flex-column flex-sm-row gap-2">
+                <a href="mailto:support@siberkobi.co" class="btn btn-primary btn-sm">
+                  E-posta Gönder
                 </a>
-                <div class="dropdown">
-                  <button class="btn btn-outline-secondary btn-icon rounded-circle d-flex align-items-center" type="button"
-                          aria-expanded="false" data-bs-toggle="dropdown" aria-label="Temayı değiştir (otomatik)">
-                    <i class="bi theme-icon-active"></i>
-                    <span class="visually-hidden bs-theme-text">Temayı değiştir</span>
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bs-theme-text" data-bs-theme="dark">
-                    <li><button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"><i class="bi theme-icon bi-sun-fill"></i><span class="ms-2">Açık</span></button></li>
-                    <li><button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"><i class="bi theme-icon bi-moon-stars-fill"></i><span class="ms-2">Koyu</span></button></li>
-                    <li><button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto"><i class="bi theme-icon bi-circle-half"></i><span class="ms-2">Otomatik</span></button></li>
-                  </ul>
-                </div>
+                <a href="{% url 'bootcamps' %}" class="btn btn-outline-light btn-sm">
+                  Bootcampleri İncele
+                </a>
+              </div>
+
+              <div class="mt-3 small">
+                E-posta: <span class="fw-semibold text-white">support@siberkobi.co</span>
               </div>
             </div>
           </div>
-          <div class="col-xl-2 col-md-3 col-6"></div>
-          <div class="col-xl-2 col-md-3 col-6"></div>
-          <div class="col-xl-2 col-md-3 col-12"></div>
-          <div class="col-xl-3 col-lg-3 col-md-6 col-12">
-            <div class="d-flex flex-column gap-5">
-              <div class="d-flex flex-column gap-3">
-                <span class="text-white-stable">İletişim</span>
-                <ul class="list-unstyled mb-0 d-flex flex-column nav nav-footer nav-x-0 text-white-50">
-                  <li>E-posta: <span class="fw-semibold">support@siberkobi.co</span></li>
-                </ul>
-              </div>
-            </div>
-          </div>
+
         </div>
 
-        <div class="row align-items-center g-0 border-top border-gray-800 pt-3 flex-column gap-1 flex-lg-row gap-lg-0">
-          <div class="col-lg-6 col-12 text-center text-md-start">
-            <span>© <span id="copyright"><script>document.getElementById("copyright").appendChild(document.createTextNode(new Date().getFullYear()));</script></span> Siberkobi. Tüm hakları saklıdır.</span>
+        <div class="row align-items-center g-0 border-top border-gray-800 pt-3 flex-column gap-2 flex-lg-row gap-lg-0">
+          <div class="col-lg-6 col-12 text-center text-lg-start">
+            <span>
+              © <span id="copyright"><script>document.getElementById("copyright").appendChild(document.createTextNode(new Date().getFullYear()));</script></span>
+              Siberkobi. Tüm hakları saklıdır.
+            </span>
           </div>
+
           <div class="col-12 col-lg-6">
-            <nav class="nav nav-footer justify-content-center justify-content-md-start justify-content-lg-end">
+            <nav class="nav nav-footer justify-content-center justify-content-lg-end">
               <a class="nav-link active" href="{% url 'terms_and_conditions' %}">Şartlar ve Koşullar</a>
               <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cookiesModal">Çerez Ayarları</a>
               <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Gizlilik Politikası</a>
@@ -256,115 +329,121 @@
       </div>
     </footer>
 
-    <!-- Scroll top -->
     <div class="btn-scroll-top">
       <svg class="progress-square svg-content" width="100%" height="100%" viewBox="0 0 40 40">
-        <path d="M8 1H32C35.866 1 39 4.13401 39 8V32C39 35.866 35.866 39 32 39H8C4.13401 39 1 35.866 1 32V8C1 4.13401 4.13401 1 8 1Z" />
+        <path d="M8 1H32C35.866 1 39 4.13401 39 8V32C39 35.866 35.866 39 32 39H8C4.13401 39 1 35.866 1 32V8C1 4.13401 1 8 1Z" />
       </svg>
     </div>
 
-    <!-- Libs JS -->
     <script src="{% static 'assets/libs/@popperjs/core/dist/umd/popper.min.js' %}"></script>
     <script src="{% static 'assets/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'assets/libs/simplebar/dist/simplebar.min.js' %}"></script>
-
-    <!-- Theme JS -->
     <script src="{% static 'assets/js/theme.min.js' %}"></script>
     <script src="{% static 'assets/libs/tiny-slider/dist/min/tiny-slider.js' %}"></script>
     <script src="{% static 'assets/js/vendors/tnsSlider.js' %}"></script>
     <script src="{% static 'assets/libs/odometer/odometer.min.js' %}"></script>
     <script src="{% static 'assets/js/vendors/pricing.js' %}"></script>
 
-    <!-- Cookies Modal -->
     <div class="modal fade" id="cookiesModal" tabindex="-1" aria-labelledby="cookiesModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
-          <div class="modal-header"><h5 class="modal-title" id="cookiesModalLabel">Çerez Ayarları</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button></div>
-          <div class="modal-body"><p>Deneyiminizi geliştirmek ve platform kullanımını analiz etmek için çerezleri kullanmıyoruz. Çerez tercihlerini tarayıcı ayarlarınızdan kontrol edebilirsiniz. Temel çerezler site işlevselliği için gerekli değildir.</p></div>
+          <div class="modal-header">
+            <h5 class="modal-title" id="cookiesModalLabel">Çerez Ayarları</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+          </div>
+          <div class="modal-body">
+            <p>Deneyiminizi geliştirmek ve platform kullanımını analiz etmek için temel çerezler kullanılabilir. Çerez tercihlerini tarayıcı ayarlarınızdan kontrol edebilirsiniz.</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Privacy Modal -->
     <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
-          <div class="modal-header"><h5 class="modal-title" id="privacyModalLabel">Gizlilik Politikası</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button></div>
-          <div class="modal-body"><p>Siberkobi olarak gizliliğinize değer veriyoruz. E-posta veya kurs etkinliği gibi sağladığınız tüm veriler güvenli bir şekilde saklanır ve izniniz olmadan üçüncü taraflarla paylaşılmaz. support@siberkobi.co adresinden bizimle iletişime geçerek veri silme talebinde bulunabilirsiniz...</p></div>
+          <div class="modal-header">
+            <h5 class="modal-title" id="privacyModalLabel">Gizlilik Politikası</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+          </div>
+          <div class="modal-body">
+            <p>Siberkobi olarak gizliliğinize değer veriyoruz. E-posta, kurs erişimi ve platform kullanımına ilişkin veriler güvenli şekilde saklanır ve izniniz olmadan üçüncü taraflarla paylaşılmaz. Veri silme talepleri için support@siberkobi.co adresinden bizimle iletişime geçebilirsiniz.</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Team Access Modal -->
     <div class="modal fade" id="teamAccessModal" tabindex="-1" aria-labelledby="teamAccessModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-          <div class="modal-header"><h5 class="modal-title" id="teamAccessModalLabel">Takım Erişimi Talep Et</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button></div>
-          <div class="modal-body">Lütfen e-posta ile bizimle iletişime geçin: <a href="mailto:support@siberkobi.co">support@siberkobi.co</a>. Ekibimiz size gerekli tüm bilgileri ve sonraki adımları sağlayacaktır.</div>
-          <div class="modal-footer"><a href="mailto:support@siberkobi.co" class="btn btn-primary">E-posta Gönder</a><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button></div>
+          <div class="modal-header">
+            <h5 class="modal-title" id="teamAccessModalLabel">Takım Erişimi Talep Et</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+          </div>
+          <div class="modal-body">
+            Lütfen e-posta ile bizimle iletişime geçin:
+            <a href="mailto:support@siberkobi.co">support@siberkobi.co</a>.
+          </div>
+          <div class="modal-footer">
+            <a href="mailto:support@siberkobi.co" class="btn btn-primary">E-posta Gönder</a>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          </div>
         </div>
       </div>
     </div>
 
     <script>
-    (() => {
-      const STORAGE_KEY = 'theme';
-      const prefersDark = () =>
-        window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      (() => {
+        const STORAGE_KEY = 'theme';
 
-      const getPreferred = () => localStorage.getItem(STORAGE_KEY) || 'auto';
+        const prefersDark = () =>
+          window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-      const setIcon = (computed) => {
-        const icon = document.querySelector('.theme-icon-active');
-        if (!icon) return;
-        icon.classList.remove('bi-sun-fill','bi-moon-stars-fill','bi-circle-half');
-        icon.classList.add(
-          computed === 'dark' ? 'bi-moon-stars-fill' :
-          computed === 'light' ? 'bi-sun-fill' : 'bi-circle-half'
-        );
-      };
+        const getPreferred = () => localStorage.getItem(STORAGE_KEY) || 'auto';
 
-      const setActiveState = (value) => {
-        document.querySelectorAll('[data-bs-theme-value]').forEach(btn => {
-          const isActive = btn.getAttribute('data-bs-theme-value') === value;
-          btn.classList.toggle('active', isActive);
-          btn.setAttribute('aria-pressed', String(isActive));
+        const setIcon = (computed) => {
+          document.querySelectorAll('.theme-icon-active').forEach(icon => {
+            icon.classList.remove('bi-sun-fill', 'bi-moon-stars-fill', 'bi-circle-half');
+            icon.classList.add(
+              computed === 'dark' ? 'bi-moon-stars-fill' :
+              computed === 'light' ? 'bi-sun-fill' : 'bi-circle-half'
+            );
+          });
+        };
+
+        const setActiveState = (value) => {
+          document.querySelectorAll('[data-bs-theme-value]').forEach(btn => {
+            const isActive = btn.getAttribute('data-bs-theme-value') === value;
+            btn.classList.toggle('active', isActive);
+            btn.setAttribute('aria-pressed', String(isActive));
+          });
+        };
+
+        const applyTheme = (value) => {
+          const computed = value === 'auto' ? (prefersDark() ? 'dark' : 'light') : value;
+          document.documentElement.setAttribute('data-bs-theme', computed);
+          setIcon(computed);
+          setActiveState(value);
+        };
+
+        applyTheme(getPreferred());
+
+        if (window.matchMedia) {
+          window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            if (getPreferred() === 'auto') applyTheme('auto');
+          });
+        }
+
+        document.addEventListener('click', (e) => {
+          const btn = e.target.closest('[data-bs-theme-value]');
+          if (!btn) return;
+
+          const val = btn.getAttribute('data-bs-theme-value');
+          localStorage.setItem(STORAGE_KEY, val);
+          applyTheme(val);
         });
-      };
-
-      const applyTheme = (value) => {
-        // value: 'light' | 'dark' | 'auto'
-        const computed = value === 'auto' ? (prefersDark() ? 'dark' : 'light') : value;
-        document.documentElement.setAttribute('data-bs-theme', computed);
-        setIcon(computed);
-        setActiveState(value);
-      };
-
-      // İlk yükleme
-      applyTheme(getPreferred());
-
-      // Sistem teması değişirse ve 'auto' seçiliyse güncelle
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-        if (getPreferred() === 'auto') applyTheme('auto');
-      });
-
-      // Dropdown’daki butonlar
-      document.addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-bs-theme-value]');
-        if (!btn) return;
-        const val = btn.getAttribute('data-bs-theme-value');
-        localStorage.setItem(STORAGE_KEY, val);
-        applyTheme(val);
-      });
-    })();
+      })();
     </script>
 
-    <!-- Bootstrap JS (Modal vb. için şart) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-
     {% block extra_js %}{% endblock %}
-
-
-
   </body>
 </html>

@@ -1,0 +1,73 @@
+{% extends "base_index.html" %}
+{% load static %}
+
+{% block content %}
+<main>
+  <section class="py-4 py-lg-6 bg-primary">
+    <div class="container">
+      <h1 class="text-white mb-1 display-4">Bootcampler</h1>
+      <p class="mb-0 text-white lead">Canlı eğitimler, gerçek vakalar ve kariyer odaklı programlar.</p>
+    </div>
+  </section>
+
+  <section class="py-7">
+    <div class="container">
+      <div class="row">
+        {% for b in bootcamps %}
+        <div class="col-lg-3 col-md-6 col-12">
+          <div class="card mb-4 card-hover h-100">
+
+            <a href="{{ b.link }}" target="_blank" class="d-block">
+              <img src="{% static b.image %}" alt="{{ b.title }}" class="card-img-top" />
+            </a>
+
+            <div class="card-body">
+              <h3 class="h5 mb-2 text-truncate-line-2">
+                <a href="{{ b.link }}" target="_blank" class="text-inherit">
+                  {{ b.title }}
+                </a>
+              </h3>
+
+              <p class="mb-3 text-muted">
+                {{ b.description }}
+              </p>
+
+              <ul class="mb-3 list-inline">
+                <li class="list-inline-item">
+                  ⏱ {{ b.duration }}
+                </li>
+                <li class="list-inline-item">
+                  📊 {{ b.level }}
+                </li>
+              </ul>
+
+              <div class="d-flex align-items-center justify-content-between">
+                <span class="fw-semibold">{{ b.price }}</span>
+                <a class="btn btn-sm btn-primary" href="{{ b.link }}" target="_blank">
+                  İncele
+                </a>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <div class="row align-items-center g-0">
+                <div class="col-auto">
+                  <img src="{% static 'assets/images/avatar/avatar-3.jpg' %}" class="rounded-circle avatar-xs" alt="avatar">
+                </div>
+                <div class="col ms-2">
+                  <span>Volkan Güler</span>
+                </div>
+                <div class="col-auto">
+                  <span class="text-muted small">Bootcamp</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

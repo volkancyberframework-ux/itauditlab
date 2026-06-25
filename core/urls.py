@@ -18,6 +18,7 @@ from . import views_store
 urlpatterns = [
     path("akademi/", views.akademi, name="akademi"),
     path('', landing_page, name='landing'),
+    path("bootcampler/", views.bootcamps_view, name="bootcamps"),
     path('course-single/<int:pk>/', views.course_single, name='course_single'),
     path("course/<int:pk>/random-question/", views.course_random_question, name="course_random_question"),
     path('login/', views.custom_login_view, name='login'),
