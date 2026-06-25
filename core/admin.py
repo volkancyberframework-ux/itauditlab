@@ -24,6 +24,26 @@ from .models import (
 DEFAULT_PASSWORD = "Siberkobi1234"
 
 
+from django.contrib import admin
+from .models import Bootcamp, BootcampPurchase
+
+
+@admin.register(Bootcamp)
+class BootcampAdmin(admin.ModelAdmin):
+    list_display = ("title", "price", "currency", "duration", "level", "is_active", "order", "created_at")
+    list_filter = ("is_active", "currency", "created_at")
+    search_fields = ("title", "description", "level")
+    prepopulated_fields = {"slug": ("title",)}
+    ordering = ("order", "-created_at")
+
+
+@admin.register(BootcampPurchase)
+class BootcampPurchaseAdmin(admin.ModelAdmin):
+    list_display = ("bootcamp", "email", "is_paid", "stripe_session_id", "created_at", "paid_at")
+    list_filter = ("is_paid", "created_at", "paid_at")
+    search_fields = ("email", "stripe_session_id", "bootcamp__title")
+    readonly_fields = ("created_at",)
+
 @admin.register(NewsletterLead)
 class NewsletterLeadAdmin(admin.ModelAdmin):
     pass

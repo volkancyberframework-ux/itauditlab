@@ -7,6 +7,36 @@ from django.core.validators import MinValueValidator
 from decimal import Decimal
 
 
+from django.db import models
+from django.utils.text import slugify
+
+class Bootcamp(models.Model):
+    title = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=220, unique=True, blank=True)
+    description = models.TextField()
+    duration = models.CharField(max_length=100, blank=True)
+    level = models.CharField(max_length=100, blank=True)
+    price = models.PositiveIntegerField(help_text="TL olarak yaz. Örn: 10000")
+    currency = models.CharField(max_length=10, default="TRY")
+    image = models.ImageField(upload_to="bootcamps/", blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+    order = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["order", "-created_at"]
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def price_display(self):
+        return f"₺{self.price:,.0f}".replace(",", ".")
+
 class NewsletterLead(models.Model):
     email = models.EmailField(unique=True)
     source = models.CharField(max_length=100, default="cybersecurity_fit_test_popup")

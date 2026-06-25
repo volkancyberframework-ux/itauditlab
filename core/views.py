@@ -369,3 +369,61 @@ def dashboard_student(request):
         'enrolled_course_ids': enrolled_course_ids,
         'can_enroll_ids': can_enroll_ids,
     })
+
+import stripe
+
+from django.conf import settings
+from django.http import HttpResponseBadRequest
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+from django.views.decorators.http import require_POST
+
+from .models import Bootcamp
+
+
+def bootcamps_view(request):
+    bootcamps = Bootcamp.objects.filter(is_active=True)
+    return render(request, "bootcamps.html", {"bootcamps": bootcamps})
+
+
+@require_POST
+def bootcamp_checkout(request, slug):
+    bootcamp = get_object_or_404(Bootcamp, slug=slug, is_active=True)
+
+    if not settings.STRIPE_SECRET_KEY:
+        return HttpResponseBadRequest("Stripe ayarı eksik.")
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+
+    email = ""
+    if request.user.is_authenticated:
+        email = request.user.email or ""
+    else:
+        email = request.POST.get("email", "").strip().lower()
+
+    session = stripe.checkout.Session.create(
+        mode="payment",
+        payment_method_types=["card"],
+        customer_email=email or None,
+        line_items=[
+            {
+                "price_data": {
+                    "currency": bootcamp.currency.lower(),
+                    "product_data": {
+                        "name": bootcamp.title,
+                        "description": bootcamp.description[:400],
+                    },
+                    "unit_amount": int(bootcamp.price * 100),
+                },
+                "quantity": 1,
+            }
+        ],
+        success_url=request.build_absolute_uri(reverse("bootcamp_payment_success")),
+        cancel_url=request.build_absolute_uri(reverse("bootcamps")),
+    )
+
+    return redirect(session.url)
+
+
+def bootcamp_payment_success(request):
+    return render(request, "bootcamp-success.html")

@@ -17,15 +17,23 @@
         <div class="col-lg-3 col-md-6 col-12">
           <div class="card mb-4 card-hover h-100">
 
-            <a href="{{ b.link }}" target="_blank" class="d-block">
-              <img src="{% static b.image %}" alt="{{ b.title }}" class="card-img-top" />
-            </a>
+            <form method="post" action="{% url 'bootcamp_checkout' b.slug %}">
+                {% csrf_token %}
+                <button type="submit" class="border-0 p-0 bg-transparent w-100">
+                    {% if b.image %}
+                        <img src="{{ b.image.url }}" alt="{{ b.title }}" class="card-img-top" />
+                    {% endif %}
+                </button>
+            </form>
 
             <div class="card-body">
               <h3 class="h5 mb-2 text-truncate-line-2">
-                <a href="{{ b.link }}" target="_blank" class="text-inherit">
-                  {{ b.title }}
-                </a>
+                <form method="post" action="{% url 'bootcamp_checkout' b.slug %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-link text-start p-0 text-decoration-none text-inherit">
+                        {{ b.title }}
+                    </button>
+                </form>
               </h3>
 
               <p class="mb-3 text-muted">
@@ -43,9 +51,12 @@
 
               <div class="d-flex align-items-center justify-content-between">
                 <span class="fw-semibold">{{ b.price }}</span>
-                <a class="btn btn-sm btn-primary" href="{{ b.link }}" target="_blank">
-                  İncele
-                </a>
+                <form method="post" action="{% url 'bootcamp_checkout' b.slug %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-primary">
+                        Stripe ile Öde
+                    </button>
+                </form>
               </div>
             </div>
 
