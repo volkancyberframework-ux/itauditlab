@@ -17,6 +17,11 @@ from . import views_store
 
 urlpatterns = [
     path("akademi/", views.akademi, name="akademi"),
+    path(
+        "membership/checkout/<str:plan>/",
+        views.create_membership_checkout,
+        name="create_membership_checkout",
+    ),
     path('', landing_page, name='landing'),
     path("bootcampler/", views.bootcamps_view, name="bootcamps"),
     path('course-single/<int:pk>/', views.course_single, name='course_single'),

@@ -427,3 +427,65 @@ def bootcamp_checkout(request, slug):
 
 def bootcamp_payment_success(request):
     return render(request, "bootcamp-success.html")
+
+from django.conf import settings
+from django.contrib import messages
+from django.shortcuts import redirect
+import stripe
+
+
+def create_membership_checkout(request, plan):
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+
+    plans = {
+        "monthly": {
+            "name": "Siberkobi Aylık Üyelik",
+            "amount": 9999,
+            "interval": "month",
+        },
+        "yearly": {
+            "name": "Siberkobi Yıllık Üyelik",
+            "amount": 69999,
+            "interval": "year",
+        },
+    }
+
+    selected_plan = plans.get(plan)
+
+    if not selected_plan:
+        messages.error(request, "Geçersiz üyelik paketi.")
+        return redirect("landing")
+
+    try:
+        checkout_session = stripe.checkout.Session.create(
+            mode="subscription",
+            payment_method_types=["card"],
+            customer_email=(
+                request.user.email
+                if request.user.is_authenticated and request.user.email
+                else None
+            ),
+            line_items=[
+                {
+                    "price_data": {
+                        "currency": "try",
+                        "unit_amount": selected_plan["amount"] * 100,
+                        "product_data": {
+                            "name": selected_plan["name"],
+                        },
+                        "recurring": {
+                            "interval": selected_plan["interval"],
+                        },
+                    },
+                    "quantity": 1,
+                }
+            ],
+            success_url=request.build_absolute_uri("/login/?payment=success"),
+            cancel_url=request.build_absolute_uri("/?payment=cancel"),
+        )
+
+        return redirect(checkout_session.url)
+
+    except Exception as e:
+        messages.error(request, f"Ödeme başlatılamadı: {e}")
+        return redirect("landing")
