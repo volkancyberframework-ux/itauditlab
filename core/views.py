@@ -355,11 +355,22 @@ from django.views.decorators.http import require_POST
 
 from .models import Bootcamp
 
+def get_client_ip(request):
+    forwarded = request.META.get("HTTP_X_FORWARDED_FOR")
+    if forwarded:
+        return forwarded.split(",")[0].strip()
+    return request.META.get("REMOTE_ADDR")
+
 
 def bootcamps_view(request):
+    PageVisit.objects.create(
+        path=request.path,
+        ip_address=get_client_ip(request),
+        user=request.user if request.user.is_authenticated else None,
+    )
+
     bootcamps = Bootcamp.objects.filter(is_active=True)
     return render(request, "bootcamps.html", {"bootcamps": bootcamps})
-
 
 @require_POST
 def bootcamp_checkout(request, slug):
