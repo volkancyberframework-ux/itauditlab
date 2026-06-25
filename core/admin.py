@@ -27,34 +27,35 @@ DEFAULT_PASSWORD = "Siberkobi1234"
 from django.contrib import admin
 from .models import Bootcamp
 
+from .models import PageVisit, BootcampInterest
+
 
 @admin.register(PageVisit)
 class PageVisitAdmin(admin.ModelAdmin):
-    list_display = (
-        "created_at",
-        "user",
-        "ip_address",
-        "path",
-    )
+    list_display = ("created_at", "user", "ip_address", "path")
+    search_fields = ("path", "ip_address", "user__email", "user__username")
+    list_filter = ("path", "created_at")
+    readonly_fields = ("created_at", "user", "ip_address", "path")
 
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(BootcampInterest)
+class BootcampInterestAdmin(admin.ModelAdmin):
+    list_display = ("created_at", "bootcamp", "user", "email", "ip_address")
     search_fields = (
-        "path",
+        "bootcamp__title",
+        "email",
         "ip_address",
         "user__email",
         "user__username",
     )
-
-    list_filter = (
-        "path",
-        "created_at",
-    )
-
-    readonly_fields = (
-        "created_at",
-        "user",
-        "ip_address",
-        "path",
-    )
+    list_filter = ("bootcamp", "created_at")
+    readonly_fields = ("created_at", "bootcamp", "user", "email", "ip_address")
 
     def has_add_permission(self, request):
         return False

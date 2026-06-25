@@ -34,31 +34,26 @@ from .models import (
     CustomUser, TestQuestion, TestOption, NewsletterLead
 )
 
-
+from .models import PageVisit, BootcampInterest
 from django.shortcuts import render
 
 from .models import Bootcamp, PageVisit
 
+def get_client_ip(request):
+    forwarded = request.META.get("HTTP_X_FORWARDED_FOR")
+    if forwarded:
+        return forwarded.split(",")[0].strip()
+    return request.META.get("REMOTE_ADDR")
+
 def bootcamps_view(request):
-
-    ip = (
-        request.META.get("HTTP_X_FORWARDED_FOR", "").split(",")[0]
-        or request.META.get("REMOTE_ADDR")
-    )
-
     PageVisit.objects.create(
         path=request.path,
-        ip_address=ip,
+        ip_address=get_client_ip(request),
         user=request.user if request.user.is_authenticated else None,
     )
 
     bootcamps = Bootcamp.objects.filter(is_active=True)
-
-    return render(
-        request,
-        "bootcamps.html",
-        {"bootcamps": bootcamps},
-    )
+    return render(request, "bootcamps.html", {"bootcamps": bootcamps})
 def deneme(request):
     return render(request, "index_b2b_siberkobi.html")
 

@@ -10,24 +10,45 @@ from decimal import Decimal
 from django.db import models
 from django.utils.text import slugify
 
+from django.conf import settings
+from django.db import models
+
+
 class PageVisit(models.Model):
     path = models.CharField(max_length=255)
     ip_address = models.GenericIPAddressField(null=True, blank=True)
-
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         null=True,
         blank=True,
         on_delete=models.SET_NULL
     )
-
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
 
     def __str__(self):
         return f"{self.path} - {self.user or self.ip_address}"
 
+
+class BootcampInterest(models.Model):
+    bootcamp = models.ForeignKey("Bootcamp", on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL
+    )
+    email = models.EmailField(blank=True)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
     class Meta:
         ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.bootcamp.title} - {self.user or self.email or self.ip_address}"
 class Bootcamp(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=220, unique=True, blank=True)
