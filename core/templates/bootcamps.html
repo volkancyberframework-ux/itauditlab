@@ -4,159 +4,188 @@
 {% block content %}
 <style>
 :root {
-  --bc-page-bg: #f8fafc;
-  --bc-card-bg: #ffffff;
-  --bc-card-border: #e6eaf2;
-  --bc-title: #1f2937;
-  --bc-text: #475569;
-  --bc-muted: #64748b;
-  --bc-pill-bg: #f8fafc;
-  --bc-pill-border: #e5e7eb;
-  --bc-footer-bg: #ffffff;
+  --bc-page-bg:#f8fafc;
+  --bc-card-bg:#ffffff;
+  --bc-card-border:#e6eaf2;
+  --bc-title:#1f2937;
+  --bc-text:#475569;
+  --bc-muted:#64748b;
+  --bc-pill-bg:#f8fafc;
+  --bc-pill-border:#e5e7eb;
+  --bc-footer-bg:#ffffff;
 }
 
 html[data-bs-theme="dark"] {
-  --bc-page-bg: #0f172a;
-  --bc-card-bg: #111827;
-  --bc-card-border: #334155;
-  --bc-title: #f8fafc;
-  --bc-text: #cbd5e1;
-  --bc-muted: #94a3b8;
-  --bc-pill-bg: #1e293b;
-  --bc-pill-border: #334155;
-  --bc-footer-bg: #0b1220;
+  --bc-page-bg:#0f172a;
+  --bc-card-bg:#111827;
+  --bc-card-border:#334155;
+  --bc-title:#f8fafc;
+  --bc-text:#cbd5e1;
+  --bc-muted:#94a3b8;
+  --bc-pill-bg:#1e293b;
+  --bc-pill-border:#334155;
+  --bc-footer-bg:#0b1220;
 }
 
 .bootcamp-page {
-  background: var(--bc-page-bg);
+  background:var(--bc-page-bg);
 }
 
 .bootcamp-card {
-  border: 1px solid var(--bc-card-border);
-  border-radius: 22px;
-  overflow: hidden;
-  box-shadow: 0 18px 45px rgba(16,24,40,.12);
-  transition: .25s ease;
-  background: var(--bc-card-bg);
-  color: var(--bc-text);
+  border:1px solid var(--bc-card-border);
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 18px 45px rgba(16,24,40,.12);
+  transition:.25s ease;
+  background:var(--bc-card-bg);
+  color:var(--bc-text);
 }
 
 .bootcamp-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 24px 60px rgba(16,24,40,.22);
+  transform:translateY(-6px);
+  box-shadow:0 24px 60px rgba(16,24,40,.22);
 }
 
-.bootcamp-img {
-  height: 180px;
-  width: 100%;
-  object-fit: cover;
-}
-
-.bootcamp-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 12px;
-  border-radius: 999px;
-  background: rgba(112,71,255,.14);
-  color: #8b5cf6;
-  font-weight: 800;
-  font-size: 13px;
-}
-
-.bootcamp-title {
-  font-size: 22px;
-  line-height: 1.25;
-  font-weight: 900;
-  color: var(--bc-title);
-}
-
-.bootcamp-desc,
-.bootcamp-description {
-  color: var(--bc-text);
-  line-height: 1.75;
-  font-size: 15px;
-}
-
-.bootcamp-desc br,
-.bootcamp-description br {
-  display: block;
-  content: "";
-  margin-bottom: .45rem;
-}
-
-.feature-pill {
-  display: inline-block;
-  background: var(--bc-pill-bg);
-  border: 1px solid var(--bc-pill-border);
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 13px;
-  margin: 3px 3px 3px 0;
-  color: var(--bc-text);
-}
-
-.price-label {
-  color: var(--bc-muted);
-}
-
-.price-box {
-  font-size: 28px;
-  font-weight: 900;
-  color: var(--bc-title);
-}
-
-.bootcamp-footer {
-  background: var(--bc-footer-bg);
-  border-top: 1px solid var(--bc-card-border);
-  color: var(--bc-text);
-}
-
-.modal-content {
-  border-radius: 24px;
-  border: 1px solid var(--bc-card-border);
-  background: var(--bc-card-bg);
-  color: var(--bc-text);
-}
-
-.modal-header,
-.modal-footer {
-  border: 0;
-}
-
-.modal-title {
-  color: var(--bc-title);
-}
-
-.pay-summary {
-  background: linear-gradient(135deg,#7047ff,#8b5cf6);
-  color: #fff;
-  border-radius: 18px;
-  padding: 20px;
-}
-
-html[data-bs-theme="dark"] .btn-light {
-  background: #1e293b;
-  border-color: #334155;
-  color: #f8fafc;
-}
-
-html[data-bs-theme="dark"] .btn-close {
-  filter: invert(1);
-}
-.bootcamp-top-strip{
+.bootcamp-top-strip {
   height:5px;
   background:linear-gradient(90deg,#7047ff,#8b5cf6);
 }
 
-.bootcamp-img{
+.bootcamp-img {
   height:180px;
   width:100%;
   object-fit:cover;
   display:block;
 }
-.bootcamp-top-strip + .card-body{
+
+.bootcamp-top-strip + .card-body {
   padding-top:28px !important;
+}
+
+.bootcamp-badge,
+.bootcamp-mini-badge {
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:7px 12px;
+  border-radius:999px;
+  font-weight:800;
+  font-size:13px;
+  white-space:nowrap;
+}
+
+.bootcamp-badge {
+  background:rgba(112,71,255,.14);
+  color:#8b5cf6;
+}
+
+.bootcamp-mini-badge {
+  background:var(--bc-pill-bg);
+  border:1px solid var(--bc-pill-border);
+  color:var(--bc-text);
+}
+
+.bootcamp-title {
+  font-size:22px;
+  line-height:1.25;
+  font-weight:900;
+  color:var(--bc-title);
+}
+
+.bootcamp-highlights {
+  color:var(--bc-text);
+  font-size:15px;
+  line-height:1.9;
+}
+
+.bootcamp-desc,
+.bootcamp-description {
+  color:var(--bc-text);
+  line-height:1.75;
+  font-size:15px;
+}
+
+.feature-pill {
+  display:inline-block;
+  background:var(--bc-pill-bg);
+  border:1px solid var(--bc-pill-border);
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:13px;
+  margin:3px 3px 3px 0;
+  color:var(--bc-text);
+}
+
+.price-label {
+  color:var(--bc-muted);
+}
+
+.price-box {
+  font-size:28px;
+  font-weight:900;
+  color:var(--bc-title);
+}
+
+.bootcamp-value-box {
+  padding:14px 16px;
+  border-radius:16px;
+  background:var(--bc-pill-bg);
+  border:1px solid var(--bc-pill-border);
+}
+
+.bootcamp-main-btn {
+  border-radius:14px;
+}
+
+.bootcamp-footer {
+  background:var(--bc-footer-bg);
+  border-top:1px solid var(--bc-card-border);
+  color:var(--bc-text);
+}
+
+.mentor-avatar {
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  background:rgba(112,71,255,.14);
+  color:#8b5cf6;
+}
+
+.modal-content {
+  border-radius:24px;
+  border:1px solid var(--bc-card-border);
+  background:var(--bc-card-bg);
+  color:var(--bc-text);
+}
+
+.modal-header,
+.modal-footer {
+  border:0;
+}
+
+.modal-title {
+  color:var(--bc-title);
+}
+
+.pay-summary {
+  background:linear-gradient(135deg,#7047ff,#8b5cf6);
+  color:#fff;
+  border-radius:18px;
+  padding:20px;
+}
+
+html[data-bs-theme="dark"] .btn-light {
+  background:#1e293b;
+  border-color:#334155;
+  color:#f8fafc;
+}
+
+html[data-bs-theme="dark"] .btn-close {
+  filter:invert(1);
 }
 </style>
 
@@ -165,7 +194,7 @@ html[data-bs-theme="dark"] .btn-close {
     <div class="container">
       <h1 class="text-white mb-2 display-4 fw-bold">Bootcampler</h1>
       <p class="mb-0 text-white lead">
-        Canlı eğitimler, gerçek vakalar, lablar ve birebir kariyer desteği.
+        3 ay süren canlı eğitimler, gerçek vakalar, lablar ve birebir kariyer desteği.
       </p>
     </div>
   </section>
@@ -186,9 +215,9 @@ html[data-bs-theme="dark"] .btn-close {
 
             <div class="card-body p-4 d-flex flex-column">
 
-              <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-3 gap-2">
                 <span class="bootcamp-badge">Canlı Bootcamp</span>
-                <span class="bootcamp-mini-badge">{{ b.duration }}</span>
+                <span class="bootcamp-mini-badge">3 Ay</span>
               </div>
 
               <h3 class="bootcamp-title mb-3">{{ b.title }}</h3>
@@ -198,10 +227,11 @@ html[data-bs-theme="dark"] .btn-close {
                 <div>📚 Soru çözümü</div>
                 <div>🎯 Gerçek vaka</div>
                 <div>👨‍🏫 Birebir mentorluk</div>
+                <div>⏳ 3 ay boyunca düzenli takip</div>
               </div>
 
               <div class="bootcamp-value-box mb-4">
-                <div class="small">Program Ücreti</div>
+                <div class="small price-label">Program Ücreti</div>
                 <div class="price-box">
                   {{ b.price_display }}
                 </div>
@@ -224,13 +254,98 @@ html[data-bs-theme="dark"] .btn-close {
                 <div class="mentor-avatar">VG</div>
                 <div class="ms-3">
                   <div class="fw-bold">Volkan Güler</div>
-                  <div class="small price-label">
-                    Mentor • Birebir destek
-                  </div>
+                  <div class="small price-label">Mentor • Birebir destek</div>
                 </div>
               </div>
             </div>
 
+          </div>
+        </div>
+
+        <div class="modal fade" id="bootcampModal{{ b.id }}" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+              <div class="modal-header px-4 pt-4">
+                <div>
+                  <span class="bootcamp-badge mb-2">3 Ay Canlı Bootcamp</span>
+                  <h3 class="modal-title fw-bold mb-0">{{ b.title }}</h3>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+              </div>
+
+              <div class="modal-body px-4">
+                <div class="row g-4">
+                  <div class="col-lg-7">
+                    <div class="bootcamp-description mb-4">
+                      {{ b.description|linebreaksbr }}
+                    </div>
+
+                    <div class="mb-3">
+                      <span class="feature-pill">✓ 3 ay program</span>
+                      <span class="feature-pill">✓ Her zaman başlanabilir</span>
+                      <span class="feature-pill">✓ Birebir çalışma</span>
+                      <span class="feature-pill">✓ Gerçek vaka çalışmaları</span>
+                      <span class="feature-pill">✓ Lab ortamı</span>
+                      <span class="feature-pill">✓ Soru çözümü</span>
+                      <span class="feature-pill">✓ CV desteği</span>
+                      <span class="feature-pill">✓ Mülakat hazırlığı</span>
+                    </div>
+
+                    <p class="mb-0 fw-semibold" style="color:var(--bc-title);">
+                      Bu program 3 ay boyunca sadece eğitim değil, düzenli kariyer hazırlığı sunar.
+                    </p>
+                  </div>
+
+                  <div class="col-lg-5">
+                    <div class="pay-summary">
+                      <div class="small opacity-75 mb-1">Ödenecek Tutar</div>
+                      <div class="display-6 fw-bold mb-3">
+                        {{ b.price_display }}
+                      </div>
+
+                      <div class="d-flex justify-content-between mb-2">
+                        <span>Süre</span>
+                        <strong>3 Ay</strong>
+                      </div>
+
+                      <div class="d-flex justify-content-between mb-2">
+                        <span>Seviye</span>
+                        <strong>{{ b.level }}</strong>
+                      </div>
+
+                      <hr class="border-light opacity-25">
+
+                      <div class="small opacity-75">
+                        Lab, vaka, soru çözümü ve birebir mentorluk dahildir.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-footer px-4 pb-4">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                  Vazgeç
+                </button>
+
+                <form method="post" action="{% url 'bootcamp_checkout' b.slug %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-primary px-4 fw-bold">
+                    Katıl
+                  </button>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        {% empty %}
+        <div class="col-12">
+          <div class="bootcamp-card p-5 text-center">
+            <h3 class="bootcamp-title mb-2">Henüz bootcamp eklemedik.</h3>
+            <p class="bootcamp-desc mb-0">Yeni programlar yakında burada listelenecek.</p>
           </div>
         </div>
         {% endfor %}
