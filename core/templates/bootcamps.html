@@ -144,6 +144,20 @@ html[data-bs-theme="dark"] .btn-light {
 html[data-bs-theme="dark"] .btn-close {
   filter: invert(1);
 }
+.bootcamp-top-strip{
+  height:5px;
+  background:linear-gradient(90deg,#7047ff,#8b5cf6);
+}
+
+.bootcamp-img{
+  height:180px;
+  width:100%;
+  object-fit:cover;
+  display:block;
+}
+.bootcamp-top-strip + .card-body{
+  padding-top:28px !important;
+}
 </style>
 
 <main class="bootcamp-page">
@@ -168,17 +182,13 @@ html[data-bs-theme="dark"] .btn-close {
 
             {% if b.image %}
               <img src="{{ b.image.url }}" alt="{{ b.title }}" class="bootcamp-img">
-            {% else %}
-              <div class="bootcamp-img bootcamp-img-placeholder">
-                <span>{{ b.title|slice:":2" }}</span>
-              </div>
             {% endif %}
 
             <div class="card-body p-4 d-flex flex-column">
 
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <span class="bootcamp-badge">Canlı Bootcamp</span>
-                <span class="bootcamp-mini-badge">3 Ay</span>
+                <span class="bootcamp-mini-badge">{{ b.duration }}</span>
               </div>
 
               <h3 class="bootcamp-title mb-3">{{ b.title }}</h3>
@@ -193,7 +203,7 @@ html[data-bs-theme="dark"] .btn-close {
               <div class="bootcamp-value-box mb-4">
                 <div class="small">Program Ücreti</div>
                 <div class="price-box">
-                  {{ b.price_display }} {{ b.currency }}
+                  {{ b.price_display }}
                 </div>
               </div>
 
@@ -206,6 +216,7 @@ html[data-bs-theme="dark"] .btn-close {
                   Detayları İncele ve Katıl
                 </button>
               </div>
+
             </div>
 
             <div class="bootcamp-footer p-4">
@@ -213,92 +224,13 @@ html[data-bs-theme="dark"] .btn-close {
                 <div class="mentor-avatar">VG</div>
                 <div class="ms-3">
                   <div class="fw-bold">Volkan Güler</div>
-                  <div class="small price-label">Mentor • Birebir destek</div>
+                  <div class="small price-label">
+                    Mentor • Birebir destek
+                  </div>
                 </div>
               </div>
             </div>
 
-          </div>
-        </div>
-
-        <div class="modal fade" id="bootcampModal{{ b.id }}" tabindex="-1" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-
-              <div class="modal-header px-4 pt-4">
-                <div>
-                  <span class="bootcamp-badge mb-2">Premium Bootcamp</span>
-                  <h3 class="modal-title fw-bold mb-0">{{ b.title }}</h3>
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
-              </div>
-
-              <div class="modal-body px-4">
-                <div class="row g-4">
-                  <div class="col-lg-7">
-                    <div class="bootcamp-description mb-4">
-                      {{ b.description|linebreaksbr }}
-                    </div>
-
-                    <div class="mb-3">
-                      <span class="feature-pill">✓ 3 ay program</span>
-                      <span class="feature-pill">✓ Her zaman başlanabilir</span>
-                      <span class="feature-pill">✓ Birebir çalışma</span>
-                      <span class="feature-pill">✓ Gerçek vaka çalışmaları</span>
-                      <span class="feature-pill">✓ Laboratuvar ortamı</span>
-                      <span class="feature-pill">✓ Soru çözümü</span>
-                      <span class="feature-pill">✓ Deneme sınavları</span>
-                      <span class="feature-pill">✓ CV ve mülakat desteği</span>
-                    </div>
-
-                    <p class="mb-0 fw-semibold" style="color:var(--bc-title);">
-                      Sadece eğitim değil, kariyer hazırlığı.
-                    </p>
-                  </div>
-
-                  <div class="col-lg-5">
-                    <div class="pay-summary">
-                      <div class="small opacity-75 mb-1">Ödenecek Tutar</div>
-                      <div class="display-6 fw-bold mb-3">
-                        {{ b.price_display }} {{ b.currency }}
-                      </div>
-
-                      <div class="d-flex justify-content-between mb-2">
-                        <span>Süre</span>
-                        <strong>{{ b.duration }}</strong>
-                      </div>
-
-                      <div class="d-flex justify-content-between mb-2">
-                        <span>Seviye</span>
-                        <strong>{{ b.level }}</strong>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="modal-footer px-4 pb-4">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">
-                  Vazgeç
-                </button>
-
-                <form method="post" action="{% url 'bootcamp_checkout' b.slug %}">
-                  {% csrf_token %}
-                  <button type="submit" class="btn btn-primary px-4 fw-bold">
-                    Katıl
-                  </button>
-                </form>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        {% empty %}
-        <div class="col-12">
-          <div class="bootcamp-card p-5 text-center">
-            <h3 class="bootcamp-title mb-2">Henüz bootcamp eklemedik.</h3>
-            <p class="bootcamp-desc mb-0">Yeni programlar yakında burada listelenecek.</p>
           </div>
         </div>
         {% endfor %}
