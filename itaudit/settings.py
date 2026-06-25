@@ -22,7 +22,6 @@ TELEGRAM_CHAT_ID = config("TELEGRAM_CHAT_ID", default="")
 import os
 
 STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY", default="")
-STRIPE_WEBHOOK_SECRET = config("STRIPE_WEBHOOK_SECRET", default="")
 
 AUTH_USER_MODEL = 'core.CustomUser'
 

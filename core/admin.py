@@ -25,7 +25,7 @@ DEFAULT_PASSWORD = "Siberkobi1234"
 
 
 from django.contrib import admin
-from .models import Bootcamp, BootcampPurchase
+from .models import Bootcamp
 
 
 @admin.register(Bootcamp)
