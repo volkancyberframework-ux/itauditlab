@@ -390,16 +390,40 @@ def bootcamps_view(request):
 def bootcamp_checkout(request, slug):
     bootcamp = get_object_or_404(Bootcamp, slug=slug, is_active=True)
 
+    email = ""
+    username = "Misafir"
+
+    if request.user.is_authenticated:
+        email = request.user.email or ""
+        username = request.user.get_full_name() or request.user.username or request.user.email
+    else:
+        email = request.POST.get("email", "").strip().lower()
+
+    bot_token = getattr(settings, "TELEGRAM_BOT_TOKEN", "")
+    chat_id = getattr(settings, "TELEGRAM_CHAT_ID", "")
+
+    if bot_token and chat_id and request.user.is_authenticated:
+        text = (
+            "🚀 Bootcamp Katıl Butonuna Basıldı\n\n"
+            f"Bootcamp: {bootcamp.title}\n"
+            f"Kullanıcı: {username}\n"
+            f"Email: {email}\n"
+            f"Fiyat: {bootcamp.price} {bootcamp.currency}"
+        )
+
+        try:
+            requests.post(
+                f"https://api.telegram.org/bot{bot_token}/sendMessage",
+                data={"chat_id": chat_id, "text": text},
+                timeout=5
+            )
+        except Exception as e:
+            print("Telegram error:", e)
+
     if not settings.STRIPE_SECRET_KEY:
         return HttpResponseBadRequest("Stripe ayarı eksik.")
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
-
-    email = ""
-    if request.user.is_authenticated:
-        email = request.user.email or ""
-    else:
-        email = request.POST.get("email", "").strip().lower()
 
     session = stripe.checkout.Session.create(
         mode="payment",
@@ -423,7 +447,6 @@ def bootcamp_checkout(request, slug):
     )
 
     return redirect(session.url)
-
 
 def bootcamp_payment_success(request):
     return render(request, "bootcamp-success.html")
