@@ -118,7 +118,7 @@
                 <div class="d-flex align-items-center justify-content-between mb-3">
                   <div>
                     <div class="text-muted small">Program Ücreti</div>
-                    <div class="price-box">{{ b.price }}</div>
+                    <div class="price-box">{{ b.price }} {{ b.currency }}</div>
                   </div>
                 </div>
 
@@ -135,7 +135,10 @@
             <div class="card-footer bg-white p-4">
               <div class="row align-items-center g-0">
                 <div class="col-auto">
-                  <img src="{% static 'assets/images/avatar/avatar-3.jpg' %}" class="rounded-circle avatar-xs" alt="avatar">
+                  <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center fw-bold"
+                       style="width:36px;height:36px;">
+                    VG
+                  </div>
                 </div>
                 <div class="col ms-2">
                   <span class="fw-semibold">Volkan Güler</span>
@@ -187,7 +190,7 @@
                   <div class="col-lg-5">
                     <div class="pay-summary">
                       <div class="small opacity-75 mb-1">Ödenecek Tutar</div>
-                      <div class="display-6 fw-bold mb-3">{{ b.price }}</div>
+                      <div class="display-6 fw-bold mb-3">{{ b.price }} {{ b.currency }}</div>
 
                       <div class="d-flex justify-content-between mb-2">
                         <span>Süre</span>
