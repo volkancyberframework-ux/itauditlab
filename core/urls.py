@@ -16,7 +16,7 @@ from . import views_store
 
 
 urlpatterns = [
-    path("akademi/", views.akademi, name="akademi"),
+    #path("akademi/", views.akademi, name="akademi"),
     path(
         "membership/checkout/<str:plan>/",
         views.create_membership_checkout,
