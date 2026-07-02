@@ -194,7 +194,7 @@ html[data-bs-theme="dark"] .btn-close {
     <div class="container">
       <h1 class="text-white mb-2 display-4 fw-bold">Bootcampler</h1>
       <p class="mb-0 text-white lead">
-        3 ay süren canlı eğitimler, gerçek vakalar, lablar ve birebir kariyer desteği.
+        12 ay süren canlı eğitimler, gerçek vakalar, lablar ve birebir kariyer desteği.
       </p>
     </div>
   </section>
@@ -210,28 +210,34 @@ html[data-bs-theme="dark"] .btn-close {
             <div class="bootcamp-top-strip"></div>
 
             {% if b.image %}
-              <img src="{{ b.image.url }}" alt="{{ b.title }}" class="bootcamp-img">
+            <img src="{{ b.image.url }}" alt="{{ b.title }}" class="bootcamp-img">
             {% endif %}
 
             <div class="card-body p-4 d-flex flex-column">
 
               <div class="d-flex justify-content-between align-items-center mb-3 gap-2">
-                <span class="bootcamp-badge">Canlı Bootcamp</span>
-                <span class="bootcamp-mini-badge">3 Ay</span>
+                <span class="bootcamp-badge">12 Ay Kariyer Programı</span>
+                <span class="bootcamp-mini-badge">Size Özel</span>
               </div>
 
-              <h3 class="bootcamp-title mb-3">{{ b.title }}</h3>
+              <h3 class="bootcamp-title mb-3">
+                {{ b.title }}
+              </h3>
 
               <div class="bootcamp-highlights mb-4">
-                <div>🧪 Lab ortamı</div>
-                <div>📚 Soru çözümü</div>
-                <div>🎯 Gerçek vaka</div>
-                <div>👨‍🏫 Birebir mentorluk</div>
-                <div>⏳ 3 ay boyunca düzenli takip</div>
+                <div>🎓 İlk 3-6 ay eğitim</div>
+                <div>🧪 Gerçek lab ve vaka çalışmaları</div>
+                <div>👨‍🏫 Size uygun zamanda birebir görüşmeler</div>
+                <div>🇹🇷 Türkçe eğitim</div>
+                <div>🇬🇧 İngilizce gelişimi</div>
+                <div>💼 İş başvurusu ve mülakat desteği</div>
               </div>
 
               <div class="bootcamp-value-box mb-4">
-                <div class="small price-label">Program Ücreti</div>
+                <div class="small price-label">
+                  12 Aylık Program Ücreti
+                </div>
+
                 <div class="price-box">
                   {{ b.price_display }}
                 </div>
@@ -243,7 +249,7 @@ html[data-bs-theme="dark"] .btn-close {
                   class="btn btn-primary w-100 py-3 fw-bold bootcamp-main-btn"
                   data-bs-toggle="modal"
                   data-bs-target="#bootcampModal{{ b.id }}">
-                  Detayları İncele ve Katıl
+                  Programı İncele
                 </button>
               </div>
 
@@ -251,62 +257,139 @@ html[data-bs-theme="dark"] .btn-close {
 
             <div class="bootcamp-footer p-4">
               <div class="d-flex align-items-center">
-                <div class="mentor-avatar">VG</div>
-                <div class="ms-3">
-                  <div class="fw-bold">Volkan Güler</div>
-                  <div class="small price-label">Mentor • Birebir destek</div>
+
+                <div class="mentor-avatar">
+                  VG
                 </div>
+
+                <div class="ms-3">
+                  <div class="fw-bold">
+                    Volkan Güler
+                  </div>
+                  <div class="small price-label">
+                    Mentor • Kariyer Yol Arkadaşı
+                  </div>
+                </div>
+
               </div>
             </div>
 
           </div>
         </div>
 
-        <div class="modal fade" id="bootcampModal{{ b.id }}" tabindex="-1" aria-hidden="true">
+        <!-- Modal -->
+
+        <div class="modal fade"
+             id="bootcampModal{{ b.id }}"
+             tabindex="-1"
+             aria-hidden="true">
+
           <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
 
               <div class="modal-header px-4 pt-4">
+
                 <div>
-                  <span class="bootcamp-badge mb-2">3 Ay Canlı Bootcamp</span>
-                  <h3 class="modal-title fw-bold mb-0">{{ b.title }}</h3>
+                  <span class="bootcamp-badge mb-2">
+                    12 Ay Kariyer Programı
+                  </span>
+
+                  <h3 class="modal-title fw-bold mb-0">
+                    {{ b.title }}
+                  </h3>
                 </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal">
+                </button>
+
               </div>
 
               <div class="modal-body px-4">
+
                 <div class="row g-4">
+
                   <div class="col-lg-7">
+
                     <div class="bootcamp-description mb-4">
                       {{ b.description|linebreaksbr }}
                     </div>
 
                     <div class="mb-3">
-                      <span class="feature-pill">✓ 3 ay program</span>
-                      <span class="feature-pill">✓ Her zaman başlanabilir</span>
-                      <span class="feature-pill">✓ Birebir çalışma</span>
+
+                      <span class="feature-pill">✓ 12 ay birlikte çalışma</span>
+
+                      <span class="feature-pill">✓ İlk 3-6 ay eğitim</span>
+
+                      <span class="feature-pill">✓ Size uygun zamanda birebir görüşmeler</span>
+
+                      <span class="feature-pill">✓ Türkçe anlatım</span>
+
+                      <span class="feature-pill">✓ İngilizce gelişimi</span>
+
                       <span class="feature-pill">✓ Gerçek vaka çalışmaları</span>
+
                       <span class="feature-pill">✓ Lab ortamı</span>
-                      <span class="feature-pill">✓ Soru çözümü</span>
-                      <span class="feature-pill">✓ CV desteği</span>
+
+                      <span class="feature-pill">✓ CV hazırlığı</span>
+
+                      <span class="feature-pill">✓ LinkedIn optimizasyonu</span>
+
+                      <span class="feature-pill">✓ Sürekli iş başvurusu desteği</span>
+
                       <span class="feature-pill">✓ Mülakat hazırlığı</span>
+
+                      <span class="feature-pill">✓ Kariyer danışmanlığı</span>
+
                     </div>
 
-                    <p class="mb-0 fw-semibold" style="color:var(--bc-title);">
-                      Bu program 3 ay boyunca sadece eğitim değil, düzenli kariyer hazırlığı sunar.
+                    <p class="mb-0 fw-semibold"
+                       style="color:var(--bc-title);">
+
+                      Bu program klasik bir video kursu değildir.
+
+                      İlk <strong>3-6 ay</strong> boyunca teknik bilgi,
+                      uygulama, lab ve gerçek vakalar üzerinde birlikte çalışırız.
+
+                      Sonrasında yaklaşık <strong>12 ay boyunca</strong>
+                      CV hazırlığı, LinkedIn optimizasyonu,
+                      iş başvuruları ve mülakat süreçlerinde
+                      size birebir destek oluruz.
+
+                      Görüşmeler tamamen sizin uygun olduğunuz
+                      gün ve saatlere göre planlanır.
+
                     </p>
+
                   </div>
 
                   <div class="col-lg-5">
+
                     <div class="pay-summary">
-                      <div class="small opacity-75 mb-1">Ödenecek Tutar</div>
+
+                      <div class="small opacity-75 mb-1">
+                        Program Ücreti
+                      </div>
+
                       <div class="display-6 fw-bold mb-3">
                         {{ b.price_display }}
                       </div>
 
                       <div class="d-flex justify-content-between mb-2">
-                        <span>Süre</span>
-                        <strong>3 Ay</strong>
+                        <span>Toplam Süre</span>
+                        <strong>12 Ay</strong>
+                      </div>
+
+                      <div class="d-flex justify-content-between mb-2">
+                        <span>Eğitim</span>
+                        <strong>3-6 Ay</strong>
+                      </div>
+
+                      <div class="d-flex justify-content-between mb-2">
+                        <span>Kariyer Desteği</span>
+                        <strong>12 Ay</strong>
                       </div>
 
                       <div class="d-flex justify-content-between mb-2">
@@ -317,24 +400,86 @@ html[data-bs-theme="dark"] .btn-close {
                       <hr class="border-light opacity-25">
 
                       <div class="small opacity-75">
-                        Lab, vaka, soru çözümü ve birebir mentorluk dahildir.
+
+                        ✔ Türkçe eğitim
+
+                        <br>
+
+                        ✔ İngilizce gelişimi
+
+                        <br>
+
+                        ✔ Lab & gerçek vaka
+
+                        <br>
+
+                        ✔ CV / LinkedIn
+
+                        <br>
+
+                        ✔ İş başvurusu desteği
+
+                        <br>
+
+                        ✔ Mülakat hazırlığı
+
                       </div>
+
+                      <div class="mt-4">
+
+                        <div class="fw-bold mb-2">
+                          Sorularınız mı var?
+                        </div>
+
+                        <div class="small opacity-75">
+
+                          Fiyat, ödeme planı ve program hakkında
+                          WhatsApp üzerinden doğrudan
+                          <strong>Volkan</strong> ile görüşebilirsiniz.
+
+                        </div>
+
+                        <div class="fs-5 fw-bold mt-2">
+                          📱 +32 476 07 31 71
+                        </div>
+
+                      </div>
+
                     </div>
+
                   </div>
+
                 </div>
+
               </div>
 
               <div class="modal-footer px-4 pb-4">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+
+                <button
+                  type="button"
+                  class="btn btn-light"
+                  data-bs-dismiss="modal">
+
                   Vazgeç
+
                 </button>
 
-                <form method="post" action="{% url 'bootcamp_checkout' b.slug %}">
+                <form
+                  method="post"
+                  action="{% url 'bootcamp_checkout' b.slug %}">
+
                   {% csrf_token %}
-                  <button type="submit" class="btn btn-primary px-4 fw-bold">
-                    Katıl
+
+                  <button
+                    type="submit"
+                    class="btn btn-primary px-4 fw-bold">
+
+                    Programa Katıl
+
                   </button>
+
                 </form>
+
               </div>
 
             </div>
@@ -342,12 +487,19 @@ html[data-bs-theme="dark"] .btn-close {
         </div>
 
         {% empty %}
+
         <div class="col-12">
           <div class="bootcamp-card p-5 text-center">
-            <h3 class="bootcamp-title mb-2">Henüz bootcamp eklemedik.</h3>
-            <p class="bootcamp-desc mb-0">Yeni programlar yakında burada listelenecek.</p>
+            <h3 class="bootcamp-title mb-2">
+              Henüz bootcamp eklemedik.
+            </h3>
+
+            <p class="bootcamp-desc mb-0">
+              Yeni programlar çok yakında burada yayınlanacak.
+            </p>
           </div>
         </div>
+
         {% endfor %}
 
       </div>

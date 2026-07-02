@@ -6,19 +6,22 @@ from django.utils import timezone
 
 class HiddenLoginAttemptTelegramMiddleware:
     """
-    /bulamazsinki altındaki tüm POST denemelerini Telegram'a bildirir.
-    Başarılı / başarısız fark etmez.
+    Sadece /bulamazsinki/login/ POST denemelerini Telegram'a bildirir.
+    Başarılı / başarısız giriş sonucunu da belirtir.
     """
 
     def __init__(self, get_response):
         self.get_response = get_response
 
     def __call__(self, request):
-
         path = request.path.rstrip("/")
 
-        if request.method == "POST" and path.startswith("/bulamazsinki"):
+        is_admin_login_attempt = (
+            request.method == "POST"
+            and path == "/bulamazsinki/login"
+        )
 
+        if is_admin_login_attempt:
             ip = self.get_client_ip(request)
 
             username = (
@@ -27,17 +30,24 @@ class HiddenLoginAttemptTelegramMiddleware:
                 or "-"
             )
 
-            # Güvenlik için şifreyi düz metin göndermiyoruz
             password_entered = "YES" if request.POST.get("password") else "NO"
-
             user_agent = request.META.get("HTTP_USER_AGENT", "-")
             referer = request.META.get("HTTP_REFERER", "-")
             full_path = request.get_full_path()
-
             now = timezone.localtime().strftime("%Y-%m-%d %H:%M:%S")
 
+            response = self.get_response(request)
+
+            login_success = (
+                response.status_code in [301, 302]
+                and "/login" not in response.get("Location", "")
+            )
+
+            status_text = "✅ BAŞARILI GİRİŞ" if login_success else "❌ BAŞARISIZ GİRİŞ"
+
             message = (
-                "🚨 ADMIN LOGIN ATTEMPT\n\n"
+                f"🚨 ADMIN LOGIN ATTEMPT\n\n"
+                f"{status_text}\n\n"
                 f"🌍 IP: {ip}\n"
                 f"👤 Username: {username}\n"
                 f"🔑 Password entered: {password_entered}\n"
@@ -48,6 +58,8 @@ class HiddenLoginAttemptTelegramMiddleware:
             )
 
             self.send_telegram(message)
+
+            return response
 
         return self.get_response(request)
 
