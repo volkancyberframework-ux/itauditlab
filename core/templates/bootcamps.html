@@ -192,12 +192,53 @@ html[data-bs-theme="dark"] .btn-close {
 <main class="bootcamp-page">
   <section class="py-5 py-lg-6 bg-primary">
     <div class="container">
-      <h1 class="text-white mb-2 display-4 fw-bold">Bootcampler</h1>
+
+      <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+
+        <span class="badge rounded-pill bg-danger px-3 py-2 d-inline-flex align-items-center">
+
+          <span style="
+              width:10px;
+              height:10px;
+              background:#fff;
+              border-radius:50%;
+              display:inline-block;
+              margin-right:8px;
+              animation:pulseLive 1.2s infinite;
+          "></span>
+
+          LIVE • {{ active_students_count }} öğrenci eğitimde
+        </span>
+
+      </div>
+
+      <h1 class="text-white mb-2 display-4 fw-bold">
+        Bootcampler
+      </h1>
+
       <p class="mb-0 text-white lead">
-        12 ay süren canlı eğitimler, gerçek vakalar, lablar ve birebir kariyer desteği.
+        12 ay süren birebir eğitimler, gerçek vakalar, lablar ve kariyer desteği.
       </p>
+
     </div>
   </section>
+
+  <style>
+  @keyframes pulseLive{
+      0%{
+          transform:scale(1);
+          opacity:1;
+      }
+      50%{
+          transform:scale(1.45);
+          opacity:.35;
+      }
+      100%{
+          transform:scale(1);
+          opacity:1;
+      }
+  }
+  </style>
 
   <section class="py-7">
     <div class="container">
@@ -267,7 +308,7 @@ html[data-bs-theme="dark"] .btn-close {
                     Volkan Güler
                   </div>
                   <div class="small price-label">
-                    Mentor • Kariyer Yol Arkadaşı
+                    Mentor • Sizinle Çalışacak Kişi
                   </div>
                 </div>
 
