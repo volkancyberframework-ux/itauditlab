@@ -187,6 +187,13 @@ html[data-bs-theme="dark"] .btn-light {
 html[data-bs-theme="dark"] .btn-close {
   filter:invert(1);
 }
+
+  @media (max-width: 576px) {
+    .badge {
+        white-space: normal !important;
+        line-height: 1.5;
+    }
+}
 </style>
 
 <main class="bootcamp-page">
@@ -195,30 +202,24 @@ html[data-bs-theme="dark"] .btn-close {
 
       <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
 
-<span class="badge rounded-pill bg-danger px-3 py-2 w-100">
+<div class="alert alert-danger rounded-pill py-2 px-3 mb-3 text-center">
 
-    <span class="d-flex align-items-center justify-content-center flex-wrap text-center">
+    <span style="
+        width:10px;
+        height:10px;
+        background:#fff;
+        border-radius:50%;
+        display:inline-block;
+        margin-right:8px;
+        animation:pulseLive 1.2s infinite;
+    "></span>
 
-        <span style="
-            width:10px;
-            height:10px;
-            background:#fff;
-            border-radius:50%;
-            display:inline-block;
-            margin-right:8px;
-            animation:pulseLive 1.2s infinite;
-            flex-shrink:0;
-        "></span>
+    <strong>CANLI</strong> •
+    Bu bootcamp programlarında şu anda
+    <strong>{{ active_students_count }}</strong>
+    öğrenci aktif olarak Volkan ile birlikte ilerliyor.
 
-        <span>
-            CANLI • Bu bootcamp programlarında şu anda
-            <strong class="mx-1">{{ active_students_count }}</strong>
-            öğrenci aktif olarak Volkan ile birlikte ilerliyor.
-        </span>
-
-    </span>
-
-</span>
+</div>
 
       </div>
 
