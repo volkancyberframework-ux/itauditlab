@@ -46,12 +46,6 @@ def get_client_ip(request):
     return request.META.get("REMOTE_ADDR")
 
 def bootcamps_view(request):
-    PageVisit.objects.create(
-        path=request.path,
-        ip_address=get_client_ip(request),
-        user=request.user if request.user.is_authenticated else None,
-    )
-
     User = get_user_model()
 
     active_students_count = User.objects.filter(
