@@ -1,0 +1,26 @@
+{% extends "admin/login.html" %}
+
+{% block content %}
+<div style="
+    background:#fff3cd;
+    color:#664d03;
+    border:1px solid #ffecb5;
+    padding:14px 18px;
+    border-radius:6px;
+    margin-bottom:20px;
+    font-size:14px;
+    line-height:1.7;
+">
+    <strong>⚠️ Yetkisiz Erişim Uyarısı</strong><br><br>
+
+    Bu sayfaya attığın her bir deneme loglanır.<br>
+    IP adresin, zaman bilgin, tarayıcı ve cihaz bilgilerin kayıt altına alınır.<br><br>
+
+    <strong>Sakın yeltenme.</strong><br>
+    Buradaysan bile yanlış yerdesin.<br><br>
+
+    <strong>Sen bilirsin.</strong>
+</div>
+
+{{ block.super }}
+{% endblock %}

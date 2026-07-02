@@ -45,7 +45,7 @@
                             <!-- Side Navbar -->
                             <ul class="nav nav-lb-tab mb-6" id="tab" role="tablist">
                                 <li class="nav-item ms-0" role="presentation">
-                                    <a class="nav-link active" id="bookmarked-tab" data-bs-toggle="pill" href="#bookmarked" role="tab" aria-controls="bookmarked" aria-selected="true">All Courses</a>
+                                    <a class="nav-link active" id="bookmarked-tab" data-bs-toggle="pill" href="#bookmarked" role="tab" aria-controls="bookmarked" aria-selected="true">Your Available Content</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link" id="currentlyLearning-tab" data-bs-toggle="pill" href="#currentlyLearning" role="tab" aria-controls="currentlyLearning" aria-selected="false">
@@ -58,6 +58,7 @@
                                 <div class="tab-pane fade show active" id="bookmarked" role="tabpanel" aria-labelledby="bookmarked-tab">
                                     <div class="row gy-4 gx-4">
                                       {% for course in courses %}
+                                        {% if course.id in enrolled_course_ids or course.id in can_enroll_ids %}
                                       <div class="col-lg-3 col-md-6 col-12">
                                         <div class="card mb-4 card-hover h-100 d-flex flex-column">
                                           {% if course.id in enrolled_course_ids %}
@@ -142,8 +143,8 @@
                                         </div>
                                       </div>
 
-
-                                      {% endfor %}
+                                      {% endif %}
+                                  {% endfor %}
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="currentlyLearning" role="tabpanel" aria-labelledby="currentlyLearning-tab">

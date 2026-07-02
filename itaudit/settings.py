@@ -63,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    "core.middleware.HiddenLoginAttemptTelegramMiddleware",
 ]
 
 ROOT_URLCONF = 'itaudit.urls'

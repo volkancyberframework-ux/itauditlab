@@ -309,6 +309,77 @@
     line-height: 1.4;
   }
 }
+
+.testimonials{
+  overflow:hidden;
+  padding:90px 0;
+}
+
+.testimonial-slider{
+  overflow:hidden;
+  position:relative;
+}
+
+.testimonial-track{
+  display:flex;
+  gap:24px;
+  width:max-content;
+  animation: scrollTestimonials 38s linear infinite;
+}
+
+.testimonial-card{
+  width:420px;
+  background:white;
+  border:1px solid var(--sk-border);
+  border-radius:30px;
+  padding:32px;
+  box-shadow:0 18px 45px rgba(40,30,20,.06);
+  flex-shrink:0;
+}
+
+.testimonial-card p{
+  font-size:18px;
+  line-height:1.8;
+  color:var(--sk-text);
+  margin:18px 0 28px;
+}
+
+.stars{
+  color:#ffb400;
+  font-size:24px;
+  letter-spacing:2px;
+}
+
+.testimonial-user{
+  display:flex;
+  flex-direction:column;
+}
+
+.testimonial-user strong{
+  font-size:17px;
+  font-weight:900;
+}
+
+.testimonial-user span{
+  color:var(--sk-muted);
+  font-size:14px;
+  font-weight:700;
+}
+
+@keyframes scrollTestimonials{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
+}
+
+.testimonial-track:hover{
+  animation-play-state:paused;
+}
+
+@media(max-width:768px){
+  .testimonial-card{
+    width:320px;
+  }
+}
 </style>
 
 <main class="sk-page">
@@ -695,6 +766,121 @@
 
     </div>
   </section>
+
+  <section class="testimonials sk-section-soft">
+  <div class="container">
+
+    <div class="row mb-xl-7 mb-5">
+      <div class="col-xl-8 col-md-10 col-12 mx-auto text-center">
+        <span class="badge bg-primary-subtle text-primary-emphasis rounded-pill px-3 py-2 mb-3">
+          Başarı Hikayeleri
+        </span>
+        <h2 class="h1 fw-bolder mb-3">Katılımcılar Ne Diyor?</h2>
+        <p class="mb-0 text-muted fs-4">
+          Siberkobi programlarına katılan insanların gerçek deneyimleri.
+        </p>
+      </div>
+    </div>
+
+    <div class="testimonial-slider">
+      <div class="testimonial-track">
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>“Volkan Güler sayesinde siber güvenlikte sadece teknik kasmanın yeterli olmadığını fark ettim. Özellikle gerçek dünya vakaları, audit bakış açısı ve risk düşünme yaklaşımı kariyerime inanılmaz katkı sağladı.”</p>
+          <div class="testimonial-user">
+            <strong>Hakan</strong>
+            <span>IT Auditor • Hollanda</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>“Üniversite döneminde neye odaklanacağımı bilmiyordum. Volkan abi bana sadece teknik değil, sektörün nasıl çalıştığını da öğretti. Gerçek vaka çalışmaları sayesinde ayrıştım.”</p>
+          <div class="testimonial-user">
+            <strong>Batuhan</strong>
+            <span>Cybersecurity Intern</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>“Bugüne kadar birçok eğitim aldım ama çoğu teoride kaldı. Burada evidence review, finding yazımı ve risk değerlendirmesi gibi gerçek dünya süreçlerini öğrendim.”</p>
+          <div class="testimonial-user">
+            <strong>Mahmut</strong>
+            <span>IT Audit & GRC</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>“Volkan Güler sadece teori anlatmıyor; bankalarda, gerçek denetimlerde ve gerçek krizlerde yaşanan şeyleri gösteriyor. Bu bakış açısı düşünme şeklimi değiştirdi.”</p>
+          <div class="testimonial-user">
+            <strong>Emirhan</strong>
+            <span>Cybersecurity Analyst</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>“Özellikle risk düşünme yaklaşımı beni çok geliştirdi. Artık teknik açıkların iş tarafındaki etkisini de değerlendirebiliyorum.”</p>
+          <div class="testimonial-user">
+            <strong>Mert</strong>
+            <span>GRC Consultant</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>“En sevdiğim tarafı her şeyin gerçek hayat odaklı olması. Evidence review, audit finding yazımı ve vendor risk değerlendirmesi çok güçlüydü.”</p>
+          <div class="testimonial-user">
+            <strong>Ayşenur</strong>
+            <span>IT Risk Intern</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>“CISA sürecinde konuları gerçek dünyaya bağlayamıyordum. Buradaki örnekler sayesinde ezber yerine mantığı anlamaya başladım.”</p>
+          <div class="testimonial-user">
+            <strong>Burak</strong>
+            <span>CISA Candidate</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>“En büyük fark birebir yönlendirme kısmıydı. Birçok platformda içerik var ama gerçekten gelişimi takip eden çok az kişi var.”</p>
+          <div class="testimonial-user">
+            <strong>Kaan</strong>
+            <span>Cybersecurity Engineer</span>
+          </div>
+        </div>
+
+        <!-- Sonsuz kayma için aynı kartlar tekrarlandı -->
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>“Volkan Güler sayesinde siber güvenlikte sadece teknik kasmanın yeterli olmadığını fark ettim. Özellikle gerçek dünya vakaları, audit bakış açısı ve risk düşünme yaklaşımı kariyerime inanılmaz katkı sağladı.”</p>
+          <div class="testimonial-user">
+            <strong>Hakan</strong>
+            <span>IT Auditor • Hollanda</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>“Üniversite döneminde neye odaklanacağımı bilmiyordum. Volkan abi bana sadece teknik değil, sektörün nasıl çalıştığını da öğretti. Gerçek vaka çalışmaları sayesinde ayrıştım.”</p>
+          <div class="testimonial-user">
+            <strong>Batuhan</strong>
+            <span>Cybersecurity Intern</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
 
   <section class="sk-section-soft py-xl-9 py-7">
     <div class="container">
