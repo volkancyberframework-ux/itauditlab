@@ -29,9 +29,11 @@ from .models import Bootcamp
 
 from .models import PageVisit, BootcampInterest
 
+import requests
+
 @admin.register(PageVisit)
 class PageVisitAdmin(admin.ModelAdmin):
-    list_display = ("created_at", "user_display", "ip_address", "path")
+    list_display = ("created_at", "user_display", "ip_with_country", "path")
     search_fields = ("path", "ip_address", "user__email", "user__username")
     list_filter = ("path", "created_at")
 
@@ -39,6 +41,25 @@ class PageVisitAdmin(admin.ModelAdmin):
         return obj.user.email if obj.user else "-"
     user_display.short_description = "User"
 
+    def ip_with_country(self, obj):
+        if not obj.ip_address:
+            return "-"
+
+        try:
+            r = requests.get(
+                f"http://ip-api.com/json/{obj.ip_address}?fields=country",
+                timeout=2,
+            )
+            country = r.json().get("country")
+
+            if country:
+                return f"{obj.ip_address} ({country})"
+        except Exception:
+            pass
+
+        return obj.ip_address
+
+    ip_with_country.short_description = "IP Address"
 
 @admin.register(BootcampInterest)
 class BootcampInterestAdmin(admin.ModelAdmin):
