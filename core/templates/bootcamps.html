@@ -195,26 +195,30 @@ html[data-bs-theme="dark"] .btn-close {
 
       <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
 
-          <span class="badge rounded-pill bg-danger px-3 py-2 d-inline-flex align-items-center">
+<span class="badge rounded-pill bg-danger px-3 py-2 w-100">
 
-              <span style="
-                  width:10px;
-                  height:10px;
-                  background:#fff;
-                  border-radius:50%;
-                  display:inline-block;
-                  margin-right:8px;
-                  animation:pulseLive 1.2s infinite;
-              "></span>
+    <span class="d-flex align-items-center justify-content-center flex-wrap text-center">
 
-              CANLI • Bu bootcamp programlarında şu anda&nbsp;
+        <span style="
+            width:10px;
+            height:10px;
+            background:#fff;
+            border-radius:50%;
+            display:inline-block;
+            margin-right:8px;
+            animation:pulseLive 1.2s infinite;
+            flex-shrink:0;
+        "></span>
 
-              <span class="fw-bold mx-1">
-                  {{ active_students_count }}
-              </span>
+        <span>
+            CANLI • Bu bootcamp programlarında şu anda
+            <strong class="mx-1">{{ active_students_count }}</strong>
+            öğrenci aktif olarak Volkan ile birlikte ilerliyor.
+        </span>
 
-              &nbsp;öğrenci aktif olarak Volkan ile birlikte ilerliyor.
-          </span>
+    </span>
+
+</span>
 
       </div>
 
