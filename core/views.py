@@ -25,7 +25,7 @@ from django.contrib.auth.decorators import login_required
 import logging
 import random
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseForbidden
-
+from django.contrib.auth import get_user_model
 from django.views.decorators.http import require_POST
 import requests
 
@@ -52,8 +52,20 @@ def bootcamps_view(request):
         user=request.user if request.user.is_authenticated else None,
     )
 
+    User = get_user_model()
+
+    active_students_count = User.objects.filter(
+        is_first_login=False,
+        is_staff=False,
+        is_superuser=False,
+    ).count()
+
     bootcamps = Bootcamp.objects.filter(is_active=True)
-    return render(request, "bootcamps.html", {"bootcamps": bootcamps})
+
+    return render(request, "bootcamps.html", {
+        "bootcamps": bootcamps,
+        "active_students_count": active_students_count,
+    })
 def deneme(request):
     return render(request, "index_b2b_siberkobi.html")
 
@@ -368,16 +380,6 @@ def get_client_ip(request):
         return forwarded.split(",")[0].strip()
     return request.META.get("REMOTE_ADDR")
 
-
-def bootcamps_view(request):
-    PageVisit.objects.create(
-        path=request.path,
-        ip_address=get_client_ip(request),
-        user=request.user if request.user.is_authenticated else None,
-    )
-
-    bootcamps = Bootcamp.objects.filter(is_active=True)
-    return render(request, "bootcamps.html", {"bootcamps": bootcamps})
 
 @require_POST
 def bootcamp_checkout(request, slug):
