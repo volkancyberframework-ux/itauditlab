@@ -550,6 +550,21 @@
     })();
   </script>
 
+
+    <script>
+    setInterval(function () {
+        fetch("/heartbeat/", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}"
+            }
+        });
+    }, 15000);
+    </script>
+
     {% block extra_js %}{% endblock %}
+
+
+
   </body>
 </html>

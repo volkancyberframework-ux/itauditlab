@@ -569,3 +569,22 @@ Bootcamp Discount Popup
         "ok": True,
         "message": "Kaydınız alındı. İndirim teklifiniz 5 gün geçerlidir."
     })
+
+from django.http import JsonResponse
+from django.utils import timezone
+from .models import PageVisit
+
+def heartbeat(request):
+    visit_id = request.session.get("visit_id")
+
+    if visit_id:
+        now = timezone.now()
+
+        PageVisit.objects.filter(id=visit_id).update(
+            last_seen=now,
+            duration_seconds=int(
+                (now - PageVisit.objects.get(id=visit_id).created_at).total_seconds()
+            )
+        )
+
+    return JsonResponse({"ok": True})
