@@ -136,9 +136,36 @@
 
   .sk-section-dark {
     background:
+      radial-gradient(circle at top right, rgba(117, 79, 254, .14), transparent 32%),
+      linear-gradient(135deg, #ffffff, #f8f7ff);
+    color: var(--sk-text);
+  }
+
+  .sk-section-dark h2,
+  .sk-section-dark .fw-bold,
+  .sk-section-dark .fw-bolder {
+    color: var(--sk-text) !important;
+  }
+
+  .sk-section-dark p {
+    color: var(--sk-muted) !important;
+  }
+
+  html[data-bs-theme="dark"] .sk-section-dark {
+    background:
       radial-gradient(circle at top right, rgba(117, 79, 254, .28), transparent 32%),
       linear-gradient(135deg, #111827, #0f172a);
     color: #fff;
+  }
+
+  html[data-bs-theme="dark"] .sk-section-dark h2,
+  html[data-bs-theme="dark"] .sk-section-dark .fw-bold,
+  html[data-bs-theme="dark"] .sk-section-dark .fw-bolder {
+    color: #fff !important;
+  }
+
+  html[data-bs-theme="dark"] .sk-section-dark p {
+    color: rgba(255,255,255,.72) !important;
   }
 
   .sk-section-dark h2,
