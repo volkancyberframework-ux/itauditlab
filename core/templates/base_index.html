@@ -444,6 +444,112 @@
       })();
     </script>
 
+      <div class="modal fade" id="bootcampDiscountModal" tabindex="-1" aria-labelledby="bootcampDiscountModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+        <div class="modal-header border-0 pb-0">
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Kapat"></button>
+        </div>
+
+        <div class="modal-body px-4 px-md-5 pb-5 text-center">
+          <div class="mb-3 fs-1">🎓</div>
+
+          <h3 class="fw-bold mb-2" id="bootcampDiscountModalLabel">
+            Bootcamplerde %20 İndirim Kazanın
+          </h3>
+
+          <p class="text-muted mb-3">
+            E-postanızı bırakın, tüm Siberkobi bootcamplerinde geçerli
+            <strong>%20 indirim</strong> kazanın.
+            Öğrenciyseniz buna ek olarak <strong>%10 indirim</strong> daha alabilirsiniz.
+          </p>
+
+          <div class="alert alert-warning small py-2 mb-3">
+            Teklif, e-postanızı paylaştıktan sonra 5 gün boyunca geçerlidir.
+          </div>
+
+          <form id="bootcampDiscountForm">
+            {% csrf_token %}
+
+            <div class="input-group mb-2">
+              <input
+                type="email"
+                name="email"
+                class="form-control"
+                placeholder="E-posta adresiniz"
+                required
+              >
+              <button class="btn btn-primary" type="submit">
+                Kaydolun
+              </button>
+            </div>
+
+            <div id="bootcampDiscountMessage" class="small mt-2"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const STORAGE_KEY = "siberkobi_bootcamp_discount_popup_seen";
+      const modalEl = document.getElementById("bootcampDiscountModal");
+      const form = document.getElementById("bootcampDiscountForm");
+      const messageEl = document.getElementById("bootcampDiscountMessage");
+
+      if (!modalEl || !form) return;
+
+      const showPopup = () => {
+        if (localStorage.getItem(STORAGE_KEY) === "1") return;
+
+        setTimeout(() => {
+          const modal = new bootstrap.Modal(modalEl);
+          modal.show();
+          localStorage.setItem(STORAGE_KEY, "1");
+        }, 1200);
+      };
+
+      showPopup();
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        messageEl.className = "small mt-2 text-muted";
+        messageEl.textContent = "Kaydediliyor...";
+
+        try {
+          const response = await fetch("{% url 'newsletter_popup_lead' %}", {
+            method: "POST",
+            headers: {
+              "X-CSRFToken": formData.get("csrfmiddlewaretoken")
+            },
+            body: formData
+          });
+
+          const data = await response.json();
+
+          if (!response.ok || !data.ok) {
+            throw new Error(data.message || "Bir hata oluştu.");
+          }
+
+          messageEl.className = "small mt-2 text-success fw-semibold";
+          messageEl.textContent = data.message;
+
+          setTimeout(() => {
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            if (modal) modal.hide();
+          }, 1200);
+
+        } catch (err) {
+          messageEl.className = "small mt-2 text-danger fw-semibold";
+          messageEl.textContent = err.message || "Kayıt alınamadı.";
+        }
+      });
+    })();
+  </script>
+
     {% block extra_js %}{% endblock %}
   </body>
 </html>

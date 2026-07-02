@@ -511,3 +511,26 @@ def create_membership_checkout(request, plan):
     except Exception as e:
         messages.error(request, f"Ödeme başlatılamadı: {e}")
         return redirect("landing")
+
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
+from .models import NewsletterLead
+
+
+@require_POST
+def newsletter_popup_lead(request):
+    email = request.POST.get("email", "").strip().lower()
+
+    if not email:
+        return JsonResponse({"ok": False, "message": "E-posta gerekli."}, status=400)
+
+    NewsletterLead.objects.get_or_create(
+        email=email,
+        defaults={"source": "bootcamp_discount_popup"}
+    )
+
+    return JsonResponse({
+        "ok": True,
+        "message": "Kaydınız alındı. İndirim teklifiniz 5 gün geçerlidir."
+    })

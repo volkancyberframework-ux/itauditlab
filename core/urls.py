@@ -23,6 +23,7 @@ urlpatterns = [
         name="create_membership_checkout",
     ),
     path('', landing_page, name='landing'),
+    path("newsletter-popup-lead/", views.newsletter_popup_lead, name="newsletter_popup_lead"),
     path("bootcampler/", views.bootcamps_view, name="bootcamps"),
     path('course-single/<int:pk>/', views.course_single, name='course_single'),
     path("course/<int:pk>/random-question/", views.course_random_question, name="course_random_question"),
