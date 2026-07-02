@@ -105,29 +105,41 @@ def about_view(request):
 
 
 def custom_login_view(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
+    if request.method == "POST":
+        email = (request.POST.get("email") or "").strip().lower()
+        password = request.POST.get("password") or ""
 
-        try:
-            user = User.objects.get(email=email)
-            user = authenticate(request, username=user.username, password=password)
-        except User.DoesNotExist:
+        if not email or not password:
+            return render(request, "login.html", {
+                "error": "Email ve şifre zorunlu."
+            })
+
+        user_obj = User.objects.filter(email__iexact=email).first()
+
+        if user_obj:
+            user = authenticate(
+                request,
+                username=user_obj.username,
+                password=password
+            )
+        else:
             user = None
 
         if user is not None:
             login(request, user)
-            if user.is_first_login:
-                return render(request, 'login.html', {
-                    'show_password_change_popup': True
-                })
-            return redirect('dashboard_student')
-        else:
-            return render(request, 'login.html', {
-                'error': 'Invalid credentials'
-            })
-    return render(request, 'login.html')
 
+            if getattr(user, "is_first_login", False):
+                return render(request, "login.html", {
+                    "show_password_change_popup": True
+                })
+
+            return redirect("dashboard_student")
+
+        return render(request, "login.html", {
+            "error": "Geçersiz email veya şifre."
+        })
+
+    return render(request, "login.html")
 
 @csrf_exempt
 def force_password_change_popup(request):

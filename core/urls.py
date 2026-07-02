@@ -5,11 +5,9 @@ from . import views
 from .views import (
     landing_page,
     course_single,
-    login,
     dashboard_student,
     logout_view,
     force_password_change_popup,
-    pricing_view,
     coming_soon_view
 )
 from . import views_store
