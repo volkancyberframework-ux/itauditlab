@@ -471,12 +471,12 @@ def create_membership_checkout(request, plan):
     plans = {
         "monthly": {
             "name": "Siberkobi Aylık Üyelik",
-            "amount": 9999,
+            "amount": 29999,
             "interval": "month",
         },
         "yearly": {
             "name": "Siberkobi Yıllık Üyelik",
-            "amount": 69999,
+            "amount": 199999,
             "interval": "year",
         },
     }
