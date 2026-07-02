@@ -574,17 +574,30 @@ from django.http import JsonResponse
 from django.utils import timezone
 from .models import PageVisit
 
+
 def heartbeat(request):
+    if request.method != "POST":
+        return JsonResponse({"ok": False, "error": "POST required"}, status=405)
+
     visit_id = request.session.get("visit_id")
 
-    if visit_id:
-        now = timezone.now()
+    if not visit_id:
+        return JsonResponse({"ok": False, "error": "No visit_id in session"})
 
-        PageVisit.objects.filter(id=visit_id).update(
-            last_seen=now,
-            duration_seconds=int(
-                (now - PageVisit.objects.get(id=visit_id).created_at).total_seconds()
-            )
-        )
+    visit = PageVisit.objects.filter(id=visit_id).first()
 
-    return JsonResponse({"ok": True})
+    if not visit:
+        return JsonResponse({"ok": False, "error": "Visit not found"})
+
+    now = timezone.now()
+    duration = int((now - visit.created_at).total_seconds())
+
+    visit.last_seen = now
+    visit.duration_seconds = duration
+    visit.save(update_fields=["last_seen", "duration_seconds"])
+
+    return JsonResponse({
+        "ok": True,
+        "visit_id": visit.id,
+        "duration_seconds": duration,
+    })

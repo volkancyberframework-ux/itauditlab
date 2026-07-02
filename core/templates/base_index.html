@@ -550,17 +550,39 @@
     })();
   </script>
 
+  <script>
+  function getCookie(name) {
+      let cookieValue = null;
 
-    <script>
-    setInterval(function () {
-        fetch("/heartbeat/", {
-            method: "POST",
-            headers: {
-                "X-CSRFToken": "{{ csrf_token }}"
-            }
-        });
-    }, 15000);
-    </script>
+      if (document.cookie && document.cookie !== "") {
+          const cookies = document.cookie.split(";");
+
+          for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+
+              if (cookie.substring(0, name.length + 1) === (name + "=")) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+
+      return cookieValue;
+  }
+
+  setInterval(function () {
+      fetch("/heartbeat/", {
+          method: "POST",
+          headers: {
+              "X-CSRFToken": getCookie("csrftoken")
+          },
+          credentials: "same-origin"
+      })
+      .then(response => response.json())
+      .then(data => console.log("heartbeat:", data))
+      .catch(error => console.log("heartbeat error:", error));
+  }, 15000);
+  </script>
 
     {% block extra_js %}{% endblock %}
 
