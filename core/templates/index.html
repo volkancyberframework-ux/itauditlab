@@ -264,6 +264,51 @@
     .sk-hero-title { font-size: 2.35rem; }
     .sk-floating { position: static; margin-bottom: .75rem; }
   }
+  .sk-live-counter {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  gap: 10px;
+  background: rgba(25, 135, 84, 0.1);
+  color: #0f5132;
+  border: 1px solid rgba(25, 135, 84, 0.25);
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 15px;
+  font-weight: 500;
+  box-shadow: 0 10px 30px rgba(25, 135, 84, 0.12);
+}
+
+.sk-live-dot {
+  width: 10px;
+  height: 10px;
+  min-width: 10px;
+  background: #198754;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 rgba(25, 135, 84, 0.7);
+  animation: skPulseGreen 1.4s infinite;
+}
+
+@keyframes skPulseGreen {
+  0% {
+    box-shadow: 0 0 0 0 rgba(25, 135, 84, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(25, 135, 84, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(25, 135, 84, 0);
+  }
+}
+
+@media (max-width: 576px) {
+  .sk-live-counter {
+    font-size: 13px;
+    padding: 9px 13px;
+    line-height: 1.4;
+  }
+}
 </style>
 
 <main class="sk-page">
@@ -273,6 +318,15 @@
       <div class="row align-items-center gy-6">
         <div class="col-lg-6 col-12">
           <div class="d-flex flex-column gap-4">
+
+            <div class="sk-live-counter">
+              <span class="sk-live-dot"></span>
+              <span>
+                Şu an <strong>{{ active_student_count }}</strong> aktif öğrenci kayıtlı çalışıyor ·
+                <strong>Son 6 ayda {{ success_story_count }} başarı hikayesi</strong>
+              </span>
+            </div>
+
             <div><span class="sk-pill">🚀 Volkan’ın Siber Güvenlik Akademisi</span></div>
 
             <div>
@@ -315,7 +369,7 @@
         <div class="col-lg-6 col-12">
           <div class="sk-visual-card p-4 position-relative">
             <div class="sk-floating top-0 start-0 mt-4 ms-4 d-none d-md-block">
-              <div class="fw-bold">50+ İçerik</div>
+              <div class="fw-bold">500+ İçerik</div>
               <div class="small text-muted">Video, test, lab ve vaka</div>
             </div>
 
@@ -353,209 +407,1140 @@
     </div>
   </section>
 
-  <section class="py-xl-8 py-6">
+  <section class="py-xl-9 py-7">
     <div class="container">
       <div class="row mb-xl-7 mb-5">
-        <div class="col-xl-8 col-md-10 col-12 mx-auto text-center">
-          <span class="badge bg-primary-subtle text-primary-emphasis rounded-pill px-3 py-2 mb-3">Bootcamp Ekosistemi</span>
-          <h2 class="h1 mb-3">Hedefin neyse, onun gerçek senaryosu burada.</h2>
-          <p class="mb-0 text-muted">
-            Her kategori canlı anlatım, vaka, lab, test ve kariyer çıktısı üretecek şekilde tasarlandı.
+        <div class="col-xl-9 col-md-10 col-12 mx-auto text-center">
+          <span class="badge bg-primary-subtle text-primary-emphasis rounded-pill px-3 py-2 mb-3">
+            Bootcamp Ekosistemi
+          </span>
+
+          <h2 class="h1 fw-bolder mb-3">
+            Hedefin neyse, onun gerçek iş senaryosu burada.
+          </h2>
+
+          <p class="mb-0 text-muted fs-4">
+            Siberkobi’de her kategori sadece konu anlatımı değil; canlı ders, vaka, lab, test,
+            mülakat hazırlığı ve kariyer çıktısı üretecek şekilde tasarlandı.
           </p>
         </div>
       </div>
 
       <div class="row gy-4">
+
         <div class="col-xl-3 col-lg-4 col-md-6 col-12">
           <a href="{% url 'bootcamps' %}" class="text-decoration-none text-reset">
-            <div class="card sk-category-card card-body p-4">
+            <div class="card sk-category-card card-body p-4 h-100">
               <div class="sk-icon mb-4">🛡️</div>
-              <h3 class="h4 mb-2">SOC Analyst</h3>
-              <p class="text-muted mb-4">SIEM, log analizi, alert triage, incident response ve gerçek saldırı senaryoları.</p>
-              <div class="d-flex justify-content-between align-items-center"><span class="fw-bold">8+ Modül</span><span class="btn btn-sm btn-outline-primary">İncele</span></div>
+
+              <h3 class="h4 fw-bold mb-2">SOC Analyst</h3>
+
+              <p class="text-muted mb-4">
+                SIEM ekranı, log analizi, alert triage, incident response ve gerçek saldırı
+                senaryoları üzerinden teknik SOC bakışı kazanırsın.
+              </p>
+
+              <div class="d-flex flex-column gap-2 small text-muted mb-4">
+                <div>✅ Log okuma pratiği</div>
+                <div>✅ Alarm önceliklendirme</div>
+                <div>✅ Incident raporu yazımı</div>
+                <div>✅ SOC mülakat senaryoları</div>
+              </div>
+
+              <div class="row g-2 mb-4">
+                <div class="col-6">
+                  <div class="p-3 rounded-4 bg-light text-center">
+                    <div class="fw-bold">8+</div>
+                    <div class="small text-muted">Modül</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-3 rounded-4 bg-light text-center">
+                    <div class="fw-bold">30+</div>
+                    <div class="small text-muted">Senaryo</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mt-auto">
+                <span class="fw-bold">Teknik Yol</span>
+                <span class="btn btn-sm btn-outline-primary">İncele</span>
+              </div>
             </div>
           </a>
         </div>
 
         <div class="col-xl-3 col-lg-4 col-md-6 col-12">
           <a href="{% url 'bootcamps' %}" class="text-decoration-none text-reset">
-            <div class="card sk-category-card card-body p-4">
+            <div class="card sk-category-card card-body p-4 h-100">
               <div class="sk-icon mb-4">📋</div>
-              <h3 class="h4 mb-2">CISA Bootcamp</h3>
-              <p class="text-muted mb-4">CISA domainleri, soru çözümü, audit mantığı ve sınav stratejisi.</p>
-              <div class="d-flex justify-content-between align-items-center"><span class="fw-bold">5 Domain</span><span class="btn btn-sm btn-outline-primary">İncele</span></div>
+
+              <h3 class="h4 fw-bold mb-2">CISA Bootcamp</h3>
+
+              <p class="text-muted mb-4">
+                CISA domainleri, audit mindset, soru çözüm stratejisi ve sınav yaklaşımıyla
+                sertifika hazırlığını sistemli hale getirirsin.
+              </p>
+
+              <div class="d-flex flex-column gap-2 small text-muted mb-4">
+                <div>✅ 5 CISA domain’i</div>
+                <div>✅ Audit mindset</div>
+                <div>✅ Soru çözüm tekniği</div>
+                <div>✅ Final tekrar planı</div>
+              </div>
+
+              <div class="row g-2 mb-4">
+                <div class="col-6">
+                  <div class="p-3 rounded-4 bg-light text-center">
+                    <div class="fw-bold">5</div>
+                    <div class="small text-muted">Domain</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-3 rounded-4 bg-light text-center">
+                    <div class="fw-bold">500+</div>
+                    <div class="small text-muted">Soru</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mt-auto">
+                <span class="fw-bold">Sertifika Yolu</span>
+                <span class="btn btn-sm btn-outline-primary">İncele</span>
+              </div>
             </div>
           </a>
         </div>
 
         <div class="col-xl-3 col-lg-4 col-md-6 col-12">
           <a href="{% url 'bootcamps' %}" class="text-decoration-none text-reset">
-            <div class="card sk-category-card card-body p-4">
+            <div class="card sk-category-card card-body p-4 h-100">
               <div class="sk-icon mb-4">🏛️</div>
-              <h3 class="h4 mb-2">GRC & IT Audit</h3>
-              <p class="text-muted mb-4">Risk, kontrol, ISO 27001, SOC 2, denetim raporu ve mülakat vakaları.</p>
-              <div class="d-flex justify-content-between align-items-center"><span class="fw-bold">Vaka Odaklı</span><span class="btn btn-sm btn-outline-primary">İncele</span></div>
+
+              <h3 class="h4 fw-bold mb-2">GRC & IT Audit</h3>
+
+              <p class="text-muted mb-4">
+                Risk, kontrol, ISO 27001, SOC 2, ITGC, denetim kanıtı, bulgu yazımı ve
+                yönetim raporlaması üzerinden profesyonel denetim bakışı kazanırsın.
+              </p>
+
+              <div class="d-flex flex-column gap-2 small text-muted mb-4">
+                <div>✅ Risk ve kontrol dili</div>
+                <div>✅ Denetim kanıtı analizi</div>
+                <div>✅ Bulgu ve aksiyon planı</div>
+                <div>✅ Audit mülakat vakaları</div>
+              </div>
+
+              <div class="row g-2 mb-4">
+                <div class="col-6">
+                  <div class="p-3 rounded-4 bg-light text-center">
+                    <div class="fw-bold">20+</div>
+                    <div class="small text-muted">Bulgu</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-3 rounded-4 bg-light text-center">
+                    <div class="fw-bold">5+</div>
+                    <div class="small text-muted">Framework</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mt-auto">
+                <span class="fw-bold">Denetim Yolu</span>
+                <span class="btn btn-sm btn-outline-primary">İncele</span>
+              </div>
             </div>
           </a>
         </div>
 
         <div class="col-xl-3 col-lg-4 col-md-6 col-12">
           <a href="{% url 'bootcamps' %}" class="text-decoration-none text-reset">
-            <div class="card sk-category-card card-body p-4">
+            <div class="card sk-category-card card-body p-4 h-100">
               <div class="sk-icon mb-4">🔵</div>
-              <h3 class="h4 mb-2">Blue Team</h3>
-              <p class="text-muted mb-4">Detection engineering, threat hunting, log korelasyonu ve savunma pratiği.</p>
-              <div class="d-flex justify-content-between align-items-center"><span class="fw-bold">Lab Destekli</span><span class="btn btn-sm btn-outline-primary">İncele</span></div>
+
+              <h3 class="h4 fw-bold mb-2">Blue Team</h3>
+
+              <p class="text-muted mb-4">
+                Detection engineering, threat hunting, log korelasyonu, savunma stratejisi
+                ve saldırı izlerini okuma pratiğiyle savunma refleksi geliştirirsin.
+              </p>
+
+              <div class="d-flex flex-column gap-2 small text-muted mb-4">
+                <div>✅ Detection mantığı</div>
+                <div>✅ Threat hunting pratiği</div>
+                <div>✅ Log korelasyonu</div>
+                <div>✅ Savunma use-case yazımı</div>
+              </div>
+
+              <div class="row g-2 mb-4">
+                <div class="col-6">
+                  <div class="p-3 rounded-4 bg-light text-center">
+                    <div class="fw-bold">Lab</div>
+                    <div class="small text-muted">Destekli</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-3 rounded-4 bg-light text-center">
+                    <div class="fw-bold">Use Case</div>
+                    <div class="small text-muted">Odaklı</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mt-auto">
+                <span class="fw-bold">Savunma Yolu</span>
+                <span class="btn btn-sm btn-outline-primary">İncele</span>
+              </div>
             </div>
           </a>
+        </div>
+
+      </div>
+
+      <div class="row mt-5">
+        <div class="col-12">
+          <div class="p-4 p-lg-5 rounded-4 bg-light border">
+            <div class="row align-items-center gy-4">
+              <div class="col-lg-7">
+                <h3 class="fw-bold mb-3">
+                  Her bootcamp sonunda sadece bilgi değil, çıktı üretirsin.
+                </h3>
+
+                <p class="text-muted mb-0">
+                  Amacımız sana “şu konuları izledim” dedirtmek değil; CV’ye yazılabilecek,
+                  mülakatta anlatılabilecek ve gerçek iş senaryosunda kullanılabilecek örnekler,
+                  raporlar ve vaka hikayeleri üretmektir.
+                </p>
+              </div>
+
+              <div class="col-lg-5">
+                <div class="row g-3 text-center">
+                  <div class="col-6">
+                    <div class="p-3 rounded-4 bg-white border h-100">
+                      <div class="h3 fw-bold mb-1">4</div>
+                      <div class="small text-muted">kariyer yolu</div>
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="p-3 rounded-4 bg-white border h-100">
+                      <div class="h3 fw-bold mb-1">60+</div>
+                      <div class="small text-muted">vaka & pratik</div>
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="p-3 rounded-4 bg-white border h-100">
+                      <div class="h3 fw-bold mb-1">1:1</div>
+                      <div class="small text-muted">yönlendirme</div>
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="p-3 rounded-4 bg-white border h-100">
+                      <div class="h3 fw-bold mb-1">CV</div>
+                      <div class="small text-muted">mülakat çıktısı</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3 mt-4">
+              <div class="col-md-3">
+                <div class="p-3 rounded-4 bg-white border h-100">
+                  <strong>1️⃣ Öğren</strong>
+                  <p class="text-muted small mb-0 mt-2">
+                    Konunun mantığını canlı anlatım ve örneklerle kavra.
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="p-3 rounded-4 bg-white border h-100">
+                  <strong>2️⃣ Uygula</strong>
+                  <p class="text-muted small mb-0 mt-2">
+                    Lab, test, vaka ve senaryolarla pratiğe dök.
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="p-3 rounded-4 bg-white border h-100">
+                  <strong>3️⃣ Raporla</strong>
+                  <p class="text-muted small mb-0 mt-2">
+                    Bulgu, risk, incident veya kontrol çıktısı üret.
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="p-3 rounded-4 bg-white border h-100">
+                  <strong>4️⃣ Anlat</strong>
+                  <p class="text-muted small mb-0 mt-2">
+                    Mülakatta profesyonel hikaye olarak ifade et.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center mt-5">
+              <a href="{% url 'bootcamps' %}" class="btn btn-primary btn-lg">
+                Bootcampleri İncele
+              </a>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   </section>
 
-  <section class="sk-section-soft py-xl-8 py-6">
+  <section class="sk-section-soft py-xl-9 py-7">
     <div class="container">
-      <div class="row align-items-center gy-5">
+      <div class="row align-items-start gy-6">
         <div class="col-lg-5">
-          <span class="sk-story-badge mb-3">Siber Güvenlik Hikayeleri</span>
-          <h2 class="h1 mb-3">Mülakatta anlatabileceğin hikayeler üret.</h2>
+          <span class="sk-story-badge mb-3">🧠 Siber Güvenlik Hikayeleri</span>
+
+          <h2 class="h1 fw-bolder mb-3">
+            Mülakatta anlatabileceğin gerçekçi hikayeler üret.
+          </h2>
+
           <p class="text-muted mb-4">
-            Eğitim sadece bilgi vermek için değil, seni gerçek hayattaki konuşmalara hazırlamak için tasarlandı.
-            Her vaka; “ne oldu, nasıl analiz ettik, nasıl raporladık?” mantığıyla ilerler.
+            Siber güvenlikte fark yaratan şey sadece terim bilmek değildir. Bir olayı nasıl fark ettiğin,
+            nasıl analiz ettiğin, hangi kanıta baktığın, riski nasıl anlattığın ve sonucu nasıl raporladığın
+            seni öne çıkarır.
           </p>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#membershipModal">
+
+          <p class="text-muted mb-4">
+            Bu yüzden her vaka; <strong>“ne oldu, nasıl analiz ettik, ne bulduk, nasıl raporladık?”</strong>
+            mantığıyla ilerler. Böylece mülakatta sadece “eğitim aldım” demezsin; gerçekten konuşabileceğin
+            profesyonel hikayeler üretirsin.
+          </p>
+
+          <div class="p-4 rounded-4 bg-white border shadow-sm mb-4">
+            <h5 class="fw-bold mb-3">🎯 Her vaka sana şunları kazandırır:</h5>
+            <div class="d-flex flex-column gap-2 text-muted">
+              <div>✅ Olayı teknik olarak anlama</div>
+              <div>✅ Kanıt ve log üzerinden düşünme</div>
+              <div>✅ Risk seviyesini açıklama</div>
+              <div>✅ Yöneticiye anlaşılır rapor yazma</div>
+              <div>✅ Mülakatta vaka gibi anlatma</div>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#membershipModal">
             Sisteme Katıl
           </button>
         </div>
 
         <div class="col-lg-7">
           <div class="row g-4">
+
             <div class="col-md-6">
-              <div class="sk-story-card p-4">
-                <span class="sk-story-badge mb-3">Vaka 01</span>
+              <div class="sk-story-card p-4 h-100">
+                <span class="sk-story-badge mb-3">🔐 Vaka 01</span>
                 <h3 class="h4">Gece Yarısı Admin Login</h3>
-                <p class="text-muted mb-0">Normalde Türkiye’den giriş yapan admin hesabı, gece saatlerinde farklı ülkeden başarılı login aldı. Bunu nasıl analiz edersin?</p>
+                <p class="text-muted mb-3">
+                  Normalde Türkiye’den giriş yapan admin hesabı, gece saatlerinde farklı bir ülkeden başarılı login aldı.
+                </p>
+                <div class="small text-muted">
+                  <strong>Ne öğrenirsin?</strong><br>
+                  IP kontrolü, impossible travel, MFA durumu, kullanıcı davranışı ve olay eskalasyonu.
+                </div>
               </div>
             </div>
 
             <div class="col-md-6">
-              <div class="sk-story-card p-4">
-                <span class="sk-story-badge mb-3">Vaka 02</span>
+              <div class="sk-story-card p-4 h-100">
+                <span class="sk-story-badge mb-3">⚡ Vaka 02</span>
                 <h3 class="h4">98 ms Kesinti</h3>
-                <p class="text-muted mb-0">Küçük görünen bir kesinti, müşteri tarafında büyük şikayete dönüştü. Loglardan kök nedeni nasıl çıkarırsın?</p>
+                <p class="text-muted mb-3">
+                  Küçük görünen bir gecikme, müşteri tarafında büyük şikayete dönüştü. Loglarda sebep nerede saklı?
+                </p>
+                <div class="small text-muted">
+                  <strong>Ne öğrenirsin?</strong><br>
+                  Kök neden analizi, log korelasyonu, zaman çizelgesi çıkarma ve incident raporu.
+                </div>
               </div>
             </div>
 
             <div class="col-md-6">
-              <div class="sk-story-card p-4">
-                <span class="sk-story-badge mb-3">Vaka 03</span>
+              <div class="sk-story-card p-4 h-100">
+                <span class="sk-story-badge mb-3">📋 Vaka 03</span>
                 <h3 class="h4">ISO 27001 Denetim Bulgusu</h3>
-                <p class="text-muted mb-0">Erişim yetkileri gözden geçirilmemiş. Bunu risk, kontrol ve aksiyon planı olarak nasıl yazarsın?</p>
+                <p class="text-muted mb-3">
+                  Erişim yetkileri uzun süredir gözden geçirilmemiş. Bu durum sadece teknik eksik değil, iş riski.
+                </p>
+                <div class="small text-muted">
+                  <strong>Ne öğrenirsin?</strong><br>
+                  Risk, kontrol, kanıt, bulgu, aksiyon planı ve yönetim raporu yazımı.
+                </div>
               </div>
             </div>
 
             <div class="col-md-6">
-              <div class="sk-story-card p-4">
-                <span class="sk-story-badge mb-3">Vaka 04</span>
+              <div class="sk-story-card p-4 h-100">
+                <span class="sk-story-badge mb-3">🚨 Vaka 04</span>
                 <h3 class="h4">SOC Alert Gürültüsü</h3>
-                <p class="text-muted mb-0">1000 alert içinden gerçek olayı ayıklamak için hangi önceliklendirme mantığını kurarsın?</p>
+                <p class="text-muted mb-3">
+                  1000 alert var ama zaman sınırlı. Hangisi gerçek olay, hangisi gürültü?
+                </p>
+                <div class="small text-muted">
+                  <strong>Ne öğrenirsin?</strong><br>
+                  Alert triage, severity belirleme, false positive ayırma ve önceliklendirme.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="sk-story-card p-4 h-100">
+                <span class="sk-story-badge mb-3">🎣 Vaka 05</span>
+                <h3 class="h4">CEO’ya Gelen Phishing Maili</h3>
+                <p class="text-muted mb-3">
+                  CEO’ya Microsoft giriş ekranı gibi görünen bir mail geldi. Link gerçek gibi duruyor ama detaylar şüpheli.
+                </p>
+                <div class="small text-muted">
+                  <strong>Ne öğrenirsin?</strong><br>
+                  Header analizi, domain kontrolü, phishing göstergeleri ve kullanıcı farkındalığı raporu.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="sk-story-card p-4 h-100">
+                <span class="sk-story-badge mb-3">🧾 Vaka 06</span>
+                <h3 class="h4">Eksik Change Approval</h3>
+                <p class="text-muted mb-3">
+                  Kritik sistemde değişiklik yapılmış ama onay kaydı yok. Sistem çalışıyor ama kontrol kırılmış olabilir.
+                </p>
+                <div class="small text-muted">
+                  <strong>Ne öğrenirsin?</strong><br>
+                  Change management, ITGC kontrolü, kanıt değerlendirme ve audit finding yazımı.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="sk-story-card p-4 h-100">
+                <span class="sk-story-badge mb-3">👤 Vaka 07</span>
+                <h3 class="h4">Ayrılan Çalışanın Aktif Hesabı</h3>
+                <p class="text-muted mb-3">
+                  Şirketten ayrılan çalışanın hesabı hâlâ aktif. Üstelik bazı sistemlere erişimi devam ediyor.
+                </p>
+                <div class="small text-muted">
+                  <strong>Ne öğrenirsin?</strong><br>
+                  Joiner-mover-leaver süreci, erişim iptali, yetki riski ve kontrol tasarımı.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="sk-story-card p-4 h-100">
+                <span class="sk-story-badge mb-3">🗂️ Vaka 08</span>
+                <h3 class="h4">Paylaşıma Açık Hassas Dosya</h3>
+                <p class="text-muted mb-3">
+                  Finans dosyası yanlışlıkla herkesin erişebileceği bir klasöre konmuş. Kim gördü, kim indirdi?
+                </p>
+                <div class="small text-muted">
+                  <strong>Ne öğrenirsin?</strong><br>
+                  Data leakage riski, erişim logları, DLP yaklaşımı ve olay kapsamı belirleme.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="sk-story-card p-4 h-100">
+                <span class="sk-story-badge mb-3">🔑 Vaka 09</span>
+                <h3 class="h4">Shared Admin Password</h3>
+                <p class="text-muted mb-3">
+                  Birden fazla kişi aynı admin şifresini kullanıyor. Olay olduğunda kimin ne yaptığını bulmak zorlaşıyor.
+                </p>
+                <div class="small text-muted">
+                  <strong>Ne öğrenirsin?</strong><br>
+                  Accountability, privileged access management, kişisel hesap kullanımı ve audit trail.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="sk-story-card p-4 h-100">
+                <span class="sk-story-badge mb-3">🧪 Vaka 10</span>
+                <h3 class="h4">Zafiyet Taraması Sonrası Kritik Bulgu</h3>
+                <p class="text-muted mb-3">
+                  Tarama sonucunda kritik bir zafiyet çıktı. Ama ekip “sistem internete kapalı” diyerek kapatmak istemiyor.
+                </p>
+                <div class="small text-muted">
+                  <strong>Ne öğrenirsin?</strong><br>
+                  Vulnerability risk değerlendirmesi, compensating control ve remediation takibi.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="sk-story-card p-4 h-100">
+                <span class="sk-story-badge mb-3">💳 Vaka 11</span>
+                <h3 class="h4">Ödeme Sisteminde Şüpheli Trafik</h3>
+                <p class="text-muted mb-3">
+                  Ödeme sayfasında normalden fazla hata ve tekrar deneme görülüyor. Bu teknik hata mı, saldırı mı?
+                </p>
+                <div class="small text-muted">
+                  <strong>Ne öğrenirsin?</strong><br>
+                  Fraud sinyalleri, web log analizi, rate limit, WAF kayıtları ve incident sınıflandırması.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="sk-story-card p-4 h-100">
+                <span class="sk-story-badge mb-3">☁️ Vaka 12</span>
+                <h3 class="h4">Yanlış Cloud Yetkisi</h3>
+                <p class="text-muted mb-3">
+                  Bir kullanıcıya geçici verilen cloud admin yetkisi kalıcı kalmış. Kim fark edecek?
+                </p>
+                <div class="small text-muted">
+                  <strong>Ne öğrenirsin?</strong><br>
+                  Least privilege, cloud IAM, access review, geçici yetki yönetimi ve kontrol testi.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="mt-5 p-4 p-lg-5 rounded-4 bg-white border shadow-sm">
+            <div class="row align-items-center gy-4">
+              <div class="col-lg-7">
+                <h3 class="fw-bold mb-3">Mülakatta artık boş konuşmazsın.</h3>
+                <p class="text-muted mb-0">
+                  “Bir güvenlik olayını nasıl analiz edersiniz?” diye sorulduğunda; log, kanıt,
+                  risk, etki, aksiyon ve raporlama adımlarıyla gerçekçi bir cevap verebilirsin.
+                </p>
+              </div>
+
+              <div class="col-lg-5">
+                <div class="row g-3 text-center">
+                  <div class="col-6">
+                    <div class="sk-step-card p-3">
+                      <div class="h2 fw-bold mb-1">12+</div>
+                      <div class="small text-muted">vaka hikayesi</div>
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="sk-step-card p-3">
+                      <div class="h2 fw-bold mb-1">5</div>
+                      <div class="small text-muted">ana yetkinlik</div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="sk-step-card p-3">
+                      <div class="fw-bold mb-1">SOC + GRC + Audit + Cloud + Incident</div>
+                      <div class="small text-muted">tek hikaye kütüphanesinde birleşir</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3 mt-4">
+              <div class="col-md-4">
+                <div class="p-3 rounded-4 bg-light h-100">
+                  <strong>1️⃣ Olayı anlat</strong>
+                  <p class="text-muted small mb-0 mt-2">Ne oldu, kim etkilendi, neden önemli?</p>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="p-3 rounded-4 bg-light h-100">
+                  <strong>2️⃣ Analizi göster</strong>
+                  <p class="text-muted small mb-0 mt-2">Hangi loga, kanıta, kontrole veya riske baktın?</p>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="p-3 rounded-4 bg-light h-100">
+                  <strong>3️⃣ Sonucu bağla</strong>
+                  <p class="text-muted small mb-0 mt-2">Nasıl raporladın, hangi aksiyonu önerdin?</p>
+                </div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
   </section>
 
-  <section class="py-xl-8 py-6">
+  <section class="py-xl-9 py-7">
     <div class="container">
-      <div class="row mb-5">
-        <div class="col-xl-8 col-md-10 col-12 mx-auto text-center">
-          <span class="badge bg-success-subtle text-success-emphasis rounded-pill px-3 py-2 mb-3">Sekmeler</span>
-          <h2 class="h1 mb-3">Tek platform, farklı kariyer yolları.</h2>
-          <p class="text-muted mb-0">İster teknik SOC tarafına, ister GRC ve denetime, ister sertifika hazırlığına odaklan.</p>
+      <div class="row mb-6">
+        <div class="col-xl-9 col-md-10 col-12 mx-auto text-center">
+          <span class="badge bg-success-subtle text-success-emphasis rounded-pill px-3 py-2 mb-3">Kariyer Yolları</span>
+
+          <h2 class="h1 fw-bolder mb-3">
+            Tek platform, farklı siber güvenlik kariyer yolları.
+          </h2>
+
+          <p class="text-muted mb-0 fs-4">
+            İster teknik SOC tarafına, ister GRC ve IT audit alanına, ister CISA sertifika hazırlığına
+            odaklan. Her yol; canlı ders, vaka, lab, test ve kariyer hazırlığıyla desteklenir.
+          </p>
         </div>
       </div>
 
       <ul class="nav nav-pills sk-tabs justify-content-center gap-2 mb-5" id="careerTabs" role="tablist">
-        <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-soc" type="button">SOC</button></li>
-        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-grc" type="button">GRC</button></li>
-        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-cisa" type="button">CISA</button></li>
-        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-career" type="button">Kariyer</button></li>
+        <li class="nav-item">
+          <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-soc" type="button">
+            SOC Analyst
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-grc" type="button">
+            GRC & IT Audit
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-cisa" type="button">
+            CISA
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-career" type="button">
+            Kariyer Hazırlığı
+          </button>
+        </li>
       </ul>
 
       <div class="tab-content">
+
         <div class="tab-pane fade show active" id="tab-soc">
           <div class="sk-glass-card p-4 p-lg-5">
-            <h3>SOC Analyst yolu</h3>
-            <p class="text-muted mb-4">Log okuma, SIEM ekranı, alarm önceliklendirme, incident response ve threat hunting pratiği.</p>
-            <div class="row g-3">
-              <div class="col-md-4"><div class="sk-step-card p-3">1. Log mantığı</div></div>
-              <div class="col-md-4"><div class="sk-step-card p-3">2. Alert triage</div></div>
-              <div class="col-md-4"><div class="sk-step-card p-3">3. Incident raporu</div></div>
+            <div class="row gy-5 align-items-center">
+              <div class="col-lg-5">
+                <span class="badge bg-primary-subtle text-primary-emphasis rounded-pill px-3 py-2 mb-3">
+                  Teknik Yol
+                </span>
+
+                <h3 class="fw-bold mb-3">SOC Analyst yolu</h3>
+
+                <p class="text-muted mb-4">
+                  SOC tarafında hedef sadece araç ismi ezberlemek değildir. Burada log okuma,
+                  SIEM ekranını yorumlama, alarm önceliklendirme, temel incident response ve
+                  threat hunting mantığını gerçekçi senaryolarla öğrenirsin.
+                </p>
+
+                <p class="text-muted mb-4">
+                  Bir alarm geldiğinde “bu ne demek?”, “öncelik seviyesi ne?”, “hangi kanıta bakmalıyım?”
+                  ve “bunu nasıl raporlamalıyım?” sorularına cevap verecek pratik bakış açısı kazanırsın.
+                </p>
+
+                <div class="row g-3">
+                  <div class="col-6">
+                    <div class="sk-step-card p-3 h-100">
+                      <div class="h3 fw-bold mb-1">30+</div>
+                      <div class="text-muted small">log ve alarm senaryosu</div>
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="sk-step-card p-3 h-100">
+                      <div class="h3 fw-bold mb-1">6</div>
+                      <div class="text-muted small">temel SOC yetkinliği</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-7">
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">1. Log mantığı</div>
+                      <p class="text-muted small mb-0">
+                        Windows, web, firewall, authentication ve endpoint loglarında temel okuma pratiği.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">2. Alert triage</div>
+                      <p class="text-muted small mb-0">
+                        Alarmı önem sırasına koyma, false positive ayırma ve ilk analiz yaklaşımı.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">3. Incident raporu</div>
+                      <p class="text-muted small mb-0">
+                        Olayı teknik ve anlaşılır dille yazma, kanıt ve aksiyon önerisi ekleme.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">4. SIEM bakışı</div>
+                      <p class="text-muted small mb-0">
+                        SIEM ekranında neye bakılır, hangi veri ne anlam taşır, nasıl korelasyon kurulur.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">5. Threat hunting</div>
+                      <p class="text-muted small mb-0">
+                        Şüpheli davranışları arama, hipotez kurma ve iz sürme mantığı geliştirme.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">6. Mülakat provası</div>
+                      <p class="text-muted small mb-0">
+                        SOC Analyst mülakatlarında gelen teknik ve senaryo bazlı sorulara hazırlanma.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="tab-pane fade" id="tab-grc">
           <div class="sk-glass-card p-4 p-lg-5">
-            <h3>GRC & IT Audit yolu</h3>
-            <p class="text-muted mb-4">Risk, kontrol, denetim kanıtı, bulgu yazımı, ISO 27001, SOC 2 ve mülakat senaryoları.</p>
-            <div class="row g-3">
-              <div class="col-md-4"><div class="sk-step-card p-3">1. Risk dili</div></div>
-              <div class="col-md-4"><div class="sk-step-card p-3">2. Kontrol testi</div></div>
-              <div class="col-md-4"><div class="sk-step-card p-3">3. Raporlama</div></div>
+            <div class="row gy-5 align-items-center">
+              <div class="col-lg-5">
+                <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill px-3 py-2 mb-3">
+                  Denetim & Risk Yolu
+                </span>
+
+                <h3 class="fw-bold mb-3">GRC & IT Audit yolu</h3>
+
+                <p class="text-muted mb-4">
+                  GRC ve IT audit tarafında hedef; riskleri, kontrolleri, kanıtları ve bulguları
+                  profesyonel bir dille okuyabilmektir. Bu yolda ISO 27001, SOC 2, ITGC, erişim
+                  kontrolleri, değişiklik yönetimi ve denetim mantığı üzerinde çalışırsın.
+                </p>
+
+                <p class="text-muted mb-4">
+                  Sadece “kontrol nedir?” öğrenmekle kalmazsın; bir kontrol eksikliğini nasıl tespit
+                  edeceğini, nasıl riskleştireceğini ve yönetime nasıl raporlayacağını öğrenirsin.
+                </p>
+
+                <div class="row g-3">
+                  <div class="col-6">
+                    <div class="sk-step-card p-3 h-100">
+                      <div class="h3 fw-bold mb-1">20+</div>
+                      <div class="text-muted small">kontrol ve bulgu örneği</div>
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="sk-step-card p-3 h-100">
+                      <div class="h3 fw-bold mb-1">5</div>
+                      <div class="text-muted small">ana denetim alanı</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-7">
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">1. Risk dili</div>
+                      <p class="text-muted small mb-0">
+                        Teknik problemi iş riski olarak ifade etme ve etki seviyesini anlatma.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">2. Kontrol testi</div>
+                      <p class="text-muted small mb-0">
+                        Kontrol tasarımı, işletim etkinliği, kanıt toplama ve test yaklaşımı.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">3. Raporlama</div>
+                      <p class="text-muted small mb-0">
+                        Bulgu, risk, etki, kök neden ve aksiyon planı yazma pratiği.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">4. ISO 27001</div>
+                      <p class="text-muted small mb-0">
+                        Bilgi güvenliği yönetim sistemi, kontrol aileleri ve denetim bakışı.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">5. SOC 2 & ITGC</div>
+                      <p class="text-muted small mb-0">
+                        Erişim, değişiklik, operasyon ve güvenlik kontrollerinin iş dünyasındaki karşılığı.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">6. Audit mülakatı</div>
+                      <p class="text-muted small mb-0">
+                        IT Auditor, GRC Analyst ve Security Officer rolleri için vaka bazlı hazırlık.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="tab-pane fade" id="tab-cisa">
           <div class="sk-glass-card p-4 p-lg-5">
-            <h3>CISA sınav yolu</h3>
-            <p class="text-muted mb-4">Domain bazlı öğrenme, soru çözme stratejisi, audit mindset ve sınav yaklaşımı.</p>
-            <div class="row g-3">
-              <div class="col-md-4"><div class="sk-step-card p-3">1. Domain özeti</div></div>
-              <div class="col-md-4"><div class="sk-step-card p-3">2. Soru pratiği</div></div>
-              <div class="col-md-4"><div class="sk-step-card p-3">3. Sınav stratejisi</div></div>
+            <div class="row gy-5 align-items-center">
+              <div class="col-lg-5">
+                <span class="badge bg-info-subtle text-info-emphasis rounded-pill px-3 py-2 mb-3">
+                  Sertifika Yolu
+                </span>
+
+                <h3 class="fw-bold mb-3">CISA sınav yolu</h3>
+
+                <p class="text-muted mb-4">
+                  CISA hazırlığında amaç sadece soru ezberlemek değildir. En önemli nokta,
+                  ISACA’nın beklediği audit mindset’i anlamaktır. Bu yolda domain bazlı ilerler,
+                  soru çözme stratejisi geliştirir ve sınav mantığını öğrenirsin.
+                </p>
+
+                <p class="text-muted mb-4">
+                  Her domain için önce kavramları netleştirir, sonra soru tiplerini analiz eder,
+                  ardından yanlış cevapların neden yanlış olduğunu anlayarak sınav refleksi kazanırsın.
+                </p>
+
+                <div class="row g-3">
+                  <div class="col-6">
+                    <div class="sk-step-card p-3 h-100">
+                      <div class="h3 fw-bold mb-1">5</div>
+                      <div class="text-muted small">CISA domain’i</div>
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="sk-step-card p-3 h-100">
+                      <div class="h3 fw-bold mb-1">500+</div>
+                      <div class="text-muted small">soru çözüm pratiği</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-7">
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">1. Domain özeti</div>
+                      <p class="text-muted small mb-0">
+                        Her domainin ana fikrini, sınavdaki ağırlığını ve kritik kavramlarını öğrenme.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">2. Soru pratiği</div>
+                      <p class="text-muted small mb-0">
+                        Soruyu okuma, tuzak şıkları ayırma ve en doğru cevabı seçme yaklaşımı.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">3. Sınav stratejisi</div>
+                      <p class="text-muted small mb-0">
+                        Zaman yönetimi, tekrar planı, yanlış analizi ve sınav günü yaklaşımı.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">4. Audit mindset</div>
+                      <p class="text-muted small mb-0">
+                        CISA’da teknik cevaptan çok denetçi bakış açısının neden önemli olduğunu öğrenme.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">5. Yanlış analizi</div>
+                      <p class="text-muted small mb-0">
+                        Yanlış yapılan soruları konu eksiğine dönüştürme ve tekrar planına bağlama.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">6. Final tekrar</div>
+                      <p class="text-muted small mb-0">
+                        Sınava yaklaşırken domain bazlı son tekrar ve zayıf alanları güçlendirme.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="tab-pane fade" id="tab-career">
           <div class="sk-glass-card p-4 p-lg-5">
-            <h3>Kariyer hazırlığı</h3>
-            <p class="text-muted mb-4">CV, LinkedIn, mülakat hikayesi, vaka anlatımı ve rol bazlı yönlendirme.</p>
-            <div class="row g-3">
-              <div class="col-md-4"><div class="sk-step-card p-3">1. Profil netliği</div></div>
-              <div class="col-md-4"><div class="sk-step-card p-3">2. Mülakat provası</div></div>
-              <div class="col-md-4"><div class="sk-step-card p-3">3. Başvuru planı</div></div>
+            <div class="row gy-5 align-items-center">
+              <div class="col-lg-5">
+                <span class="badge bg-danger-subtle text-danger-emphasis rounded-pill px-3 py-2 mb-3">
+                  Kariyer Yolu
+                </span>
+
+                <h3 class="fw-bold mb-3">Kariyer hazırlığı</h3>
+
+                <p class="text-muted mb-4">
+                  Teknik bilgi tek başına iş buldurmaz. Kendini doğru konumlandırman, CV’ni hedef role
+                  göre yazman, LinkedIn profilini güçlendirmen ve mülakatta hikayeni net anlatman gerekir.
+                </p>
+
+                <p class="text-muted mb-4">
+                  Bu yolda hedef; seni sadece eğitim alan biri olarak değil, başvuru yapmaya,
+                  mülakata girmeye ve iş görüşmesinde kendini profesyonelce anlatmaya hazır biri
+                  haline getirmektir.
+                </p>
+
+                <div class="row g-3">
+                  <div class="col-6">
+                    <div class="sk-step-card p-3 h-100">
+                      <div class="h3 fw-bold mb-1">1:1</div>
+                      <div class="text-muted small">profil yönlendirme</div>
+                    </div>
+                  </div>
+
+                  <div class="col-6">
+                    <div class="sk-step-card p-3 h-100">
+                      <div class="h3 fw-bold mb-1">4</div>
+                      <div class="text-muted small">ana hazırlık alanı</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-7">
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">1. Profil netliği</div>
+                      <p class="text-muted small mb-0">
+                        SOC, GRC, IT audit veya security officer yolundan hangisinin sana uygun olduğunu netleştirme.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">2. CV düzenleme</div>
+                      <p class="text-muted small mb-0">
+                        Deneyimini hedef role göre yazma, güçlü yanlarını görünür hale getirme.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">3. LinkedIn</div>
+                      <p class="text-muted small mb-0">
+                        Profil başlığı, açıklama, deneyim ve görünürlük tarafını profesyonelleştirme.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">4. Mülakat provası</div>
+                      <p class="text-muted small mb-0">
+                        Teknik, davranışsal ve vaka bazlı sorulara net cevap hazırlama.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">5. Vaka anlatımı</div>
+                      <p class="text-muted small mb-0">
+                        Gerçek iş senaryolarını STAR yapısıyla ve profesyonel dille anlatma.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="sk-step-card p-4 h-100">
+                      <div class="fw-bold mb-2">6. Başvuru planı</div>
+                      <p class="text-muted small mb-0">
+                        Hangi role, hangi sırayla, hangi mesajla ve hangi stratejiyle başvuracağını belirleme.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-5 p-4 rounded-4 bg-success-subtle border border-success-subtle">
+              <h4 class="fw-bold mb-3">Bu yolun sonunda hedeflenen çıktı</h4>
+
+              <div class="row g-3 text-muted">
+                <div class="col-md-6">✅ Daha güçlü CV ve LinkedIn profili</div>
+                <div class="col-md-6">✅ Rol bazlı kariyer yönü</div>
+                <div class="col-md-6">✅ Daha net mülakat hikayesi</div>
+                <div class="col-md-6">✅ Gerçek vaka anlatma becerisi</div>
+                <div class="col-md-6">✅ Başvuru stratejisi</div>
+                <div class="col-md-6">✅ Profesyonel özgüven</div>
+              </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <section class="sk-section-dark py-xl-8 py-6">
+  <section class="sk-section-dark py-xl-9 py-7">
     <div class="container">
-      <div class="row align-items-center gy-5">
+      <div class="row align-items-start gy-6">
         <div class="col-lg-5">
           <span class="badge bg-light text-dark rounded-pill px-3 py-2 mb-3">Neden farklı?</span>
-          <h2 class="display-5 fw-bolder mb-3 text-white">Sadece kurs değil, kariyer üretim alanı.</h2>
-          <p class="mb-0 text-white-50">
-            Burada amaç sana “ders izletmek” değil; seni vaka konuşabilen, rapor yazabilen,
-            mülakatta kendini anlatabilen ve gerçek iş senaryolarını anlayabilen biri yapmak.
+
+          <h2 class="display-5 fw-bolder mb-4 text-white">
+            Sadece kurs değil, gerçek kariyer üretim alanı.
+          </h2>
+
+          <p class="text-white-50 mb-4">
+            Siberkobi’de amaç sana birkaç video izletip yalnız bırakmak değil. Burada hedef;
+            siber güvenlik, IT audit ve GRC alanlarında gerçek dünyada konuşulan vakaları anlayabilen,
+            raporlayabilen ve mülakatta kendini güvenle anlatabilen bir profesyonel yetiştirmek.
           </p>
+
+          <p class="text-white-50 mb-4">
+            Çünkü bu alanlarda başarılı olmak sadece teorik bilgiyle olmaz. Bir log gördüğünde neye
+            bakacağını, bir kontrol eksikliği gördüğünde bunu nasıl yazacağını, bir risk senaryosunu
+            yönetime nasıl anlatacağını ve teknik ekiplerle nasıl iletişim kuracağını öğrenmen gerekir.
+          </p>
+
+          <div class="p-4 rounded-4 bg-white bg-opacity-10 border border-white border-opacity-10">
+            <h5 class="fw-bold text-white mb-2">Burada öğrendiğin şey:</h5>
+            <p class="text-white-50 mb-0">
+              “Ben bu eğitimi izledim” demek değil; “Ben bu işi nasıl yapacağımı biliyorum”
+              diyebilecek seviyeye gelmek.
+            </p>
+          </div>
         </div>
 
         <div class="col-lg-7">
           <div class="row g-4">
-            <div class="col-md-4"><div class="sk-stat"><div class="display-6 fw-bold">01</div><div>Canlı ders</div></div></div>
-            <div class="col-md-4"><div class="sk-stat"><div class="display-6 fw-bold">02</div><div>Gerçek vaka</div></div></div>
-            <div class="col-md-4"><div class="sk-stat"><div class="display-6 fw-bold">03</div><div>Birebir yönlendirme</div></div></div>
-            <div class="col-md-4"><div class="sk-stat"><div class="display-6 fw-bold">04</div><div>Lab pratiği</div></div></div>
-            <div class="col-md-4"><div class="sk-stat"><div class="display-6 fw-bold">05</div><div>Test & quiz</div></div></div>
-            <div class="col-md-4"><div class="sk-stat"><div class="display-6 fw-bold">06</div><div>Mülakat hazırlığı</div></div></div>
+
+            <div class="col-md-6">
+              <div class="sk-stat h-100">
+                <div class="display-6 fw-bold">01</div>
+                <h5 class="fw-bold mb-2">Canlı dersler</h5>
+                <div>
+                  Sadece kayıt izlemek yerine canlı oturumlarda soru sorar, örnekler üzerinden ilerler
+                  ve kafana takılan yerleri gerçek zamanlı netleştirirsin.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="sk-stat h-100">
+                <div class="display-6 fw-bold">02</div>
+                <h5 class="fw-bold mb-2">Gerçek vaka analizi</h5>
+                <div>
+                  Banka, teknoloji şirketi, SaaS, fintech ve kurumsal yapılardan esinlenen gerçekçi
+                  senaryolarla düşünmeyi öğrenirsin.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="sk-stat h-100">
+                <div class="display-6 fw-bold">03</div>
+                <h5 class="fw-bold mb-2">Birebir yönlendirme</h5>
+                <div>
+                  Hedefine göre hangi role hazırlanman gerektiğini, CV’ni nasıl konumlandıracağını
+                  ve hangi eksiklere odaklanman gerektiğini birlikte netleştiririz.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="sk-stat h-100">
+                <div class="display-6 fw-bold">04</div>
+                <h5 class="fw-bold mb-2">Lab pratiği</h5>
+                <div>
+                  Teoriyi gerçek iş çıktısına dönüştürürsün. Log inceleme, kontrol değerlendirme,
+                  risk yazımı, bulgu oluşturma ve raporlama pratiği yaparsın.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="sk-stat h-100">
+                <div class="display-6 fw-bold">05</div>
+                <h5 class="fw-bold mb-2">Test & quiz sistemi</h5>
+                <div>
+                  Bilgini sadece dinleyerek değil, düzenli testlerle ölçersin. Böylece hangi konuyu
+                  gerçekten anladığını, hangisinde tekrar gerektiğini net görürsün.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="sk-stat h-100">
+                <div class="display-6 fw-bold">06</div>
+                <h5 class="fw-bold mb-2">Mülakat hazırlığı</h5>
+                <div>
+                  “Bana kendinden bahset” seviyesinden çıkıp; vaka, teknik soru, davranışsal soru ve
+                  rol bazlı mülakat cevaplarını profesyonel şekilde hazırlarsın.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="mt-4 p-4 rounded-4 bg-primary bg-opacity-25 border border-primary border-opacity-25">
+            <h4 class="fw-bold text-white mb-3">Sonuçta ne kazanırsın?</h4>
+
+            <div class="row g-3 text-white-50">
+              <div class="col-md-6">✅ Gerçek iş senaryolarını yorumlama becerisi</div>
+              <div class="col-md-6">✅ Daha güçlü CV ve LinkedIn konumlandırması</div>
+              <div class="col-md-6">✅ Mülakatlarda daha net ve özgüvenli anlatım</div>
+              <div class="col-md-6">✅ Rapor, bulgu ve risk yazma pratiği</div>
+              <div class="col-md-6">✅ Teknik ve GRC tarafını birlikte okuyabilme</div>
+              <div class="col-md-6">✅ Kariyer hedeflerine göre yol haritası</div>
+            </div>
           </div>
         </div>
       </div>

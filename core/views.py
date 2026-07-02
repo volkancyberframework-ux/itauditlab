@@ -157,7 +157,14 @@ def logout_view(request):
 
 def landing_page(request):
     courses = Course.objects.filter(main_page_activated=True)
-    return render(request, 'index.html', {'courses': courses})
+
+    active_student_count = CustomUser.objects.filter(is_active=True).count()
+
+    return render(request, "index.html", {
+        "courses": courses,
+        "active_student_count": active_student_count,
+        "success_story_count": 26,
+    })
 
 def terms_and_conditions(request):
     """
@@ -517,7 +524,6 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from .models import NewsletterLead
 
-
 @require_POST
 def newsletter_popup_lead(request):
     email = request.POST.get("email", "").strip().lower()
@@ -525,10 +531,37 @@ def newsletter_popup_lead(request):
     if not email:
         return JsonResponse({"ok": False, "message": "E-posta gerekli."}, status=400)
 
-    NewsletterLead.objects.get_or_create(
+    lead, created = NewsletterLead.objects.get_or_create(
         email=email,
         defaults={"source": "bootcamp_discount_popup"}
     )
+
+    if created:
+        bot_token = getattr(settings, "TELEGRAM_BOT_TOKEN", "")
+        chat_id = getattr(settings, "TELEGRAM_CHAT_ID", "")
+
+        if bot_token and chat_id:
+            text = f"""
+🎁 Yeni Bootcamp İndirim Lead'i
+
+📧 Email:
+{email}
+
+📍 Kaynak:
+Bootcamp Discount Popup
+"""
+
+            try:
+                requests.post(
+                    f"https://api.telegram.org/bot{bot_token}/sendMessage",
+                    data={
+                        "chat_id": chat_id,
+                        "text": text,
+                    },
+                    timeout=5,
+                )
+            except Exception as e:
+                print("Telegram error:", e)
 
     return JsonResponse({
         "ok": True,

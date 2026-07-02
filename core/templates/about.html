@@ -1,249 +1,426 @@
 {% extends "base_index.html" %}
 {% load static %}
 {% block content %}
-        <!-- Page Content -->
-        <main>
-          <section class="py-8 bg-white">
-            <div class="container my-lg-4">
-              <div class="row">
-                <div class="offset-lg-2 col-lg-8 col-md-12 col-12 mb-8">
-                  <!-- caption -->
-                  <h1 class="display-2 fw-bold mb-3">
-                    Merhaba, ben
-                    <span class="text-primary">Volkan</span>
-                  </h1>
-                  <!-- sub heading -->
-                  <p class="h2 mb-3">
-                    Bu YouTube temelli girişimin kurucusuyum. 103 ülke gezdim; 8 yıldır siber güvenlik ve IT alanında birçok ülkenin büyük finansal kurumlarında çalışmış bir gencim.
-                  </p>
-                  <!-- body -->
-                  <p class="mb-0 h4 text-body lh-lg">
-                    Amacım, dünyada öğrendiklerimi ve çoğu zaman gösterilmeyenleri <strong>ülkemdeki insanlara</strong> ulaştırmak. Heryerden öğreniyorum, <em>size anlaşılır ve uygulanabilir</em> şekilde aktarıyorum.
-                  </p>
 
-                  <!-- CTAs -->
-                  <div class="d-flex gap-3 mt-4">
-                    <a href="https://www.youtube.com/@volkangulernguyen" class="btn btn-primary btn-lg">YouTube’a Git</a>
-                    <a href="https://siberkobi.co" class="btn btn-outline-primary btn-lg">Siberkobi</a>
-                  </div>
-                </div>
-              </div>
+<main>
 
-              <!-- gallery -->
-              <div class="gallery mb-8">
-                <!-- Görselleri kendi yollarınla değiştir -->
-                <figure class="gallery__item gallery__item--1 mb-0">
-                  <img src="{% static 'assets/images/volkan/1.JPG' %}" alt="Dünya turundan kare 1" class="gallery__img rounded-3">
-                </figure>
-                <figure class="gallery__item gallery__item--2 mb-0">
-                  <img src="{% static 'assets/images/volkan/2.JPG' %}" alt="Eğitim ve konuşmalar" class="gallery__img rounded-3">
-                </figure>
-                <figure class="gallery__item gallery__item--3 mb-0">
-                  <img src="{% static 'assets/images/volkan/3.JPG' %}" alt="Finans kurumlarında çalışma" class="gallery__img rounded-3">
-                </figure>
-                <figure class="gallery__item gallery__item--4 mb-0">
-                  <img src="{% static 'assets/images/volkan/4.JPG' %}" alt="Dijital göçebelik" class="gallery__img rounded-3">
-                </figure>
-                <figure class="gallery__item gallery__item--5 mb-0">
-                  <img src="{% static 'assets/images/volkan/5.JPG' %}" alt="Öğren-öğret yaklaşımı" class="gallery__img rounded-3">
-                </figure>
-                <figure class="gallery__item gallery__item--6 mb-0">
-                  <img src="{% static 'assets/images/volkan/6.JPG' %}" alt="Topluluk" class="gallery__img rounded-3">
-                </figure>
-              </div>
+  <!-- Hero -->
+  <section class="py-8 bg-white">
+    <div class="container my-lg-4">
+      <div class="row">
+        <div class="offset-lg-1 col-lg-10 col-md-12 col-12 mb-8 text-center">
+          <span class="badge bg-primary-subtle text-primary-emphasis rounded-pill px-3 py-2 mb-4">
+            Volkan Güler
+          </span>
 
-              <div class="row">
+          <h1 class="display-2 fw-bold mb-4">
+            Merhaba, ben <span class="text-primary">Volkan</span>.
+          </h1>
 
-                <div class="col-lg-2 col-md-4 col-6">
-                  <div class="border-top pt-4 mt-6 mb-5">
-                    <h1 class="display-5 fw-bold mb-0">7</h1>
-                    <p class="text-uppercase small">Ülkede<br>Uluslararası Deneyim</p>
-                  </div>
-                </div>
+          <p class="h2 mb-4 lh-base">
+            Türkiye’de memur bir ailenin çocuğu olarak başlayan yolculuğum;
+            siber güvenlik, uluslararası finans kurumları, YouTube, eğitim girişimleri
+            ve 103 ülkelik bir dünya deneyimine dönüştü.
+          </p>
 
-                <div class="col-lg-2 col-md-4 col-6">
-                  <div class="border-top pt-4 mt-6 mb-5">
-                    <h1 class="display-5 fw-bold mb-0">10+</h1>
-                    <p class="text-uppercase small">Yıl<br>Tecrübe</p>
-                  </div>
-                </div>
+          <p class="lead text-muted lh-lg mb-0">
+            Bugün amacım, yıllarca farklı ülkelerde, şirketlerde ve gerçek hayat senaryolarında
+            öğrendiğim şeyleri daha anlaşılır, uygulanabilir ve erişilebilir hâle getirmek.
+            Çünkü bilgi yalnızca bilende kaldığında değil, paylaşıldığında değer kazanır.
+          </p>
 
-                <div class="col-lg-2 col-md-4 col-6">
-                  <div class="border-top pt-4 mt-6 mb-5">
-                    <h1 class="display-5 fw-bold mb-0">500+</h1>
-                    <p class="text-uppercase small">Kayıtlı Öğrenci</p>
-                  </div>
-                </div>
+          <div class="d-flex flex-wrap justify-content-center gap-3 mt-5">
+            <a href="https://www.youtube.com/@volkangulernguyen" class="btn btn-primary btn-lg">
+              YouTube’a Git
+            </a>
+            <a href="https://siberkobi.co" class="btn btn-outline-primary btn-lg">
+              Siberkobi
+            </a>
+          </div>
+        </div>
+      </div>
 
-                <div class="col-lg-2 col-md-4 col-6">
-                  <div class="border-top pt-4 mt-6 mb-5">
-                    <h1 class="display-5 fw-bold mb-0">2000+</h1>
-                    <p class="text-uppercase small">Danışan</p>
-                  </div>
-                </div>
+      <!-- Gallery -->
+      <div class="gallery mb-8">
+        <figure class="gallery__item gallery__item--1 mb-0">
+          <img src="{% static 'assets/images/volkan/1.JPG' %}" alt="Volkan Güler dünya yolculuğu" class="gallery__img rounded-3">
+        </figure>
+        <figure class="gallery__item gallery__item--2 mb-0">
+          <img src="{% static 'assets/images/volkan/2.JPG' %}" alt="Volkan Güler eğitim ve içerik üretimi" class="gallery__img rounded-3">
+        </figure>
+        <figure class="gallery__item gallery__item--3 mb-0">
+          <img src="{% static 'assets/images/volkan/3.JPG' %}" alt="Uluslararası siber güvenlik kariyeri" class="gallery__img rounded-3">
+        </figure>
+        <figure class="gallery__item gallery__item--4 mb-0">
+          <img src="{% static 'assets/images/volkan/4.JPG' %}" alt="Dijital üretim ve seyahat" class="gallery__img rounded-3">
+        </figure>
+        <figure class="gallery__item gallery__item--5 mb-0">
+          <img src="{% static 'assets/images/volkan/5.JPG' %}" alt="Öğrenme ve öğretme yolculuğu" class="gallery__img rounded-3">
+        </figure>
+        <figure class="gallery__item gallery__item--6 mb-0">
+          <img src="{% static 'assets/images/volkan/6.JPG' %}" alt="Topluluk ve deneyim paylaşımı" class="gallery__img rounded-3">
+        </figure>
+      </div>
 
-                <div class="col-lg-2 col-md-4 col-6">
-                  <div class="border-top pt-4 mt-6 mb-5">
-                    <h1 class="display-5 fw-bold mb-0">500K+</h1>
-                    <p class="text-uppercase small">İzlenme</p>
-                  </div>
-                </div>
+      <!-- Stats -->
+      <div class="row">
+        <div class="col-lg-2 col-md-4 col-6">
+          <div class="border-top pt-4 mt-6 mb-5">
+            <h1 class="display-5 fw-bold mb-0">103</h1>
+            <p class="text-uppercase small">Ülke<br>Gezi Deneyimi</p>
+          </div>
+        </div>
 
-              </div>
+        <div class="col-lg-2 col-md-4 col-6">
+          <div class="border-top pt-4 mt-6 mb-5">
+            <h1 class="display-5 fw-bold mb-0">7+</h1>
+            <p class="text-uppercase small">Ülkede<br>Profesyonel Deneyim</p>
+          </div>
+        </div>
 
+        <div class="col-lg-2 col-md-4 col-6">
+          <div class="border-top pt-4 mt-6 mb-5">
+            <h1 class="display-5 fw-bold mb-0">10+</h1>
+            <p class="text-uppercase small">Yıl<br>IT ve Siber Güvenlik</p>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6">
+          <div class="border-top pt-4 mt-6 mb-5">
+            <h1 class="display-5 fw-bold mb-0">500+</h1>
+            <p class="text-uppercase small">Kayıtlı<br>Öğrenci</p>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6">
+          <div class="border-top pt-4 mt-6 mb-5">
+            <h1 class="display-5 fw-bold mb-0">2000+</h1>
+            <p class="text-uppercase small">Danışan ve<br>Topluluk Etkileşimi</p>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6">
+          <div class="border-top pt-4 mt-6 mb-5">
+            <h1 class="display-5 fw-bold mb-0">500K+</h1>
+            <p class="text-uppercase small">İçerik<br>İzlenmesi</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="py-8">
+    <div class="container my-lg-8">
+      <div class="row align-items-center">
+        <div class="col-lg-6 col-12 mb-6 mb-lg-0">
+          <h2 class="display-4 fw-bold mb-4">Benim Hikâyem</h2>
+
+          <p class="lead lh-lg">
+            Hayatımın büyük kısmında bana öğretilen yol çok netti:
+            iyi bir okul oku, iyi bir işe gir, güvenli bir kariyer kur.
+            Ben de bu yoldan başladım.
+          </p>
+
+          <p class="lh-lg text-muted">
+            Siber güvenlik ve IT alanına girdikten sonra dünyanın farklı ülkelerinde
+            çalışma fırsatı buldum. Uluslararası bankalarda, finans kurumlarında ve
+            milyonlarca insanın kullandığı sistemlerde görev aldım.
+          </p>
+
+          <p class="lh-lg text-muted">
+            ABD’den Japonya'ya, Çin'den Singapur'a kadar farklı ekiplerle
+            aynı masaya oturdum. Her ülkede yalnızca sistemleri değil, insanların kariyere,
+            eğitime, paraya ve hayata bakışını da gözlemledim.
+          </p>
+
+          <p class="lh-lg text-muted mb-0">
+            Sonra bir şeyi fark ettim: Bilgi var ama çoğu insan için dağınık, karmaşık
+            ve uzak. Ben de YouTube’da, eğitimlerimde ve topluluklarımda bunu değiştirmek
+            için içerik üretmeye başladım.
+          </p>
+        </div>
+
+        <div class="col-lg-5 offset-lg-1 col-12">
+          <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-body p-5">
+              <h3 class="fw-bold mb-3">Neden anlatıyorum?</h3>
+              <p class="text-muted lh-lg mb-4">
+                Çünkü benim yıllarca deneyerek, hata yaparak ve farklı ülkelerde çalışarak
+                öğrendiğim şeyleri bir başkası çok daha kısa sürede öğrenebilir.
+              </p>
+              <p class="text-muted lh-lg mb-0">
+                Eğer bir videom, eğitimim ya da yazdığım bir şey sayesinde biri yeni bir
+                beceri kazanıyorsa, ilk işini buluyorsa veya dünyaya daha cesur bakıyorsa,
+                benim için başarı budur.
+              </p>
             </div>
-          </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <!-- features -->
-          <section class="py-8">
-            <div class="container my-lg-8">
-              <div class="row">
-                <div class="col-lg-6 col-md-8 col-12 mb-6">
-                  <!-- caption -->
-                  <h2 class="display-4 mb-3 fw-bold">Değerlerim</h2>
-                  <p class="lead">
-                    Volkan’ın YouTube temelli girişiminde değerler net: bilgiyi sadeleştir, erişimi artır, toplulukla büyüt.
-                    Amacımız; doğru–yanlış ayrımını netleştirirken, herkesin pratik şekilde öğrenip uygulayabilmesini sağlamak.
+  <!-- Timeline -->
+  <section class="py-8 bg-white">
+    <div class="container my-lg-8">
+      <div class="row mb-6">
+        <div class="col-lg-7 col-md-10 col-12">
+          <h2 class="display-4 fw-bold mb-3">Yolculuk</h2>
+          <p class="lead text-muted">
+            Bu sayfa yalnızca bir özgeçmiş değil. Türkiye’den başlayan, Avrupa’da güçlenen
+            ve dünyaya açılan bir öğrenme hikâyesi.
+          </p>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4 col-12">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body p-5">
+              <span class="badge bg-primary-subtle text-primary-emphasis mb-3">Başlangıç</span>
+              <h3 class="fw-bold mb-3">Siber Güvenlik</h3>
+              <p class="text-muted mb-0">
+                IT, denetim, risk yönetimi ve siber güvenlik alanlarında uzmanlaşmaya başladım.
+                Zamanla bu alan kariyerimin ana omurgası hâline geldi.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-12">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body p-5">
+              <span class="badge bg-primary-subtle text-primary-emphasis mb-3">Uluslararası</span>
+              <h3 class="fw-bold mb-3">Finans Kurumları</h3>
+              <p class="text-muted mb-0">
+                Avrupa’da büyük finans kurumlarında IT Auditor ve siber güvenlik rolleri üstlendim.
+                Gerçek denetimler, regülasyonlar ve kurumsal güvenlik süreçleriyle çalıştım.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-12">
+          <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body p-5">
+              <span class="badge bg-primary-subtle text-primary-emphasis mb-3">Bugün</span>
+              <h3 class="fw-bold mb-3">İçerik ve Eğitim</h3>
+              <p class="text-muted mb-0">
+                YouTube, Siberkobi ve topluluklar üzerinden siber güvenlik, kariyer,
+                İngilizce, yurtdışı ve üretkenlik konularında içerikler üretiyorum.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="py-8">
+    <div class="container my-lg-8">
+      <div class="row">
+        <div class="col-lg-7 col-md-10 col-12 mb-6">
+          <h2 class="display-4 mb-3 fw-bold">Neye İnanıyorum?</h2>
+          <p class="lead">
+            Benim için eğitim yalnızca bilgi aktarmak değil; insanların kendi hayatlarında
+            gerçek bir değişim başlatmasına yardım etmektir.
+          </p>
+        </div>
+      </div>
+
+      <div class="row g-4">
+
+        <div class="col-md-4 col-12">
+          <div class="card h-100">
+            <div class="card-body p-5">
+              <div class="mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-lightbulb text-primary" viewBox="0 0 16 16">
+                  <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.459-.302l-.762-1.77a2.12 2.12 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z"/>
+                  <path d="M5 14.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                </svg>
+              </div>
+              <h3 class="mb-2">Bilgi Sade Olmalı</h3>
+              <p class="mb-0 text-muted">
+                Bir şeyi gerçekten biliyorsan, onu herkesin anlayacağı şekilde anlatabilmelisin.
+                Karmaşık konuları basitleştirmek benim en büyük önceliğim.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-12">
+          <div class="card h-100">
+            <div class="card-body p-5">
+              <div class="mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-rocket-takeoff text-primary" viewBox="0 0 16 16">
+                  <path d="M9.752 6.193c.599.6.73 1.86-.25 2.839-.98.98-2.24.848-2.839.25-.599-.6-.73-1.86.25-2.839.98-.98 2.24-.848 2.839-.25z"/>
+                  <path d="M15.811.189c-.406-.405-1.858.261-3.826 1.907-1.344 1.123-2.788 2.597-4.073 4.093a11.863 11.863 0 0 0-2.317-.143c-.835.03-1.45.173-1.792.515-.577.577-2.13 4.016-2.13 4.016s3.439-1.553 4.016-2.13c.342-.342.486-.957.515-1.792a11.86 11.86 0 0 0-.143-2.317c1.496-1.285 2.97-2.729 4.093-4.073C15.55 2.047 16.216.595 15.811.189z"/>
+                </svg>
+              </div>
+              <h3 class="mb-2">Kariyer Cesaret İster</h3>
+              <p class="mb-0 text-muted">
+                Diploma başlangıçtır. Gerçek kariyer; projelerle, hatalarla, denemelerle
+                ve konfor alanının dışına çıkmakla oluşur.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-12">
+          <div class="card h-100">
+            <div class="card-body p-5">
+              <div class="mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-globe2 text-primary" viewBox="0 0 16 16">
+                  <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zM3.5 8c0-.958.11-1.892.314-2.75H1.674A6.96 6.96 0 0 0 1 8c0 .95.188 1.856.526 2.682h2.288A12.9 12.9 0 0 1 3.5 8zM5.145 12c.138.54.302 1.055.468 1.532.552 1.035 1.217 1.65 1.887 1.855V12H5.145zM7.5 5.25H4.877A11.98 11.98 0 0 0 4.5 8c0 .966.133 1.9.377 2.75H7.5v-5.5zm1 0v5.5h2.623c.244-.85.377-1.784.377-2.75 0-.966-.133-1.9-.377-2.75H8.5zm0-4.173V4h2.355a7.97 7.97 0 0 0-.468-1.068C9.835 1.897 9.17 1.281 8.5 1.077z"/>
+                </svg>
+              </div>
+              <h3 class="mb-2">Dünya Bakış Açısı Kazandırır</h3>
+              <p class="mb-0 text-muted">
+                103 ülke bana şunu öğretti: Farklı kültürleri görmek yalnızca seyahat değil,
+                insanın kendini ve dünyayı yeniden anlamasıdır.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- What I Do -->
+  <section class="py-8 bg-white">
+    <div class="container my-lg-8">
+      <div class="row align-items-center">
+        <div class="col-lg-6 col-12 mb-6 mb-lg-0">
+          <h2 class="display-4 fw-bold mb-4">Bugün Ne Yapıyorum?</h2>
+          <p class="lead text-muted lh-lg">
+            Bugün zamanımın büyük kısmını içerik üretmeye, eğitim programları geliştirmeye,
+            topluluk kurmaya ve yeni dijital ürünler oluşturmaya ayırıyorum.
+          </p>
+        </div>
+
+        <div class="col-lg-6 col-12">
+          <div class="row g-4">
+
+            <div class="col-md-6 col-12">
+              <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body p-4">
+                  <h4 class="fw-bold mb-2">YouTube</h4>
+                  <p class="text-muted mb-0">
+                    Siber güvenlik, kariyer, yurtdışı ve hayat deneyimleri üzerine ücretsiz içerikler üretiyorum.
                   </p>
                 </div>
               </div>
-
-              <div class="row">
-                <div class="col-md-4 col-12">
-                  <!-- card -->
-                  <div class="card mb-4 mb-lg-0">
-                    <!-- card body -->
-                    <div class="card-body p-5">
-                      <!-- icon (AYNEN KORUNDU) -->
-                      <div class="mb-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-mortarboard text-primary" viewBox="0 0 16 16">
-                          <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917l-7.5-3.5ZM8 8.46 1.758 5.965 8 3.052l6.242 2.913L8 8.46Z" />
-                          <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466 4.176 9.032Zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46l-3.892-1.556Z" />
-                        </svg>
-                      </div>
-                      <h3 class="mb-2">Eğitimi Erişilebilir Kıl</h3>
-                      <p class="mb-0">
-                        Karmaşığı sadeleştiririz. Türkçe, örnekli ve uygulanabilir içeriklerle; ücretsiz ve uygun fiyatlı kaynakları
-                        bir araya getirip herkesin erişimine sunarız.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-4 col-12">
-                  <!-- card -->
-                  <div class="card mb-4 mb-lg-0">
-                    <!-- card body -->
-                    <div class="card-body p-5">
-                      <!-- icon (AYNEN KORUNDU) -->
-                      <div class="mb-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-people-fill text-primary" viewBox="0 0 16 16">
-                          <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
-                        </svg>
-                      </div>
-                      <h3 class="mb-2">Birlikte Öğren & Büyü</h3>
-                      <p class="mb-0">
-                        Topluluk gücüne inanırız. Canlı yayınlar, soru–cevaplar ve proje odaklı görevlerle birbirimizi ileri taşır,
-                        dayanışma kültürü oluştururuz.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-4 col-12">
-                  <!-- card -->
-                  <div class="card mb-4 mb-lg-0">
-                    <!-- card body -->
-                    <div class="card-body p-5">
-                      <!-- icon (AYNEN KORUNDU) -->
-                      <div class="mb-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-graph-up-arrow text-primary" viewBox="0 0 16 16">
-                          <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5Z" />
-                        </svg>
-                      </div>
-                      <h3 class="mb-2">Ölçülebilir Etki</h3>
-                      <p class="mb-0">
-                        Sonuç odaklıyız. İşe yarayan metrikler, düzenli geri bildirim ve vaka senaryolarıyla becerileri
-                        hızla kariyer değerine dönüştürürüz.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
             </div>
-          </section>
-          <!-- Team (Single) -->
-          <section class="py-8 bg-white">
-            <div class="container my-lg-8">
-              <div class="row">
-                <div class="col-lg-6 col-md-8 col-12 mb-8">
-                  <!-- heading -->
-                  <h2 class="display-4 mb-3 fw-bold">Takım</h2>
-                  <!-- lead -->
-                  <p class="lead mb-5">
-                    Bu girişimin arkasında tek bir kişi var: Volkan. Sahadan öğrendiklerini sadeleştirip
-                    herkesin erişebileceği içeriklere dönüştürüyor.
+
+            <div class="col-md-6 col-12">
+              <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body p-4">
+                  <h4 class="fw-bold mb-2">Siberkobi</h4>
+                  <p class="text-muted mb-0">
+                    Bootcamp’ler, vaka çalışmaları, test bankaları ve topluluk desteğiyle kariyer gelişimi sağlıyorum.
                   </p>
-                  <!-- btn -->
-                  <a href="#" class="btn btn-primary">İletişim</a>
-                </div>
-              </div>
-
-              <!-- Single member -->
-              <div class="row justify-content-start">
-                <div class="col-md-3 col-6">
-                  <div class="p-xl-5 p-lg-3 mb-3 mb-lg-0 text-center">
-                    <!-- avatar -->
-                    <img
-                      src="{% static 'assets/images/volkan/avatar.png' %}"
-                      alt="Volkan Güler"
-                      class="imgtooltip img-fluid rounded-circle"
-                      data-template="volkan"
-                    />
-                    <!-- tooltip content -->
-                    <div id="volkan" class="d-none">
-                      <div class="mb-0 fw-semibold">Volkan Güler</div>
-                      <span>Founder · IT Auditor & Creator</span>
-                    </div>
-                    <!-- name (visible on mobile if tooltip not used) -->
-                    <div class="mt-3 d-md-none">
-                      <div class="mb-0 fw-semibold">Volkan Güler</div>
-                      <small class="text-muted">Founder · IT Auditor & Creator</small>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
-          </section>
 
-          <!-- cta -->
-          <section class="bg-primary">
-            <div class="container">
-              <!-- row -->
-              <div class="row align-items-center g-0">
-                <div class="col-xl-6 col-lg-6 col-md-12">
-                  <!-- heading -->
-                  <div class="pt-6 pt-lg-0">
-                    <h1 class="text-white display-4 fw-bold pe-lg-8">
-                      Siberkobi’ye katılın & kariyerinizi hızlandırın
-                    </h1>
-                    <!-- text -->
-                    <p class="text-white-50 mb-4 lead">
-                      Canlı bootcamp’ler, soru setleri, vaka senaryoları ve aktif topluluk ile
-                      siber güvenlik / IT deneyiminizi hızla somut değere çevirin. Hemen planları inceleyin.
-                    </p>
-                    <!-- btn -->
-                    <a href="/pricing" class="btn btn-dark">Fiyatlandırmayı Gör</a>
-                  </div>
-                </div>
-                <!-- img -->
-                <div class="col-xl-6 col-lg-6 col-md-12 text-lg-end text-center pt-6">
-                  <img src="{% static 'assets/images/volkan/volkan.png' %}" alt="Siberkobi Hero" class="img-fluid">
+            <div class="col-md-6 col-12">
+              <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body p-4">
+                  <h4 class="fw-bold mb-2">Nomaya</h4>
+                  <p class="text-muted mb-0">
+                    İnsanların şehirleri daha kişisel, daha yerel ve daha anlamlı deneyimlemesi için ürün geliştiriyorum.
+                  </p>
                 </div>
               </div>
             </div>
-          </section>
 
-        </main>
+            <div class="col-md-6 col-12">
+              <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body p-4">
+                  <h4 class="fw-bold mb-2">Topluluk</h4>
+                  <p class="text-muted mb-0">
+                    Canlı yayınlar, soru-cevaplar ve mentorluklarla insanların yalnız ilerlememesini sağlıyorum.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="py-8">
+    <div class="container my-lg-8">
+      <div class="row">
+        <div class="col-lg-6 col-md-8 col-12 mb-8">
+          <h2 class="display-4 mb-3 fw-bold">Takım</h2>
+          <p class="lead mb-5">
+            Bu girişimin merkezinde tek bir amaç var: gerçek deneyimi sadeleştirip
+            insanların hayatında uygulanabilir hâle getirmek.
+          </p>
+          <a href="#" class="btn btn-primary">İletişim</a>
+        </div>
+      </div>
+
+      <div class="row justify-content-start">
+        <div class="col-md-3 col-6">
+          <div class="p-xl-5 p-lg-3 mb-3 mb-lg-0 text-center">
+            <img
+              src="{% static 'assets/images/volkan/avatar.png' %}"
+              alt="Volkan Güler"
+              class="imgtooltip img-fluid rounded-circle"
+              data-template="volkan"
+            />
+
+            <div id="volkan" class="d-none">
+              <div class="mb-0 fw-semibold">Volkan Güler</div>
+              <span>Founder · IT Auditor · Creator</span>
+            </div>
+
+            <div class="mt-3">
+              <div class="mb-0 fw-semibold">Volkan Güler</div>
+              <small class="text-muted">Founder · IT Auditor · Creator</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-primary">
+    <div class="container">
+      <div class="row align-items-center g-0">
+        <div class="col-xl-6 col-lg-6 col-md-12">
+          <div class="pt-6 pt-lg-0">
+            <h1 class="text-white display-4 fw-bold pe-lg-8">
+              Siber güvenlik kariyerinizi gerçek senaryolarla hızlandırın.
+            </h1>
+
+            <p class="text-white-50 mb-4 lead">
+              Canlı bootcamp’ler, vaka senaryoları, soru setleri ve aktif topluluk ile
+              teoriyi pratiğe dönüştürün. Öğrenin, uygulayın, ölçün ve kariyer değerinizi artırın.
+            </p>
+
+            <a href="/pricing" class="btn btn-dark">Fiyatlandırmayı Gör</a>
+          </div>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-12 text-lg-end text-center pt-6">
+          <img src="{% static 'assets/images/volkan/volkan.png' %}" alt="Volkan Güler Siberkobi" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
 {% endblock %}
