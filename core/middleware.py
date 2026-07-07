@@ -4,57 +4,11 @@ from django.conf import settings
 from django.utils import timezone
 
 from django.utils import timezone
-from core.models import PageVisit
 import requests
 
 from django.conf import settings
 from django.utils import timezone
-from core.models import PageVisit
 
-
-class PageVisitMiddleware:
-
-    def __init__(self, get_response):
-        self.get_response = get_response
-
-    def __call__(self, request):
-
-        excluded_paths = [
-            "/admin",
-            "/bulamazsinki",
-            "/heartbeat",
-            "/static",
-            "/media",
-            "/favicon.ico",
-        ]
-
-        if any(request.path.startswith(p) for p in excluded_paths):
-            return self.get_response(request)
-
-        ip = self.get_client_ip(request)
-
-        visit = PageVisit.objects.create(
-            path=request.path,
-            ip_address=ip if ip != "-" else None,
-            user=request.user if request.user.is_authenticated else None,
-            last_seen=timezone.now(),
-        )
-
-        request.session["visit_id"] = visit.id
-
-        return self.get_response(request)
-
-    @staticmethod
-    def get_client_ip(request):
-        forwarded = request.META.get("HTTP_X_FORWARDED_FOR")
-        if forwarded:
-            return forwarded.split(",")[0].strip()
-
-        real_ip = request.META.get("HTTP_X_REAL_IP")
-        if real_ip:
-            return real_ip.strip()
-
-        return request.META.get("REMOTE_ADDR", "-")
 
 class HiddenLoginAttemptTelegramMiddleware:
     """
