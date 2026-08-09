@@ -2,22 +2,27 @@ services:
   - type: web
     name: core
     runtime: python
-    region: frankfurt          # isteğe bağlı
+    region: frankfurt
     plan: starter
-    branch: main               # repo dalın
+    branch: main
     buildCommand: |
-      pip install -r requirements.txt
+      pip install --disable-pip-version-check --no-cache-dir -r requirements.txt
       python manage.py collectstatic --noinput
-    startCommand: gunicorn myproject.wsgi:application --bind 0.0.0.0:$PORT
+      python manage.py check --deploy
+    preDeployCommand: python manage.py migrate --noinput
+    startCommand: gunicorn itaudit.wsgi:application --config gunicorn.conf.py
+    healthCheckPath: /healthz/
+    maxShutdownDelaySeconds: 45
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: DJANGO_SETTINGS_MODULE
-        value: myproject.settings
+        value: itaudit.settings
       - key: WEB_CONCURRENCY
         value: "2"
-      # MEDIA_ROOT'u kodda /data/media yapacağız (aşağıda)
-    disk:                      # Persistent Disk
+    # Uploaded media currently lives on this disk. Render cannot perform
+    # zero-downtime deploys while a persistent disk is attached.
+    disk:
       name: data
       mountPath: /data
       sizeGB: 10

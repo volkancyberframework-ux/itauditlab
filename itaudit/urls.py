@@ -3,8 +3,10 @@ from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
+from itaudit.health import readiness
 
 urlpatterns = [
+    path('healthz/', readiness, name='healthz'),
     path('bulamazsinki/', admin.site.urls),
     path('', include('core.urls')),
 ]

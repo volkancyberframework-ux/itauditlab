@@ -35,6 +35,8 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['itauditlab.onrender.com','www.siberkobi.co','siberkobi.co','itauditlab.siberkobi.co',"akademi.siberkobi.co"]
+if render_hostname := os.environ.get("RENDER_EXTERNAL_HOSTNAME"):
+    ALLOWED_HOSTS.append(render_hostname)
 
 CSP_FRAME_SRC = (
     "'self'",
@@ -95,6 +97,11 @@ WSGI_APPLICATION = 'itaudit.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(conn_max_age=600)
 }
+DATABASES['default']['CONN_HEALTH_CHECKS'] = True
+
+# Render terminates TLS at its proxy. Trust its forwarded scheme so Django
+# generates secure URLs and handles redirects correctly in production.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Password validation
