@@ -1,0 +1,18 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+  <div id="content-main">
+    <h1>Program öğrencilerini CSV ile içe aktar</h1>
+    <p><code>email,name,start_date,program</code> kolonlarını içeren dosyayı seçin. Program değeri <code>normal</code>, <code>normallong</code> veya <code>lab</code> olmalıdır.</p>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <fieldset class="module aligned">
+        <div class="form-row"><input type="file" name="csv_file" accept=".csv,text/csv" required></div>
+        <div class="form-row">
+          <label><input type="checkbox" name="bootstrap_history" checked> Geçmiş günleri tamamlanmış say; eski hoş geldin/içerik maillerini yeniden gönderme</label>
+        </div>
+      </fieldset>
+      <div class="submit-row"><input type="submit" value="İçe aktar" class="default"></div>
+    </form>
+  </div>
+{% endblock %}

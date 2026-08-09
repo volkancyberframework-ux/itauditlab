@@ -310,6 +310,88 @@ class Enrollment(models.Model):
     class Meta:
         unique_together = ('user', 'course')
 
+
+class LearningProgram(models.Model):
+    slug = models.SlugField(unique=True)
+    name = models.CharField(max_length=200)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+
+class LearningProgramStep(models.Model):
+    program = models.ForeignKey(
+        LearningProgram, on_delete=models.CASCADE, related_name="steps"
+    )
+    day_offset = models.PositiveIntegerField(help_text="Başlangıçtan kaç gün sonra açılacak")
+    course = models.ForeignKey(Course, on_delete=models.PROTECT)
+    email_title = models.CharField(max_length=255, blank=True)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ("day_offset", "order", "id")
+        constraints = [
+            models.UniqueConstraint(
+                fields=("program", "course"), name="unique_program_course_step"
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.program} · Gün {self.day_offset} · {self.course}"
+
+
+class ProgramEnrollment(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="learning_programs"
+    )
+    program = models.ForeignKey(
+        LearningProgram, on_delete=models.PROTECT, related_name="enrollments"
+    )
+    start_date = models.DateField()
+    is_active = models.BooleanField(default=True)
+    welcome_sent_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=("user", "program"), name="unique_user_learning_program"
+            )
+        ]
+        ordering = ("-is_active", "start_date", "user__email")
+
+    def __str__(self):
+        return f"{self.user.email} · {self.program}"
+
+
+class ProgramRelease(models.Model):
+    class Status(models.TextChoices):
+        PENDING = "pending", "Mail bekliyor"
+        SENT = "sent", "Gönderildi"
+        FAILED = "failed", "Mail hatası"
+
+    enrollment = models.ForeignKey(
+        ProgramEnrollment, on_delete=models.CASCADE, related_name="releases"
+    )
+    step = models.ForeignKey(LearningProgramStep, on_delete=models.PROTECT)
+    status = models.CharField(max_length=12, choices=Status.choices, default=Status.PENDING)
+    access_granted_at = models.DateTimeField(blank=True, null=True)
+    email_sent_at = models.DateTimeField(blank=True, null=True)
+    error_message = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=("enrollment", "step"), name="unique_program_step_release"
+            )
+        ]
+        ordering = ("-created_at",)
+
+    def __str__(self):
+        return f"{self.enrollment} · {self.step} · {self.get_status_display()}"
+
 class CourseFAQ(models.Model):
     course = models.ForeignKey("Course", on_delete=models.CASCADE, related_name='faqs')
     question = models.CharField(max_length=255)

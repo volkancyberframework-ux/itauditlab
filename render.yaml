@@ -9,7 +9,7 @@ services:
       pip install --disable-pip-version-check --no-cache-dir -r requirements.txt
       python manage.py collectstatic --noinput
       python manage.py check --deploy
-    preDeployCommand: python manage.py migrate --noinput
+    preDeployCommand: python manage.py migrate --noinput && python manage.py seed_learning_programs
     startCommand: gunicorn itaudit.wsgi:application --config gunicorn.conf.py
     healthCheckPath: /healthz/
     maxShutdownDelaySeconds: 45
@@ -26,3 +26,40 @@ services:
       name: data
       mountPath: /data
       sizeGB: 10
+
+  - type: cron
+    name: daily-learning-programs
+    runtime: python
+    region: frankfurt
+    plan: starter
+    branch: main
+    schedule: "0 6 * * *"
+    buildCommand: pip install --disable-pip-version-check --no-cache-dir -r requirements.txt
+    startCommand: python manage.py run_daily_programs
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: DJANGO_SETTINGS_MODULE
+        value: itaudit.settings
+      - key: DATABASE_URL
+        sync: false
+      - key: SECRET_KEY
+        sync: false
+      - key: EMAIL_HOST_USER
+        sync: false
+      - key: EMAIL_HOST_PASSWORD
+        sync: false
+      - key: DEFAULT_FROM_EMAIL
+        sync: false
+      - key: EMAIL_HOST
+        value: smtpout.secureserver.net
+      - key: EMAIL_PORT
+        value: "465"
+      - key: EMAIL_USE_TLS
+        value: "False"
+      - key: EMAIL_USE_SSL
+        value: "True"
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false

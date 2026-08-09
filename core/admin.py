@@ -1,11 +1,15 @@
 from urllib.parse import quote
+import csv
+import io
+from datetime import datetime
 
 from django import forms
 from django.contrib import admin, messages
 from django.contrib.auth.admin import UserAdmin
-from django.shortcuts import render
-from django.urls import path
+from django.shortcuts import redirect, render
+from django.urls import path, reverse
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 
 from .models import (
     CustomUser,
@@ -19,6 +23,10 @@ from .models import (
     DigitalProduct,
     PurchaseIntent,
     NewsletterLead,
+    LearningProgram,
+    LearningProgramStep,
+    ProgramEnrollment,
+    ProgramRelease,
 )
 
 DEFAULT_PASSWORD = "Siberkobi1234"
@@ -223,6 +231,117 @@ class CourseFAQAdmin(admin.ModelAdmin):
         "course__turkish_name", "course__english_name"
     )
     list_filter = ("course",)
+
+
+class LearningProgramStepInline(admin.TabularInline):
+    model = LearningProgramStep
+    extra = 0
+    autocomplete_fields = ("course",)
+    ordering = ("day_offset", "order")
+
+
+@admin.register(LearningProgram)
+class LearningProgramAdmin(admin.ModelAdmin):
+    list_display = ("name", "slug", "is_active", "student_count", "step_count")
+    list_filter = ("is_active",)
+    prepopulated_fields = {"slug": ("name",)}
+    search_fields = ("name", "slug")
+    inlines = (LearningProgramStepInline,)
+
+    @admin.display(description="Öğrenci")
+    def student_count(self, obj):
+        return obj.enrollments.count()
+
+    @admin.display(description="Adım")
+    def step_count(self, obj):
+        return obj.steps.count()
+
+
+@admin.register(ProgramEnrollment)
+class ProgramEnrollmentAdmin(admin.ModelAdmin):
+    list_display = ("user", "program", "start_date", "is_active", "welcome_sent_at", "progress")
+    list_filter = ("program", "is_active", "start_date")
+    search_fields = ("user__email", "user__first_name", "user__last_name")
+    autocomplete_fields = ("user", "program")
+    list_editable = ("is_active",)
+    date_hierarchy = "start_date"
+    change_list_template = "admin/program_enrollment_changelist.html"
+
+    def get_urls(self):
+        return [
+            path(
+                "import-csv/",
+                self.admin_site.admin_view(self.import_csv),
+                name="core_programenrollment_import_csv",
+            )
+        ] + super().get_urls()
+
+    def import_csv(self, request):
+        if request.method == "POST" and request.FILES.get("csv_file"):
+            stream = io.StringIO(request.FILES["csv_file"].read().decode("utf-8-sig"))
+            bootstrap_history = request.POST.get("bootstrap_history") == "on"
+            imported = 0
+            errors = []
+            for row_number, row in enumerate(csv.DictReader(stream), start=2):
+                email = row.get("email", "").strip().lower()
+                try:
+                    user = CustomUser.objects.get(email__iexact=email)
+                    program = LearningProgram.objects.get(
+                        slug=row.get("program", "normal").strip().lower()
+                    )
+                    start_date = datetime.strptime(
+                        row.get("start_date", "").strip(), "%Y-%m-%d"
+                    ).date()
+                    enrollment, _ = ProgramEnrollment.objects.update_or_create(
+                        user=user,
+                        program=program,
+                        defaults={"start_date": start_date, "is_active": True},
+                    )
+                    if bootstrap_history:
+                        now = timezone.now()
+                        elapsed_days = (timezone.localdate() - start_date).days
+                        for step in program.steps.filter(day_offset__lte=elapsed_days).select_related("course"):
+                            if step.course.course_type == Course.CourseType.TEST:
+                                user.allowed_tests.add(step.course)
+                            ProgramRelease.objects.update_or_create(
+                                enrollment=enrollment,
+                                step=step,
+                                defaults={
+                                    "status": ProgramRelease.Status.SENT,
+                                    "access_granted_at": now,
+                                    "email_sent_at": now,
+                                    "error_message": "Geçmiş akış CSV geçişinde işlendi.",
+                                },
+                            )
+                        if not enrollment.welcome_sent_at:
+                            enrollment.welcome_sent_at = now
+                            enrollment.save(update_fields=("welcome_sent_at",))
+                    imported += 1
+                except Exception as exc:
+                    errors.append(f"Satır {row_number} ({email or '-'}): {exc}")
+            if imported:
+                messages.success(request, f"{imported} öğrenci programlara aktarıldı.")
+            for error in errors[:10]:
+                messages.error(request, error)
+            return redirect(reverse("admin:core_programenrollment_changelist"))
+        return render(request, "admin/program_enrollment_import.html")
+
+    @admin.display(description="İlerleme")
+    def progress(self, obj):
+        total = obj.program.steps.count()
+        sent = obj.releases.filter(status=ProgramRelease.Status.SENT).count()
+        return f"{sent}/{total}"
+
+
+@admin.register(ProgramRelease)
+class ProgramReleaseAdmin(admin.ModelAdmin):
+    list_display = ("enrollment", "step", "status", "access_granted_at", "email_sent_at")
+    list_filter = ("status", "enrollment__program")
+    search_fields = ("enrollment__user__email", "step__course__turkish_name")
+    readonly_fields = ("enrollment", "step", "status", "access_granted_at", "email_sent_at", "error_message", "created_at")
+
+    def has_add_permission(self, request):
+        return False
 
 
 class EnrollmentInline(admin.TabularInline):
