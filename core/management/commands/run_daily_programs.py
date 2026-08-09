@@ -19,6 +19,19 @@ class Command(BaseCommand):
             f"✉️ Gönderilen mail: {stats['emails']}\n"
             f"❌ Hata: {stats['failed']}"
         )
+        if stats["details"]:
+            detail_lines = ["", "📋 Açılan içerik detayları"]
+            for item in stats["details"]:
+                mail_icon = "✅" if item["mail"] == "gönderildi" else "❌"
+                detail_lines.extend([
+                    "",
+                    f"👤 {item['email']}",
+                    f"📚 {item['course']}",
+                    f"{mail_icon} Mail: {item['mail']}",
+                ])
+            summary += "\n" + "\n".join(detail_lines)
+        else:
+            summary += "\n\nBugün açılacak yeni içerik bulunmuyor."
         self.stdout.write(summary)
         notify_telegram(summary)
         if stats["failed"]:

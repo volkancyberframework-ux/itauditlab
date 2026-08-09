@@ -76,17 +76,34 @@ def notify_telegram(text):
     if not settings.TELEGRAM_BOT_TOKEN or not settings.TELEGRAM_CHAT_ID:
         logger.warning("Telegram bildirimi atlandı: ayarlar eksik")
         return
-    response = requests.post(
-        f"https://api.telegram.org/bot{settings.TELEGRAM_BOT_TOKEN}/sendMessage",
-        data={"chat_id": settings.TELEGRAM_CHAT_ID, "text": text},
-        timeout=10,
-    )
-    response.raise_for_status()
+    chunks = []
+    current = ""
+    for line in text.splitlines(keepends=True):
+        if current and len(current) + len(line) > 3800:
+            chunks.append(current.rstrip())
+            current = ""
+        current += line
+    if current:
+        chunks.append(current.rstrip())
+
+    for chunk in chunks:
+        response = requests.post(
+            f"https://api.telegram.org/bot{settings.TELEGRAM_BOT_TOKEN}/sendMessage",
+            data={"chat_id": settings.TELEGRAM_CHAT_ID, "text": chunk},
+            timeout=10,
+        )
+        response.raise_for_status()
 
 
 def run_daily_programs(run_date=None):
     run_date = run_date or timezone.localdate()
-    stats = {"students": 0, "courses": 0, "emails": 0, "failed": 0}
+    stats = {
+        "students": 0,
+        "courses": 0,
+        "emails": 0,
+        "failed": 0,
+        "details": [],
+    }
     enrollments = ProgramEnrollment.objects.filter(
         is_active=True, program__is_active=True, start_date__lte=run_date
     ).select_related("user", "program")
@@ -105,6 +122,11 @@ def run_daily_programs(run_date=None):
                 release.status = ProgramRelease.Status.PENDING
                 release.save(update_fields=("access_granted_at", "status"))
                 stats["courses"] += 1
+                stats["details"].append({
+                    "email": enrollment.user.email,
+                    "course": step.email_title or str(step.course),
+                    "mail": "bekliyor",
+                })
             if release.status != ProgramRelease.Status.SENT:
                 releases.append(release)
 
@@ -124,6 +146,9 @@ def run_daily_programs(run_date=None):
                 ProgramRelease.objects.filter(pk__in=[r.pk for r in releases]).update(
                     status=ProgramRelease.Status.SENT, email_sent_at=now, error_message=""
                 )
+                for detail in stats["details"]:
+                    if detail["email"] == enrollment.user.email:
+                        detail["mail"] = "gönderildi"
                 stats["emails"] += 1
         except Exception as exc:
             logger.exception("Program mail failed for %s", enrollment.user.email)
@@ -131,5 +156,8 @@ def run_daily_programs(run_date=None):
                 status=ProgramRelease.Status.FAILED, error_message=str(exc)[:2000]
             )
             stats["failed"] += 1
+            for detail in stats["details"]:
+                if detail["email"] == enrollment.user.email and detail["mail"] == "bekliyor":
+                    detail["mail"] = f"hata: {str(exc)[:160]}"
 
     return stats
