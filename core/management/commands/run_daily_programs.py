@@ -1,7 +1,11 @@
 from django.core.management.base import BaseCommand
 from django.utils import timezone
 
-from core.program_automation import notify_telegram, run_daily_programs
+from core.program_automation import (
+    notify_telegram,
+    run_daily_programs,
+    send_daily_report_email,
+)
 
 
 class Command(BaseCommand):
@@ -34,5 +38,6 @@ class Command(BaseCommand):
             summary += "\n\nBugün açılacak yeni içerik bulunmuyor."
         self.stdout.write(summary)
         notify_telegram(summary)
+        send_daily_report_email(summary, run_date)
         if stats["failed"]:
             raise RuntimeError(f"{stats['failed']} öğrenci için mail gönderilemedi")

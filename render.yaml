@@ -51,6 +51,8 @@ services:
         sync: false
       - key: DEFAULT_FROM_EMAIL
         sync: false
+      - key: DAILY_REPORT_EMAIL
+        value: volkancyberframework@gmail.com
       - key: EMAIL_HOST
         value: smtpout.secureserver.net
       - key: EMAIL_PORT

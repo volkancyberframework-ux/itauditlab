@@ -95,6 +95,28 @@ def notify_telegram(text):
         response.raise_for_status()
 
 
+def send_daily_report_email(text, run_date):
+    recipient = settings.DAILY_REPORT_EMAIL
+    if not recipient:
+        logger.warning("Günlük e-posta raporu atlandı: DAILY_REPORT_EMAIL boş")
+        return
+    subject = f"Siberkobi günlük eğitim raporu — {run_date:%d.%m.%Y}"
+    html_body = _email_shell(
+        subject,
+        "Volkan",
+        '<pre style="white-space:pre-wrap;font:14px/1.65 Arial,sans-serif;color:#172033">'
+        f"{html.escape(text)}</pre>",
+    )
+    message = EmailMultiAlternatives(
+        subject=subject,
+        body=text,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=[recipient],
+    )
+    message.attach_alternative(html_body, "text/html")
+    message.send(fail_silently=False)
+
+
 def run_daily_programs(run_date=None):
     run_date = run_date or timezone.localdate()
     stats = {
