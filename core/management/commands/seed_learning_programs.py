@@ -11,7 +11,7 @@ class Command(BaseCommand):
         missing = []
         count = 0
         for slug, definition in PROGRAM_SCHEDULES.items():
-            program, _ = LearningProgram.objects.update_or_create(
+            program, _ = LearningProgram.objects.get_or_create(
                 slug=slug, defaults={"name": definition["name"], "is_active": True}
             )
             for order, (day_offset, course_id) in enumerate(definition["steps"]):
@@ -20,7 +20,7 @@ class Command(BaseCommand):
                 except Course.DoesNotExist:
                     missing.append(course_id)
                     continue
-                LearningProgramStep.objects.update_or_create(
+                LearningProgramStep.objects.get_or_create(
                     program=program,
                     course=course,
                     defaults={"day_offset": day_offset, "order": order},
