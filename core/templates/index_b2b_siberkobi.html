@@ -4,41 +4,42 @@
 {% block content %}
 <style>
   :root {
-    --corp-ink:#15221d; --corp-muted:#5d6d65; --corp-green:#19a974;
-    --corp-green-dark:#087a51; --corp-mint:#e9fff5; --corp-line:#dcebe4;
-    --corp-card:#fff; --corp-page:#f8fbf9; --corp-warm:#fff8ed;
+    --corp-ink:#111827; --corp-muted:#6b7280; --corp-green:#754ffe;
+    --corp-green-dark:#5b36e8; --corp-mint:#f1edff; --corp-line:rgba(117,79,254,.16);
+    --corp-card:#fff; --corp-page:#fff; --corp-warm:#f8f7ff;
   }
-  [data-bs-theme="dark"] { --corp-ink:#f1fff8; --corp-muted:#a9bdb3; --corp-card:#14231d; --corp-page:#0c1713; --corp-line:#28453a; --corp-mint:#112e23; --corp-warm:#282116; }
+  [data-bs-theme="dark"] { --corp-ink:#f8fafc; --corp-muted:#cbd5e1; --corp-card:#1e293b; --corp-page:#0f172a; --corp-line:rgba(148,163,184,.24); --corp-mint:#262044; --corp-warm:#172033; }
   .corp-page { overflow:hidden; background:var(--corp-page); color:var(--corp-ink); }
   .corp-container { width:min(1180px,calc(100% - 32px)); margin:auto; }
-  .corp-kicker { display:inline-flex; align-items:center; gap:8px; padding:9px 14px; border:1px solid rgba(25,169,116,.24); border-radius:999px; background:var(--corp-mint); color:var(--corp-green-dark); font-weight:800; font-size:.84rem; }
+  .corp-kicker { display:inline-flex; align-items:center; gap:8px; padding:9px 14px; border:1px solid rgba(117,79,254,.24); border-radius:999px; background:var(--corp-mint); color:var(--corp-green-dark); font-weight:800; font-size:.84rem; }
   .corp-title { font-size:clamp(2.8rem,6.5vw,6.1rem); line-height:.94; letter-spacing:-.065em; color:var(--corp-ink); font-weight:900; }
   .corp-title .accent { color:var(--corp-green); }
   .corp-lead { max-width:720px; font-size:clamp(1.1rem,1.8vw,1.38rem); line-height:1.7; color:var(--corp-muted); }
   .corp-btn { display:inline-flex; align-items:center; justify-content:center; gap:12px; padding:15px 22px; border-radius:14px; font-weight:850; text-decoration:none; transition:.22s ease; }
-  .corp-btn-primary { background:var(--corp-green); color:#fff; box-shadow:0 12px 28px rgba(25,169,116,.24); }
+  .corp-btn-primary { background:var(--corp-green); color:#fff; box-shadow:0 12px 28px rgba(117,79,254,.24); }
   .corp-btn-primary:hover { transform:translateY(-3px); color:#fff; background:var(--corp-green-dark); }
   .corp-btn-ghost { border:1px solid var(--corp-line); color:var(--corp-ink); background:var(--corp-card); }
   .corp-btn-ghost:hover { transform:translateY(-3px); color:var(--corp-green-dark); }
-  .corp-hero { padding:92px 0 68px; position:relative; }
-  .corp-hero:before { content:""; position:absolute; width:520px; height:520px; right:-150px; top:-90px; border-radius:50%; background:radial-gradient(circle,rgba(25,169,116,.20),transparent 68%); }
+  .corp-hero { padding:92px 0 68px; position:relative; background:radial-gradient(circle at top left,rgba(117,79,254,.16),transparent 34%),radial-gradient(circle at bottom right,rgba(19,154,116,.16),transparent 32%),linear-gradient(180deg,#fff 0%,#f8f7ff 100%); }
+  [data-bs-theme="dark"] .corp-hero { background:radial-gradient(circle at top left,rgba(117,79,254,.28),transparent 34%),radial-gradient(circle at bottom right,rgba(19,154,116,.22),transparent 32%),linear-gradient(180deg,#0f172a 0%,#111827 100%); }
+  .corp-hero:before { content:""; position:absolute; width:520px; height:520px; right:-150px; top:-90px; border-radius:50%; background:radial-gradient(circle,rgba(117,79,254,.16),transparent 68%); }
   .hero-proof { position:relative; min-height:510px; }
   .audit-orbit { position:absolute; inset:45px 0 0 25px; border:1px solid var(--corp-line); border-radius:50%; animation:corp-spin 32s linear infinite; }
   .audit-orbit.two { inset:105px 60px 60px 85px; animation-direction:reverse; animation-duration:24s; }
   @keyframes corp-spin { to { transform:rotate(360deg); } }
-  .audit-core { position:absolute; inset:155px 92px 105px 118px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; background:var(--corp-card); border:2px solid var(--corp-ink); border-radius:32px; box-shadow:18px 20px 0 rgba(25,169,116,.18); z-index:3; }
+  .audit-core { position:absolute; inset:155px 92px 105px 118px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; background:var(--corp-card); border:2px solid var(--corp-ink); border-radius:32px; box-shadow:18px 20px 0 rgba(117,79,254,.18); z-index:3; }
   .audit-core .shield { font-size:3.4rem; }
   .audit-core strong { font-size:1.35rem; }
-  .orbit-chip { position:absolute; z-index:4; padding:10px 14px; border:1px solid var(--corp-line); background:var(--corp-card); border-radius:13px; font-weight:800; box-shadow:7px 8px 0 rgba(25,169,116,.10); animation:corp-float 4s ease-in-out infinite; }
+  .orbit-chip { position:absolute; z-index:4; padding:10px 14px; border:1px solid var(--corp-line); background:var(--corp-card); border-radius:13px; font-weight:800; box-shadow:7px 8px 0 rgba(117,79,254,.10); animation:corp-float 4s ease-in-out infinite; }
   .chip-a{top:25px;left:25px}.chip-b{top:80px;right:0;animation-delay:.8s}.chip-c{bottom:70px;left:0;animation-delay:1.4s}.chip-d{bottom:20px;right:40px;animation-delay:2s}
   @keyframes corp-float { 50% { transform:translateY(-10px) rotate(1deg); } }
   .stat-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:52px; }
-  .stat-box { padding:22px; border:1px solid var(--corp-line); border-radius:20px; background:var(--corp-card); box-shadow:8px 9px 0 rgba(25,169,116,.09); }
+  .stat-box { padding:22px; border:1px solid var(--corp-line); border-radius:20px; background:var(--corp-card); box-shadow:8px 9px 0 rgba(117,79,254,.09); }
   .stat-box strong { display:block; font-size:1.65rem; color:var(--corp-ink); }
   .stat-box span { color:var(--corp-muted); }
   .logo-river { padding:28px 0; border-block:1px solid var(--corp-line); background:var(--corp-card); overflow:hidden; }
   .flag-track { display:flex; width:max-content; gap:18px; animation:flag-flow 28s linear infinite; }
-  .flag-pill { min-width:170px; padding:12px 18px; border-radius:14px; border:1px solid var(--corp-line); background:var(--corp-page); font-weight:800; box-shadow:5px 6px 0 rgba(25,169,116,.09); }
+  .flag-pill { min-width:170px; padding:12px 18px; border-radius:14px; border:1px solid var(--corp-line); background:var(--corp-page); font-weight:800; box-shadow:5px 6px 0 rgba(117,79,254,.09); }
   @keyframes flag-flow { to { transform:translateX(-50%); } }
   .corp-section { padding:96px 0; }
   .corp-section.alt { background:var(--corp-card); }
@@ -51,10 +52,10 @@
   .corp-card .icon { width:52px; height:52px; display:grid; place-items:center; border-radius:15px; background:var(--corp-mint); font-size:1.5rem; margin-bottom:20px; }
   .corp-card h3 { font-size:1.23rem; font-weight:850; color:var(--corp-ink); }
   .corp-card p { color:var(--corp-muted); line-height:1.7; margin:0; }
-  .alert-band { margin-top:38px; padding:26px 30px; border-radius:22px; background:#17251f; color:#fff; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+  .alert-band { margin-top:38px; padding:26px 30px; border-radius:22px; background:linear-gradient(120deg,#5b36e8,#754ffe); color:#fff; display:flex; align-items:center; justify-content:space-between; gap:24px; }
   .alert-band strong { font-size:1.3rem; }
   .law-panel { display:grid; grid-template-columns:.85fr 1.15fr; gap:34px; align-items:start; }
-  .law-year { position:sticky; top:110px; padding:36px; border-radius:28px; background:var(--corp-green); color:#fff; box-shadow:14px 15px 0 rgba(25,169,116,.18); }
+  .law-year { position:sticky; top:110px; padding:36px; border-radius:28px; background:var(--corp-green); color:#fff; box-shadow:14px 15px 0 rgba(117,79,254,.18); }
   .law-year .year { font-size:5.6rem; font-weight:950; letter-spacing:-.08em; line-height:1; }
   .law-list { display:grid; gap:14px; }
   .law-item { padding:22px 24px; border:1px solid var(--corp-line); border-radius:18px; background:var(--corp-card); }
@@ -78,7 +79,7 @@
   .framework-card strong { display:block; font-size:1.1rem; color:var(--corp-ink); }
   .framework-card small { color:var(--corp-muted); }
   .monitor-wrap { display:grid; grid-template-columns:1.05fr .95fr; gap:35px; align-items:center; }
-  .monitor-chart { min-height:420px; border:2px solid var(--corp-ink); border-radius:28px; background:var(--corp-card); padding:30px; box-shadow:14px 16px 0 rgba(25,169,116,.14); position:relative; }
+  .monitor-chart { min-height:420px; border:2px solid var(--corp-ink); border-radius:28px; background:var(--corp-card); padding:30px; box-shadow:14px 16px 0 rgba(117,79,254,.14); position:relative; }
   .monitor-grid { position:absolute; inset:90px 30px 45px; background:repeating-linear-gradient(to bottom,transparent 0 68px,var(--corp-line) 69px 70px); }
   .monitor-svg { position:absolute; inset:100px 38px 55px; width:calc(100% - 76px); height:calc(100% - 155px); overflow:visible; }
   .monitor-path { stroke-dasharray:800; stroke-dashoffset:800; animation:draw-path 4s ease forwards infinite alternate; }
@@ -95,12 +96,25 @@
   .faq-list summary:after { content:"+"; color:var(--corp-green); font-size:1.5rem; }
   .faq-list details[open] summary:after { content:"−"; }
   .faq-list p { color:var(--corp-muted); line-height:1.75; max-width:900px; margin:16px 0 0; }
-  .final-cta { margin:70px auto 95px; padding:clamp(34px,6vw,72px); border-radius:34px; background:#14231d; color:#fff; position:relative; overflow:hidden; }
+  .final-cta { margin:70px auto 95px; padding:clamp(34px,6vw,72px); border-radius:34px; background:linear-gradient(120deg,#5b36e8,#754ffe 58%,#139a74); color:#fff; position:relative; overflow:hidden; }
   .final-cta:after { content:"↗"; position:absolute; right:35px; bottom:-55px; font-size:15rem; line-height:1; opacity:.08; }
   .final-cta h2 { color:#fff; font-size:clamp(2.2rem,5vw,4.6rem); font-weight:900; letter-spacing:-.05em; max-width:850px; }
   .final-cta p { color:rgba(255,255,255,.7); max-width:670px; font-size:1.15rem; }
-  @media(max-width:991px){.hero-proof{min-height:430px;margin-top:35px}.stat-strip{grid-template-columns:repeat(2,1fr)}.problem-grid,.service-grid,.case-grid{grid-template-columns:repeat(2,1fr)}.law-panel,.monitor-wrap{grid-template-columns:1fr}.law-year{position:relative;top:auto}.process-line-corp{grid-template-columns:repeat(2,1fr)}.process-line-corp:before{display:none}}
-  @media(max-width:575px){.corp-hero{padding-top:58px}.hero-proof{min-height:340px}.audit-core{inset:110px 55px 75px}.audit-orbit{inset:30px 10px}.audit-orbit.two{inset:75px 48px}.orbit-chip{font-size:.73rem;padding:8px}.stat-strip,.problem-grid,.service-grid,.case-grid,.framework-grid,.process-line-corp,.deliverable{grid-template-columns:1fr}.alert-band{align-items:flex-start;flex-direction:column}.corp-section{padding:68px 0}}
+  .experience-band { display:grid; grid-template-columns:.8fr 1.2fr; gap:32px; padding:42px; border:1px solid var(--corp-line); border-radius:30px; background:linear-gradient(135deg,var(--corp-card),var(--corp-warm)); box-shadow:0 30px 90px rgba(31,41,55,.10); }
+  .experience-number { font-size:clamp(4.5rem,9vw,8rem); line-height:.85; letter-spacing:-.08em; color:var(--corp-green); font-weight:950; }
+  .sector-pills { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+  .sector-pills span { padding:9px 13px; border:1px solid var(--corp-line); border-radius:999px; background:var(--corp-card); color:var(--corp-ink); font-weight:750; }
+  .package-card { display:grid; grid-template-columns:1.15fr .85fr; overflow:hidden; border:1px solid var(--corp-line); border-radius:32px; background:var(--corp-card); box-shadow:0 30px 90px rgba(31,41,55,.12); }
+  .package-copy { padding:clamp(30px,5vw,58px); }
+  .package-price { padding:clamp(30px,5vw,58px); background:linear-gradient(150deg,#f1edff,#fbfbff); display:flex; flex-direction:column; justify-content:center; }
+  [data-bs-theme="dark"] .package-price { background:linear-gradient(150deg,#262044,#172033); }
+  .package-price .amount { font-size:clamp(3rem,5vw,5.2rem); line-height:.95; letter-spacing:-.065em; color:var(--corp-ink); font-weight:950; }
+  .package-price .period { color:var(--corp-muted); font-weight:750; }
+  .package-list { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:28px; }
+  .package-list div { display:flex; gap:10px; color:var(--corp-muted); }
+  .package-list b { color:#139a74; }
+  @media(max-width:991px){.hero-proof{min-height:430px;margin-top:35px}.stat-strip{grid-template-columns:repeat(2,1fr)}.problem-grid,.service-grid,.case-grid{grid-template-columns:repeat(2,1fr)}.law-panel,.monitor-wrap,.experience-band,.package-card{grid-template-columns:1fr}.law-year{position:relative;top:auto}.process-line-corp{grid-template-columns:repeat(2,1fr)}.process-line-corp:before{display:none}}
+  @media(max-width:575px){.corp-hero{padding-top:58px}.hero-proof{min-height:340px}.audit-core{inset:110px 55px 75px}.audit-orbit{inset:30px 10px}.audit-orbit.two{inset:75px 48px}.orbit-chip{font-size:.73rem;padding:8px}.stat-strip,.problem-grid,.service-grid,.case-grid,.framework-grid,.process-line-corp,.deliverable,.package-list{grid-template-columns:1fr}.alert-band{align-items:flex-start;flex-direction:column}.corp-section{padding:68px 0}.experience-band{padding:28px}.package-price{padding:30px}}
 </style>
 
 <main class="corp-page">
@@ -125,10 +139,19 @@
         </div>
       </div>
       <div class="stat-strip">
-        <div class="stat-box"><strong>360°</strong><span>teknik ve idari kontrol</span></div>
-        <div class="stat-box"><strong>Kanıtlı</strong><span>bulgu ve risk raporu</span></div>
-        <div class="stat-box"><strong>Aylık</strong><span>sürekli güvenlik takibi</span></div>
-        <div class="stat-box"><strong>Bağımsız</strong><span>IT ekibinden ayrı bakış</span></div>
+        <div class="stat-box"><strong>8 yıl</strong><span>uluslararası saha deneyimi</span></div>
+        <div class="stat-box"><strong>100+</strong><span>denetim ve kontrol çalışması</span></div>
+        <div class="stat-box"><strong>7 ülke</strong><span>farklı pazar ve çalışma kültürü</span></div>
+        <div class="stat-box"><strong>12 ay</strong><span>sürekli güvenlik takibi</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="corp-section">
+    <div class="corp-container">
+      <div class="experience-band">
+        <div><div class="experience-number">100+</div><h2 class="mt-3 fw-bolder">Denetim ve kontrol</h2><p class="text-muted mb-0">Sekiz yılda farklı ölçek, ülke ve regülasyon ortamlarında edinilmiş uygulamalı deneyim.</p></div>
+        <div><span class="corp-kicker">Sektör tecrübesi</span><h2 class="mt-3">Risk her sektörde başka görünür. Kontrolün çalışıp çalışmadığı ise her yerde kanıt ister.</h2><p class="corp-lead">Finansal sistemlerden üretim hatlarına, kişisel veriden küresel tedarik zincirlerine kadar farklı iş modellerinde süreç, teknoloji ve insan kontrollerini değerlendirdik.</p><div class="sector-pills"><span>Finans</span><span>Bankacılık</span><span>Sigorta</span><span>Üretim</span><span>Teknoloji</span><span>E-ticaret</span><span>Telekom</span><span>Profesyonel hizmetler</span></div></div>
       </div>
     </div>
   </section>
@@ -247,7 +270,7 @@
         <div class="monitor-chart">
           <strong style="font-size:1.25rem">Kontrol olgunluğu</strong><span class="d-block text-muted">Temsili iyileştirme görünümü</span>
           <div class="monitor-grid"></div>
-          <svg class="monitor-svg" viewBox="0 0 500 240" preserveAspectRatio="none" aria-hidden="true"><path d="M0 215 C85 205 110 185 170 177 S270 150 315 115 S410 54 500 22" fill="none" stroke="#19a974" stroke-width="10" stroke-linecap="round" class="monitor-path"/><path d="M0 215 C85 205 110 185 170 177 S270 150 315 115 S410 54 500 22 L500 240 L0 240 Z" fill="rgba(25,169,116,.10)"/></svg>
+          <svg class="monitor-svg" viewBox="0 0 500 240" preserveAspectRatio="none" aria-hidden="true"><path d="M0 215 C85 205 110 185 170 177 S270 150 315 115 S410 54 500 22" fill="none" stroke="#754ffe" stroke-width="10" stroke-linecap="round" class="monitor-path"/><path d="M0 215 C85 205 110 185 170 177 S270 150 315 115 S410 54 500 22 L500 240 L0 240 Z" fill="rgba(117,79,254,.10)"/></svg>
           <span class="monitor-label">Sürekli takip ↗</span>
         </div>
       </div>
@@ -268,7 +291,41 @@
     </div>
   </section>
 
-  <section class="corp-section">
+  <section class="corp-section" id="paket">
+    <div class="corp-container">
+      <div class="section-head"><span class="corp-kicker">Tek paket · 12 aylık güvence</span><h2 class="mt-3">Raf raporu değil, yıl boyunca çalışan güvenlik programı.</h2><p>Başlangıç denetimini, uygulanabilir yol haritasını, bulgu kapanışlarını ve aylık kritik kontrol takibini tek hizmette birleştiriyoruz.</p></div>
+      <div class="package-card">
+        <div class="package-copy">
+          <span class="corp-kicker">Siberkobi Yıllık Bağımsız Güvence Paketi</span>
+          <h2 class="mt-4">Bir kez denetle. On iki ay boyunca güvende kalmayı takip et.</h2>
+          <p class="corp-lead">KOBİ’nizin kritik sistem, süreç, veri ve tedarikçi risklerini bağımsız olarak değerlendirir; bulguları yönetilebilir aksiyonlara çevirir ve iyileştirmelerin gerçekten yapıldığını kanıtlarıyla doğrularız.</p>
+          <div class="package-list">
+            <div><b>✓</b><span>Başlangıç kapsam ve risk analizi</span></div>
+            <div><b>✓</b><span>Teknik ve idari kontrol denetimi</span></div>
+            <div><b>✓</b><span>Yönetici özeti ve detaylı bulgu raporu</span></div>
+            <div><b>✓</b><span>Öncelikli 12 aylık iyileştirme planı</span></div>
+            <div><b>✓</b><span>Her ay kritik kontrol ve aksiyon takibi</span></div>
+            <div><b>✓</b><span>Kapanış kanıtlarının bağımsız doğrulaması</span></div>
+            <div><b>✓</b><span>ISO 27001, KVKK ve CIS eşlemesi</span></div>
+            <div><b>✓</b><span>Yıl sonu güvenlik olgunluğu özeti</span></div>
+          </div>
+        </div>
+        <div class="package-price">
+          <span class="corp-kicker align-self-start">Yıllık hizmet</span>
+          <div class="amount mt-4">99.999 TL</div>
+          <div class="period mt-2">yıllık · Stripe ile güvenli ödeme</div>
+          <p class="text-muted mt-4">Satın alma sonrasında kapsam ve başlangıç toplantısını planlamak için sizinle iletişime geçeriz.</p>
+          <form method="post" action="{% url 'corporate_assurance_checkout' %}" class="mt-2">
+            {% csrf_token %}
+            <button type="submit" class="corp-btn corp-btn-primary border-0 w-100">Paketi satın al <span>→</span></button>
+          </form>
+          <small class="text-muted mt-3">Fiyat yıllık hizmet bedelidir. Stripe ödeme ekranında şirket fatura bilgilerinizi girebilirsiniz.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="corp-section alt">
     <div class="corp-container">
       <div class="section-head"><span class="corp-kicker">Sık sorulanlar</span><h2 class="mt-3">Başlamadan önce bilmek isteyecekleriniz.</h2></div>
       <div class="faq-list">
@@ -287,7 +344,7 @@
     <p>Mevcut yapınızı, kritik sistemlerinizi ve beklentinizi konuşalım. Size uygun denetim kapsamını ve ilk kontrol planını birlikte netleştirelim.</p>
     <div class="d-flex flex-wrap gap-3 mt-4 position-relative" style="z-index:2">
       <a class="corp-btn corp-btn-primary" href="mailto:support@siberkobi.co?subject=Kurumsal%20Denetim%20%C3%96n%20G%C3%B6r%C3%BC%C5%9Fme">support@siberkobi.co →</a>
-      <a class="corp-btn corp-btn-ghost" href="tel:+32476073171">+32 476 07 31 71</a>
+      <a class="corp-btn corp-btn-ghost" href="#paket">Yıllık paketi incele</a>
     </div>
   </section>
 </main>

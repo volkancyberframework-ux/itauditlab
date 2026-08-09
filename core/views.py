@@ -465,6 +465,63 @@ def bootcamp_checkout(request, slug):
 def bootcamp_payment_success(request):
     return render(request, "bootcamp-success.html")
 
+
+@require_POST
+def corporate_assurance_checkout(request):
+    """Start the annual corporate assurance subscription in Stripe Checkout."""
+    if not settings.STRIPE_SECRET_KEY:
+        return HttpResponseBadRequest("Stripe ayarı eksik.")
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+
+    try:
+        checkout_session = stripe.checkout.Session.create(
+            mode="subscription",
+            payment_method_types=["card"],
+            customer_email=(
+                request.user.email
+                if request.user.is_authenticated and request.user.email
+                else None
+            ),
+            billing_address_collection="required",
+            tax_id_collection={"enabled": True},
+            allow_promotion_codes=True,
+            line_items=[
+                {
+                    "price_data": {
+                        "currency": "try",
+                        "unit_amount": 9_999_900,
+                        "product_data": {
+                            "name": "Siberkobi Yıllık Bağımsız Güvence Paketi",
+                            "description": (
+                                "Kapsam belirleme, bağımsız siber güvenlik denetimi, "
+                                "kanıta dayalı bulgu ve yönetim raporu, iyileştirme "
+                                "takibi ve 12 ay boyunca aylık kritik kontrol takibi."
+                            ),
+                        },
+                        "recurring": {"interval": "year"},
+                    },
+                    "quantity": 1,
+                }
+            ],
+            metadata={"service": "annual_corporate_assurance"},
+            subscription_data={
+                "metadata": {"service": "annual_corporate_assurance"}
+            },
+            success_url=request.build_absolute_uri(
+                reverse("corporate_payment_success") + "?session_id={CHECKOUT_SESSION_ID}"
+            ),
+            cancel_url=request.build_absolute_uri(reverse("for_businesses") + "#paket"),
+        )
+        return redirect(checkout_session.url)
+    except Exception as exc:
+        messages.error(request, f"Ödeme başlatılamadı: {exc}")
+        return redirect(reverse("for_businesses") + "#paket")
+
+
+def corporate_payment_success(request):
+    return render(request, "corporate-success.html")
+
 from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import redirect
