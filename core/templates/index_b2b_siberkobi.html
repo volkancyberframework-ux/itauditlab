@@ -57,6 +57,8 @@
   .law-panel { display:grid; grid-template-columns:.85fr 1.15fr; gap:34px; align-items:start; }
   .law-year { position:sticky; top:110px; padding:36px; border-radius:28px; background:var(--corp-green); color:#fff; box-shadow:14px 15px 0 rgba(117,79,254,.18); }
   .law-year .year { font-size:5.6rem; font-weight:950; letter-spacing:-.08em; line-height:1; }
+  .law-year-next { margin-top:34px; padding-top:30px; border-top:1px solid rgba(255,255,255,.28); }
+  .law-year-next .year { font-size:4.5rem; }
   .law-list { display:grid; gap:14px; }
   .law-item { padding:22px 24px; border:1px solid var(--corp-line); border-radius:18px; background:var(--corp-card); }
   .law-item strong { display:block; color:var(--corp-ink); margin-bottom:6px; }
@@ -113,11 +115,11 @@
   .package-list { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:28px; }
   .package-list div { display:flex; gap:10px; color:var(--corp-muted); }
   .package-list b { color:#139a74; }
-  .founder-panel { display:grid; grid-template-columns:.72fr 1.28fr; gap:0; border:1px solid var(--corp-line); border-radius:32px; overflow:hidden; background:var(--corp-card); box-shadow:0 30px 90px rgba(31,41,55,.12); }
-  .founder-photo { min-height:560px; background:linear-gradient(150deg,#e9e5ff,#dff7ee); position:relative; overflow:hidden; }
-  .founder-photo img { width:100%; height:100%; object-fit:cover; object-position:center 24%; position:absolute; inset:0; filter:saturate(.82) contrast(1.04); }
+  .founder-panel { display:grid; grid-template-columns:.9fr 1.1fr; gap:0; align-items:center; border:1px solid var(--corp-line); border-radius:32px; overflow:hidden; background:var(--corp-card); box-shadow:0 30px 90px rgba(31,41,55,.12); }
+  .founder-photo { min-height:0; aspect-ratio:3/2; margin:clamp(24px,3vw,42px); border-radius:24px; background:linear-gradient(150deg,#e9e5ff,#dff7ee); position:relative; overflow:hidden; box-shadow:0 22px 55px rgba(15,23,42,.18); }
+  .founder-photo img { width:100%; height:100%; object-fit:cover; object-position:center; position:absolute; inset:0; filter:saturate(.9) contrast(1.03); }
   .founder-copy { padding:clamp(32px,5vw,64px); display:flex; flex-direction:column; justify-content:center; }
-  .founder-copy h2 { font-size:clamp(2.4rem,5vw,4.8rem); letter-spacing:-.055em; line-height:1; }
+  .founder-copy h2 { font-size:clamp(2.2rem,4vw,3.9rem); letter-spacing:-.05em; line-height:1.03; }
   .credential-row { display:flex; flex-wrap:wrap; gap:12px; margin:26px 0; }
   .credential-mark { min-width:112px; padding:15px 18px; border:1px solid var(--corp-line); border-radius:18px; background:var(--corp-warm); }
   .credential-mark strong { display:block; color:var(--corp-green); font-size:1.3rem; letter-spacing:.03em; }
@@ -131,8 +133,8 @@
   .saving { padding:22px; border:1px solid var(--corp-line); border-radius:20px; background:var(--corp-card); }
   .saving strong { display:block; margin-bottom:8px; color:var(--corp-ink); }
   .saving span { color:var(--corp-muted); line-height:1.55; }
-  @media(max-width:991px){.hero-proof{min-height:430px;margin-top:35px}.stat-strip{grid-template-columns:repeat(2,1fr)}.problem-grid,.service-grid,.case-grid{grid-template-columns:repeat(2,1fr)}.law-panel,.monitor-wrap,.experience-band,.package-card,.founder-panel,.impact-panel{grid-template-columns:1fr}.founder-photo{min-height:500px}.savings-grid{grid-template-columns:repeat(2,1fr)}.law-year{position:relative;top:auto}.process-line-corp{grid-template-columns:repeat(2,1fr)}.process-line-corp:before{display:none}}
-  @media(max-width:575px){.corp-hero{padding-top:58px}.hero-proof{min-height:340px}.audit-core{inset:110px 55px 75px}.audit-orbit{inset:30px 10px}.audit-orbit.two{inset:75px 48px}.orbit-chip{font-size:.73rem;padding:8px}.stat-strip,.problem-grid,.service-grid,.case-grid,.framework-grid,.process-line-corp,.deliverable,.package-list,.savings-grid{grid-template-columns:1fr}.alert-band{align-items:flex-start;flex-direction:column}.corp-section{padding:68px 0}.experience-band{padding:28px}.package-price{padding:30px}.founder-photo{min-height:420px}.credential-mark{min-width:0;flex:1}.impact-panel{padding:30px}}
+  @media(max-width:991px){.hero-proof{min-height:430px;margin-top:35px}.stat-strip{grid-template-columns:repeat(2,1fr)}.problem-grid,.service-grid,.case-grid{grid-template-columns:repeat(2,1fr)}.law-panel,.monitor-wrap,.experience-band,.package-card,.founder-panel,.impact-panel{grid-template-columns:1fr}.founder-photo{width:calc(100% - 56px);margin:28px}.savings-grid{grid-template-columns:repeat(2,1fr)}.law-year{position:relative;top:auto}.process-line-corp{grid-template-columns:repeat(2,1fr)}.process-line-corp:before{display:none}}
+  @media(max-width:575px){.corp-hero{padding-top:58px}.hero-proof{min-height:340px}.audit-core{inset:110px 55px 75px}.audit-orbit{inset:30px 10px}.audit-orbit.two{inset:75px 48px}.orbit-chip{font-size:.73rem;padding:8px}.stat-strip,.problem-grid,.service-grid,.case-grid,.framework-grid,.process-line-corp,.deliverable,.package-list,.savings-grid{grid-template-columns:1fr}.alert-band{align-items:flex-start;flex-direction:column}.corp-section{padding:68px 0}.experience-band{padding:28px}.package-price{padding:30px}.founder-photo{width:calc(100% - 36px);margin:18px}.founder-copy{padding:28px 24px 34px}.credential-mark{min-width:0;flex:1}.impact-panel{padding:30px}.law-year-next .year{font-size:3.8rem}}
 </style>
 
 <main class="corp-page">
@@ -244,7 +246,16 @@
   <section class="corp-section alt">
     <div class="corp-container">
       <div class="law-panel">
-        <div class="law-year"><div class="year">2025</div><h2 class="text-white mt-3">Siber güvenlik artık yalnızca IT konusu değil.</h2><p class="mb-0 opacity-75">Yönetim sorumluluğu, kanıt, olay bildirimi ve süreklilik ekseninde yeni bir dönem.</p></div>
+        <div class="law-year">
+          <div class="year">2025</div>
+          <h2 class="text-white mt-3">Siber güvenlik artık yalnızca IT konusu değil.</h2>
+          <p class="mb-0 opacity-75">Yönetim sorumluluğu, kanıt, olay bildirimi ve süreklilik ekseninde yeni bir dönem.</p>
+          <div class="law-year-next">
+            <div class="year">2026</div>
+            <h3 class="text-white mt-3">Uygulama ve süreklilik dönemi.</h3>
+            <p class="mb-0 opacity-75">Politikaların ötesine geçip kontrollerin çalıştığını kanıtlama; envanter, tedarikçi, olay yönetimi ve iyileştirme takibini sürekli hâle getirme zamanı.</p>
+          </div>
+        </div>
         <div>
           <div class="section-head mb-4"><span class="corp-kicker">Mevzuat ve sorumluluk</span><h2 class="mt-3">Kanun, KVKK ve sektör gereklilikleri birlikte düşünülmeli.</h2></div>
           <div class="law-list">
