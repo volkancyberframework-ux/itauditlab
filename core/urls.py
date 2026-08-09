@@ -1,6 +1,7 @@
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
+from django.views.generic import RedirectView
 from . import views
 from .views import (
     landing_page,
@@ -21,7 +22,8 @@ urlpatterns = [
         name="create_membership_checkout",
     ),
     path("heartbeat/", views.heartbeat, name="heartbeat"),
-    path('', landing_page, name='landing'),
+    path('', RedirectView.as_view(pattern_name='for_businesses', permanent=False), name='landing'),
+    path('bireysel/', landing_page, name='for_individuals'),
     path("newsletter-popup-lead/", views.newsletter_popup_lead, name="newsletter_popup_lead"),
     path("bootcampler/", views.bootcamps_view, name="bootcamps"),
     path('course-single/<int:pk>/', views.course_single, name='course_single'),

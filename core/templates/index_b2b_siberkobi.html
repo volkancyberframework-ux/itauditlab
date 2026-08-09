@@ -113,8 +113,26 @@
   .package-list { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:28px; }
   .package-list div { display:flex; gap:10px; color:var(--corp-muted); }
   .package-list b { color:#139a74; }
-  @media(max-width:991px){.hero-proof{min-height:430px;margin-top:35px}.stat-strip{grid-template-columns:repeat(2,1fr)}.problem-grid,.service-grid,.case-grid{grid-template-columns:repeat(2,1fr)}.law-panel,.monitor-wrap,.experience-band,.package-card{grid-template-columns:1fr}.law-year{position:relative;top:auto}.process-line-corp{grid-template-columns:repeat(2,1fr)}.process-line-corp:before{display:none}}
-  @media(max-width:575px){.corp-hero{padding-top:58px}.hero-proof{min-height:340px}.audit-core{inset:110px 55px 75px}.audit-orbit{inset:30px 10px}.audit-orbit.two{inset:75px 48px}.orbit-chip{font-size:.73rem;padding:8px}.stat-strip,.problem-grid,.service-grid,.case-grid,.framework-grid,.process-line-corp,.deliverable,.package-list{grid-template-columns:1fr}.alert-band{align-items:flex-start;flex-direction:column}.corp-section{padding:68px 0}.experience-band{padding:28px}.package-price{padding:30px}}
+  .founder-panel { display:grid; grid-template-columns:.72fr 1.28fr; gap:0; border:1px solid var(--corp-line); border-radius:32px; overflow:hidden; background:var(--corp-card); box-shadow:0 30px 90px rgba(31,41,55,.12); }
+  .founder-photo { min-height:560px; background:linear-gradient(150deg,#e9e5ff,#dff7ee); position:relative; overflow:hidden; }
+  .founder-photo img { width:100%; height:100%; object-fit:cover; object-position:center 24%; position:absolute; inset:0; filter:saturate(.82) contrast(1.04); }
+  .founder-copy { padding:clamp(32px,5vw,64px); display:flex; flex-direction:column; justify-content:center; }
+  .founder-copy h2 { font-size:clamp(2.4rem,5vw,4.8rem); letter-spacing:-.055em; line-height:1; }
+  .credential-row { display:flex; flex-wrap:wrap; gap:12px; margin:26px 0; }
+  .credential-mark { min-width:112px; padding:15px 18px; border:1px solid var(--corp-line); border-radius:18px; background:var(--corp-warm); }
+  .credential-mark strong { display:block; color:var(--corp-green); font-size:1.3rem; letter-spacing:.03em; }
+  .credential-mark small { color:var(--corp-muted); font-size:.72rem; }
+  .impact-panel { display:grid; grid-template-columns:.9fr 1.1fr; gap:34px; align-items:center; padding:clamp(34px,6vw,72px); border-radius:34px; color:#fff; background:linear-gradient(125deg,#111827,#37256f 62%,#0f766e); overflow:hidden; position:relative; }
+  .impact-panel h2 { color:#fff; font-size:clamp(2.3rem,5vw,4.8rem); line-height:1; letter-spacing:-.055em; }
+  .impact-panel p { color:rgba(255,255,255,.74); font-size:1.12rem; line-height:1.75; }
+  .impact-number { font-size:clamp(5rem,12vw,10rem); line-height:.8; letter-spacing:-.09em; font-weight:950; color:#fff; }
+  .impact-card { padding:28px; border:1px solid rgba(255,255,255,.16); border-radius:24px; background:rgba(255,255,255,.08); backdrop-filter:blur(12px); }
+  .savings-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-top:30px; }
+  .saving { padding:22px; border:1px solid var(--corp-line); border-radius:20px; background:var(--corp-card); }
+  .saving strong { display:block; margin-bottom:8px; color:var(--corp-ink); }
+  .saving span { color:var(--corp-muted); line-height:1.55; }
+  @media(max-width:991px){.hero-proof{min-height:430px;margin-top:35px}.stat-strip{grid-template-columns:repeat(2,1fr)}.problem-grid,.service-grid,.case-grid{grid-template-columns:repeat(2,1fr)}.law-panel,.monitor-wrap,.experience-band,.package-card,.founder-panel,.impact-panel{grid-template-columns:1fr}.founder-photo{min-height:500px}.savings-grid{grid-template-columns:repeat(2,1fr)}.law-year{position:relative;top:auto}.process-line-corp{grid-template-columns:repeat(2,1fr)}.process-line-corp:before{display:none}}
+  @media(max-width:575px){.corp-hero{padding-top:58px}.hero-proof{min-height:340px}.audit-core{inset:110px 55px 75px}.audit-orbit{inset:30px 10px}.audit-orbit.two{inset:75px 48px}.orbit-chip{font-size:.73rem;padding:8px}.stat-strip,.problem-grid,.service-grid,.case-grid,.framework-grid,.process-line-corp,.deliverable,.package-list,.savings-grid{grid-template-columns:1fr}.alert-band{align-items:flex-start;flex-direction:column}.corp-section{padding:68px 0}.experience-band{padding:28px}.package-price{padding:30px}.founder-photo{min-height:420px}.credential-mark{min-width:0;flex:1}.impact-panel{padding:30px}}
 </style>
 
 <main class="corp-page">
@@ -156,6 +174,27 @@
     </div>
   </section>
 
+  <section class="corp-section alt" id="kurucu">
+    <div class="corp-container">
+      <div class="founder-panel">
+        <div class="founder-photo"><img src="{% static 'assets/images/volkan/avatar.png' %}" alt="Volkan Güler, Siberkobi Kurucusu"></div>
+        <div class="founder-copy">
+          <span class="corp-kicker align-self-start">Kurucu ve baş denetçi</span>
+          <h2 class="mt-4">Bu işin başında doğrudan ben varım.</h2>
+          <h3 class="mt-3 mb-0">Volkan Güler</h3>
+          <p class="text-muted">Founder, Siberkobi · Bilgi Güvenliği ve IT Denetimi</p>
+          <div class="credential-row" aria-label="Profesyonel sertifikalar">
+            <a class="credential-mark text-decoration-none" href="https://www.isaca.org/credentialing/cisa" target="_blank" rel="noopener"><strong>CISA®</strong><small>IT Audit</small></a>
+            <a class="credential-mark text-decoration-none" href="https://www.isaca.org/credentialing/cism" target="_blank" rel="noopener"><strong>CISM®</strong><small>Security Management</small></a>
+            <a class="credential-mark text-decoration-none" href="https://www.isc2.org/certifications/cissp" target="_blank" rel="noopener"><strong>CISSP®</strong><small>Cybersecurity</small></a>
+          </div>
+          <p class="corp-lead">Sekiz yıldır finans, bankacılık, sigorta, teknoloji, üretim ve uluslararası operasyonlarda denetim ve kontrol çalışmalarının içindeyim. Siberkobi’de kapsamı yalnızca satış ekibiyle konuşmazsınız; risk yaklaşımını, bulguları ve yönetim raporunu doğrudan işin sorumlusu takip eder.</p>
+          <p class="mb-0 fw-semibold">Amacım size daha fazla ürün satmak değil; sahip olduğunuz teknoloji yatırımlarının gerçekten çalışmasını ve paranızın görünmeyen risklere akmamasını sağlamak.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="logo-river" aria-label="Uluslararası deneyim">
     <div class="flag-track">
       <span class="flag-pill">🇧🇪 Belçika</span><span class="flag-pill">🇻🇳 Vietnam</span><span class="flag-pill">🇯🇵 Japonya</span><span class="flag-pill">🇸🇬 Singapur</span><span class="flag-pill">🇭🇰 Hong Kong</span><span class="flag-pill">🇹🇷 Türkiye</span><span class="flag-pill">🇺🇸 ABD</span>
@@ -175,6 +214,30 @@
         <article class="corp-card"><div class="icon">🚨</div><h3>Alarm var, sahiplenen yok</h3><p>Güvenlik ürünü uyarı üretir; fakat kimin, ne kadar sürede ve hangi kayıtla aksiyon alacağı tanımlı değildir.</p></article>
       </div>
       <div class="alert-band"><div><strong>Asıl soru: Kontrolünüz var mı değil, çalıştığını en son ne zaman kanıtladınız?</strong><div class="opacity-75 mt-1">Siberkobi bu kanıtı toplar, test eder ve yönetime görünür hâle getirir.</div></div><a class="corp-btn corp-btn-primary" href="mailto:support@siberkobi.co?subject=Ba%C4%9F%C4%B1ms%C4%B1z%20Kontrol%20Talebi">Kontrol talep et →</a></div>
+    </div>
+  </section>
+
+  <section class="corp-section alt" id="maliyet">
+    <div class="corp-container">
+      <div class="impact-panel">
+        <div>
+          <span class="corp-kicker">Sahada gördüğümüz gerçek</span>
+          <div class="impact-number mt-4">100/100</div>
+          <h2 class="mt-4">İncelediğimiz ilk 100 yapının tamamında fark edilmemiş, birikmiş güvenlik açıkları bulduk.</h2>
+        </div>
+        <div class="impact-card">
+          <h3 class="text-white">Çoğunun tek şansı henüz hedef olmamış olmalarıydı.</h3>
+          <p class="mb-3">Bazı yapılarda saldırganın ileri seviye bir tekniğe ihtiyacı yoktu: yıllardır değişmeyen servis parolası, açık unutulan hesap, yanlış firewall kuralı veya herkese açık bulut bağlantısı yeterli olabilirdi.</p>
+          <p class="mb-0">Biz bu riskleri olay yaşanmadan bulup kapattığımızda yalnızca güvenliği artırmıyoruz; kesinti, fidye, veri kaybı, kriz danışmanlığı, ceza ve itibar kaybı gibi çok daha büyük maliyetlerin önüne geçiyoruz.</p>
+        </div>
+      </div>
+      <div class="section-head mt-6 mb-4"><span class="corp-kicker">Güvenlik aynı zamanda maliyet kontrolüdür</span><h2 class="mt-3">Yeni ürün almak yerine önce mevcut yatırımınızın karşılığını alın.</h2><p>KOBİ’lerde maliyet çoğu zaman güvenlik ürününün fiyatından değil; kullanılmayan lisanslardan, yanlış yapılandırmadan, dağınık tedarikçilerden ve geç fark edilen olaylardan büyür.</p></div>
+      <div class="savings-grid">
+        <div class="saving"><strong>Gereksiz lisansları görün</strong><span>Ödendiği hâlde kullanılmayan veya aynı işi tekrar eden araçları belirleyin.</span></div>
+        <div class="saving"><strong>Kesintiyi önceden azaltın</strong><span>Yedek ve geri dönüşü olay gününden önce test ederek üretim kaybını sınırlayın.</span></div>
+        <div class="saving"><strong>IT ekibine doğru öncelik verin</strong><span>Yüzlerce dağınık iş yerine en yüksek riski düşüren aksiyonlara odaklanın.</span></div>
+        <div class="saving"><strong>Kriz maliyetinden kaçının</strong><span>Olay müdahale, hukuk, bildirim ve itibar maliyetini risk gerçekleşmeden düşürün.</span></div>
+      </div>
     </div>
   </section>
 

@@ -16,27 +16,24 @@
     <link rel="stylesheet" href="{% static 'assets/css/theme.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/libs/tiny-slider/dist/tiny-slider.css' %}" />
 
-    <title>{% if request.resolver_match.url_name == 'for_businesses' %}Siberkobi Kurumsal | Siber Güvenlik Denetimi ve Sürekli Kontrol{% else %}Siberkobi | Siber Güvenlik, IT Audit & GRC Bootcampleri{% endif %}</title>
+    <title>{% if request.resolver_match.url_name == 'for_businesses' or request.resolver_match.url_name == 'landing' %}Siberkobi Kurumsal | Siber Güvenlik Denetimi ve Sürekli Kontrol{% else %}Siberkobi | Siber Güvenlik, IT Audit & GRC Bootcampleri{% endif %}</title>
 
     <style>
       .navbar {
         padding-top: .75rem;
         padding-bottom: .75rem;
-        border-bottom: 1px solid rgba(0,0,0,.06);
-        background: rgba(255,255,255,.92);
+        border-bottom: 1px solid rgba(255,255,255,.10);
+        background: rgba(15,23,42,.96);
         backdrop-filter: blur(14px);
         position: sticky;
         top: 0;
         z-index: 1030;
       }
 
-      :root[data-bs-theme="dark"] .navbar {
-        background: rgba(15, 23, 42, .92);
-        border-bottom-color: rgba(255,255,255,.08);
-      }
+      :root[data-bs-theme="dark"] .navbar { background:rgba(15,23,42,.96); border-bottom-color:rgba(255,255,255,.10); }
 
       .navbar-brand .brand-word {
-        height: 34px !important;
+        height: 44px !important;
         width: auto !important;
         display: inline-block;
       }
@@ -48,24 +45,17 @@
         display: block;
       }
 
-      :root[data-bs-theme="dark"] img.theme-adaptive {
-        filter: invert(1) brightness(1.1) contrast(1) !important;
-      }
-
-      :root[data-bs-theme="light"] img.theme-adaptive {
-        filter: none !important;
-      }
-
       .navbar-nav .nav-link {
         border-radius: .75rem;
         padding-left: .8rem;
         padding-right: .8rem;
+        color: rgba(255,255,255,.78);
       }
 
       .navbar-nav .nav-link:hover,
       .navbar-nav .nav-link.active {
-        background: rgba(117,79,254,.09);
-        color: #754ffe;
+        background: rgba(117,79,254,.22);
+        color: #fff;
       }
 
       .nav-tools {
@@ -80,14 +70,14 @@
         padding: .25rem;
         border: 1px solid rgba(117,79,254,.18);
         border-radius: 999px;
-        background: rgba(117,79,254,.06);
+        background: rgba(255,255,255,.06);
         gap: .2rem;
       }
 
       .audience-switch a {
         padding: .42rem .8rem;
         border-radius: 999px;
-        color: var(--bs-body-color);
+        color: rgba(255,255,255,.72);
         text-decoration: none;
         font-size: .84rem;
         font-weight: 700;
@@ -105,7 +95,13 @@
         padding: .42rem .85rem !important;
         line-height: 1.1 !important;
         border-radius: .75rem;
+        color:#fff;
+        border-color:rgba(255,255,255,.42);
       }
+
+      .nav-tools .btn-login:hover { background:#fff; color:#111827; }
+      .navbar-toggler .icon-bar { background-color:#fff !important; }
+      .navbar .btn-icon { color:#fff; border-color:rgba(255,255,255,.28); }
 
       .theme-icon-active::before {
         display: none !important;
@@ -172,7 +168,7 @@
         }
 
         .navbar-brand .brand-word {
-          height: 28px !important;
+          height: 36px !important;
         }
 
         .navbar-brand img {
@@ -232,14 +228,14 @@
       <div class="container px-0">
 
         <a href="{% url 'landing' %}" class="navbar-brand m-0 p-0" aria-label="Siberkobi Ana Sayfa">
-          <img src="{% static 'assets/images/brand/logo/logo.svg' %}" alt="Siberkobi" class="brand-word" />
+          <img src="{% static 'assets/images/svg/white.svg' %}" alt="Siberkobi" class="brand-word" />
         </a>
 
         <div class="ms-auto d-flex align-items-center gap-2 nav-tools order-lg-3">
           {% with url_name=request.resolver_match.url_name %}
           <div class="audience-switch" aria-label="Site görünümü">
-            <a href="{% url 'landing' %}" class="{% if url_name != 'for_businesses' %}active{% endif %}">Bireysel</a>
-            <a href="{% url 'for_businesses' %}" class="{% if url_name == 'for_businesses' %}active{% endif %}">Kurumsal</a>
+            <a href="{% url 'for_individuals' %}" class="{% if url_name == 'for_individuals' %}active{% endif %}">Bireysel</a>
+            <a href="{% url 'for_businesses' %}" class="{% if url_name != 'for_individuals' %}active{% endif %}">Kurumsal</a>
           </div>
           {% endwith %}
           <div class="dropdown">
@@ -248,7 +244,7 @@
               <i class="bi theme-icon-active"></i>
               <span class="visually-hidden bs-theme-text">Temayı değiştir</span>
             </button>
-            <ul class="dropdown-menu dropdown-menu-end shadow" data-bs-theme="dark">
+            <ul class="dropdown-menu dropdown-menu-end shadow">
               <li><button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"><i class="bi theme-icon bi-sun-fill"></i><span class="ms-2">Açık</span></button></li>
               <li><button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"><i class="bi theme-icon bi-moon-stars-fill"></i><span class="ms-2">Koyu</span></button></li>
               <li><button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto"><i class="bi theme-icon bi-circle-half"></i><span class="ms-2">Otomatik</span></button></li>
@@ -274,7 +270,7 @@
           <ul class="navbar-nav mt-3 mt-lg-0 mx-xxl-auto">
             {% with url_name=request.resolver_match.url_name %}
               <li class="nav-item">
-                <a class="nav-link {% if url_name == 'landing' or url_name == 'for_businesses' %}active fw-semibold{% endif %}" href="{% if url_name == 'for_businesses' %}{% url 'for_businesses' %}{% else %}{% url 'landing' %}{% endif %}">
+                <a class="nav-link {% if url_name == 'landing' or url_name == 'for_businesses' or url_name == 'for_individuals' %}active fw-semibold{% endif %}" href="{% if url_name == 'for_individuals' %}{% url 'for_individuals' %}{% else %}{% url 'for_businesses' %}{% endif %}">
                   🏠 Ana Sayfa
                 </a>
               </li>
@@ -286,18 +282,19 @@
                   <a class="nav-link" href="{% url 'login' %}">🔐 Giriş</a>
                 {% endif %}
               </li>
-              <li class="nav-item">
-                <a class="nav-link {% if url_name == 'about' %}active fw-semibold{% endif %}" href="{% url 'about' %}" aria-label="Hikayem">
-                  ✈️ Hikayem
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link {% if url_name == 'bootcamps' %}active fw-semibold{% endif %}" href="{% url 'bootcamps' %}" aria-label="Bootcampler">
-                  🎓 Bootcampler
-                  <span class="badge rounded-pill bg-info-subtle text-info-emphasis ms-1 align-middle">Yeni</span>
-                </a>
-              </li>
+              {% if url_name == 'for_businesses' or url_name == 'landing' %}
+                <li class="nav-item"><a class="nav-link" href="#hizmetler">Hizmetler</a></li>
+                <li class="nav-item"><a class="nav-link" href="#maliyet">Maliyet Etkisi</a></li>
+                <li class="nav-item"><a class="nav-link" href="#kurucu">Kurucu</a></li>
+                <li class="nav-item"><a class="nav-link" href="#paket">Yıllık Paket</a></li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link {% if url_name == 'bootcamps' %}active fw-semibold{% endif %}" href="{% url 'bootcamps' %}" aria-label="Bootcampler">
+                    🎓 Bootcampler
+                    <span class="badge rounded-pill bg-info-subtle text-info-emphasis ms-1 align-middle">Yeni</span>
+                  </a>
+                </li>
+              {% endif %}
             {% endwith %}
           </ul>
         </div>
@@ -316,7 +313,7 @@
               <img src="{% static 'assets/images/svg/white.svg' %}" class="footer-logo" alt="Siberkobi logosu" />
 
               <p class="mb-0">
-                {% if request.resolver_match.url_name == 'for_businesses' %}
+                {% if request.resolver_match.url_name == 'for_businesses' or request.resolver_match.url_name == 'landing' %}
                   Siberkobi; KOBİ’lerin siber güvenlik, bilgi güvenliği ve uyum kontrollerini bağımsız bir gözle denetler, eksikleri raporlar ve iyileştirmeleri takip eder.
                 {% else %}
                   Siberkobi; siber güvenlik, IT audit, GRC ve kariyer gelişimi alanlarında canlı bootcampler,
@@ -325,7 +322,7 @@
               </p>
 
               <div class="d-flex flex-wrap gap-2">
-                {% if request.resolver_match.url_name == 'for_businesses' %}
+                {% if request.resolver_match.url_name == 'for_businesses' or request.resolver_match.url_name == 'landing' %}
                   <span class="footer-badge">🔎 Bağımsız Denetim</span>
                   <span class="footer-badge">🛡️ Sürekli Kontrol</span>
                   <span class="footer-badge">📋 Somut Yol Haritası</span>
@@ -342,7 +339,6 @@
             <h6 class="footer-title">Platform</h6>
             <ul class="list-unstyled footer-link-list mb-0">
               <li><a href="{% url 'landing' %}">Ana Sayfa</a></li>
-              <li><a href="{% url 'about' %}">Hikayem</a></li>
               <li><a href="{% url 'bootcamps' %}">Bootcampler</a></li>
               {% if user.is_authenticated %}
                 <li><a href="{% url 'dashboard_student' %}">Öğrenci Paneli</a></li>
@@ -364,7 +360,7 @@
 
           <div class="col-xl-4 col-lg-12 col-md-4 col-12">
             <div class="footer-cta">
-              {% if request.resolver_match.url_name == 'for_businesses' %}
+              {% if request.resolver_match.url_name == 'for_businesses' or request.resolver_match.url_name == 'landing' %}
                 <h6 class="footer-title mb-2">Kurumunuzun gerçek risklerini görelim.</h6>
                 <p class="mb-3 small">Kısa bir ön görüşmede kapsamı, öncelikleri ve ilk denetim adımını birlikte netleştirelim.</p>
               {% else %}
@@ -376,8 +372,8 @@
                 <a href="mailto:support@siberkobi.co" class="btn btn-primary btn-sm">
                   E-posta Gönder
                 </a>
-                {% if request.resolver_match.url_name == 'for_businesses' %}
-                  <a href="{% url 'landing' %}" class="btn btn-outline-light btn-sm">Bireysel Eğitimler</a>
+                {% if request.resolver_match.url_name == 'for_businesses' or request.resolver_match.url_name == 'landing' %}
+                  <a href="{% url 'for_individuals' %}" class="btn btn-outline-light btn-sm">Bireysel Eğitimler</a>
                 {% else %}
                   <a href="{% url 'bootcamps' %}" class="btn btn-outline-light btn-sm">Bootcampleri İncele</a>
                 {% endif %}
