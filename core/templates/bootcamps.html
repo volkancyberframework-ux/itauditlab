@@ -228,7 +228,7 @@ html[data-bs-theme="dark"] .btn-close {
       </h1>
 
       <p class="mb-0 text-white lead">
-        12 ay süren birebir eğitimler, gerçek vakalar, lablar ve kariyer desteği.
+        Hedefine özel birebir programlar, uygulamalı çalışmalar ve net aksiyon planları.
       </p>
 
     </div>
@@ -268,7 +268,7 @@ html[data-bs-theme="dark"] .btn-close {
             <div class="card-body p-4 d-flex flex-column">
 
               <div class="d-flex justify-content-between align-items-center mb-3 gap-2">
-                <span class="bootcamp-badge">12 Ay Kariyer Programı</span>
+                <span class="bootcamp-badge">{{ b.duration }}</span>
                 <span class="bootcamp-mini-badge">Size Özel</span>
               </div>
 
@@ -277,17 +277,17 @@ html[data-bs-theme="dark"] .btn-close {
               </h3>
 
               <div class="bootcamp-highlights mb-4">
-                <div>🎓 İlk 3-6 ay eğitim</div>
-                <div>🧪 Gerçek lab ve vaka çalışmaları</div>
-                <div>👨‍🏫 Size uygun zamanda birebir görüşmeler</div>
+                <div>🎯 Hedefine özel çalışma planı</div>
+                <div>🧪 Uygulamalı çalışma ve gerçek örnekler</div>
+                <div>👨‍🏫 Size uygun zamanda birebir çalışma</div>
                 <div>🇹🇷 Türkçe eğitim</div>
-                <div>🇬🇧 İngilizce gelişimi</div>
-                <div>💼 İş başvurusu ve mülakat desteği</div>
+                <div>🗺️ Ölçülebilir yol haritası</div>
+                <div>💬 Program sonrası aksiyon listesi</div>
               </div>
 
               <div class="bootcamp-value-box mb-4">
                 <div class="small price-label">
-                  12 Aylık Program Ücreti
+                  Program Ücreti
                 </div>
 
                 <div class="price-box">
@@ -343,7 +343,7 @@ html[data-bs-theme="dark"] .btn-close {
 
                 <div>
                   <span class="bootcamp-badge mb-2">
-                    12 Ay Kariyer Programı
+                    {{ b.duration }} Program
                   </span>
 
                   <h3 class="modal-title fw-bold mb-0">
@@ -371,29 +371,19 @@ html[data-bs-theme="dark"] .btn-close {
 
                     <div class="mb-3">
 
-                      <span class="feature-pill">✓ 12 ay birlikte çalışma</span>
+                      <span class="feature-pill">✓ Birebir çalışma</span>
 
-                      <span class="feature-pill">✓ İlk 3-6 ay eğitim</span>
+                      <span class="feature-pill">✓ Kişisel yol haritası</span>
 
-                      <span class="feature-pill">✓ Size uygun zamanda birebir görüşmeler</span>
+                      <span class="feature-pill">✓ Size uygun planlama</span>
 
                       <span class="feature-pill">✓ Türkçe anlatım</span>
 
-                      <span class="feature-pill">✓ İngilizce gelişimi</span>
+                      <span class="feature-pill">✓ Gerçek örnekler</span>
 
-                      <span class="feature-pill">✓ Gerçek vaka çalışmaları</span>
+                      <span class="feature-pill">✓ Uygulanabilir çıktılar</span>
 
-                      <span class="feature-pill">✓ Lab ortamı</span>
-
-                      <span class="feature-pill">✓ CV hazırlığı</span>
-
-                      <span class="feature-pill">✓ LinkedIn optimizasyonu</span>
-
-                      <span class="feature-pill">✓ Sürekli iş başvurusu desteği</span>
-
-                      <span class="feature-pill">✓ Mülakat hazırlığı</span>
-
-                      <span class="feature-pill">✓ Kariyer danışmanlığı</span>
+                      <span class="feature-pill">✓ Program sonrası aksiyon planı</span>
 
                     </div>
 
@@ -401,16 +391,9 @@ html[data-bs-theme="dark"] .btn-close {
                        style="color:var(--bc-title);">
 
                       Bu program klasik bir video kursu değildir.
-
-                      İlk <strong>3-6 ay</strong> boyunca teknik bilgi,
-                      uygulama, lab ve gerçek vakalar üzerinde birlikte çalışırız.
-
-                      Sonrasında yaklaşık <strong>12 ay boyunca</strong>
-                      CV hazırlığı, LinkedIn optimizasyonu,
-                      iş başvuruları ve mülakat süreçlerinde
-                      size birebir destek oluruz.
-
-                      Görüşmeler tamamen sizin uygun olduğunuz
+                      Hedefini, mevcut durumunu ve ihtiyaçlarını birlikte değerlendirir;
+                      uygulamaları birebir yapar ve program sonunda kullanabileceğin
+                      net bir yol haritası oluştururuz. Görüşmeler uygun olduğun
                       gün ve saatlere göre planlanır.
 
                     </p>
@@ -431,17 +414,17 @@ html[data-bs-theme="dark"] .btn-close {
 
                       <div class="d-flex justify-content-between mb-2">
                         <span>Toplam Süre</span>
-                        <strong>12 Ay</strong>
+                        <strong>{{ b.duration }}</strong>
                       </div>
 
                       <div class="d-flex justify-content-between mb-2">
-                        <span>Eğitim</span>
-                        <strong>3-6 Ay</strong>
+                        <span>Çalışma Modeli</span>
+                        <strong>Birebir</strong>
                       </div>
 
                       <div class="d-flex justify-content-between mb-2">
-                        <span>Kariyer Desteği</span>
-                        <strong>12 Ay</strong>
+                        <span>Çıktı</span>
+                        <strong>Kişisel Yol Haritası</strong>
                       </div>
 
                       <div class="d-flex justify-content-between mb-2">
@@ -457,23 +440,23 @@ html[data-bs-theme="dark"] .btn-close {
 
                         <br>
 
-                        ✔ İngilizce gelişimi
+                        ✔ Birebir çalışma
 
                         <br>
 
-                        ✔ Lab & gerçek vaka
+                        ✔ Gerçek örnek ve uygulamalar
 
                         <br>
 
-                        ✔ CV / LinkedIn
+                        ✔ Kişisel çalışma planı
 
                         <br>
 
-                        ✔ İş başvurusu desteği
+                        ✔ Ölçülebilir hedefler
 
                         <br>
 
-                        ✔ Mülakat hazırlığı
+                        ✔ Program sonrası aksiyon listesi
 
                       </div>
 
