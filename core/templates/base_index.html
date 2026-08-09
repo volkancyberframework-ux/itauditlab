@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{% static 'assets/css/theme.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/libs/tiny-slider/dist/tiny-slider.css' %}" />
 
-    <title>Siberkobi | Siber Güvenlik, IT Audit & GRC Bootcampleri</title>
+    <title>{% if request.resolver_match.url_name == 'for_businesses' %}Siberkobi Kurumsal | Siber Güvenlik Denetimi ve Sürekli Kontrol{% else %}Siberkobi | Siber Güvenlik, IT Audit & GRC Bootcampleri{% endif %}</title>
 
     <style>
       .navbar {
@@ -72,6 +72,33 @@
         display: flex;
         align-items: center;
         gap: .5rem;
+      }
+
+      .audience-switch {
+        display: inline-flex;
+        align-items: center;
+        padding: .25rem;
+        border: 1px solid rgba(117,79,254,.18);
+        border-radius: 999px;
+        background: rgba(117,79,254,.06);
+        gap: .2rem;
+      }
+
+      .audience-switch a {
+        padding: .42rem .8rem;
+        border-radius: 999px;
+        color: var(--bs-body-color);
+        text-decoration: none;
+        font-size: .84rem;
+        font-weight: 700;
+        white-space: nowrap;
+        transition: .2s ease;
+      }
+
+      .audience-switch a.active {
+        color: #fff;
+        background: #754ffe;
+        box-shadow: 0 5px 14px rgba(117,79,254,.25);
       }
 
       .nav-tools .btn-login {
@@ -173,8 +200,28 @@
           justify-content: center;
         }
 
+        .audience-switch {
+          order: -1;
+        }
+
+        .audience-switch a {
+          padding: .38rem .58rem;
+          font-size: .74rem;
+        }
+
         .dropdown-menu {
           max-width: 90vw;
+        }
+      }
+
+      @media (max-width: 575.98px) {
+        .nav-tools > .dropdown,
+        .nav-tools > .btn-login {
+          display: none !important;
+        }
+
+        .navbar-brand .brand-word {
+          max-width: 142px;
         }
       }
     </style>
@@ -189,6 +236,12 @@
         </a>
 
         <div class="ms-auto d-flex align-items-center gap-2 nav-tools order-lg-3">
+          {% with url_name=request.resolver_match.url_name %}
+          <div class="audience-switch" aria-label="Site görünümü">
+            <a href="{% url 'landing' %}" class="{% if url_name != 'for_businesses' %}active{% endif %}">Bireysel</a>
+            <a href="{% url 'for_businesses' %}" class="{% if url_name == 'for_businesses' %}active{% endif %}">Kurumsal</a>
+          </div>
+          {% endwith %}
           <div class="dropdown">
             <button class="btn btn-outline-secondary btn-icon rounded-circle d-flex align-items-center"
                     type="button" data-bs-toggle="dropdown" aria-label="Temayı değiştir">
@@ -221,6 +274,19 @@
           <ul class="navbar-nav mt-3 mt-lg-0 mx-xxl-auto">
             {% with url_name=request.resolver_match.url_name %}
               <li class="nav-item">
+                <a class="nav-link {% if url_name == 'landing' or url_name == 'for_businesses' %}active fw-semibold{% endif %}" href="{% if url_name == 'for_businesses' %}{% url 'for_businesses' %}{% else %}{% url 'landing' %}{% endif %}">
+                  🏠 Ana Sayfa
+                </a>
+              </li>
+
+              <li class="nav-item d-lg-none">
+                {% if user.is_authenticated %}
+                  <a class="nav-link" href="{% url 'dashboard_student' %}">👤 Panel</a>
+                {% else %}
+                  <a class="nav-link" href="{% url 'login' %}">🔐 Giriş</a>
+                {% endif %}
+              </li>
+              <li class="nav-item">
                 <a class="nav-link {% if url_name == 'about' %}active fw-semibold{% endif %}" href="{% url 'about' %}" aria-label="Hikayem">
                   ✈️ Hikayem
                 </a>
@@ -250,14 +316,24 @@
               <img src="{% static 'assets/images/svg/white.svg' %}" class="footer-logo" alt="Siberkobi logosu" />
 
               <p class="mb-0">
-                Siberkobi; siber güvenlik, IT audit, GRC ve kariyer gelişimi alanlarında canlı bootcampler,
-                vaka çalışmaları ve uygulamalı eğitimler sunar.
+                {% if request.resolver_match.url_name == 'for_businesses' %}
+                  Siberkobi; KOBİ’lerin siber güvenlik, bilgi güvenliği ve uyum kontrollerini bağımsız bir gözle denetler, eksikleri raporlar ve iyileştirmeleri takip eder.
+                {% else %}
+                  Siberkobi; siber güvenlik, IT audit, GRC ve kariyer gelişimi alanlarında canlı bootcampler,
+                  vaka çalışmaları ve uygulamalı eğitimler sunar.
+                {% endif %}
               </p>
 
               <div class="d-flex flex-wrap gap-2">
-                <span class="footer-badge">🎓 Canlı Bootcamp</span>
-                <span class="footer-badge">🧪 Lab & Vaka</span>
-                <span class="footer-badge">🌍 Global Kariyer</span>
+                {% if request.resolver_match.url_name == 'for_businesses' %}
+                  <span class="footer-badge">🔎 Bağımsız Denetim</span>
+                  <span class="footer-badge">🛡️ Sürekli Kontrol</span>
+                  <span class="footer-badge">📋 Somut Yol Haritası</span>
+                {% else %}
+                  <span class="footer-badge">🎓 Canlı Bootcamp</span>
+                  <span class="footer-badge">🧪 Lab & Vaka</span>
+                  <span class="footer-badge">🌍 Global Kariyer</span>
+                {% endif %}
               </div>
             </div>
           </div>
@@ -288,18 +364,23 @@
 
           <div class="col-xl-4 col-lg-12 col-md-4 col-12">
             <div class="footer-cta">
-              <h6 class="footer-title mb-2">Doğru bootcamp’i seçmek ister misin?</h6>
-              <p class="mb-3 small">
-                Seviyene ve hedeflediğin role göre en uygun programı birlikte netleştirebiliriz.
-              </p>
+              {% if request.resolver_match.url_name == 'for_businesses' %}
+                <h6 class="footer-title mb-2">Kurumunuzun gerçek risklerini görelim.</h6>
+                <p class="mb-3 small">Kısa bir ön görüşmede kapsamı, öncelikleri ve ilk denetim adımını birlikte netleştirelim.</p>
+              {% else %}
+                <h6 class="footer-title mb-2">Doğru bootcamp’i seçmek ister misin?</h6>
+                <p class="mb-3 small">Seviyene ve hedeflediğin role göre en uygun programı birlikte netleştirebiliriz.</p>
+              {% endif %}
 
               <div class="d-flex flex-column flex-sm-row gap-2">
                 <a href="mailto:support@siberkobi.co" class="btn btn-primary btn-sm">
                   E-posta Gönder
                 </a>
-                <a href="{% url 'bootcamps' %}" class="btn btn-outline-light btn-sm">
-                  Bootcampleri İncele
-                </a>
+                {% if request.resolver_match.url_name == 'for_businesses' %}
+                  <a href="{% url 'landing' %}" class="btn btn-outline-light btn-sm">Bireysel Eğitimler</a>
+                {% else %}
+                  <a href="{% url 'bootcamps' %}" class="btn btn-outline-light btn-sm">Bootcampleri İncele</a>
+                {% endif %}
               </div>
 
               <div class="mt-3 small">

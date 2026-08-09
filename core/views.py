@@ -201,7 +201,7 @@ def for_individuals(request):
     return render(request, "for-individuals.html")
 
 def for_businesses(request):
-    return render(request, "for-businesses.html")
+    return render(request, "index_b2b_siberkobi.html")
 
 logger = logging.getLogger(__name__)
 
