@@ -327,13 +327,6 @@
                 <li class="nav-item"><a class="nav-link" href="#maliyet">Maliyet Etkisi</a></li>
                 <li class="nav-item"><a class="nav-link" href="#kurucu">Kurucu</a></li>
                 <li class="nav-item"><a class="nav-link" href="#paket">Yıllık Paket</a></li>
-              {% else %}
-                <li class="nav-item">
-                  <a class="nav-link {% if url_name == 'bootcamps' %}active fw-semibold{% endif %}" href="{% url 'bootcamps' %}" aria-label="Kamplar">
-                    🎓 Kamplar
-                    <span class="badge rounded-pill bg-info-subtle text-info-emphasis ms-1 align-middle">Yeni</span>
-                  </a>
-                </li>
               {% endif %}
             {% endwith %}
           </ul>
