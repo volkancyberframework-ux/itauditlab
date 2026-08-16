@@ -46,19 +46,10 @@ def get_client_ip(request):
     return request.META.get("REMOTE_ADDR")
 
 def bootcamps_view(request):
-    User = get_user_model()
-
-    active_students_count = User.objects.filter(
-        is_first_login=False,
-        is_staff=False,
-        is_superuser=False,
-    ).count()
-
     bootcamps = Bootcamp.objects.filter(is_active=True)
 
     return render(request, "bootcamps.html", {
         "bootcamps": bootcamps,
-        "active_students_count": active_students_count,
     })
 def deneme(request):
     return render(request, "index_b2b_siberkobi.html")
@@ -176,11 +167,8 @@ def logout_view(request):
 def landing_page(request):
     courses = Course.objects.filter(main_page_activated=True)
 
-    active_student_count = CustomUser.objects.filter(is_active=True).count()
-
     return render(request, "index.html", {
         "courses": courses,
-        "active_student_count": active_student_count,
         "success_story_count": 26,
     })
 

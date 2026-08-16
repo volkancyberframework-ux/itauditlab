@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{% static 'assets/css/theme.min.css' %}">
     <link rel="stylesheet" href="{% static 'assets/libs/tiny-slider/dist/tiny-slider.css' %}" />
 
-    <title>{% if request.resolver_match.url_name == 'for_businesses' or request.resolver_match.url_name == 'landing' %}Siberkobi Kurumsal | Siber Güvenlik Denetimi ve Sürekli Kontrol{% else %}Siberkobi | Siber Güvenlik, IT Audit & GRC Bootcampleri{% endif %}</title>
+    <title>{% if request.resolver_match.url_name == 'for_businesses' or request.resolver_match.url_name == 'landing' %}Siberkobi Kurumsal | Siber Güvenlik Denetimi ve Sürekli Kontrol{% else %}Siberkobi | Siber Güvenlik, IT Audit & GRC Kampları{% endif %}</title>
 
     <style>
       .navbar {
@@ -329,8 +329,8 @@
                 <li class="nav-item"><a class="nav-link" href="#paket">Yıllık Paket</a></li>
               {% else %}
                 <li class="nav-item">
-                  <a class="nav-link {% if url_name == 'bootcamps' %}active fw-semibold{% endif %}" href="{% url 'bootcamps' %}" aria-label="Bootcampler">
-                    🎓 Bootcampler
+                  <a class="nav-link {% if url_name == 'bootcamps' %}active fw-semibold{% endif %}" href="{% url 'bootcamps' %}" aria-label="Kamplar">
+                    🎓 Kamplar
                     <span class="badge rounded-pill bg-info-subtle text-info-emphasis ms-1 align-middle">Yeni</span>
                   </a>
                 </li>
@@ -379,7 +379,7 @@
             <h6 class="footer-title">Platform</h6>
             <ul class="list-unstyled footer-link-list mb-0">
               <li><a href="{% url 'landing' %}">Ana Sayfa</a></li>
-              <li><a href="{% url 'bootcamps' %}">Bootcampler</a></li>
+              <li><a href="{% url 'bootcamps' %}">Kamplar</a></li>
               {% if user.is_authenticated %}
                 <li><a href="{% url 'dashboard_student' %}">Öğrenci Paneli</a></li>
               {% else %}
@@ -389,7 +389,7 @@
           </div>
 
           <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-            <h6 class="footer-title">Bootcampler</h6>
+            <h6 class="footer-title">Kamplar</h6>
             <ul class="list-unstyled footer-link-list mb-0">
               <li><a href="{% url 'bootcamps' %}">SOC Analyst</a></li>
               <li><a href="{% url 'bootcamps' %}">CISA</a></li>
@@ -415,7 +415,7 @@
                 {% if request.resolver_match.url_name == 'for_businesses' or request.resolver_match.url_name == 'landing' %}
                   <a href="{% url 'for_individuals' %}" class="btn btn-outline-light btn-sm">Bireysel Eğitimler</a>
                 {% else %}
-                  <a href="{% url 'bootcamps' %}" class="btn btn-outline-light btn-sm">Bootcampleri İncele</a>
+                  <a href="{% url 'bootcamps' %}" class="btn btn-outline-light btn-sm">Kampları İncele</a>
                 {% endif %}
               </div>
 
@@ -572,7 +572,7 @@
           <div class="mb-3 fs-1">🎓</div>
 
           <h3 class="fw-bold mb-2" id="bootcampDiscountModalLabel">
-            Bootcamplerde %20 İndirim Kazanın
+            Kamplarda %20 İndirim Kazanın
           </h3>
 
           <p class="text-muted mb-3">

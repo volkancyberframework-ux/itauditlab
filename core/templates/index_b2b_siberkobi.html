@@ -11,6 +11,8 @@
   [data-bs-theme="dark"] { --corp-ink:#f8fafc; --corp-muted:#cbd5e1; --corp-card:#1e293b; --corp-page:#0f172a; --corp-line:rgba(148,163,184,.24); --corp-mint:#262044; --corp-warm:#172033; }
   .corp-page { overflow:hidden; background:var(--corp-page); color:var(--corp-ink); }
   .corp-container { width:min(1180px,calc(100% - 32px)); margin:auto; }
+  .corp-setup-notice { position:relative; z-index:5; padding:12px 16px; background:linear-gradient(90deg,#f59e0b,#f97316); color:#fff; text-align:center; font-size:.9rem; font-weight:750; letter-spacing:.01em; }
+  .corp-setup-notice strong { font-weight:900; }
   .corp-kicker { display:inline-flex; align-items:center; gap:8px; padding:9px 14px; border:1px solid rgba(117,79,254,.24); border-radius:999px; background:var(--corp-mint); color:var(--corp-green-dark); font-weight:800; font-size:.84rem; }
   .corp-title { font-size:clamp(2.8rem,6.5vw,6.1rem); line-height:.94; letter-spacing:-.065em; color:var(--corp-ink); font-weight:900; }
   .corp-title .accent { color:var(--corp-green); }
@@ -134,10 +136,13 @@
   .saving strong { display:block; margin-bottom:8px; color:var(--corp-ink); }
   .saving span { color:var(--corp-muted); line-height:1.55; }
   @media(max-width:991px){.hero-proof{min-height:430px;margin-top:35px}.stat-strip{grid-template-columns:repeat(2,1fr)}.problem-grid,.service-grid,.case-grid{grid-template-columns:repeat(2,1fr)}.law-panel,.monitor-wrap,.experience-band,.package-card,.founder-panel,.impact-panel{grid-template-columns:1fr}.founder-photo{width:calc(100% - 56px);margin:28px}.savings-grid{grid-template-columns:repeat(2,1fr)}.law-year{position:relative;top:auto}.process-line-corp{grid-template-columns:repeat(2,1fr)}.process-line-corp:before{display:none}}
-  @media(max-width:575px){.corp-hero{padding-top:58px}.hero-proof{min-height:340px}.audit-core{inset:110px 55px 75px}.audit-orbit{inset:30px 10px}.audit-orbit.two{inset:75px 48px}.orbit-chip{font-size:.73rem;padding:8px}.stat-strip,.problem-grid,.service-grid,.case-grid,.framework-grid,.process-line-corp,.deliverable,.package-list,.savings-grid{grid-template-columns:1fr}.alert-band{align-items:flex-start;flex-direction:column}.corp-section{padding:68px 0}.experience-band{padding:28px}.package-price{padding:30px}.founder-photo{width:calc(100% - 36px);margin:18px}.founder-copy{padding:28px 24px 34px}.credential-mark{min-width:0;flex:1}.impact-panel{padding:30px}.law-year-next .year{font-size:3.8rem}}
+  @media(max-width:575px){.corp-setup-notice{padding:10px 14px;font-size:.78rem;line-height:1.45}.corp-hero{padding-top:58px}.hero-proof{min-height:340px}.audit-core{inset:110px 55px 75px}.audit-orbit{inset:30px 10px}.audit-orbit.two{inset:75px 48px}.orbit-chip{font-size:.73rem;padding:8px}.stat-strip,.problem-grid,.service-grid,.case-grid,.framework-grid,.process-line-corp,.deliverable,.package-list,.savings-grid{grid-template-columns:1fr}.alert-band{align-items:flex-start;flex-direction:column}.corp-section{padding:68px 0}.experience-band{padding:28px}.package-price{padding:30px}.founder-photo{width:calc(100% - 36px);margin:18px}.founder-copy{padding:28px 24px 34px}.credential-mark{min-width:0;flex:1}.impact-panel{padding:30px}.law-year-next .year{font-size:3.8rem}}
 </style>
 
 <main class="corp-page">
+  <div class="corp-setup-notice" role="status">
+    🚧 <strong>Siberkobi Kurumsal kurulma aşamasındadır.</strong> Kurumsal hizmet kapsamımız ve operasyon yapımız geliştirilmektedir.
+  </div>
   <section class="corp-hero">
     <div class="corp-container">
       <div class="row align-items-center">

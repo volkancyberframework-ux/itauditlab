@@ -25,7 +25,7 @@ urlpatterns = [
     path('', RedirectView.as_view(pattern_name='for_businesses', permanent=False), name='landing'),
     path('bireysel/', landing_page, name='for_individuals'),
     path("newsletter-popup-lead/", views.newsletter_popup_lead, name="newsletter_popup_lead"),
-    path("bootcampler/", views.bootcamps_view, name="bootcamps"),
+    path("kamplar/", views.bootcamps_view, name="bootcamps"),
     path('course-single/<int:pk>/', views.course_single, name='course_single'),
     path("course/<int:pk>/random-question/", views.course_random_question, name="course_random_question"),
     path('login/', views.custom_login_view, name='login'),
@@ -47,8 +47,7 @@ urlpatterns = [
     #path("store/<slug:slug>/intent/", views_store.create_purchase_intent, name="create_purchase_intent"),
     #path("store/success/<uuid:token>/", views_store.purchase_success, name="purchase_success"),
     path("newsletter-lead/", views.newsletter_lead_create, name="newsletter_lead_create"),
-    path("bootcampler/", views.bootcamps_view, name="bootcamps"),
-    path("bootcampler/<slug:slug>/checkout/", views.bootcamp_checkout, name="bootcamp_checkout"),
-    path("bootcampler/odeme-basarili/", views.bootcamp_payment_success, name="bootcamp_payment_success"),
+    path("kamplar/<slug:slug>/checkout/", views.bootcamp_checkout, name="bootcamp_checkout"),
+    path("kamplar/odeme-basarili/", views.bootcamp_payment_success, name="bootcamp_payment_success"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
