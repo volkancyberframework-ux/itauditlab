@@ -127,7 +127,7 @@ class SiteSetting(models.Model):
     youtube_url = models.URLField('Ücretsiz ders URL', blank=True)
     linkedin_url = models.URLField('LinkedIn URL', blank=True)
     whatsapp_url = models.URLField('WhatsApp URL', blank=True)
-    contact_email = models.EmailField('İletişim e-postası', default='info@grcmastery.com')
+    contact_email = models.EmailField('İletişim e-postası', default='destek@grcustasi.co')
     updated_at = models.DateTimeField(auto_now=True)
     class Meta: verbose_name = 'Site ayarı'; verbose_name_plural = 'Site ayarları'
     def __str__(self): return 'GRC Ustası site ayarları'

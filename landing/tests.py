@@ -19,14 +19,14 @@ class LandingTests(TestCase):
         self.assertNotContains(response, 'img/experience/qnb-finansbank-transparent.png')
         self.assertNotContains(response, 'img/experience/bilkent-transparent.png')
         self.assertContains(response, 'img/cisa-badge.png')
-        self.assertContains(response, 'YURTDIŞI BAĞIMSIZ ÇALIŞMALAR')
+        self.assertContains(response, 'YURTDIŞI FREELANCE ÇALIŞMALARIM')
         self.assertContains(response, 'OSB VE KOBİ DENETİMLERİ')
         self.assertNotContains(response, 'Şimdi bu deneyim senin vakalarına dönüşüyor')
         self.assertNotContains(response, 'AKADEMİK YOLCULUK')
         self.assertNotContains(response, 'GİZLİLİK KORUMALI')
         self.assertNotContains(response, 'Haritada gösterilen Türkiye deneyimi')
-        self.assertContains(response, 'CREDENDO VE KBC BELÇİKA DÖNEMİYLE PARALEL İLERLEYEN DENEYİMLER')
-        self.assertContains(response, 'YURTDIŞINDA İŞ YAPTIĞIM YERLER')
+        self.assertNotContains(response, 'CREDENDO VE KBC BELÇİKA DÖNEMİYLE PARALEL İLERLEYEN DENEYİMLER')
+        self.assertContains(response, 'FREELANCE ÇALIŞMALARIM')
         self.assertContains(response, '59.999 TL')
         self.assertContains(response, '3 × 25.000 TL')
         self.assertContains(response, 'toplam 75.000 TL')
@@ -40,12 +40,28 @@ class LandingTests(TestCase):
         self.assertContains(response, 'Kubernetes')
         self.assertContains(response, 'https://www.skool.com/volkan-guler-9286/about')
         self.assertContains(response, 'Türkiye’den dünyaya uzanan gerçek denetim tecrübesi')
-        self.assertContains(response, 'Denetim Rotası')
+        self.assertContains(response, 'İş Yaptığım Şehirler ve Sektörler')
         self.assertContains(response, 'Savunma Sanayii Şirketleri')
         self.assertContains(response, 'Gizlilik nedeniyle kurum isimleri paylaşılmamaktadır')
         self.assertContains(response, 'Bart Preneel ile akademik çalışmalar')
         self.assertContains(response, 'İlgili kurumların GRC Ustası programını desteklediği')
         self.assertContains(response, f'href="{reverse("login")}"')
+        self.assertContains(response, 'destek@grcustasi.co')
+        self.assertContains(response, reverse('landing:checkout'))
+        self.assertNotContains(response, 'info@grcmastery.com')
+
+    @override_settings(STRIPE_SECRET_KEY='sk_test_placeholder')
+    def test_checkout_creates_grc_ustasi_stripe_session(self):
+        from unittest.mock import patch
+        with patch('stripe.checkout.Session.create') as create_session:
+            create_session.return_value.url = 'https://checkout.stripe.com/test-session'
+            response = self.client.post(reverse('landing:checkout'))
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, 'https://checkout.stripe.com/test-session')
+        payload = create_session.call_args.kwargs
+        self.assertEqual(payload['mode'], 'payment')
+        self.assertEqual(payload['line_items'][0]['price_data']['unit_amount'], 5_999_900)
+        self.assertEqual(payload['line_items'][0]['price_data']['currency'], 'try')
 
     def test_existing_login_route_remains_owned_by_core(self):
         match = resolve('/login/')

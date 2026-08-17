@@ -1,7 +1,8 @@
 from django.conf import settings as django_settings
 from django.db import IntegrityError
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 from .forms import LeadForm, WaitingListForm
@@ -16,6 +17,38 @@ def home(request):
         'site': site, 'payment_url': payment_url, 'jobs': JobMarketCount.objects.all(),
         'curriculum': CURRICULUM, 'curriculum_stats': CURRICULUM_STATS,
     })
+
+
+@require_POST
+def create_checkout(request):
+    if not django_settings.STRIPE_SECRET_KEY:
+        return JsonResponse({'ok': False, 'message': 'Stripe ödeme ayarı eksik.'}, status=503)
+    import stripe
+    stripe.api_key = django_settings.STRIPE_SECRET_KEY
+    try:
+        session = stripe.checkout.Session.create(
+            mode='payment',
+            payment_method_types=['card'],
+            allow_promotion_codes=True,
+            billing_address_collection='required',
+            line_items=[{
+                'price_data': {
+                    'currency': 'try',
+                    'unit_amount': 5_999_900,
+                    'product_data': {
+                        'name': '80 Saatlik GRC Ustası Yoğun Eğitim Programı',
+                        'description': '6 ay eğitim ve uygulama, 6 ay kariyer desteği, ömür boyu içerik erişimi.',
+                    },
+                },
+                'quantity': 1,
+            }],
+            metadata={'product': 'grc_ustasi_80_saat', 'price_try': '59999'},
+            success_url=request.build_absolute_uri(reverse('landing:home') + '?payment=success#fiyat'),
+            cancel_url=request.build_absolute_uri(reverse('landing:home') + '?payment=cancel#fiyat'),
+        )
+    except Exception:
+        return JsonResponse({'ok': False, 'message': 'Ödeme şu anda başlatılamadı. Lütfen destek@grcustasi.co adresine yazın.'}, status=502)
+    return redirect(session.url, permanent=False)
 
 
 def _errors(form): return {k: [str(x) for x in v] for k, v in form.errors.items()}
