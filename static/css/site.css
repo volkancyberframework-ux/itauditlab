@@ -93,7 +93,7 @@ body{font-family:"Ubuntu",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-
 .theme-toggle{display:grid;place-items:center;flex:none;width:38px;height:38px;padding:0;border:1px solid var(--line);border-radius:10px;background:#ffffff06;color:#b9d4e8;cursor:pointer;font-size:19px;transition:.25s}
 .theme-toggle:hover{transform:translateY(-1px);border-color:#4eb6ff88;background:#ffffff0b;color:#fff}
 .logo-grid img{padding:3px;background:transparent;filter:none}
-html[data-theme="light"]{--navy:#edf4f9;--panel:#fff;--ink:#102337;--muted:#5e7488;--blue:#087ed1;--cyan:#0ba89a;--gold:#9a6b08;--line:#173d5b22}
+html[data-theme="light"]{--navy:#edf4f9;--panel:#fff;--ink:#102337;--muted:#50677b;--blue:#066eaf;--cyan:#087d72;--gold:#805700;--line:#173d5b22}
 html[data-theme="light"] body{background:#edf4f9;color:#102337}
 html[data-theme="light"] .nav{background:#f8fbfdec;box-shadow:0 10px 30px #14344d13}
 html[data-theme="light"] .nav .brand b,html[data-theme="light"] footer .brand b{color:#102337}
@@ -288,3 +288,61 @@ html[data-theme="light"] .professional-flow{background:#fff;color:#102337}
 .ticks .skool-benefit{padding:11px 13px;border:1px solid #63e6d340;border-radius:11px;background:#63e6d309}.ticks .skool-benefit:before{vertical-align:top}.skool-benefit a{display:inline-grid;gap:2px}.skool-benefit b{color:#dffdf7}.skool-benefit span{color:#72cdbc;font-size:9px}html[data-theme="light"] .ticks .skool-benefit{background:#087f7808;border-color:#087f7835}html[data-theme="light"] .skool-benefit b{color:#16443f}html[data-theme="light"] .skool-benefit span{color:#087f78}
 .nav .brand b>em{color:#e8bd5b;font-style:normal;text-shadow:0 0 16px #e8bd5b25}
 html[data-theme="light"] .nav .brand b>em{color:#9a6b08}
+
+/* Complete light-theme and responsive QA pass */
+body{overflow-x:hidden}
+.price-card>form.price{padding:42px}
+html[data-theme="light"] .faq-contact{background:#fff;border-color:#1f6d9f35;box-shadow:0 12px 30px #26475f10}
+html[data-theme="light"] .faq-contact b{color:#102337}
+html[data-theme="light"] .faq-contact span{color:#526b7f}
+html[data-theme="light"] footer{background:linear-gradient(180deg,#e9f1f6,#dfeaf2);border-color:#244d6925}
+html[data-theme="light"] .footer-brand p{color:#526b7f}
+html[data-theme="light"] .footer-links>b{color:#102337}
+html[data-theme="light"] .footer-links a{color:#49677f}
+html[data-theme="light"] .footer-login{background:#f7fbfd;color:#49677f;border-color:#244d6928}
+html[data-theme="light"] .footer-bottom{color:#526b7f;border-color:#244d6928}
+html[data-theme="light"] .audit-map-shell{background:radial-gradient(circle at 52% 44%,#91d4f74a,transparent 38%),#f7fbfd;box-shadow:inset 0 0 70px #b6d9ec35,0 18px 45px #23475d12}
+html[data-theme="light"] .audit-node text{fill:#244b66;text-shadow:0 1px 3px #fff}
+html[data-theme="light"] .audit-node .node-core{fill:#087ed1;filter:drop-shadow(0 0 5px #64bff0)}
+html[data-theme="light"] .audit-tooltip{background:#fff;color:#102337;border-color:#087ed14a;box-shadow:0 18px 40px #173b5830}
+html[data-theme="light"] .audit-tooltip p{color:#526b7f}
+html[data-theme="light"] .map-story blockquote{background:#fff;color:#173047}
+html[data-theme="light"] .parallel-experience>span{color:#075f9f}
+html[data-theme="light"] .professional-flow>div span{color:#075f9f;background:#0879c70a}
+html[data-theme="light"] .socials a,html[data-theme="light"] .socials span{background:#fff;color:#365c77}
+html[data-theme="light"] .instructor-photo>span{background:#fffffff0;color:#0871bd;border-color:#087ed145}
+html[data-theme="light"] .payment-readiness label{color:#36566f}
+html[data-theme="light"] .price>p,html[data-theme="light"] .price>span{color:#526b7f}
+html[data-theme="light"] .trust,html[data-theme="light"] .disclaimer{color:#526b7f}
+html[data-theme="light"] .faq-list details p{color:#526b7f}
+html[data-theme="light"] .faq-list summary{color:#102337}
+html[data-theme="light"] .certificate-grid>div:first-child p{color:#526b7f}
+html[data-theme="light"] .career-equation{background:#fff;color:#102337}
+html[data-theme="light"] .career-equation>p{color:#526b7f}
+html[data-theme="light"] .modal-close,html[data-theme="light"] .modal-progress{color:#36566f}
+html[data-theme="light"] .quiz label,html[data-theme="light"] .step-hint,html[data-theme="light"] .quiz-result ul{color:#425e74}
+html[data-theme="light"] .qno,html[data-theme="light"] .profile-kicker,html[data-theme="light"] .subsection-title>span,html[data-theme="light"] .experience-story article>span{color:#075f9f}
+html[data-theme="light"] .profile-certifications span,html[data-theme="light"] .profile-metric small,html[data-theme="light"] .difference-note,html[data-theme="light"] .institution-disclaimer{color:#49667c}
+html[data-theme="light"] .map-story blockquote span{color:#087268}
+html[data-theme="light"] .result-icon{color:#087268;border-color:#087268}
+html[data-theme="light"] .footer-links a:hover{color:#075f9f}
+
+@media(max-width:700px){
+  .price-card>form.price{padding:27px}
+  .footer-bottom div{flex-wrap:wrap}
+  .hero-grid>*{min-width:0}
+  .hero-logo{width:min(340px,100%);max-width:100%}
+  .nav-glow{left:12px;width:calc(100vw - 24px)}
+}
+@media(max-width:420px){
+  .nav-inner{gap:5px}
+  .nav .brand{gap:5px}
+  .nav .brand img{width:44px;height:44px}
+  .nav .brand b{font-size:15px}
+  .login-btn{padding:6px 7px;font-size:11px}
+  .theme-toggle{width:32px;height:32px}
+  .menu{padding:6px;font-size:11px}
+  .footer-top{gap:24px}
+  .footer-brand .brand img{width:62px;height:62px}
+  .footer-bottom div{gap:12px}
+}
