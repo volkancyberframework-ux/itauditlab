@@ -31,7 +31,7 @@
 <!-- Tema CSS -->
 <link rel="stylesheet" href="{% static 'assets/css/theme.min.css' %}">
 <link rel="canonical" href="https://geeksui.codescandy.com/geeks/pages/dashboard-student.html">
-<title>Siberkobi | Uygulamalı BT Denetimi ve GRC Öğrenme Platformu</title>
+<title>GRC Ustası | Öğrenci Platformu</title>
     </head>
 
     <body>
@@ -40,8 +40,9 @@
 
           <!-- Logo -->
           <div>
-            <a href="{% url 'landing' %}">
-              <img src="{% static 'assets/images/brand/logo/logo.svg' %}" width="250" alt="Siberkobi logosu" />
+            <a href="{% url 'landing' %}" class="d-inline-flex align-items-center gap-2 text-decoration-none">
+              <img src="{% static 'img/grc-ustasi-logo.png' %}" width="70" height="70" style="object-fit:contain" alt="GRC Ustası logosu" />
+              <span class="fs-3 fw-bold text-body">GRC <span class="text-warning">Ustası</span></span>
             </a>
           </div>
 
@@ -126,7 +127,7 @@
                                   document.getElementById("copyright").appendChild(document.createTextNode(new Date().getFullYear()));
                               </script>
                           </span>
-                          Siberkobi. Tüm hakları saklıdır.
+                          GRC Ustası. Tüm hakları saklıdır.
                       </span>
                   </div>
                   <!-- Bağlantılar -->
@@ -204,7 +205,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
             </div>
             <div class="modal-body">
-              Gizliliğinize saygı duyuyoruz. Siberkobi yalnızca giriş ve kişiselleştirme için gerekli temel kullanıcı verilerini toplar. Verileriniz güvenli bir şekilde saklanır ve izniniz olmadan üçüncü kişilerle paylaşılmaz. Detaylı bilgi için Gizlilik Belgelerimizi inceleyebilirsiniz.
+              Gizliliğinize saygı duyuyoruz. GRC Ustası yalnızca giriş ve kişiselleştirme için gerekli temel kullanıcı verilerini toplar. Verileriniz güvenli bir şekilde saklanır ve izniniz olmadan üçüncü kişilerle paylaşılmaz. Detaylı bilgi için Gizlilik Belgelerimizi inceleyebilirsiniz.
             </div>
           </div>
         </div>
@@ -219,7 +220,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
             </div>
             <div class="modal-body">
-              Siberkobi’yi kullanarak, kurs içeriklerimizi yeniden dağıtmamayı ve giriş bilgilerinizi paylaşmamayı kabul etmiş olursunuz. Yetkisiz erişim veya içerik kopyalama kesinlikle yasaktır. Tüm haklar platform sahibine aittir.
+              GRC Ustası’nı kullanarak, kurs içeriklerimizi yeniden dağıtmamayı ve giriş bilgilerinizi paylaşmamayı kabul etmiş olursunuz. Yetkisiz erişim veya içerik kopyalama kesinlikle yasaktır. Tüm haklar platform sahibine aittir.
             </div>
           </div>
         </div>
@@ -237,8 +238,8 @@
               <i class="fe fe-mail fs-1 text-primary mb-3"></i>
               <p class="mb-3 fs-5">Bir sorunuz mu var veya bir sorun mu bildirmek istiyorsunuz?</p>
               <p class="mb-4">Bize şu adresten ulaşabilirsiniz:</p>
-              <a href="mailto:support@siberkobi.co" class="btn btn-outline-primary px-4 py-2">
-                support@siberkobi.co
+              <a href="mailto:destek@grcustasi.co" class="btn btn-outline-primary px-4 py-2">
+                destek@grcustasi.co
               </a>
             </div>
           </div>
@@ -255,7 +256,7 @@
             </div>
             <div class="modal-body">
               Teknik sorunlar, sorular veya platformu kullanma konusunda yardıma ihtiyacınız varsa,
-              lütfen <a href="mailto:support@siberkobi.co">support@siberkobi.co</a> adresine e-posta gönderin
+              lütfen <a href="mailto:destek@grcustasi.co">destek@grcustasi.co</a> adresine e-posta gönderin
               veya kontrol panelindeki iletişim formunu doldurun.
             </div>
           </div>

@@ -70,7 +70,7 @@ class LandingTests(TestCase):
         self.assertEqual(match.url_name, 'login')
         self.assertEqual(match.func.__module__, 'core.views')
 
-    def test_authenticated_home_keeps_session_and_points_to_student_dashboard(self):
+    def test_authenticated_home_keeps_session_and_retains_login_label(self):
         user = get_user_model().objects.create_user(
             username='student', email='student-login@example.com', password='secret123'
         )
@@ -78,8 +78,23 @@ class LandingTests(TestCase):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(str(self.client.session['_auth_user_id']), str(user.pk))
-        self.assertContains(response, 'Öğrenci Paneli')
-        self.assertContains(response, f'href="{reverse("dashboard_student")}"')
+        self.assertContains(response, '>Giriş</a>')
+        self.assertNotContains(response, 'Öğrenci Paneli')
+
+    def test_login_and_student_shell_use_only_grc_ustasi_branding(self):
+        login_response = self.client.get(reverse('login'))
+        self.assertContains(login_response, 'GRC Ustası | Öğrenci Girişi')
+        self.assertContains(login_response, 'img/grc-ustasi-logo.png')
+        self.assertNotContains(login_response, 'Siberkobi', html=False)
+
+        user = get_user_model().objects.create_user(
+            username='brand-student', email='brand@example.com', password='secret123'
+        )
+        self.client.force_login(user)
+        dashboard_response = self.client.get(reverse('dashboard_student'))
+        self.assertContains(dashboard_response, 'GRC Ustası | Öğrenci Platformu')
+        self.assertContains(dashboard_response, 'img/grc-ustasi-logo.png')
+        self.assertNotContains(dashboard_response, 'Siberkobi', html=False)
 
     def test_authenticated_login_page_redirects_without_logging_user_out(self):
         user = get_user_model().objects.create_user(
