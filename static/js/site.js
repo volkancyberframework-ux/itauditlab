@@ -27,25 +27,25 @@ const auditMapRoot=$('[data-audit-map]');
 if(auditMapRoot){
   const auditLocations=[
     {id:'los-angeles',name:'Los Angeles',flag:'🇺🇸',x:185,y:160,detail:'2. Seviye Kontrol',labelX:9,labelY:-8},
-    {id:'new-york',name:'New York',flag:'🇺🇸',x:294,y:137,detail:'Bankacılık Denetimi',labelX:9,labelY:-8},
+    {id:'new-york',name:'New York',flag:'🇺🇸',x:294,y:137,detail:'Freelance ve yerinde bankacılık denetimi',labelX:9,labelY:-8},
     {id:'rotterdam',name:'Rotterdam',flag:'🇳🇱',x:510,y:96,detail:'Denetim',labelX:-10,labelY:-10,anchor:'end'},
-    {id:'brussels',name:'Brüksel',flag:'🇧🇪',x:514,y:111,detail:'Bankacılık Denetimi • Credendo ve KBC',labelX:-10,labelY:17,anchor:'end'},
+    {id:'brussels',name:'Brüksel',flag:'🇧🇪',x:514,y:111,detail:'Credendo ve KBC • Freelance ve yerinde bankacılık denetimi',labelX:-10,labelY:17,anchor:'end'},
     {id:'paris',name:'Paris',flag:'🇫🇷',x:499,y:126,detail:'Denetim',labelX:-10,labelY:18,anchor:'end'},
     {id:'prague',name:'Prag',flag:'🇨🇿',x:545,y:103,detail:'Denetim',labelX:10,labelY:-8},
     {id:'varna',name:'Varna',flag:'🇧🇬',x:566,y:124,detail:'Denetim',labelX:10,labelY:17},
     {id:'manisa',name:'Manisa',flag:'🇹🇷',x:578,y:141,detail:'OSB ve KOBİ Denetimi',turkeyCity:true,labelX:-11,labelY:-10,anchor:'end'},
     {id:'izmir',name:'İzmir',flag:'🇹🇷',x:574,y:148,detail:'OSB ve KOBİ Denetimi',turkeyCity:true,labelX:-11,labelY:19,anchor:'end'},
-    {id:'istanbul',name:'İstanbul',flag:'🇹🇷',x:590,y:136,detail:'QNB Finansbank ve Garanti BBVA • Bankacılık Denetimi',turkeyCity:true,labelX:11,labelY:-9},
+    {id:'istanbul',name:'İstanbul',flag:'🇹🇷',x:590,y:136,detail:'QNB Finansbank ve Garanti BBVA • Freelance ve yerinde bankacılık denetimi',turkeyCity:true,labelX:11,labelY:-9},
     {id:'ankara',name:'Ankara',flag:'🇹🇷',x:601,y:145,detail:'Savunma Sanayii • Denetim',turkeyCity:true,labelX:11,labelY:18},
     {id:'kahramanmaras',name:'Kahramanmaraş',flag:'🇹🇷',x:615,y:154,detail:'OSB ve KOBİ Denetimi',turkeyCity:true,labelX:11,labelY:22},
     {id:'singapore',name:'Singapur',flag:'🇸🇬',x:788,y:246,detail:'Denetim ve 2. Seviye Kontrol'},
-    {id:'hong-kong',name:'Hong Kong',flag:'🇭🇰',x:817,y:188,detail:'Bankacılık Denetimi'},
-    {id:'shanghai',name:'Şanghay',flag:'🇨🇳',x:837,y:163,detail:'Bankacılık ve KOBİ Denetimi'},
-    {id:'tokyo',name:'Tokyo',flag:'🇯🇵',x:888,y:151,detail:'Bankacılık ve KOBİ Denetimi'},
-    {id:'ho-chi-minh',name:'Ho Chi Minh Kenti',flag:'🇻🇳',x:796,y:220,detail:'Bankacılık ve KOBİ Denetimi'}
+    {id:'hong-kong',name:'Hong Kong',flag:'🇭🇰',x:817,y:188,detail:'Freelance ve yerinde bankacılık denetimi'},
+    {id:'shanghai',name:'Şanghay',flag:'🇨🇳',x:837,y:163,detail:'Freelance ve yerinde bankacılık ile KOBİ denetimi'},
+    {id:'tokyo',name:'Tokyo',flag:'🇯🇵',x:888,y:151,detail:'Freelance ve yerinde bankacılık ile KOBİ denetimi'},
+    {id:'ho-chi-minh',name:'Ho Chi Minh Kenti',flag:'🇻🇳',x:796,y:220,detail:'Freelance ve yerinde bankacılık ile KOBİ denetimi'}
   ];
   const svgNS='http://www.w3.org/2000/svg',nodesLayer=$('.audit-nodes',auditMapRoot),tooltip=$('.audit-tooltip',auditMapRoot),mapShell=$('.audit-map-shell',auditMapRoot);
-  const showAuditTooltip=(item,node)=>{const shellRect=mapShell.getBoundingClientRect(),nodeRect=node.getBoundingClientRect();tooltip.innerHTML=`<b>${item.name} ${item.flag}</b><span>ŞEHİR VE SEKTÖR DENEYİMİ</span><p>${item.detail}</p>`;tooltip.hidden=false;const left=Math.min(shellRect.width-230,Math.max(10,nodeRect.left-shellRect.left+12)),top=Math.max(10,nodeRect.top-shellRect.top-92);tooltip.style.left=`${left}px`;tooltip.style.top=`${top}px`;$$('.audit-node',auditMapRoot).forEach(el=>el.classList.toggle('active',el===node))};
+  const showAuditTooltip=(item,node)=>{const shellRect=mapShell.getBoundingClientRect(),nodeRect=node.getBoundingClientRect();tooltip.innerHTML=`<b>${item.name} ${item.flag}</b><p>${item.detail}</p>`;tooltip.hidden=false;const left=Math.min(shellRect.width-230,Math.max(10,nodeRect.left-shellRect.left+12)),top=Math.max(10,nodeRect.top-shellRect.top-92);tooltip.style.left=`${left}px`;tooltip.style.top=`${top}px`;$$('.audit-node',auditMapRoot).forEach(el=>el.classList.toggle('active',el===node))};
   const hideAuditTooltip=()=>{tooltip.hidden=true;$$('.audit-node',auditMapRoot).forEach(el=>el.classList.remove('active'))};
   const buildAuditMap=()=>{
     auditLocations.forEach((item,index)=>{const group=document.createElementNS(svgNS,'g');group.setAttribute('class',`audit-node${item.turkeyCity?' turkey':''}`);group.setAttribute('transform',`translate(${item.x} ${item.y})`);group.setAttribute('tabindex','0');group.setAttribute('role','button');group.setAttribute('aria-label',`${item.name}, profesyonel denetim deneyimi`);group.style.setProperty('--delay',`${.12+index*.09}s`);group.innerHTML=`<circle class="node-hit" r="20"/><circle class="node-ring" r="7"/><circle class="node-core" r="3.6"/><text x="${item.labelX??9}" y="${item.labelY??-8}" text-anchor="${item.anchor??'start'}">${item.name}</text>`;group.addEventListener('mouseenter',()=>showAuditTooltip(item,group));group.addEventListener('mouseleave',hideAuditTooltip);group.addEventListener('focus',()=>showAuditTooltip(item,group));group.addEventListener('blur',hideAuditTooltip);group.addEventListener('click',event=>{event.stopPropagation();showAuditTooltip(item,group)});nodesLayer.append(group)});

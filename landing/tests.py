@@ -51,6 +51,8 @@ class LandingTests(TestCase):
         self.assertContains(response, 'destek@grcustasi.co')
         self.assertContains(response, reverse('landing:checkout'))
         self.assertNotContains(response, 'info@grcmastery.com')
+        self.assertNotContains(response, 'Öğrenci girişi yakında')
+        self.assertContains(response, f'href="{reverse("login")}">Giriş →</a>')
 
     @override_settings(STRIPE_SECRET_KEY='sk_test_placeholder')
     def test_checkout_creates_grc_ustasi_stripe_session(self):
