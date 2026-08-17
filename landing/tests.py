@@ -1,4 +1,6 @@
 from datetime import date
+from unittest.mock import patch
+from django.contrib.auth import get_user_model
 from django.test import TestCase, override_settings
 from django.urls import resolve, reverse
 from .models import AssessmentSession, Certificate, Lead
@@ -68,16 +70,67 @@ class LandingTests(TestCase):
         self.assertEqual(match.url_name, 'login')
         self.assertEqual(match.func.__module__, 'core.views')
 
+    def test_authenticated_home_keeps_session_and_points_to_student_dashboard(self):
+        user = get_user_model().objects.create_user(
+            username='student', email='student-login@example.com', password='secret123'
+        )
+        self.client.force_login(user)
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(str(self.client.session['_auth_user_id']), str(user.pk))
+        self.assertContains(response, 'Öğrenci Paneli')
+        self.assertContains(response, f'href="{reverse("dashboard_student")}"')
+
+    def test_authenticated_login_page_redirects_without_logging_user_out(self):
+        user = get_user_model().objects.create_user(
+            username='returning', email='returning@example.com', password='secret123'
+        )
+        self.client.force_login(user)
+        response = self.client.get(reverse('login'))
+        self.assertRedirects(response, reverse('dashboard_student'))
+        self.assertEqual(str(self.client.session['_auth_user_id']), str(user.pk))
+
+    def test_career_compass_link_marks_quiz_for_immediate_open(self):
+        response = self.client.get(reverse('landing:career_compass'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'data-auto-open="true"')
+        self.assertContains(response, 'quiz-direct-start')
+
     def test_assessment_email_and_answers_are_logged_with_profile_discount(self):
-        response = self.client.post(reverse('landing:save_assessment'), {
-            'email': 'student@example.com', 'profile_type': 'student',
-            'career_clarity': 'true',
-        })
+        with patch('landing.views._notify_telegram') as notify:
+            response = self.client.post(reverse('landing:save_assessment'), {
+                'email': 'student@example.com', 'profile_type': 'student',
+                'career_clarity': 'true',
+            })
         self.assertEqual(response.status_code, 200)
         session = AssessmentSession.objects.get(email='student@example.com')
         self.assertEqual(session.discount_percent, 50)
         self.assertEqual(session.answers['career_clarity'], 'true')
         self.assertFalse(session.completed)
+        notify.assert_called_once()
+
+    def test_assessment_email_notifies_telegram_only_once(self):
+        payload = {'email': 'once@example.com', 'profile_type': 'graduate'}
+        with patch('landing.views._notify_telegram') as notify:
+            self.client.post(reverse('landing:save_assessment'), payload)
+            self.client.post(reverse('landing:save_assessment'), payload | {'career_clarity': 'true'})
+        notify.assert_called_once()
+
+    @override_settings(TELEGRAM_BOT_TOKEN='token', TELEGRAM_CHAT_ID='chat')
+    def test_first_login_sends_telegram_and_preserves_authentication(self):
+        user = get_user_model().objects.create_user(
+            username='first-login', email='first@example.com', password='secret123',
+            is_first_login=True,
+        )
+        with patch('core.views.requests.post') as post:
+            post.return_value.raise_for_status.return_value = None
+            response = self.client.post(reverse('login'), {
+                'email': user.email, 'password': 'secret123',
+            })
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.context['show_password_change_popup'])
+        self.assertEqual(str(self.client.session['_auth_user_id']), str(user.pk))
+        post.assert_called_once()
 
     def test_discount_levels_are_profile_specific_and_expire_in_three_days(self):
         for profile, discount in [('student', 50), ('graduate', 25), ('working', 15)]:

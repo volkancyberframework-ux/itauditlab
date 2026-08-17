@@ -4,6 +4,7 @@ from . import views
 app_name = 'landing'
 urlpatterns = [
     path('', views.home, name='home'),
+    path('kariyer-pusulasi/', views.home, name='career_compass'),
     path('api/lead/', views.submit_lead, name='submit_lead'),
     path('api/assessment/', views.save_assessment, name='save_assessment'),
     path('api/waiting-list/', views.join_waiting_list, name='waiting_list'),

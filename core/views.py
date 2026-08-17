@@ -96,6 +96,9 @@ def about_view(request):
 
 
 def custom_login_view(request):
+    if request.method == "GET" and request.user.is_authenticated:
+        return redirect("dashboard_student")
+
     if request.method == "POST":
         email = (request.POST.get("email") or "").strip().lower()
         password = request.POST.get("password") or ""
@@ -120,6 +123,23 @@ def custom_login_view(request):
             login(request, user)
 
             if getattr(user, "is_first_login", False):
+                if not request.session.get("first_login_telegram_sent"):
+                    bot_token = getattr(settings, "TELEGRAM_BOT_TOKEN", "")
+                    chat_id = getattr(settings, "TELEGRAM_CHAT_ID", "")
+                    if bot_token and chat_id:
+                        try:
+                            requests.post(
+                                f"https://api.telegram.org/bot{bot_token}/sendMessage",
+                                data={"chat_id": chat_id, "text": (
+                                    "🎓 Bir öğrenci ilk kez giriş yaptı\n"
+                                    f"Ad: {user.get_full_name() or user.username}\n"
+                                    f"E-posta: {user.email}"
+                                )},
+                                timeout=5,
+                            ).raise_for_status()
+                            request.session["first_login_telegram_sent"] = True
+                        except requests.RequestException:
+                            logger.exception("İlk giriş Telegram bildirimi gönderilemedi.")
                 return render(request, "login.html", {
                     "show_password_change_popup": True
                 })

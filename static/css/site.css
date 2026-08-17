@@ -292,6 +292,12 @@ html[data-theme="light"] .nav .brand b>em{color:#9a6b08}
 /* Complete light-theme and responsive QA pass */
 body{overflow-x:hidden}
 .price-card>form.price{padding:42px}
+.payment-actions{display:grid;gap:12px;margin-top:18px}
+.payment-actions .btn{position:relative;width:100%;margin:0;line-height:1.25;text-align:center}
+.installment-action{background:transparent;color:var(--gold);border-color:#e8bd5b66;box-shadow:none}
+.installment-action:hover{background:#e8bd5b12;border-color:var(--gold)}
+.quiz-direct-start{padding:18px 0}
+.quiz-direct-start .profile-picks{display:grid;grid-template-columns:1fr;gap:10px;margin-top:20px}
 html[data-theme="light"] .faq-contact{background:#fff;border-color:#1f6d9f35;box-shadow:0 12px 30px #26475f10}
 html[data-theme="light"] .faq-contact b{color:#102337}
 html[data-theme="light"] .faq-contact span{color:#526b7f}

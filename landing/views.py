@@ -5,9 +5,28 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils import timezone
 from django.views.decorators.http import require_POST
+import logging
+import requests
 from .forms import LeadForm, WaitingListForm
 from .models import AssessmentSession, Certificate, JobMarketCount, SiteSetting
 from .curriculum import CURRICULUM, CURRICULUM_STATS
+
+logger = logging.getLogger(__name__)
+
+
+def _notify_telegram(message):
+    token = getattr(django_settings, 'TELEGRAM_BOT_TOKEN', '')
+    chat_id = getattr(django_settings, 'TELEGRAM_CHAT_ID', '')
+    if not token or not chat_id:
+        return
+    try:
+        requests.post(
+            f'https://api.telegram.org/bot{token}/sendMessage',
+            data={'chat_id': chat_id, 'text': message},
+            timeout=5,
+        ).raise_for_status()
+    except requests.RequestException:
+        logger.exception('Kariyer pusulası Telegram bildirimi gönderilemedi.')
 
 
 def home(request):
@@ -16,6 +35,7 @@ def home(request):
     return render(request, 'landing/index.html', {
         'site': site, 'payment_url': payment_url, 'jobs': JobMarketCount.objects.all(),
         'curriculum': CURRICULUM, 'curriculum_stats': CURRICULUM_STATS,
+        'open_assessment': request.path.rstrip('/').endswith('kariyer-pusulasi'),
     })
 
 
@@ -71,10 +91,17 @@ def save_assessment(request):
     answers.update(incoming)
     discount = AssessmentSession.discount_for(profile)
     expires = (session.discount_expires_at if session and session.profile_type == profile else timezone.now() + timezone.timedelta(days=3))
-    session, _ = AssessmentSession.objects.update_or_create(email=email, defaults={
+    session, created = AssessmentSession.objects.update_or_create(email=email, defaults={
         'profile_type': profile, 'answers': answers, 'discount_percent': discount,
         'discount_expires_at': expires, 'completed': request.POST.get('assessment_completed') == 'true' or bool(session and session.completed),
     })
+    if created:
+        _notify_telegram(
+            '🧭 Yeni GRC Ustası kariyer pusulası\n'
+            f'E-posta: {session.email}\n'
+            f'Profil: {session.get_profile_type_display()}\n'
+            f'İndirim: %{session.discount_percent}'
+        )
     return JsonResponse({'ok': True, 'discount': discount, 'expires_at': session.discount_expires_at.isoformat()})
 
 
