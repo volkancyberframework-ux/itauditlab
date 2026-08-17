@@ -1,0 +1,130 @@
+from datetime import date
+from django.test import TestCase, override_settings
+from django.urls import resolve, reverse
+from .models import AssessmentSession, Certificate, Lead
+
+@override_settings(STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage')
+class LandingTests(TestCase):
+    def lead_data(self):
+        return {'name':'Ada','email':'ada@example.com','profile_type':'student','english_awareness':'true','weekly_time':'true','age_over_45':'false','existing_it_experience':'false','eligibility_awareness':'true','career_clarity':'true','opportunity_awareness':'true','effort_awareness':'true','ethics_commitment':'true'}
+    def test_home(self):
+        response = self.client.get('/')
+        self.assertContains(response, 'Sen hangi aşamadasın?', status_code=200)
+        self.assertContains(response, '80 saatte temelden gerçek denetim hikâyesine')
+        self.assertContains(response, 'AWS IAM Yetki Dağınıklığı')
+        self.assertContains(response, 'ExertaBank')
+        self.assertContains(response, 'Zeugma Sigorta')
+        self.assertNotContains(response, 'Çalıştığım ve profesyonel deneyim edindiğim kurumlar')
+        self.assertNotContains(response, 'img/experience/kbc-transparent.png')
+        self.assertNotContains(response, 'img/experience/qnb-finansbank-transparent.png')
+        self.assertNotContains(response, 'img/experience/bilkent-transparent.png')
+        self.assertContains(response, 'img/cisa-badge.png')
+        self.assertContains(response, 'YURTDIŞI BAĞIMSIZ ÇALIŞMALAR')
+        self.assertContains(response, 'OSB VE KOBİ DENETİMLERİ')
+        self.assertNotContains(response, 'Şimdi bu deneyim senin vakalarına dönüşüyor')
+        self.assertNotContains(response, 'AKADEMİK YOLCULUK')
+        self.assertNotContains(response, 'GİZLİLİK KORUMALI')
+        self.assertNotContains(response, 'Haritada gösterilen Türkiye deneyimi')
+        self.assertContains(response, 'CREDENDO VE KBC BELÇİKA DÖNEMİYLE PARALEL İLERLEYEN DENEYİMLER')
+        self.assertContains(response, 'YURTDIŞINDA İŞ YAPTIĞIM YERLER')
+        self.assertContains(response, '59.999 TL')
+        self.assertContains(response, '3 × 25.000 TL')
+        self.assertContains(response, 'toplam 75.000 TL')
+        self.assertContains(response, '299 USD değerinde Skool topluluğu')
+        self.assertContains(response, '132 kişilik topluluğa ücretsiz erişim')
+        self.assertContains(response, 'Ki&#351;iyle birebir ment&#246;rl&#252;k')
+        self.assertContains(response, 'Program mezunu')
+        self.assertContains(response, 'Bu test adli sicil bilgisi toplamaz')
+        self.assertContains(response, "GRC USTASI'NIN FARKI")
+        self.assertContains(response, 'Katılımcılarımız, resmî kaynakları')
+        self.assertContains(response, 'Kubernetes')
+        self.assertContains(response, 'https://www.skool.com/volkan-guler-9286/about')
+        self.assertContains(response, 'Türkiye’den dünyaya uzanan gerçek denetim tecrübesi')
+        self.assertContains(response, 'Denetim Rotası')
+        self.assertContains(response, 'Savunma Sanayii Şirketleri')
+        self.assertContains(response, 'Gizlilik nedeniyle kurum isimleri paylaşılmamaktadır')
+        self.assertContains(response, 'Bart Preneel ile akademik çalışmalar')
+        self.assertContains(response, 'İlgili kurumların GRC Ustası programını desteklediği')
+        self.assertContains(response, f'href="{reverse("login")}"')
+
+    def test_existing_login_route_remains_owned_by_core(self):
+        match = resolve('/login/')
+        self.assertEqual(match.url_name, 'login')
+        self.assertEqual(match.func.__module__, 'core.views')
+
+    def test_assessment_email_and_answers_are_logged_with_profile_discount(self):
+        response = self.client.post(reverse('landing:save_assessment'), {
+            'email': 'student@example.com', 'profile_type': 'student',
+            'career_clarity': 'true',
+        })
+        self.assertEqual(response.status_code, 200)
+        session = AssessmentSession.objects.get(email='student@example.com')
+        self.assertEqual(session.discount_percent, 50)
+        self.assertEqual(session.answers['career_clarity'], 'true')
+        self.assertFalse(session.completed)
+
+    def test_discount_levels_are_profile_specific_and_expire_in_three_days(self):
+        for profile, discount in [('student', 50), ('graduate', 25), ('working', 15)]:
+            response = self.client.post(reverse('landing:save_assessment'), {
+                'email': f'{profile}@example.com', 'profile_type': profile,
+            })
+            self.assertEqual(response.json()['discount'], discount)
+            self.assertEqual(AssessmentSession.objects.get(email=f'{profile}@example.com').discount_percent, discount)
+
+    def test_early_age_gate_marks_assessment_complete(self):
+        self.client.post(reverse('landing:save_assessment'), {
+            'email': 'gate@example.com', 'profile_type': 'working',
+            'residence_type': 'turkey', 'age_over_45': 'true',
+            'assessment_completed': 'true',
+        })
+        session = AssessmentSession.objects.get(email='gate@example.com')
+        self.assertTrue(session.completed)
+        self.assertEqual(session.answers['age_over_45'], 'true')
+
+    def test_curriculum_totals_exactly_80_hours(self):
+        from .curriculum import CURRICULUM, CURRICULUM_STATS
+        self.assertEqual(len(CURRICULUM), 8)
+        self.assertEqual(sum(module['hours'] for module in CURRICULUM), 80)
+        self.assertEqual(CURRICULUM_STATS['hours'], 80)
+    def test_lead_score_and_duplicate(self):
+        self.assertEqual(self.client.post(reverse('landing:submit_lead'), self.lead_data()).status_code, 200)
+        lead = Lead.objects.get()
+        self.assertEqual(lead.result_type, 'strong'); self.assertTrue(lead.student_discount_eligible)
+        self.assertEqual(lead.discount_percent, 50)
+        self.assertEqual(self.client.post(reverse('landing:submit_lead'), self.lead_data()).status_code, 400)
+
+    def test_working_in_turkey_over_45_gets_polite_wait_result(self):
+        data = self.lead_data() | {
+            'email': 'turkey@example.com',
+            'profile_type': 'working',
+            'residence_type': 'turkey',
+            'age_over_45': 'true',
+        }
+        response = self.client.post(reverse('landing:submit_lead'), data)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['result'], 'wait')
+
+    def test_working_abroad_skips_age_gate(self):
+        data = self.lead_data() | {
+            'email': 'abroad@example.com',
+            'profile_type': 'working',
+            'residence_type': 'abroad',
+            'region': 'europe',
+            'age_over_45': 'true',
+        }
+        response = self.client.post(reverse('landing:submit_lead'), data)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['result'], 'strong')
+
+    def test_student_is_not_subject_to_age_gate(self):
+        data = self.lead_data() | {
+            'email': 'student45@example.com',
+            'age_over_45': 'true',
+        }
+        response = self.client.post(reverse('landing:submit_lead'), data)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['result'], 'strong')
+    def test_certificate_masks_name(self):
+        Certificate.objects.create(certificate_id='GRC-1', participant_name='Ada Lovelace', issue_date=date(2026,1,1))
+        data = self.client.get(reverse('landing:verify_certificate'), {'certificate_id':'GRC-1'}).json()
+        self.assertEqual(data['participant'], 'Ada L.'); self.assertNotIn('Lovelace', str(data))

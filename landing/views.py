@@ -1,0 +1,96 @@
+from django.conf import settings as django_settings
+from django.db import IntegrityError
+from django.http import JsonResponse
+from django.shortcuts import render
+from django.utils import timezone
+from django.views.decorators.http import require_POST
+from .forms import LeadForm, WaitingListForm
+from .models import AssessmentSession, Certificate, JobMarketCount, SiteSetting
+from .curriculum import CURRICULUM, CURRICULUM_STATS
+
+
+def home(request):
+    site = SiteSetting.load()
+    payment_url = site.payment_url or getattr(django_settings, 'PAYMENT_URL', '')
+    return render(request, 'landing/index.html', {
+        'site': site, 'payment_url': payment_url, 'jobs': JobMarketCount.objects.all(),
+        'curriculum': CURRICULUM, 'curriculum_stats': CURRICULUM_STATS,
+    })
+
+
+def _errors(form): return {k: [str(x) for x in v] for k, v in form.errors.items()}
+
+
+@require_POST
+def save_assessment(request):
+    email = request.POST.get('email', '').strip().lower()
+    profile = request.POST.get('profile_type', '').strip()
+    if profile not in dict(AssessmentSession.PROFILE_CHOICES):
+        return JsonResponse({'ok': False, 'message': 'Lütfen profilini yeniden seç.'}, status=400)
+    from django.core.validators import validate_email
+    from django.core.exceptions import ValidationError
+    try: validate_email(email)
+    except ValidationError: return JsonResponse({'ok': False, 'message': 'Geçerli bir e-posta adresi yaz.'}, status=400)
+    allowed = ('residence_type','region','age_over_45','eligibility_awareness','career_clarity','opportunity_awareness','effort_awareness','english_awareness','weekly_time','ethics_commitment','assessment_completed')
+    incoming = {key: request.POST.get(key) for key in allowed if key in request.POST}
+    session = AssessmentSession.objects.filter(email=email).first()
+    answers = dict(session.answers) if session else {}
+    answers.update(incoming)
+    discount = AssessmentSession.discount_for(profile)
+    expires = (session.discount_expires_at if session and session.profile_type == profile else timezone.now() + timezone.timedelta(days=3))
+    session, _ = AssessmentSession.objects.update_or_create(email=email, defaults={
+        'profile_type': profile, 'answers': answers, 'discount_percent': discount,
+        'discount_expires_at': expires, 'completed': request.POST.get('assessment_completed') == 'true' or bool(session and session.completed),
+    })
+    return JsonResponse({'ok': True, 'discount': discount, 'expires_at': session.discount_expires_at.isoformat()})
+
+
+@require_POST
+def submit_lead(request):
+    form = LeadForm(request.POST)
+    if not form.is_valid(): return JsonResponse({'ok': False, 'errors': _errors(form)}, status=400)
+    d = form.cleaned_data
+    awareness_score = sum(1 for key in ('eligibility_awareness','career_clarity','opportunity_awareness','effort_awareness','ethics_commitment') if d[key])
+    score = awareness_score + (2 if d['english_awareness'] else 0) + (3 if d['weekly_time'] else 0)
+    if d['profile_type'] == 'working' and d['residence_type'] == 'turkey' and d['age_over_45']: result = 'wait'
+    elif score >= 9 and d['ethics_commitment']: result = 'strong'
+    else: result = 'develop'
+    lead = form.save(commit=False)
+    lead.test_score, lead.result_type = score, result
+    lead.student_discount_eligible = d['profile_type'] == 'student'
+    assessment = AssessmentSession.objects.filter(email=d['email']).first()
+    lead.discount_percent = AssessmentSession.discount_for(d['profile_type'])
+    lead.discount_expires_at = assessment.discount_expires_at if assessment else timezone.now() + timezone.timedelta(days=3)
+    try: lead.save()
+    except IntegrityError:
+        return JsonResponse({'ok': False, 'errors': {'email': ['Bu e-posta ile daha önce bir sonuç oluşturulmuş.']}}, status=409)
+    reasons = {
+        'strong': ['Hedefin, çalışma planın ve etik yaklaşımın programla uyumlu.', 'Risk, teknoloji ve iş süreçlerinin kesişimine açıksın.'],
+        'develop': ['Başlamak için uygun bir profilsin.', 'Hedef, İngilizce, çalışma temposu veya etik sorumluluk başlıklarından bazılarını netleştirmen faydalı olur.'],
+        'wait': ['Türkiye’deki mevcut başlangıç koşulların için bu yoğun program en verimli seçenek olmayabilir.', 'Önce daha kısa bir teknoloji ve iş süreçleri temeliyle ilerlemeni öneriyoruz.']}
+    if assessment:
+        assessment.answers.update({key: request.POST.get(key, '') for key in request.POST if key not in ('csrfmiddlewaretoken','name','whatsapp','consent')})
+        assessment.completed = True
+        assessment.save(update_fields=['answers','completed','updated_at'])
+    return JsonResponse({'ok': True, 'result': result, 'title': dict(lead.RESULT_CHOICES)[result], 'reasons': reasons[result], 'student': lead.student_discount_eligible, 'discount': lead.discount_percent, 'discount_expires_at': lead.discount_expires_at.isoformat()})
+
+
+@require_POST
+def join_waiting_list(request):
+    form = WaitingListForm(request.POST)
+    if not form.is_valid(): return JsonResponse({'ok': False, 'errors': _errors(form)}, status=400)
+    try: form.save()
+    except IntegrityError: return JsonResponse({'ok': False, 'message': 'Bu e-posta zaten listede.'}, status=409)
+    return JsonResponse({'ok': True, 'message': 'Harika, yeni grup açıldığında sana haber vereceğiz.'})
+
+
+def verify_certificate(request):
+    cid = request.GET.get('certificate_id', '').strip()
+    if not cid: return JsonResponse({'ok': False, 'status': 'not_found', 'message': 'Sertifika ID girin.'}, status=400)
+    cert = Certificate.objects.filter(certificate_id__iexact=cid).first()
+    if not cert: return JsonResponse({'ok': True, 'status': 'not_found', 'message': 'Sertifika bulunamadı.'})
+    expired = cert.status == 'expired' or (cert.expiry_date and cert.expiry_date < timezone.localdate())
+    status = 'expired' if expired else ('valid' if cert.status == 'valid' else 'not_found')
+    name_parts = cert.participant_name.split()
+    safe_name = f'{name_parts[0]} {name_parts[-1][0]}.' if len(name_parts) > 1 else name_parts[0]
+    return JsonResponse({'ok': True, 'status': status, 'message': 'Geçerli sertifika.' if status == 'valid' else 'Sertifikanın süresi dolmuş.', 'participant': safe_name, 'issue_date': cert.issue_date.strftime('%d.%m.%Y')})
