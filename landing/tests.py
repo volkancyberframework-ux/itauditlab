@@ -133,6 +133,21 @@ class LandingTests(TestCase):
             self.client.post(reverse('landing:save_assessment'), payload | {'career_clarity': 'true'})
         notify.assert_called_once()
 
+    def test_whatsapp_submission_notifies_telegram(self):
+        payload = {
+            'name': 'Deneme Kişi', 'email': 'whatsapp@example.com',
+            'whatsapp': '+90 555 111 22 33', 'profile_type': 'student',
+            'english_awareness': 'true', 'weekly_time': 'true',
+            'eligibility_awareness': 'true', 'career_clarity': 'true',
+            'opportunity_awareness': 'true', 'effort_awareness': 'true',
+            'ethics_commitment': 'true', 'residence_type': 'turkey',
+        }
+        with patch('landing.views._notify_telegram') as notify:
+            response = self.client.post(reverse('landing:submit_lead'), payload)
+        self.assertEqual(response.status_code, 200)
+        notify.assert_called_once()
+        self.assertIn('+90 555 111 22 33', notify.call_args.args[0])
+
     @override_settings(TELEGRAM_BOT_TOKEN='token', TELEGRAM_CHAT_ID='chat')
     def test_first_login_sends_telegram_and_preserves_authentication(self):
         user = get_user_model().objects.create_user(

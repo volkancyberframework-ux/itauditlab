@@ -128,6 +128,15 @@ def submit_lead(request):
         'strong': ['Hedefin, çalışma planın ve etik yaklaşımın programla uyumlu.', 'Risk, teknoloji ve iş süreçlerinin kesişimine açıksın.'],
         'develop': ['Başlamak için uygun bir profilsin.', 'Hedef, İngilizce, çalışma temposu veya etik sorumluluk başlıklarından bazılarını netleştirmen faydalı olur.'],
         'wait': ['Türkiye’deki mevcut başlangıç koşulların için bu yoğun program en verimli seçenek olmayabilir.', 'Önce daha kısa bir teknoloji ve iş süreçleri temeliyle ilerlemeni öneriyoruz.']}
+    if lead.whatsapp:
+        _notify_telegram(
+            '📱 Kariyer pusulasında WhatsApp paylaşıldı\n'
+            f'Ad: {lead.name}\n'
+            f'E-posta: {lead.email}\n'
+            f'WhatsApp: {lead.whatsapp}\n'
+            f'Profil: {lead.get_profile_type_display()}\n'
+            f'Sonuç: {lead.get_result_type_display()}'
+        )
     if assessment:
         assessment.answers.update({key: request.POST.get(key, '') for key in request.POST if key not in ('csrfmiddlewaretoken','name','whatsapp','consent')})
         assessment.completed = True

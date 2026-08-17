@@ -53,13 +53,18 @@
                                     </a>
                                 </li>
                             </ul>
+                            <div class="student-course-search mb-4">
+                                <i class="fe fe-search" aria-hidden="true"></i>
+                                <input id="studentCourseSearch" type="search" class="form-control" placeholder="Eğitim adına göre ara…" autocomplete="off" aria-label="Eğitim adına göre ara">
+                                <button id="studentCourseSearchClear" type="button" class="btn btn-sm" aria-label="Aramayı temizle" hidden>Temizle</button>
+                            </div>
                             <!-- Tab content -->
                             <div class="tab-content" id="tabContent">
                                 <div class="tab-pane fade show active" id="bookmarked" role="tabpanel" aria-labelledby="bookmarked-tab">
                                     <div class="row gy-4 gx-4">
                                       {% for course in courses %}
                                         {% if course.id in enrolled_course_ids or course.id in can_enroll_ids %}
-                                      <div class="col-lg-3 col-md-6 col-12">
+                                      <div class="col-lg-3 col-md-6 col-12 student-course-item" data-course-title="{{ course.turkish_name|default:course.english_name|lower }}">
                                         <div class="card mb-4 card-hover h-100 d-flex flex-column">
                                           {% if course.id in enrolled_course_ids %}
                                             <a href="{% url 'course_single' course.id %}">
@@ -151,7 +156,7 @@
                                   <div class="row gy-4 gx-4">
                                     {% if enrolled_courses %}
                                       {% for course in enrolled_courses %}
-                                      <div class="col-lg-3 col-md-6 col-12">
+                                      <div class="col-lg-3 col-md-6 col-12 student-course-item" data-course-title="{{ course.turkish_name|default:course.english_name|lower }}">
                                         <div class="card mb-4 card-hover h-100 d-flex flex-column">
                                           <a href="{% url 'course_single' course.id %}">
                                             {% if course.image %}
@@ -241,6 +246,26 @@
 
               alert(`"${title}" kursuna kayıt olmak için uygun Katıl seviyesine yükseltin.`);
             });
+
+            (function () {
+              const input = document.getElementById('studentCourseSearch');
+              const clear = document.getElementById('studentCourseSearchClear');
+              if (!input || !clear) return;
+              const normalize = value => value.toLocaleLowerCase('tr-TR').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+              const filterCourses = () => {
+                const query = normalize(input.value.trim());
+                document.querySelectorAll('.student-course-item').forEach(card => {
+                  card.hidden = Boolean(query) && !normalize(card.dataset.courseTitle || '').includes(query);
+                });
+                clear.hidden = !query;
+              };
+              input.addEventListener('input', filterCourses);
+              clear.addEventListener('click', () => {
+                input.value = '';
+                filterCourses();
+                input.focus();
+              });
+            })();
             </script>
 
 

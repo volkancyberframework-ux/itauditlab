@@ -43,6 +43,12 @@
 .student-shell .btn-outline-primary{border-color:rgba(49,164,255,.5);color:#70c5ff}
 .student-shell .btn-outline-primary:hover{background:#178fee;color:#fff}
 .student-shell .btn-outline-danger{border-color:rgba(255,106,121,.45);color:#ff8b97}
+.student-course-search{position:relative;display:flex;align-items:center;max-width:620px}
+.student-course-search>i{position:absolute;left:16px;z-index:2;color:var(--grc-muted);font-size:18px;pointer-events:none}
+.student-course-search .form-control{height:52px;padding-left:46px;padding-right:92px;border:1px solid var(--grc-line);border-radius:14px;background:rgba(255,255,255,.045);color:var(--grc-text);box-shadow:none}
+.student-course-search .form-control::placeholder{color:var(--grc-muted)}
+.student-course-search .form-control:focus{border-color:rgba(49,164,255,.65);background:rgba(255,255,255,.065);box-shadow:0 0 0 3px rgba(49,164,255,.12)}
+.student-course-search .btn{position:absolute;right:7px;padding:7px 10px;background:transparent;color:var(--grc-muted);box-shadow:none}
 
 .student-course-hero{position:relative;overflow:hidden;background:radial-gradient(circle at 78% 12%,rgba(49,164,255,.35),transparent 30%),linear-gradient(135deg,#102d4a,#071522)!important;border-bottom:1px solid var(--grc-line)}
 .student-course-hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--grc-line) 1px,transparent 1px),linear-gradient(90deg,var(--grc-line) 1px,transparent 1px);background-size:60px 60px;opacity:.18}
@@ -80,6 +86,7 @@
 [data-bs-theme="light"] .student-navbar .dropdown-item,[data-bs-theme="light"] .student-navbar .dropdown-item h5,[data-bs-theme="light"] .student-navbar .dropdown-item p{color:#173047}
 [data-bs-theme="light"] .student-profile-card,[data-bs-theme="light"] .student-shell .card{background:rgba(255,255,255,.96);color:#102337;box-shadow:0 16px 42px rgba(24,61,88,.1)}
 [data-bs-theme="light"] .student-course-library .text-inherit,[data-bs-theme="light"] .student-course-library h3{color:#102337!important}
+[data-bs-theme="light"] .student-course-search .form-control{background:#fff;color:#102337;border-color:rgba(23,61,91,.18)}
 [data-bs-theme="light"] .student-course-content .card-body,[data-bs-theme="light"] .student-course-content .list-group-item{color:#29475e}
 [data-bs-theme="light"] .student-course-content .card-header{background:#f7fbfd}
 [data-bs-theme="light"] .student-shell .modal-content{background:#fff;color:#102337}
