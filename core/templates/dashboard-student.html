@@ -20,7 +20,7 @@
                                         <div class="lh-1">
                                             <h2 class="mb-0">
                                                 {{ request.user.first_name }} {{ request.user.last_name }}
-                                                <a href="#"  data-bs-toggle="tooltip" data-placement="top" title="Beginner">
+                                                <a href="#" data-bs-toggle="tooltip" data-placement="top" title="Başlangıç seviyesi">
                                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
                                                         <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9"></rect>
@@ -45,11 +45,11 @@
                             <!-- Side Navbar -->
                             <ul class="nav nav-lb-tab mb-6" id="tab" role="tablist">
                                 <li class="nav-item ms-0" role="presentation">
-                                    <a class="nav-link active" id="bookmarked-tab" data-bs-toggle="pill" href="#bookmarked" role="tab" aria-controls="bookmarked" aria-selected="true">Your Available Content</a>
+                                    <a class="nav-link active" id="bookmarked-tab" data-bs-toggle="pill" href="#bookmarked" role="tab" aria-controls="bookmarked" aria-selected="true">Erişebildiğin Eğitimler</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link" id="currentlyLearning-tab" data-bs-toggle="pill" href="#currentlyLearning" role="tab" aria-controls="currentlyLearning" aria-selected="false">
-                                        Enrolled
+                                        Kayıtlı Olduğun Eğitimler
                                     </a>
                                 </li>
                             </ul>
@@ -67,7 +67,7 @@
                                                 <img src="{{ course.image.url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="card-img-top">
                                               {% else %}
                                                 <div class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted" style="height: 200px;">
-                                                  No Image
+                                                  Görsel yok
                                                 </div>
                                               {% endif %}
                                             </a>
@@ -77,15 +77,15 @@
                                                 <img src="{{ course.image.url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="card-img-top opacity-50">
                                               {% else %}
                                                 <div class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted opacity-50" style="height: 200px;">
-                                                  No Image
+                                                  Görsel yok
                                                 </div>
                                               {% endif %}
                                               <div class="position-absolute top-50 start-50 translate-middle fw-bold fs-6
                                                           {% if course.id in can_enroll_ids %}text-muted{% else %}text-danger{% endif %}">
                                                 {% if course.id in can_enroll_ids %}
-                                                  Enroll to access
+                                                  Erişmek için kayıt ol
                                                 {% else %}
-                                                  Upgrade required
+                                                  Yetki yükseltme gerekli
                                                 {% endif %}
                                               </div>
 
@@ -117,10 +117,10 @@
                                               </div>
                                               <div class="col-auto">
                                                 {% if course.id in enrolled_course_ids %}
-                                                  <form method="POST" action="{% url 'unenroll_course' %}" onsubmit="return confirm('Unenroll from this course?');">
+                                                  <form method="POST" action="{% url 'unenroll_course' %}" onsubmit="return confirm('Bu eğitimden ayrılmak istediğinize emin misiniz?');">
                                                     {% csrf_token %}
                                                     <input type="hidden" name="course_id" value="{{ course.id }}">
-                                                    <button class="btn btn-outline-danger btn-sm">Unenroll</button>
+                                                    <button class="btn btn-outline-danger btn-sm">Eğitimden Ayrıl</button>
                                                   </form>
                                                   {% else %}
                                                     <form method="POST"
@@ -133,7 +133,7 @@
                                                         type="submit"
                                                         class="btn btn-primary btn-sm js-enroll-btn"
                                                         data-allowed="{% if course.id in can_enroll_ids %}true{% else %}false{% endif %}">
-                                                        Enroll
+                                                        Eğitime Kaydol
                                                       </button>
                                                     </form>
                                                   {% endif %}
@@ -158,7 +158,7 @@
                                               <img src="{{ course.image.url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="card-img-top">
                                             {% else %}
                                               <div class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted" style="height: 200px;">
-                                                No Image
+                                                Görsel yok
                                               </div>
                                             {% endif %}
                                           </a>
@@ -183,10 +183,10 @@
                                                 <span>{{ course.preparer.first_name }} {{ course.preparer.last_name }}</span>
                                               </div>
                                               <div class="col-auto">
-                                                <form method="POST" action="{% url 'unenroll_course' %}" onsubmit="return confirm('Unenroll from this course?');">
+                                                <form method="POST" action="{% url 'unenroll_course' %}" onsubmit="return confirm('Bu eğitimden ayrılmak istediğinize emin misiniz?');">
                                                   {% csrf_token %}
                                                   <input type="hidden" name="course_id" value="{{ course.id }}">
-                                                  <button class="btn btn-outline-danger btn-sm">Unenroll</button>
+                                                  <button class="btn btn-outline-danger btn-sm">Eğitimden Ayrıl</button>
                                                 </form>
                                               </div>
                                             </div>
@@ -209,9 +209,9 @@
                                             <div class="py-6">
                                                 <img src="{% static 'assets/images/svg/path-img.svg' %}" alt="path" class="img-fluid">
                                                 <div class="mt-4">
-                                                    <h2 class="display-4 fw-bold">Coming Soon</h2>
-                                                    <p class="mb-5">The designer working on our design so for now we schedule it to come soon. we release it soon for you. Thank you for watching.</p>
-                                                    <a href="../index.html" class="btn btn-primary">Back To Dashboard</a>
+                                                    <h2 class="display-4 fw-bold">Yakında</h2>
+                                                    <p class="mb-5">Bu bölüm hazırlanıyor ve yakında kullanıma açılacak.</p>
+                                                    <a href="{% url 'dashboard_student' %}" class="btn btn-primary">Öğrenci Paneline Dön</a>
                                                 </div>
                                             </div>
                                         </div>

@@ -3,9 +3,11 @@ from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase
+from django.urls import reverse
 
 from .models import (
     Course,
+    Enrollment,
     LearningProgram,
     LearningProgramStep,
     ProgramEnrollment,
@@ -58,3 +60,40 @@ class DailyProgramAutomationTests(TestCase):
         self.assertEqual(second["courses"], 0)
         self.assertEqual(release_mail.call_count, 2)
         self.assertEqual(ProgramRelease.objects.get().status, ProgramRelease.Status.FAILED)
+
+
+class StudentCourseInterfaceTests(TestCase):
+    def setUp(self):
+        self.user = get_user_model().objects.create_user(
+            username="ogrenci@example.com", email="ogrenci@example.com", password="test"
+        )
+        self.course = Course.objects.create(
+            turkish_name="Unix Denetimi",
+            duration=timedelta(hours=1),
+            difficulty="Intermediate",
+            description="Ders açıklaması",
+            course_type=Course.CourseType.VIDEO,
+            dashboard_activated=True,
+        )
+        self.enrollment = Enrollment.objects.create(user=self.user, course=self.course)
+        self.client.force_login(self.user)
+
+    def test_orientation_is_shown_only_on_first_course_visit(self):
+        url = reverse("course_single", args=[self.course.pk])
+
+        first = self.client.get(url)
+        self.assertContains(first, "Derse hoş geldin")
+        self.assertContains(first, "Öğrenci Paneline Dön")
+        self.assertContains(first, "Açıklama ve Dosyalar")
+
+        self.enrollment.refresh_from_db()
+        self.assertTrue(self.enrollment.orientation_seen)
+
+        second = self.client.get(url)
+        self.assertNotContains(second, "Derse hoş geldin")
+
+    def test_dashboard_uses_turkish_labels(self):
+        response = self.client.get(reverse("dashboard_student"))
+        self.assertContains(response, "Erişebildiğin Eğitimler")
+        self.assertContains(response, "Kayıtlı Olduğun Eğitimler")
+        self.assertNotContains(response, "Your Available Content")

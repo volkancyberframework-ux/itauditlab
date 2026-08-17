@@ -14,15 +14,15 @@
                   {{ course.turkish_name|default:course.english_name }}
                 </h1>
                 <p class="text-white mb-6 lead">{{ course.description }}</p>
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center justify-content-center flex-wrap gap-3 course-header-actions">
 
                   <a href="{% url 'dashboard_student' %}" class="btn btn-outline-light btn-lg d-inline-flex align-items-center">
                     <i class="fe fe-arrow-left me-2 fs-5"></i>
-                    Back to Dashboard
+                    Öğrenci Paneline Dön
                   </a>
                   <span class="text-white ms-3">
                     <i class="fe fe-user"></i>
-                    {{ course.enrollment_set.count }} Enrolled
+                    {{ course.enrollment_set.count }} Kayıtlı Öğrenci
                   </span>
 
                   <div>
@@ -45,7 +45,7 @@
                       <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9"></rect>
                       <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
                     </svg>
-                    <span class="align-middle">{{ course.difficulty }}</span>
+                    <span class="align-middle">{% if course.difficulty == 'Beginner' %}Başlangıç{% elif course.difficulty == 'Intermediate' %}Orta{% else %}İleri{% endif %}</span>
                   </span>
 
                 </div>
@@ -68,13 +68,13 @@
                     <!-- Nav -->
                     <ul class="nav nav-lb-tab" id="tab" role="tablist">
                       <li class="nav-item">
-                        <a class="nav-link active" id="table-tab" data-bs-toggle="pill" href="#table" role="tab" aria-controls="table" aria-selected="true">Contents</a>
+                        <a class="nav-link active" id="table-tab" data-bs-toggle="pill" href="#table" role="tab" aria-controls="table" aria-selected="true">İçerik</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" id="description-tab" data-bs-toggle="pill" href="#description" role="tab" aria-controls="description" aria-selected="false">Description</a>
+                        <a class="nav-link" id="description-tab" data-bs-toggle="pill" href="#description" role="tab" aria-controls="description" aria-selected="false">Açıklama ve Dosyalar</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" id="faq-tab" data-bs-toggle="pill" href="#faq" role="tab" aria-controls="faq" aria-selected="false">FAQ</a>
+                        <a class="nav-link" id="faq-tab" data-bs-toggle="pill" href="#faq" role="tab" aria-controls="faq" aria-selected="false">Sık Sorulan Sorular</a>
                       </li>
                     </ul>
                   </div>
@@ -100,7 +100,7 @@
                             <!-- Footer with Next button -->
                             <div class="mt-3 d-flex justify-content-end">
                               <button id="quiz-next-btn" class="btn btn-primary">
-                                Next <i class="fe fe-arrow-right"></i>
+                                Sonraki Soru <i class="fe fe-arrow-right"></i>
                               </button>
                             </div>
                           </form>
@@ -110,12 +110,12 @@
                             <div class="modal-dialog modal-dialog-centered">
                               <div class="modal-content">
                                 <div id="answerModalHeader" class="modal-header">
-                                  <h5 class="modal-title" id="answerModalLabel">Result</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  <h5 class="modal-title" id="answerModalLabel">Sonuç</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
                                 </div>
                                 <div class="modal-body" id="answerModalBody"></div>
                                 <div class="modal-footer">
-                                  <button type="button" id="answerModalOk" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                                  <button type="button" id="answerModalOk" class="btn btn-primary" data-bs-dismiss="modal">Tamam</button>
                                 </div>
                               </div>
                             </div>
@@ -126,7 +126,7 @@
                               const root = document.getElementById('quiz-root');
                               const nextBtn = document.getElementById('quiz-next-btn');
                               const fetchUrl = root.dataset.fetchUrl;
-                              const courseTitle = root.dataset.courseTitle || 'Quiz';
+                              const courseTitle = root.dataset.courseTitle || 'Soru Modülü';
 
                               // simple state
                               const state = { count: 0, last: null };
@@ -152,17 +152,17 @@
                                 nextBtn.disabled = true;
                                 try {
                                   const res = await fetch(fetchUrl, { credentials: 'same-origin' });
-                                  if (!res.ok) throw new Error('Failed to fetch question');
+                                  if (!res.ok) throw new Error('Soru alınamadı');
                                   const data = await res.json();
                                   if (!data.ok || !data.question) {
                                     root.innerHTML = `
-                                      <div class="alert alert-info mb-0">No questions available yet for this test.</div>
+                                      <div class="alert alert-info mb-0">Bu modül için henüz soru bulunmuyor.</div>
                                     `;
                                     return;
                                   }
                                   renderQuestion(data.question);
                                 } catch (e) {
-                                  root.innerHTML = `<div class="alert alert-danger mb-0">Error loading question.</div>`;
+                                  root.innerHTML = `<div class="alert alert-danger mb-0">Soru yüklenirken bir sorun oluştu.</div>`;
                                   console.error(e);
                                 } finally {
                                   nextBtn.disabled = false;
@@ -206,15 +206,15 @@
                                         </div>
                                         <div>
                                           <span class="text-success">
-                                            <i class="fe fe-clock me-1 align-middle"></i> Interactive Mode
+                                            <i class="fe fe-clock me-1 align-middle"></i> Etkileşimli Mod
                                           </span>
                                         </div>
                                       </div>
 
                                       <div class="mt-3">
                                         <div class="d-flex justify-content-between">
-                                          <span>Questionnary Progress:</span>
-                                          <span>Question ${state.count} out of ∞</span>
+                                          <span>Soru ilerlemesi:</span>
+                                          <span>${state.count}. soru</span>
                                         </div>
                                         <div class="mt-2">
                                           <div class="progress" style="height: 6px">
@@ -225,7 +225,7 @@
                                       </div>
 
                                       <div class="mt-5">
-                                        <span>Question ${state.count}</span>
+                                        <span>Soru ${state.count}</span>
                                         <h3 class="mb-3 mt-1">${q.text}</h3>
                                         <div class="list-group">
                                           ${optionsHtml}
@@ -243,7 +243,7 @@
                                 const inputs = Array.from(document.querySelectorAll(`input[name="q${q.id}"]`));
                                 const selected = inputs.filter(i => i.checked).map(i => parseInt(i.id.replace('opt',''), 10));
                                 if (selected.length === 0) {
-                                  showResultModal({ title: 'Select an option', bodyHtml: 'Please choose an answer.', headerClass: 'bg-warning bg-opacity-25' });
+                                  showResultModal({ title: 'Bir seçenek işaretleyin', bodyHtml: 'Lütfen bir yanıt seçin.', headerClass: 'bg-warning bg-opacity-25' });
                                   return;
                                 }
 
@@ -260,13 +260,13 @@
                                   .map(o => o.text);
 
                                 const bodyHtml = isCorrect
-                                  ? (q.explanation || 'Great job!')
+                                  ? (q.explanation || 'Harika, doğru yanıt!')
                                   : (q.explanation || '') + (correctLabels.length
-                                      ? `<hr class="my-3"><strong>Correct answer${correctLabels.length>1?'s':''}:</strong><br>${correctLabels.join('<br>')}`
+                                      ? `<hr class="my-3"><strong>Doğru yanıt:</strong><br>${correctLabels.join('<br>')}`
                                       : '');
 
                                 showResultModal({
-                                  title: isCorrect ? 'Correct 🎉' : 'Not quite',
+                                  title: isCorrect ? 'Doğru 🎉' : 'Henüz değil',
                                   bodyHtml,
                                   headerClass: isCorrect ? 'bg-success bg-opacity-25' : 'bg-danger bg-opacity-25'
                                 }, () => {
@@ -329,7 +329,7 @@
                                               <div class="modal-content">
                                                 <div class="modal-header">
                                                   <h5 class="modal-title" id="videoModalLabel{{ sub.id }}">{{ sub.small_title }}</h5>
-                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
                                                 </div>
                                                 <div class="modal-body p-0">
                                                   {% if sub.bunny_iframe_url %}
@@ -379,31 +379,31 @@
 
                     <div class="tab-pane fade" id="description" role="tabpanel" aria-labelledby="description-tab">
                       <div class="mb-4">
-                        <h3 class="mb-2">Course Descriptions</h3>
+                        <h3 class="mb-2">Ders Açıklaması</h3>
                         <p>{{ course.description|linebreaks }}</p>
                       </div>
                       <div class="mb-4">
-                        <h3 class="mb-2">Attachments</h3>
+                        <h3 class="mb-2">Ders Dosyaları</h3>
                         {% if course.attachment %}
                           <a href="{{ course.attachment.url }}" class="btn btn-outline-primary" download>
-                            Download Attachment
+                            PDF / Dosyayı İndir
                           </a>
                         {% else %}
-                          <p class="text-muted">No attachment uploaded.</p>
+                          <p class="text-muted">Bu ders için henüz dosya yüklenmedi.</p>
                         {% endif %}
                       </div>
                     </div>
 
                     <div class="tab-pane fade" id="faq" role="tabpanel" aria-labelledby="faq-tab">
                       <div>
-                        <h3 class="mb-3">Course - Frequently Asked Questions</h3>
+                        <h3 class="mb-3">Ders Hakkında Sık Sorulan Sorular</h3>
                         {% for faq in faqs %}
                           <div class="mb-4">
                             <h4>{{ faq.question }}</h4>
                             <p>{{ faq.answer }}</p>
                           </div>
                         {% empty %}
-                          <p>No frequently asked questions available for this course.</p>
+                          <p>Bu ders için henüz sık sorulan soru eklenmedi.</p>
                         {% endfor %}
                       </div>
                     </div>
@@ -427,13 +427,13 @@
                             height: 210px">
 
                     {% if not course.image %}
-                      <span class="text-muted">No Image</span>
+                      <span class="text-muted">Görsel yok</span>
                     {% endif %}
 
                     {% if first_video_url or is_test and course.intro_video_url %}
                       <div class="position-relative" style="height: 210px; width: 100%;">
                         <a href="#"
-                           class="icon-shape rounded-circle btn-play icon-xl"
+                           class="icon-shape rounded-circle btn-play icon-xl position-absolute top-50 start-50 translate-middle"
                            data-bs-toggle="modal"
                            data-bs-target="#previewModal"
                            data-preview-src="{% if is_test %}{{ course.intro_video_url }}{% else %}{{ first_video_url }}{% endif %}">
@@ -472,28 +472,28 @@
                 <div>
                   <!-- Card header -->
                   <div class="card-header">
-                    <h4 class="mb-0">What’s included</h4>
+                    <h4 class="mb-0">Bu Derste Neler Var?</h4>
                   </div>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item bg-transparent">
                       <i class="fe fe-shield align-middle me-2 text-primary"></i>
-                      Real-world IT Audit, Control, and GRC Exercises
+                      Gerçekçi BT denetimi, kontrol ve GRC uygulamaları
                     </li>
                     <li class="list-group-item bg-transparent">
                       <i class="fe fe-edit-3 me-2 align-middle text-success"></i>
-                      Interactive Quizzes for Every Module
+                      Modüllere özel etkileşimli sorular
                     </li>
                     <li class="list-group-item bg-transparent">
                       <i class="fe fe-message-square align-middle me-2 text-info"></i>
-                      Personalized Feedback After Submissions
+                      Çalışmaların ardından kişisel geri bildirim
                     </li>
                     <li class="list-group-item bg-transparent">
                       <i class="fe fe-book-open align-middle me-2 text-secondary"></i>
-                      Exam Preparation for CISA, CISM, CISSP
+                      CISA, CISM ve CISSP sınav yaklaşımı
                     </li>
                     <li class="list-group-item bg-transparent">
                       <i class="fe fe-zap align-middle me-2 text-warning"></i>
-                      Lifetime Access to All Updates
+                      Tüm güncellemelere ömür boyu erişim
                     </li>
                   </ul>
                 </div>
@@ -503,6 +503,37 @@
           </div>
         </div>
       </section>
+
+      {% if show_orientation %}
+      <div class="modal fade" id="courseOrientationModal" tabindex="-1" aria-labelledby="courseOrientationTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="courseOrientationTitle">Derse hoş geldin 👋</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+              <p>Bu eğitimden en yüksek verimi almak için şu sırayı izle:</p>
+              <ol class="mb-0 ps-4">
+                <li class="mb-2"><b>Sağ üstteki oynat düğmesinden videoyu izle.</b></li>
+                <li class="mb-2"><b>Açıklama ve Dosyalar</b> sekmesinden PDF ve ekleri indir.</li>
+                <li class="mb-2">Modülde sorular varsa hepsini çöz.</li>
+                <li>Bol bol pratik yap; öğrendiklerini gerçek denetim hikâyelerine dönüştür.</li>
+              </ol>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Anladım, başlayalım</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const orientation = document.getElementById('courseOrientationModal');
+          if (orientation) new bootstrap.Modal(orientation).show();
+        });
+      </script>
+      {% endif %}
 
     </main>
 

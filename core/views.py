@@ -229,6 +229,8 @@ def _bunny_url_passthrough(val: str | None) -> str | None:
 @never_cache
 def course_single(request, pk):
     course = get_object_or_404(Course, pk=pk)
+    enrollment = None
+    show_orientation = False
 
     # ---- ACCESS CONTROL (deep-link protection) ----
     # Determine if test
@@ -252,11 +254,16 @@ def course_single(request, pk):
             return redirect("dashboard_student")
     else:
         # videos: require enrollment (unless staff)
-        if not (request.user.is_staff or request.user.is_superuser
-                or Enrollment.objects.filter(user=request.user, course=course).exists()):
+        enrollment = Enrollment.objects.filter(user=request.user, course=course).first()
+        if not (request.user.is_staff or request.user.is_superuser or enrollment):
             messages.error(request, "Please enroll to access this course.")
             # send them to the list; you can keep the tab anchor if you like
             return redirect("dashboard_student")
+
+        if enrollment and not enrollment.orientation_seen:
+            show_orientation = True
+            enrollment.orientation_seen = True
+            enrollment.save(update_fields=["orientation_seen"])
 
     # ---- normal view rendering below (unchanged) ----
     sections_qs = course.sections.annotate(
@@ -290,6 +297,7 @@ def course_single(request, pk):
         "first_video_url": first_video_url or "",
         "is_test": is_test,
         "can_access_test": can_access_test,
+        "show_orientation": show_orientation,
     })
 
 @login_required
