@@ -100,7 +100,7 @@
   .student-navbar .fs-3{font-size:1.15rem!important}
   .student-profile-section{padding-top:1rem!important}
   .student-profile-cover{height:90px!important}
-  .student-profile-cover:after{left:18px;right:auto;bottom:12px;font-size:8px}
+  .student-profile-cover:after{left:auto;right:16px;bottom:12px;max-width:calc(100% - 112px);text-align:right;font-size:8px}
   .student-profile-card{padding-inline:1rem!important}
   .student-course-library .nav-lb-tab,.student-course-page .nav-lb-tab{flex-wrap:nowrap;overflow-x:auto}
   .student-shell .nav-lb-tab .nav-link{white-space:nowrap;font-size:.82rem;padding:.75rem .8rem}
