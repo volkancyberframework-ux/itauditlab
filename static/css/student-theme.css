@@ -47,9 +47,11 @@
 .student-course-hero{position:relative;overflow:hidden;background:radial-gradient(circle at 78% 12%,rgba(49,164,255,.35),transparent 30%),linear-gradient(135deg,#102d4a,#071522)!important;border-bottom:1px solid var(--grc-line)}
 .student-course-hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--grc-line) 1px,transparent 1px),linear-gradient(90deg,var(--grc-line) 1px,transparent 1px);background-size:60px 60px;opacity:.18}
 .student-course-hero .container{position:relative}
-.student-course-hero h1{font-size:clamp(2.25rem,5vw,4rem);line-height:1.04;letter-spacing:-.045em}
+.student-course-hero h1{font-size:clamp(2.25rem,5vw,4rem);line-height:1.04;letter-spacing:-.045em;color:#f1f7fd!important;text-shadow:0 3px 24px rgba(0,0,0,.22)}
 .student-course-hero .lead{color:#bcd0e1!important;max-width:760px}
-.student-course-hero .btn-outline-light{border-color:rgba(255,255,255,.23);background:rgba(255,255,255,.05);border-radius:12px}
+.student-course-hero .course-header-actions,.student-course-hero .course-header-actions .text-white,.student-course-hero .course-header-actions span{color:#dcebf6!important}
+.student-course-hero .btn-outline-light{border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.07);border-radius:12px;color:#f1f7fd!important}
+.student-course-hero .btn-outline-light:hover{background:#f1f7fd;color:#102337!important;border-color:#f1f7fd}
 .student-course-content .card{border-radius:18px!important;overflow:hidden}
 .student-course-content .card-header{background:rgba(2,10,18,.3);border-color:var(--grc-line)!important}
 .student-course-content .card-body,.student-course-content .list-group-item{color:#d9e7f2}
