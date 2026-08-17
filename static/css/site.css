@@ -333,11 +333,25 @@ html[data-theme="light"] .map-story blockquote span{color:#087268}
 html[data-theme="light"] .result-icon{color:#087268;border-color:#087268}
 html[data-theme="light"] .footer-links a:hover{color:#075f9f}
 
+/* Mobile navigation and presentation refinements */
+.footer-login{align-self:flex-start;width:auto;display:inline-flex}
+html[data-theme="light"] .menu{background:#fff;color:#173047;border-color:#244d6940}
+
 @media(max-width:700px){
   .price-card>form.price{padding:27px}
   .footer-bottom div{flex-wrap:wrap}
   .hero-grid>*{min-width:0}
   .hero-logo{width:min(340px,100%);max-width:100%}
+  .hero-side{min-height:0;flex-direction:column;padding:12px 0 22px}
+  .badges{position:relative;right:auto;bottom:auto;width:min(238px,92%);margin:0 auto;padding:9px;grid-template-columns:42px 42px 1fr;border-radius:13px}
+  .badges img{width:38px}
+  .badges p{font-size:9px;line-height:1.35;margin-left:5px}
+  .login-btn{order:2;margin-left:auto}
+  .menu{order:3;margin-left:0}
+  .theme-toggle{order:4}
+  .footer-login{padding:7px 12px}
+  .audit-map-shell{height:340px}
+  .audit-map{width:100%;height:100%;transform:scale(1.45);transform-origin:51% 48%}
   .nav-glow{left:12px;width:calc(100vw - 24px)}
 }
 @media(max-width:420px){
