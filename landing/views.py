@@ -67,7 +67,7 @@ def create_checkout(request):
             cancel_url=request.build_absolute_uri(reverse('landing:home') + '?payment=cancel#fiyat'),
         )
     except Exception:
-        return JsonResponse({'ok': False, 'message': 'Ödeme şu anda başlatılamadı. Lütfen destek@grcustasi.co adresine yazın.'}, status=502)
+        return JsonResponse({'ok': False, 'message': 'Ödeme şu anda başlatılamadı. Lütfen volkan@grcustasi.com adresine yazın.'}, status=502)
     return redirect(session.url, permanent=False)
 
 
@@ -87,6 +87,11 @@ def save_assessment(request):
     allowed = ('residence_type','region','age_over_45','eligibility_awareness','career_clarity','opportunity_awareness','effort_awareness','english_awareness','weekly_time','ethics_commitment','assessment_completed')
     incoming = {key: request.POST.get(key) for key in allowed if key in request.POST}
     session = AssessmentSession.objects.filter(email=email).first()
+    if request.POST.get('initial_capture') == 'true' and session:
+        return JsonResponse({
+            'ok': False,
+            'message': 'Bu e-posta adresiyle daha önce kariyer pusulasına başlanmış. Aynı e-posta ile yeniden değerlendirme başlatamazsın.',
+        }, status=409)
     answers = dict(session.answers) if session else {}
     answers.update(incoming)
     discount = AssessmentSession.discount_for(profile)

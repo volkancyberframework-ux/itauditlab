@@ -8,6 +8,11 @@ class LeadForm(forms.ModelForm):
         fields = ['name','email','whatsapp','profile_type','english_awareness','weekly_time','age_over_45','existing_it_experience','eligibility_awareness','career_clarity','opportunity_awareness','effort_awareness','ethics_commitment','residence_type','region','consent']
 
     def clean_email(self): return self.cleaned_data['email'].strip().lower()
+    def clean_whatsapp(self):
+        value = self.cleaned_data.get('whatsapp', '').strip()
+        if not value:
+            raise forms.ValidationError('Sonucunu görmek için WhatsApp kullandığın telefon numaranı yaz.')
+        return value
 
 
 class WaitingListForm(forms.ModelForm):

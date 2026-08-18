@@ -366,3 +366,6 @@ html[data-theme="light"] .menu{background:#fff;color:#173047;border-color:#244d6
   .footer-brand .brand img{width:62px;height:62px}
   .footer-bottom div{gap:12px}
 }
+
+.warning-continue{display:inline-flex;margin-left:8px;padding:5px 9px;border:1px solid #e8bd5b66;border-radius:8px;background:#e8bd5b14;color:var(--gold);font-weight:800;cursor:pointer}
+.warning-continue:hover{background:#e8bd5b24}

@@ -8,7 +8,7 @@ from .models import AssessmentSession, Certificate, Lead
 @override_settings(STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage')
 class LandingTests(TestCase):
     def lead_data(self):
-        return {'name':'Ada','email':'ada@example.com','profile_type':'student','english_awareness':'true','weekly_time':'true','age_over_45':'false','existing_it_experience':'false','eligibility_awareness':'true','career_clarity':'true','opportunity_awareness':'true','effort_awareness':'true','ethics_commitment':'true'}
+        return {'name':'Ada','email':'ada@example.com','whatsapp':'+90 555 000 00 00','profile_type':'student','english_awareness':'true','weekly_time':'true','age_over_45':'false','existing_it_experience':'false','eligibility_awareness':'true','career_clarity':'true','opportunity_awareness':'true','effort_awareness':'true','ethics_commitment':'true'}
     def test_home(self):
         response = self.client.get('/')
         self.assertContains(response, 'Sen hangi aşamadasın?', status_code=200)
@@ -36,7 +36,8 @@ class LandingTests(TestCase):
         self.assertContains(response, '132 kişilik topluluğa ücretsiz erişim')
         self.assertContains(response, 'Ki&#351;iyle birebir ment&#246;rl&#252;k')
         self.assertContains(response, 'Program mezunu')
-        self.assertContains(response, 'Bu test adli sicil bilgisi toplamaz')
+        self.assertContains(response, 'Adli sicil kaydın varsa bu sektörde iş bulmanın')
+        self.assertContains(response, 'siber güvenlik de güven işidir')
         self.assertContains(response, "GRC USTASI'NIN FARKI")
         self.assertContains(response, 'Katılımcılarımız, resmî kaynakları')
         self.assertContains(response, 'Kubernetes')
@@ -48,7 +49,8 @@ class LandingTests(TestCase):
         self.assertContains(response, 'Bart Preneel ile akademik çalışmalar')
         self.assertContains(response, 'İlgili kurumların GRC Ustası programını desteklediği')
         self.assertContains(response, f'href="{reverse("login")}"')
-        self.assertContains(response, 'destek@grcustasi.co')
+        self.assertContains(response, 'volkan@grcustasi.com')
+        self.assertNotContains(response, 'destek@grcustasi.co')
         self.assertContains(response, reverse('landing:checkout'))
         self.assertNotContains(response, 'info@grcmastery.com')
         self.assertNotContains(response, 'Öğrenci girişi yakında')
@@ -132,6 +134,18 @@ class LandingTests(TestCase):
             self.client.post(reverse('landing:save_assessment'), payload)
             self.client.post(reverse('landing:save_assessment'), payload | {'career_clarity': 'true'})
         notify.assert_called_once()
+
+    def test_same_email_cannot_start_career_compass_twice(self):
+        payload = {
+            'email': 'duplicate-compass@example.com',
+            'profile_type': 'working',
+            'initial_capture': 'true',
+        }
+        first = self.client.post(reverse('landing:save_assessment'), payload)
+        second = self.client.post(reverse('landing:save_assessment'), payload)
+        self.assertEqual(first.status_code, 200)
+        self.assertEqual(second.status_code, 409)
+        self.assertIn('daha önce kariyer pusulasına başlanmış', second.json()['message'])
 
     def test_whatsapp_submission_notifies_telegram(self):
         payload = {
