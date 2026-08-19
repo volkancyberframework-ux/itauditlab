@@ -369,3 +369,38 @@ html[data-theme="light"] .menu{background:#fff;color:#173047;border-color:#244d6
 
 .warning-continue{display:inline-flex;margin-left:8px;padding:5px 9px;border:1px solid #e8bd5b66;border-radius:8px;background:#e8bd5b14;color:var(--gold);font-weight:800;cursor:pointer}
 .warning-continue:hover{background:#e8bd5b24}
+
+/* Küresel düzenleme dalgası */
+.regulation-wave{position:relative;overflow:hidden;background:radial-gradient(circle at 15% 20%,#174e7838,transparent 32%),linear-gradient(180deg,#071521,#091a2a)}
+.regulation-wave:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#55baff0b 1px,transparent 1px),linear-gradient(90deg,#55baff0b 1px,transparent 1px);background-size:72px 72px;pointer-events:none}
+.regulation-wave>.wrap{position:relative}
+.regulation-intro{display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:end;margin-bottom:34px}
+.regulation-intro h2{margin-bottom:0}
+.regulation-intro>p{color:#a5bacb;font-size:16px;line-height:1.7;margin:0}
+.regulation-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.regulation-card{display:flex;flex-direction:column;min-height:330px;padding:25px;border:1px solid #4aaeff2d;border-radius:19px;background:linear-gradient(145deg,#10273d,#091624);box-shadow:0 20px 55px #0002}
+.regulation-card.turkey{border-color:#e8bd5b55;background:linear-gradient(145deg,#2b271c,#0d1a27)}
+.regulation-card.penalty-card{border-color:#ff8a6644}
+.regulation-card>span{color:#67c1ff;font:900 10px/1.4 monospace;letter-spacing:.08em}
+.regulation-card.turkey>span{color:var(--gold)}
+.regulation-card h3{font-size:21px;line-height:1.2;margin:14px 0 11px}
+.regulation-card p{color:#9db1c2;font-size:13px;line-height:1.6;margin:0 0 18px}
+.regulation-card a{color:#54b9ff;font-size:11px;font-weight:850;margin-top:auto}
+.source-links{display:grid;gap:7px;margin-top:auto}
+.source-links a{margin:0}
+.regulation-outcome{display:grid;grid-template-columns:.8fr 1.45fr auto;gap:28px;align-items:center;margin-top:15px;padding:25px 28px;border:1px solid #5fe5d33b;border-radius:18px;background:linear-gradient(115deg,#0d2a37,#0b1b2b)}
+.regulation-outcome span{display:block;color:var(--cyan);font:900 10px monospace;letter-spacing:.14em;margin-bottom:8px}
+.regulation-outcome b{font-size:14px;line-height:1.6}
+.regulation-outcome h3{font-size:24px;margin:0 0 6px}
+.regulation-outcome p{color:#9cb1c2;font-size:13px;line-height:1.55;margin:0}
+.regulation-outcome .btn{white-space:nowrap}
+.regulation-wave .not-pentest{margin-top:15px}
+.regulation-note{color:#6f8aa0;font-size:10px;text-align:center;margin:18px 0 0}
+html[data-theme="light"] .regulation-wave{background:radial-gradient(circle at 15% 20%,#70c5ff2b,transparent 32%),#edf4f9}
+html[data-theme="light"] .regulation-intro>p,html[data-theme="light"] .regulation-card p,html[data-theme="light"] .regulation-outcome p{color:#526b7f}
+html[data-theme="light"] .regulation-card{background:#fffffff0;box-shadow:0 14px 38px #173b5812}
+html[data-theme="light"] .regulation-card.turkey{background:#fffaf0}
+html[data-theme="light"] .regulation-outcome{background:#ffffffd9}
+html[data-theme="light"] .regulation-note{color:#607c92}
+@media(max-width:1050px){.regulation-grid{grid-template-columns:1fr 1fr}.regulation-card{min-height:0}.regulation-outcome{grid-template-columns:1fr 1.4fr}.regulation-outcome .btn{grid-column:1/-1;justify-self:start}}
+@media(max-width:700px){.regulation-intro,.regulation-grid,.regulation-outcome{grid-template-columns:1fr}.regulation-intro{gap:18px;margin-bottom:25px}.regulation-card{padding:21px}.regulation-outcome{gap:18px;padding:22px}.regulation-outcome .btn{grid-column:auto;width:100%;white-space:normal;text-align:center}.regulation-wave:before{background-size:44px 44px}}
