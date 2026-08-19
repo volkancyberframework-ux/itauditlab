@@ -404,3 +404,35 @@ html[data-theme="light"] .regulation-outcome{background:#ffffffd9}
 html[data-theme="light"] .regulation-note{color:#607c92}
 @media(max-width:1050px){.regulation-grid{grid-template-columns:1fr 1fr}.regulation-card{min-height:0}.regulation-outcome{grid-template-columns:1fr 1.4fr}.regulation-outcome .btn{grid-column:1/-1;justify-self:start}}
 @media(max-width:700px){.regulation-intro,.regulation-grid,.regulation-outcome{grid-template-columns:1fr}.regulation-intro{gap:18px;margin-bottom:25px}.regulation-card{padding:21px}.regulation-outcome{gap:18px;padding:22px}.regulation-outcome .btn{grid-column:auto;width:100%;white-space:normal;text-align:center}.regulation-wave:before{background-size:44px 44px}}
+
+/* Kahraman alanındaki kariyer pusulası */
+.career-compass{isolation:isolate;grid-template-columns:92px 1fr 1.15fr;gap:24px;margin-top:34px;padding:25px 27px;border-radius:24px 24px 0 0;border-color:#52baff55;background:linear-gradient(125deg,#0c263e,#0a1726 58%,#10283e);box-shadow:0 -16px 70px #1a9cf018,inset 0 1px #ffffff0b}
+.career-compass:before{content:"";position:absolute;z-index:-1;width:250px;height:250px;right:20%;top:-140px;border-radius:50%;background:#229df325;filter:blur(55px);animation:compass-glow 4s ease-in-out infinite}
+.compass-mark{position:relative;display:grid;place-items:center;width:82px;height:82px;border:1px solid #5dc8ff55;border-radius:50%;background:radial-gradient(circle,#102e47 42%,#071522 43%);box-shadow:0 0 35px #259ffc29}
+.compass-mark:before,.compass-mark:after{content:"";position:absolute;background:#6acaff55}
+.compass-mark:before{width:1px;height:105%}.compass-mark:after{width:105%;height:1px}
+.compass-mark i{position:absolute;width:48px;height:48px;border:1px dashed #59c3ff88;border-radius:50%;animation:compass-spin 8s linear infinite}
+.compass-mark span{z-index:1;color:var(--cyan);font-size:34px;line-height:1;transform:rotate(-32deg);text-shadow:0 0 18px #63e6d3}
+.compass-copy h2{font-size:clamp(28px,3vw,40px);margin:8px 0 7px}
+.compass-copy>p{max-width:550px;color:#a9becf;font-size:13px;line-height:1.55;margin-bottom:15px}
+.compass-copy>small{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:#758fa5;font-size:9px;font-weight:700}
+.compass-copy>small b{color:#5fc2ff;font:900 9px monospace}
+.compass-copy>small i{width:18px;height:1px;background:#426782}
+.compass-action{padding:17px;border:1px solid #ffffff0d;border-radius:17px;background:#06131fb8}
+.compass-action>strong{display:block;margin:0 0 11px;color:#c6d7e5;font-size:11px}
+.compass-action .profile-picks button{align-items:center;gap:7px;padding:13px 12px;background:#ffffff07;transition:transform .2s,border-color .2s,background .2s}
+.compass-action .profile-picks button:hover{transform:translateY(-3px);background:#159df118}
+.compass-action .profile-picks button>span{font-size:17px}
+.compass-action .profile-picks button>b{margin-left:auto;color:#60c3ff}
+.compass-action>em{display:flex;align-items:center;gap:6px;margin-top:10px;color:#6f899f;font-size:9px;font-style:normal}
+.compass-action>em i{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:live-pulse 1.5s infinite}
+html[data-theme="light"] .career-compass{background:linear-gradient(125deg,#fff,#f4f9fc);border-color:#2386c948}
+html[data-theme="light"] .compass-mark{background:radial-gradient(circle,#fff 42%,#dcecf6 43%)}
+html[data-theme="light"] .compass-copy>p{color:#526b7f}
+html[data-theme="light"] .compass-copy>small{color:#617b8f}
+html[data-theme="light"] .compass-action{background:#edf5fad9;border-color:#276b9830}
+html[data-theme="light"] .compass-action>strong{color:#27465f}
+@keyframes compass-spin{to{transform:rotate(360deg)}}
+@keyframes compass-glow{50%{opacity:.45;transform:translateY(12px)}}
+@media(max-width:950px){.career-compass{grid-template-columns:74px 1fr}.compass-mark{width:68px;height:68px}.compass-action{grid-column:1/-1}.compass-action .profile-picks{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.career-compass{grid-template-columns:1fr;gap:15px;margin-top:26px;padding:20px 16px}.compass-mark{width:60px;height:60px}.compass-mark i{width:37px;height:37px}.compass-mark span{font-size:27px}.compass-copy h2{font-size:29px}.compass-copy>small{gap:6px}.compass-action{padding:13px}.compass-action .profile-picks{grid-template-columns:1fr}.compass-action .profile-picks button{padding:12px}.compass-action>em{justify-content:center}}

@@ -11,7 +11,10 @@ class LandingTests(TestCase):
         return {'name':'Ada','email':'ada@example.com','whatsapp':'+90 555 000 00 00','profile_type':'student','english_awareness':'true','weekly_time':'true','age_over_45':'false','existing_it_experience':'false','eligibility_awareness':'true','career_clarity':'true','opportunity_awareness':'true','effort_awareness':'true','ethics_commitment':'true'}
     def test_home(self):
         response = self.client.get('/')
-        self.assertContains(response, 'Sen hangi aşamadasın?', status_code=200)
+        self.assertContains(response, 'Bu alan sana ne kadar uygun?', status_code=200)
+        self.assertContains(response, 'İlk seçimini yap; sonucunu iki dakikada gör.')
+        self.assertContains(response, 'NovaBank, ExertaBank ve Zeugma Sigorta gibi gerçekçi senaryolar')
+        self.assertNotContains(response, 'diğer eğitim şirketlerinin')
         self.assertContains(response, '80 saatte temelden gerçek denetim hikâyesine')
         self.assertContains(response, 'AWS IAM Yetki Dağınıklığı')
         self.assertContains(response, 'ExertaBank')
