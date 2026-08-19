@@ -69,6 +69,21 @@ class WaitingList(models.Model):
     def __str__(self): return self.email
 
 
+class NewsletterSubscriber(models.Model):
+    email = models.EmailField('E-posta', unique=True)
+    consent = models.BooleanField('Bülten izni', default=True)
+    discount_percent = models.PositiveSmallIntegerField('İndirim oranı', default=5)
+    is_active = models.BooleanField('Aktif', default=True)
+    created_at = models.DateTimeField('Kayıt tarihi', auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Bülten abonesi'
+        verbose_name_plural = 'Bülten aboneleri'
+
+    def __str__(self): return self.email
+
+
 class JobMarketCount(models.Model):
     country = models.CharField('Ülke', max_length=60, unique=True)
     flag = models.CharField('Bayrak', max_length=8, blank=True)

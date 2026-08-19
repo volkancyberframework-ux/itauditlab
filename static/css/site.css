@@ -436,3 +436,28 @@ html[data-theme="light"] .compass-action>strong{color:#27465f}
 @keyframes compass-glow{50%{opacity:.45;transform:translateY(12px)}}
 @media(max-width:950px){.career-compass{grid-template-columns:74px 1fr}.compass-mark{width:68px;height:68px}.compass-action{grid-column:1/-1}.compass-action .profile-picks{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:600px){.career-compass{grid-template-columns:1fr;gap:15px;margin-top:26px;padding:20px 16px}.compass-mark{width:60px;height:60px}.compass-mark i{width:37px;height:37px}.compass-mark span{font-size:27px}.compass-copy h2{font-size:29px}.compass-copy>small{gap:6px}.compass-action{padding:13px}.compass-action .profile-picks{grid-template-columns:1fr}.compass-action .profile-picks button{padding:12px}.compass-action>em{justify-content:center}}
+
+/* İlk ziyaret bülten penceresi */
+.newsletter-modal{width:min(640px,calc(100% - 24px));padding:0;border:0;border-radius:26px;background:transparent;color:#fff;overflow:visible}
+.newsletter-modal::backdrop{background:#010811d9;backdrop-filter:blur(10px)}
+.newsletter-modal[open]{animation:modal-in .4s cubic-bezier(.2,.8,.2,1)}
+.newsletter-shell{position:relative;overflow:hidden;padding:31px;border:1px solid #52baff55;border-radius:26px;background:radial-gradient(circle at 85% 10%,#219df338,transparent 35%),linear-gradient(145deg,#102942,#07131f);box-shadow:0 35px 110px #000c}
+.newsletter-shell:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#52baff0b 1px,transparent 1px),linear-gradient(90deg,#52baff0b 1px,transparent 1px);background-size:45px 45px;pointer-events:none}
+.newsletter-close{position:absolute;z-index:2;right:15px;top:12px;border:0;background:none;color:#8fa7ba;font-size:28px;cursor:pointer}
+.newsletter-brand{position:relative;display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.newsletter-brand img{width:70px;height:70px;object-fit:contain;filter:drop-shadow(0 12px 20px #0006)}
+.newsletter-brand>span{display:grid;line-height:1.05}.newsletter-brand b{font-size:21px}.newsletter-brand em{color:var(--gold);font-style:normal}.newsletter-brand small{margin-top:6px;color:#7893aa;font-size:8px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.newsletter-offer,.newsletter-success{position:relative}
+.newsletter-offer h2,.newsletter-success h2{font-size:clamp(31px,5vw,48px);margin:12px 0}
+.newsletter-offer>p,.newsletter-success>p{color:#a6bacb;font-size:14px}
+.newsletter-offer form{display:grid;gap:13px;margin-top:21px}
+.newsletter-offer input[type="email"]{font-size:16px;padding:14px}
+.newsletter-consent{font-size:10px;line-height:1.45;color:#839baf;margin:0}
+.newsletter-offer .btn{width:100%}
+.newsletter-success{text-align:center;padding:25px 5px 15px}
+.newsletter-success>span{display:grid;place-items:center;width:64px;height:64px;margin:auto;border:1px solid var(--cyan);border-radius:50%;color:var(--cyan);font-size:29px;box-shadow:0 0 30px #63e6d326}
+.newsletter-success .btn{margin-top:10px}
+html[data-theme="light"] .newsletter-shell{background:radial-gradient(circle at 85% 10%,#55baff30,transparent 35%),#f9fcfe;color:#142c40;box-shadow:0 35px 110px #173b5840}
+html[data-theme="light"] .newsletter-offer>p,html[data-theme="light"] .newsletter-success>p{color:#526b7f}
+html[data-theme="light"] .newsletter-consent{color:#587085}
+@media(max-width:600px){.newsletter-shell{padding:23px 17px}.newsletter-brand img{width:58px;height:58px}.newsletter-brand b{font-size:18px}.newsletter-offer h2,.newsletter-success h2{font-size:31px}.newsletter-success .btn{width:100%;font-size:13px}}

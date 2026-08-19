@@ -3,7 +3,7 @@ from unittest.mock import patch
 from django.contrib.auth import get_user_model
 from django.test import TestCase, override_settings
 from django.urls import resolve, reverse
-from .models import AssessmentSession, Certificate, Lead
+from .models import AssessmentSession, Certificate, Lead, NewsletterSubscriber
 
 @override_settings(STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage')
 class LandingTests(TestCase):
@@ -61,6 +61,8 @@ class LandingTests(TestCase):
         self.assertContains(response, 'İlgili kurumların GRC Ustası programını desteklediği')
         self.assertContains(response, f'href="{reverse("login")}"')
         self.assertContains(response, 'volkan@grcustasi.com')
+        self.assertContains(response, 'Tüm programlarda %5 indirim kazan.')
+        self.assertContains(response, reverse('landing:newsletter'))
         self.assertNotContains(response, 'destek@grcustasi.co')
         self.assertContains(response, reverse('landing:checkout'))
         self.assertNotContains(response, 'info@grcmastery.com')
@@ -212,6 +214,24 @@ class LandingTests(TestCase):
         self.assertEqual(len(CURRICULUM), 8)
         self.assertEqual(sum(module['hours'] for module in CURRICULUM), 80)
         self.assertEqual(CURRICULUM_STATS['hours'], 80)
+
+    def test_newsletter_subscription_is_saved_once(self):
+        url = reverse('landing:newsletter')
+        first = self.client.post(url, {'email': 'NEWS@example.com', 'consent': 'true'})
+        self.assertEqual(first.status_code, 200)
+        self.assertTrue(first.json()['created'])
+        subscriber = NewsletterSubscriber.objects.get()
+        self.assertEqual(subscriber.email, 'news@example.com')
+        self.assertEqual(subscriber.discount_percent, 5)
+        second = self.client.post(url, {'email': 'news@example.com', 'consent': 'true'})
+        self.assertEqual(second.status_code, 200)
+        self.assertFalse(second.json()['created'])
+        self.assertEqual(NewsletterSubscriber.objects.count(), 1)
+
+    def test_newsletter_requires_valid_email_and_consent(self):
+        url = reverse('landing:newsletter')
+        self.assertEqual(self.client.post(url, {'email': 'yanlis', 'consent': 'true'}).status_code, 400)
+        self.assertEqual(self.client.post(url, {'email': 'valid@example.com'}).status_code, 400)
     def test_lead_score_and_duplicate(self):
         self.assertEqual(self.client.post(reverse('landing:submit_lead'), self.lead_data()).status_code, 200)
         lead = Lead.objects.get()

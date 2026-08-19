@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import AssessmentSession, Certificate, JobMarketCount, Lead, SiteSetting, WaitingList
+from .models import AssessmentSession, Certificate, JobMarketCount, Lead, NewsletterSubscriber, SiteSetting, WaitingList
 
 
 @admin.register(AssessmentSession)
@@ -20,6 +20,13 @@ class LeadAdmin(admin.ModelAdmin):
 @admin.register(WaitingList)
 class WaitingListAdmin(admin.ModelAdmin):
     list_display = ('name','email','whatsapp','created_at'); search_fields = ('name','email','whatsapp')
+
+@admin.register(NewsletterSubscriber)
+class NewsletterSubscriberAdmin(admin.ModelAdmin):
+    list_display = ('email','discount_percent','consent','is_active','created_at')
+    list_filter = ('consent','is_active','created_at')
+    search_fields = ('email',)
+    readonly_fields = ('created_at',)
 
 @admin.register(JobMarketCount)
 class JobMarketAdmin(admin.ModelAdmin):

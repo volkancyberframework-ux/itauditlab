@@ -8,7 +8,7 @@ from django.views.decorators.http import require_POST
 import logging
 import requests
 from .forms import LeadForm, WaitingListForm
-from .models import AssessmentSession, Certificate, JobMarketCount, SiteSetting
+from .models import AssessmentSession, Certificate, JobMarketCount, NewsletterSubscriber, SiteSetting
 from .curriculum import CURRICULUM, CURRICULUM_STATS
 
 logger = logging.getLogger(__name__)
@@ -156,6 +156,33 @@ def join_waiting_list(request):
     try: form.save()
     except IntegrityError: return JsonResponse({'ok': False, 'message': 'Bu e-posta zaten listede.'}, status=409)
     return JsonResponse({'ok': True, 'message': 'Harika, yeni grup açıldığında sana haber vereceğiz.'})
+
+
+@require_POST
+def subscribe_newsletter(request):
+    from django.core.exceptions import ValidationError
+    from django.core.validators import validate_email
+    email = request.POST.get('email', '').strip().lower()
+    consent = request.POST.get('consent') == 'true'
+    try:
+        validate_email(email)
+    except ValidationError:
+        return JsonResponse({'ok': False, 'message': 'Geçerli bir e-posta adresi yaz.'}, status=400)
+    if not consent:
+        return JsonResponse({'ok': False, 'message': 'Bülten kaydı için iletişim iznini onaylamalısın.'}, status=400)
+    subscriber, created = NewsletterSubscriber.objects.get_or_create(
+        email=email,
+        defaults={'consent': True, 'discount_percent': 5, 'is_active': True},
+    )
+    if not created and not subscriber.is_active:
+        subscriber.is_active = True
+        subscriber.consent = True
+        subscriber.save(update_fields=['is_active', 'consent'])
+    return JsonResponse({
+        'ok': True,
+        'created': created,
+        'message': 'Bülten kaydın tamamlandı. Tüm programlarda geçerli %5 ayrıcalığını kullanmak için volkan@grcustasi.com adresine e-posta gönder.',
+    })
 
 
 def verify_certificate(request):

@@ -56,4 +56,24 @@ if(auditMapRoot){
 }
 const readiness=$('.payment-readiness'),paymentAction=$('.payment-action');
 if(readiness&&paymentAction){const checks=$$('input[type="checkbox"]',readiness),sync=()=>{const ready=checks.every(input=>input.checked);paymentAction.classList.toggle('ready',ready);paymentAction.setAttribute('aria-disabled',String(!ready))};checks.forEach(input=>input.addEventListener('change',sync));paymentAction.addEventListener('click',event=>{if(paymentAction.getAttribute('aria-disabled')==='true')event.preventDefault()});sync()}
+const newsletterModal=$('#newsletter-modal'),newsletterForm=$('form[data-newsletter-url]',newsletterModal);
+if(newsletterModal&&newsletterForm){
+  const newsletterSeen='grc-newsletter-seen-v1';
+  const quizAutoOpen=quiz?.dataset.autoOpen==='true';
+  const closeNewsletter=()=>{localStorage.setItem(newsletterSeen,'true');newsletterModal.close()};
+  $('.newsletter-close',newsletterModal)?.addEventListener('click',closeNewsletter);
+  newsletterModal.addEventListener('click',event=>{if(event.target===newsletterModal)closeNewsletter()});
+  newsletterModal.addEventListener('cancel',event=>{event.preventDefault();closeNewsletter()});
+  newsletterForm.addEventListener('submit',async event=>{
+    event.preventDefault();
+    const error=$('.newsletter-error',newsletterModal),button=$('button[type="submit"]',newsletterForm);
+    error.textContent='';
+    if(!newsletterForm.reportValidity())return;
+    button.disabled=true;
+    const data=new FormData(newsletterForm);data.set('consent','true');
+    try{const response=await fetch(newsletterForm.dataset.newsletterUrl,{method:'POST',body:data,headers:{'X-Requested-With':'XMLHttpRequest'}}),json=await response.json();if(!response.ok)throw json;newsletterForm.closest('.newsletter-offer').hidden=true;$('.newsletter-brand',newsletterModal).hidden=true;$('.newsletter-success',newsletterModal).hidden=false;localStorage.setItem(newsletterSeen,'true')}
+    catch(json){error.textContent=json.message||'Kayıt tamamlanamadı. Lütfen yeniden dene.';button.disabled=false}
+  });
+  if(!quizAutoOpen&&!localStorage.getItem(newsletterSeen))setTimeout(()=>{if(!modal?.open)newsletterModal.showModal()},1400);
+}
 })();
