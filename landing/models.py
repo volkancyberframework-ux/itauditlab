@@ -1,4 +1,57 @@
 from django.db import models
+
+
+class LandingVisit(models.Model):
+    visitor_hash = models.CharField('Anonim ziyaretçi özeti', max_length=64, db_index=True)
+    visit_date = models.DateField('Ziyaret günü', db_index=True)
+    first_path = models.CharField('İlk sayfa', max_length=255, default='/')
+    page_views = models.PositiveIntegerField('Sayfa görüntüleme', default=1)
+    is_returning = models.BooleanField('Geri dönen ziyaretçi', default=False)
+    first_seen = models.DateTimeField('İlk görülme', auto_now_add=True)
+    last_seen = models.DateTimeField('Son görülme', auto_now=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=('visitor_hash', 'visit_date'),
+                name='unique_landing_visitor_per_day',
+            ),
+        ]
+        ordering = ('-visit_date', '-last_seen')
+        verbose_name = 'Günlük tekil ziyaretçi'
+        verbose_name_plural = 'Günlük tekil ziyaretçiler'
+
+    def __str__(self):
+        return f'{self.visit_date} — {self.visitor_hash[:10]}'
+
+
+class DailyTrafficMetric(models.Model):
+    date = models.DateField('Gün', unique=True)
+    page_views = models.PositiveIntegerField('Sayfa görüntüleme', default=0)
+    filtered_bot_requests = models.PositiveIntegerField('Filtrelenen bot isteği', default=0)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('-date',)
+        verbose_name = 'Günlük trafik özeti'
+        verbose_name_plural = 'Günlük trafik özetleri'
+
+    def __str__(self):
+        return str(self.date)
+
+
+class DailyTrafficReport(models.Model):
+    report_date = models.DateField('Rapor günü', unique=True)
+    sent_at = models.DateTimeField('Gönderilme zamanı', auto_now_add=True)
+
+    class Meta:
+        ordering = ('-report_date',)
+        verbose_name = 'Telegram trafik raporu'
+        verbose_name_plural = 'Telegram trafik raporları'
+
+    def __str__(self):
+        return str(self.report_date)
+
 class AssessmentSession(models.Model):
     PROFILE_CHOICES = [('student', 'Üniversite öğrencisi'), ('graduate', 'Yeni mezun'), ('working', 'Çalışıyor')]
     email = models.EmailField('E-posta', unique=True)

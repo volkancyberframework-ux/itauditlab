@@ -2,13 +2,16 @@ from django.conf import settings as django_settings
 from django.db import IntegrityError
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
+from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import reverse
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 import logging
+from datetime import timedelta
 import requests
 from .forms import LeadForm, WaitingListForm
 from .models import AssessmentSession, Certificate, JobMarketCount, NewsletterSubscriber, SiteSetting
+from .traffic import period_page_views, period_unique_visitors, traffic_stats
 from .curriculum import CURRICULUM, CURRICULUM_STATS
 
 logger = logging.getLogger(__name__)
@@ -36,6 +39,24 @@ def home(request):
         'site': site, 'payment_url': payment_url, 'jobs': JobMarketCount.objects.all(),
         'curriculum': CURRICULUM, 'curriculum_stats': CURRICULUM_STATS,
         'open_assessment': request.path.rstrip('/').endswith('kariyer-pusulasi'),
+    })
+
+
+@staff_member_required
+def traffic_dashboard(request):
+    today = timezone.localdate()
+    yesterday = today - timedelta(days=1)
+    daily = [traffic_stats(today - timedelta(days=offset)) for offset in range(13, -1, -1)]
+    maximum = max((item['unique_visitors'] for item in daily), default=1) or 1
+    for item in daily:
+        item['bar_percent'] = max(3, round(item['unique_visitors'] / maximum * 100)) if item['unique_visitors'] else 0
+    return render(request, 'landing/traffic_dashboard.html', {
+        'today_stats': traffic_stats(today),
+        'yesterday_stats': traffic_stats(yesterday),
+        'seven_day_unique': period_unique_visitors(today - timedelta(days=6), today),
+        'thirty_day_unique': period_unique_visitors(today - timedelta(days=29), today),
+        'seven_day_views': period_page_views(today - timedelta(days=6), today),
+        'daily': daily,
     })
 
 

@@ -6,6 +6,7 @@ from core.program_automation import (
     run_daily_programs,
     send_daily_report_email,
 )
+from landing.traffic import send_daily_traffic_report
 
 
 class Command(BaseCommand):
@@ -39,5 +40,11 @@ class Command(BaseCommand):
         self.stdout.write(summary)
         notify_telegram(summary)
         send_daily_report_email(summary, run_date)
+        try:
+            sent = send_daily_traffic_report(run_date - timezone.timedelta(days=1))
+            self.stdout.write('Günlük trafik raporu gönderildi.' if sent else 'Günlük trafik raporu zaten gönderilmiş.')
+        except Exception as exc:
+            # Eğitim erişim otomasyonunu trafik raporundaki geçici bir sorun yüzünden durdurma.
+            self.stderr.write(self.style.WARNING(f'Trafik raporu gönderilemedi: {exc}'))
         if stats["failed"]:
             raise RuntimeError(f"{stats['failed']} öğrenci için mail gönderilemedi")

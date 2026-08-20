@@ -1,5 +1,31 @@
 from django.contrib import admin
-from .models import AssessmentSession, Certificate, JobMarketCount, Lead, NewsletterSubscriber, SiteSetting, WaitingList
+from .models import (
+    AssessmentSession, Certificate, DailyTrafficMetric, DailyTrafficReport,
+    JobMarketCount, LandingVisit, Lead, NewsletterSubscriber, SiteSetting, WaitingList,
+)
+
+
+@admin.register(LandingVisit)
+class LandingVisitAdmin(admin.ModelAdmin):
+    list_display = ('visit_date', 'short_visitor', 'page_views', 'is_returning', 'first_path', 'last_seen')
+    list_filter = ('visit_date', 'is_returning', 'first_path')
+    readonly_fields = ('visitor_hash', 'visit_date', 'first_path', 'page_views', 'is_returning', 'first_seen', 'last_seen')
+
+    @admin.display(description='Anonim ziyaretçi')
+    def short_visitor(self, obj):
+        return obj.visitor_hash[:12]
+
+
+@admin.register(DailyTrafficMetric)
+class DailyTrafficMetricAdmin(admin.ModelAdmin):
+    list_display = ('date', 'page_views', 'filtered_bot_requests', 'updated_at')
+    readonly_fields = ('date', 'page_views', 'filtered_bot_requests', 'updated_at')
+
+
+@admin.register(DailyTrafficReport)
+class DailyTrafficReportAdmin(admin.ModelAdmin):
+    list_display = ('report_date', 'sent_at')
+    readonly_fields = ('report_date', 'sent_at')
 
 
 @admin.register(AssessmentSession)

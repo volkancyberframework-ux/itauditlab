@@ -1,9 +1,13 @@
-from datetime import date
+from datetime import date, timedelta
 from unittest.mock import patch
 from django.contrib.auth import get_user_model
 from django.test import TestCase, override_settings
 from django.urls import resolve, reverse
-from .models import AssessmentSession, Certificate, Lead, NewsletterSubscriber
+from django.utils import timezone
+from .models import (
+    AssessmentSession, Certificate, DailyTrafficMetric, DailyTrafficReport,
+    LandingVisit, Lead, NewsletterSubscriber,
+)
 
 @override_settings(STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage')
 class LandingTests(TestCase):
@@ -279,3 +283,59 @@ class LandingTests(TestCase):
         Certificate.objects.create(certificate_id='GRC-1', participant_name='Ada Lovelace', issue_date=date(2026,1,1))
         data = self.client.get(reverse('landing:verify_certificate'), {'certificate_id':'GRC-1'}).json()
         self.assertEqual(data['participant'], 'Ada L.'); self.assertNotIn('Lovelace', str(data))
+
+
+@override_settings(STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage')
+class TrafficTrackingTests(TestCase):
+    browser_headers = {'HTTP_USER_AGENT': 'Mozilla/5.0 Safari/605.1.15'}
+
+    def test_same_browser_counts_once_per_day_and_increments_page_views(self):
+        self.client.get('/', **self.browser_headers)
+        self.client.get('/', **self.browser_headers)
+        self.assertEqual(LandingVisit.objects.count(), 1)
+        self.assertEqual(LandingVisit.objects.get().page_views, 2)
+        self.assertEqual(DailyTrafficMetric.objects.get().page_views, 2)
+        self.assertIn('grc_vid', self.client.cookies)
+
+    def test_different_browsers_count_as_two_unique_visitors(self):
+        self.client.get('/', **self.browser_headers)
+        second_client = self.client_class()
+        second_client.get('/', **self.browser_headers)
+        self.assertEqual(LandingVisit.objects.count(), 2)
+
+    def test_bot_is_filtered_and_does_not_create_visit(self):
+        self.client.get('/', HTTP_USER_AGENT='Googlebot/2.1')
+        self.assertFalse(LandingVisit.objects.exists())
+        self.assertEqual(DailyTrafficMetric.objects.get().filtered_bot_requests, 1)
+
+    def test_health_and_non_landing_pages_are_not_tracked(self):
+        self.client.get('/healthz/', **self.browser_headers)
+        self.assertFalse(LandingVisit.objects.exists())
+
+    def test_traffic_dashboard_requires_staff_and_shows_stats(self):
+        self.client.get('/', **self.browser_headers)
+        response = self.client.get(reverse('landing:traffic_dashboard'), **self.browser_headers)
+        self.assertEqual(response.status_code, 302)
+        staff = get_user_model().objects.create_user(
+            username='traffic-admin', email='traffic@example.com', password='secret123', is_staff=True,
+        )
+        self.client.force_login(staff)
+        response = self.client.get(reverse('landing:traffic_dashboard'), **self.browser_headers)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Ziyaretçi paneli')
+
+    @override_settings(TELEGRAM_BOT_TOKEN='token', TELEGRAM_CHAT_ID='chat')
+    @patch('landing.traffic.requests.post')
+    def test_daily_telegram_report_is_idempotent(self, post):
+        from .traffic import send_daily_traffic_report
+        post.return_value.raise_for_status.return_value = None
+        yesterday = timezone.localdate() - timedelta(days=1)
+        LandingVisit.objects.create(
+            visitor_hash='a' * 64, visit_date=yesterday, first_path='/', is_returning=False,
+        )
+        DailyTrafficMetric.objects.create(date=yesterday, page_views=3, filtered_bot_requests=2)
+        self.assertTrue(send_daily_traffic_report(yesterday))
+        self.assertFalse(send_daily_traffic_report(yesterday))
+        self.assertEqual(post.call_count, 1)
+        self.assertTrue(DailyTrafficReport.objects.filter(report_date=yesterday).exists())
+        self.assertIn('Tekil ziyaretçi: 1', post.call_args.kwargs['data']['text'])
