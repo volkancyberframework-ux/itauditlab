@@ -51,7 +51,8 @@ class LandingTests(TestCase):
         self.assertNotContains(response, '6 Ay Yakın Takip')
         self.assertContains(response, '12 Ay Birebir Çalışma')
         self.assertContains(response, 'Kendi denetim işini geliştir')
-        self.assertContains(response, '“Yapılamaz” diyenler olabilir.')
+        self.assertContains(response, '“İş yok” diyenler olabilir.')
+        self.assertContains(response, 'Bana gel. O kişiyi bana yolla.')
         self.assertContains(response, '100+ KOBİ • Organize sanayi bölgeleri • Saha deneyimi')
         self.assertContains(response, '132 kişilik topluluğa ücretsiz erişim')
         self.assertContains(response, 'Ki&#351;iyle birebir ment&#246;rl&#252;k')
@@ -62,7 +63,9 @@ class LandingTests(TestCase):
         self.assertContains(response, 'Katılımcılarımız, resmî kaynakları')
         self.assertContains(response, 'Kubernetes')
         self.assertContains(response, 'https://www.skool.com/volkan-guler-9286/about')
-        self.assertContains(response, 'Türkiye’den dünyaya uzanan gerçek denetim tecrübesi')
+        self.assertContains(response, 'Kimisi checklist denetimi yapar')
+        self.assertContains(response, 'Ben bunu yaptım. Bunu da size öğretiyorum.')
+        self.assertContains(response, 'Dünyadan kurumsal iş fırsatlarını canlı takip et.')
         self.assertContains(response, 'İş Yaptığım Şehirler ve Sektörler')
         self.assertContains(response, 'Savunma Sanayii Şirketleri')
         self.assertContains(response, 'Gizlilik nedeniyle kurum isimleri paylaşılmamaktadır')
@@ -353,11 +356,11 @@ class CorporateLandingTests(TestCase):
         self.assertContains(response, 'ProfessionalService')
         self.assertNotContains(response, 'ISO 27001 sertifikası veriyoruz')
 
-    def test_corporate_subdomain_root_uses_corporate_landing(self):
-        response = self.client.get('/', HTTP_HOST='kurumsal.grcustasi.com')
+    def test_main_root_remains_individual_landing(self):
+        response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Checklist Değil.')
-        self.assertNotContains(response, '2 DAKİKALIK KARİYER PUSULASI')
+        self.assertContains(response, '2 DAKİKALIK KARİYER PUSULASI')
+        self.assertNotContains(response, 'Checklist Değil.')
 
     @patch('landing.views._notify_telegram')
     def test_corporate_inquiry_is_saved_and_notified(self, notify):
@@ -386,4 +389,4 @@ class CorporateLandingTests(TestCase):
     def test_main_landing_contains_partner_link(self):
         response = self.client.get('/')
         self.assertContains(response, 'GRC Ustası Partneri Ol')
-        self.assertContains(response, 'https://kurumsal.grcustasi.com/#partner')
+        self.assertContains(response, f'{reverse("landing:corporate")}#partner')

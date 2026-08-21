@@ -33,8 +33,6 @@ def _notify_telegram(message):
 
 
 def home(request):
-    if request.get_host().split(':', 1)[0].lower() == 'kurumsal.grcustasi.com':
-        return corporate_home(request)
     site = SiteSetting.load()
     payment_url = site.payment_url or getattr(django_settings, 'PAYMENT_URL', '')
     return render(request, 'landing/index.html', {

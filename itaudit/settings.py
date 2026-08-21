@@ -48,7 +48,7 @@ MEDIA_ROOT = '/data/media'
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['itauditlab.onrender.com','www.siberkobi.co','siberkobi.co','itauditlab.siberkobi.co',"akademi.siberkobi.co",'grcustasi.com','www.grcustasi.com','kurumsal.grcustasi.com']
+ALLOWED_HOSTS = ['itauditlab.onrender.com','www.siberkobi.co','siberkobi.co','itauditlab.siberkobi.co',"akademi.siberkobi.co",'grcustasi.com','www.grcustasi.com']
 if render_hostname := os.environ.get("RENDER_EXTERNAL_HOSTNAME"):
     ALLOWED_HOSTS.append(render_hostname)
 if DEBUG:
@@ -59,7 +59,6 @@ CSRF_TRUSTED_ORIGINS = [
     'https://www.siberkobi.co',
     'https://grcustasi.com',
     'https://www.grcustasi.com',
-    'https://kurumsal.grcustasi.com',
 ]
 
 CSP_FRAME_SRC = (
