@@ -52,6 +52,63 @@ class DailyTrafficReport(models.Model):
     def __str__(self):
         return str(self.report_date)
 
+
+class CorporateInquiry(models.Model):
+    SERVICE_CHOICES = [
+        ('it_audit', 'BT Denetim'),
+        ('iso_readiness', 'ISO 27001 Uyum Hazırlığı'),
+        ('technical_assessment', 'Teknik Siber Güvenlik Değerlendirmesi'),
+        ('continuous_control', 'Sürekli Kontrol'),
+        ('grc_control', 'GRC / Risk / Kontrol'),
+        ('other', 'Diğer'),
+    ]
+    EMPLOYEE_CHOICES = [
+        ('1-10', '1–10'), ('11-50', '11–50'), ('51-250', '51–250'),
+        ('251-1000', '251–1.000'), ('1000+', '1.000+'),
+    ]
+    name = models.CharField('Ad soyad', max_length=120)
+    email = models.EmailField('Kurumsal e-posta')
+    phone = models.CharField('Telefon', max_length=40)
+    company = models.CharField('Şirket', max_length=160)
+    employee_count = models.CharField('Çalışan sayısı', max_length=20, choices=EMPLOYEE_CHOICES)
+    service = models.CharField('İlgilenilen hizmet', max_length=40, choices=SERVICE_CHOICES)
+    message = models.TextField('İhtiyaç')
+    consent = models.BooleanField('İletişim izni', default=False)
+    created_at = models.DateTimeField('Oluşturulma', auto_now_add=True)
+
+    class Meta:
+        ordering = ('-created_at',)
+        verbose_name = 'Kurumsal görüşme talebi'
+        verbose_name_plural = 'Kurumsal görüşme talepleri'
+
+    def __str__(self):
+        return f'{self.company} — {self.get_service_display()}'
+
+
+class PartnerApplication(models.Model):
+    TYPE_CHOICES = [
+        ('sales', 'Satış / Referral Partner'),
+        ('professional', 'GRC / Audit Professional'),
+        ('both', 'Her İkisi'),
+    ]
+    name = models.CharField('Ad soyad', max_length=120)
+    email = models.EmailField('E-posta')
+    phone = models.CharField('Telefon', max_length=40)
+    linkedin = models.URLField('LinkedIn', blank=True)
+    company_role = models.CharField('Şirket / Pozisyon', max_length=180)
+    partnership_type = models.CharField('Partnerlik tipi', max_length=20, choices=TYPE_CHOICES)
+    message = models.TextField('Birlikte çalışma fikri')
+    consent = models.BooleanField('İletişim izni', default=False)
+    created_at = models.DateTimeField('Oluşturulma', auto_now_add=True)
+
+    class Meta:
+        ordering = ('-created_at',)
+        verbose_name = 'Partnerlik başvurusu'
+        verbose_name_plural = 'Partnerlik başvuruları'
+
+    def __str__(self):
+        return f'{self.name} — {self.get_partnership_type_display()}'
+
 class AssessmentSession(models.Model):
     PROFILE_CHOICES = [('student', 'Üniversite öğrencisi'), ('graduate', 'Yeni mezun'), ('working', 'Çalışıyor')]
     email = models.EmailField('E-posta', unique=True)

@@ -1,8 +1,25 @@
 from django.contrib import admin
 from .models import (
-    AssessmentSession, Certificate, DailyTrafficMetric, DailyTrafficReport,
-    JobMarketCount, LandingVisit, Lead, NewsletterSubscriber, SiteSetting, WaitingList,
+    AssessmentSession, Certificate, CorporateInquiry, DailyTrafficMetric, DailyTrafficReport,
+    JobMarketCount, LandingVisit, Lead, NewsletterSubscriber, PartnerApplication,
+    SiteSetting, WaitingList,
 )
+
+
+@admin.register(CorporateInquiry)
+class CorporateInquiryAdmin(admin.ModelAdmin):
+    list_display = ('company', 'name', 'service', 'employee_count', 'email', 'created_at')
+    list_filter = ('service', 'employee_count', 'created_at')
+    search_fields = ('company', 'name', 'email', 'phone', 'message')
+    readonly_fields = ('created_at',)
+
+
+@admin.register(PartnerApplication)
+class PartnerApplicationAdmin(admin.ModelAdmin):
+    list_display = ('name', 'partnership_type', 'company_role', 'email', 'created_at')
+    list_filter = ('partnership_type', 'created_at')
+    search_fields = ('name', 'email', 'phone', 'company_role', 'message')
+    readonly_fields = ('created_at',)
 
 
 @admin.register(LandingVisit)

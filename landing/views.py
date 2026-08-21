@@ -9,7 +9,7 @@ from django.views.decorators.http import require_POST
 import logging
 from datetime import timedelta
 import requests
-from .forms import LeadForm, WaitingListForm
+from .forms import CorporateInquiryForm, LeadForm, PartnerApplicationForm, WaitingListForm
 from .models import AssessmentSession, Certificate, JobMarketCount, NewsletterSubscriber, SiteSetting
 from .traffic import period_page_views, period_unique_visitors, traffic_stats
 from .curriculum import CURRICULUM, CURRICULUM_STATS
@@ -33,6 +33,8 @@ def _notify_telegram(message):
 
 
 def home(request):
+    if request.get_host().split(':', 1)[0].lower() == 'kurumsal.grcustasi.com':
+        return corporate_home(request)
     site = SiteSetting.load()
     payment_url = site.payment_url or getattr(django_settings, 'PAYMENT_URL', '')
     return render(request, 'landing/index.html', {
@@ -40,6 +42,35 @@ def home(request):
         'curriculum': CURRICULUM, 'curriculum_stats': CURRICULUM_STATS,
         'open_assessment': request.path.rstrip('/').endswith('kariyer-pusulasi'),
     })
+
+
+def corporate_home(request):
+    return render(request, 'landing/corporate.html', {'site': SiteSetting.load()})
+
+
+def _save_form_and_notify(request, form_class, notification_title):
+    form = form_class(request.POST)
+    if not form.is_valid():
+        return JsonResponse({'ok': False, 'errors': _errors(form)}, status=400)
+    record = form.save()
+    details = [notification_title]
+    for field in form.Meta.fields:
+        if field == 'consent':
+            continue
+        value = getattr(record, f'get_{field}_display', lambda: getattr(record, field, ''))()
+        details.append(f'{form.fields[field].label}: {value}')
+    _notify_telegram('\n'.join(details))
+    return JsonResponse({'ok': True, 'message': 'Talebiniz alındı. En kısa sürede sizinle iletişime geçeceğiz.'})
+
+
+@require_POST
+def submit_corporate_inquiry(request):
+    return _save_form_and_notify(request, CorporateInquiryForm, '🏢 Yeni GRC Ustası kurumsal görüşme talebi')
+
+
+@require_POST
+def submit_partner_application(request):
+    return _save_form_and_notify(request, PartnerApplicationForm, '🤝 Yeni GRC Ustası partnerlik başvurusu')
 
 
 @staff_member_required

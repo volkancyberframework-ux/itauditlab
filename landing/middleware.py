@@ -11,7 +11,7 @@ from .models import DailyTrafficMetric, LandingVisit
 
 
 COOKIE_NAME = 'grc_vid'
-TRACKED_URL_NAMES = {'landing:home', 'landing:career_compass'}
+TRACKED_URL_NAMES = {'landing:home', 'landing:career_compass', 'landing:corporate'}
 BOT_MARKERS = (
     'bot', 'crawler', 'spider', 'slurp', 'headless', 'lighthouse', 'pagespeed',
     'pingdom', 'uptime', 'statuscake', 'curl/', 'wget/', 'python-requests',

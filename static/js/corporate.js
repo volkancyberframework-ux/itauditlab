@@ -1,0 +1,10 @@
+(()=>{'use strict';
+const $=(s,c=document)=>c.querySelector(s),$$=(s,c=document)=>[...c.querySelectorAll(s)];
+const header=$('.corp-nav'),menu=$('.nav-menu');
+menu?.addEventListener('click',()=>{const open=header.classList.toggle('open');menu.setAttribute('aria-expanded',String(open))});
+$$('.corp-nav nav a').forEach(a=>a.addEventListener('click',()=>{header.classList.remove('open');menu?.setAttribute('aria-expanded','false')}));
+const observer='IntersectionObserver'in window?new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.08}):null;
+$$('.reveal').forEach(el=>observer?observer.observe(el):el.classList.add('visible'));
+$$('[data-service]').forEach(link=>link.addEventListener('click',()=>{const select=$('select[name="service"]');if(select)select.value=link.dataset.service}));
+$$('.corp-form').forEach(form=>form.addEventListener('submit',async event=>{event.preventDefault();const status=$('.form-status',form),button=$('button[type="submit"]',form);status.textContent='';status.classList.remove('error');button.disabled=true;try{const response=await fetch(form.dataset.endpoint,{method:'POST',body:new FormData(form),headers:{'X-Requested-With':'XMLHttpRequest'}}),data=await response.json();if(!response.ok)throw data;status.textContent=data.message;form.reset()}catch(data){status.classList.add('error');status.textContent=data.message||Object.values(data.errors||{}).flat().join(' ')||'Talebiniz iletilemedi. Lütfen alanları kontrol edin.'}finally{button.disabled=false}}));
+})();

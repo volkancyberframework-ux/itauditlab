@@ -5,8 +5,8 @@ from django.test import TestCase, override_settings
 from django.urls import resolve, reverse
 from django.utils import timezone
 from .models import (
-    AssessmentSession, Certificate, DailyTrafficMetric, DailyTrafficReport,
-    LandingVisit, Lead, NewsletterSubscriber,
+    AssessmentSession, Certificate, CorporateInquiry, DailyTrafficMetric, DailyTrafficReport,
+    LandingVisit, Lead, NewsletterSubscriber, PartnerApplication,
 )
 
 @override_settings(STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage')
@@ -339,3 +339,51 @@ class TrafficTrackingTests(TestCase):
         self.assertEqual(post.call_count, 1)
         self.assertTrue(DailyTrafficReport.objects.filter(report_date=yesterday).exists())
         self.assertIn('Tekil ziyaretçi: 1', post.call_args.kwargs['data']['text'])
+
+
+@override_settings(STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage')
+class CorporateLandingTests(TestCase):
+    def test_corporate_route_has_required_seo_and_sections(self):
+        response = self.client.get(reverse('landing:corporate'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Checklist Değil.')
+        self.assertContains(response, 'ISO/IEC 27001 Uyum Hazırlığı')
+        self.assertContains(response, 'Sayılı Siber Güvenlik Kanunu')
+        self.assertContains(response, 'GRC USTASI PARTNER PROGRAMI', html=False)
+        self.assertContains(response, 'ProfessionalService')
+        self.assertNotContains(response, 'ISO 27001 sertifikası veriyoruz')
+
+    def test_corporate_subdomain_root_uses_corporate_landing(self):
+        response = self.client.get('/', HTTP_HOST='kurumsal.grcustasi.com')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Checklist Değil.')
+        self.assertNotContains(response, '2 DAKİKALIK KARİYER PUSULASI')
+
+    @patch('landing.views._notify_telegram')
+    def test_corporate_inquiry_is_saved_and_notified(self, notify):
+        response = self.client.post(reverse('landing:corporate_inquiry'), {
+            'name': 'Ada Kurumsal', 'email': 'ada@kurum.com', 'phone': '+90 555 000 00 00',
+            'company': 'Örnek Teknoloji', 'employee_count': '51-250', 'service': 'it_audit',
+            'message': 'BT kontrollerimizi değerlendirmek istiyoruz.', 'consent': 'true',
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.json()['ok'])
+        self.assertTrue(CorporateInquiry.objects.filter(company='Örnek Teknoloji').exists())
+        notify.assert_called_once()
+
+    @patch('landing.views._notify_telegram')
+    def test_partner_application_is_saved_and_notified(self, notify):
+        response = self.client.post(reverse('landing:partner_application'), {
+            'name': 'Ali Partner', 'email': 'ali@example.com', 'phone': '+90 555 111 11 11',
+            'linkedin': 'https://linkedin.com/in/ali', 'company_role': 'Danışman',
+            'partnership_type': 'both', 'message': 'Projelerde birlikte çalışabiliriz.',
+            'consent': 'true',
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(PartnerApplication.objects.filter(name='Ali Partner').exists())
+        notify.assert_called_once()
+
+    def test_main_landing_contains_partner_link(self):
+        response = self.client.get('/')
+        self.assertContains(response, 'GRC Ustası Partneri Ol')
+        self.assertContains(response, 'https://kurumsal.grcustasi.com/#partner')
