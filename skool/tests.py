@@ -4,6 +4,7 @@ from unittest.mock import patch
 from zoneinfo import ZoneInfo
 
 from django.contrib.auth import get_user_model
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.db import IntegrityError
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
@@ -11,15 +12,16 @@ from django.utils import timezone
 
 from .models import (
     AvailabilityException, CareerTestAnswer, MeetingBooking, MeetingSlot, NotificationLog,
-    SkoolInvitation, SkoolSettings, SkoolUser, TravelAvailability,
+    SkoolInvitation, SkoolLab, SkoolSettings, SkoolUser, TravelAvailability,
 )
 from .questions import QUESTIONS
 from .admin import AvailabilityExceptionForm, TravelAvailabilityForm
-from .services import generate_slots, reserve_slot, reschedule_booking
+from .services import ensure_upcoming_slots, generate_slots, reserve_slot, reschedule_booking
 from .views import bunny_embed_url, youtube_video_id
 
 
 @override_settings(STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage")
+@override_settings(MEDIA_ROOT="/tmp/itaudit-test-media")
 class SkoolFlowTests(TestCase):
     def setUp(self):
         self.invitation, self.raw_token = SkoolInvitation.create_invitation("Volkan Güler")
@@ -61,6 +63,32 @@ class SkoolFlowTests(TestCase):
         response = self.client.get(reverse("skool:journey"))
         self.assertContains(response, "current:7")
 
+    def test_logout_allows_name_login_again(self):
+        self.claim()
+        self.client.get(reverse("skool:logout"))
+        response = self.client.post(reverse("skool:onboarding"), {"full_name": "Volkan Güler"})
+        self.assertRedirects(response, reverse("skool:journey"))
+
+    def test_revoked_person_loses_existing_session_access(self):
+        self.claim()
+        self.invitation.status = "revoked"
+        self.invitation.revoked_at = timezone.now()
+        self.invitation.save(update_fields=("status", "revoked_at"))
+        self.assertRedirects(self.client.get(reverse("skool:journey")), reverse("skool:onboarding"))
+        response = self.client.post(reverse("skool:labs"), {"full_name": "Volkan Güler"})
+        self.assertContains(response, "etkin bir GRC Ustası erişimi bulunamadı")
+
+    def test_labs_allow_repeated_name_access_and_protect_pdf(self):
+        self.claim()
+        lab = SkoolLab.objects.create(
+            title="IAM Laboratuvarı",
+            pdf=SimpleUploadedFile("iam.pdf", b"%PDF-1.4 test", content_type="application/pdf"),
+        )
+        self.assertContains(self.client.get(reverse("skool:labs")), "IAM Laboratuvarı")
+        self.assertEqual(self.client.get(reverse("skool:lab_pdf", args=[lab.pk])).status_code, 200)
+        other = Client()
+        self.assertRedirects(other.get(reverse("skool:lab_pdf", args=[lab.pk])), reverse("skool:onboarding"))
+
     def test_cannot_skip_questions(self):
         self.claim()
         response = self.client.post(reverse("skool:save_answer"), json.dumps({"question_id": 2, "selected_option": "Evet"}), content_type="application/json")
@@ -91,7 +119,7 @@ class SkoolFlowTests(TestCase):
         response = self.client.post(reverse("skool:audio_progress"), json.dumps({"position": 20, "duration": 100}), content_type="application/json")
         self.assertEqual(response.status_code, 403)
 
-    def test_audio_cannot_complete_under_eighty_percent(self):
+    def test_audio_completion_uses_explicit_user_confirmation(self):
         self.claim()
         user = SkoolUser.objects.get()
         user.test_completed_at = timezone.now()
@@ -99,7 +127,9 @@ class SkoolFlowTests(TestCase):
         user.audio_listened_seconds = 79
         user.save()
         response = self.client.post(reverse("skool:complete_audio"))
-        self.assertEqual(response.status_code, 409)
+        self.assertEqual(response.status_code, 200)
+        user.refresh_from_db()
+        self.assertEqual(user.state, "READY_TO_BOOK")
 
     def test_audio_completes_at_eighty_percent(self):
         self.claim()
@@ -188,6 +218,15 @@ class BookingTests(TestCase):
         second = generate_slots(self.availability, target)
         self.assertEqual(len(first), 3)
         self.assertEqual([x.pk for x in first], [x.pk for x in second])
+
+    def test_expired_enabled_schedule_is_safely_renewed(self):
+        self.availability.start_date = timezone.localdate() - timedelta(days=5)
+        self.availability.end_date = timezone.localdate() - timedelta(days=1)
+        self.availability.save(update_fields=("start_date", "end_date"))
+        ensure_upcoming_slots(days=2)
+        renewed = TravelAvailability.objects.exclude(pk=self.availability.pk).get()
+        self.assertEqual(renewed.start_date, timezone.localdate() + timedelta(days=1))
+        self.assertEqual(renewed.slots.count(), 6)
 
     def test_slots_do_not_overlap(self):
         slots = generate_slots(self.availability, timezone.localdate() + timedelta(days=2))
@@ -343,6 +382,18 @@ class AdminAndTelegramTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(SkoolInvitation.objects.filter(full_name="Volkan Güler").exists())
         notify.assert_called_once()
+
+    @override_settings(TELEGRAM_ADMIN_CHAT_ID="123", TELEGRAM_WEBHOOK_SECRET="secret")
+    @patch("skool.views.send_telegram")
+    def test_telegram_disable_and_filtered_list(self, notify):
+        SkoolInvitation.create_invitation("Volkan Güler")
+        disable = {"message": {"chat": {"id": 123}, "text": "grcustasi disable Volkan Güler"}}
+        self.client.post(reverse("skool:telegram_webhook"), json.dumps(disable), content_type="application/json", HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN="secret")
+        self.assertEqual(SkoolInvitation.objects.get().status, "revoked")
+        listing = {"message": {"chat": {"id": 123}, "text": "grcustasi list volkan"}}
+        self.client.post(reverse("skool:telegram_webhook"), json.dumps(listing), content_type="application/json", HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN="secret")
+        self.assertEqual(notify.call_count, 2)
+        self.assertIn("Volkan Güler", notify.call_args.args[0])
 
     def test_admin_can_create_multiple_invitations_without_token_collision(self):
         admin = get_user_model().objects.create_superuser(username="root", email="root@example.com", password="pass")

@@ -52,6 +52,23 @@ class SkoolInvitation(models.Model):
         return f"{self.full_name} — {self.get_status_display()}"
 
 
+class SkoolLab(models.Model):
+    title = models.CharField("Çalışma adı", max_length=180)
+    description = models.TextField("Açıklama", blank=True)
+    pdf = models.FileField("Laboratuvar PDF'i", upload_to="skool_labs/")
+    order = models.PositiveSmallIntegerField("Sıra", default=0)
+    is_active = models.BooleanField("Yayında", default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ("order", "title")
+        verbose_name = "Skool laboratuvarı"
+        verbose_name_plural = "Skool laboratuvarları"
+
+    def __str__(self):
+        return self.title
+
+
 class SkoolUser(models.Model):
     STATES = [
         ("IDENTITY_VERIFIED", "Kimlik doğrulandı"), ("TEST_IN_PROGRESS", "Test sürüyor"),

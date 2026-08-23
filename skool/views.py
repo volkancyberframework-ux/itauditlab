@@ -7,7 +7,7 @@ from zoneinfo import ZoneInfo
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db import transaction
-from django.http import Http404, JsonResponse
+from django.http import FileResponse, Http404, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
@@ -17,7 +17,7 @@ from django.views.decorators.http import require_GET, require_POST
 from .decorators import skool_user_required
 from .models import (
     CareerTestAnswer, MeetingBooking, MeetingSlot, OnboardingEvent, SkoolInvitation,
-    SkoolSettings, SkoolUser, TravelAvailability, normalize_name,
+    SkoolLab, SkoolSettings, SkoolUser, TravelAvailability, normalize_name,
 )
 from .questions import FOUNDATION_POSITIVE, QUESTIONS, question_dicts
 from .services import (
@@ -84,6 +84,10 @@ def onboarding(request):
             invitation = SkoolInvitation.objects.filter(
                 token_hash=request.session.get("skool_invite_hash", ""), status__in=("invited", "claimed")
             ).first()
+            if not invitation:
+                invitation = SkoolInvitation.objects.filter(
+                    normalized_name=normalize_name(request.POST.get("full_name", "")), status__in=("invited", "claimed")
+                ).order_by("-created_at").first()
             supplied = normalize_name(request.POST.get("full_name", ""))
             if invitation and hmac.compare_digest(invitation.normalized_name.encode("utf-8"), supplied.encode("utf-8")):
                 if invitation.status == "claimed" and hasattr(invitation, "user"):
@@ -111,6 +115,40 @@ def onboarding(request):
     return render(request, "skool/onboarding.html", {"error": error})
 
 
+def skool_logout(request):
+    request.session.pop("skool_user_id", None)
+    request.session.pop("skool_invite_hash", None)
+    return redirect("skool:onboarding")
+
+
+def labs(request):
+    user_id = request.session.get("skool_user_id")
+    user = SkoolUser.objects.filter(pk=user_id, invitation__status="claimed").first()
+    error = ""
+    if not user and request.method == "POST":
+        supplied = normalize_name(request.POST.get("full_name", ""))
+        invitation = SkoolInvitation.objects.filter(normalized_name=supplied, status__in=("invited", "claimed")).order_by("-created_at").first()
+        if invitation:
+            if invitation.status == "invited":
+                invitation.status = "claimed"
+                invitation.claimed_at = timezone.now()
+                invitation.save(update_fields=("status", "claimed_at"))
+            user, _ = SkoolUser.objects.get_or_create(invitation=invitation, defaults={"full_name": invitation.full_name})
+            request.session["skool_user_id"] = user.pk
+            request.session.set_expiry(60 * 60 * 24 * 180)
+            return redirect("skool:labs")
+        error = "Bu ad soyad için etkin bir GRC Ustası erişimi bulunamadı."
+    if not user:
+        return render(request, "skool/labs_login.html", {"error": error})
+    return render(request, "skool/labs.html", {"skool_user": user, "labs": SkoolLab.objects.filter(is_active=True)})
+
+
+@skool_user_required
+def lab_pdf(request, pk):
+    lab = get_object_or_404(SkoolLab, pk=pk, is_active=True)
+    return FileResponse(lab.pdf.open("rb"), content_type="application/pdf", filename=f"{lab.title}.pdf")
+
+
 @skool_user_required
 def journey(request):
     user = request.skool_user
@@ -119,6 +157,7 @@ def journey(request):
     answers = {a.question_id: a.selected_option for a in user.answers.all()}
     config = SkoolSettings.load()
     booking = user.bookings.filter(status="active").select_related("slot__availability").first()
+    previous_bookings = user.bookings.exclude(status="active").select_related("slot__availability").order_by("-slot__start_at_utc")[:10]
     if booking:
         tr_start, tr_end, host_start, host_end = local_booking_lines(booking)
         can_reschedule = booking.slot.start_at_utc > timezone.now() + timedelta(hours=24)
@@ -139,6 +178,7 @@ def journey(request):
         "youtube_video_id": youtube_id,
         "bunny_embed_url": bunny_url,
         "audio_was_skipped": user.events.filter(event_type="audio_skipped").exists(),
+        "previous_bookings": previous_bookings,
     })
 
 
@@ -232,8 +272,6 @@ def complete_audio(request):
     user = request.skool_user
     if not user.test_completed_at:
         return JsonResponse({"ok": False}, status=403)
-    if not user.audio_duration_seconds or user.audio_listened_seconds < user.audio_duration_seconds * 0.8:
-        return JsonResponse({"ok": False, "error": "Kaydın en az %80'ini dinlemelisiniz."}, status=409)
     if not user.audio_completed_at:
         user.audio_completed_at = timezone.now()
         user.state = "READY_TO_BOOK"
@@ -359,6 +397,26 @@ def telegram_webhook(request):
     elif command == "revoke" and argument:
         count = SkoolInvitation.objects.filter(normalized_name=normalize_name(argument), status="invited").update(status="revoked", revoked_at=timezone.now())
         send_telegram(f"⛔ {argument}: {count} aktif davet iptal edildi.")
+    elif command == "disable" and argument:
+        count = SkoolInvitation.objects.filter(normalized_name=normalize_name(argument)).exclude(status="revoked").update(status="revoked", revoked_at=timezone.now())
+        send_telegram(f"🔒 {argument}: {count} erişim devre dışı bırakıldı. Skool, çalışmalar ve takvim erişimi kapatıldı.")
+    elif command == "list":
+        query = SkoolInvitation.objects.all()
+        if argument:
+            query = query.filter(normalized_name__contains=normalize_name(argument))
+        entries = list(query.order_by("full_name", "-created_at")[:50])
+        send_telegram("👥 GRC Ustası erişimleri\n\n" + ("\n".join(f"• {obj.full_name} — {obj.get_status_display()}" for obj in entries) or "Kayıt bulunamadı."))
+    elif command == "help":
+        send_telegram(
+            "🧭 GRC Ustası Telegram Komutları\n\n"
+            "grcustasi create Ad Soyad — yeni erişim ve kişisel bağlantı\n"
+            "grcustasi status Ad Soyad — erişim durumunu göster\n"
+            "grcustasi disable Ad Soyad — tüm erişimi kapat\n"
+            "grcustasi revoke Ad Soyad — kullanılmamış daveti iptal et\n"
+            "grcustasi list — kişileri listele\n"
+            "grcustasi list volkan — adında volkan geçenleri listele\n"
+            "grcustasi help — bu kılavuzu göster"
+        )
     else:
-        send_telegram("Komutlar: /create Ad Soyad, /status Ad Soyad, /revoke Ad Soyad")
+        send_telegram("Komut anlaşılmadı. Kullanım kılavuzu için: grcustasi help")
     return JsonResponse({"ok": True})

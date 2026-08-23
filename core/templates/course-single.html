@@ -55,33 +55,10 @@
         </div>
       </section>
 
-      <section class="container mt-n6 position-relative mentorship-support">
-        <div class="card border-0 shadow-lg rounded-4 p-4 p-lg-5">
-          <div class="row align-items-center g-4">
-            <div class="col-lg-7">
-              <span class="badge bg-warning text-dark mb-3">VOLKAN İLE DOĞRUDAN DESTEK</span>
-              <h2 class="h3 mb-3">Bir sorunuz mu var, yoksa uzun bir konuyu birlikte mi ele alalım?</h2>
-              <p class="mb-2">Tek bir sorunuz varsa aşağıya yazın. Volkan size Skool veya mevcut erişim kanalınızdan dönecektir.</p>
-              <p class="mb-0">Daha uzun konuşmanız gereken bir konu varsa gerekçesini yazın ve birebir görüşme organize edin.</p>
-            </div>
-            <div class="col-lg-5">
-              <form method="post" action="{% url 'mentorship_request' course.id %}" class="d-grid gap-3">
-                {% csrf_token %}
-                <label class="fw-semibold">Talep türü
-                  <select name="request_type" class="form-select mt-2" required>
-                    <option value="question">Tek bir sorum var</option>
-                    <option value="meeting">Volkan’la birebir görüşmek istiyorum</option>
-                  </select>
-                </label>
-                <label class="fw-semibold">Sorunuz veya görüşme gerekçeniz
-                  <textarea name="reason" class="form-control mt-2" rows="3" minlength="5" required placeholder="Kısaca yazın..."></textarea>
-                </label>
-                <button class="btn btn-primary btn-lg" type="submit">Talebi Volkan’a Gönder →</button>
-              </form>
-            </div>
-          </div>
-        </div>
+      <section class="container mt-n6 mb-5 position-relative mentorship-support text-center">
+        <button class="btn btn-warning btn-lg shadow-lg px-5 py-3 fw-bold" type="button" data-bs-toggle="modal" data-bs-target="#mentorshipModal">Volkan’a Sor veya Birebir Görüşme Planla →</button>
       </section>
+      <div class="modal fade" id="mentorshipModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><div><span class="badge bg-warning text-dark mb-2">VOLKAN İLE DOĞRUDAN DESTEK</span><h2 class="modal-title h4">Nasıl yardımcı olalım?</h2></div><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button></div><div class="modal-body"><p>Tek bir sorunuz varsa yazın; Volkan size Skool veya mevcut erişim kanalınızdan dönecektir.</p><p>Daha uzun konuşacağınız bir konu varsa gerekçesini yazın; onaydan sonra doğrudan takvim açılır. Ayrıca e-posta almayacaksınız.</p><form method="post" action="{% url 'mentorship_request' course.id %}" class="d-grid gap-3">{% csrf_token %}<label class="fw-semibold text-start">Talep türü<select name="request_type" class="form-select mt-2" required><option value="question">Tek bir sorum var</option><option value="meeting">Volkan’la birebir görüşmek istiyorum</option></select></label><label class="fw-semibold text-start">Sorunuz veya görüşme gerekçeniz<textarea name="reason" class="form-control mt-2" rows="4" minlength="5" required placeholder="Kısaca yazın..."></textarea></label><button class="btn btn-primary btn-lg" type="submit">Onayla ve Devam Et →</button></form></div></div></div></div>
 
       <!-- Page content -->
       <section class="pb-8 student-course-content">

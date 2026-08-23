@@ -113,7 +113,21 @@ def generate_slots(availability, local_date):
 
 def ensure_upcoming_slots(days=60):
     today = timezone.localdate()
-    for availability in TravelAvailability.objects.filter(enabled=True, end_date__gte=today):
+    availabilities = TravelAvailability.objects.filter(enabled=True, end_date__gte=today)
+    if not availabilities.exists():
+        latest = TravelAvailability.objects.filter(enabled=True).order_by("-end_date").first()
+        if latest:
+            latest = TravelAvailability.objects.create(
+                location_name=latest.location_name,
+                timezone=latest.timezone,
+                start_date=today + timedelta(days=1),
+                end_date=today + timedelta(days=days),
+                local_available_start=latest.local_available_start,
+                local_available_end=latest.local_available_end,
+                enabled=True,
+            )
+            availabilities = TravelAvailability.objects.filter(pk=latest.pk)
+    for availability in availabilities:
         start = max(today + timedelta(days=1), availability.start_date)
         end = min(today + timedelta(days=days), availability.end_date)
         current = start

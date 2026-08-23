@@ -10,7 +10,7 @@ from django.urls import reverse
 from .models import (
     AvailabilityException, BookingHistory, CareerTestAnswer, MeetingBooking, MeetingSlot,
     NotificationLog, OnboardingEvent, SkoolInvitation, SkoolSettings, SkoolUser,
-    TravelAvailability,
+    TravelAvailability, SkoolLab,
 )
 
 
@@ -79,6 +79,13 @@ class InvitationAdmin(admin.ModelAdmin):
             base = getattr(settings, "PUBLIC_BASE_URL", "https://grcustasi.com").rstrip("/")
             self.message_user(request, f"Davet bağlantısı: {base}{reverse('skool:onboarding')}?invite={raw}", messages.SUCCESS)
         return super().response_add(request, obj, post_url_continue)
+
+
+@admin.register(SkoolLab)
+class SkoolLabAdmin(admin.ModelAdmin):
+    list_display = ("title", "order", "is_active", "created_at")
+    list_editable = ("order", "is_active")
+    search_fields = ("title", "description")
 
 
 @admin.register(SkoolUser)
