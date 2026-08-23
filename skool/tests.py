@@ -16,7 +16,7 @@ from .models import (
 from .questions import QUESTIONS
 from .admin import AvailabilityExceptionForm, TravelAvailabilityForm
 from .services import generate_slots, reserve_slot, reschedule_booking
-from .views import youtube_video_id
+from .views import bunny_embed_url, youtube_video_id
 
 
 @override_settings(STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage")
@@ -117,6 +117,27 @@ class SkoolFlowTests(TestCase):
         self.assertEqual(youtube_video_id("https://youtu.be/dQw4w9WgXcQ"), "dQw4w9WgXcQ")
         self.assertEqual(youtube_video_id("https://www.youtube.com/watch?v=dQw4w9WgXcQ"), "dQw4w9WgXcQ")
         self.assertEqual(youtube_video_id("https://example.com/video.mp4"), "")
+
+    def test_bunny_stream_iframe_link_is_accepted(self):
+        url = "https://iframe.mediadelivery.net/play/478437/cb866163-57ae-4fad-9c95-4a727852b9b0"
+        self.assertEqual(bunny_embed_url(url), url)
+        self.assertEqual(bunny_embed_url("https://example.com/play/478437/video"), "")
+
+    def test_bunny_stream_link_renders_as_iframe_not_html_video(self):
+        self.claim()
+        user = SkoolUser.objects.get()
+        user.test_completed_at = timezone.now()
+        user.state = "TEST_COMPLETED"
+        user.save(update_fields=("test_completed_at", "state"))
+        config = SkoolSettings.load()
+        config.audio_url = ""
+        config.video_url = "https://iframe.mediadelivery.net/play/478437/cb866163-57ae-4fad-9c95-4a727852b9b0"
+        config.save(update_fields=("audio_url", "video_url"))
+
+        response = self.client.get(reverse("skool:journey"))
+        self.assertContains(response, 'id="bunny-player"')
+        self.assertContains(response, config.video_url)
+        self.assertNotContains(response, 'id="career-media"')
 
 
 @override_settings(STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage")

@@ -43,6 +43,23 @@ def youtube_video_id(url):
     return candidate if candidate.replace("-", "").replace("_", "").isalnum() else ""
 
 
+def bunny_embed_url(url):
+    """Bunny Stream'in iframe/play bağlantılarını yalnızca güvenilir hosttan kabul eder."""
+    if not url:
+        return ""
+    parsed = urlparse(url)
+    host = parsed.netloc.casefold().split(":", 1)[0]
+    if parsed.scheme != "https" or host not in {"iframe.mediadelivery.net", "player.mediadelivery.net"}:
+        return ""
+    parts = [part for part in parsed.path.split("/") if part]
+    if len(parts) != 3 or parts[0] not in {"play", "embed"}:
+        return ""
+    library_id, video_id = parts[1], parts[2]
+    if not library_id.isdigit() or not video_id.replace("-", "").isalnum():
+        return ""
+    return url
+
+
 def _json_body(request):
     try:
         return json.loads(request.body or b"{}")
@@ -108,6 +125,7 @@ def journey(request):
         "booking": booking, "tr_start": tr_start, "tr_end": tr_end,
         "can_reschedule": can_reschedule,
         "youtube_video_id": youtube_video_id(config.video_url) if not config.audio_url else "",
+        "bunny_embed_url": bunny_embed_url(config.video_url) if not config.audio_url else "",
     })
 
 
