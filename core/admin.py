@@ -1,7 +1,7 @@
 from urllib.parse import quote
 import csv
 import io
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django import forms
 from django.contrib import admin, messages
@@ -30,6 +30,21 @@ from .models import (
 )
 
 DEFAULT_PASSWORD = "Siberkobi1234"
+
+
+def format_program_calendar(steps, start_date):
+    """Program adımlarını e-posta taslağı için gerçek tarihlere dönüştürür."""
+    lines = []
+    for step in steps:
+        if isinstance(step, dict):
+            day_offset = step["day_offset"]
+            title = step["email_title"] or step["course__turkish_name"] or step["course__english_name"]
+        else:
+            day_offset = step.day_offset
+            title = step.email_title or step.course.turkish_name or step.course.english_name
+        release_date = start_date + timedelta(days=day_offset)
+        lines.append(f"📅 {release_date:%d.%m.%Y} — {title}")
+    return "\n".join(lines)
 
 
 from django.contrib import admin
@@ -355,6 +370,20 @@ class EnrollmentInline(admin.TabularInline):
 class QuickStudentCreateForm(forms.Form):
     email = forms.EmailField(label="Öğrenci e-posta adresi")
 
+    program = forms.ModelChoiceField(
+        queryset=LearningProgram.objects.filter(is_active=True).order_by("name"),
+        required=False,
+        label="Öğrenciyi bir programa kaydet",
+        help_text="Program seçerseniz öğrenci için Program Enrollment kaydı ve kişisel eğitim takvimi oluşturulur.",
+    )
+
+    program_start_date = forms.DateField(
+        required=False,
+        label="Program başlangıç tarihi",
+        widget=forms.DateInput(attrs={"type": "date"}),
+        help_text="Takvimdeki bütün içerik tarihleri bu güne göre hesaplanır.",
+    )
+
     courses = forms.ModelMultipleChoiceField(
         queryset=Course.objects.all().order_by("id"),
         required=False,
@@ -372,6 +401,14 @@ class QuickStudentCreateForm(forms.Form):
         label="Meeting linki",
         initial="https://meet.google.com/vza-zmpe-fjf",
     )
+
+    def clean(self):
+        cleaned = super().clean()
+        if cleaned.get("program") and not cleaned.get("program_start_date"):
+            self.add_error("program_start_date", "Bir program seçtiğinizde başlangıç tarihi zorunludur.")
+        if cleaned.get("program_start_date") and not cleaned.get("program"):
+            self.add_error("program", "Başlangıç tarihi için bir program seçin.")
+        return cleaned
 
 
 @admin.register(CustomUser)
@@ -423,6 +460,8 @@ class CustomUserAdmin(UserAdmin):
             if form.is_valid():
                 email = form.cleaned_data["email"].strip().lower()
                 courses = form.cleaned_data["courses"]
+                program = form.cleaned_data["program"]
+                program_start_date = form.cleaned_data["program_start_date"]
                 has_meeting = form.cleaned_data["has_meeting"]
                 meeting_link = form.cleaned_data["meeting_link"]
 
@@ -446,6 +485,21 @@ class CustomUserAdmin(UserAdmin):
                     if course.course_type == Course.CourseType.TEST:
                         user.allowed_tests.add(course)
 
+                program_enrollment = None
+                program_calendar = ""
+                if program:
+                    program_enrollment, _ = ProgramEnrollment.objects.update_or_create(
+                        user=user,
+                        program=program,
+                        defaults={"start_date": program_start_date, "is_active": True},
+                    )
+                    program_calendar = format_program_calendar(
+                        program.steps.order_by("day_offset", "order", "id").values(
+                            "day_offset", "email_title", "course__turkish_name", "course__english_name"
+                        ),
+                        program_start_date,
+                    )
+
                 course_lines = "\n".join(
                     [
                         f"✅ {course.turkish_name or course.english_name}"
@@ -454,7 +508,22 @@ class CustomUserAdmin(UserAdmin):
                 )
 
                 if not course_lines:
-                    course_lines = "✅ İçerikler kısa süre içinde hesabınıza tanımlanacaktır."
+                    course_lines = "✅ İçerikler program takviminize göre hesabınıza tanımlanacaktır." if program else "✅ İçerikler kısa süre içinde hesabınıza tanımlanacaktır."
+
+                program_text = ""
+                if program:
+                    program_text = f"""
+
+━━━━━━━━━━━━━━━━━━━━
+🗓️ {program.name} Eğitim Takvimi
+━━━━━━━━━━━━━━━━━━━━
+
+Program başlangıç tarihi: {program_start_date:%d.%m.%Y}
+
+{program_calendar or "Program adımları yönetim panelinden eklenecektir."}
+
+İçerikleriniz bu kişisel takvime göre otomatik olarak erişime açılacaktır.
+"""
 
                 meeting_text = ""
 
@@ -496,6 +565,7 @@ Aşağıda sizin için oluşturulan hesap bilgilerini bulabilirsiniz.
 ━━━━━━━━━━━━━━━━━━━━
 
 {course_lines}
+{program_text}
 
 Bu içeriklerde ilerlerken lütfen:
 
@@ -538,6 +608,7 @@ Siberkobi
                         "body": body,
                         "mailto_url": mailto_url,
                         "created": created,
+                        "program_enrollment": program_enrollment,
                     },
                 )
 

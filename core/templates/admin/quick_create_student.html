@@ -3,12 +3,14 @@
 {% block content %}
   <h1>Kamp Öğrencisi Oluştur</h1>
 
+  <p>Yeni hesabı tekil içeriklere, bir eğitim programına veya ikisine birden kaydedebilirsiniz. Program seçildiğinde başlangıç tarihine göre kişisel takvim otomatik oluşturulur.</p>
+
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
 
     <button type="submit" class="default">
-      Hesap oluştur ve mail hazırla
+      Hesap oluştur, kaydet ve e-posta taslağını hazırla
     </button>
   </form>
 {% endblock %}

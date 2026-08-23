@@ -1,4 +1,5 @@
 from datetime import date, timedelta
+from types import SimpleNamespace
 from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
@@ -14,6 +15,7 @@ from .models import (
     ProgramRelease,
 )
 from .program_automation import run_daily_programs
+from .admin import QuickStudentCreateForm, format_program_calendar
 
 
 class DailyProgramAutomationTests(TestCase):
@@ -60,6 +62,46 @@ class DailyProgramAutomationTests(TestCase):
         self.assertEqual(second["courses"], 0)
         self.assertEqual(release_mail.call_count, 2)
         self.assertEqual(ProgramRelease.objects.get().status, ProgramRelease.Status.FAILED)
+
+
+class QuickStudentProgramEnrollmentTests(TestCase):
+    def setUp(self):
+        self.admin = get_user_model().objects.create_superuser(
+            username="admin@example.com", email="admin@example.com", password="test"
+        )
+        self.program = LearningProgram.objects.create(slug="calendar-test", name="Takvim Programı")
+        self.client.force_login(self.admin)
+
+    def test_program_requires_start_date(self):
+        form = QuickStudentCreateForm({
+            "email": "student@example.com",
+            "program": self.program.pk,
+        })
+        self.assertFalse(form.is_valid())
+        self.assertIn("program_start_date", form.errors)
+
+    def test_calendar_formatter_uses_program_start_date(self):
+        course = SimpleNamespace(turkish_name="Yedek Ders", english_name="")
+        step = SimpleNamespace(day_offset=6, email_title="Altıncı Gün Dersi", course=course)
+        calendar = format_program_calendar([step], date(2026, 9, 1))
+        self.assertIn("07.09.2026", calendar)
+        self.assertIn("Altıncı Gün Dersi", calendar)
+
+    def test_quick_create_enrolls_and_builds_mail_draft(self):
+        response = self.client.post(reverse("admin:quick_create_student"), {
+            "email": "student@example.com",
+            "program": self.program.pk,
+            "program_start_date": "2026-09-01",
+            "courses": [],
+            "meeting_link": "https://meet.google.com/vza-zmpe-fjf",
+        })
+
+        self.assertEqual(response.status_code, 200)
+        enrollment = ProgramEnrollment.objects.get(user__email="student@example.com", program=self.program)
+        self.assertEqual(enrollment.start_date, date(2026, 9, 1))
+        self.assertContains(response, "01.09.2026")
+        self.assertContains(response, "Program adımları yönetim panelinden eklenecektir")
+        self.assertContains(response, "Takvimli e-postayı varsayılan uygulamada aç")
 
 
 class StudentCourseInterfaceTests(TestCase):
