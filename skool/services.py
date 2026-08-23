@@ -71,7 +71,7 @@ def send_telegram(text, *, idempotency_key=None):
 
 
 def admin_user_url(user):
-    base = getattr(settings, "PUBLIC_BASE_URL", "https://grcustasi.com").rstrip("/")
+    base = getattr(settings, "PUBLIC_BASE_URL", "https://www.grcustasi.com").rstrip("/")
     return f"{base}{reverse('skool:admin_user', args=[user.pk])}"
 
 

@@ -76,7 +76,7 @@ class InvitationAdmin(admin.ModelAdmin):
     def response_add(self, request, obj, post_url_continue=None):
         raw = getattr(request, "_skool_invite_token", "")
         if raw:
-            base = getattr(settings, "PUBLIC_BASE_URL", "https://grcustasi.com").rstrip("/")
+            base = getattr(settings, "PUBLIC_BASE_URL", "https://www.grcustasi.com").rstrip("/")
             self.message_user(request, f"Davet bağlantısı: {base}{reverse('skool:onboarding')}?invite={raw}", messages.SUCCESS)
         return super().response_add(request, obj, post_url_continue)
 

@@ -404,7 +404,7 @@ def telegram_webhook(request):
     command, argument = command.casefold(), argument.strip()
     if command == "create" and argument:
         invitation, raw = SkoolInvitation.create_invitation(argument)
-        base = getattr(settings, "PUBLIC_BASE_URL", "https://grcustasi.com").rstrip("/")
+        base = getattr(settings, "PUBLIC_BASE_URL", "https://www.grcustasi.com").rstrip("/")
         send_telegram(f"✅ {invitation.full_name} için erişim oluşturuldu.\n\nOnboarding linki:\n{base}{reverse('skool:onboarding')}?invite={raw}\n\nDurum: Kullanılmadı")
     elif command == "status" and argument:
         invitations = SkoolInvitation.objects.filter(normalized_name=normalize_name(argument))[:5]

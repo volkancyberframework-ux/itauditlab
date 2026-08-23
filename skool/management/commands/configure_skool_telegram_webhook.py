@@ -10,7 +10,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         token = getattr(settings, "GRCUSTASI_TELEGRAM_BOT_TOKEN", "")
         secret = getattr(settings, "GRCUSTASI_TELEGRAM_WEBHOOK_SECRET", "")
-        base = getattr(settings, "PUBLIC_BASE_URL", "https://grcustasi.com").rstrip("/")
+        base = getattr(settings, "PUBLIC_BASE_URL", "https://www.grcustasi.com").rstrip("/")
         if not token:
             raise CommandError("GRCUSTASI_TELEGRAM_BOT_TOKEN tanımlı değil.")
         if not secret:
