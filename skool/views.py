@@ -119,13 +119,19 @@ def journey(request):
     else:
         tr_start = tr_end = host_start = host_end = None
         can_reschedule = False
+    media_url = config.audio_url or config.video_url
+    youtube_id = youtube_video_id(media_url)
+    bunny_url = bunny_embed_url(media_url)
     return render(request, "skool/journey.html", {
         "skool_user": user, "questions_json": json.dumps(question_dicts(), ensure_ascii=False),
         "answers_json": json.dumps(answers, ensure_ascii=False), "config": config,
         "booking": booking, "tr_start": tr_start, "tr_end": tr_end,
         "can_reschedule": can_reschedule,
-        "youtube_video_id": youtube_video_id(config.video_url) if not config.audio_url else "",
-        "bunny_embed_url": bunny_embed_url(config.video_url) if not config.audio_url else "",
+        "media_url": media_url,
+        "direct_audio_url": media_url if config.audio_url and not youtube_id and not bunny_url else "",
+        "direct_video_url": media_url if config.video_url and not youtube_id and not bunny_url else "",
+        "youtube_video_id": youtube_id,
+        "bunny_embed_url": bunny_url,
     })
 
 

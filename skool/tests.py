@@ -139,6 +139,22 @@ class SkoolFlowTests(TestCase):
         self.assertContains(response, config.video_url)
         self.assertNotContains(response, 'id="career-media"')
 
+    def test_bunny_stream_link_in_audio_field_renders_as_iframe(self):
+        self.claim()
+        user = SkoolUser.objects.get()
+        user.test_completed_at = timezone.now()
+        user.state = "TEST_COMPLETED"
+        user.save(update_fields=("test_completed_at", "state"))
+        config = SkoolSettings.load()
+        config.audio_url = "https://iframe.mediadelivery.net/play/478437/cb866163-57ae-4fad-9c95-4a727852b9b0"
+        config.video_url = ""
+        config.save(update_fields=("audio_url", "video_url"))
+
+        response = self.client.get(reverse("skool:journey"))
+        self.assertContains(response, 'id="bunny-player"')
+        self.assertContains(response, config.audio_url)
+        self.assertNotContains(response, 'id="career-media"')
+
 
 @override_settings(STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage")
 class BookingTests(TestCase):
