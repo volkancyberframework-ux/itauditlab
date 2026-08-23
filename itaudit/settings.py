@@ -18,6 +18,15 @@ from decouple import config
 
 TELEGRAM_BOT_TOKEN = config("TELEGRAM_BOT_TOKEN", default="")
 TELEGRAM_CHAT_ID = config("TELEGRAM_CHAT_ID", default="")
+TELEGRAM_ADMIN_CHAT_ID = config("TELEGRAM_ADMIN_CHAT_ID", default=TELEGRAM_CHAT_ID)
+TELEGRAM_WEBHOOK_SECRET = config("TELEGRAM_WEBHOOK_SECRET", default="")
+PUBLIC_BASE_URL = config("PUBLIC_BASE_URL", default="https://grcustasi.com")
+SKOOL_MEETING_DURATION_MINUTES = config("SKOOL_MEETING_DURATION_MINUTES", default=90, cast=int)
+SKOOL_DAILY_SLOT_COUNT = config("SKOOL_DAILY_SLOT_COUNT", default=3, cast=int)
+SKOOL_MINIMUM_GAP_MINUTES = config("SKOOL_MINIMUM_GAP_MINUTES", default=15, cast=int)
+SKOOL_DISPLAY_TIMEZONE = config("SKOOL_DISPLAY_TIMEZONE", default="Europe/Istanbul")
+SKOOL_GOOGLE_MEET_URL = config("SKOOL_GOOGLE_MEET_URL", default="https://meet.google.com/jbv-csdm-eyy")
+SKOOL_AUDIO_URL = config("SKOOL_AUDIO_URL", default="")
 
 import os
 
@@ -78,6 +87,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'landing',
+    'skool',
 ]
 
 MIDDLEWARE = [
@@ -161,6 +171,13 @@ USE_TZ = True
 
 LOGIN_URL = 'login'
 
+# Skool davet oturumu yalnızca sunucu tarafından okunur. Üretimde çerezler
+# HTTPS dışında taşınmaz; yerel geliştirme HTTP ile çalışmaya devam eder.
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+SESSION_COOKIE_SAMESITE = 'Lax'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -175,7 +192,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # ✅ Your actual static folder
 ]
 
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+STATICFILES_STORAGE = (
+    'django.contrib.staticfiles.storage.StaticFilesStorage'
+    if DEBUG else 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+)
 
 WHITENOISE_SKIP_COMPRESS_EXTENSIONS = ['.map']
 

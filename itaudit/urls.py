@@ -9,6 +9,7 @@ urlpatterns = [
     path('healthz/', readiness, name='healthz'),
     path('bulamazsinki/', admin.site.urls),
     path('', include('landing.urls')),
+    path('', include('skool.urls')),
     path('', include('core.urls')),
 ]
 
