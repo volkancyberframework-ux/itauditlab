@@ -16,10 +16,15 @@
                 <p class="text-white mb-6 lead">{{ course.description }}</p>
                 <div class="d-flex align-items-center justify-content-center flex-wrap gap-3 course-header-actions">
 
-                  <a href="{% url 'dashboard_student' %}" class="btn btn-outline-light btn-lg d-inline-flex align-items-center">
-                    <i class="fe fe-arrow-left me-2 fs-5"></i>
-                    Öğrenci Paneline Dön
-                  </a>
+                  <div class="d-grid gap-2 course-primary-actions">
+                    <a href="{% url 'dashboard_student' %}" class="btn btn-outline-light btn-lg d-inline-flex align-items-center justify-content-center">
+                      <i class="fe fe-arrow-left me-2 fs-5"></i>
+                      Öğrenci Paneline Dön
+                    </a>
+                    <button class="btn btn-warning btn-lg fw-bold" type="button" data-bs-toggle="modal" data-bs-target="#mentorshipModal">
+                      Volkan’a Sor veya Birebir Görüşme Planla →
+                    </button>
+                  </div>
                   <span class="text-white ms-3">
                     <i class="fe fe-user"></i>
                     {{ course.enrollment_set.count }} Kayıtlı Öğrenci
@@ -62,11 +67,6 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-8 col-md-12 col-12 mt-n8 mb-4 mb-lg-0">
-              <div class="course-mentorship-action mb-3">
-                <button class="btn btn-warning w-100 py-3 fw-bold" type="button" data-bs-toggle="modal" data-bs-target="#mentorshipModal">
-                  Volkan’a Sor veya Birebir Görüşme Planla →
-                </button>
-              </div>
               <!-- Card -->
               <div class="card rounded-3">
                 <!-- Card header -->
