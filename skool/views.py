@@ -57,7 +57,13 @@ def bunny_embed_url(url):
     library_id, video_id = parts[1], parts[2]
     if not library_id.isdigit() or not video_id.replace("-", "").isalnum():
         return ""
-    return url
+    # `/play/` is Bunny's standalone player page. Embedding that page inside
+    # another iframe causes the player to render as a tiny nested viewport on
+    # mobile Safari. Always return Bunny's responsive iframe endpoint.
+    return (
+        f"https://iframe.mediadelivery.net/embed/{library_id}/{video_id}"
+        "?autoplay=false&loop=false&muted=false&preload=true&responsive=true"
+    )
 
 
 def _json_body(request):

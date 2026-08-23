@@ -179,7 +179,7 @@ class SkoolFlowTests(TestCase):
 
     def test_bunny_stream_iframe_link_is_accepted(self):
         url = "https://iframe.mediadelivery.net/play/478437/cb866163-57ae-4fad-9c95-4a727852b9b0"
-        self.assertEqual(bunny_embed_url(url), url)
+        self.assertTrue(bunny_embed_url(url).startswith("https://iframe.mediadelivery.net/embed/478437/cb866163-57ae-4fad-9c95-4a727852b9b0?"))
         self.assertEqual(bunny_embed_url("https://example.com/play/478437/video"), "")
 
     def test_bunny_stream_link_renders_as_iframe_not_html_video(self):
@@ -195,7 +195,7 @@ class SkoolFlowTests(TestCase):
 
         response = self.client.get(reverse("skool:journey"))
         self.assertContains(response, 'id="bunny-player"')
-        self.assertContains(response, config.video_url)
+        self.assertContains(response, "/embed/478437/cb866163-57ae-4fad-9c95-4a727852b9b0")
         self.assertNotContains(response, 'id="career-media"')
 
     def test_bunny_stream_link_in_audio_field_renders_as_iframe(self):
@@ -211,7 +211,7 @@ class SkoolFlowTests(TestCase):
 
         response = self.client.get(reverse("skool:journey"))
         self.assertContains(response, 'id="bunny-player"')
-        self.assertContains(response, config.audio_url)
+        self.assertContains(response, "/embed/478437/cb866163-57ae-4fad-9c95-4a727852b9b0")
         self.assertNotContains(response, 'id="career-media"')
 
 

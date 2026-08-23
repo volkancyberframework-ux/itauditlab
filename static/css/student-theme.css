@@ -60,7 +60,7 @@
 .student-course-hero .btn-outline-light{border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.07);border-radius:12px;color:#f1f7fd!important}
 .student-course-hero .btn-outline-light:hover{background:#f1f7fd;color:#102337!important;border-color:#f1f7fd}
 .course-primary-actions{width:min(100%,520px)}
-.student-course-hero .course-primary-actions .btn-warning{white-space:normal;line-height:1.25}
+.student-course-hero .course-primary-actions button{white-space:normal;line-height:1.25}
 .student-course-content .card{border-radius:18px!important;overflow:hidden}
 .student-course-content .card-header{background:rgba(2,10,18,.3);border-color:var(--grc-line)!important}
 .student-course-content .card-body,.student-course-content .list-group-item{color:#d9e7f2}
