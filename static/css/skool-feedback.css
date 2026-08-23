@@ -1,0 +1,16 @@
+.answer-feedback { display: grid; gap: 24px; }
+.feedback-kicker { margin: 0; color: var(--cyan); font-size: 13px; font-weight: 800; letter-spacing: .14em; }
+.answer-feedback h2 { margin: 0; font-size: clamp(27px, 4vw, 42px); line-height: 1.15; }
+.explanation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.explanation-card { display: grid; align-content: start; gap: 12px; min-height: 190px; padding: 22px; border: 1px solid #31536c; border-radius: 16px; background: #081b2b; }
+.explanation-card.chosen { border-color: var(--cyan); background: linear-gradient(145deg, rgba(22, 76, 82, .7), rgba(8, 27, 43, .98)); box-shadow: 0 0 0 2px rgba(88, 223, 204, .1); }
+.explanation-card small { color: var(--blue); font-size: 11px; font-weight: 800; letter-spacing: .1em; }
+.explanation-card.chosen small { color: var(--cyan); }
+.explanation-card h3 { margin: 0; color: var(--text); font-size: 18px; line-height: 1.35; }
+.explanation-card p { margin: 0; color: #bcd0df; line-height: 1.65; }
+.answer-feedback .primary { margin-top: 0; }
+@media (max-width: 650px) {
+  .explanation-grid { grid-template-columns: 1fr; }
+  .explanation-card { min-height: 0; padding: 18px; }
+  .answer-feedback { gap: 18px; }
+}

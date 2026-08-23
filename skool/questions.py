@@ -1,3 +1,6 @@
+from .explanations import ANSWER_EXPLANATIONS
+
+
 QUESTIONS = [
     (1, "Üniversite mezunu musun ya da olmayı planlıyor musun?", "", ["Evet", "Hayır"], "foundation"),
     (2, "İngilizce biliyor musun?", "Karşındakini teknik bir sohbette anlayıp cevap verebiliyor musun?", ["Evet", "Hayır"], "foundation"),
@@ -33,6 +36,13 @@ FOUNDATION_POSITIVE = {
 
 def question_dicts():
     return [
-        {"number": n, "text": text, "help": help_text, "options": options, "section": section}
+        {
+            "number": n,
+            "text": text,
+            "help": help_text,
+            "options": options,
+            "section": section,
+            "explanations": ANSWER_EXPLANATIONS[n],
+        }
         for n, text, help_text, options, section in QUESTIONS
     ]

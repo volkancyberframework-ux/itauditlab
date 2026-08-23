@@ -14,7 +14,7 @@ from .models import (
     AvailabilityException, CareerTestAnswer, MeetingBooking, MeetingSlot, NotificationLog,
     SkoolInvitation, SkoolLab, SkoolSettings, SkoolUser, TravelAvailability,
 )
-from .questions import QUESTIONS
+from .questions import QUESTIONS, question_dicts
 from .admin import AvailabilityExceptionForm, TravelAvailabilityForm
 from .services import ensure_upcoming_slots, generate_slots, reserve_slot, reschedule_booking
 from .views import bunny_embed_url, youtube_video_id
@@ -62,6 +62,13 @@ class SkoolFlowTests(TestCase):
         user.save()
         response = self.client.get(reverse("skool:journey"))
         self.assertContains(response, "current:7")
+
+    def test_every_question_exposes_both_answer_explanations(self):
+        questions = question_dicts()
+        self.assertEqual(len(questions), 24)
+        self.assertTrue(all(len(question["explanations"]) == 2 for question in questions))
+        self.assertTrue(all(all(text.strip() for text in question["explanations"]) for question in questions))
+        self.assertIn("Nitelikli siber güvenlik", questions[0]["explanations"][0])
 
     def test_logout_allows_name_login_again(self):
         self.claim()
