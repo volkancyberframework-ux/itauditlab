@@ -6,6 +6,7 @@ from django.utils import timezone
 
 from skool.models import MeetingBooking, TravelAvailability
 from skool.services import send_telegram
+from core.models import MentorshipRequest
 
 
 class Command(BaseCommand):
@@ -38,5 +39,16 @@ class Command(BaseCommand):
                 message = "\n".join(lines)
             else:
                 message = "☀️ Bugün planlanmış Skool görüşmesi bulunmuyor."
+            requests = MentorshipRequest.objects.filter(
+                created_at__date=local_now.date() - timedelta(days=1)
+            ).select_related("user", "course")
+            if requests:
+                lines = [message, "", f"📨 Dün gelen {requests.count()} öğrenci talebi:"]
+                for item in requests[:20]:
+                    lines.append(
+                        f"• {item.user.get_full_name() or item.user.username} — {item.get_request_type_display()}\n"
+                        f"  {item.course.turkish_name or item.course.english_name}: {item.reason}"
+                    )
+                message = "\n".join(lines)
             if send_telegram(message, idempotency_key=key):
                 self.stdout.write(self.style.SUCCESS(f"Özet gönderildi: {availability.location_name}"))

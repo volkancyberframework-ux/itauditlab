@@ -45,12 +45,12 @@ class SkoolFlowTests(TestCase):
         self.invitation.refresh_from_db()
         self.assertEqual(self.invitation.status, "claimed")
 
-    def test_invitation_is_single_use(self):
+    def test_claimed_invitation_link_resumes_existing_user(self):
         self.claim()
         other = Client()
         other.get(reverse("skool:onboarding") + f"?invite={self.raw_token}")
         response = other.post(reverse("skool:onboarding"), {"full_name": "Volkan Güler"})
-        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(response, reverse("skool:journey"))
         self.assertEqual(SkoolUser.objects.count(), 1)
 
     def test_session_resumes_progress(self):
@@ -112,6 +112,19 @@ class SkoolFlowTests(TestCase):
         self.assertEqual(response.status_code, 200)
         user.refresh_from_db()
         self.assertEqual(user.state, "READY_TO_BOOK")
+
+    @patch("skool.views.send_telegram")
+    def test_audio_can_be_skipped_with_warning_event(self, notify):
+        self.claim()
+        user = SkoolUser.objects.get()
+        user.test_completed_at = timezone.now()
+        user.save(update_fields=("test_completed_at",))
+        response = self.client.post(reverse("skool:skip_audio"))
+        self.assertEqual(response.status_code, 200)
+        user.refresh_from_db()
+        self.assertEqual(user.state, "READY_TO_BOOK")
+        self.assertTrue(user.events.filter(event_type="audio_skipped").exists())
+        notify.assert_called_once()
 
     def test_youtube_links_are_rendered_by_video_id(self):
         self.assertEqual(youtube_video_id("https://youtu.be/dQw4w9WgXcQ"), "dQw4w9WgXcQ")
@@ -321,6 +334,24 @@ class AdminAndTelegramTests(TestCase):
         self.assertEqual(len(invitation.token_hash), 64)
         self.assertNotIn("Ayşe", invitation.token_hash)
         notify.assert_called_once()
+
+    @override_settings(TELEGRAM_ADMIN_CHAT_ID="123", TELEGRAM_WEBHOOK_SECRET="secret")
+    @patch("skool.views.send_telegram")
+    def test_telegram_grcustasi_create_alias(self, notify):
+        payload = {"message": {"chat": {"id": 123}, "text": "grcustasi create Volkan Güler"}}
+        response = self.client.post(reverse("skool:telegram_webhook"), json.dumps(payload), content_type="application/json", HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN="secret")
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(SkoolInvitation.objects.filter(full_name="Volkan Güler").exists())
+        notify.assert_called_once()
+
+    def test_admin_can_create_multiple_invitations_without_token_collision(self):
+        admin = get_user_model().objects.create_superuser(username="root", email="root@example.com", password="pass")
+        self.client.force_login(admin)
+        url = reverse("admin:skool_skoolinvitation_add")
+        self.assertEqual(self.client.post(url, {"full_name": "Birinci Kişi", "status": "invited", "_save": "Kaydet"}).status_code, 302)
+        self.assertEqual(self.client.post(url, {"full_name": "İkinci Kişi", "status": "invited", "_save": "Kaydet"}).status_code, 302)
+        self.assertEqual(SkoolInvitation.objects.count(), 2)
+        self.assertTrue(all(len(value) == 64 for value in SkoolInvitation.objects.values_list("token_hash", flat=True)))
 
     @override_settings(TELEGRAM_ADMIN_CHAT_ID="123", TELEGRAM_WEBHOOK_SECRET="secret")
     def test_telegram_rejects_bad_webhook_secret(self):

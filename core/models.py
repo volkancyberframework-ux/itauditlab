@@ -441,6 +441,27 @@ class CustomUser(AbstractUser):
         return True  # Video’lar serbest (mevcut akışla uyumlu)
 
 
+class MentorshipRequest(models.Model):
+    REQUEST_TYPES = (("question", "Tek soru"), ("meeting", "Birebir görüşme"))
+    STATUS = (("pending", "Bekliyor"), ("answered", "Yanıtlandı"), ("scheduled", "Planlandı"), ("closed", "Kapandı"))
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="mentorship_requests")
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="mentorship_requests")
+    request_type = models.CharField(max_length=16, choices=REQUEST_TYPES)
+    reason = models.TextField()
+    status = models.CharField(max_length=16, choices=STATUS, default="pending", db_index=True)
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ("-created_at",)
+        verbose_name = "Birebir destek talebi"
+        verbose_name_plural = "Birebir destek talepleri"
+
+    def __str__(self):
+        return f"{self.user} — {self.get_request_type_display()} — {self.course}"
+
+
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 import requests

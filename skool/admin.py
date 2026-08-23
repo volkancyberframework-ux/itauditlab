@@ -1,7 +1,11 @@
+import secrets
+
 from django import forms
+from django.conf import settings
 from django.contrib import admin, messages
 from django.db.models import Count
 from django.utils import timezone
+from django.urls import reverse
 
 from .models import (
     AvailabilityException, BookingHistory, CareerTestAnswer, MeetingBooking, MeetingSlot,
@@ -61,6 +65,20 @@ class InvitationAdmin(admin.ModelAdmin):
     list_filter = ("status", "created_at")
     search_fields = ("full_name", "normalized_name")
     readonly_fields = ("normalized_name", "token_hash", "created_at", "claimed_at", "revoked_at")
+
+    def save_model(self, request, obj, form, change):
+        if not change and not obj.token_hash:
+            raw = secrets.token_urlsafe(32)
+            obj.token_hash = SkoolInvitation.hash_token(raw)
+            request._skool_invite_token = raw
+        super().save_model(request, obj, form, change)
+
+    def response_add(self, request, obj, post_url_continue=None):
+        raw = getattr(request, "_skool_invite_token", "")
+        if raw:
+            base = getattr(settings, "PUBLIC_BASE_URL", "https://grcustasi.com").rstrip("/")
+            self.message_user(request, f"Davet bağlantısı: {base}{reverse('skool:onboarding')}?invite={raw}", messages.SUCCESS)
+        return super().response_add(request, obj, post_url_continue)
 
 
 @admin.register(SkoolUser)

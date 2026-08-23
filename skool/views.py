@@ -82,10 +82,16 @@ def onboarding(request):
         else:
             request.session["skool_claim_attempts"] = attempts + 1
             invitation = SkoolInvitation.objects.filter(
-                token_hash=request.session.get("skool_invite_hash", ""), status="invited"
+                token_hash=request.session.get("skool_invite_hash", ""), status__in=("invited", "claimed")
             ).first()
             supplied = normalize_name(request.POST.get("full_name", ""))
             if invitation and hmac.compare_digest(invitation.normalized_name.encode("utf-8"), supplied.encode("utf-8")):
+                if invitation.status == "claimed" and hasattr(invitation, "user"):
+                    user = invitation.user
+                    request.session.flush()
+                    request.session["skool_user_id"] = user.pk
+                    request.session.set_expiry(60 * 60 * 24 * 180)
+                    return redirect("skool:journey")
                 with transaction.atomic():
                     invitation = SkoolInvitation.objects.select_for_update().get(pk=invitation.pk)
                     if invitation.status != "invited":
@@ -132,6 +138,7 @@ def journey(request):
         "direct_video_url": media_url if config.video_url and not youtube_id and not bunny_url else "",
         "youtube_video_id": youtube_id,
         "bunny_embed_url": bunny_url,
+        "audio_was_skipped": user.events.filter(event_type="audio_skipped").exists(),
     })
 
 
@@ -235,6 +242,24 @@ def complete_audio(request):
     return JsonResponse({"ok": True})
 
 
+@require_POST
+@skool_user_required
+def skip_audio(request):
+    user = request.skool_user
+    if not user.test_completed_at:
+        return JsonResponse({"ok": False, "error": "Önce kariyer testini tamamlayın."}, status=403)
+    if not user.audio_completed_at:
+        user.audio_completed_at = timezone.now()
+        user.state = "READY_TO_BOOK"
+        user.save(update_fields=("audio_completed_at", "state", "updated_at"))
+        OnboardingEvent.objects.create(user=user, event_type="audio_skipped")
+        send_telegram(
+            f"⚠️ {user.full_name} Skool kaydını tamamlamadan takvime geçti.\n\n{admin_user_url(user)}",
+            idempotency_key=f"audio-skipped:{user.pk}",
+        )
+    return JsonResponse({"ok": True})
+
+
 @require_GET
 @skool_user_required
 def slots(request):
@@ -320,6 +345,8 @@ def telegram_webhook(request):
     if not admin_chat or not hmac.compare_digest(chat_id, admin_chat):
         return JsonResponse({"ok": True})
     text = (message.get("text") or "").strip()
+    if text.casefold().startswith("grcustasi "):
+        text = text.split(" ", 1)[1].strip()
     command, _, argument = text.lstrip("/").partition(" ")
     command, argument = command.casefold(), argument.strip()
     if command == "create" and argument:

@@ -55,6 +55,34 @@
         </div>
       </section>
 
+      <section class="container mt-n6 position-relative mentorship-support">
+        <div class="card border-0 shadow-lg rounded-4 p-4 p-lg-5">
+          <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+              <span class="badge bg-warning text-dark mb-3">VOLKAN İLE DOĞRUDAN DESTEK</span>
+              <h2 class="h3 mb-3">Bir sorunuz mu var, yoksa uzun bir konuyu birlikte mi ele alalım?</h2>
+              <p class="mb-2">Tek bir sorunuz varsa aşağıya yazın. Volkan size Skool veya mevcut erişim kanalınızdan dönecektir.</p>
+              <p class="mb-0">Daha uzun konuşmanız gereken bir konu varsa gerekçesini yazın ve birebir görüşme organize edin.</p>
+            </div>
+            <div class="col-lg-5">
+              <form method="post" action="{% url 'mentorship_request' course.id %}" class="d-grid gap-3">
+                {% csrf_token %}
+                <label class="fw-semibold">Talep türü
+                  <select name="request_type" class="form-select mt-2" required>
+                    <option value="question">Tek bir sorum var</option>
+                    <option value="meeting">Volkan’la birebir görüşmek istiyorum</option>
+                  </select>
+                </label>
+                <label class="fw-semibold">Sorunuz veya görüşme gerekçeniz
+                  <textarea name="reason" class="form-control mt-2" rows="3" minlength="5" required placeholder="Kısaca yazın..."></textarea>
+                </label>
+                <button class="btn btn-primary btn-lg" type="submit">Talebi Volkan’a Gönder →</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Page content -->
       <section class="pb-8 student-course-content">
         <div class="container">

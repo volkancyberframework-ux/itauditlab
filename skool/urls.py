@@ -12,6 +12,7 @@ urlpatterns = [
     path("skooltoplulugu/api/cevap/", views.save_answer, name="save_answer"),
     path("skooltoplulugu/api/ses-ilerleme/", views.audio_progress, name="audio_progress"),
     path("skooltoplulugu/api/ses-tamamla/", views.complete_audio, name="complete_audio"),
+    path("skooltoplulugu/api/ses-atla/", views.skip_audio, name="skip_audio"),
     path("skooltoplulugu/api/saatler/", views.slots, name="slots"),
     path("skooltoplulugu/api/rezervasyon/", views.book, name="book"),
     path("skooltoplulugu/api/degistir/", views.reschedule, name="reschedule"),

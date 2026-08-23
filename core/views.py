@@ -31,7 +31,7 @@ import requests
 
 from .models import (
     Course, Enrollment, CourseSection, CourseSubsection, CourseFAQ,
-    CustomUser, TestQuestion, TestOption, NewsletterLead
+    CustomUser, TestQuestion, TestOption, NewsletterLead, MentorshipRequest
 )
 
 from .models import PageVisit, BootcampInterest
@@ -299,6 +299,52 @@ def course_single(request, pk):
         "can_access_test": can_access_test,
         "show_orientation": show_orientation,
     })
+
+
+@login_required
+@require_POST
+def mentorship_request(request, pk):
+    course = get_object_or_404(Course, pk=pk)
+    allowed = request.user.is_staff or request.user.is_superuser or Enrollment.objects.filter(user=request.user, course=course).exists()
+    if not allowed:
+        return HttpResponseForbidden("Bu eğitim için erişiminiz bulunmuyor.")
+    request_type = request.POST.get("request_type", "").strip()
+    reason = request.POST.get("reason", "").strip()
+    if request_type not in {"question", "meeting"} or len(reason) < 5:
+        messages.error(request, "Lütfen talebinizi en az 5 karakterle açıklayın.")
+        return redirect("course_single", pk=course.pk)
+    item = MentorshipRequest.objects.create(user=request.user, course=course, request_type=request_type, reason=reason)
+    from skool.services import send_telegram
+    send_telegram(
+        f"{'📅 Yeni birebir görüşme talebi' if request_type == 'meeting' else '❓ Yeni öğrenci sorusu'}\n\n"
+        f"👤 {request.user.get_full_name() or request.user.username}\n📧 {request.user.email}\n"
+        f"📚 {course.turkish_name or course.english_name}\n📝 {reason}\n\nTalep #{item.pk}"
+    )
+    if request_type == "question":
+        messages.success(request, "Sorunuz Volkan’a iletildi. Yanıt Skool veya mevcut erişim kanalınızdan paylaşılacak.")
+        return redirect("course_single", pk=course.pk)
+
+    from skool.models import OnboardingEvent, SkoolInvitation, SkoolUser, normalize_name
+    full_name = request.user.get_full_name().strip() or request.user.username
+    skool_user = SkoolUser.objects.filter(invitation__normalized_name=normalize_name(full_name)).order_by("-updated_at").first()
+    if not skool_user:
+        invitation, _ = SkoolInvitation.create_invitation(full_name)
+        invitation.status = "claimed"
+        invitation.claimed_at = timezone.now()
+        invitation.save(update_fields=("status", "claimed_at"))
+        skool_user = SkoolUser.objects.create(
+            invitation=invitation, full_name=full_name, state="READY_TO_BOOK",
+            test_completed_at=timezone.now(), audio_completed_at=timezone.now(), intro_seen=True,
+        )
+        OnboardingEvent.objects.create(user=skool_user, event_type="course_meeting_request", detail={"request_id": item.pk, "course_id": course.pk})
+    elif not skool_user.audio_completed_at:
+        skool_user.audio_completed_at = timezone.now()
+        skool_user.state = "READY_TO_BOOK"
+        skool_user.save(update_fields=("audio_completed_at", "state", "updated_at"))
+    request.session["skool_user_id"] = skool_user.pk
+    request.session.set_expiry(60 * 60 * 24 * 180)
+    messages.success(request, "Talebiniz Volkan’a iletildi. Şimdi uygun görüşme saatini seçebilirsiniz.")
+    return redirect("skool:journey")
 
 @login_required
 def course_random_question(request, pk):

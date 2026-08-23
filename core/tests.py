@@ -13,6 +13,7 @@ from .models import (
     LearningProgramStep,
     ProgramEnrollment,
     ProgramRelease,
+    MentorshipRequest,
 )
 from .program_automation import run_daily_programs
 from .admin import QuickStudentCreateForm, format_program_calendar
@@ -139,3 +140,26 @@ class StudentCourseInterfaceTests(TestCase):
         self.assertContains(response, "Erişebildiğin Eğitimler")
         self.assertContains(response, "Kayıtlı Olduğun Eğitimler")
         self.assertNotContains(response, "Your Available Content")
+
+    @patch("skool.services.send_telegram")
+    def test_single_question_is_saved_and_notified(self, notify):
+        response = self.client.post(reverse("mentorship_request", args=[self.course.pk]), {
+            "request_type": "question", "reason": "Bu kontrolü nasıl test etmeliyim?",
+        })
+        self.assertRedirects(response, reverse("course_single", args=[self.course.pk]))
+        self.assertTrue(MentorshipRequest.objects.filter(user=self.user, request_type="question").exists())
+        notify.assert_called_once()
+
+    @patch("skool.services.send_telegram")
+    def test_meeting_request_opens_calendar_without_repeating_test(self, notify):
+        response = self.client.post(reverse("mentorship_request", args=[self.course.pk]), {
+            "request_type": "meeting", "reason": "Kariyer planımı uzun biçimde konuşmak istiyorum.",
+        })
+        self.assertRedirects(response, reverse("skool:journey"))
+        skool_user_id = self.client.session.get("skool_user_id")
+        self.assertTrue(skool_user_id)
+        from skool.models import SkoolUser
+        skool_user = SkoolUser.objects.get(pk=skool_user_id)
+        self.assertIsNotNone(skool_user.test_completed_at)
+        self.assertIsNotNone(skool_user.audio_completed_at)
+        notify.assert_called_once()

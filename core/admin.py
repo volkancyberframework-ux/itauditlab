@@ -27,7 +27,16 @@ from .models import (
     LearningProgramStep,
     ProgramEnrollment,
     ProgramRelease,
+    MentorshipRequest,
 )
+
+
+@admin.register(MentorshipRequest)
+class MentorshipRequestAdmin(admin.ModelAdmin):
+    list_display = ("user", "course", "request_type", "status", "created_at")
+    list_filter = ("request_type", "status", "created_at")
+    search_fields = ("user__username", "user__email", "course__turkish_name", "reason")
+    readonly_fields = ("user", "course", "request_type", "reason", "created_at", "updated_at")
 
 DEFAULT_PASSWORD = "Siberkobi1234"
 

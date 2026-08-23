@@ -27,6 +27,7 @@ urlpatterns = [
     path("newsletter-popup-lead/", views.newsletter_popup_lead, name="newsletter_popup_lead"),
     path("kamplar/", views.bootcamps_view, name="bootcamps"),
     path('course-single/<int:pk>/', views.course_single, name='course_single'),
+    path('course-single/<int:pk>/birebir-talep/', views.mentorship_request, name='mentorship_request'),
     path("course/<int:pk>/random-question/", views.course_random_question, name="course_random_question"),
     path('login/', views.custom_login_view, name='login'),
     path('force-password-change/', views.force_password_change_popup, name='force_password_change_popup'),
