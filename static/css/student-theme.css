@@ -59,7 +59,8 @@
 .student-shell .student-course-hero .course-header-actions .text-warning,.student-shell .student-course-hero .course-header-actions .text-warning path{color:#ffad0a!important;-webkit-text-fill-color:#ffad0a!important;fill:#ffad0a!important}
 .student-course-hero .btn-outline-light{border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.07);border-radius:12px;color:#f1f7fd!important}
 .student-course-hero .btn-outline-light:hover{background:#f1f7fd;color:#102337!important;border-color:#f1f7fd}
-.course-primary-actions{width:min(100%,520px)}
+.course-primary-actions{width:fit-content;max-width:100%;justify-items:start}
+.course-primary-actions .btn{width:auto;max-width:100%;padding-left:1.35rem;padding-right:1.35rem}
 .student-course-hero .course-primary-actions button{white-space:normal;line-height:1.25}
 .student-course-content .card{border-radius:18px!important;overflow:hidden}
 .student-course-content .card-header{background:rgba(2,10,18,.3);border-color:var(--grc-line)!important}
