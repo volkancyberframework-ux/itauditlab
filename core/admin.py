@@ -28,6 +28,7 @@ from .models import (
     ProgramEnrollment,
     ProgramRelease,
     MentorshipRequest,
+    StudentMeetingBooking,
 )
 
 
@@ -37,6 +38,14 @@ class MentorshipRequestAdmin(admin.ModelAdmin):
     list_filter = ("request_type", "status", "created_at")
     search_fields = ("user__username", "user__email", "course__turkish_name", "reason")
     readonly_fields = ("user", "course", "request_type", "reason", "created_at", "updated_at")
+
+
+@admin.register(StudentMeetingBooking)
+class StudentMeetingBookingAdmin(admin.ModelAdmin):
+    list_display = ("user", "request", "slot", "status", "created_at")
+    list_filter = ("status", "created_at")
+    search_fields = ("user__email", "user__first_name", "user__last_name", "request__reason")
+    readonly_fields = ("user", "request", "slot", "meeting_url", "created_at", "updated_at")
 
 DEFAULT_PASSWORD = "Siberkobi1234"
 

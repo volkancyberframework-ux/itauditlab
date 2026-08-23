@@ -1,0 +1,62 @@
+{% load static %}<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Volkan ile Görüşme | GRC Ustası</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="{% static 'img/favicon.ico' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/skool.css' %}">
+  <link rel="stylesheet" href="{% static 'css/student-meeting.css' %}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="{% url 'dashboard_student' %}">
+      <img src="{% static 'img/grc-ustasi-logo.png' %}" alt="GRC Ustası">
+      <span><b>GRC <em>Ustası</em></b><small>ÖĞRENCİ GÖRÜŞMESİ</small></span>
+    </a>
+    <div class="welcome">{{ request.user.email }}</div>
+  </header>
+  <main class="journey">
+    <section class="stage-card">
+      <span class="kicker">VOLKAN İLE BİREBİR GÖRÜŞME</span>
+      <h1>Uygun zamanı seç.</h1>
+      <p><b>{{ mentorship_request.course.turkish_name|default:mentorship_request.course.english_name }}</b></p>
+      <div class="notice"><b>Görüşme nedenin</b><br>{{ mentorship_request.reason }}</div>
+
+      {% if booking %}
+        <div class="success">
+          <div class="success-icon">✓</div>
+          <h2>Görüşmen planlandı</h2>
+          <div class="booking-ticket">
+            <b>{{ booking.slot.start_at_utc|date:"d.m.Y" }}</b>
+            <strong>{{ booking.slot.start_at_utc|date:"H:i" }}–{{ booking.slot.end_at_utc|date:"H:i" }}</strong>
+            <span>Türkiye saati</span>
+          </div>
+          <p>Talebin ve kayıtlı e-posta adresin Volkan’a iletildi. Volkan sana dönecek.</p>
+          <a class="primary link" href="{{ booking.meeting_url }}" rel="noopener">Görüşme bağlantısını aç →</a>
+        </div>
+      {% else %}
+        <div class="calendar-head">
+          <button id="prev-month" type="button" aria-label="Önceki ay">←</button>
+          <h2 id="month-title"></h2>
+          <button id="next-month" type="button" aria-label="Sonraki ay">→</button>
+        </div>
+        <div class="weekdays"><span>Pzt</span><span>Sal</span><span>Çar</span><span>Per</span><span>Cum</span><span>Cmt</span><span>Paz</span></div>
+        <div id="student-calendar" class="calendar"></div>
+        <div id="student-slot-panel" class="slot-panel" hidden><h3></h3><div id="student-slot-list"></div></div>
+        <p id="student-calendar-error" class="error" hidden></p>
+      {% endif %}
+      <p class="chat-note">Bu alan normal öğrenci hesabına ve {{ request.user.email }} adresine bağlıdır; Skool daveti veya Skool oturumu kullanmaz.</p>
+      <a class="secondary" href="{% url 'course_single' mentorship_request.course_id %}">← Eğitime dön</a>
+    </section>
+  </main>
+  {% if not booking %}
+  <script>window.STUDENT_MEETING={slotsUrl:"{% url 'student_meeting_slots' mentorship_request.pk %}",bookUrl:"{% url 'student_meeting_book' mentorship_request.pk %}"};</script>
+  <script src="{% static 'js/student-meeting-calendar.js' %}"></script>
+  {% endif %}
+</body>
+</html>

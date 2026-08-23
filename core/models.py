@@ -462,6 +462,40 @@ class MentorshipRequest(models.Model):
         return f"{self.user} — {self.get_request_type_display()} — {self.course}"
 
 
+class StudentMeetingBooking(models.Model):
+    """Normal öğrenci hesabının Skool kimliğinden tamamen bağımsız görüşme kaydı."""
+
+    STATUS = (("active", "Aktif"), ("completed", "Tamamlandı"), ("cancelled", "İptal"))
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="student_meeting_bookings"
+    )
+    request = models.OneToOneField(
+        MentorshipRequest, on_delete=models.PROTECT, related_name="booking"
+    )
+    slot = models.OneToOneField(
+        "skool.MeetingSlot", on_delete=models.PROTECT, related_name="student_booking"
+    )
+    meeting_url = models.URLField()
+    status = models.CharField(max_length=16, choices=STATUS, default="active", db_index=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ("-created_at",)
+        constraints = [
+            models.UniqueConstraint(
+                fields=("user",), condition=models.Q(status="active"),
+                name="one_active_normal_student_booking",
+            )
+        ]
+        verbose_name = "Öğrenci görüşme rezervasyonu"
+        verbose_name_plural = "Öğrenci görüşme rezervasyonları"
+
+    def __str__(self):
+        return f"{self.user.email} — {self.slot.start_at_utc}"
+
+
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 import requests

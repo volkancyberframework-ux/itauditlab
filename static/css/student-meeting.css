@@ -1,0 +1,15 @@
+#student-slot-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.stage-card > .secondary {
+  display: inline-block;
+  margin-top: 24px;
+  text-decoration: none;
+}
+
+@media (max-width: 760px) {
+  #student-slot-list { grid-template-columns: 1fr; }
+}

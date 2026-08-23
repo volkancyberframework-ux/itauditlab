@@ -1,4 +1,5 @@
-from datetime import date, timedelta
+from datetime import date, time, timedelta
+import json
 from types import SimpleNamespace
 from unittest.mock import patch
 
@@ -14,6 +15,7 @@ from .models import (
     ProgramEnrollment,
     ProgramRelease,
     MentorshipRequest,
+    StudentMeetingBooking,
 )
 from .program_automation import run_daily_programs
 from .admin import QuickStudentCreateForm, format_program_calendar
@@ -149,17 +151,62 @@ class StudentCourseInterfaceTests(TestCase):
         self.assertRedirects(response, reverse("course_single", args=[self.course.pk]))
         self.assertTrue(MentorshipRequest.objects.filter(user=self.user, request_type="question").exists())
         notify.assert_called_once()
+        notification = notify.call_args.args[0]
+        self.assertIn(self.user.email, notification)
+        self.assertIn("Bu kontrolü nasıl test etmeliyim?", notification)
 
     @patch("skool.services.send_telegram")
-    def test_meeting_request_opens_calendar_without_repeating_test(self, notify):
+    def test_meeting_request_opens_independent_student_calendar(self, notify):
         response = self.client.post(reverse("mentorship_request", args=[self.course.pk]), {
             "request_type": "meeting", "reason": "Kariyer planımı uzun biçimde konuşmak istiyorum.",
         })
-        self.assertRedirects(response, reverse("skool:journey"))
-        skool_user_id = self.client.session.get("skool_user_id")
-        self.assertTrue(skool_user_id)
+        item = MentorshipRequest.objects.get(user=self.user, request_type="meeting")
+        self.assertRedirects(response, reverse("student_meeting_calendar", args=[item.pk]))
+        self.assertNotIn("skool_user_id", self.client.session)
         from skool.models import SkoolUser
-        skool_user = SkoolUser.objects.get(pk=skool_user_id)
-        self.assertIsNotNone(skool_user.test_completed_at)
-        self.assertIsNotNone(skool_user.audio_completed_at)
+        self.assertFalse(SkoolUser.objects.exists())
         notify.assert_called_once()
+
+    def test_student_calendar_request_is_private_to_account(self):
+        item = MentorshipRequest.objects.create(
+            user=self.user, course=self.course, request_type="meeting", reason="Özel görüşme gerekçesi",
+        )
+        other = get_user_model().objects.create_user(
+            username="other@example.com", email="other@example.com", password="test"
+        )
+        self.client.force_login(other)
+        response = self.client.get(reverse("student_meeting_calendar", args=[item.pk]))
+        self.assertEqual(response.status_code, 404)
+
+    @patch("skool.services.send_telegram")
+    def test_normal_student_books_shared_slot_with_email_and_reason(self, notify):
+        from django.utils import timezone
+        from skool.models import MeetingSlot, TravelAvailability
+
+        item = MentorshipRequest.objects.create(
+            user=self.user, course=self.course, request_type="meeting",
+            reason="Kontrol kariyerimi ayrıntılı konuşmak istiyorum.",
+        )
+        availability = TravelAvailability.objects.create(
+            location_name="İstanbul", timezone="Europe/Istanbul",
+            start_date=timezone.localdate() + timedelta(days=1),
+            end_date=timezone.localdate() + timedelta(days=3),
+            local_available_start=time(9), local_available_end=time(18),
+        )
+        start_at = timezone.now() + timedelta(days=2)
+        slot = MeetingSlot.objects.create(
+            availability=availability, local_date=timezone.localdate() + timedelta(days=2),
+            start_at_utc=start_at, end_at_utc=start_at + timedelta(minutes=90),
+        )
+        response = self.client.post(
+            reverse("student_meeting_book", args=[item.pk]),
+            data=json.dumps({"slot_id": slot.pk}), content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(StudentMeetingBooking.objects.filter(user=self.user, request=item).exists())
+        slot.refresh_from_db()
+        self.assertEqual(slot.status, "booked")
+        notify.assert_called_once()
+        message = notify.call_args.args[0]
+        self.assertIn(self.user.email, message)
+        self.assertIn(item.reason, message)

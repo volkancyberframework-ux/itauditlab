@@ -1,14 +1,18 @@
 from __future__ import annotations
+import json
+from datetime import timedelta
+
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
-from django.db import models
+from django.db import models, transaction
 from django.db.models import Prefetch, IntegerField
 from django.db.models.functions import Coalesce
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from .models import Bootcamp, BootcampInterest
 from .models import Course, Enrollment,CourseSection,CourseSubsection,CourseFAQ,CustomUser,TestQuestion,TestOption
@@ -31,7 +35,8 @@ import requests
 
 from .models import (
     Course, Enrollment, CourseSection, CourseSubsection, CourseFAQ,
-    CustomUser, TestQuestion, TestOption, NewsletterLead, MentorshipRequest
+    CustomUser, TestQuestion, TestOption, NewsletterLead, MentorshipRequest,
+    StudentMeetingBooking,
 )
 
 from .models import PageVisit, BootcampInterest
@@ -310,6 +315,9 @@ def mentorship_request(request, pk):
         return HttpResponseForbidden("Bu eğitim için erişiminiz bulunmuyor.")
     request_type = request.POST.get("request_type", "").strip()
     reason = request.POST.get("reason", "").strip()
+    if not (request.user.email or "").strip():
+        messages.error(request, "Bu talep için öğrenci hesabınızda kayıtlı bir e-posta adresi bulunmalıdır.")
+        return redirect("course_single", pk=course.pk)
     if request_type not in {"question", "meeting"} or len(reason) < 5:
         messages.error(request, "Lütfen talebinizi en az 5 karakterle açıklayın.")
         return redirect("course_single", pk=course.pk)
@@ -321,30 +329,105 @@ def mentorship_request(request, pk):
         f"📚 {course.turkish_name or course.english_name}\n📝 {reason}\n\nTalep #{item.pk}"
     )
     if request_type == "question":
-        messages.success(request, "Sorunuz Volkan’a iletildi. Yanıt Skool veya mevcut erişim kanalınızdan paylaşılacak.")
+        messages.success(request, "Sorunuz Volkan’a iletildi. Volkan sana kayıtlı e-posta adresinden dönecek.")
         return redirect("course_single", pk=course.pk)
-
-    from skool.models import OnboardingEvent, SkoolInvitation, SkoolUser, normalize_name
-    full_name = request.user.get_full_name().strip() or request.user.username
-    skool_user = SkoolUser.objects.filter(invitation__normalized_name=normalize_name(full_name)).order_by("-updated_at").first()
-    if not skool_user:
-        invitation, _ = SkoolInvitation.create_invitation(full_name)
-        invitation.status = "claimed"
-        invitation.claimed_at = timezone.now()
-        invitation.save(update_fields=("status", "claimed_at"))
-        skool_user = SkoolUser.objects.create(
-            invitation=invitation, full_name=full_name, state="READY_TO_BOOK",
-            test_completed_at=timezone.now(), audio_completed_at=timezone.now(), intro_seen=True,
-        )
-        OnboardingEvent.objects.create(user=skool_user, event_type="course_meeting_request", detail={"request_id": item.pk, "course_id": course.pk})
-    elif not skool_user.audio_completed_at:
-        skool_user.audio_completed_at = timezone.now()
-        skool_user.state = "READY_TO_BOOK"
-        skool_user.save(update_fields=("audio_completed_at", "state", "updated_at"))
-    request.session["skool_user_id"] = skool_user.pk
-    request.session.set_expiry(60 * 60 * 24 * 180)
     messages.success(request, "Talebiniz Volkan’a iletildi. Şimdi uygun görüşme saatini seçebilirsiniz.")
-    return redirect("skool:journey")
+    return redirect("student_meeting_calendar", request_id=item.pk)
+
+
+@login_required
+def student_meeting_calendar(request, request_id):
+    item = get_object_or_404(
+        MentorshipRequest.objects.select_related("course"),
+        pk=request_id, user=request.user, request_type="meeting",
+    )
+    StudentMeetingBooking.objects.filter(
+        user=request.user, status="active", slot__end_at_utc__lte=timezone.now()
+    ).update(status="completed")
+    booking = StudentMeetingBooking.objects.filter(
+        request=item, status="active"
+    ).select_related("slot__availability").first()
+    return render(request, "student-meeting-calendar.html", {
+        "mentorship_request": item,
+        "booking": booking,
+    })
+
+
+@login_required
+def student_meeting_slots(request, request_id):
+    get_object_or_404(
+        MentorshipRequest, pk=request_id, user=request.user, request_type="meeting"
+    )
+    from skool.models import MeetingSlot
+    from skool.services import ensure_upcoming_slots
+    ensure_upcoming_slots()
+    tomorrow = timezone.localdate() + timedelta(days=1)
+    slots = MeetingSlot.objects.filter(
+        local_date__gte=tomorrow, status="available"
+    ).order_by("start_at_utc")[:180]
+    return JsonResponse({"slots": [
+        {
+            "id": slot.pk,
+            "date": slot.local_date.isoformat(),
+            "start": timezone.localtime(slot.start_at_utc).strftime("%H:%M"),
+            "end": timezone.localtime(slot.end_at_utc).strftime("%H:%M"),
+        }
+        for slot in slots
+    ]})
+
+
+@login_required
+@require_POST
+def student_meeting_book(request, request_id):
+    item = get_object_or_404(
+        MentorshipRequest.objects.select_related("course"),
+        pk=request_id, user=request.user, request_type="meeting",
+    )
+    try:
+        data = json.loads(request.body or "{}")
+        slot_id = int(data.get("slot_id"))
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return JsonResponse({"error": "Geçerli bir görüşme saati seçin."}, status=400)
+
+    from skool.models import MeetingSlot, SkoolSettings
+    from skool.services import local_booking_lines, send_telegram
+    try:
+        with transaction.atomic():
+            StudentMeetingBooking.objects.filter(
+                user=request.user, status="active", slot__end_at_utc__lte=timezone.now()
+            ).update(status="completed")
+            if StudentMeetingBooking.objects.select_for_update().filter(
+                user=request.user, status="active"
+            ).exists():
+                raise ValueError("Zaten aktif bir görüşmeniz var.")
+            slot = MeetingSlot.objects.select_for_update().select_related("availability").get(pk=slot_id)
+            if slot.status != "available" or slot.local_date < timezone.localdate() + timedelta(days=1):
+                raise ValueError("Bu görüşme saati artık müsait değil.")
+            booking = StudentMeetingBooking.objects.create(
+                user=request.user, request=item, slot=slot,
+                meeting_url=SkoolSettings.load().meet_url,
+            )
+            slot.status = "booked"
+            slot.save(update_fields=("status",))
+            item.status = "scheduled"
+            item.save(update_fields=("status", "updated_at"))
+    except MeetingSlot.DoesNotExist:
+        return JsonResponse({"error": "Görüşme saati bulunamadı."}, status=404)
+    except ValueError as exc:
+        return JsonResponse({"error": str(exc)}, status=409)
+
+    tr_start, tr_end, _, _ = local_booking_lines(booking)
+    full_name = request.user.get_full_name() or request.user.username
+    transaction.on_commit(lambda: send_telegram(
+        "📅 Normal öğrenci görüşmesi planlandı\n\n"
+        f"👤 {full_name}\n📧 {request.user.email}\n"
+        f"📚 {item.course.turkish_name or item.course.english_name}\n"
+        f"📝 Görüşme nedeni: {item.reason}\n\n"
+        f"🗓 {tr_start:%d.%m.%Y} • {tr_start:%H:%M}–{tr_end:%H:%M}\n"
+        f"🔗 {booking.meeting_url}",
+        idempotency_key=f"student-booking:{booking.pk}",
+    ))
+    return JsonResponse({"ok": True, "redirect": reverse("student_meeting_calendar", args=[item.pk])})
 
 @login_required
 def course_random_question(request, pk):
