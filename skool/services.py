@@ -18,6 +18,23 @@ from .models import (
 logger = logging.getLogger(__name__)
 
 
+def finalize_expired_bookings(user=None):
+    """Süresi biten randevuları geçmişe alır; tamamlanan hazırlık yeniden istenmez."""
+    bookings = MeetingBooking.objects.filter(status="active", slot__end_at_utc__lte=timezone.now())
+    if user is not None:
+        bookings = bookings.filter(user=user)
+    user_ids = list(bookings.values_list("user_id", flat=True))
+    updated = bookings.update(status="completed")
+    if user_ids:
+        from .models import SkoolUser
+        SkoolUser.objects.filter(
+            pk__in=user_ids,
+            test_completed_at__isnull=False,
+            audio_completed_at__isnull=False,
+        ).update(state="READY_TO_BOOK")
+    return updated
+
+
 def send_telegram(text, *, idempotency_key=None):
     reserved_log = None
     if idempotency_key:
@@ -106,6 +123,7 @@ def ensure_upcoming_slots(days=60):
 
 
 def reserve_slot(user, slot_id):
+    finalize_expired_bookings(user)
     tomorrow = timezone.localdate(timezone=ZoneInfo("Europe/Istanbul")) + timedelta(days=1)
     with transaction.atomic():
         if MeetingBooking.objects.select_for_update().filter(user=user, status="active").exists():

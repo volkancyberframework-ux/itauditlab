@@ -14,7 +14,9 @@ from .models import (
     SkoolInvitation, SkoolSettings, SkoolUser, TravelAvailability,
 )
 from .questions import QUESTIONS
+from .admin import AvailabilityExceptionForm, TravelAvailabilityForm
 from .services import generate_slots, reserve_slot, reschedule_booking
+from .views import youtube_video_id
 
 
 @override_settings(STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage")
@@ -111,6 +113,11 @@ class SkoolFlowTests(TestCase):
         user.refresh_from_db()
         self.assertEqual(user.state, "READY_TO_BOOK")
 
+    def test_youtube_links_are_rendered_by_video_id(self):
+        self.assertEqual(youtube_video_id("https://youtu.be/dQw4w9WgXcQ"), "dQw4w9WgXcQ")
+        self.assertEqual(youtube_video_id("https://www.youtube.com/watch?v=dQw4w9WgXcQ"), "dQw4w9WgXcQ")
+        self.assertEqual(youtube_video_id("https://example.com/video.mp4"), "")
+
 
 @override_settings(STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage")
 class BookingTests(TestCase):
@@ -196,6 +203,58 @@ class BookingTests(TestCase):
         new_slot = generate_slots(self.availability, timezone.localdate() + timedelta(days=2))[0]
         with self.assertRaises(ValueError):
             reschedule_booking(self.user, new_slot.pk)
+
+    def test_finished_booking_returns_prepared_user_to_calendar(self):
+        past_slot = MeetingSlot.objects.create(
+            availability=self.availability,
+            local_date=timezone.localdate() - timedelta(days=1),
+            start_at_utc=timezone.now() - timedelta(hours=3),
+            end_at_utc=timezone.now() - timedelta(hours=1, minutes=30),
+            status="booked",
+        )
+        booking = MeetingBooking.objects.create(
+            user=self.user, slot=past_slot, meeting_url="https://meet.google.com/test"
+        )
+        self.user.state = "BOOKED"
+        self.user.save(update_fields=("state",))
+
+        session = self.client.session
+        session["skool_user_id"] = self.user.pk
+        session.save()
+        response = self.client.get(reverse("skool:journey"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIsNone(response.context["booking"])
+        self.assertContains(response, "Volkan ile 90 Dakikalık Görüşmeni Planla")
+        self.assertNotContains(response, "Görüşmeniz planlandı")
+        booking.refresh_from_db()
+        self.user.refresh_from_db()
+        self.assertEqual(booking.status, "completed")
+        self.assertEqual(self.user.state, "READY_TO_BOOK")
+
+
+class AvailabilityAdminFormTests(TestCase):
+    def test_travel_availability_can_be_single_day(self):
+        form = TravelAvailabilityForm(data={
+            "location_name": "İstanbul", "timezone": "Europe/Istanbul",
+            "start_date": "2026-09-01", "end_date": "",
+            "local_available_start": "09:00", "local_available_end": "17:00",
+            "enabled": True,
+        })
+        self.assertTrue(form.is_valid(), form.errors)
+        self.assertEqual(form.cleaned_data["end_date"], date(2026, 9, 1))
+
+    def test_exception_can_be_single_day_or_range(self):
+        single = AvailabilityExceptionForm(data={
+            "start_date": "2026-09-02", "end_date": "", "reason": "Tek gün"
+        })
+        ranged = AvailabilityExceptionForm(data={
+            "start_date": "2026-09-03", "end_date": "2026-09-05", "reason": "Aralık"
+        })
+        self.assertTrue(single.is_valid(), single.errors)
+        self.assertTrue(ranged.is_valid(), ranged.errors)
+        self.assertEqual(single.cleaned_data["end_date"], date(2026, 9, 2))
+        self.assertEqual(ranged.cleaned_data["end_date"], date(2026, 9, 5))
 
 
 @override_settings(STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage")

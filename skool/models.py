@@ -199,7 +199,7 @@ class MeetingSlot(models.Model):
 
 
 class MeetingBooking(models.Model):
-    STATUS = [("active", "Aktif"), ("rescheduled", "Değiştirildi"), ("cancelled", "İptal")]
+    STATUS = [("active", "Aktif"), ("completed", "Tamamlandı"), ("rescheduled", "Değiştirildi"), ("cancelled", "İptal")]
     user = models.ForeignKey(SkoolUser, on_delete=models.PROTECT, related_name="bookings")
     slot = models.OneToOneField(MeetingSlot, on_delete=models.PROTECT, related_name="booking")
     status = models.CharField(max_length=16, choices=STATUS, default="active", db_index=True)

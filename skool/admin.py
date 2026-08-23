@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib import admin, messages
 from django.db.models import Count
 from django.utils import timezone
@@ -23,6 +24,37 @@ class EventInline(admin.TabularInline):
     readonly_fields = ("event_type", "detail", "created_at")
 
 
+class OptionalEndDateForm(forms.ModelForm):
+    """Tek gün için bitşi boş bırakır; aralık için ikinci tarihi kullanır."""
+    end_date = forms.DateField(
+        required=False,
+        label="Bitiş tarihi (aralık için)",
+        widget=forms.DateInput(attrs={"type": "date"}),
+        help_text="Tek gün seçiyorsanız boş bırakın.",
+    )
+
+    class Meta:
+        fields = "__all__"
+        widgets = {"start_date": forms.DateInput(attrs={"type": "date"})}
+
+    def clean(self):
+        cleaned = super().clean()
+        if cleaned.get("start_date") and not cleaned.get("end_date"):
+            cleaned["end_date"] = cleaned["start_date"]
+            self.instance.end_date = cleaned["start_date"]
+        return cleaned
+
+
+class TravelAvailabilityForm(OptionalEndDateForm):
+    class Meta(OptionalEndDateForm.Meta):
+        model = TravelAvailability
+
+
+class AvailabilityExceptionForm(OptionalEndDateForm):
+    class Meta(OptionalEndDateForm.Meta):
+        model = AvailabilityException
+
+
 @admin.register(SkoolInvitation)
 class InvitationAdmin(admin.ModelAdmin):
     list_display = ("full_name", "status", "created_at", "claimed_at")
@@ -42,6 +74,7 @@ class SkoolUserAdmin(admin.ModelAdmin):
 
 @admin.register(TravelAvailability)
 class TravelAvailabilityAdmin(admin.ModelAdmin):
+    form = TravelAvailabilityForm
     list_display = ("location_name", "timezone", "start_date", "end_date", "local_available_start", "local_available_end", "enabled", "booking_count", "needs_attention")
     list_filter = ("enabled", "timezone")
     search_fields = ("location_name", "timezone")
@@ -86,6 +119,7 @@ class TravelAvailabilityAdmin(admin.ModelAdmin):
 
 @admin.register(AvailabilityException)
 class AvailabilityExceptionAdmin(admin.ModelAdmin):
+    form = AvailabilityExceptionForm
     list_display = ("start_date", "end_date", "availability", "reason", "active_booking_warning")
     list_filter = ("start_date", "availability")
 
@@ -93,6 +127,17 @@ class AvailabilityExceptionAdmin(admin.ModelAdmin):
     def active_booking_warning(self, obj):
         count = MeetingBooking.objects.filter(status="active", slot__local_date__range=(obj.start_date, obj.end_date)).count()
         return f"Bu aralıkta {count} aktif görüşme var" if count else "—"
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        slots = MeetingSlot.objects.filter(
+            local_date__range=(obj.start_date, obj.end_date), status="available"
+        )
+        if obj.availability_id:
+            slots = slots.filter(availability=obj.availability)
+        disabled = slots.update(status="disabled")
+        if disabled:
+            self.message_user(request, f"{disabled} boş görüşme saati bu istisna nedeniyle kapatıldı.", messages.INFO)
 
 
 @admin.register(MeetingSlot)

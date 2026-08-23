@@ -1,6 +1,7 @@
 import hmac
 import json
 from datetime import timedelta
+from urllib.parse import parse_qs, urlparse
 from zoneinfo import ZoneInfo
 
 from django.conf import settings
@@ -20,9 +21,26 @@ from .models import (
 )
 from .questions import FOUNDATION_POSITIVE, QUESTIONS, question_dicts
 from .services import (
-    admin_user_url, booking_notification, ensure_upcoming_slots, local_booking_lines,
+    admin_user_url, booking_notification, ensure_upcoming_slots, finalize_expired_bookings, local_booking_lines,
     reserve_slot, reschedule_booking, send_telegram,
 )
+
+
+def youtube_video_id(url):
+    """Yaygın YouTube bağlantılarından güvenli video kimliğini ayıklar."""
+    if not url:
+        return ""
+    parsed = urlparse(url)
+    host = parsed.netloc.casefold().split(":", 1)[0]
+    candidate = ""
+    if host in {"youtu.be", "www.youtu.be"}:
+        candidate = parsed.path.strip("/").split("/", 1)[0]
+    elif host in {"youtube.com", "www.youtube.com", "m.youtube.com"}:
+        if parsed.path == "/watch":
+            candidate = parse_qs(parsed.query).get("v", [""])[0]
+        elif parsed.path.startswith(("/embed/", "/shorts/", "/live/")):
+            candidate = parsed.path.strip("/").split("/", 1)[1].split("/", 1)[0]
+    return candidate if candidate.replace("-", "").replace("_", "").isalnum() else ""
 
 
 def _json_body(request):
@@ -73,6 +91,8 @@ def onboarding(request):
 @skool_user_required
 def journey(request):
     user = request.skool_user
+    finalize_expired_bookings(user)
+    user.refresh_from_db()
     answers = {a.question_id: a.selected_option for a in user.answers.all()}
     config = SkoolSettings.load()
     booking = user.bookings.filter(status="active").select_related("slot__availability").first()
@@ -87,6 +107,7 @@ def journey(request):
         "answers_json": json.dumps(answers, ensure_ascii=False), "config": config,
         "booking": booking, "tr_start": tr_start, "tr_end": tr_end,
         "can_reschedule": can_reschedule,
+        "youtube_video_id": youtube_video_id(config.video_url) if not config.audio_url else "",
     })
 
 
