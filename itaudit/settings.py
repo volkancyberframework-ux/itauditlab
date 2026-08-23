@@ -20,6 +20,11 @@ TELEGRAM_BOT_TOKEN = config("TELEGRAM_BOT_TOKEN", default="")
 TELEGRAM_CHAT_ID = config("TELEGRAM_CHAT_ID", default="")
 TELEGRAM_ADMIN_CHAT_ID = config("TELEGRAM_ADMIN_CHAT_ID", default=TELEGRAM_CHAT_ID)
 TELEGRAM_WEBHOOK_SECRET = config("TELEGRAM_WEBHOOK_SECRET", default="")
+# A Telegram bot can own only one webhook. Use a dedicated bot for GRC Ustası
+# commands while keeping the legacy notification bot available as fallback.
+GRCUSTASI_TELEGRAM_BOT_TOKEN = config("GRCUSTASI_TELEGRAM_BOT_TOKEN", default=TELEGRAM_BOT_TOKEN)
+GRCUSTASI_TELEGRAM_ADMIN_CHAT_ID = config("GRCUSTASI_TELEGRAM_ADMIN_CHAT_ID", default=TELEGRAM_ADMIN_CHAT_ID)
+GRCUSTASI_TELEGRAM_WEBHOOK_SECRET = config("GRCUSTASI_TELEGRAM_WEBHOOK_SECRET", default=TELEGRAM_WEBHOOK_SECRET)
 PUBLIC_BASE_URL = config("PUBLIC_BASE_URL", default="https://grcustasi.com")
 SKOOL_MEETING_DURATION_MINUTES = config("SKOOL_MEETING_DURATION_MINUTES", default=90, cast=int)
 SKOOL_DAILY_SLOT_COUNT = config("SKOOL_DAILY_SLOT_COUNT", default=3, cast=int)

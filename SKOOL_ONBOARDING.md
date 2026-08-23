@@ -76,6 +76,11 @@ Bu ekranların tamamı Django staff authentication gerektirir. Kariyer cevaplar�
 TELEGRAM_BOT_TOKEN=
 TELEGRAM_ADMIN_CHAT_ID=
 TELEGRAM_WEBHOOK_SECRET=
+# Aynı bot başka bir uygulamada webhook kullanıyorsa BotFather üzerinden GRC
+# Ustası için ayrı bot açın. Bir Telegram botu yalnızca tek webhook kullanabilir.
+GRCUSTASI_TELEGRAM_BOT_TOKEN=
+GRCUSTASI_TELEGRAM_ADMIN_CHAT_ID=
+GRCUSTASI_TELEGRAM_WEBHOOK_SECRET=
 PUBLIC_BASE_URL=https://grcustasi.com
 SKOOL_GOOGLE_MEET_URL=https://meet.google.com/jbv-csdm-eyy
 SKOOL_AUDIO_URL=
@@ -86,6 +91,12 @@ SKOOL_DISPLAY_TIMEZONE=Europe/Istanbul
 ```
 
 `DATABASE_URL` ve `SECRET_KEY` mevcut servisle aynıdır.
+
+Render web servisine bu değerleri ekledikten sonra webhook'u kurup doğrulayın:
+
+```bash
+python manage.py configure_skool_telegram_webhook
+```
 
 ## Deployment
 

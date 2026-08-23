@@ -81,17 +81,28 @@ def onboarding(request):
             error = "Çok fazla deneme yapıldı. Lütfen daha sonra tekrar deneyin."
         else:
             request.session["skool_claim_attempts"] = attempts + 1
+            supplied = normalize_name(request.POST.get("full_name", ""))
             invitation = SkoolInvitation.objects.filter(
                 token_hash=request.session.get("skool_invite_hash", ""), status__in=("invited", "claimed")
             ).first()
-            if not invitation:
+            # A previously opened invite link may remain in the browser session.
+            # It must not shadow a later, valid name-only login.
+            if not invitation or invitation.normalized_name != supplied:
                 invitation = SkoolInvitation.objects.filter(
-                    normalized_name=normalize_name(request.POST.get("full_name", "")), status__in=("invited", "claimed")
+                    normalized_name=supplied, status__in=("invited", "claimed")
                 ).order_by("-created_at").first()
-            supplied = normalize_name(request.POST.get("full_name", ""))
             if invitation and hmac.compare_digest(invitation.normalized_name.encode("utf-8"), supplied.encode("utf-8")):
                 if invitation.status == "claimed" and hasattr(invitation, "user"):
                     user = invitation.user
+                    request.session.flush()
+                    request.session["skool_user_id"] = user.pk
+                    request.session.set_expiry(60 * 60 * 24 * 180)
+                    return redirect("skool:journey")
+                if invitation.status == "claimed":
+                    # Repair manually-created/edited invitations which were marked
+                    # claimed before their SkoolUser row was created.
+                    user = SkoolUser.objects.create(invitation=invitation, full_name=invitation.full_name)
+                    OnboardingEvent.objects.create(user=user, event_type="identity_verified", detail={"source": "manual_invitation_repair"})
                     request.session.flush()
                     request.session["skool_user_id"] = user.pk
                     request.session.set_expiry(60 * 60 * 24 * 180)
@@ -373,13 +384,17 @@ def admin_bookings(request):
 @csrf_exempt
 @require_POST
 def telegram_webhook(request):
-    secret = getattr(settings, "TELEGRAM_WEBHOOK_SECRET", "")
+    secret = getattr(settings, "GRCUSTASI_TELEGRAM_WEBHOOK_SECRET", "") or getattr(settings, "TELEGRAM_WEBHOOK_SECRET", "")
     if secret and not hmac.compare_digest(request.headers.get("X-Telegram-Bot-Api-Secret-Token", ""), secret):
         return JsonResponse({"ok": False}, status=403)
     payload = _json_body(request)
     message = payload.get("message", {})
     chat_id = str(message.get("chat", {}).get("id", ""))
-    admin_chat = str(getattr(settings, "TELEGRAM_ADMIN_CHAT_ID", "") or getattr(settings, "TELEGRAM_CHAT_ID", ""))
+    admin_chat = str(
+        getattr(settings, "GRCUSTASI_TELEGRAM_ADMIN_CHAT_ID", "")
+        or getattr(settings, "TELEGRAM_ADMIN_CHAT_ID", "")
+        or getattr(settings, "TELEGRAM_CHAT_ID", "")
+    )
     if not admin_chat or not hmac.compare_digest(chat_id, admin_chat):
         return JsonResponse({"ok": True})
     text = (message.get("text") or "").strip()

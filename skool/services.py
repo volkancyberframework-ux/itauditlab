@@ -43,8 +43,12 @@ def send_telegram(text, *, idempotency_key=None):
         )
         if not created:
             return False
-    token = getattr(settings, "TELEGRAM_BOT_TOKEN", "")
-    chat_id = getattr(settings, "TELEGRAM_ADMIN_CHAT_ID", "") or getattr(settings, "TELEGRAM_CHAT_ID", "")
+    token = getattr(settings, "GRCUSTASI_TELEGRAM_BOT_TOKEN", "") or getattr(settings, "TELEGRAM_BOT_TOKEN", "")
+    chat_id = (
+        getattr(settings, "GRCUSTASI_TELEGRAM_ADMIN_CHAT_ID", "")
+        or getattr(settings, "TELEGRAM_ADMIN_CHAT_ID", "")
+        or getattr(settings, "TELEGRAM_CHAT_ID", "")
+    )
     if not token or not chat_id:
         logger.warning("Skool Telegram bildirimi atlandı: yapılandırma eksik")
         if reserved_log:

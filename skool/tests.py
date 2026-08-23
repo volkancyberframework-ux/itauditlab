@@ -69,6 +69,22 @@ class SkoolFlowTests(TestCase):
         response = self.client.post(reverse("skool:onboarding"), {"full_name": "Volkan Güler"})
         self.assertRedirects(response, reverse("skool:journey"))
 
+    def test_stale_invite_session_does_not_shadow_valid_name_login(self):
+        other_invitation, other_raw = SkoolInvitation.create_invitation("Başka Davet")
+        self.client.get(reverse("skool:onboarding") + f"?invite={other_raw}")
+        response = self.client.post(reverse("skool:onboarding"), {"full_name": "Volkan Güler"})
+        self.assertRedirects(response, reverse("skool:journey"))
+        other_invitation.refresh_from_db()
+        self.assertEqual(other_invitation.status, "invited")
+
+    def test_manually_claimed_invitation_without_user_is_repaired(self):
+        self.invitation.status = "claimed"
+        self.invitation.claimed_at = timezone.now()
+        self.invitation.save(update_fields=("status", "claimed_at"))
+        response = self.client.post(reverse("skool:onboarding"), {"full_name": "Volkan Güler"})
+        self.assertRedirects(response, reverse("skool:journey"))
+        self.assertTrue(SkoolUser.objects.filter(invitation=self.invitation).exists())
+
     def test_revoked_person_loses_existing_session_access(self):
         self.claim()
         self.invitation.status = "revoked"
