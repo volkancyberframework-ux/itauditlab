@@ -7,6 +7,7 @@ from core.program_automation import (
     send_daily_report_email,
 )
 from landing.traffic import send_daily_traffic_report
+from skool.digest import send_daily_meeting_digest
 
 
 class Command(BaseCommand):
@@ -46,5 +47,11 @@ class Command(BaseCommand):
         except Exception as exc:
             # Eğitim erişim otomasyonunu trafik raporundaki geçici bir sorun yüzünden durdurma.
             self.stderr.write(self.style.WARNING(f'Trafik raporu gönderilemedi: {exc}'))
+        try:
+            sent = send_daily_meeting_digest(run_date)
+            self.stdout.write('Günlük görüşme özeti gönderildi.' if sent else 'Günlük görüşme özeti zaten gönderilmiş.')
+        except Exception as exc:
+            # Eğitim erişim otomasyonunu Telegram'daki geçici bir sorun yüzünden durdurma.
+            self.stderr.write(self.style.WARNING(f'Görüşme özeti gönderilemedi: {exc}'))
         if stats["failed"]:
             raise RuntimeError(f"{stats['failed']} öğrenci için mail gönderilemedi")

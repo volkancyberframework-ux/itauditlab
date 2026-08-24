@@ -65,26 +65,3 @@ services:
         sync: false
       - key: TELEGRAM_CHAT_ID
         sync: false
-
-  - type: cron
-    name: skool-meeting-digest
-    runtime: python
-    region: frankfurt
-    plan: starter
-    branch: main
-    schedule: "*/15 * * * *"
-    buildCommand: pip install --disable-pip-version-check --no-cache-dir -r requirements.txt
-    startCommand: python manage.py send_skool_daily_digest
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.9
-      - key: DJANGO_SETTINGS_MODULE
-        value: itaudit.settings
-      - key: DATABASE_URL
-        sync: false
-      - key: SECRET_KEY
-        sync: false
-      - key: TELEGRAM_BOT_TOKEN
-        sync: false
-      - key: TELEGRAM_ADMIN_CHAT_ID
-        sync: false

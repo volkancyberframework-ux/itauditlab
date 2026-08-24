@@ -17,6 +17,7 @@ from .models import (
 from .questions import QUESTIONS, question_dicts
 from .admin import AvailabilityExceptionForm, TravelAvailabilityForm
 from .services import ensure_upcoming_slots, generate_slots, reserve_slot, reschedule_booking
+from .digest import send_daily_meeting_digest
 from .views import bunny_embed_url, youtube_video_id
 
 
@@ -69,6 +70,12 @@ class SkoolFlowTests(TestCase):
         self.assertTrue(all(len(question["explanations"]) == 2 for question in questions))
         self.assertTrue(all(all(text.strip() for text in question["explanations"]) for question in questions))
         self.assertIn("Nitelikli siber güvenlik", questions[0]["explanations"][0])
+
+    @patch("skool.digest.send_telegram", return_value=True)
+    def test_daily_digest_sends_zero_meeting_message(self, notify):
+        self.assertTrue(send_daily_meeting_digest(timezone.localdate()))
+        message = notify.call_args.args[0]
+        self.assertIn("Bugün planlanmış birebir görüşmen yok", message)
 
     def test_logout_allows_name_login_again(self):
         self.claim()
