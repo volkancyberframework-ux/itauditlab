@@ -493,3 +493,6 @@ html[data-theme="light"] .parallel-experience article{background:#f7fbfe}
 html[data-theme="light"] .parallel-experience article>strong{color:#36566e}
 @media(max-width:900px){.path-proof{grid-template-columns:auto 1fr}.path-proof p{grid-column:1/-1}.path-proof>b{justify-self:end}.journey-seal{width:142px!important;height:142px!important}}
 @media(max-width:600px){.path-proof{grid-template-columns:1fr;gap:7px}.path-proof>b{justify-self:start}.parallel-experience{padding:19px}.parallel-heading h4{font-size:20px}.parallel-experience article{min-height:0;padding:19px}.journey-seal{width:138px!important;height:138px!important}}
+.hero-promise{display:inline-block;max-width:680px;margin:0 0 14px;padding:9px 13px;border-left:3px solid var(--gold);border-radius:0 9px 9px 0;background:#e8bd5b10;color:#f1d38d;font-size:14px;font-weight:800}
+html[data-theme="light"] .hero-promise{background:#fff5d8;color:#755718}
+@media(max-width:600px){.hero-promise{font-size:13px;line-height:1.45}.hero .lead{line-height:1.55}}
