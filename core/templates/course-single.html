@@ -8,15 +8,14 @@
       <section class="pt-lg-8 pb-8 bg-primary student-course-hero">
         <div class="container pb-lg-8">
           <div class="row align-items-center">
-            <div class="col-xl-7 col-lg-7 col-md-12">
+            <div class="col-12">
               <div>
                 <h1 class="text-white display-4 fw-semibold">
                   {{ course.turkish_name|default:course.english_name }}
                 </h1>
                 <p class="text-white mb-6 lead">{{ course.description }}</p>
-                <div class="d-flex align-items-center justify-content-center flex-wrap gap-3 course-header-actions">
-
-                  <div class="d-grid gap-2 course-primary-actions">
+                <div class="course-header-toolbar">
+                  <div class="course-primary-actions">
                     <a href="{% url 'dashboard_student' %}" class="btn btn-outline-light btn-lg d-inline-flex align-items-center justify-content-center">
                       <i class="fe fe-arrow-left me-2 fs-5"></i>
                       Öğrenci Paneline Dön
@@ -25,13 +24,13 @@
                       Volkan’a Sor
                     </button>
                   </div>
-                  <span class="text-white ms-3">
-                    <i class="fe fe-user"></i>
-                    {{ course.enrollment_set.count }} Kayıtlı Öğrenci
-                  </span>
-
-                  <div>
-                    <span class="fs-6 ms-4 align-text-top">
+                  <div class="course-meta" aria-label="Eğitim bilgileri">
+                    <span class="course-meta-item">
+                      <i class="fe fe-user" aria-hidden="true"></i>
+                      <b>{{ course.enrollment_set.count }}</b> Kayıtlı Öğrenci
+                    </span>
+                    <span class="course-meta-item course-rating" aria-label="5 üzerinden {{ course.score }} puan">
+                      <span class="course-stars" aria-hidden="true">
                       {% for i in "12345" %}
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor"
                              class="bi bi-star-fill text-warning" viewBox="0 0 16 16">
@@ -39,20 +38,19 @@
                             d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
                         </svg>
                       {% endfor %}
+                      </span>
+                      <b>{{ course.score }}</b>
                     </span>
-                    <span class="text-white">({{ course.score }})</span>
-                  </div>
-
-                  <span class="text-white ms-4 d-none d-md-block">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                    <span class="course-meta-item">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"
                          xmlns="http://www.w3.org/2000/svg">
-                      <rect x="3" y="8" width="2" height="6" rx="1" fill="#DBD8E9"></rect>
-                      <rect x="7" y="5" width="2" height="9" rx="1" fill="#DBD8E9"></rect>
-                      <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                    </svg>
-                    <span class="align-middle">{% if course.difficulty == 'Beginner' %}Başlangıç{% elif course.difficulty == 'Intermediate' %}Orta{% else %}İleri{% endif %}</span>
-                  </span>
-
+                        <rect x="3" y="8" width="2" height="6" rx="1" fill="currentColor"></rect>
+                        <rect x="7" y="5" width="2" height="9" rx="1" fill="currentColor"></rect>
+                        <rect x="11" y="2" width="2" height="12" rx="1" fill="currentColor"></rect>
+                      </svg>
+                      <b>{% if course.difficulty == 'Beginner' %}Başlangıç{% elif course.difficulty == 'Intermediate' %}Orta{% else %}İleri{% endif %}</b>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

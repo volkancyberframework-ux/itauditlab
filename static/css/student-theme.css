@@ -55,13 +55,21 @@
 .student-course-hero .container{position:relative}
 .student-shell .student-course-page .student-course-hero h1.text-white{font-size:clamp(2.25rem,5vw,4rem);line-height:1.04;letter-spacing:-.045em;color:#f1f7fd!important;-webkit-text-fill-color:#f1f7fd!important;text-shadow:0 3px 24px rgba(0,0,0,.22)}
 .student-course-hero .lead{color:#bcd0e1!important;max-width:760px}
-.student-shell .student-course-hero .course-header-actions,.student-shell .student-course-hero .course-header-actions .text-white,.student-shell .student-course-hero .course-header-actions span{color:#dcebf6!important;-webkit-text-fill-color:#dcebf6!important}
-.student-shell .student-course-hero .course-header-actions .text-warning,.student-shell .student-course-hero .course-header-actions .text-warning path{color:#ffad0a!important;-webkit-text-fill-color:#ffad0a!important;fill:#ffad0a!important}
+.student-shell .student-course-hero .course-header-toolbar,.student-shell .student-course-hero .course-header-toolbar span{color:#dcebf6!important;-webkit-text-fill-color:#dcebf6!important}
+.student-shell .student-course-hero .course-stars .text-warning,.student-shell .student-course-hero .course-stars .text-warning path{color:#ffad0a!important;-webkit-text-fill-color:#ffad0a!important;fill:#ffad0a!important}
 .student-course-hero .btn-outline-light{border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.07);border-radius:12px;color:#f1f7fd!important}
 .student-course-hero .btn-outline-light:hover{background:#f1f7fd;color:#102337!important;border-color:#f1f7fd}
-.course-primary-actions{width:fit-content;max-width:100%;justify-items:start}
-.course-primary-actions .btn{width:auto;max-width:100%;padding-left:1.35rem;padding-right:1.35rem}
+.course-header-toolbar{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:2rem;padding:14px;border:1px solid rgba(159,198,226,.2);border-radius:18px;background:rgba(5,17,29,.38);box-shadow:0 18px 45px rgba(0,0,0,.14);backdrop-filter:blur(12px)}
+.course-primary-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;flex:none}
+.course-primary-actions .btn{width:auto;max-width:100%;min-height:48px;padding:.7rem 1.15rem;font-size:1rem}
 .student-course-hero .course-primary-actions button{white-space:normal;line-height:1.25}
+.course-meta{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:0}
+.course-meta-item{display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:0 18px;border-left:1px solid rgba(159,198,226,.18);color:#dcebf6;font-size:.94rem;white-space:nowrap}
+.course-meta-item:first-child{border-left:0}
+.course-meta-item>i{font-size:1.05rem;color:#8fcfff}
+.course-meta-item>b{color:#f4f9fd;font-weight:700}
+.course-rating{gap:9px}
+.course-stars{display:inline-flex;align-items:center;gap:2px}
 .student-course-content .card{border-radius:18px!important;overflow:hidden}
 .student-course-content .card-header{background:rgba(2,10,18,.3);border-color:var(--grc-line)!important}
 .student-course-content .card-body,.student-course-content .list-group-item{color:#d9e7f2}
@@ -109,9 +117,21 @@
   .student-shell .nav-lb-tab .nav-link{white-space:nowrap;font-size:.82rem;padding:.75rem .8rem}
   .student-course-hero{padding-top:3rem!important;padding-bottom:6rem!important}
   .student-course-hero h1{font-size:2.25rem}
-  .course-header-actions{justify-content:flex-start!important}
-  .course-header-actions .ms-3,.course-header-actions .ms-4{margin-left:0!important}
+  .course-header-toolbar{align-items:stretch;flex-direction:column;gap:13px;margin-top:1.4rem;padding:12px}
+  .course-primary-actions{width:100%}
+  .course-primary-actions .btn{flex:1 1 auto;min-width:0;font-size:.92rem;padding:.65rem .9rem}
+  .course-meta{justify-content:flex-start;border-top:1px solid rgba(159,198,226,.14);padding-top:10px}
+  .course-meta-item{padding:0 12px;font-size:.84rem}
+  .course-meta-item:first-child{padding-left:2px}
   .student-course-content .mt-n8{margin-top:-4rem!important}
   .student-course-content .card-body{padding:1rem}
   .student-footer{text-align:center}
+}
+
+@media(max-width:480px){
+  .course-primary-actions{display:grid;grid-template-columns:1fr auto}
+  .course-primary-actions .btn{width:auto}
+  .course-meta{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .course-meta-item{min-height:32px;padding:0 8px;border:0}
+  .course-meta-item:last-child{grid-column:1/-1}
 }
