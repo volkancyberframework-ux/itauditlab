@@ -16,6 +16,7 @@ from .models import (
 )
 
 logger = logging.getLogger(__name__)
+REPEAT_BOOKING_WAIT_DAYS = 14
 
 
 def finalize_expired_bookings(user=None):
@@ -33,6 +34,20 @@ def finalize_expired_bookings(user=None):
             audio_completed_at__isnull=False,
         ).update(state="READY_TO_BOOK")
     return updated
+
+
+def earliest_repeat_booking_date(user, display_zone=None):
+    """Return the first selectable Istanbul date after the latest completed meeting."""
+    latest = (
+        MeetingBooking.objects.filter(user=user, status="completed")
+        .select_related("slot")
+        .order_by("-slot__start_at_utc")
+        .first()
+    )
+    if latest is None:
+        return None
+    zone = display_zone or ZoneInfo(SkoolSettings.load().display_timezone)
+    return latest.slot.start_at_utc.astimezone(zone).date() + timedelta(days=REPEAT_BOOKING_WAIT_DAYS)
 
 
 def send_telegram(text, *, idempotency_key=None):
@@ -149,6 +164,13 @@ def reserve_slot(user, slot_id):
         slot = MeetingSlot.objects.select_for_update().select_related("availability").get(pk=slot_id)
         if slot.status != "available" or slot.local_date < tomorrow:
             raise ValueError("Bu görüşme saati artık müsait değil.")
+        display_zone = ZoneInfo(SkoolSettings.load().display_timezone)
+        earliest_repeat_date = earliest_repeat_booking_date(user, display_zone)
+        slot_display_date = slot.start_at_utc.astimezone(display_zone).date()
+        if earliest_repeat_date and slot_display_date < earliest_repeat_date:
+            raise ValueError(
+                "İkinci ve sonraki görüşmeler, önceki görüşmeden en erken 14 gün sonrasına planlanabilir."
+            )
         if AvailabilityException.objects.filter(
             Q(availability=slot.availability) | Q(availability__isnull=True),
             start_date__lte=slot.local_date, end_date__gte=slot.local_date,

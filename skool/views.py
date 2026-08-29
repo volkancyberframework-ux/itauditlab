@@ -21,8 +21,8 @@ from .models import (
 )
 from .questions import FOUNDATION_POSITIVE, QUESTIONS, question_dicts
 from .services import (
-    admin_user_url, booking_notification, ensure_upcoming_slots, finalize_expired_bookings, local_booking_lines,
-    reserve_slot, reschedule_booking, send_telegram,
+    admin_user_url, booking_notification, earliest_repeat_booking_date, ensure_upcoming_slots,
+    finalize_expired_bookings, local_booking_lines, reserve_slot, reschedule_booking, send_telegram,
 )
 
 
@@ -175,6 +175,7 @@ def journey(request):
     config = SkoolSettings.load()
     booking = user.bookings.filter(status="active").select_related("slot__availability").first()
     previous_bookings = user.bookings.exclude(status="active").select_related("slot__availability").order_by("-slot__start_at_utc")[:10]
+    repeat_booking_available_date = earliest_repeat_booking_date(user)
     if booking:
         tr_start, tr_end, host_start, host_end = local_booking_lines(booking)
         can_reschedule = booking.slot.start_at_utc > timezone.now() + timedelta(hours=24)
@@ -196,6 +197,7 @@ def journey(request):
         "bunny_embed_url": bunny_url,
         "audio_was_skipped": user.events.filter(event_type="audio_skipped").exists(),
         "previous_bookings": previous_bookings,
+        "repeat_booking_available_date": repeat_booking_available_date,
     })
 
 
@@ -321,14 +323,27 @@ def slots(request):
     user = request.skool_user
     if not user.audio_completed_at:
         return JsonResponse({"ok": False, "error": "Önce ses kaydını tamamlayın."}, status=403)
+    finalize_expired_bookings(user)
     ensure_upcoming_slots()
     display_zone = ZoneInfo(SkoolSettings.load().display_timezone)
     tomorrow = timezone.localdate(timezone=display_zone) + timedelta(days=1)
+    earliest_date = earliest_repeat_booking_date(user, display_zone)
+    first_selectable_date = max(tomorrow, earliest_date) if earliest_date else tomorrow
     result = []
-    for slot in MeetingSlot.objects.filter(local_date__gte=tomorrow).select_related("availability").order_by("start_at_utc")[:180]:
+    queryset = MeetingSlot.objects.filter(local_date__gte=tomorrow).select_related("availability").order_by("start_at_utc")
+    for slot in queryset[:360]:
         start, end = slot.start_at_utc.astimezone(display_zone), slot.end_at_utc.astimezone(display_zone)
+        if start.date() < first_selectable_date:
+            continue
         result.append({"id": slot.pk, "date": start.date().isoformat(), "start": start.strftime("%H:%M"), "end": end.strftime("%H:%M"), "status": slot.status})
-    return JsonResponse({"ok": True, "timezone": "Europe/Istanbul", "slots": result})
+        if len(result) == 180:
+            break
+    return JsonResponse({
+        "ok": True,
+        "timezone": "Europe/Istanbul",
+        "slots": result,
+        "first_selectable_date": first_selectable_date.isoformat(),
+    })
 
 
 @require_POST

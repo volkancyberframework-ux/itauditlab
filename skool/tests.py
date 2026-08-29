@@ -1,5 +1,5 @@
 import json
-from datetime import date, time, timedelta
+from datetime import date, datetime, time, timedelta
 from unittest.mock import patch
 from zoneinfo import ZoneInfo
 
@@ -16,7 +16,10 @@ from .models import (
 )
 from .questions import QUESTIONS, question_dicts
 from .admin import AvailabilityExceptionForm, TravelAvailabilityForm
-from .services import ensure_upcoming_slots, generate_slots, reserve_slot, reschedule_booking
+from .services import (
+    earliest_repeat_booking_date, ensure_upcoming_slots, generate_slots, reserve_slot,
+    reschedule_booking,
+)
 from .digest import send_daily_meeting_digest
 from .views import bunny_embed_url, youtube_video_id
 
@@ -299,6 +302,80 @@ class BookingTests(TestCase):
         reserve_slot(self.user, slots[0].pk)
         with self.assertRaises(ValueError):
             reserve_slot(self.user, slots[1].pk)
+
+    def test_repeat_booking_requires_fourteen_days_after_previous_meeting(self):
+        display_zone = ZoneInfo("Europe/Istanbul")
+        first_date = timezone.localdate(timezone=display_zone) - timedelta(days=1)
+        first_start = datetime.combine(first_date, time(10), tzinfo=display_zone).astimezone(ZoneInfo("UTC"))
+        first_slot = MeetingSlot.objects.create(
+            availability=self.availability,
+            local_date=first_date,
+            start_at_utc=first_start,
+            end_at_utc=first_start + timedelta(minutes=90),
+            status="booked",
+        )
+        MeetingBooking.objects.create(
+            user=self.user,
+            slot=first_slot,
+            status="completed",
+            meeting_url="https://meet.google.com/test",
+        )
+        earliest_date = first_date + timedelta(days=14)
+        self.assertEqual(earliest_repeat_booking_date(self.user, display_zone), earliest_date)
+
+        too_early_start = datetime.combine(
+            earliest_date - timedelta(days=1), time(10), tzinfo=display_zone
+        ).astimezone(ZoneInfo("UTC"))
+        too_early_slot = MeetingSlot.objects.create(
+            availability=self.availability,
+            local_date=earliest_date - timedelta(days=1),
+            start_at_utc=too_early_start,
+            end_at_utc=too_early_start + timedelta(minutes=90),
+        )
+        with self.assertRaisesMessage(ValueError, "en erken 14 gün"):
+            reserve_slot(self.user, too_early_slot.pk)
+
+        allowed_start = datetime.combine(earliest_date, time(10), tzinfo=display_zone).astimezone(ZoneInfo("UTC"))
+        allowed_slot = MeetingSlot.objects.create(
+            availability=self.availability,
+            local_date=earliest_date,
+            start_at_utc=allowed_start,
+            end_at_utc=allowed_start + timedelta(minutes=90),
+        )
+        booking = reserve_slot(self.user, allowed_slot.pk)
+        self.assertEqual(booking.slot_id, allowed_slot.pk)
+
+    def test_slots_api_hides_dates_inside_repeat_booking_wait(self):
+        display_zone = ZoneInfo("Europe/Istanbul")
+        first_date = timezone.localdate(timezone=display_zone) - timedelta(days=1)
+        first_start = datetime.combine(first_date, time(10), tzinfo=display_zone).astimezone(ZoneInfo("UTC"))
+        first_slot = MeetingSlot.objects.create(
+            availability=self.availability,
+            local_date=first_date,
+            start_at_utc=first_start,
+            end_at_utc=first_start + timedelta(minutes=90),
+            status="booked",
+        )
+        MeetingBooking.objects.create(
+            user=self.user, slot=first_slot, status="completed",
+            meeting_url="https://meet.google.com/test",
+        )
+        earliest_date = first_date + timedelta(days=14)
+        self.availability.end_date = earliest_date + timedelta(days=2)
+        self.availability.save(update_fields=("end_date",))
+        generate_slots(self.availability, earliest_date - timedelta(days=1))
+        generate_slots(self.availability, earliest_date)
+        session = self.client.session
+        session["skool_user_id"] = self.user.pk
+        session.save()
+
+        response = self.client.get(reverse("skool:slots"))
+
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertEqual(payload["first_selectable_date"], earliest_date.isoformat())
+        self.assertTrue(payload["slots"])
+        self.assertTrue(all(item["date"] >= earliest_date.isoformat() for item in payload["slots"]))
 
     def test_disabled_date_cannot_be_booked(self):
         target = timezone.localdate() + timedelta(days=1)
