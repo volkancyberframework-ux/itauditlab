@@ -133,6 +133,17 @@ class SkoolFlowTests(TestCase):
         self.assertNotContains(second, 'id="labs-welcome"')
         self.assertTrue(SkoolUser.objects.get().labs_welcome_seen)
 
+    def test_labs_view_self_heals_missing_built_in_records(self):
+        self.claim()
+        SkoolLab.objects.all().delete()
+
+        response = self.client.get(reverse("skool:labs"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(SkoolLab.objects.count(), 10)
+        lab = SkoolLab.objects.get(order=1)
+        self.assertEqual(self.client.get(reverse("skool:lab_pdf", args=[lab.pk])).status_code, 200)
+
     def test_seed_skool_labs_is_repeatable_and_installs_all_pdfs(self):
         with tempfile.TemporaryDirectory() as media_root, override_settings(MEDIA_ROOT=media_root):
             call_command("seed_skool_labs", verbosity=0)

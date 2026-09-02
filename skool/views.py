@@ -139,6 +139,9 @@ def skool_logout(request):
 
 
 def labs(request):
+    from .lab_catalog import ensure_lab_records
+
+    ensure_lab_records()
     user_id = request.session.get("skool_user_id")
     user = SkoolUser.objects.filter(pk=user_id, invitation__status="claimed").first()
     error = ""
@@ -170,7 +173,12 @@ def labs(request):
 
 @skool_user_required
 def lab_pdf(request, pk):
+    from .lab_catalog import bundled_pdf_path
+
     lab = get_object_or_404(SkoolLab, pk=pk, is_active=True)
+    packaged_pdf = bundled_pdf_path(lab.pdf.name)
+    if packaged_pdf.is_file():
+        return FileResponse(packaged_pdf.open("rb"), content_type="application/pdf", filename=f"{lab.title}.pdf")
     return FileResponse(lab.pdf.open("rb"), content_type="application/pdf", filename=f"{lab.title}.pdf")
 
 
