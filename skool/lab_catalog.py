@@ -4,7 +4,7 @@ from django.core.files import File
 from django.core.files.storage import default_storage
 from django.db import transaction
 
-from .models import SkoolLab
+from .models import SkoolLab, SkoolLabProgress
 
 
 LABS = (
@@ -53,3 +53,14 @@ def ensure_lab_records():
             changed.append("pdf")
         if changed:
             lab.save(update_fields=changed)
+
+
+def lab_is_unlocked(user, lab, ordered_labs=None):
+    ordered_labs = list(ordered_labs or SkoolLab.objects.filter(is_active=True).order_by("order", "title"))
+    try:
+        index = next(index for index, item in enumerate(ordered_labs) if item.pk == lab.pk)
+    except StopIteration:
+        return False
+    if index == 0:
+        return True
+    return SkoolLabProgress.objects.filter(user=user, lab=ordered_labs[index - 1]).exists()

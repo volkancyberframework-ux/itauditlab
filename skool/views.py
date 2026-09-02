@@ -1,5 +1,6 @@
 import hmac
 import json
+import logging
 from datetime import timedelta
 from urllib.parse import parse_qs, urlparse
 from zoneinfo import ZoneInfo
@@ -18,8 +19,18 @@ from django.views.decorators.http import require_GET, require_POST
 from .decorators import skool_user_required
 from .models import (
     CareerTestAnswer, MeetingBooking, MeetingSlot, OnboardingEvent, SkoolInvitation,
-    SkoolLab, SkoolSettings, SkoolUser, TravelAvailability, normalize_name,
+    SkoolLab, SkoolLabProgress, SkoolSettings, SkoolUser, TravelAvailability, normalize_name,
 )
+
+logger = logging.getLogger(__name__)
+
+
+def safe_send_telegram(message):
+    try:
+        return send_telegram(message)
+    except Exception:
+        logger.exception("Telegram bildirimi gönderilemedi")
+        return False
 from .questions import FOUNDATION_POSITIVE, QUESTIONS, question_dicts
 from .services import (
     admin_user_url, booking_notification, earliest_repeat_booking_date, ensure_upcoming_slots,
@@ -140,14 +151,15 @@ def skool_logout(request):
 
 
 def labs(request):
-    from .lab_catalog import ensure_lab_records
+    from .lab_catalog import ensure_lab_records, lab_is_unlocked
 
     ensure_lab_records()
     user_id = request.session.get("skool_user_id")
     user = SkoolUser.objects.filter(pk=user_id, invitation__status="claimed").first()
     error = ""
     if not user and request.method == "POST":
-        supplied = normalize_name(request.POST.get("full_name", ""))
+        entered_name = " ".join(request.POST.get("full_name", "").strip().split())
+        supplied = normalize_name(entered_name)
         invitation = SkoolInvitation.objects.filter(normalized_name=supplied, status__in=("invited", "claimed")).order_by("-created_at").first()
         if invitation:
             if invitation.status == "invited":
@@ -157,7 +169,9 @@ def labs(request):
             user, _ = SkoolUser.objects.get_or_create(invitation=invitation, defaults={"full_name": invitation.full_name})
             request.session["skool_user_id"] = user.pk
             request.session.set_expiry(60 * 60 * 24 * 180)
+            safe_send_telegram(f"✅ Çalışmalar paneli girişi\n\n👤 {user.full_name}\nDurum: Başarılı")
             return redirect("skool:labs")
+        safe_send_telegram(f"⚠️ Çalışmalar paneli giriş denemesi\n\n👤 {entered_name or '(isim girilmedi)'}\nDurum: Erişim bulunamadı")
         error = "Bu ad soyad için etkin bir GRC Ustası erişimi bulunamadı."
     if not user:
         return render(request, "skool/labs_login.html", {"error": error})
@@ -165,9 +179,14 @@ def labs(request):
     if show_labs_welcome:
         SkoolUser.objects.filter(pk=user.pk, labs_welcome_seen=False).update(labs_welcome_seen=True)
         user.labs_welcome_seen = True
+    ordered_labs = list(SkoolLab.objects.filter(is_active=True).order_by("order", "title"))
+    completed_ids = set(SkoolLabProgress.objects.filter(user=user).values_list("lab_id", flat=True))
+    for lab in ordered_labs:
+        lab.is_completed = lab.pk in completed_ids
+        lab.is_unlocked = lab_is_unlocked(user, lab, ordered_labs)
     return render(request, "skool/labs.html", {
         "skool_user": user,
-        "labs": SkoolLab.objects.filter(is_active=True),
+        "labs": ordered_labs,
         "show_labs_welcome": show_labs_welcome,
     })
 
@@ -175,13 +194,34 @@ def labs(request):
 @xframe_options_sameorigin
 @skool_user_required
 def lab_pdf(request, pk):
-    from .lab_catalog import bundled_pdf_path
+    from .lab_catalog import bundled_pdf_path, lab_is_unlocked
 
     lab = get_object_or_404(SkoolLab, pk=pk, is_active=True)
+    if not lab_is_unlocked(request.skool_user, lab):
+        raise Http404("Bu laboratuvar henüz açılmadı.")
     packaged_pdf = bundled_pdf_path(lab.pdf.name)
     if packaged_pdf.is_file():
         return FileResponse(packaged_pdf.open("rb"), content_type="application/pdf", filename=f"{lab.title}.pdf")
     return FileResponse(lab.pdf.open("rb"), content_type="application/pdf", filename=f"{lab.title}.pdf")
+
+
+@require_POST
+@skool_user_required
+def complete_lab(request, pk):
+    from .lab_catalog import lab_is_unlocked
+
+    lab = get_object_or_404(SkoolLab, pk=pk, is_active=True)
+    if not lab_is_unlocked(request.skool_user, lab):
+        return JsonResponse({"ok": False, "error": "Önce bir önceki laboratuvarı tamamlayın."}, status=409)
+    progress, created = SkoolLabProgress.objects.get_or_create(user=request.skool_user, lab=lab)
+    if created:
+        next_lab = SkoolLab.objects.filter(is_active=True, order__gt=lab.order).order_by("order", "title").first()
+        transition = f"Sıradaki çalışma açıldı: {next_lab.title}" if next_lab else "Tüm çalışmalar tamamlandı."
+        safe_send_telegram(
+            f"🧪 Laboratuvar tamamlandı\n\n👤 {request.skool_user.full_name}\n"
+            f"📘 {lab.title}\n✅ Kullanıcı cevabını Volkan'a gönderdiğini onayladı.\n{transition}"
+        )
+    return JsonResponse({"ok": True, "created": created})
 
 
 @skool_user_required

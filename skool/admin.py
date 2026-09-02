@@ -10,7 +10,7 @@ from django.urls import reverse
 from .models import (
     AvailabilityException, BookingHistory, CareerTestAnswer, MeetingBooking, MeetingSlot,
     NotificationLog, OnboardingEvent, SkoolInvitation, SkoolSettings, SkoolUser,
-    TravelAvailability, SkoolLab,
+    TravelAvailability, SkoolLab, SkoolLabProgress,
 )
 
 
@@ -86,6 +86,14 @@ class SkoolLabAdmin(admin.ModelAdmin):
     list_display = ("title", "order", "is_active", "created_at")
     list_editable = ("order", "is_active")
     search_fields = ("title", "description")
+
+
+@admin.register(SkoolLabProgress)
+class SkoolLabProgressAdmin(admin.ModelAdmin):
+    list_display = ("user", "lab", "completed_at")
+    list_filter = ("lab", "completed_at")
+    search_fields = ("user__full_name", "lab__title")
+    readonly_fields = ("user", "lab", "completed_at")
 
 
 @admin.register(SkoolUser)

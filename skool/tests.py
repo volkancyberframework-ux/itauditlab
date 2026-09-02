@@ -14,7 +14,7 @@ from django.utils import timezone
 
 from .models import (
     AvailabilityException, CareerTestAnswer, MeetingBooking, MeetingSlot, NotificationLog,
-    SkoolInvitation, SkoolLab, SkoolSettings, SkoolUser, TravelAvailability,
+    SkoolInvitation, SkoolLab, SkoolLabProgress, SkoolSettings, SkoolUser, TravelAvailability,
 )
 from .questions import QUESTIONS, question_dicts
 from .admin import AvailabilityExceptionForm, TravelAvailabilityForm
@@ -147,6 +147,31 @@ class SkoolFlowTests(TestCase):
         self.assertEqual(pdf_response.status_code, 200)
         self.assertEqual(pdf_response.headers["X-Frame-Options"], "SAMEORIGIN")
         self.assertEqual(pdf_response.headers["Content-Type"], "application/pdf")
+
+    @patch("skool.views.safe_send_telegram")
+    def test_labs_unlock_sequentially_and_notify(self, telegram):
+        self.claim()
+        self.client.get(reverse("skool:labs"))
+        labs = list(SkoolLab.objects.order_by("order", "title")[:2])
+
+        self.assertEqual(self.client.get(reverse("skool:lab_pdf", args=[labs[1].pk])).status_code, 404)
+        response = self.client.post(reverse("skool:complete_lab", args=[labs[0].pk]))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(SkoolLabProgress.objects.filter(user=SkoolUser.objects.get(), lab=labs[0]).exists())
+        self.assertEqual(self.client.get(reverse("skool:lab_pdf", args=[labs[1].pk])).status_code, 200)
+        telegram.assert_called_once()
+
+    @patch("skool.views.safe_send_telegram")
+    def test_labs_login_attempts_notify_for_success_and_failure(self, telegram):
+        response = self.client.post(reverse("skool:labs"), {"full_name": "Bilinmeyen Kişi"})
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("Erişim bulunamadı", telegram.call_args.args[0])
+
+        telegram.reset_mock()
+        response = self.client.post(reverse("skool:labs"), {"full_name": "Volkan Güler"})
+        self.assertRedirects(response, reverse("skool:labs"))
+        self.assertIn("Başarılı", telegram.call_args.args[0])
 
     def test_seed_skool_labs_is_repeatable_and_installs_all_pdfs(self):
         with tempfile.TemporaryDirectory() as media_root, override_settings(MEDIA_ROOT=media_root):

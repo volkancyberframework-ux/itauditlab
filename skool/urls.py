@@ -12,6 +12,7 @@ urlpatterns = [
     path("calismalar", views.labs, name="labs"),
     path("calismalar/", views.labs),
     path("calismalar/<int:pk>/pdf/", views.lab_pdf, name="lab_pdf"),
+    path("calismalar/<int:pk>/tamamla/", views.complete_lab, name="complete_lab"),
     path("skooltoplulugu/api/basla/", views.mark_intro, name="mark_intro"),
     path("skooltoplulugu/api/cevap/", views.save_answer, name="save_answer"),
     path("skooltoplulugu/api/ses-ilerleme/", views.audio_progress, name="audio_progress"),

@@ -69,6 +69,21 @@ class SkoolLab(models.Model):
         return self.title
 
 
+class SkoolLabProgress(models.Model):
+    user = models.ForeignKey("SkoolUser", on_delete=models.CASCADE, related_name="lab_progress")
+    lab = models.ForeignKey(SkoolLab, on_delete=models.CASCADE, related_name="user_progress")
+    completed_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=("user", "lab"), name="unique_skool_lab_progress")]
+        ordering = ("completed_at",)
+        verbose_name = "Laboratuvar ilerlemesi"
+        verbose_name_plural = "Laboratuvar ilerlemeleri"
+
+    def __str__(self):
+        return f"{self.user} - {self.lab}"
+
+
 class SkoolUser(models.Model):
     STATES = [
         ("IDENTITY_VERIFIED", "Kimlik doğrulandı"), ("TEST_IN_PROGRESS", "Test sürüyor"),
