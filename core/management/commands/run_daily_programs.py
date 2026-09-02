@@ -18,7 +18,7 @@ class Command(BaseCommand):
         stats = run_daily_programs(run_date)
         status = "✅ Başarılı" if not stats["failed"] else "⚠️ Kısmi hata"
         summary = (
-            f"{status} — Günlük Siberkobi programı\n"
+            f"{status} — Günlük GRC Ustası programı\n"
             f"📅 {run_date:%d.%m.%Y}\n"
             f"👥 İşlenen öğrenci: {stats['students']}\n"
             f"📚 Açılan içerik: {stats['courses']}\n"

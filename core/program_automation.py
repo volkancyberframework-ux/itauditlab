@@ -1,5 +1,6 @@
 import html
 import logging
+from email.utils import formataddr, parseaddr
 
 import requests
 from django.conf import settings
@@ -11,6 +12,12 @@ from .models import Course, ProgramEnrollment, ProgramRelease
 logger = logging.getLogger(__name__)
 
 
+def _from_email():
+    """Keep the configured SMTP address while presenting the GRC Ustası brand."""
+    address = settings.EMAIL_HOST_USER or parseaddr(settings.DEFAULT_FROM_EMAIL)[1]
+    return formataddr(("GRC Ustası", address)) if address else settings.DEFAULT_FROM_EMAIL
+
+
 def _display_name(user):
     return user.first_name.strip() or user.get_full_name().strip() or user.email.split("@", 1)[0]
 
@@ -20,9 +27,9 @@ def _email_shell(title, name, content):
 <html lang="tr"><body style="margin:0;background:#f3f6fb;font-family:Arial,sans-serif;color:#172033">
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0"><tr><td align="center" style="padding:32px 12px">
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 8px 28px rgba(20,35,70,.10)">
-<tr><td style="padding:28px 34px;background:#111d3b;color:#fff"><div style="font-size:13px;letter-spacing:1.5px;color:#7dd3fc">SİBERKOBİ</div><h1 style="font-size:25px;margin:8px 0 0">{html.escape(title)}</h1></td></tr>
+<tr><td style="padding:28px 34px;background:#111d3b;color:#fff"><div style="font-size:13px;letter-spacing:1.5px;color:#7dd3fc">GRC USTASI</div><h1 style="font-size:25px;margin:8px 0 0">{html.escape(title)}</h1></td></tr>
 <tr><td style="padding:32px 34px"><p style="font-size:17px;margin-top:0">Merhaba {html.escape(name)},</p>{content}
-<p style="margin:28px 0 0">İyi çalışmalar,<br><strong>Volkan Güler</strong><br>Siberkobi</p></td></tr>
+<p style="margin:28px 0 0">İyi çalışmalar,<br><strong>Volkan Güler</strong><br>GRC Ustası</p></td></tr>
 <tr><td style="padding:18px 34px;background:#f8fafc;color:#64748b;font-size:12px">Bu e-posta eğitim programındaki ilerleme planına göre otomatik gönderildi.</td></tr>
 </table></td></tr></table></body></html>"""
 
@@ -38,7 +45,7 @@ def send_welcome(enrollment):
         f"<p><strong>{html.escape(enrollment.program.name)}</strong> programın başladı. "
         "İçeriklerin aşağıdaki kişisel takvimine göre otomatik açılacak.</p>"
         f'<table width="100%" cellspacing="0" style="border-collapse:collapse;margin:22px 0">{rows}</table>'
-        '<p><a href="https://siberkobi.co/dashboard-student/" style="display:inline-block;background:#2563eb;color:#fff;text-decoration:none;padding:12px 20px;border-radius:8px">Eğitim paneline git</a></p>'
+        '<p><a href="https://www.grcustasi.com/dashboard-student/" style="display:inline-block;background:#2563eb;color:#fff;text-decoration:none;padding:12px 20px;border-radius:8px">Eğitim paneline git</a></p>'
     )
     subject = f"{enrollment.program.name} eğitim takvimin"
     _send_email(enrollment.user.email, subject, _email_shell(subject, _display_name(enrollment.user), content))
@@ -53,7 +60,7 @@ def send_release_email(enrollment, releases):
         "<p>Programındaki yeni içerikler hesabına tanımlandı ve erişime açıldı.</p>"
         f'<ul style="padding-left:22px;margin:22px 0">{items}</ul>'
         "<p>İçerikleri dikkatlice incelemeni, ekleri kontrol etmeni, notlarını çıkarmanı ve gerçek bir denetçi gibi kanıt–risk–öneri ilişkisi kurmanı bekliyorum.</p>"
-        '<p><a href="https://siberkobi.co/dashboard-student/" style="display:inline-block;background:#2563eb;color:#fff;text-decoration:none;padding:12px 20px;border-radius:8px">İçeriklere git</a></p>'
+        '<p><a href="https://www.grcustasi.com/dashboard-student/" style="display:inline-block;background:#2563eb;color:#fff;text-decoration:none;padding:12px 20px;border-radius:8px">İçeriklere git</a></p>'
     )
     subject = "Yeni eğitim içeriklerin erişime açıldı"
     _send_email(enrollment.user.email, subject, _email_shell(subject, _display_name(enrollment.user), content))
@@ -64,8 +71,8 @@ def _send_email(recipient, subject, html_body):
         raise RuntimeError("EMAIL_HOST_USER veya EMAIL_HOST_PASSWORD tanımlı değil")
     message = EmailMultiAlternatives(
         subject=subject,
-        body="Yeni eğitim içerikleriniz açıldı. Detaylar için https://siberkobi.co adresini ziyaret edin.",
-        from_email=settings.DEFAULT_FROM_EMAIL,
+        body="Yeni eğitim içerikleriniz açıldı. Detaylar için https://www.grcustasi.com adresini ziyaret edin.",
+        from_email=_from_email(),
         to=[recipient],
     )
     message.attach_alternative(html_body, "text/html")
@@ -100,7 +107,7 @@ def send_daily_report_email(text, run_date):
     if not recipient:
         logger.warning("Günlük e-posta raporu atlandı: DAILY_REPORT_EMAIL boş")
         return
-    subject = f"Siberkobi günlük eğitim raporu — {run_date:%d.%m.%Y}"
+    subject = f"GRC Ustası günlük eğitim raporu — {run_date:%d.%m.%Y}"
     html_body = _email_shell(
         subject,
         "Volkan",
@@ -110,7 +117,7 @@ def send_daily_report_email(text, run_date):
     message = EmailMultiAlternatives(
         subject=subject,
         body=text,
-        from_email=settings.DEFAULT_FROM_EMAIL,
+        from_email=_from_email(),
         to=[recipient],
     )
     message.attach_alternative(html_body, "text/html")

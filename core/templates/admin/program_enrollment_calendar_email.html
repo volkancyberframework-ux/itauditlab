@@ -1,0 +1,27 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+  <h1>Program takvimi e-posta taslağı</h1>
+
+  <p><strong>Öğrenci:</strong> {{ email }}</p>
+  <p><strong>Program:</strong> {{ program_enrollment.program.name }}</p>
+  <p><strong>Başlangıç:</strong> {{ program_enrollment.start_date|date:"d.m.Y" }}</p>
+
+  <p>
+    <a class="button default" href="{{ mailto_url }}">
+      Takvimli e-postayı varsayılan uygulamada aç
+    </a>
+  </p>
+
+  <h2>E-posta içeriği</h2>
+  <textarea style="width:100%; height:460px;">{{ body }}</textarea>
+
+  <p>
+    <a class="button" href="{% url 'admin:core_programenrollment_change' program_enrollment.pk %}">
+      Program kaydına dön
+    </a>
+    <a class="button" href="{% url 'admin:core_programenrollment_changelist' %}">
+      Program kayıtları
+    </a>
+  </p>
+{% endblock %}

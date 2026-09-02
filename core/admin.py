@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from django import forms
 from django.contrib import admin, messages
 from django.contrib.auth.admin import UserAdmin
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import path, reverse
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
@@ -47,7 +47,7 @@ class StudentMeetingBookingAdmin(admin.ModelAdmin):
     search_fields = ("user__email", "user__first_name", "user__last_name", "request__reason")
     readonly_fields = ("user", "request", "slot", "meeting_url", "created_at", "updated_at")
 
-DEFAULT_PASSWORD = "Siberkobi1234"
+DEFAULT_PASSWORD = "GRCUstasi1234"
 
 
 def format_program_calendar(steps, start_date):
@@ -63,6 +63,47 @@ def format_program_calendar(steps, start_date):
         release_date = start_date + timedelta(days=day_offset)
         lines.append(f"📅 {release_date:%d.%m.%Y} — {title}")
     return "\n".join(lines)
+
+
+def build_program_calendar_email(enrollment):
+    """Program Enrollment için gönderime hazır, markalı takvim taslağı üretir."""
+    program = enrollment.program
+    calendar = format_program_calendar(
+        program.steps.order_by("day_offset", "order", "id").values(
+            "day_offset", "email_title", "course__turkish_name", "course__english_name"
+        ),
+        enrollment.start_date,
+    )
+    subject = f"🗓️ {program.name} Eğitim Takvimi"
+    body = f"""Merhaba,
+
+GRC Ustası eğitim programınıza kaydınız tamamlandı.
+
+━━━━━━━━━━━━━━━━━━━━
+🗓️ {program.name}
+━━━━━━━━━━━━━━━━━━━━
+
+Program başlangıç tarihi: {enrollment.start_date:%d.%m.%Y}
+
+{calendar or "Program adımları yönetim panelinden eklenecektir."}
+
+İçerikleriniz bu kişisel takvime göre otomatik olarak erişime açılacaktır.
+
+🌐 Eğitim paneli: https://www.grcustasi.com/dashboard-student/
+👤 Kullanıcı hesabı: {enrollment.user.email}
+
+Sorularınız için volkan@grcustasi.com adresinden ulaşabilirsiniz.
+
+İyi çalışmalar,
+Volkan Güler
+GRC Ustası
+"""
+    mailto_url = (
+        f"mailto:{quote(enrollment.user.email)}"
+        f"?subject={quote(subject)}"
+        f"&body={quote(body)}"
+    )
+    return subject, body, mailto_url
 
 
 from django.contrib import admin
@@ -290,8 +331,25 @@ class LearningProgramAdmin(admin.ModelAdmin):
         return obj.steps.count()
 
 
+class ProgramEnrollmentAdminForm(forms.ModelForm):
+    prepare_calendar_email = forms.BooleanField(
+        required=False,
+        initial=False,
+        label="Kaydettikten sonra takvim e-posta taslağını hazırla",
+        help_text=(
+            "Öğrencinin başlangıç tarihi ve program adımlarından gönderime hazır "
+            "bir e-posta oluşturur; e-posta otomatik gönderilmez."
+        ),
+    )
+
+    class Meta:
+        model = ProgramEnrollment
+        fields = "__all__"
+
+
 @admin.register(ProgramEnrollment)
 class ProgramEnrollmentAdmin(admin.ModelAdmin):
+    form = ProgramEnrollmentAdminForm
     list_display = ("user", "program", "start_date", "is_active", "welcome_sent_at", "progress")
     list_filter = ("program", "is_active", "start_date")
     search_fields = ("user__email", "user__first_name", "user__last_name")
@@ -303,11 +361,53 @@ class ProgramEnrollmentAdmin(admin.ModelAdmin):
     def get_urls(self):
         return [
             path(
+                "<int:object_id>/calendar-email/",
+                self.admin_site.admin_view(self.calendar_email),
+                name="core_programenrollment_calendar_email",
+            ),
+            path(
                 "import-csv/",
                 self.admin_site.admin_view(self.import_csv),
                 name="core_programenrollment_import_csv",
             )
         ] + super().get_urls()
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        if form.cleaned_data.get("prepare_calendar_email"):
+            request._program_calendar_email_id = obj.pk
+
+    def response_add(self, request, obj, post_url_continue=None):
+        if getattr(request, "_program_calendar_email_id", None):
+            return redirect(
+                reverse("admin:core_programenrollment_calendar_email", args=[obj.pk])
+            )
+        return super().response_add(request, obj, post_url_continue)
+
+    def response_change(self, request, obj):
+        if getattr(request, "_program_calendar_email_id", None):
+            return redirect(
+                reverse("admin:core_programenrollment_calendar_email", args=[obj.pk])
+            )
+        return super().response_change(request, obj)
+
+    def calendar_email(self, request, object_id):
+        enrollment = get_object_or_404(
+            ProgramEnrollment.objects.select_related("user", "program"),
+            pk=object_id,
+        )
+        subject, body, mailto_url = build_program_calendar_email(enrollment)
+        return render(
+            request,
+            "admin/program_enrollment_calendar_email.html",
+            {
+                "email": enrollment.user.email,
+                "subject": subject,
+                "body": body,
+                "mailto_url": mailto_url,
+                "program_enrollment": enrollment,
+            },
+        )
 
     def import_csv(self, request):
         if request.method == "POST" and request.FILES.get("csv_file"):
@@ -558,11 +658,11 @@ Volkan ile planladığınız gün ve saatte aşağıdaki link üzerinden görü�
 Görüşmeye katılmadan önce mümkünse platforma giriş yapıp size tanımlanan içeriklere göz atmanızı öneririm.
 """
 
-                subject = "🎓 Siberkobi Siber Güvenlik Kampına Hoş Geldiniz"
+                subject = "🎓 GRC Ustası Eğitim Programına Hoş Geldiniz"
 
                 body = f"""Merhaba,
 
-🎓 Volkan Güler ile Siberkobi üzerinden Siber Güvenlik Kampına hoş geldiniz.
+🎓 Volkan Güler ile GRC Ustası eğitim programına hoş geldiniz.
 
 Bu süreçte size sadece video izleteceğimiz bir sistem değil; gerçek iş hayatına daha yakın, uygulamalı, soru odaklı ve kariyer gelişiminizi destekleyen bir öğrenme deneyimi sunmayı hedefliyoruz.
 
@@ -572,7 +672,7 @@ Aşağıda sizin için oluşturulan hesap bilgilerini bulabilirsiniz.
 🔐 Giriş Bilgileriniz
 ━━━━━━━━━━━━━━━━━━━━
 
-🌐 Platform: https://siberkobi.co
+🌐 Platform: https://www.grcustasi.com
 👤 Kullanıcı adı: {email}
 🔑 İlk giriş parolası: {DEFAULT_PASSWORD}
 
@@ -606,7 +706,7 @@ Takıldığınız bir konu, anlamadığınız bir bölüm, kariyerle ilgili bir 
 Başarılar dilerim. Bu sürecin sizin için gerçekten faydalı ve dönüştürücü olmasını umuyorum. 🚀
 
 Volkan Güler
-Siberkobi
+GRC Ustası
 """
 
                 mailto_url = (
