@@ -33,7 +33,8 @@ services:
     region: frankfurt
     plan: starter
     branch: main
-    schedule: "0 6 * * *"
+    # Render cron uses UTC. 00:00 UTC = 07:00 in Vietnam (UTC+7).
+    schedule: "0 0 * * *"
     buildCommand: pip install --disable-pip-version-check --no-cache-dir -r requirements.txt
     startCommand: python manage.py run_daily_programs
     envVars:
