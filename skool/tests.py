@@ -1,9 +1,11 @@
 import json
+import tempfile
 from datetime import date, datetime, time, timedelta
 from unittest.mock import patch
 from zoneinfo import ZoneInfo
 
 from django.contrib.auth import get_user_model
+from django.core.management import call_command
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.db import IntegrityError
 from django.test import Client, TestCase, override_settings
@@ -121,6 +123,21 @@ class SkoolFlowTests(TestCase):
         self.assertEqual(self.client.get(reverse("skool:lab_pdf", args=[lab.pk])).status_code, 200)
         other = Client()
         self.assertRedirects(other.get(reverse("skool:lab_pdf", args=[lab.pk])), reverse("skool:onboarding"))
+
+    def test_seed_skool_labs_is_repeatable_and_installs_all_pdfs(self):
+        with tempfile.TemporaryDirectory() as media_root, override_settings(MEDIA_ROOT=media_root):
+            call_command("seed_skool_labs", verbosity=0)
+            self.assertEqual(SkoolLab.objects.filter(is_active=True).count(), 10)
+            first_ids = list(SkoolLab.objects.order_by("order").values_list("pk", flat=True))
+
+            call_command("seed_skool_labs", verbosity=0)
+
+            self.assertEqual(
+                list(SkoolLab.objects.order_by("order").values_list("pk", flat=True)),
+                first_ids,
+            )
+            for lab in SkoolLab.objects.all():
+                self.assertTrue(lab.pdf.storage.exists(lab.pdf.name))
 
     def test_cannot_skip_questions(self):
         self.claim()
