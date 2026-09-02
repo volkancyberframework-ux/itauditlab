@@ -30,6 +30,7 @@ from .views import bunny_embed_url, youtube_video_id
 @override_settings(MEDIA_ROOT="/tmp/itaudit-test-media")
 class SkoolFlowTests(TestCase):
     def setUp(self):
+        SkoolInvitation.objects.all().delete()
         self.invitation, self.raw_token = SkoolInvitation.create_invitation("Volkan Güler")
 
     def claim(self, name="Volkan Güler"):
@@ -521,6 +522,9 @@ class AvailabilityAdminFormTests(TestCase):
 
 @override_settings(STATICFILES_STORAGE="django.contrib.staticfiles.storage.StaticFilesStorage")
 class AdminAndTelegramTests(TestCase):
+    def setUp(self):
+        SkoolInvitation.objects.all().delete()
+
     def test_admin_dashboard_requires_authentication(self):
         response = self.client.get(reverse("skool:admin_dashboard"))
         self.assertEqual(response.status_code, 302)
