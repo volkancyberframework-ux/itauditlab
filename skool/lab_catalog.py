@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from django.core.files import File
+from django.core.files.storage import default_storage
 from django.db import transaction
 
 from .models import SkoolLab
@@ -27,11 +29,16 @@ def bundled_pdf_path(filename):
 def ensure_lab_records():
     """Ensure the built-in library exists even when a deploy hook was skipped."""
     for order, title, filename, description in LABS:
+        packaged_path = bundled_pdf_path(filename)
+        storage_name = f"skool_labs/{filename}"
+        if packaged_path.is_file() and not default_storage.exists(storage_name):
+            with packaged_path.open("rb") as source:
+                default_storage.save(storage_name, File(source))
         lab, _ = SkoolLab.objects.get_or_create(
             title=title,
             defaults={
                 "description": description,
-                "pdf": f"skool_labs/{filename}",
+                "pdf": storage_name,
                 "order": order,
                 "is_active": True,
             },
@@ -42,8 +49,7 @@ def ensure_lab_records():
                 setattr(lab, field, value)
                 changed.append(field)
         if not lab.pdf:
-            lab.pdf = f"skool_labs/{filename}"
+            lab.pdf = storage_name
             changed.append("pdf")
         if changed:
             lab.save(update_fields=changed)
-

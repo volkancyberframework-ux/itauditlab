@@ -142,7 +142,11 @@ class SkoolFlowTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(SkoolLab.objects.count(), 10)
         lab = SkoolLab.objects.get(order=1)
-        self.assertEqual(self.client.get(reverse("skool:lab_pdf", args=[lab.pk])).status_code, 200)
+        self.assertTrue(lab.pdf.storage.exists(lab.pdf.name))
+        pdf_response = self.client.get(reverse("skool:lab_pdf", args=[lab.pk]))
+        self.assertEqual(pdf_response.status_code, 200)
+        self.assertEqual(pdf_response.headers["X-Frame-Options"], "SAMEORIGIN")
+        self.assertEqual(pdf_response.headers["Content-Type"], "application/pdf")
 
     def test_seed_skool_labs_is_repeatable_and_installs_all_pdfs(self):
         with tempfile.TemporaryDirectory() as media_root, override_settings(MEDIA_ROOT=media_root):

@@ -12,6 +12,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.clickjacking import xframe_options_sameorigin
 from django.views.decorators.http import require_GET, require_POST
 
 from .decorators import skool_user_required
@@ -171,6 +172,7 @@ def labs(request):
     })
 
 
+@xframe_options_sameorigin
 @skool_user_required
 def lab_pdf(request, pk):
     from .lab_catalog import bundled_pdf_path
