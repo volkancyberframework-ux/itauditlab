@@ -68,23 +68,11 @@
                                         <div class="card mb-4 card-hover h-100 d-flex flex-column">
                                           {% if course.id in enrolled_course_ids %}
                                             <a href="{% url 'course_single' course.id %}">
-                                              {% if course.image %}
-                                                <img src="{{ course.image.url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="card-img-top">
-                                              {% else %}
-                                                <div class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted" style="height: 200px;">
-                                                  Görsel yok
-                                                </div>
-                                              {% endif %}
+                                              <img src="{{ course.cover_url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="card-img-top">
                                             </a>
                                           {% else %}
                                             <div class="position-relative">
-                                              {% if course.image %}
-                                                <img src="{{ course.image.url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="card-img-top opacity-50">
-                                              {% else %}
-                                                <div class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted opacity-50" style="height: 200px;">
-                                                  Görsel yok
-                                                </div>
-                                              {% endif %}
+                                              <img src="{{ course.cover_url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="card-img-top opacity-50">
                                               <div class="position-absolute top-50 start-50 translate-middle fw-bold fs-6
                                                           {% if course.id in can_enroll_ids %}text-muted{% else %}text-danger{% endif %}">
                                                 {% if course.id in can_enroll_ids %}
@@ -159,13 +147,7 @@
                                       <div class="col-lg-3 col-md-6 col-12 student-course-item" data-course-title="{{ course.turkish_name|default:course.english_name|lower }}">
                                         <div class="card mb-4 card-hover h-100 d-flex flex-column">
                                           <a href="{% url 'course_single' course.id %}">
-                                            {% if course.image %}
-                                              <img src="{{ course.image.url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="card-img-top">
-                                            {% else %}
-                                              <div class="card-img-top d-flex align-items-center justify-content-center bg-light text-muted" style="height: 200px;">
-                                                Görsel yok
-                                              </div>
-                                            {% endif %}
+                                            <img src="{{ course.cover_url }}" alt="{{ course.turkish_name|default:course.english_name }}" class="card-img-top">
                                           </a>
 
                                           <div class="card-body flex-grow-1">

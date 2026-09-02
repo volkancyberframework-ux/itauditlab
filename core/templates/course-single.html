@@ -199,11 +199,7 @@
                                       <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
                                         <div class="d-flex align-items-center">
                                           <a href="#">
-                                            {% if course.image %}
-                                              <img src="{{ course.image.url }}" alt="course" class="rounded img-4by3-lg" />
-                                            {% else %}
-                                              <img src="{% static 'images/course-react.jpg' %}" alt="course" class="rounded img-4by3-lg" />
-                                            {% endif %}
+                                            <img src="{{ course.cover_url }}" alt="course" class="rounded img-4by3-lg" />
                                           </a>
                                           <div class="ms-3">
                                             <h3 class="mb-0"><a href="#" class="text-inherit">${courseTitle}</a></h3>
@@ -424,16 +420,8 @@
                 <div class="p-1">
                   <div
                     class="d-flex justify-content-center align-items-center rounded border-white border rounded-3 bg-cover"
-                    style="{% if course.image %}
-                              background-image: url('{{ course.image.url }}');
-                            {% else %}
-                              background-color: #f8f9fa;
-                            {% endif %}
+                    style="background-image: url('{{ course.cover_url }}');
                             height: 210px">
-
-                    {% if not course.image %}
-                      <span class="text-muted">Görsel yok</span>
-                    {% endif %}
 
                     {% if first_video_url or is_test and course.intro_video_url %}
                       <div class="position-relative" style="height: 210px; width: 100%;">
