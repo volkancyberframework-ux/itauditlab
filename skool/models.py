@@ -92,6 +92,7 @@ class SkoolUser(models.Model):
     audio_last_position = models.PositiveIntegerField(default=0)
     audio_duration_seconds = models.PositiveIntegerField(default=0)
     audio_progress_updated_at = models.DateTimeField(null=True, blank=True)
+    labs_welcome_seen = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -124,6 +124,15 @@ class SkoolFlowTests(TestCase):
         other = Client()
         self.assertRedirects(other.get(reverse("skool:lab_pdf", args=[lab.pk])), reverse("skool:onboarding"))
 
+    def test_labs_welcome_is_shown_only_on_first_visit(self):
+        self.claim()
+        first = self.client.get(reverse("skool:labs"))
+        self.assertContains(first, 'id="labs-welcome"')
+
+        second = self.client.get(reverse("skool:labs"))
+        self.assertNotContains(second, 'id="labs-welcome"')
+        self.assertTrue(SkoolUser.objects.get().labs_welcome_seen)
+
     def test_seed_skool_labs_is_repeatable_and_installs_all_pdfs(self):
         with tempfile.TemporaryDirectory() as media_root, override_settings(MEDIA_ROOT=media_root):
             call_command("seed_skool_labs", verbosity=0)

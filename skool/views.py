@@ -157,7 +157,15 @@ def labs(request):
         error = "Bu ad soyad için etkin bir GRC Ustası erişimi bulunamadı."
     if not user:
         return render(request, "skool/labs_login.html", {"error": error})
-    return render(request, "skool/labs.html", {"skool_user": user, "labs": SkoolLab.objects.filter(is_active=True)})
+    show_labs_welcome = not user.labs_welcome_seen
+    if show_labs_welcome:
+        SkoolUser.objects.filter(pk=user.pk, labs_welcome_seen=False).update(labs_welcome_seen=True)
+        user.labs_welcome_seen = True
+    return render(request, "skool/labs.html", {
+        "skool_user": user,
+        "labs": SkoolLab.objects.filter(is_active=True),
+        "show_labs_welcome": show_labs_welcome,
+    })
 
 
 @skool_user_required
