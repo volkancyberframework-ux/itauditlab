@@ -39,8 +39,16 @@ class Command(BaseCommand):
         else:
             summary += "\n\nBugün açılacak yeni içerik bulunmuyor."
         self.stdout.write(summary)
-        notify_telegram(summary)
-        send_daily_report_email(summary, run_date)
+        # Each delivery is independent: a temporary SMTP or Telegram failure
+        # must not prevent traffic and meeting reports from being attempted.
+        try:
+            notify_telegram(summary)
+        except Exception as exc:
+            self.stderr.write(self.style.WARNING(f'Program Telegram özeti gönderilemedi: {exc}'))
+        try:
+            send_daily_report_email(summary, run_date)
+        except Exception as exc:
+            self.stderr.write(self.style.WARNING(f'Program e-posta özeti gönderilemedi: {exc}'))
         try:
             sent = send_daily_traffic_report(run_date - timezone.timedelta(days=1))
             self.stdout.write('Günlük trafik raporu gönderildi.' if sent else 'Günlük trafik raporu zaten gönderilmiş.')

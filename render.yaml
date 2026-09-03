@@ -66,3 +66,9 @@ services:
         sync: false
       - key: TELEGRAM_CHAT_ID
         sync: false
+      # The meeting digest and GRC Ustası operational alerts use the dedicated
+      # bot. Keep these on the cron service as well as the web service.
+      - key: GRCUSTASI_TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: GRCUSTASI_TELEGRAM_ADMIN_CHAT_ID
+        sync: false
