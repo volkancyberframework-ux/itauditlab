@@ -7,7 +7,9 @@
   <h3>{{ product.title }}</h3>
   <p class="bootcamp-subtitle">{{ product.subtitle }}</p>
   <p class="bootcamp-description">{{ product.description }}</p>
+  {% if product.preparation %}<p class="bootcamp-preparation">{{ product.preparation }}</p>{% endif %}
   <ul class="bootcamp-features">{% for feature in product.features %}<li>{{ feature }}</li>{% endfor %}</ul>
+  {% if product.case_disclaimer %}<p class="bootcamp-case-note"><span aria-hidden="true">i</span>{{ product.case_disclaimer }}</p>{% endif %}
   <div class="bootcamp-duration"><span>{{ product.duration }}</span><strong>{{ product.duration_detail }}</strong></div>
   <div class="bootcamp-purchase">
     <div><strong>{{ product.price_display }}</strong><small>{{ product.price_note }}</small></div>
