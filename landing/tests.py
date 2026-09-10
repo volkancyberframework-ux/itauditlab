@@ -79,6 +79,12 @@ class LandingTests(TestCase):
         self.assertContains(response, reverse('landing:newsletter'))
         self.assertNotContains(response, 'destek@grcustasi.co')
         self.assertContains(response, reverse('landing:checkout'))
+        self.assertContains(response, 'id="bootcamp"')
+        self.assertContains(response, 'id="cisa-bootcamp"')
+        self.assertContains(response, 'id="cism-bootcamp"')
+        self.assertContains(response, 'Kariyer Yolunu Seç')
+        self.assertContains(response, 'name="product" value="cisa"')
+        self.assertContains(response, 'name="product" value="cism"')
         self.assertNotContains(response, 'info@grcmastery.com')
         self.assertNotContains(response, 'Öğrenci girişi yakında')
         self.assertContains(response, f'href="{reverse("login")}">Giriş →</a>')
@@ -95,6 +101,21 @@ class LandingTests(TestCase):
         self.assertEqual(payload['mode'], 'payment')
         self.assertEqual(payload['line_items'][0]['price_data']['unit_amount'], 5_999_900)
         self.assertEqual(payload['line_items'][0]['price_data']['currency'], 'try')
+
+    @override_settings(STRIPE_SECRET_KEY='sk_test_placeholder')
+    def test_cisa_checkout_uses_catalog_product(self):
+        with patch('stripe.checkout.Session.create') as create_session:
+            create_session.return_value.url = 'https://checkout.stripe.com/cisa-session'
+            response = self.client.post(reverse('landing:checkout'), {'product': 'cisa'})
+        self.assertEqual(response.status_code, 302)
+        payload = create_session.call_args.kwargs
+        self.assertEqual(payload['metadata']['product'], 'cisa')
+        self.assertEqual(payload['line_items'][0]['price_data']['product_data']['name'], 'CISA Bootcamp')
+        self.assertEqual(payload['line_items'][0]['price_data']['unit_amount'], 5_999_900)
+
+    def test_checkout_rejects_unknown_bootcamp(self):
+        response = self.client.post(reverse('landing:checkout'), {'product': 'unknown'})
+        self.assertEqual(response.status_code, 400)
 
     def test_existing_login_route_remains_owned_by_core(self):
         match = resolve('/login/')

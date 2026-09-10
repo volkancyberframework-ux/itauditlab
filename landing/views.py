@@ -13,6 +13,7 @@ from .forms import CorporateInquiryForm, LeadForm, PartnerApplicationForm, Waiti
 from .models import AssessmentSession, Certificate, JobMarketCount, NewsletterSubscriber, SiteSetting
 from .traffic import period_page_views, period_unique_visitors, traffic_stats
 from .curriculum import CURRICULUM, CURRICULUM_STATS
+from .bootcamp_catalog import BOOTCAMPS, BOOTCAMPS_BY_KEY
 
 logger = logging.getLogger(__name__)
 
@@ -38,6 +39,7 @@ def home(request):
     return render(request, 'landing/index.html', {
         'site': site, 'payment_url': payment_url, 'jobs': JobMarketCount.objects.all(),
         'curriculum': CURRICULUM, 'curriculum_stats': CURRICULUM_STATS,
+        'bootcamps': BOOTCAMPS,
         'open_assessment': request.path.rstrip('/').endswith('kariyer-pusulasi'),
     })
 
@@ -91,6 +93,15 @@ def traffic_dashboard(request):
 
 @require_POST
 def create_checkout(request):
+    product_key = request.POST.get('product', '').strip().lower()
+    product = BOOTCAMPS_BY_KEY.get(product_key)
+    if product_key and not product:
+        return JsonResponse({'ok': False, 'message': 'Geçersiz program seçimi.'}, status=400)
+    product = product or {
+        'key': 'grc_ustasi_80_saat', 'title': '80 Saatlik GRC Ustası Yoğun Eğitim Programı',
+        'description': '6 ay eğitim ve uygulama, 6 ay kariyer desteği, ömür boyu içerik erişimi.',
+        'price': 59_999,
+    }
     if not django_settings.STRIPE_SECRET_KEY:
         return JsonResponse({'ok': False, 'message': 'Stripe ödeme ayarı eksik.'}, status=503)
     import stripe
@@ -104,17 +115,17 @@ def create_checkout(request):
             line_items=[{
                 'price_data': {
                     'currency': 'try',
-                    'unit_amount': 5_999_900,
+                    'unit_amount': product['price'] * 100,
                     'product_data': {
-                        'name': '80 Saatlik GRC Ustası Yoğun Eğitim Programı',
-                        'description': '6 ay eğitim ve uygulama, 6 ay kariyer desteği, ömür boyu içerik erişimi.',
+                        'name': product['title'],
+                        'description': product['description'][:400],
                     },
                 },
                 'quantity': 1,
             }],
-            metadata={'product': 'grc_ustasi_80_saat', 'price_try': '59999'},
-            success_url=request.build_absolute_uri(reverse('landing:home') + '?payment=success#fiyat'),
-            cancel_url=request.build_absolute_uri(reverse('landing:home') + '?payment=cancel#fiyat'),
+            metadata={'product': product['key'], 'price_try': str(product['price'])},
+            success_url=request.build_absolute_uri(reverse('landing:home') + '?payment=success#bootcamp'),
+            cancel_url=request.build_absolute_uri(reverse('landing:home') + '?payment=cancel#bootcamp'),
         )
     except Exception:
         return JsonResponse({'ok': False, 'message': 'Ödeme şu anda başlatılamadı. Lütfen volkan@grcustasi.com adresine yazın.'}, status=502)
