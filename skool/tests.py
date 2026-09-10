@@ -33,9 +33,38 @@ class SkoolFlowTests(TestCase):
         SkoolInvitation.objects.all().delete()
         self.invitation, self.raw_token = SkoolInvitation.create_invitation("Volkan Güler")
 
-    def claim(self, name="Volkan Güler"):
+    def claim(self, name="Volkan Güler", client=None):
+        client = client or self.client
+        client.get(reverse("skool:onboarding") + f"?invite={self.raw_token}")
+        response = client.post(reverse("skool:onboarding"), {"full_name": name})
+        if response.status_code == 302 and response.url == reverse("skool:onboarding"):
+            response = client.post(
+                reverse("skool:onboarding"), {"action": "accept_withdrawal_notice"}
+            )
+        return response
+
+    def test_withdrawal_notice_is_required_and_persisted_before_journey(self):
         self.client.get(reverse("skool:onboarding") + f"?invite={self.raw_token}")
-        return self.client.post(reverse("skool:onboarding"), {"full_name": name})
+        response = self.client.post(
+            reverse("skool:onboarding"), {"full_name": "Volkan Güler"}
+        )
+        self.assertRedirects(response, reverse("skool:onboarding"))
+        user = SkoolUser.objects.get()
+        self.assertIsNone(user.withdrawal_notice_accepted_at)
+        notice = self.client.get(reverse("skool:onboarding"))
+        self.assertContains(notice, "Elektronik hizmetlerin anında ifası kapsamında")
+        self.assertContains(notice, "cayma hakkınız bulunmamaktadır")
+        self.assertContains(notice, "Ücret iadesi yapılamamaktadır")
+        self.assertRedirects(self.client.get(reverse("skool:journey")), reverse("skool:onboarding"))
+
+        response = self.client.post(
+            reverse("skool:onboarding"), {"action": "accept_withdrawal_notice"}
+        )
+        self.assertRedirects(response, reverse("skool:journey"))
+        user.refresh_from_db()
+        self.assertIsNotNone(user.withdrawal_notice_accepted_at)
+        self.assertEqual(user.withdrawal_notice_version, "2026-09-10-v1")
+        self.assertTrue(user.events.filter(event_type="withdrawal_notice_accepted").exists())
 
     def test_unauthorized_person_cannot_enter(self):
         response = self.client.post(reverse("skool:onboarding"), {"full_name": "Başka Kişi"})
@@ -57,8 +86,7 @@ class SkoolFlowTests(TestCase):
     def test_claimed_invitation_link_resumes_existing_user(self):
         self.claim()
         other = Client()
-        other.get(reverse("skool:onboarding") + f"?invite={self.raw_token}")
-        response = other.post(reverse("skool:onboarding"), {"full_name": "Volkan Güler"})
+        response = self.claim(client=other)
         self.assertRedirects(response, reverse("skool:journey"))
         self.assertEqual(SkoolUser.objects.count(), 1)
 
@@ -86,13 +114,15 @@ class SkoolFlowTests(TestCase):
     def test_logout_allows_name_login_again(self):
         self.claim()
         self.client.get(reverse("skool:logout"))
-        response = self.client.post(reverse("skool:onboarding"), {"full_name": "Volkan Güler"})
+        response = self.claim()
         self.assertRedirects(response, reverse("skool:journey"))
 
     def test_stale_invite_session_does_not_shadow_valid_name_login(self):
         other_invitation, other_raw = SkoolInvitation.create_invitation("Başka Davet")
         self.client.get(reverse("skool:onboarding") + f"?invite={other_raw}")
         response = self.client.post(reverse("skool:onboarding"), {"full_name": "Volkan Güler"})
+        self.assertRedirects(response, reverse("skool:onboarding"))
+        response = self.client.post(reverse("skool:onboarding"), {"action": "accept_withdrawal_notice"})
         self.assertRedirects(response, reverse("skool:journey"))
         other_invitation.refresh_from_db()
         self.assertEqual(other_invitation.status, "invited")
@@ -102,6 +132,8 @@ class SkoolFlowTests(TestCase):
         self.invitation.claimed_at = timezone.now()
         self.invitation.save(update_fields=("status", "claimed_at"))
         response = self.client.post(reverse("skool:onboarding"), {"full_name": "Volkan Güler"})
+        self.assertRedirects(response, reverse("skool:onboarding"))
+        response = self.client.post(reverse("skool:onboarding"), {"action": "accept_withdrawal_notice"})
         self.assertRedirects(response, reverse("skool:journey"))
         self.assertTrue(SkoolUser.objects.filter(invitation=self.invitation).exists())
 
@@ -171,7 +203,9 @@ class SkoolFlowTests(TestCase):
 
         telegram.reset_mock()
         response = self.client.post(reverse("skool:labs"), {"full_name": "Volkan Güler"})
-        self.assertRedirects(response, reverse("skool:labs"))
+        self.assertRedirects(response, reverse("skool:onboarding"))
+        self.client.post(reverse("skool:onboarding"), {"action": "accept_withdrawal_notice"})
+        self.assertEqual(self.client.get(reverse("skool:labs")).status_code, 200)
         self.assertIn("Başarılı", telegram.call_args.args[0])
 
     def test_seed_skool_labs_is_repeatable_and_installs_all_pdfs(self):
@@ -305,7 +339,15 @@ class BookingTests(TestCase):
         invitation, _ = SkoolInvitation.create_invitation("Ada Test")
         invitation.status = "claimed"
         invitation.save()
-        self.user = SkoolUser.objects.create(invitation=invitation, full_name="Ada Test", state="READY_TO_BOOK", test_completed_at=timezone.now(), audio_completed_at=timezone.now())
+        self.user = SkoolUser.objects.create(
+            invitation=invitation,
+            full_name="Ada Test",
+            state="READY_TO_BOOK",
+            withdrawal_notice_accepted_at=timezone.now(),
+            withdrawal_notice_version="2026-09-10-v1",
+            test_completed_at=timezone.now(),
+            audio_completed_at=timezone.now(),
+        )
         self.availability = TravelAvailability.objects.create(
             location_name="Vietnam", timezone="Asia/Ho_Chi_Minh",
             start_date=timezone.localdate() + timedelta(days=1), end_date=timezone.localdate() + timedelta(days=10),

@@ -99,6 +99,12 @@ class SkoolUser(models.Model):
     current_question = models.PositiveSmallIntegerField(default=1)
     intro_seen = models.BooleanField(default=False)
     identity_verified_at = models.DateTimeField(default=timezone.now)
+    withdrawal_notice_accepted_at = models.DateTimeField(
+        "Cayma/iade bildirimi kabul zamanı", null=True, blank=True
+    )
+    withdrawal_notice_version = models.CharField(
+        "Cayma/iade bildirimi sürümü", max_length=24, blank=True
+    )
     test_started_at = models.DateTimeField(null=True, blank=True)
     test_completed_at = models.DateTimeField(null=True, blank=True)
     audio_started_at = models.DateTimeField(null=True, blank=True)

@@ -98,8 +98,8 @@ class SkoolLabProgressAdmin(admin.ModelAdmin):
 
 @admin.register(SkoolUser)
 class SkoolUserAdmin(admin.ModelAdmin):
-    list_display = ("full_name", "state", "current_question", "test_completed_at", "audio_completed_at", "updated_at")
-    list_filter = ("state", "test_completed_at", "audio_completed_at")
+    list_display = ("full_name", "state", "withdrawal_notice_accepted_at", "current_question", "test_completed_at", "audio_completed_at", "updated_at")
+    list_filter = ("state", "withdrawal_notice_accepted_at", "test_completed_at", "audio_completed_at")
     search_fields = ("full_name",)
     readonly_fields = tuple(field.name for field in SkoolUser._meta.fields)
     inlines = (AnswerInline, EventInline)

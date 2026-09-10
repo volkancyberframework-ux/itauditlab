@@ -1,0 +1,54 @@
+.consent-greeting {
+  margin-bottom: 22px;
+}
+
+.withdrawal-notice {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  margin: 22px 0;
+  padding: 20px;
+  border: 1px solid rgba(244, 189, 79, .48);
+  border-radius: 16px;
+  background: rgba(244, 189, 79, .08);
+}
+
+.withdrawal-notice > span {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  color: var(--gold);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.withdrawal-notice h2 {
+  margin: 2px 0 10px;
+  color: #ffe1a0;
+  font-size: 18px;
+}
+
+.withdrawal-notice p {
+  margin: 7px 0;
+  color: #d8e2e9;
+  line-height: 1.55;
+}
+
+.withdrawal-notice strong {
+  color: #fff;
+}
+
+@media (max-width: 520px) {
+  .withdrawal-notice {
+    grid-template-columns: 1fr;
+    padding: 17px;
+  }
+
+  .withdrawal-notice > span {
+    width: 32px;
+    height: 32px;
+  }
+}

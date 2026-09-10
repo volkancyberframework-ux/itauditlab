@@ -14,6 +14,8 @@ def skool_user_required(view):
             if request.skool_user.invitation.status == "revoked":
                 request.session.flush()
                 return redirect("skool:onboarding")
+            if not request.skool_user.withdrawal_notice_accepted_at:
+                return redirect("skool:onboarding")
         except (SkoolUser.DoesNotExist, TypeError, ValueError):
             return redirect("skool:onboarding")
         return view(request, *args, **kwargs)

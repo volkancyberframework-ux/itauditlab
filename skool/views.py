@@ -24,6 +24,8 @@ from .models import (
 
 logger = logging.getLogger(__name__)
 
+WITHDRAWAL_NOTICE_VERSION = "2026-09-10-v1"
+
 
 def safe_send_telegram(message):
     try:
@@ -87,8 +89,30 @@ def _json_body(request):
 
 def onboarding(request):
     current_id = request.session.get("skool_user_id")
-    if current_id and SkoolUser.objects.filter(pk=current_id).exists():
-        return redirect("skool:journey")
+    current_user = SkoolUser.objects.filter(pk=current_id).first() if current_id else None
+    if current_user:
+        if current_user.invitation.status == "revoked":
+            request.session.flush()
+            current_user = None
+        elif current_user.withdrawal_notice_accepted_at:
+            return redirect("skool:journey")
+        elif request.method == "POST" and request.POST.get("action") == "accept_withdrawal_notice":
+            accepted_at = timezone.now()
+            with transaction.atomic():
+                SkoolUser.objects.filter(
+                    pk=current_user.pk, withdrawal_notice_accepted_at__isnull=True
+                ).update(
+                    withdrawal_notice_accepted_at=accepted_at,
+                    withdrawal_notice_version=WITHDRAWAL_NOTICE_VERSION,
+                )
+                OnboardingEvent.objects.create(
+                    user=current_user,
+                    event_type="withdrawal_notice_accepted",
+                    detail={"version": WITHDRAWAL_NOTICE_VERSION},
+                )
+            return redirect("skool:journey")
+        else:
+            return render(request, "skool/onboarding.html", {"consent_user": current_user})
     raw_token = request.GET.get("invite", "")
     if raw_token:
         request.session["skool_invite_hash"] = SkoolInvitation.hash_token(raw_token)
@@ -115,7 +139,7 @@ def onboarding(request):
                     request.session.flush()
                     request.session["skool_user_id"] = user.pk
                     request.session.set_expiry(60 * 60 * 24 * 180)
-                    return redirect("skool:journey")
+                    return redirect("skool:onboarding")
                 if invitation.status == "claimed":
                     # Repair manually-created/edited invitations which were marked
                     # claimed before their SkoolUser row was created.
@@ -124,7 +148,7 @@ def onboarding(request):
                     request.session.flush()
                     request.session["skool_user_id"] = user.pk
                     request.session.set_expiry(60 * 60 * 24 * 180)
-                    return redirect("skool:journey")
+                    return redirect("skool:onboarding")
                 with transaction.atomic():
                     invitation = SkoolInvitation.objects.select_for_update().get(pk=invitation.pk)
                     if invitation.status != "invited":
@@ -138,7 +162,7 @@ def onboarding(request):
                         request.session.flush()
                         request.session["skool_user_id"] = user.pk
                         request.session.set_expiry(60 * 60 * 24 * 180)
-                        return redirect("skool:journey")
+                        return redirect("skool:onboarding")
             else:
                 error = "Bu isim için aktif bir Skool birebir görüşme daveti bulunamadı."
     return render(request, "skool/onboarding.html", {"error": error})
@@ -156,6 +180,8 @@ def labs(request):
     ensure_lab_records()
     user_id = request.session.get("skool_user_id")
     user = SkoolUser.objects.filter(pk=user_id, invitation__status="claimed").first()
+    if user and not user.withdrawal_notice_accepted_at:
+        return redirect("skool:onboarding")
     error = ""
     if not user and request.method == "POST":
         entered_name = " ".join(request.POST.get("full_name", "").strip().split())
@@ -170,7 +196,7 @@ def labs(request):
             request.session["skool_user_id"] = user.pk
             request.session.set_expiry(60 * 60 * 24 * 180)
             safe_send_telegram(f"✅ Çalışmalar paneli girişi\n\n👤 {user.full_name}\nDurum: Başarılı")
-            return redirect("skool:labs")
+            return redirect("skool:onboarding")
         safe_send_telegram(f"⚠️ Çalışmalar paneli giriş denemesi\n\n👤 {entered_name or '(isim girilmedi)'}\nDurum: Erişim bulunamadı")
         error = "Bu ad soyad için etkin bir GRC Ustası erişimi bulunamadı."
     if not user:
