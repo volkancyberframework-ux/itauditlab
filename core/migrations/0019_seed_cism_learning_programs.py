@@ -78,6 +78,12 @@ PROGRAMS = (
     ("cism-bootcamp-6-ay", "CISM Bootcamp — 6 Ay", SIX_MONTH_STEPS),
 )
 
+CISM_COURSE_DESCRIPTION = (
+    "CISM Bootcamp kapsamında bilgi güvenliği yönetişimi, risk yönetimi, "
+    "güvenlik programı yönetimi ve olay yönetimi alanlarında ilerleyin. "
+    "Sorularınız için bana volkan@grcustasi.com adresinden ulaşabilirsiniz."
+)
+
 
 def ensure_course_access_schema(apps, schema_editor):
     """Repair columns skipped by 0013's state-only migration on fresh databases."""
@@ -127,15 +133,11 @@ def seed_cism_programs(apps, schema_editor):
         )
         for order, (day_offset, title) in enumerate(steps, start=1):
             course_type = "test"
-            description = (
-                f"{program_name} · Gün {day_offset} içeriği. "
-                "İçerik ve materyaller daha sonra eklenecektir."
-            )
             course, _ = Course.objects.get_or_create(
                 turkish_name=title,
-                description=description,
+                english_name=f"{program_name} · {title}",
+                description=CISM_COURSE_DESCRIPTION,
                 defaults={
-                    "english_name": "",
                     "duration": timedelta(hours=1),
                     "difficulty": "Advanced",
                     "score": 0,

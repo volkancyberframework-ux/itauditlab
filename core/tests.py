@@ -120,6 +120,12 @@ class CismProgramCatalogTests(TestCase):
         )
         self.assertTrue(all(course.course_type == Course.CourseType.TEST for course in courses))
         self.assertTrue(all(course.dashboard_activated for course in courses))
+        descriptions = set(courses.values_list("description", flat=True))
+        self.assertEqual(len(descriptions), 1)
+        self.assertIn("CISM Bootcamp kapsamında", descriptions.pop())
+        self.assertTrue(
+            all("volkan@grcustasi.com" in course.description for course in courses)
+        )
         self.assertTrue(all("cism-bootcamp.png" in course.cover_url for course in courses))
         self.assertFalse(
             ProgramEnrollment.objects.filter(program__in=(three_month, six_month)).exists()
