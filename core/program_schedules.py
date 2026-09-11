@@ -1,6 +1,7 @@
 PROGRAM_SCHEDULES = {
     "normal": {
         "name": "CISA Bootcamp Programı",
+        "cover": "__static__/img/course-covers/cisa-bootcamp.png",
         "steps": [
             (0, 36), (3, 37), (6, 38), (6, 201), (7, 53), (10, 39),
             (13, 40), (13, 202), (16, 41), (19, 42), (22, 43), (22, 203),
@@ -11,6 +12,7 @@ PROGRAM_SCHEDULES = {
     },
     "normallong": {
         "name": "CISA Bootcamp Uzun Program",
+        "cover": "__static__/img/course-covers/cisa-bootcamp.png",
         "steps": [
             (0, 36), (6, 37), (12, 38), (12, 201), (18, 53), (24, 39),
             (30, 40), (30, 202), (36, 41), (42, 42), (48, 43), (48, 203),

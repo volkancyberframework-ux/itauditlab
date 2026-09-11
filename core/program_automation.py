@@ -7,7 +7,7 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.utils import timezone
 
-from .models import Course, ProgramEnrollment, ProgramRelease
+from .models import Course, Enrollment, ProgramEnrollment, ProgramRelease
 
 logger = logging.getLogger(__name__)
 
@@ -147,6 +147,10 @@ def run_daily_programs(run_date=None):
             if not release.access_granted_at:
                 if step.course.course_type == Course.CourseType.TEST:
                     enrollment.user.allowed_tests.add(step.course)
+                else:
+                    Enrollment.objects.get_or_create(
+                        user=enrollment.user, course=step.course
+                    )
                 release.access_granted_at = timezone.now()
                 release.status = ProgramRelease.Status.PENDING
                 release.save(update_fields=("access_granted_at", "status"))

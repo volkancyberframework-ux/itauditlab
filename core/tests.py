@@ -1,9 +1,11 @@
 from datetime import date, time, timedelta
+from importlib import import_module
 import json
 from types import SimpleNamespace
 from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
+from django.apps import apps as django_apps
 from django.test import TestCase
 from django.urls import reverse
 
@@ -65,6 +67,78 @@ class DailyProgramAutomationTests(TestCase):
         self.assertEqual(second["courses"], 0)
         self.assertEqual(release_mail.call_count, 2)
         self.assertEqual(ProgramRelease.objects.get().status, ProgramRelease.Status.FAILED)
+
+    @patch("core.program_automation.send_release_email")
+    @patch("core.program_automation.send_welcome")
+    def test_due_video_step_creates_course_enrollment(self, welcome, release_mail):
+        video = Course.objects.create(
+            turkish_name="CISM video dersi",
+            duration=timedelta(hours=1),
+            difficulty="Advanced",
+            description="Test",
+            course_type=Course.CourseType.VIDEO,
+        )
+        LearningProgramStep.objects.create(
+            program=self.program, course=video, day_offset=0, order=2
+        )
+
+        run_daily_programs(date(2026, 8, 4))
+
+        self.assertTrue(Enrollment.objects.filter(user=self.user, course=video).exists())
+
+
+class CismProgramCatalogTests(TestCase):
+    def test_cism_programs_and_courses_are_seeded_without_students(self):
+        three_month = LearningProgram.objects.get(slug="cism-bootcamp-3-ay")
+        six_month = LearningProgram.objects.get(slug="cism-bootcamp-6-ay")
+
+        self.assertEqual(three_month.steps.count(), 30)
+        self.assertEqual(six_month.steps.count(), 31)
+        self.assertEqual(three_month.steps.order_by("day_offset").last().day_offset, 87)
+        self.assertEqual(six_month.steps.order_by("day_offset").last().day_offset, 180)
+        courses = Course.objects.filter(
+            learningprogramstep__program__in=(three_month, six_month)
+        ).distinct()
+        self.assertEqual(courses.count(), 61)
+        self.assertTrue(
+            all(
+                course.image.name == "__static__/img/course-covers/cism-bootcamp.png"
+                for course in courses
+            )
+        )
+        self.assertTrue(all("cism-bootcamp.png" in course.cover_url for course in courses))
+        self.assertFalse(
+            ProgramEnrollment.objects.filter(program__in=(three_month, six_month)).exists()
+        )
+        self.assertFalse(Enrollment.objects.filter(course__in=courses).exists())
+
+    def test_cisa_short_and_long_program_courses_receive_shared_cover(self):
+        short = LearningProgram.objects.create(slug="normal", name="CISA Kısa")
+        long = LearningProgram.objects.create(slug="normallong", name="CISA Uzun")
+        short_course = Course.objects.create(
+            turkish_name="CISA kısa ders",
+            duration=timedelta(hours=1),
+            difficulty="Advanced",
+            description="Kısa",
+        )
+        long_course = Course.objects.create(
+            turkish_name="CISA uzun ders",
+            duration=timedelta(hours=1),
+            difficulty="Advanced",
+            description="Uzun",
+        )
+        LearningProgramStep.objects.create(program=short, course=short_course, day_offset=0)
+        LearningProgramStep.objects.create(program=long, course=long_course, day_offset=0)
+
+        migration = import_module("core.migrations.0019_seed_cism_learning_programs")
+        migration.seed_cism_programs(django_apps, None)
+
+        short_course.refresh_from_db()
+        long_course.refresh_from_db()
+        expected = "__static__/img/course-covers/cisa-bootcamp.png"
+        self.assertEqual(short_course.image.name, expected)
+        self.assertEqual(long_course.image.name, expected)
+        self.assertIn("cisa-bootcamp.png", short_course.cover_url)
 
 
 class QuickStudentProgramEnrollmentTests(TestCase):

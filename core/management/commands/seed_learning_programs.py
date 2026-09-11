@@ -20,6 +20,10 @@ class Command(BaseCommand):
                 except Course.DoesNotExist:
                     missing.append(course_id)
                     continue
+                cover = definition.get("cover")
+                if cover and course.image.name != cover:
+                    course.image = cover
+                    course.save(update_fields=("image",))
                 LearningProgramStep.objects.get_or_create(
                     program=program,
                     course=course,

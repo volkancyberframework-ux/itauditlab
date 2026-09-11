@@ -249,6 +249,8 @@ class Course(models.Model):
     def cover_url(self):
         """Return a safe course cover URL even when no upload is present."""
         if self.image:
+            if self.image.name.startswith("__static__/"):
+                return static(self.image.name.removeprefix("__static__/"))
             try:
                 return self.image.url
             except Exception:
