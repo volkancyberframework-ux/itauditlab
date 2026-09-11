@@ -126,7 +126,7 @@ def seed_cism_programs(apps, schema_editor):
             defaults={"name": program_name, "is_active": True},
         )
         for order, (day_offset, title) in enumerate(steps, start=1):
-            course_type = "test" if "soru" in title.casefold() or "mock exam" in title.casefold() else "video"
+            course_type = "test"
             description = (
                 f"{program_name} · Gün {day_offset} içeriği. "
                 "İçerik ve materyaller daha sonra eklenecektir."
@@ -140,7 +140,7 @@ def seed_cism_programs(apps, schema_editor):
                     "difficulty": "Advanced",
                     "score": 0,
                     "preparer": None,
-                    "dashboard_activated": False,
+                    "dashboard_activated": True,
                     "main_page_activated": False,
                     "is_english": False,
                     "is_turkish": True,

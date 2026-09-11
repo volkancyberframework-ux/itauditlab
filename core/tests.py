@@ -118,6 +118,8 @@ class CismProgramCatalogTests(TestCase):
                 for course in courses
             )
         )
+        self.assertTrue(all(course.course_type == Course.CourseType.TEST for course in courses))
+        self.assertTrue(all(course.dashboard_activated for course in courses))
         self.assertTrue(all("cism-bootcamp.png" in course.cover_url for course in courses))
         self.assertFalse(
             ProgramEnrollment.objects.filter(program__in=(three_month, six_month)).exists()
