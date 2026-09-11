@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+from django.core.management.color import no_style
 from django.db import migrations, models
 
 
@@ -107,6 +108,17 @@ def seed_cism_programs(apps, schema_editor):
     LearningProgram = apps.get_model("core", "LearningProgram")
     LearningProgramStep = apps.get_model("core", "LearningProgramStep")
     cover_name = "__static__/img/course-covers/cism-bootcamp.png"
+
+    # Production historically received several Course rows with explicit IDs.
+    # PostgreSQL's sequence can therefore lag behind MAX(id), making the next
+    # normal insert reuse an existing primary key. Align every sequence used by
+    # this seed before creating catalog records.
+    sequence_sql = schema_editor.connection.ops.sequence_reset_sql(
+        no_style(), [Course, LearningProgram, LearningProgramStep]
+    )
+    with schema_editor.connection.cursor() as cursor:
+        for statement in sequence_sql:
+            cursor.execute(statement)
 
     for slug, program_name, steps in PROGRAMS:
         program, _ = LearningProgram.objects.update_or_create(

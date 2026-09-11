@@ -6,6 +6,7 @@ from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
 from django.apps import apps as django_apps
+from django.db import connection
 from django.test import TestCase
 from django.urls import reverse
 
@@ -131,7 +132,9 @@ class CismProgramCatalogTests(TestCase):
         LearningProgramStep.objects.create(program=long, course=long_course, day_offset=0)
 
         migration = import_module("core.migrations.0019_seed_cism_learning_programs")
-        migration.seed_cism_programs(django_apps, None)
+        migration.seed_cism_programs(
+            django_apps, SimpleNamespace(connection=connection)
+        )
 
         short_course.refresh_from_db()
         long_course.refresh_from_db()
