@@ -89,6 +89,17 @@ class DailyProgramAutomationTests(TestCase):
 
 
 class CismProgramCatalogTests(TestCase):
+    def test_admin_static_course_cover_url_redirects_to_asset(self):
+        response = self.client.get(
+            "/media/__static__/img/course-covers/cism-bootcamp.png"
+        )
+        self.assertRedirects(
+            response,
+            "/static/img/course-covers/cism-bootcamp.png",
+            status_code=301,
+            fetch_redirect_response=False,
+        )
+
     def test_cism_programs_and_courses_are_seeded_without_students(self):
         three_month = LearningProgram.objects.get(slug="cism-bootcamp-3-ay")
         six_month = LearningProgram.objects.get(slug="cism-bootcamp-6-ay")
