@@ -13,4 +13,5 @@ urlpatterns += [path('console/<int:audit_id>/controls.pdf', workspace_views.cont
 urlpatterns += [path('admin/', admin.site.urls)]
 
 from workspace.logo import organization_logo
+urlpatterns += [path('privacy/', views.privacy, name='privacy')]
 urlpatterns += [path('branding/<int:organization_id>/logo/', organization_logo, name='organization_logo')]

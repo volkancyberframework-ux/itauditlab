@@ -6,7 +6,8 @@ from pathlib import Path
 
 def organization_brand(organization=None):
     if organization and organization.logo_data:
-        logo=reverse('organization_logo',args=[organization.pk])
+        from hashlib import sha256
+        logo=reverse('organization_logo',args=[organization.pk])+'?v='+sha256(bytes(organization.logo_data)).hexdigest()[:12]
     elif organization and organization.slug=='torbali-belediyesi':
         logo=static('img/torbali-belediyesi.gif')
     else:logo=static('img/organization.svg')
@@ -18,7 +19,14 @@ def pdf_logo(organization):
     return None
 
 def brand_context(request):
-    return organization_brand(getattr(request,'tenant',None))
+    organization=getattr(request,'tenant',None)
+    if not organization and getattr(request,'user',None) and request.user.is_authenticated:
+        from .models import Audit
+        audits=Audit.objects.filter(archived=False).select_related('organization')
+        if not request.user.is_superuser:audits=audits.filter(membership__user=request.user)
+        audit=audits.filter(pk=request.session.get('selected_audit')).first() or audits.order_by('pk').first()
+        if audit:organization=audit.organization
+    return organization_brand(organization)
 
 def it_label(audit):
     names=[m.user.get_full_name() or m.user.email for m in audit.membership_set.filter(role='it',user__is_active=True).select_related('user').order_by('user__first_name','user__pk')]

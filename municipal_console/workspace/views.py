@@ -8,8 +8,8 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_POST
 from django import forms
 from django.urls import resolve, Resolver404, reverse
-from .models import Audit, Membership, Control, ResponseRevision, Evaluation, Finding, Suggestion, Activity, ROLES, STATUSES
-from .forms import ResponseForm, EvaluationForm, SuggestionForm, AppointmentForm, FindingForm
+from .models import Audit, Membership, Control, ResponseRevision, Evaluation, Finding, Suggestion, Activity, ROLES, STATUSES, ControlDefinition
+from .forms import ResponseForm, EvaluationForm, SuggestionForm, AppointmentForm, FindingForm, AddControlsForm
 from . import services
 from django.conf import settings
 from django.core.exceptions import ValidationError
@@ -44,7 +44,16 @@ def scope(request,audit_id=None):
         audit=audits.filter(pk=request.session.get('selected_audit')).first() or audits.order_by('pk').first()
     if not audit:return None,None,False
     preview=request.user.is_superuser and request.session.get('view_as','admin')!='admin'
-    role=request.session.get('view_as','admin') if request.user.is_superuser else Membership.objects.get(user=request.user,audit=audit).role
+    request.auditor_readonly=False
+    if request.user.is_superuser:
+        role=request.session.get('view_as','admin')
+    else:
+        membership=Membership.objects.get(user=request.user,audit=audit)
+        role=membership.role
+        if role=='intern' and membership.auditor_readonly:
+            request.auditor_readonly=True
+            role='auditor'
+            preview=True
     if role not in dict(ROLES):raise Http404
     return audit,role,preview
 
@@ -54,12 +63,12 @@ def demo_write(request,audit):
 def shared(request,audit,role,preview):
     from .branding import organization_brand,it_label
     label=it_label(audit) if audit else 'BT Sorumlusu'
-    return {**organization_brand(audit.organization if audit else None),'audit':audit,'audit_choices':accessible_audits(request),'it_label':label,'role':role,'role_label':label if role=='it' else dict(ROLES).get(role,''),'preview':preview,'roles':ROLES,'is_platform_admin':request.user.is_superuser,'demo_writable':demo_write(request,audit),'can_evaluate':role in ('admin','auditor'),'show_evaluation':role in ('admin','auditor','executive'),'phase_order':[('responses','BT yanıtları'),('fieldwork','Saha denetimi'),('remediation','Bulgu giderme'),('completed','Sürekli kontrol')]}
+    return {**organization_brand(audit.organization if audit else None),'audit':audit,'audit_choices':accessible_audits(request),'it_label':label,'role':role,'role_label':'Stajyer · Denetçi görünümü (salt okunur)' if getattr(request,'auditor_readonly',False) else (label if role=='it' else dict(ROLES).get(role,'')),'preview':preview,'roles':ROLES,'is_platform_admin':request.user.is_superuser,'demo_writable':demo_write(request,audit),'auditor_readonly':getattr(request,'auditor_readonly',False),'can_evaluate':role in ('admin','auditor') and not getattr(request,'auditor_readonly',False),'show_auditor_data':role in ('admin','auditor'),'show_evaluation':role in ('admin','auditor','executive'),'phase_order':[('responses','BT yanıtları'),('fieldwork','Saha denetimi'),('remediation','Bulgu giderme'),('completed','Sürekli kontrol')]}
 
 def evaluation_form(control):
     ev=Evaluation.objects.filter(control=control).first()
     finding=Finding.objects.filter(control=control).first()
-    initial={'assessment':ev.assessment,'rationale':ev.rationale,'private_note':ev.private_note,'verified':ev.verified} if ev else {}
+    initial={'assessment':ev.assessment,'deficiency':ev.deficiency,'rationale':ev.rationale,'private_note':ev.private_note,'verified':ev.verified} if ev else {}
     if finding:initial.update(recommendation=finding.recommendation,due_date=finding.due_date)
     return EvaluationForm(initial=initial,auto_id=f'evaluation_{control.pk}_%s')
 
@@ -76,8 +85,10 @@ def serialize_control(control,role):
     data['evaluation']=None
     if role=='it':return data
     evaluations=Evaluation.objects.filter(control=control)
-    evaluation=evaluations.values('assessment','rationale','verified').first()
+    evaluation=evaluations.values('assessment','rationale','verified','deficiency').first()
     if evaluation:
+        from .models import DEFICIENCIES
+        evaluation['deficiency_label']=dict(DEFICIENCIES).get(evaluation['deficiency'],'')
         evaluation['label']=dict(Evaluation._meta.get_field('assessment').choices)[evaluation['assessment']
         ]
         if role in ('admin','auditor'):evaluation['private_note']=evaluations.values_list('private_note',flat=True).first()
@@ -90,6 +101,9 @@ def console(request):
     if not audit:return render(request,'workspace/empty.html',{'is_platform_admin':request.user.is_superuser},status=200)
     ctx=shared(request,audit,role,preview)
     controls=visible_controls(audit,role)
+    if ctx['can_evaluate']:
+        ctx['add_controls_form']=AddControlsForm()
+        ctx['add_controls_form'].fields['controls'].queryset=ControlDefinition.objects.exclude(audit_controls__audit=audit)
     all_rows=[serialize_control(c,role) for c in controls]
     q=request.GET.get('q','').strip()[:100]
     framework=request.GET.get('framework','')
@@ -97,7 +111,7 @@ def console(request):
     for row in rows:
         row['answer_form']=ResponseForm(initial={'status':row.get('status') if row.get('status')!='unanswered' else 'implemented','explanation':row['response'].explanation if row.get('response') else ''},auto_id=f"answer_{row['id']}_%s")
         if role in ('admin','auditor'):row['evaluation_form']=evaluation_form(controls.get(pk=row['id']))
-        row['can_answer']=role=='it' and (preview or demo_write(request,audit) or not row.get('response') or row['response'].actor_id==request.user.pk)
+        row['can_answer']=role=='it'
     ctx.update(rows=rows,total=len(all_rows),q=q,framework=framework,frameworks=sorted({r['framework'] for r in all_rows}),appointment_form=AppointmentForm(),suggestion_form=SuggestionForm())
     if role in ('intern','admin','auditor'):
         suggestions=Suggestion.objects.filter(audit=audit)
@@ -109,7 +123,7 @@ def console(request):
         compliant=sum(bool(r['evaluation'] and r['evaluation']['assessment']=='compliant') for r in all_rows)
         findings=Finding.objects.filter(audit=audit).prefetch_related('updates__actor').select_related('control')
         if role not in ('admin','auditor'):findings=findings.filter(customer_visible=True)
-        ctx.update(answered=answered,unanswered=len(all_rows)-answered,completion=round(answered/len(all_rows)*100) if all_rows else 0,compliant=compliant,findings=list(findings),finding_count=findings.exclude(status__in=['closed','risk_accepted']).count(),response_form=ResponseForm(),ready_for_fieldwork=bool(all_rows) and answered==len(all_rows))
+        ctx.update(answered=answered,unanswered=len(all_rows)-answered,completion=round(answered/len(all_rows)*100) if all_rows else 0,compliant=compliant,findings=list(findings),finding_count=findings.exclude(status__in=['closed','risk_accepted']).count(),response_form=ResponseForm(),ready_for_fieldwork=bool(all_rows))
     # Chart payload is assembled from the same permission-filtered records as the page.
     risk_counts=Counter(r['risk'] for r in all_rows)
     framework_counts=Counter(r['framework'] for r in all_rows)
@@ -169,7 +183,7 @@ def detail(request,audit_id,control_id):
     if request.method=='GET' and row.get('response'):
         form=ResponseForm(initial={'status':row['response'].status,'explanation':row['response'].explanation})
     ctx=shared(request,audit,role,preview)
-    can_answer=role=='it' and (preview or demo_write(request,audit) or not row.get('response') or row['response'].actor_id==request.user.pk)
+    can_answer=role=='it'
     ctx.update(control=row,form=form,can_answer=can_answer)
     if role in ('admin','auditor'):ctx['evaluation_form']=evaluation_form(control)
     return render(request,'workspace/detail.html',ctx)
@@ -188,10 +202,18 @@ def history(request,audit_id,control_id):
 @require_POST
 def workflow(request,audit_id):
     audit,role,preview=scope(request,audit_id)
+    if getattr(request,'auditor_readonly',False):return HttpResponseForbidden('Stajyer denetçi görünümü salt okunurdur.')
     action=request.POST.get('action','')
     writable=demo_write(request,audit)
     try:
-        if action=='answer':
+        if action=='add_controls':
+            services.allowed(role,['admin','auditor'],preview,writable)
+            form=AddControlsForm(request.POST)
+            if not form.is_valid():return form_failure(request,audit,role,preview,form,action)
+            with transaction.atomic():
+                added=services.add_catalog_controls(audit,form.cleaned_data['controls'])
+                services.log(audit,request.user,role,'Katalogdan kontrol eklendi',controls=[c.code for c in added])
+        elif action=='answer':
             control=get_object_or_404(visible_controls(audit,role),pk=request.POST.get('control'))
             form=ResponseForm(request.POST)
             if not form.is_valid():return form_failure(request,audit,role,preview,form,action,control.pk)

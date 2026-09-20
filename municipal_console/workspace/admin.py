@@ -3,7 +3,7 @@ from PIL import Image, UnidentifiedImageError
 from django.contrib import admin
 from django.core.exceptions import ValidationError
 from django import forms
-from .models import Organization,Audit,Membership,Control,Notification,ControlEmail
+from .models import Organization,Audit,Membership,Control,Notification,ControlEmail,AuditTemplate,ControlDefinition
 
 class OrganizationForm(forms.ModelForm):
     logo=forms.ImageField(label='Kurum logosu',required=False,help_text='PNG, JPEG veya GIF; en fazla 2 MB. Veritabanında kalıcı saklanır.')
@@ -55,7 +55,7 @@ class OrganizationAdmin(SuperuserAdmin):
     def logo_preview(self,obj):
         from django.utils.html import format_html
         from .branding import organization_brand
-        return format_html('<img src="{}" alt="Kurum logosu" style="max-width:240px;max-height:120px;background:white;padding:8px">',organization_brand(obj)['brand_logo_url'])
+        return format_html('<img src="{}" alt="Kurum logosu" style="max-width:240px;max-height:120px;background:transparent;padding:8px">',organization_brand(obj)['brand_logo_url'])
     logo_preview.short_description='Mevcut logo'
 
 class MembershipInline(admin.TabularInline):
@@ -63,14 +63,41 @@ class MembershipInline(admin.TabularInline):
     extra=1
     autocomplete_fields=['user']
 
+class AuditForm(forms.ModelForm):
+    extra_controls=forms.ModelMultipleChoiceField(queryset=ControlDefinition.objects.all(),required=False,label='Katalogdan ek kontroller',widget=admin.widgets.FilteredSelectMultiple('Ek kontroller',False),help_text='Şablondakilere ek olarak seçilir. Mevcut kontroller ve yanıtlar korunur.')
+    class Meta:
+        model=Audit
+        fields=['organization','title','template','is_demo','archived']
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        if self.instance.pk:
+            self.fields['extra_controls'].queryset=ControlDefinition.objects.exclude(audit_controls__audit=self.instance)
+
+@admin.register(ControlDefinition)
+class ControlDefinitionAdmin(SuperuserAdmin):
+    list_display=('code','title','framework','theme','risk')
+    list_filter=('framework','theme','risk')
+    search_fields=('code','title','description')
+
+@admin.register(AuditTemplate)
+class AuditTemplateAdmin(SuperuserAdmin):
+    list_display=('name',)
+    search_fields=('name',)
+    filter_horizontal=('controls',)
+
 @admin.register(Audit)
 class AuditAdmin(SuperuserAdmin):
-    list_display=('title','organization','phase','archived')
+    form=AuditForm
+    list_display=('title','organization','template','phase','archived')
     list_filter=('organization','phase','archived')
     search_fields=('title','organization__name')
-    fields=('organization','title','is_demo','archived','phase')
+    fields=('organization','title','template','extra_controls','is_demo','archived','phase')
     readonly_fields=('phase',)
     inlines=[MembershipInline]
+    def save_related(self,request,form,formsets,change):
+        super().save_related(request,form,formsets,change)
+        from .services import add_catalog_controls
+        add_catalog_controls(form.instance,form.cleaned_data['extra_controls'])
     def view_on_site(self,obj):
         from django.urls import reverse
         return reverse('console')+f'?audit={obj.pk}'
@@ -90,7 +117,7 @@ class ControlAdmin(SuperuserAdmin):
 
 @admin.register(Membership)
 class MembershipAdmin(SuperuserAdmin):
-    list_display=('user','audit','role')
+    list_display=('user','audit','role','auditor_readonly')
     list_filter=('role','audit')
     autocomplete_fields=['user','audit']
 

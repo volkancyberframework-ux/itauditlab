@@ -1,11 +1,13 @@
 from django.test import TestCase, Client, override_settings
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+from django.utils import timezone
+from .privacy import PRIVACY_VERSION
 
 @override_settings(STORAGES={'default':{'BACKEND':'django.core.files.storage.FileSystemStorage'},'staticfiles':{'BACKEND':'django.contrib.staticfiles.storage.StaticFilesStorage'}})
 class AuthenticationTests(TestCase):
     def setUp(self):
-        self.user = get_user_model().objects.create_user('person@example.com','Initial-Password-384!')
+        self.user = get_user_model().objects.create_user('person@example.com','Initial-Password-384!',privacy_accepted_at=timezone.now(),privacy_version=PRIVACY_VERSION)
     def signin(self, **extra):
         return self.client.post('/signin/', {'username':self.user.email, 'password':'Initial-Password-384!', **extra})
     def test_root_shows_signin(self):

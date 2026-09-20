@@ -1,5 +1,5 @@
 from django import forms
-from .models import STATUSES, ASSESSMENTS, Suggestion
+from .models import STATUSES, ASSESSMENTS, DEFICIENCIES, Suggestion, ControlDefinition
 class ResponseForm(forms.Form):
     status=forms.ChoiceField(choices=STATUSES[:-1],label='Uygulama durumu')
     explanation=forms.CharField(label='Açıklama / mevcut durum',required=False,max_length=4000,help_text='Yapılıyor ve uygulanamaz seçimlerinde açıklama zorunludur.',widget=forms.Textarea(attrs={'rows':3,'data-response-guide':'true','placeholder':'Hangi süreç uygulanıyor? Kim yürütüyor, ne sıklıkta ve hangi kanıtla doğrulanabilir?'}))
@@ -11,6 +11,7 @@ class ResponseForm(forms.Form):
     declaration=forms.BooleanField(label='Bilgilerin doğru, eksiksiz ve mevcut durumu yansıttığını onaylıyorum.')
 class EvaluationForm(forms.Form):
     assessment=forms.ChoiceField(choices=ASSESSMENTS[:-1],label='Denetçi görüşü')
+    deficiency=forms.ChoiceField(choices=[('','---------')]+DEFICIENCIES,required=False,label='Eksiklik türü',help_text='Kısmen uygun / uygun değil için Tasarım, Uygulama veya ikisi birlikte seçilmelidir.')
     rationale=forms.CharField(label='Değerlendirme gerekçesi (yalnızca yöneticiye açık)',max_length=4000,widget=forms.Textarea(attrs={'rows':3}))
     recommendation=forms.CharField(label='Bulgu / giderim önerisi (BT sorumlusuyla paylaşılır)',required=False,max_length=4000,widget=forms.Textarea(attrs={'rows':3}))
     private_note=forms.CharField(label='Denetim ekibi özel notu',required=False,max_length=4000,widget=forms.Textarea(attrs={'rows':2}))
@@ -19,6 +20,8 @@ class EvaluationForm(forms.Form):
     def clean(self):
         data=super().clean()
         if data.get('assessment') in ['partial','noncompliant'] and not data.get('recommendation'):self.add_error('recommendation','Bulgu için giderim önerisi gereklidir.')
+        if data.get('assessment') in ['partial','noncompliant'] and not data.get('deficiency'):self.add_error('deficiency','Eksikliğin tasarım, uygulama veya her ikisiyle ilgili olduğunu seçin.')
+        if data.get('assessment')=='compliant':data['deficiency']=''
         return data
 class SuggestionForm(forms.ModelForm):
     class Meta:
@@ -30,6 +33,10 @@ class SuggestionForm(forms.ModelForm):
         value=self.cleaned_data['test_steps']
         if len(value.strip())<30:raise forms.ValidationError('En az 30 karakterle somut test adımlarını açıklayın.')
         return value
+
+class AddControlsForm(forms.Form):
+    controls=forms.ModelMultipleChoiceField(queryset=ControlDefinition.objects.all(),label='Katalogdan ek kontroller',widget=forms.CheckboxSelectMultiple)
+
 class AppointmentForm(forms.Form):
     when=forms.DateTimeField(label='Gün ve saat (İstanbul)',widget=forms.DateTimeInput(attrs={'type':'datetime-local'}))
     note=forms.CharField(label='İletişim / görüşme notu',max_length=2000,widget=forms.Textarea(attrs={'rows':2}))

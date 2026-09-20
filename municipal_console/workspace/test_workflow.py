@@ -1,3 +1,5 @@
+from accounts.privacy import PRIVACY_VERSION
+from django.utils import timezone
 from io import BytesIO
 from datetime import timedelta
 from django.test import TestCase, override_settings
@@ -11,12 +13,12 @@ from .models import *
 class WorkflowTests(TestCase):
     def setUp(self):
         U=get_user_model()
-        self.admin=U.objects.create_superuser('demo@grcustasi.local','Long-Test-Password!',must_change_password=False)
+        self.admin=U.objects.create_superuser('demo@grcustasi.local','Long-Test-Password!',must_change_password=False,privacy_accepted_at=timezone.now(),privacy_version=PRIVACY_VERSION)
         self.audit=Audit.objects.create(organization=Organization.objects.create(name='Test Belediyesi',slug='test'),title='Akış',is_demo=True)
         self.control=Control.objects.create(audit=self.audit,code='GRC-001',title='İş süreçleri ve güvenlik',description='Test açıklaması',risk='medium',intern_visible=True)
         self.users={}
         for role in ['it','executive','auditor','intern']:
-            user=U.objects.create_user(f'{role}@example.com','Long-Test-Password!',must_change_password=False)
+            user=U.objects.create_user(f'{role}@example.com','Long-Test-Password!',must_change_password=False,privacy_accepted_at=timezone.now(),privacy_version=PRIVACY_VERSION)
             Membership.objects.create(user=user,audit=self.audit,role=role);self.users[role]=user
         self.url=f'/console/{self.audit.pk}/workflow/'
     def login(self,role):self.client.force_login(self.admin if role=='admin' else self.users[role],backend='django.contrib.auth.backends.ModelBackend')
@@ -28,11 +30,11 @@ class WorkflowTests(TestCase):
         when=timezone.localtime(timezone.now()+timedelta(days=3)).strftime('%Y-%m-%dT%H:%M')
         self.post('appointment',when=when,note='BT ekibi ile telefonla görüşüldü.');self.login('it');self.post('confirm_appointment')
     def evaluate(self,status='partial'):
-        self.login('auditor');return self.post('evaluate',control=self.control.pk,assessment=status,verified='on',rationale='YÖNETİCİYE-GİZLİ-GÖRÜŞ',private_note='EKİP-ÖZEL-NOT',recommendation='Erişim yetkilerini gözden geçirin; kanıt özetini paylaşın.')
+        self.login('auditor');return self.post('evaluate',control=self.control.pk,assessment=status,deficiency='both',verified='on',rationale='YÖNETİCİYE-GİZLİ-GÖRÜŞ',private_note='EKİP-ÖZEL-NOT',recommendation='Erişim yetkilerini gözden geçirin; kanıt özetini paylaşın.')
     def test_initial_unanswered_and_inline_form(self):
         self.login('it');r=self.client.get('/console/');self.assertContains(r,'Başlanmadı');self.assertContains(r,'GRC-001 yanıtını düzenle');self.assertNotContains(r,'Denetçi görüşü')
-    def test_phase_cannot_skip_answers(self):
-        self.login('admin');self.post('phase',target='fieldwork');self.audit.refresh_from_db();self.assertEqual(self.audit.phase,'responses')
+    def test_auditor_can_start_fieldwork_without_answers(self):
+        self.login('admin');self.post('phase',target='fieldwork');self.audit.refresh_from_db();self.assertEqual(self.audit.phase,'fieldwork')
     def test_inline_answer_and_revision(self):
         self.answer();self.post('answer',control=self.control.pk,status='implemented',explanation='Yeni açıklama',declaration='on');self.assertEqual(self.control.revisions.count(),2)
     def test_readonly_roles_cannot_answer(self):

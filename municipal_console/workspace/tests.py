@@ -1,3 +1,5 @@
+from accounts.privacy import PRIVACY_VERSION
+from django.utils import timezone
 from django.test import TestCase, override_settings
 from django.core.management import call_command
 from django.contrib.auth import get_user_model
@@ -7,14 +9,14 @@ from .models import Organization, Audit, Membership, Control, ResponseRevision, 
 class WorkspaceTests(TestCase):
     def setUp(self):
         U=get_user_model()
-        self.admin=U.objects.create_superuser('admin@example.com','Long-Password-33!',must_change_password=False)
+        self.admin=U.objects.create_superuser('admin@example.com','Long-Password-33!',must_change_password=False,privacy_accepted_at=timezone.now(),privacy_version=PRIVACY_VERSION)
         self.org=Organization.objects.create(name='A Kurumu',slug='a')
         self.audit=Audit.objects.create(organization=self.org,title='A Denetimi')
         self.control=Control.objects.create(audit=self.audit,code='A-01',title='Erişim kontrolü',description='Açık tanım',evidence_guidance='Liste',framework='ISO',theme='Erişim',risk='high',intern_visible=True)
         self.hidden=Control.objects.create(audit=self.audit,code='A-02',title='Stajyere gizli kontrol',risk='medium')
         self.users={}
         for role in ['intern','it','executive','auditor']:
-            user=U.objects.create_user(f'{role}@example.com','Long-Password-33!',must_change_password=False)
+            user=U.objects.create_user(f'{role}@example.com','Long-Password-33!',must_change_password=False,privacy_accepted_at=timezone.now(),privacy_version=PRIVACY_VERSION)
             Membership.objects.create(user=user,audit=self.audit,role=role);self.users[role]=user
         self.rev=ResponseRevision.objects.create(control=self.control,actor=self.users['it'],status='partial',explanation='GİZLİ-MÜŞTERİ-YANITI')
         Evaluation.objects.create(control=self.control,assessment='partial',rationale='PAYLAŞILAN-DEĞERLENDİRME',private_note='ÖZEL-DENETÇİ-NOTU')
@@ -70,10 +72,12 @@ class WorkspaceTests(TestCase):
         self.assertEqual(response.status_code,302)
         self.assertEqual(ResponseRevision.objects.count(),2)
         self.rev.refresh_from_db();self.assertEqual(self.rev.explanation,'GİZLİ-MÜŞTERİ-YANITI')
-    def test_it_cannot_overwrite_others_response(self):
-        user=get_user_model().objects.create_user('another@example.com',must_change_password=False)
+    def test_assigned_it_can_append_to_others_response(self):
+        user=get_user_model().objects.create_user('another@example.com',must_change_password=False,privacy_accepted_at=timezone.now(),privacy_version=PRIVACY_VERSION)
         Membership.objects.create(user=user,audit=self.audit,role='it');self.login(user)
-        self.assertEqual(self.client.post(self.detail,{'status':'implemented','explanation':'change','declaration':'on'}).status_code,403)
+        self.assertEqual(self.client.post(self.detail,{'status':'implemented','explanation':'change','declaration':'on'}).status_code,302)
+        self.assertEqual(ResponseRevision.objects.count(),2)
+        self.rev.refresh_from_db();self.assertEqual(self.rev.explanation,'GİZLİ-MÜŞTERİ-YANITI')
     def test_declaration_required(self):
         self.login(self.users['it']);self.client.post(self.detail,{'status':'implemented','explanation':'change'})
         self.assertEqual(ResponseRevision.objects.count(),1)

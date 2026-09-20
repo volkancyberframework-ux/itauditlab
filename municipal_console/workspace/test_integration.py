@@ -1,3 +1,5 @@
+from accounts.privacy import PRIVACY_VERSION
+from django.utils import timezone
 from unittest.mock import patch
 from django.test import TestCase, override_settings
 from django.contrib.auth import get_user_model
@@ -10,7 +12,7 @@ class IntegrationTests(TestCase):
     def setUp(self):
         self.org=Organization.objects.create(name='Torbalı',slug='torbali',subdomain='torbalibld')
         self.audit=Audit.objects.create(organization=self.org,title='Denetim',phase='completed')
-        self.user=get_user_model().objects.create_superuser('admin@example.com','Strong-Password-784!',must_change_password=False)
+        self.user=get_user_model().objects.create_superuser('admin@example.com','Strong-Password-784!',must_change_password=False,privacy_accepted_at=timezone.now(),privacy_version=PRIVACY_VERSION)
         self.c=Control.objects.create(audit=self.audit,code='T1',title='Test',risk='high')
     def test_unknown_tenant_rejected(self):self.assertEqual(self.client.get('/signin/',HTTP_HOST='unknown.grcustasi.com').status_code,404)
     def test_subdomain_change_takes_effect(self):
@@ -23,7 +25,7 @@ class IntegrationTests(TestCase):
         services.answer(self.audit,self.c,self.user,'it',{**data,'explanation':'Güncel yanıt'})
         self.assertEqual(ResponseRevision.objects.filter(control=self.c).count(),2)
     def test_continuous_evaluation_reopens_findings(self):
-        data={'assessment':'noncompliant','rationale':'Yeni eksik','private_note':'Gizli not','recommendation':'Düzelt'}
+        data={'assessment':'noncompliant','deficiency':'both','rationale':'Yeni eksik','private_note':'Gizli not','recommendation':'Düzelt'}
         services.evaluate(self.audit,self.c,self.user,'auditor',data.copy())
         finding=self.c.finding;finding.status='closed';finding.save()
         services.evaluate(self.audit,self.c,self.user,'auditor',data.copy())

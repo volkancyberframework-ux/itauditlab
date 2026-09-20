@@ -1,3 +1,5 @@
+from accounts.privacy import PRIVACY_VERSION
+from django.utils import timezone
 from datetime import timedelta
 from io import BytesIO
 from unittest.mock import patch
@@ -20,9 +22,9 @@ class MultiTenantTests(TestCase):
     def setUp(self):
         self.org=Organization.objects.create(name='Yeni Kurum',slug='yeni',subdomain='yenikurum')
         self.audit=Audit.objects.create(organization=self.org,title='Yeni Denetim')
-        self.admin=get_user_model().objects.create_superuser('admin@test.local','Long-Password-739!',must_change_password=False)
-        self.it=get_user_model().objects.create_user('it@test.local',first_name='Ahmet',must_change_password=False)
-        self.it2=get_user_model().objects.create_user('it2@test.local',first_name='Volkan',must_change_password=False)
+        self.admin=get_user_model().objects.create_superuser('admin@test.local','Long-Password-739!',must_change_password=False,privacy_accepted_at=timezone.now(),privacy_version=PRIVACY_VERSION)
+        self.it=get_user_model().objects.create_user('it@test.local',first_name='Ahmet',must_change_password=False,privacy_accepted_at=timezone.now(),privacy_version=PRIVACY_VERSION)
+        self.it2=get_user_model().objects.create_user('it2@test.local',first_name='Volkan',must_change_password=False,privacy_accepted_at=timezone.now(),privacy_version=PRIVACY_VERSION)
         for user in (self.it,self.it2):Membership.objects.create(user=user,audit=self.audit,role='it')
         self.control=Control.objects.create(audit=self.audit,code='C01',title='Kontrol',description='Kontrolün detayları',evidence_guidance='Erişim listesi',framework='ISO',risk='high')
     def login(self,user=None):self.client.force_login(user or self.admin,backend='django.contrib.auth.backends.ModelBackend')

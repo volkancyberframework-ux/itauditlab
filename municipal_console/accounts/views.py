@@ -48,3 +48,31 @@ def change_password(request):
 def signout(request):
     logout(request)
     return redirect('signin')
+
+
+@login_required
+@never_cache
+def privacy(request):
+    from django import forms
+    from django.utils import timezone
+    from .privacy import PRIVACY_VERSION, accepted
+
+    class PrivacyForm(forms.Form):
+        consent = forms.BooleanField(label='Gizlilik sözleşmesini okudum ve kabul ediyorum.')
+        acknowledgement = forms.CharField(label='Aşağıya “okudum, anladım” yazın', max_length=100)
+
+        def clean_acknowledgement(self):
+            value = self.cleaned_data['acknowledgement'].strip().translate(str.maketrans('Iİ', 'ıi')).lower()
+            if value != 'okudum, anladım':
+                raise forms.ValidationError('Lütfen “okudum, anladım” yazın.')
+            return value
+
+    if accepted(request.user):
+        return redirect('console')
+    form = PrivacyForm(request.POST if request.method == 'POST' else None)
+    if request.method == 'POST' and form.is_valid():
+        request.user.privacy_accepted_at = timezone.now()
+        request.user.privacy_version = PRIVACY_VERSION
+        request.user.save(update_fields=['privacy_accepted_at', 'privacy_version'])
+        return redirect('console')
+    return render(request, 'accounts/privacy.html', {'form': form, 'privacy_version': PRIVACY_VERSION})

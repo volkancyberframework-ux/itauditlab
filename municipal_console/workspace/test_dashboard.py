@@ -1,3 +1,5 @@
+from accounts.privacy import PRIVACY_VERSION
+from django.utils import timezone
 import json
 from io import BytesIO
 from django.test import TestCase,override_settings
@@ -10,15 +12,15 @@ class DashboardTests(TestCase):
     def setUp(self):
         self.org=Organization.objects.create(name='Torbalı Belediyesi',slug='torbali-belediyesi',subdomain='torbalibld')
         self.audit=Audit.objects.create(organization=self.org,title='Torbalı Denetimi')
-        self.admin=get_user_model().objects.create_superuser('test@example.com','Test-Password-784!',must_change_password=False)
+        self.admin=get_user_model().objects.create_superuser('test@example.com','Test-Password-784!',must_change_password=False,privacy_accepted_at=timezone.now(),privacy_version=PRIVACY_VERSION)
         self.users={}
         for role in ['it','intern','executive','auditor']:
-            u=get_user_model().objects.create_user(role+'@example.com',must_change_password=False)
+            u=get_user_model().objects.create_user(role+'@example.com',must_change_password=False,privacy_accepted_at=timezone.now(),privacy_version=PRIVACY_VERSION)
             Membership.objects.create(audit=self.audit,user=u,role=role);self.users[role]=u
         self.c=Control.objects.create(audit=self.audit,code='TB-01',title='Şifreleme ve erişim',description='Özgün kontrol sorusu.',evidence_guidance='Test adımları ve kanıtlar.',risk='high',framework='ISO',theme='Erişim',intern_visible=True)
         self.hidden=Control.objects.create(audit=self.audit,code='TB-02',title='Stajyere kapalı kontrol',risk='medium',framework='NIST',intern_visible=False)
         ResponseRevision.objects.create(control=self.c,actor=self.users['it'],status='partial',explanation='SADECE-YETKİLİ-BT-YANITI')
-        Evaluation.objects.create(control=self.c,assessment='noncompliant',rationale='YÖNETİCİYE-ÖZEL-GÖRÜŞ',private_note='RAPORA-GİRMEYECEK-İÇ-NOT')
+        Evaluation.objects.create(control=self.c,assessment='noncompliant',deficiency='both',rationale='YÖNETİCİYE-ÖZEL-GÖRÜŞ',private_note='RAPORA-GİRMEYECEK-İÇ-NOT')
     def login(self,role):self.client.force_login(self.admin if role=='admin' else self.users[role],backend='django.contrib.auth.backends.ModelBackend')
     def pdf(self,role):
         self.login(role);response=self.client.get(f'/console/{self.audit.pk}/controls.pdf')

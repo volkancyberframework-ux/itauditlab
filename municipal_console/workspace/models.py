@@ -9,6 +9,32 @@ def default_due_date():
 ROLES = [('admin','Platform yöneticisi'),('executive','Kurum yöneticisi'),('it','BT sorumlusu'),('auditor','Denetçi'),('intern','Stajyer')]
 STATUSES = [('implemented','Yapılıyor'),('partial','Kısmen yapılıyor'),('missing','Yapılmıyor'),('na','Uygulanamaz'),('unanswered','Başlanmadı')]
 ASSESSMENTS = [('compliant','Uygun'),('partial','Kısmen uygun'),('noncompliant','Uygun değil'),('pending','İnceleme bekliyor')]
+DEFICIENCIES = [('design','Tasarım'),('implementation','Uygulama'),('both','Tasarım ve uygulama')]
+
+class ControlDefinition(models.Model):
+    code=models.CharField(max_length=30,unique=True)
+    title=models.CharField(max_length=180)
+    description=models.TextField()
+    evidence_guidance=models.TextField(verbose_name='Beklenen kanıtlar / test rehberi')
+    framework=models.CharField(max_length=60)
+    theme=models.CharField(max_length=80)
+    risk=models.CharField(max_length=10,choices=[('high','Yüksek'),('medium','Orta'),('low','Düşük')])
+    intern_visible=models.BooleanField(default=False)
+    class Meta:
+        ordering=['code']
+        verbose_name='Kontrol kataloğu kaydı'
+        verbose_name_plural='Kontrol kataloğu'
+    def __str__(self):return f'{self.code} · {self.title}'
+
+class AuditTemplate(models.Model):
+    name=models.CharField(max_length=180,unique=True)
+    description=models.TextField(blank=True)
+    controls=models.ManyToManyField(ControlDefinition,blank=True,verbose_name='Hazır kontroller')
+    class Meta:
+        verbose_name='Denetim şablonu'
+        verbose_name_plural='Denetim şablonları'
+    def __str__(self):return self.name
+
 class Organization(models.Model):
     name=models.CharField(max_length=180)
     slug=models.SlugField(unique=True)
@@ -16,6 +42,7 @@ class Organization(models.Model):
     logo_data=models.BinaryField(blank=True,default=bytes,editable=False)
     def __str__(self):return self.name
 class Audit(models.Model):
+    template=models.ForeignKey(AuditTemplate,on_delete=models.PROTECT,null=True,blank=True,verbose_name='Hazır denetim şablonu')
     organization=models.ForeignKey(Organization,on_delete=models.PROTECT)
     title=models.CharField(max_length=180)
     is_demo=models.BooleanField(default=False)
@@ -25,13 +52,23 @@ class Audit(models.Model):
     appointment_status=models.CharField(max_length=20,default='none',choices=[('none','Planlanmadı'),('proposed','BT onayı bekleniyor'),('counter','Denetim ekibi onayı bekleniyor'),('confirmed','Onaylandı')])
     appointment_note=models.TextField(blank=True)
     def __str__(self):return self.title
+    def save(self,*args,**kwargs):
+        from django.db import transaction
+        with transaction.atomic():
+            previous=type(self).objects.filter(pk=self.pk).values_list('template_id',flat=True).first() if self.pk else None
+            super().save(*args,**kwargs)
+            if self.template_id and self.template_id!=previous:
+                from .services import add_catalog_controls
+                add_catalog_controls(self,self.template.controls.all())
 class Membership(models.Model):
+    auditor_readonly=models.BooleanField(default=False,verbose_name='Stajyer denetçi görünümü (salt okunur)',help_text='Stajyer bu denetimde tüm denetçi verilerini görebilir; hiçbir kayıt değiştiremez.')
     user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     audit=models.ForeignKey(Audit,on_delete=models.CASCADE)
     role=models.CharField(max_length=20,choices=ROLES[1:])
     class Meta:
         constraints=[models.UniqueConstraint(fields=['user','audit'],name='one_membership_per_audit')]
 class Control(models.Model):
+    source=models.ForeignKey(ControlDefinition,on_delete=models.SET_NULL,null=True,blank=True,related_name='audit_controls')
     audit=models.ForeignKey(Audit,on_delete=models.PROTECT,related_name='controls')
     code=models.CharField(max_length=30)
     title=models.CharField(max_length=180)
@@ -43,7 +80,7 @@ class Control(models.Model):
     intern_visible=models.BooleanField(default=False)
     class Meta:
         ordering=['code']
-        constraints=[models.UniqueConstraint(fields=['audit','code'],name='unique_audit_control_code')]
+        constraints=[models.UniqueConstraint(fields=['audit','code'],name='unique_audit_control_code'),models.UniqueConstraint(fields=['audit','source'],name='unique_audit_catalog_control')]
 class ResponseRevision(models.Model):
     control=models.ForeignKey(Control,on_delete=models.PROTECT,related_name='revisions')
     actor=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.PROTECT)
@@ -57,6 +94,7 @@ class ResponseRevision(models.Model):
         return super().save(*args,**kwargs)
     def delete(self,*args,**kwargs):raise ValueError('Yanıt geçmişi silinemez.')
 class Evaluation(models.Model):
+    deficiency=models.CharField(max_length=20,choices=DEFICIENCIES,blank=True,default='',verbose_name='Eksiklik türü')
     control=models.OneToOneField(Control,on_delete=models.PROTECT,related_name='evaluation')
     assessment=models.CharField(max_length=20,choices=ASSESSMENTS)
     rationale=models.TextField()

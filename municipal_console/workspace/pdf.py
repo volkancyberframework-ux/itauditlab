@@ -87,6 +87,7 @@ def render_controls(audit,rows,role):
                 story.append(KeepTogether([para('Denetçi görüşü',bold),para(ev['label'] if ev else 'Değerlendirilmedi')]))
                 if ev:
                     story.append(para(ev['rationale']))
+                    if ev.get('deficiency_label'):story.append(para('Eksiklik: '+ev['deficiency_label']))
                     story.append(para('Test edildi · Son onay' if ev.get('verified') else 'Son test onayı bekliyor',small))
         # Internal private notes intentionally never appear in downloadable controls reports.
         story.append(Spacer(1,18))

@@ -1,0 +1,16 @@
+{% extends 'accounts/base.html' %}
+{% block title %}Gizlilik sözleşmesi{% endblock %}
+{% block content %}
+<h1>Gizlilik sözleşmesi</h1>
+<p class="intro">Denetim çalışma alanına erişmeden önce aşağıdaki taahhütleri okuyun. Bu onay tüm kullanıcılar için zorunludur.</p>
+<article class="privacy-terms" aria-label="Gizlilik sözleşmesi metni">
+<p><strong>1. Gizli bilgiler.</strong> Bu platformda eriştiğim kurum bilgilerini, BT yanıtlarını, denetim kanıtlarını, kişisel verileri, bulguları ve denetçi notlarını gizli tutacağım.</p>
+<p><strong>2. Kullanım amacı.</strong> Bilgileri yalnızca yetkilendirildiğim denetim ve hazırlık çalışmaları için kullanacağım. Kurumun yetkilendirmediği kişi veya hizmetlerle paylaşmayacağım; kişisel hesaplara veya izinsiz depolama alanlarına aktarmayacağım.</p>
+<p><strong>3. Erişim güvenliği.</strong> Hesabımı ve parolamı paylaşmayacağım. Yetkim dışındaki verilere erişmeye çalışmayacağım. Stajyer erişiminde verilen görüntüleme ve değişiklik sınırlarına uyacağım.</p>
+<p><strong>4. Olay bildirimi ve saklama.</strong> Yanlış paylaşım veya yetkisiz erişim fark edersem kurum yöneticisine bildireceğim. Görevim sona erdiğinde elimdeki denetim verilerini kurumun talimatlarına göre iade edecek veya sileceğim. Gizlilik yükümlülüğüm görevim sona erdikten sonra da devam eder.</p>
+<p><strong>5. Onay kaydı.</strong> Bu sözleşmeyi kabul ettiğim tarih ve saat ile metin sürümünün hesabımla birlikte saklanacağını biliyorum.</p>
+<p>Metin sürümü: {{ privacy_version }}</p>
+</article>
+<form method="post" class="response-form privacy-form">{% csrf_token %}{{ form.as_p }}<button type="submit" class="btn btn-primary signin-button">Kabul et ve devam et</button></form>
+<form method="post" action="{% url 'signout' %}">{% csrf_token %}<button type="submit" class="text-button">Çıkış yap</button></form>
+{% endblock %}

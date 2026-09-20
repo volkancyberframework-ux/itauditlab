@@ -11,4 +11,16 @@
     const update=()=>{textarea.placeholder=hints[select.value]||'';textarea.required=['implemented','na'].includes(select.value);textarea.setAttribute('aria-required',String(textarea.required));};
     select.addEventListener('change',update);update();
   });
+  document.querySelectorAll('select[name="assessment"]').forEach(assessment => {
+    const deficiency = assessment.form.querySelector('select[name="deficiency"]');
+    if (!deficiency) return;
+    const update = () => {
+      const required = ['partial', 'noncompliant'].includes(assessment.value);
+      deficiency.required = required;
+      deficiency.disabled = !required;
+      deficiency.closest('p').hidden = !required;
+    };
+    assessment.addEventListener('change', update);
+    update();
+  });
 })();

@@ -2,6 +2,22 @@ from django.core.exceptions import PermissionDenied, ValidationError
 from django.db import transaction
 from .models import Audit, Control, ResponseRevision, Evaluation, Finding, FindingUpdate, Activity, Suggestion
 
+@transaction.atomic
+def add_catalog_controls(audit,definitions):
+    """Copy definitions into independent audit snapshots; never overwrite audit history."""
+    audit=Audit.objects.select_for_update().get(pk=audit.pk)
+    created=[]
+    for definition in definitions:
+        if audit.controls.filter(source=definition).exists():continue
+        code=definition.code
+        suffix=1
+        while audit.controls.filter(code=code).exists():
+            suffix+=1
+            code=f'{definition.code[:23]}-{suffix}'
+        values={field:getattr(definition,field) for field in ('title','description','evidence_guidance','framework','theme','risk','intern_visible')}
+        created.append(Control.objects.create(audit=audit,source=definition,code=code,**values))
+    return created
+
 def log(audit,actor,role,action,**metadata):
     Activity.objects.create(audit=audit,actor=actor,role=role,action=action,metadata=metadata)
 
@@ -14,8 +30,7 @@ def answer(audit,control,actor,role,data,preview=False,writable=False):
     audit=Audit.objects.select_for_update().get(pk=audit.pk)
     if data.get('status') in ('implemented','na') and not data.get('explanation','').strip():raise ValidationError('Bu durum için açıklama zorunludur.')
     control=Control.objects.select_for_update().get(pk=control.pk,audit=audit)
-    latest=control.revisions.first()
-    if latest and latest.actor_id!=actor.pk and not writable:raise PermissionDenied('Başka kullanıcının yanıtını değiştiremezsiniz.')
+    if not data.get('declaration'):raise ValidationError('Bilgilerin doğruluğunu onaylayın.')
     ResponseRevision.objects.create(control=control,actor=actor,**data)
     Evaluation.objects.filter(control=control,verified=True).update(verified=False)
     log(audit,actor,role,'BT yanıtı kaydedildi',control=control.code,status=data['status'])
@@ -28,12 +43,11 @@ def transition(audit,actor,role,target,preview=False,writable=False):
     allowed(role,['admin','auditor'],preview,writable)
     audit=Audit.objects.select_for_update().get(pk=audit.pk)
     if audit.phase=='responses' and target=='fieldwork':
-        if not audit.controls.exists() or answered_count(audit)!=audit.controls.count():raise ValidationError('Saha denetimine geçmeden önce tüm BT yanıtları tamamlanmalıdır.')
+        if not audit.controls.exists():raise ValidationError('Denetime en az bir kontrol ekleyin.')
     elif audit.phase=='fieldwork' and target=='remediation':
-        if answered_count(audit)!=audit.controls.count():raise ValidationError('Yeni kontroller dahil tüm BT yanıtları tamamlanmalıdır.')
         if audit.controls.exclude(evaluation__assessment__in=['compliant','partial','noncompliant'],evaluation__verified=True).exists():raise ValidationError('Önce tüm kontrollerin denetçi değerlendirmesini tamamlayın.')
     elif audit.phase=='remediation' and target=='completed':
-        if answered_count(audit)!=audit.controls.count() or audit.controls.exclude(evaluation__verified=True).exists():raise ValidationError('Yeni kontroller dahil tüm BT yanıtları ve son test onayları tamamlanmalıdır.')
+        if audit.controls.exclude(evaluation__verified=True).exists():raise ValidationError('Yeni kontroller dahil tüm son test onayları tamamlanmalıdır.')
         if audit.findings.exclude(status__in=['closed','risk_accepted']).exists():raise ValidationError('Açık bulgular kapanmadan denetim tamamlanamaz.')
     else:raise ValidationError('Bu faz geçişi yapılamaz.')
     previous=audit.phase;audit.phase=target;audit.save(update_fields=['phase'])
@@ -46,6 +60,11 @@ def evaluate(audit,control,actor,role,data,preview=False,writable=False):
 
     control=Control.objects.select_for_update().get(pk=control.pk,audit=audit)
     data=data.copy()
+    from .models import DEFICIENCIES
+    if data.get('assessment') in ('partial','noncompliant'):
+        if data.get('deficiency') not in dict(DEFICIENCIES):raise ValidationError('Eksiklik türünü seçin.')
+        if not data.get('recommendation','').strip():raise ValidationError('Giderim önerisi gereklidir.')
+    else:data['deficiency']=''
     recommendation=data.pop('recommendation')
     due_date=data.pop('due_date',None)
     if due_date:
@@ -65,6 +84,10 @@ def evaluate(audit,control,actor,role,data,preview=False,writable=False):
                 finding.status='open';FindingUpdate.objects.create(finding=finding,actor=actor,role=role,action='reopen',explanation='Yeni denetçi değerlendirmesi nedeniyle yeniden açıldı.')
             finding.save()
         log(audit,actor,role,'Bulgu oluşturuldu/güncellendi',finding=finding.pk)
+    elif evaluation.assessment=='compliant' and evaluation.verified:
+        finding=Finding.objects.filter(control=control).exclude(status__in=['closed','risk_accepted']).first()
+        if finding:
+            finding_action(audit,finding,actor,role,'close',evaluation.rationale,preview,writable)
     log(audit,actor,role,'Denetçi değerlendirmesi kaydedildi',control=control.code,previous=old,current=data,recommendation=recommendation,due_date=str(due_date) if due_date else None)
 
 @transaction.atomic
@@ -76,7 +99,6 @@ def finding_action(audit,finding,actor,role,action,explanation,preview=False,wri
     targets={'remediate':'remediation_submitted','dispute':'disputed','close':'closed','reject':'open','reopen':'open','acknowledge':'open','plan':'open','request_risk':'open','accept_risk':'risk_accepted','set_due':finding.status}
     if action not in targets:raise ValidationError('Geçersiz işlem.')
     if finding.is_terminal and action!='reopen':raise ValidationError('Sonuçlanmış bulgu önce yeniden açılmalıdır.')
-    if action=='close' and finding.status not in ['remediation_submitted','disputed']:raise ValidationError('Kapanıştan önce BT giderim bildirimi veya itirazı incelenmelidir.')
     if action=='reject' and finding.status not in ['remediation_submitted','disputed'] and finding.treatment!='risk_requested':raise ValidationError('İncelenecek bir bildirim bulunmuyor.')
     if action=='reopen' and not finding.is_terminal:raise ValidationError('Bu bulgu zaten açık.')
     if action=='accept_risk' and finding.treatment!='risk_requested':raise ValidationError('Önce BT risk kabulü talebi bulunmalıdır.')
