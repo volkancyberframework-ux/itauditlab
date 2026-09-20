@@ -108,3 +108,10 @@ class MultiTenantTests(TestCase):
         self.audit.phase='fieldwork';self.audit.save();self.login()
         r=self.client.post('/admin/workspace/control/add/',{'audit':self.audit.pk,'code':'NEW','title':'Yeni','description':'Tanım','evidence_guidance':'Kanıt','framework':'ISO','theme':'Erişim','risk':'medium','_save':'Save'})
         self.assertEqual(r.status_code,302);self.assertTrue(Control.objects.filter(code='NEW').exists());self.assertFalse(ControlEmail.objects.exists())
+
+    def test_overdue_finding_can_be_reviewed_without_extending_deadline(self):
+        overdue=timezone.localdate()-timedelta(days=3)
+        finding=Finding.objects.create(audit=self.audit,control=self.control,title='Eski bulgu',severity='high',due_date=overdue)
+        services.evaluate(self.audit,self.control,self.admin,'auditor',{'assessment':'compliant','rationale':'Giderimi test ettim','recommendation':'','verified':True,'due_date':overdue})
+        finding.refresh_from_db();self.assertEqual(finding.due_date,overdue)
+        self.assertTrue(Evaluation.objects.get(control=self.control).verified)

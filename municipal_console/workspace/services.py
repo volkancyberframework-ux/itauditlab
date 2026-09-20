@@ -50,7 +50,8 @@ def evaluate(audit,control,actor,role,data,preview=False,writable=False):
     due_date=data.pop('due_date',None)
     if due_date:
         from django.utils import timezone
-        if due_date<timezone.localdate():raise ValidationError('Son tarih geçmiş olamaz.')
+        existing_due=Finding.objects.filter(control=control).values_list('due_date',flat=True).first()
+        if due_date<timezone.localdate() and due_date!=existing_due:raise ValidationError('Yeni son tarih geçmiş olamaz.')
     old=Evaluation.objects.filter(control=control).values('assessment','rationale').first()
     evaluation,_=Evaluation.objects.update_or_create(control=control,defaults={**data,'customer_visible':False})
     if evaluation.assessment in ['partial','noncompliant']:
