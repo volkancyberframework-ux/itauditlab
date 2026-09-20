@@ -1,4 +1,20 @@
 (() => {
+  // Keep actions clickable; explain validation failures next to the action.
+  document.querySelectorAll('form.response-form').forEach(form => {
+    let notice;
+    form.addEventListener('invalid', event => {
+      if (!notice) {
+        notice = document.createElement('p');
+        notice.className = 'notice error';
+        notice.setAttribute('role', 'alert');
+        form.append(notice);
+      }
+      const label = event.target.labels?.[0]?.textContent.trim() || 'Zorunlu alan';
+      notice.textContent = `Kayıt için bu alanı kontrol edin: ${label}`;
+      notice.hidden = false;
+    }, true);
+    form.addEventListener('input', () => { if (notice) notice.hidden = true; });
+  });
   const hints={
     implemented:'Hangi uygulama veya süreç yürürlükte? Kim yürütüyor, ne sıklıkta uygulanıyor? Kısa bir örnek ve varsa kanıt belirtin.',
     partial:'İsteğe bağlı: Hangi kısım uygulanıyor, hangi eksikler var?',

@@ -1,5 +1,6 @@
 from urllib.parse import urlsplit, parse_qs
 from datetime import timedelta
+from html.parser import HTMLParser
 from django.test import TestCase, Client, override_settings
 from django.contrib.auth import get_user_model
 from django.utils import timezone
@@ -11,6 +12,29 @@ from .invitations import invitation_draft, temporary_password
 
 @override_settings(DEBUG=False, SECURE_SSL_REDIRECT=False, EMAIL_BACKEND='django.core.mail.backends.locmem.EmailBackend', STORAGES={'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'}, 'staticfiles': {'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage'}})
 class ConsoleChangesTests(TestCase):
+    def test_visible_console_actions_are_enabled_for_every_working_role(self):
+        class Buttons(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.disabled = []
+            def handle_starttag(self, tag, attrs):
+                attributes = dict(attrs)
+                if tag in ('button', 'fieldset') and 'disabled' in attributes:
+                    self.disabled.append(attributes)
+
+        Finding.objects.create(audit=self.audit,control=self.c,title='Test bulgusu',recommendation='Düzelt',severity='high',treatment='risk_requested')
+        for role, _ in ROLES:
+            with self.subTest(role=role):
+                self.client.post('/console/view-as/', {'role': role})
+                for url in ('/console/', f'/console/{self.audit.pk}/controls/{self.c.pk}/'):
+                    if role == 'intern' and url != '/console/':
+                        continue
+                    page = self.client.get(url)
+                    self.assertEqual(page.status_code, 200)
+                    parser = Buttons()
+                    parser.feed(page.content.decode())
+                    self.assertEqual(parser.disabled, [])
+
     def setUp(self):
         U=get_user_model()
         self.admin=U.objects.create_superuser('admin@new.test',must_change_password=False,privacy_version=PRIVACY_VERSION,privacy_accepted_at=timezone.now())

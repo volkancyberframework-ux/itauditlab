@@ -105,7 +105,7 @@ class WorkflowTests(TestCase):
         self.login('admin');self.client.post('/console/view-as/',{'role':'it'})
         response=self.client.get('/console/')
         self.assertTrue(response.context['can_save_response'])
-        self.assertContains(response,'type="submit" >Yanıtı kaydet</button>')
+        self.assertContains(response,'type="submit">Yanıtı kaydet</button>')
         self.assertEqual(self.post('answer',control=self.control.pk,status='missing',explanation='',declaration='on').status_code,302)
         revision=self.control.revisions.get()
         self.assertEqual(revision.actor,self.admin)
