@@ -45,6 +45,7 @@ class IntegrationTests(TestCase):
         self.assertIn('municipal_sessionid',self.client.cookies)
         self.assertNotIn('sessionid',self.client.cookies)
         self.assertEqual(self.client.get('/admin/workspace/organization/').status_code,200)
+        self.assertEqual(self.client.get('/admin/accounts/user/?q=admin').status_code,200)
     def test_central_admin_creates_independent_user(self):
         self.client.force_login(self.user,backend='django.contrib.auth.backends.ModelBackend')
         response=self.client.post('/admin/accounts/user/add/',{'email':'new@example.com','password1':'New-Strong-Password-739!','password2':'New-Strong-Password-739!','usable_password':'true','_save':'Save'})
