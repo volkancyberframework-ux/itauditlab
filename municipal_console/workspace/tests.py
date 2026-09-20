@@ -81,10 +81,11 @@ class WorkspaceTests(TestCase):
     def test_declaration_required(self):
         self.login(self.users['it']);self.client.post(self.detail,{'status':'implemented','explanation':'change'})
         self.assertEqual(ResponseRevision.objects.count(),1)
-    def test_preview_cannot_write_as_it(self):
+    def test_admin_bt_view_can_save_own_response(self):
         self.login(self.admin);self.client.post('/console/view-as/',{'role':'it'})
-        self.assertContains(self.client.get(self.detail),'Önizlemede kayıt kapalı')
-        self.assertEqual(self.client.post(self.detail,{'status':'implemented','explanation':'change','declaration':'on'}).status_code,403)
+        self.assertContains(self.client.get(self.detail),'kendi yönetici hesabınızla')
+        self.assertEqual(self.client.post(self.detail,{'status':'implemented','explanation':'change','declaration':'on'}).status_code,302)
+        self.assertEqual(self.control.revisions.first().actor,self.admin)
     def test_cross_tenant_and_unassigned_auditor_denied(self):
         b=Audit.objects.create(organization=Organization.objects.create(name='B',slug='b'),title='B Denetimi')
         c=Control.objects.create(audit=b,code='B-1',title='B özel kontrol',risk='high')

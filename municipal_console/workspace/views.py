@@ -60,10 +60,14 @@ def scope(request,audit_id=None):
 def demo_write(request,audit):
     return bool(settings.DEBUG and audit and audit.is_demo and request.user.is_superuser)
 
+def response_write(request,audit,role):
+    # Platform administrators may answer in the BT view under their own identity.
+    return bool(audit and role=='it' and request.user.is_superuser and not getattr(request,'auditor_readonly',False))
+
 def shared(request,audit,role,preview):
     from .branding import organization_brand,it_label
     label=it_label(audit) if audit else 'BT Sorumlusu'
-    return {**organization_brand(audit.organization if audit else None),'audit':audit,'audit_choices':accessible_audits(request),'it_label':label,'role':role,'role_label':'Stajyer · Denetçi görünümü (salt okunur)' if getattr(request,'auditor_readonly',False) else (label if role=='it' else dict(ROLES).get(role,'')),'preview':preview,'roles':ROLES,'is_platform_admin':request.user.is_superuser,'demo_writable':demo_write(request,audit),'auditor_readonly':getattr(request,'auditor_readonly',False),'can_evaluate':role in ('admin','auditor') and not getattr(request,'auditor_readonly',False),'show_auditor_data':role in ('admin','auditor'),'show_evaluation':role in ('admin','auditor','executive'),'phase_order':[('responses','BT yanıtları'),('fieldwork','Saha denetimi'),('remediation','Bulgu giderme'),('completed','Sürekli kontrol')]}
+    return {**organization_brand(audit.organization if audit else None),'audit':audit,'audit_choices':accessible_audits(request),'it_label':label,'role':role,'role_label':'Stajyer · Denetçi görünümü (salt okunur)' if getattr(request,'auditor_readonly',False) else (label if role=='it' else dict(ROLES).get(role,'')),'preview':preview,'roles':ROLES,'is_platform_admin':request.user.is_superuser,'demo_writable':demo_write(request,audit),'can_save_response':role=='it' and (not preview or response_write(request,audit,role)),'auditor_readonly':getattr(request,'auditor_readonly',False),'can_evaluate':role in ('admin','auditor') and not getattr(request,'auditor_readonly',False),'show_auditor_data':role in ('admin','auditor'),'show_evaluation':role in ('admin','auditor','executive'),'phase_order':[('responses','BT yanıtları'),('fieldwork','Saha denetimi'),('remediation','Bulgu giderme'),('completed','Sürekli kontrol')]}
 
 def evaluation_form(control):
     ev=Evaluation.objects.filter(control=control).first()
@@ -174,7 +178,7 @@ def detail(request,audit_id,control_id):
     form=ResponseForm(request.POST or None)
     if request.method=='POST':
         if form.is_valid():
-            try:services.answer(audit,control,request.user,role,form.cleaned_data,preview,demo_write(request,audit))
+            try:services.answer(audit,control,request.user,role,form.cleaned_data,preview,response_write(request,audit,role))
             except ValidationError as error:form.add_error(None,error)
             else:
                 messages.success(request,'BT sorumlusu yanıtı kaydedildi.')
@@ -217,7 +221,7 @@ def workflow(request,audit_id):
             control=get_object_or_404(visible_controls(audit,role),pk=request.POST.get('control'))
             form=ResponseForm(request.POST)
             if not form.is_valid():return form_failure(request,audit,role,preview,form,action,control.pk)
-            services.answer(audit,control,request.user,role,form.cleaned_data,preview,writable)
+            services.answer(audit,control,request.user,role,form.cleaned_data,preview,response_write(request,audit,role))
         elif action=='evaluate':
             services.allowed(role,['admin','auditor'],preview,writable)
             control=get_object_or_404(Control,audit=audit,pk=request.POST.get('control'))

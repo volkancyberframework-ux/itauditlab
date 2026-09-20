@@ -99,7 +99,22 @@ class WorkflowTests(TestCase):
     @override_settings(DEBUG=True)
     def test_demo_role_write_attributed_to_admin(self):
         self.login('admin');self.client.post('/console/view-as/',{'role':'it'});self.post('answer',control=self.control.pk,status='implemented',explanation='Demo yanıt',declaration='on');self.assertEqual(ResponseRevision.objects.get().actor,self.admin);self.assertEqual(Activity.objects.get().role,'it')
-    @override_settings(DEBUG=False)
-    def test_production_preview_cannot_write(self):
-        self.login('admin');session=self.client.session;session['view_as']='it';session.save()
-        with override_settings(SECURE_SSL_REDIRECT=False):self.assertEqual(self.post('answer',control=self.control.pk,status='implemented',explanation='Demo yanıt',declaration='on').status_code,403)
+    @override_settings(DEBUG=False,SECURE_SSL_REDIRECT=False)
+    def test_production_admin_bt_view_saves_missing_without_explanation(self):
+        self.audit.is_demo=False;self.audit.save()
+        self.login('admin');self.client.post('/console/view-as/',{'role':'it'})
+        response=self.client.get('/console/')
+        self.assertTrue(response.context['can_save_response'])
+        self.assertContains(response,'type="submit" >Yanıtı kaydet</button>')
+        self.assertEqual(self.post('answer',control=self.control.pk,status='missing',explanation='',declaration='on').status_code,302)
+        revision=self.control.revisions.get()
+        self.assertEqual(revision.actor,self.admin)
+        self.assertEqual(revision.status,'missing')
+        self.assertEqual(Activity.objects.get().actor,self.admin)
+
+    @override_settings(DEBUG=False,SECURE_SSL_REDIRECT=False)
+    def test_other_production_role_previews_remain_readonly(self):
+        self.login('admin');self.client.post('/console/view-as/',{'role':'auditor'})
+        self.assertEqual(self.post('evaluate',control=self.control.pk,assessment='compliant',rationale='Test',verified='on').status_code,403)
+        self.client.post('/console/view-as/',{'role':'intern'})
+        self.assertEqual(self.post('answer',control=self.control.pk,status='missing',declaration='on').status_code,403)
