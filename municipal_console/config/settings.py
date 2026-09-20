@@ -1,4 +1,5 @@
 import os
+from django.urls import reverse_lazy
 from pathlib import Path
 from datetime import timedelta
 import dj_database_url
@@ -35,8 +36,8 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STORAGES = {'default':{'BACKEND':'django.core.files.storage.FileSystemStorage'},'staticfiles':{'BACKEND':'whitenoise.storage.CompressedManifestStaticFilesStorage'}}
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_URL = '/signin/'
-LOGIN_REDIRECT_URL = '/console/'
+LOGIN_URL = reverse_lazy('signin')
+LOGIN_REDIRECT_URL = reverse_lazy('console')
 ROOT_SIGNIN_ENABLED = os.getenv('ROOT_SIGNIN_ENABLED','true').lower() == 'true'
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'Lax'
@@ -58,7 +59,7 @@ if os.getenv('RENDER_EXTERNAL_HOSTNAME'):
     ALLOWED_HOSTS.append(os.environ['RENDER_EXTERNAL_HOSTNAME'])
 ALLOWED_HOSTS.append('.'+TENANT_BASE_DOMAIN)
 TELEGRAM_BOT_TOKEN = os.getenv('GRCUSTASI_TELEGRAM_BOT_TOKEN', os.getenv('TELEGRAM_BOT_TOKEN', ''))
-TELEGRAM_CHAT_ID = os.getenv('GRCUSTASI_TELEGRAM_ADMIN_CHAT_ID', os.getenv('TELEGRAM_CHAT_ID', ''))
+TELEGRAM_CHAT_ID = os.getenv('GRCUSTASI_TELEGRAM_ADMIN_CHAT_ID') or os.getenv('TELEGRAM_ADMIN_CHAT_ID') or os.getenv('TELEGRAM_CHAT_ID','')
 
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')
 EMAIL_HOST = os.getenv('EMAIL_HOST', '')

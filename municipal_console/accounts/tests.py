@@ -60,3 +60,25 @@ class AuthenticationTests(TestCase):
         self.user.is_active=False;self.user.save()
         self.signin()
         self.assertNotIn('_auth_user_id',self.client.session)
+
+
+@override_settings(ALLOWED_HOSTS=['.grcustasi.com'], STORAGES={'default':{'BACKEND':'django.core.files.storage.FileSystemStorage'},'staticfiles':{'BACKEND':'django.contrib.staticfiles.storage.StaticFilesStorage'}})
+class SharedDeploymentTests(TestCase):
+    def test_central_www_signin_and_unknown_tenant(self):
+        self.assertEqual(self.client.get('/signin/',HTTP_HOST='www.grcustasi.com').status_code,200)
+        self.assertEqual(self.client.get('/signin/',HTTP_HOST='undefined.grcustasi.com').status_code,404)
+
+    def test_bootstrap_import_keeps_password_and_never_overwrites_existing_user(self):
+        import io,json
+        from unittest.mock import patch
+        from django.core.management import call_command
+        from django.contrib.auth.hashers import make_password
+        entries=[dict(email='admin@example.test',password=make_password('first-secret'),first_name='First',last_name='Admin')]
+        with patch('sys.stdin',io.StringIO(json.dumps(entries))):call_command('import_platform_admins',stdout=io.StringIO())
+        user=get_user_model().objects.get(email='admin@example.test')
+        self.assertTrue(user.check_password('first-secret'))
+        self.assertTrue(user.is_superuser)
+        self.assertFalse(user.must_change_password)
+        user.set_password('changed-secret');user.save()
+        with patch('sys.stdin',io.StringIO(json.dumps(entries))):call_command('import_platform_admins',stdout=io.StringIO())
+        user.refresh_from_db();self.assertTrue(user.check_password('changed-secret'))

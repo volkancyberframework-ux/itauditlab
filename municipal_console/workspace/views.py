@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_POST
 from django import forms
-from django.urls import resolve, Resolver404
+from django.urls import resolve, Resolver404, reverse
 from .models import Audit, Membership, Control, ResponseRevision, Evaluation, Finding, Suggestion, Activity, ROLES, STATUSES
 from .forms import ResponseForm, EvaluationForm, SuggestionForm, AppointmentForm, FindingForm
 from . import services
@@ -244,7 +244,7 @@ def workflow(request,audit_id):
         messages.error(request,' '.join(error.messages));return redirect('console')
     messages.success(request,'İşlem kaydedildi.')
     anchor={'answer':'controls','evaluate':'controls','finding':'findings','suggest':'suggestions','review_suggestion':'suggestions','appointment':'phases','confirm_appointment':'phases','phase':'phases'}.get(action,'')
-    return redirect('/console/#'+anchor)
+    return redirect(reverse('console')+'#'+anchor)
 
 def form_failure(request,audit,role,preview,form,action,control=None,finding=None):
     ctx=shared(request,audit,role,preview)

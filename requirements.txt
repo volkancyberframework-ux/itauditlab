@@ -21,3 +21,6 @@ whitenoise==6.9.0
 PyPDF2==3.0.1
 reportlab==3.6.13
 stripe
+# Audit console uses the same runtime; Django/ITAudit pins stay unchanged.
+django-axes==8.3.1
+pypdf==6.19.0

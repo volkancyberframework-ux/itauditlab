@@ -71,7 +71,9 @@ class AuditAdmin(SuperuserAdmin):
     fields=('organization','title','is_demo','archived','phase')
     readonly_fields=('phase',)
     inlines=[MembershipInline]
-    def view_on_site(self,obj):return f'/console/?audit={obj.pk}'
+    def view_on_site(self,obj):
+        from django.urls import reverse
+        return reverse('console')+f'?audit={obj.pk}'
 
 @admin.register(Control)
 class ControlAdmin(SuperuserAdmin):

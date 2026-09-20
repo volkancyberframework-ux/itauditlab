@@ -22,3 +22,12 @@ worker_tmp_dir = "/dev/shm"
 accesslog = "-"
 errorlog = "-"
 capture_output = True
+
+# Keep the current Render service/start command. The console shares its infrastructure.
+def when_ready(server):
+    from itaudit.console_runtime import start
+    start(server)
+
+def on_exit(server):
+    from itaudit.console_runtime import stop
+    stop(server)

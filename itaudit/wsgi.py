@@ -14,3 +14,6 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'itaudit.settings')
 
 application = get_wsgi_application()
+
+from .console_gateway import ConsoleGateway
+application = ConsoleGateway(application)

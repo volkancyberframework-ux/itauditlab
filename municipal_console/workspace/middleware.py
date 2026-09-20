@@ -8,7 +8,7 @@ class TenantMiddleware:
         host=request.get_host().split(':')[0].lower()
         request.tenant=None
         suffix='.'+settings.TENANT_BASE_DOMAIN
-        if host.endswith(suffix):
+        if host.endswith(suffix) and host[:-len(suffix)] not in {'www','admin','api','mail','core','akademi','itauditlab'}:
             name=host[:-len(suffix)]
             request.tenant=Organization.objects.filter(subdomain=name).first()
             if not request.tenant:return HttpResponseNotFound('Bu kurum adresi tanımlanmamış.')

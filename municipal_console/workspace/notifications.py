@@ -60,6 +60,8 @@ def new_control_email(sender,instance,created,raw=False,**kwargs):
     audit=instance.audit
     org=audit.organization
     url=f'https://{org.subdomain}.{settings.TENANT_BASE_DOMAIN}/console/{audit.pk}/controls/{instance.pk}/' if org.subdomain else 'Kurum denetim konsolunuzdan kontrolü açın.'
+    if getattr(settings,'PUBLIC_CONSOLE_URL',''):
+        url=f'{settings.PUBLIC_CONSOLE_URL}/console/{audit.pk}/controls/{instance.pk}/'
     body=f'''{org.name} denetimine yeni kontrol eklendi.
 
 Denetim: {audit.title}

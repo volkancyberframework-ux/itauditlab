@@ -1,34 +1,27 @@
 # Denetim konsolu kullanım kılavuzu
 
-## 1. Bir kez yapılacak yayın kurulumu
+## 1. Mevcut siteden hemen başlayın
 
-Uygulama ITAudit deposunda `municipal_console/` klasöründe çalışır. ITAudit'in kullanıcıları, veritabanı ve oturumlarından bağımsızdır. Yerel demo: http://127.0.0.1:8765/console/
+Konsol **mevcut ITAudit Render servisini ve PostgreSQL veritabanını** kullanır. Yeni servis, veritabanı veya cron kurmayın. Mevcut yayın komutu değişmez; yayın sırasında konsol tabloları otomatik hazırlanır. ITAudit tabloları değiştirilmez. Aynı veritabanındaki ayrı tablo alanı, kullanıcıların ve oturumların birbirine karışmasını önler.
 
-Render'da yeni Blueprint oluştururken bu depoyu ve **`render-console.yaml`** dosyasını seçin. Mevcut ITAudit Blueprint dosyasını değiştirmeyin. Bu yeni tanım web servisi, ayrı PostgreSQL ve bildirimleri tekrar deneyen cron oluşturur; Render'ın ücret özetini kontrol edin.
+1. Yayın tamamlandığında **https://www.grcustasi.com/denetim/admin/** adresini açın.
+2. Mevcut ITAudit süper yönetici hesabınızın **e-posta adresi ve parolasıyla** giriş yapın. Aktif süper yöneticiler ilk kurulumda bağımsız konsol hesaplarına aktarılır. Sonraki parola değişiklikleri iki sistem arasında eşitlenmez; normal ITAudit üyeleri aktarılmaz.
+3. **Organizations** altında kurumunuzu, logonuzu ve istediğiniz subdomain adını kaydedin.
+4. **Users**, **Audits / Memberships** ve **Controls** üzerinden kullanıcıları, denetimi ve kontrolleri ekleyin.
+5. Kullanıcılar DNS beklemeden **https://www.grcustasi.com/denetim/** adresinden giriş yapabilir.
 
-Yeni serviste:
-
-- `DATABASE_URL`: yalnızca yeni konsol veritabanı. ITAudit veritabanını kullanmayın.
-- `SECRET_KEY`: Render tarafından ayrı üretilir.
-- `TENANT_BASE_DOMAIN`: `grcustasi.com`.
-- Telegram: mevcut botun `GRCUSTASI_TELEGRAM_BOT_TOKEN` ve `GRCUSTASI_TELEGRAM_ADMIN_CHAT_ID` değerlerini tanımlayın. Bot webhook'unu değiştirmeyin.
-- E-posta: `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD`, `DEFAULT_FROM_EMAIL`, `EMAIL_USE_TLS`, `EMAIL_USE_SSL`. SMTP sağlayıcınızın değerlerini kullanın. Genellikle 587 için TLS=true / SSL=false; 465 için TLS=false / SSL=true kullanılır. İkisini birlikte açmayın.
-- SMTP gönderen adresi sağlayıcınızda yetkili olmalıdır. Bu bilgiler tanımlanmadan gerçek e-posta gönderilemez; bekleyen mesajlar kayıt altında kalır.
-
-Yeni Render servisi yayına geldiğinde Shell'de `python manage.py createsuperuser` çalıştırın. Kendi e-posta ve parolanızla bağımsız yönetici oluşturun. Kurumları kendiniz oluşturacağınız için demo seed veya Torbalı hazırlama komutunu çalıştırmanız gerekmez.
-
-Merkezi yönetim adresi: **yeni konsol servisinin `https://….onrender.com/admin/` adresi**. Bu URL için Render panelindeki gerçek servis adresini kullanın. ITAudit'in mevcut admin adresi değildir.
+Mevcut `DATABASE_URL`, `SECRET_KEY`, SMTP ve Telegram ortam değişkenleri kullanılır. Mevcut SMTP/Telegram bilgileri eksikse ilgili gönderimler bu bilgiler tamamlanana kadar bekler. Bildirim kuyruğu aynı servis içinde yaklaşık dakikada bir yeniden denenir. Ayrı Render servisi veya veritabanı oluşturulmaz.
 
 ## 2. Tüm kurumlar için tek wildcard DNS kurulumu
 
 Yalnızca Torbalı değil, panelde tanımladığınız bütün geçerli kurum etiketleri desteklenir: `torbalibld.grcustasi.com`, `ornekfirma.grcustasi.com`, vb.
 
-1. Yeni konsol web servisinde **Settings → Custom Domains** bölümüne `*.grcustasi.com` ekleyin. Blueprint de bu wildcard alan adını içerir.
+1. Mevcut ITAudit web servisinde **Settings → Custom Domains** bölümüne `*.grcustasi.com` ekleyin.
 2. DNS sağlayıcınızda aşağıdaki CNAME kayıtlarını oluşturun. Hedefleri **Render'ın gösterdiği tam değerlerden** kopyalayın:
 
 | Tür | Ad / Host | Hedef |
 | --- | --- | --- |
-| CNAME | `*` | Yeni konsol servisinin `….onrender.com` adresi |
+| CNAME | `*` | Mevcut ITAudit servisinin `itauditlab.onrender.com` adresi |
 | CNAME | `_acme-challenge` | Render'ın verdiği `….verify.renderdns.com` değeri |
 | CNAME | `_cf-custom-hostname` | Render'ın verdiği `….hostname.renderdns.com` değeri |
 
@@ -141,10 +134,12 @@ Merkezi yönetimde:
 
 - **Notifications:** Telegram teslim zamanı ve deneme sayısı.
 - **Control emails:** Faz 4 yeni kontrol e-postaları, alıcı, içerik ve teslim zamanı.
-- Teslim zamanı boşsa mesaj henüz gönderilmemiştir. Seçili kayıtlar için yeniden gönderme işlemi vardır. Render cron'u da bekleyen kayıtları 5 dakikada bir dener.
+- Teslim zamanı boşsa mesaj henüz gönderilmemiştir. Seçili kayıtlar için yeniden gönderme işlemi vardır. Aynı servis içindeki bildirim işçisi bekleyen kayıtları yaklaşık dakikada bir dener.
 
 Telegram ve SMTP yapılandırması eksikse “gönderildi” kabul edilmez. Ağ hatalarında tekrar gönderim nadiren mükerrer mesaja yol açabilir. Üyeliği kaldırılmış veya pasifleştirilmiş kullanıcıya bekleyen yeni kontrol e-postası gönderilmez.
 
 ## Hızlı başlangıç sırası
 
-**Wildcard DNS → bağımsız admin hesabı → kurum + logo + subdomain → kullanıcılar → denetim + üyelikler → kontroller → kurum adresinden giriş.**
+**Mevcut yönetici ile /denetim/admin/ → kurum + logo → kullanıcılar → denetim + üyelikler → kontroller → /denetim/ üzerinden giriş.**
+
+Kurumlara özel adresleri açmak için wildcard DNS adımını sonradan tamamlayabilirsiniz.
