@@ -8,8 +8,8 @@ DEBUG = os.getenv('DEBUG', 'true').lower() == 'true'
 SECRET_KEY = os.getenv('SECRET_KEY', 'local-development-only-do-not-deploy-this-key')
 if not DEBUG and SECRET_KEY == 'local-development-only-do-not-deploy-this-key':
     raise ImproperlyConfigured('Production requires SECRET_KEY.')
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,testserver,torbalibld.grcustasi.com').split(',')
-CSRF_TRUSTED_ORIGINS = [v for v in os.getenv('CSRF_TRUSTED_ORIGINS', 'https://torbalibld.grcustasi.com').split(',') if v]
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,testserver').split(',')
+CSRF_TRUSTED_ORIGINS = [v for v in os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',') if v]
 INSTALLED_APPS = ['django.contrib.admin','django.contrib.auth','django.contrib.contenttypes','django.contrib.sessions','django.contrib.messages','django.contrib.staticfiles','accounts','workspace','axes']
 MIDDLEWARE = ['django.middleware.security.SecurityMiddleware','whitenoise.middleware.WhiteNoiseMiddleware','workspace.middleware.TenantMiddleware','django.contrib.sessions.middleware.SessionMiddleware','django.middleware.common.CommonMiddleware','django.middleware.csrf.CsrfViewMiddleware','django.contrib.auth.middleware.AuthenticationMiddleware','django.contrib.messages.middleware.MessageMiddleware','django.middleware.clickjacking.XFrameOptionsMiddleware','axes.middleware.AxesMiddleware']
 ROOT_URLCONF = 'config.urls'
@@ -47,8 +47,7 @@ SECURE_HSTS_SECONDS = 31536000 if not DEBUG else 0
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
 
-TENANT_DOMAIN = os.getenv('TENANT_DOMAIN', 'torbalibld.grcustasi.com')
-TENANT_ORGANIZATION_SLUG = os.getenv('TENANT_ORGANIZATION_SLUG', 'torbali-belediyesi')
+TENANT_BASE_DOMAIN = os.getenv('TENANT_BASE_DOMAIN', 'grcustasi.com').lower()
 
 SESSION_COOKIE_NAME = 'municipal_sessionid'
 CSRF_COOKIE_NAME = 'municipal_csrftoken'
@@ -57,6 +56,16 @@ CSRF_COOKIE_DOMAIN = None
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 if os.getenv('RENDER_EXTERNAL_HOSTNAME'):
     ALLOWED_HOSTS.append(os.environ['RENDER_EXTERNAL_HOSTNAME'])
-ALLOWED_HOSTS.append('.grcustasi.com')
+ALLOWED_HOSTS.append('.'+TENANT_BASE_DOMAIN)
 TELEGRAM_BOT_TOKEN = os.getenv('GRCUSTASI_TELEGRAM_BOT_TOKEN', os.getenv('TELEGRAM_BOT_TOKEN', ''))
 TELEGRAM_CHAT_ID = os.getenv('GRCUSTASI_TELEGRAM_ADMIN_CHAT_ID', os.getenv('TELEGRAM_CHAT_ID', ''))
+
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')
+EMAIL_HOST = os.getenv('EMAIL_HOST', '')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', '587'))
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'true').lower() == 'true'
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', 'false').lower() == 'true'
+EMAIL_TIMEOUT = 8
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'noreply@grcustasi.com')

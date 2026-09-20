@@ -26,17 +26,24 @@ def ready(view):
         return view(request,*args,**kwargs)
     return wrapper
 
-def scope(request,audit_id=None):
+def accessible_audits(request):
     audits=Audit.objects.filter(archived=False).select_related('organization')
-    if getattr(request,'tenant',None):
-        audits=audits.filter(organization=request.tenant)
-    elif request.get_host().split(':',1)[0].lower()==settings.TENANT_DOMAIN.lower():
-        audits=audits.filter(organization__slug=settings.TENANT_ORGANIZATION_SLUG)
-    if not request.user.is_superuser:
-        audits=audits.filter(membership__user=request.user)
-    audit=get_object_or_404(audits,pk=audit_id) if audit_id else audits.order_by('pk').first()
+    if getattr(request,'tenant',None):audits=audits.filter(organization=request.tenant)
+    if not request.user.is_superuser:audits=audits.filter(membership__user=request.user)
+    return audits
+
+def scope(request,audit_id=None):
+    audits=accessible_audits(request)
+    selected=audit_id or request.GET.get('audit')
+    if selected:
+        try:selected=int(selected)
+        except (TypeError,ValueError):raise Http404
+        audit=get_object_or_404(audits,pk=selected)
+        request.session['selected_audit']=audit.pk
+    else:
+        audit=audits.filter(pk=request.session.get('selected_audit')).first() or audits.order_by('pk').first()
     if not audit:return None,None,False
-    preview=request.user.is_superuser and request.session.get('view_as','admin') != 'admin'
+    preview=request.user.is_superuser and request.session.get('view_as','admin')!='admin'
     role=request.session.get('view_as','admin') if request.user.is_superuser else Membership.objects.get(user=request.user,audit=audit).role
     if role not in dict(ROLES):raise Http404
     return audit,role,preview
@@ -45,7 +52,16 @@ def demo_write(request,audit):
     return bool(settings.DEBUG and audit and audit.is_demo and request.user.is_superuser)
 
 def shared(request,audit,role,preview):
-    return {'audit':audit,'role':role,'role_label':dict(ROLES).get(role,''),'preview':preview,'roles':ROLES,'is_platform_admin':request.user.is_superuser,'demo_writable':demo_write(request,audit),'can_evaluate':role in ('admin','auditor'),'show_evaluation':role in ('admin','auditor','executive'),'phase_order':[('responses','BT yanıtları'),('fieldwork','Saha denetimi'),('remediation','Bulgu giderme'),('completed','Sürekli kontrol')]}
+    from .branding import organization_brand,it_label
+    label=it_label(audit) if audit else 'BT Sorumlusu'
+    return {**organization_brand(audit.organization if audit else None),'audit':audit,'audit_choices':accessible_audits(request),'it_label':label,'role':role,'role_label':label if role=='it' else dict(ROLES).get(role,''),'preview':preview,'roles':ROLES,'is_platform_admin':request.user.is_superuser,'demo_writable':demo_write(request,audit),'can_evaluate':role in ('admin','auditor'),'show_evaluation':role in ('admin','auditor','executive'),'phase_order':[('responses','BT yanıtları'),('fieldwork','Saha denetimi'),('remediation','Bulgu giderme'),('completed','Sürekli kontrol')]}
+
+def evaluation_form(control):
+    ev=Evaluation.objects.filter(control=control).first()
+    finding=Finding.objects.filter(control=control).first()
+    initial={'assessment':ev.assessment,'rationale':ev.rationale,'private_note':ev.private_note,'verified':ev.verified} if ev else {}
+    if finding:initial.update(recommendation=finding.recommendation,due_date=finding.due_date)
+    return EvaluationForm(initial=initial,auto_id=f'evaluation_{control.pk}_%s')
 
 def visible_controls(audit,role):
     qs=Control.objects.filter(audit=audit)
@@ -60,7 +76,7 @@ def serialize_control(control,role):
     data['evaluation']=None
     if role=='it':return data
     evaluations=Evaluation.objects.filter(control=control)
-    evaluation=evaluations.values('assessment','rationale').first()
+    evaluation=evaluations.values('assessment','rationale','verified').first()
     if evaluation:
         evaluation['label']=dict(Evaluation._meta.get_field('assessment').choices)[evaluation['assessment']
         ]
@@ -71,7 +87,7 @@ def serialize_control(control,role):
 @ready
 def console(request):
     audit,role,preview=scope(request)
-    if not audit:return render(request,'workspace/empty.html',status=200)
+    if not audit:return render(request,'workspace/empty.html',{'is_platform_admin':request.user.is_superuser},status=200)
     ctx=shared(request,audit,role,preview)
     controls=visible_controls(audit,role)
     all_rows=[serialize_control(c,role) for c in controls]
@@ -80,10 +96,8 @@ def console(request):
     rows=[r for r in all_rows if (not q or q.casefold() in (r['title']+' '+r['code']).casefold()) and (not framework or r['framework']==framework)]
     for row in rows:
         row['answer_form']=ResponseForm(initial={'status':row.get('status') if row.get('status')!='unanswered' else 'implemented','explanation':row['response'].explanation if row.get('response') else ''},auto_id=f"answer_{row['id']}_%s")
-        ev=Evaluation.objects.filter(control_id=row['id']).first() if role in ('admin','auditor') else None
-        initial={'assessment':ev.assessment,'rationale':ev.rationale,'private_note':ev.private_note} if ev else {}
-        row['evaluation_form']=EvaluationForm(initial=initial,auto_id=f"evaluation_{row['id']}_%s")
-        row['can_answer']=role=='it' and audit.phase in ('responses','completed') and (preview or demo_write(request,audit) or not row.get('response') or row['response'].actor_id==request.user.pk)
+        if role in ('admin','auditor'):row['evaluation_form']=evaluation_form(controls.get(pk=row['id']))
+        row['can_answer']=role=='it' and (preview or demo_write(request,audit) or not row.get('response') or row['response'].actor_id==request.user.pk)
     ctx.update(rows=rows,total=len(all_rows),q=q,framework=framework,frameworks=sorted({r['framework'] for r in all_rows}),appointment_form=AppointmentForm(),suggestion_form=SuggestionForm())
     if role in ('intern','admin','auditor'):
         suggestions=Suggestion.objects.filter(audit=audit)
@@ -95,7 +109,7 @@ def console(request):
         compliant=sum(bool(r['evaluation'] and r['evaluation']['assessment']=='compliant') for r in all_rows)
         findings=Finding.objects.filter(audit=audit).prefetch_related('updates__actor').select_related('control')
         if role not in ('admin','auditor'):findings=findings.filter(customer_visible=True)
-        ctx.update(answered=answered,unanswered=len(all_rows)-answered,completion=round(answered/len(all_rows)*100) if all_rows else 0,compliant=compliant,findings=list(findings),finding_count=findings.exclude(status='closed').count(),response_form=ResponseForm(),ready_for_fieldwork=bool(all_rows) and answered==len(all_rows))
+        ctx.update(answered=answered,unanswered=len(all_rows)-answered,completion=round(answered/len(all_rows)*100) if all_rows else 0,compliant=compliant,findings=list(findings),finding_count=findings.exclude(status__in=['closed','risk_accepted']).count(),response_form=ResponseForm(),ready_for_fieldwork=bool(all_rows) and answered==len(all_rows))
     # Chart payload is assembled from the same permission-filtered records as the page.
     risk_counts=Counter(r['risk'] for r in all_rows)
     framework_counts=Counter(r['framework'] for r in all_rows)
@@ -107,6 +121,7 @@ def console(request):
         ctx['response_legend']=[{'key':key,'label':label,'count':statuses[key]} for key,label in STATUSES]
         finding_states=Counter(f.status for f in ctx['findings'])
         ctx['closed_findings']=finding_states['closed']
+        ctx['accepted_risks']=finding_states['risk_accepted']
         if role in ('admin','auditor','executive'):
             evaluations=Counter(r['evaluation']['assessment'] if r.get('evaluation') else 'pending' for r in all_rows)
             labels=[('compliant','Uygun'),('partial','Kısmen uygun'),('noncompliant','Uygun değil'),('pending','Değerlendirilmedi')]
@@ -154,8 +169,9 @@ def detail(request,audit_id,control_id):
     if request.method=='GET' and row.get('response'):
         form=ResponseForm(initial={'status':row['response'].status,'explanation':row['response'].explanation})
     ctx=shared(request,audit,role,preview)
-    can_answer=role=='it' and audit.phase in ('responses','completed') and (preview or demo_write(request,audit) or not row.get('response') or row['response'].actor_id==request.user.pk)
+    can_answer=role=='it' and (preview or demo_write(request,audit) or not row.get('response') or row['response'].actor_id==request.user.pk)
     ctx.update(control=row,form=form,can_answer=can_answer)
+    if role in ('admin','auditor'):ctx['evaluation_form']=evaluation_form(control)
     return render(request,'workspace/detail.html',ctx)
 
 @ready
@@ -222,7 +238,7 @@ def workflow(request,audit_id):
             data=request.POST.copy();data['action']=request.POST.get('finding_action','')
             form=FindingForm(data)
             if not form.is_valid():return form_failure(request,audit,role,preview,form,action,finding=finding.pk)
-            services.finding_action(audit,finding,request.user,role,form.cleaned_data['action'],form.cleaned_data['explanation'],preview,writable)
+            services.finding_action(audit,finding,request.user,role,form.cleaned_data['action'],form.cleaned_data['explanation'],preview,writable,due_date=form.cleaned_data.get('due_date'))
         else:return HttpResponseBadRequest('Geçersiz işlem.')
     except ValidationError as error:
         messages.error(request,' '.join(error.messages));return redirect('console')
@@ -245,7 +261,7 @@ def findings_pdf(request,audit_id):
     content=render_findings(audit,list(findings))
     services.log(audit,request.user,role,'Bulgular PDF indirildi',count=findings.count())
     response=HttpResponse(content,content_type='application/pdf')
-    response['Content-Disposition']=f'attachment; filename="torbalibld-bulgular-{audit.pk}.pdf"'
+    response['Content-Disposition']=f'attachment; filename="{audit.organization.slug}-bulgular-{audit.pk}.pdf"'
     return response
 
 
@@ -257,5 +273,5 @@ def controls_pdf(request,audit_id):
     content=render_controls(audit,rows,role)
     services.log(audit,request.user,role,'Kontroller PDF indirildi',count=len(rows))
     response=HttpResponse(content,content_type='application/pdf')
-    response['Content-Disposition']=f'attachment; filename="torbalibld-kontroller-{audit.pk}.pdf"'
+    response['Content-Disposition']=f'attachment; filename="{audit.organization.slug}-kontroller-{audit.pk}.pdf"'
     return response

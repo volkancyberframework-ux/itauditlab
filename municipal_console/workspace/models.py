@@ -1,6 +1,10 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from datetime import timedelta
+
+def default_due_date():
+    return timezone.localdate()+timedelta(days=30)
 
 ROLES = [('admin','Platform yöneticisi'),('executive','Kurum yöneticisi'),('it','BT sorumlusu'),('auditor','Denetçi'),('intern','Stajyer')]
 STATUSES = [('implemented','Yapılıyor'),('partial','Kısmen yapılıyor'),('missing','Yapılmıyor'),('na','Uygulanamaz'),('unanswered','Başlanmadı')]
@@ -9,6 +13,7 @@ class Organization(models.Model):
     name=models.CharField(max_length=180)
     slug=models.SlugField(unique=True)
     subdomain=models.SlugField(max_length=63,unique=True,null=True,blank=True,help_text='Örnek: torbalibld. DNS/Render alan adı ayrıca yapılandırılmalıdır.')
+    logo_data=models.BinaryField(blank=True,default=bytes,editable=False)
     def __str__(self):return self.name
 class Audit(models.Model):
     organization=models.ForeignKey(Organization,on_delete=models.PROTECT)
@@ -31,7 +36,7 @@ class Control(models.Model):
     code=models.CharField(max_length=30)
     title=models.CharField(max_length=180)
     description=models.TextField()
-    evidence_guidance=models.TextField()
+    evidence_guidance=models.TextField(verbose_name='Beklenen kanıtlar / test rehberi',help_text='İstenecek belge, ekran görüntüsü, kayıt ve test adımlarını yazın.')
     framework=models.CharField(max_length=60)
     theme=models.CharField(max_length=80)
     risk=models.CharField(max_length=10,choices=[('high','Yüksek'),('medium','Orta'),('low','Düşük')])
@@ -57,6 +62,7 @@ class Evaluation(models.Model):
     rationale=models.TextField()
     private_note=models.TextField(blank=True)
     customer_visible=models.BooleanField(default=True)
+    verified=models.BooleanField(default=False,verbose_name='Test edildi ve son onay verildi')
     updated_at=models.DateTimeField(auto_now=True)
 class Finding(models.Model):
     audit=models.ForeignKey(Audit,on_delete=models.PROTECT,related_name='findings')
@@ -66,7 +72,13 @@ class Finding(models.Model):
     customer_visible=models.BooleanField(default=True)
 
     control=models.OneToOneField(Control,on_delete=models.PROTECT,null=True,blank=True,related_name='finding')
-    status=models.CharField(max_length=25,default='open',choices=[('open','Açık'),('remediation_submitted','Giderim incelemede'),('disputed','İtiraz incelemede'),('closed','Kapatıldı')])
+    status=models.CharField(max_length=25,default='open',choices=[('open','Açık'),('remediation_submitted','Giderim incelemede'),('disputed','İtiraz incelemede'),('closed','Kapatıldı'),('risk_accepted','Risk kabul edildi')])
+    due_date=models.DateField(default=default_due_date,verbose_name='Giderilme son tarihi')
+    treatment=models.CharField(max_length=20,default='undecided',choices=[('undecided','Karar bekliyor'),('acknowledged','Bulgu kabul edildi'),('mitigate','Risk giderilecek'),('risk_requested','Risk kabulü onay bekliyor'),('risk_accepted','Risk kabul edildi')])
+    @property
+    def is_terminal(self):return self.status in ('closed','risk_accepted')
+    @property
+    def overdue(self):return not self.is_terminal and self.due_date<timezone.localdate()
     created_at=models.DateTimeField(default=timezone.now,editable=False)
     updated_at=models.DateTimeField(auto_now=True)
 
@@ -74,7 +86,7 @@ class FindingUpdate(models.Model):
     finding=models.ForeignKey(Finding,on_delete=models.PROTECT,related_name='updates')
     actor=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.PROTECT)
     role=models.CharField(max_length=20)
-    action=models.CharField(max_length=30,choices=[('remediate','Giderim bildirimi'),('dispute','İtiraz'),('close','Kapanış onayı'),('reopen','Tekrar açıldı'),('reject','İtiraz/giderim reddi')])
+    action=models.CharField(max_length=30,choices=[('remediate','Giderim bildirimi'),('dispute','İtiraz'),('close','Kapanış onayı'),('reopen','Tekrar açıldı'),('reject','İtiraz/giderim reddi'),('acknowledge','Bulgu kabul edildi'),('plan','Risk giderilecek'),('request_risk','Risk kabulü talebi'),('accept_risk','Yönetici risk kabul onayı'),('set_due','Son tarih değişti')])
     explanation=models.TextField()
     created_at=models.DateTimeField(auto_now_add=True)
     class Meta:ordering=['-created_at','-pk']
@@ -106,3 +118,15 @@ class Notification(models.Model):
     delivered_at=models.DateTimeField(null=True,blank=True)
     attempts=models.PositiveIntegerField(default=0)
     created_at=models.DateTimeField(auto_now_add=True)
+
+class ControlEmail(models.Model):
+    control=models.ForeignKey(Control,on_delete=models.PROTECT)
+    recipient=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.PROTECT)
+    email=models.EmailField()
+    subject=models.CharField(max_length=250)
+    body=models.TextField()
+    delivered_at=models.DateTimeField(null=True,blank=True)
+    attempts=models.PositiveIntegerField(default=0)
+    created_at=models.DateTimeField(auto_now_add=True)
+    class Meta:
+        constraints=[models.UniqueConstraint(fields=['control','recipient'],name='one_new_control_email_per_recipient')]

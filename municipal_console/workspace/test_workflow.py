@@ -28,7 +28,7 @@ class WorkflowTests(TestCase):
         when=timezone.localtime(timezone.now()+timedelta(days=3)).strftime('%Y-%m-%dT%H:%M')
         self.post('appointment',when=when,note='BT ekibi ile telefonla görüşüldü.');self.login('it');self.post('confirm_appointment')
     def evaluate(self,status='partial'):
-        self.login('auditor');return self.post('evaluate',control=self.control.pk,assessment=status,rationale='YÖNETİCİYE-GİZLİ-GÖRÜŞ',private_note='EKİP-ÖZEL-NOT',recommendation='Erişim yetkilerini gözden geçirin; kanıt özetini paylaşın.')
+        self.login('auditor');return self.post('evaluate',control=self.control.pk,assessment=status,verified='on',rationale='YÖNETİCİYE-GİZLİ-GÖRÜŞ',private_note='EKİP-ÖZEL-NOT',recommendation='Erişim yetkilerini gözden geçirin; kanıt özetini paylaşın.')
     def test_initial_unanswered_and_inline_form(self):
         self.login('it');r=self.client.get('/console/');self.assertContains(r,'Başlanmadı');self.assertContains(r,'GRC-001 yanıtını düzenle');self.assertNotContains(r,'Denetçi görüşü')
     def test_phase_cannot_skip_answers(self):
@@ -40,15 +40,16 @@ class WorkflowTests(TestCase):
             self.login(role);self.assertEqual(self.post('answer',control=self.control.pk,status='partial',explanation='Açıklama',declaration='on').status_code,403)
     def test_invalid_answer_preserves_text(self):
         self.login('it');r=self.post('answer',control=self.control.pk,status='partial',explanation='Korunacak açıklama');self.assertEqual(r.status_code,400);self.assertContains(r,'Korunacak açıklama',status_code=400)
-    def test_evaluation_requires_fieldwork_and_appointment(self):
-        self.evaluate();self.assertFalse(Evaluation.objects.exists());self.answer();self.login('admin');self.post('phase',target='fieldwork');self.evaluate();self.assertFalse(Evaluation.objects.exists())
+    def test_evaluation_available_from_first_phase(self):
+        self.evaluate();self.assertTrue(Evaluation.objects.exists());self.assertTrue(Evaluation.objects.get().verified)
+        self.answer();self.assertFalse(Evaluation.objects.get().verified)
     def test_appointment_counter_and_confirmation(self):
         self.answer();self.login('admin');self.post('phase',target='fieldwork')
         when=timezone.localtime(timezone.now()+timedelta(days=4)).strftime('%Y-%m-%dT%H:%M')
         self.login('it');self.post('appointment',when=when,note='Başka saat öneriyoruz.');self.post('confirm_appointment');self.audit.refresh_from_db();self.assertEqual(self.audit.appointment_status,'counter')
         self.login('auditor');self.post('confirm_appointment');self.audit.refresh_from_db();self.assertEqual(self.audit.appointment_status,'confirmed')
-    def test_response_frozen_after_phase1(self):
-        self.fieldwork();self.login('it');self.post('answer',control=self.control.pk,status='missing',explanation='Sonra',declaration='on');self.assertEqual(self.control.revisions.count(),1)
+    def test_response_remains_editable_after_phase1(self):
+        self.fieldwork();self.login('it');self.post('answer',control=self.control.pk,status='missing',explanation='Sonra',declaration='on');self.assertEqual(self.control.revisions.count(),2)
     def test_noncompliance_creates_single_finding(self):
         self.fieldwork();self.evaluate();self.evaluate('noncompliant');self.assertEqual(Finding.objects.count(),1);self.assertEqual(Finding.objects.get().severity,'high')
     def test_compliant_creates_no_finding(self):
@@ -87,7 +88,7 @@ class WorkflowTests(TestCase):
     def test_pdf_authorization_and_privacy(self):
         self.fieldwork();self.evaluate();url=f'/console/{self.audit.pk}/findings.pdf'
         self.login('it');response=self.client.get(url);self.assertEqual(response['Content-Type'],'application/pdf');text=''.join(p.extract_text() for p in PdfReader(BytesIO(response.content)).pages)
-        self.assertIn('Torbalı Belediyesi',text);self.assertIn('gözden',text);self.assertNotIn('YÖNETİCİYE-GİZLİ-GÖRÜŞ',text);self.assertNotIn('EKİP-ÖZEL-NOT',text)
+        self.assertIn('Test Belediyesi',text);self.assertIn('gözden',text);self.assertNotIn('YÖNETİCİYE-GİZLİ-GÖRÜŞ',text);self.assertNotIn('EKİP-ÖZEL-NOT',text)
         self.login('intern');self.assertEqual(self.client.get(url).status_code,404)
     def test_cross_tenant_write_and_pdf_denied(self):
         other=Audit.objects.create(organization=Organization.objects.create(name='Başka',slug='other'),title='Other');self.login('it')

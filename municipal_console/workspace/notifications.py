@@ -25,7 +25,7 @@ def send(message):
 
 @receiver(user_logged_in)
 def login_notification(sender,request,user,**kwargs):
-    queue('Torbalı Belediyesi · Başarılı giriş\n'+user.email)
+    queue((request.tenant.name if getattr(request,'tenant',None) else 'Denetim Konsolu')+' · Başarılı giriş\n'+user.email)
 
 @receiver(post_save,sender=Activity)
 def activity_notification(sender,instance,created,**kwargs):
@@ -45,3 +45,49 @@ def deliver(notification_id):
 def queue(message):
     item=Notification.objects.create(message=message)
     transaction.on_commit(lambda: deliver(item.pk), robust=True)
+
+from .models import Control, ControlEmail, Membership
+from django.core.mail import send_mail
+
+@receiver(post_save,sender=Control)
+def new_control_email(sender,instance,created,raw=False,**kwargs):
+    if raw:return
+    if not created:
+        from .models import Evaluation
+        Evaluation.objects.filter(control=instance,verified=True).update(verified=False)
+        return
+    if instance.audit.phase!='completed':return
+    audit=instance.audit
+    org=audit.organization
+    url=f'https://{org.subdomain}.{settings.TENANT_BASE_DOMAIN}/console/{audit.pk}/controls/{instance.pk}/' if org.subdomain else 'Kurum denetim konsolunuzdan kontrolü açın.'
+    body=f'''{org.name} denetimine yeni kontrol eklendi.
+
+Denetim: {audit.title}
+Kontrol: {instance.code} · {instance.title}
+Çerçeve: {instance.framework}
+Risk: {instance.get_risk_display()}
+
+Kontrol açıklaması:
+{instance.description}
+
+Beklenen kanıtlar / test rehberi:
+{instance.evidence_guidance}
+
+BT yanıtınızı kaydetmek için:
+{url}
+'''
+    for membership in Membership.objects.filter(audit=audit,role='it',user__is_active=True).select_related('user'):
+        item,new=ControlEmail.objects.get_or_create(control=instance,recipient=membership.user,defaults={'email':membership.user.email,'subject':('Yeni kontrol: '+instance.code+' · '+instance.title).replace('\n',' ').replace('\r',' ')[:250],'body':body})
+        if new:transaction.on_commit(lambda pk=item.pk:deliver_email(pk),robust=True)
+
+def deliver_email(pk):
+    with transaction.atomic():
+        item=ControlEmail.objects.select_for_update().select_related('control__audit','recipient').get(pk=pk)
+        if item.delivered_at:return
+        if not item.recipient.is_active or not Membership.objects.filter(user=item.recipient,audit=item.control.audit,role='it').exists():return
+        if settings.EMAIL_BACKEND.endswith('smtp.EmailBackend') and not settings.EMAIL_HOST:return
+        item.attempts+=1
+        try:
+            if send_mail(item.subject,item.body,settings.DEFAULT_FROM_EMAIL,[item.recipient.email],fail_silently=False):item.delivered_at=timezone.now()
+        except Exception:logger.warning('Kontrol e-postası gönderilemedi; yeniden denenecek.')
+        item.save(update_fields=['attempts','delivered_at'])

@@ -16,6 +16,8 @@ services:
     preDeployCommand: python manage.py migrate --noinput
     startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --access-logfile -
     healthCheckPath: /signin/
+    domains:
+      - "*.grcustasi.com"
     envVars:
       - key: PYTHON_VERSION
         value: 3.12.14
@@ -32,13 +34,27 @@ services:
       - key: ALLOWED_HOSTS
         value: .grcustasi.com
       - key: CSRF_TRUSTED_ORIGINS
-        value: https://torbalibld.grcustasi.com
-      - key: TENANT_DOMAIN
-        value: torbalibld.grcustasi.com
+        value: ""
+      - key: TENANT_BASE_DOMAIN
+        value: grcustasi.com
       - key: GRCUSTASI_TELEGRAM_BOT_TOKEN
         sync: false
       - key: GRCUSTASI_TELEGRAM_ADMIN_CHAT_ID
         sync: false
+      - key: EMAIL_HOST
+        sync: false
+      - key: EMAIL_HOST_USER
+        sync: false
+      - key: EMAIL_HOST_PASSWORD
+        sync: false
+      - key: DEFAULT_FROM_EMAIL
+        sync: false
+      - key: EMAIL_PORT
+        value: "587"
+      - key: EMAIL_USE_TLS
+        value: "true"
+      - key: EMAIL_USE_SSL
+        value: "false"
   - type: cron
     name: municipal-notification-retry
     runtime: python
@@ -73,3 +89,38 @@ services:
           type: web
           name: municipal-console
           envVarKey: GRCUSTASI_TELEGRAM_ADMIN_CHAT_ID
+      - key: EMAIL_HOST
+        fromService:
+          type: web
+          name: municipal-console
+          envVarKey: EMAIL_HOST
+      - key: EMAIL_HOST_USER
+        fromService:
+          type: web
+          name: municipal-console
+          envVarKey: EMAIL_HOST_USER
+      - key: EMAIL_HOST_PASSWORD
+        fromService:
+          type: web
+          name: municipal-console
+          envVarKey: EMAIL_HOST_PASSWORD
+      - key: DEFAULT_FROM_EMAIL
+        fromService:
+          type: web
+          name: municipal-console
+          envVarKey: DEFAULT_FROM_EMAIL
+      - key: EMAIL_PORT
+        fromService:
+          type: web
+          name: municipal-console
+          envVarKey: EMAIL_PORT
+      - key: EMAIL_USE_TLS
+        fromService:
+          type: web
+          name: municipal-console
+          envVarKey: EMAIL_USE_TLS
+      - key: EMAIL_USE_SSL
+        fromService:
+          type: web
+          name: municipal-console
+          envVarKey: EMAIL_USE_SSL

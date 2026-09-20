@@ -47,6 +47,6 @@ class DashboardTests(TestCase):
         text=self.pdf('intern');self.assertIn('Özgün kontrol sorusu',text);self.assertNotIn('Stajyere kapalı kontrol',text);self.assertNotIn('SADECE-YETKİLİ-BT-YANITI',text);self.assertNotIn('YÖNETİCİYE-ÖZEL-GÖRÜŞ',text)
     def test_pdf_requires_login(self):self.assertEqual(self.client.get(f'/console/{self.audit.pk}/controls.pdf').status_code,302)
     def test_login_brand_without_platform_name(self):
-        r=self.client.get('/signin/');self.assertContains(r,'Torbalı Belediyesi');self.assertNotContains(r,'GRC Ustası');self.assertContains(r,'torbali-belediyesi.gif')
+        r=self.client.get('/signin/',HTTP_HOST='torbalibld.grcustasi.com');self.assertContains(r,'Torbalı Belediyesi');self.assertNotContains(r,'GRC Ustası');self.assertContains(r,'torbali-belediyesi.gif')
     def test_charts_ignore_table_filter(self):
         self.login('admin');r=self.client.get('/console/?q=Şifreleme');self.assertEqual(len(r.context['rows']),1);self.assertEqual(sum(r.context['charts']['responses']['values']),2)
