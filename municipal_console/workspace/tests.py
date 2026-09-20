@@ -26,7 +26,7 @@ class WorkspaceTests(TestCase):
     def test_only_admin_can_switch_role(self):
         self.login(self.users['it'])
         self.assertEqual(self.client.post('/console/view-as/',{'role':'admin'}).status_code,403)
-        self.assertNotContains(self.client.get('/console/'),'Kullanıcı gözünden bakın')
+        self.assertNotContains(self.client.get('/console/'),'Çalışma rolünü seçin')
     def test_switch_requires_post_and_valid_role(self):
         self.login(self.admin)
         self.assertEqual(self.client.get('/console/view-as/').status_code,405)

@@ -21,7 +21,9 @@ class EvaluationForm(forms.Form):
         data=super().clean()
         if data.get('assessment') in ['partial','noncompliant'] and not data.get('recommendation'):self.add_error('recommendation','Bulgu için giderim önerisi gereklidir.')
         if data.get('assessment') in ['partial','noncompliant'] and not data.get('deficiency'):self.add_error('deficiency','Eksikliğin tasarım, uygulama veya her ikisiyle ilgili olduğunu seçin.')
-        if data.get('assessment')=='compliant':data['deficiency']=''
+        if data.get('assessment')=='compliant':
+            data['deficiency']=''
+            data['due_date']=None
         return data
 class SuggestionForm(forms.ModelForm):
     class Meta:

@@ -113,8 +113,8 @@ class WorkflowTests(TestCase):
         self.assertEqual(Activity.objects.get().actor,self.admin)
 
     @override_settings(DEBUG=False,SECURE_SSL_REDIRECT=False)
-    def test_other_production_role_previews_remain_readonly(self):
+    def test_production_auditor_view_can_write_but_keeps_role_boundaries(self):
         self.login('admin');self.client.post('/console/view-as/',{'role':'auditor'})
-        self.assertEqual(self.post('evaluate',control=self.control.pk,assessment='compliant',rationale='Test',verified='on').status_code,403)
+        self.assertEqual(self.post('evaluate',control=self.control.pk,assessment='compliant',rationale='Test',verified='on').status_code,302)
         self.client.post('/console/view-as/',{'role':'intern'})
         self.assertEqual(self.post('answer',control=self.control.pk,status='missing',declaration='on').status_code,403)

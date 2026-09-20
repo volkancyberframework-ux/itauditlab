@@ -1,0 +1,11 @@
+<form method="get" action="{% url 'console' %}#controls" class="filters control-filters" aria-label="Kontrol filtreleri">
+  <input type="hidden" name="audit" value="{{ audit.pk }}">
+  <label class="control-search">Kontrol / referans ara<input type="search" name="q" value="{{ q }}" placeholder="Kod, kontrol adı, referans veya tema…"></label>
+  {% for filter in control_filters %}
+  <label>{{ filter.label }}<select name="{{ filter.name }}"><option value="">Tümü</option>{% for value,label in filter.choices %}<option value="{{ value }}" {% if filter.value == value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+  {% endfor %}
+  <label>Sıralama<select name="sort">{% for value,label in sort_choices %}<option value="{{ value }}" {% if sort == value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+  <button class="secondary" type="submit">Filtrele</button>
+  {% if filters_active %}<a href="{{ clear_filters_url }}">Filtreleri temizle</a>{% endif %}
+</form>
+<p class="filter-count" role="status">{{ total }} kontrolden {{ filtered_count }} gösteriliyor. Sıralamak için sütun başlıklarına tıklayın.</p>

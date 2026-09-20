@@ -11,7 +11,6 @@ from django.urls import resolve, Resolver404, reverse
 from .models import Audit, Membership, Control, ResponseRevision, Evaluation, Finding, Suggestion, Activity, ROLES, STATUSES, ControlDefinition
 from .forms import ResponseForm, EvaluationForm, SuggestionForm, AppointmentForm, FindingForm, AddControlsForm
 from . import services
-from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.http import HttpResponse
 from django.utils import timezone
@@ -57,17 +56,14 @@ def scope(request,audit_id=None):
     if role not in dict(ROLES):raise Http404
     return audit,role,preview
 
-def demo_write(request,audit):
-    return bool(settings.DEBUG and audit and audit.is_demo and request.user.is_superuser)
-
-def response_write(request,audit,role):
-    # Platform administrators may answer in the BT view under their own identity.
-    return bool(audit and role=='it' and request.user.is_superuser and not getattr(request,'auditor_readonly',False))
+def role_write(request,audit):
+    # Role selection changes the workflow, never the identity of the administrator.
+    return bool(audit and request.user.is_superuser and not getattr(request,'auditor_readonly',False))
 
 def shared(request,audit,role,preview):
     from .branding import organization_brand,it_label
     label=it_label(audit) if audit else 'BT Sorumlusu'
-    return {**organization_brand(audit.organization if audit else None),'audit':audit,'audit_choices':accessible_audits(request),'it_label':label,'role':role,'role_label':'Stajyer · Denetçi görünümü (salt okunur)' if getattr(request,'auditor_readonly',False) else (label if role=='it' else dict(ROLES).get(role,'')),'preview':preview,'roles':ROLES,'is_platform_admin':request.user.is_superuser,'demo_writable':demo_write(request,audit),'can_save_response':role=='it' and (not preview or response_write(request,audit,role)),'auditor_readonly':getattr(request,'auditor_readonly',False),'can_evaluate':role in ('admin','auditor') and not getattr(request,'auditor_readonly',False),'show_auditor_data':role in ('admin','auditor'),'show_evaluation':role in ('admin','auditor','executive'),'phase_order':[('responses','BT yanıtları'),('fieldwork','Saha denetimi'),('remediation','Bulgu giderme'),('completed','Sürekli kontrol')]}
+    return {**organization_brand(audit.organization if audit else None),'audit':audit,'audit_choices':accessible_audits(request),'it_label':label,'role':role,'role_label':'Stajyer · Denetçi görünümü (salt okunur)' if getattr(request,'auditor_readonly',False) else (label if role=='it' else dict(ROLES).get(role,'')),'preview':preview,'roles':ROLES,'is_platform_admin':request.user.is_superuser,'can_write':not preview or role_write(request,audit),'can_save_response':role=='it' and (not preview or role_write(request,audit)),'auditor_readonly':getattr(request,'auditor_readonly',False),'can_evaluate':role in ('admin','auditor') and not getattr(request,'auditor_readonly',False),'show_auditor_data':role in ('admin','auditor'),'show_evaluation':role in ('admin','auditor','executive'),'phase_order':[('responses','BT yanıtları'),('fieldwork','Saha denetimi'),('remediation','Bulgu giderme'),('completed','Sürekli kontrol')]}
 
 def evaluation_form(control):
     ev=Evaluation.objects.filter(control=control).first()
@@ -109,17 +105,17 @@ def console(request):
         ctx['add_controls_form']=AddControlsForm()
         ctx['add_controls_form'].fields['controls'].queryset=ControlDefinition.objects.exclude(audit_controls__audit=audit)
     all_rows=[serialize_control(c,role) for c in controls]
-    q=request.GET.get('q','').strip()[:100]
-    framework=request.GET.get('framework','')
-    rows=[r for r in all_rows if (not q or q.casefold() in (r['title']+' '+r['code']).casefold()) and (not framework or r['framework']==framework)]
+    from .table import control_table
+    rows,table_context=control_table(request.GET,audit,role,all_rows,ctx['it_label'])
+    ctx.update(table_context)
     for row in rows:
         row['answer_form']=ResponseForm(initial={'status':row.get('status') if row.get('status')!='unanswered' else 'implemented','explanation':row['response'].explanation if row.get('response') else ''},auto_id=f"answer_{row['id']}_%s")
         if role in ('admin','auditor'):row['evaluation_form']=evaluation_form(controls.get(pk=row['id']))
         row['can_answer']=role=='it'
-    ctx.update(rows=rows,total=len(all_rows),q=q,framework=framework,frameworks=sorted({r['framework'] for r in all_rows}),appointment_form=AppointmentForm(),suggestion_form=SuggestionForm())
+    ctx.update(rows=rows,total=len(all_rows),frameworks=sorted({r['framework'] for r in all_rows}),appointment_form=AppointmentForm(),suggestion_form=SuggestionForm())
     if role in ('intern','admin','auditor'):
         suggestions=Suggestion.objects.filter(audit=audit)
-        if role=='intern' and not demo_write(request,audit):suggestions=suggestions.filter(author=request.user)
+        if role=='intern' and not role_write(request,audit):suggestions=suggestions.filter(author=request.user)
         ctx['suggestions']=suggestions.select_related('author')
     if role in ('admin','auditor'):ctx['activities']=Activity.objects.filter(audit=audit).select_related('actor')[:12]
     if role!='intern':
@@ -178,7 +174,7 @@ def detail(request,audit_id,control_id):
     form=ResponseForm(request.POST or None)
     if request.method=='POST':
         if form.is_valid():
-            try:services.answer(audit,control,request.user,role,form.cleaned_data,preview,response_write(request,audit,role))
+            try:services.answer(audit,control,request.user,role,form.cleaned_data,preview,role_write(request,audit))
             except ValidationError as error:form.add_error(None,error)
             else:
                 messages.success(request,'BT sorumlusu yanıtı kaydedildi.')
@@ -208,7 +204,7 @@ def workflow(request,audit_id):
     audit,role,preview=scope(request,audit_id)
     if getattr(request,'auditor_readonly',False):return HttpResponseForbidden('Stajyer denetçi görünümü salt okunurdur.')
     action=request.POST.get('action','')
-    writable=demo_write(request,audit)
+    writable=role_write(request,audit)
     try:
         if action=='add_controls':
             services.allowed(role,['admin','auditor'],preview,writable)
@@ -221,7 +217,7 @@ def workflow(request,audit_id):
             control=get_object_or_404(visible_controls(audit,role),pk=request.POST.get('control'))
             form=ResponseForm(request.POST)
             if not form.is_valid():return form_failure(request,audit,role,preview,form,action,control.pk)
-            services.answer(audit,control,request.user,role,form.cleaned_data,preview,response_write(request,audit,role))
+            services.answer(audit,control,request.user,role,form.cleaned_data,preview,role_write(request,audit))
         elif action=='evaluate':
             services.allowed(role,['admin','auditor'],preview,writable)
             control=get_object_or_404(Control,audit=audit,pk=request.POST.get('control'))
@@ -269,7 +265,7 @@ def workflow(request,audit_id):
     except ValidationError as error:
         messages.error(request,' '.join(error.messages));return redirect('console')
     messages.success(request,'İşlem kaydedildi.')
-    anchor={'answer':'controls','evaluate':'controls','finding':'findings','suggest':'suggestions','review_suggestion':'suggestions','appointment':'phases','confirm_appointment':'phases','phase':'phases'}.get(action,'')
+    anchor={'add_controls':'controls','answer':'controls','evaluate':'controls','finding':'findings','suggest':'suggestions','review_suggestion':'suggestions','appointment':'phases','confirm_appointment':'phases','phase':'phases'}.get(action,'')
     return redirect(reverse('console')+'#'+anchor)
 
 def form_failure(request,audit,role,preview,form,action,control=None,finding=None):

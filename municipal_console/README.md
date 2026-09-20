@@ -27,3 +27,15 @@ Tüm kullanıcılar (yönetici, denetçi, stajyer, BT ve kurum yöneticisi dahil
 Kurum logosunun alfa kanalı korunur; giriş, konsol ve admin logo kapsayıcıları transparandır. Kuruma özel giriş adresinde ve seçili denetimde kurum adı sekme başlığına, logo favicon'a yansır. Genel giriş adresi, kullanıcı/kurum henüz belirlenmediği için genel konsol markasını gösterir.
 
 Yayında mevcut `prepare_console` adımı yeni migration'ları ve statik dosyaları uygular. Bağımsız kurulumda `python manage.py migrate` ve `python manage.py collectstatic --noinput` çalıştırın. Mevcut denetimler silinmez veya yeni şablonlara zorla bağlanmaz.
+
+## Konsoldan kullanıcı oluşturma ve e-posta taslağı
+
+Platform yöneticisi, konsol menüsündeki **Kullanıcı oluştur** ekranından ad, soyad, e-posta, kurum, denetim/proje, rol ve stajyerin salt okunur denetçi erişimini seçebilir. Genel konsolda tüm kurumlar; kurum subdomain'inde yalnızca o kurumun denetimleri listelenir. Aynı e-posta yeniden oluşturulmaz ve mevcut kullanıcının parolası değiştirilmez.
+
+Yeni hesap için güvenli rastgele 12 karakterlik geçici parola oluşturulur; veritabanına yalnızca parola özeti kaydedilir. İlk başarılı giriş bu parolayı tüketir ve kullanıcıyı yeni parola belirleme ekranına gönderir. Yeni parola belirlenmeden çıkış yapılırsa yönetici parola sıfırlamalıdır. Eski hesapların giriş davranışı değişmez.
+
+Hesap oluşturulunca varsayılan e-posta uygulamasına `mailto:` taslağı açılır; uygulama engellerse ekrandaki açma, kopyalama veya `.eml` indirme seçeneklerini kullanın. Uygulama davet e-postasını otomatik göndermez. Geçici parolayı içeren taslak sunucuda, oturumda veya işlem kayıtlarında saklanmaz; sayfadan ayrılmadan taslağı kaydedin.
+
+Stajyer taslağı seçilen kurum türüne göre mevzuat/iyi uygulama kontrol listesi ve Excel sütunlarını içerir. Kurum yöneticisi taslağında haftalık ve aylık durum bilgilendirmesi ifadesi bulunur; bu değişiklik periyodik e-posta gönderimi planlamaz. Kurum subdomain'i varsa davet doğrudan o subdomain'deki projeye, yoksa genel konsoldaki projeye bağlanır.
+
+Yönetici rol geçişleri artık üretimde de seçilen rolün işlemlerini yapabilir; tüm kayıtlar giriş yapan yöneticiye atfedilir. Salt okunur stajyer üyelikleri değişiklik yapamaz. Kontrol tablosundaki filtreler ve sütun sıralamaları görünür veriler üzerinde çalışır; dashboard toplamları bütün denetimi göstermeye devam eder.

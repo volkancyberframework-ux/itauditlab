@@ -2,7 +2,7 @@ from django.conf import settings
 from django.urls import reverse
 from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render
 from django.http import Http404
@@ -15,7 +15,23 @@ class SignIn(LoginView):
     authentication_form = SignInForm
     redirect_authenticated_user = True
     def form_valid(self, form):
-        response = super().form_valid(form)
+        if form.get_user().temporary_password:
+            from django.db import transaction
+            from .models import User
+            with transaction.atomic():
+                user = User.objects.select_for_update().get(pk=form.get_user().pk)
+                if not user.temporary_password or not user.check_password(form.cleaned_data['password']):
+                    form.add_error(None, 'Geçici parola daha önce kullanıldı. Kurum yöneticinizle iletişime geçin.')
+                    return self.form_invalid(form)
+                user.set_unusable_password()
+                user.temporary_password = False
+                user.must_change_password = True
+                user.save(update_fields=['password', 'temporary_password', 'must_change_password'])
+                user.backend = form.get_user().backend
+                form.user_cache = user
+                response = super().form_valid(form)
+        else:
+            response = super().form_valid(form)
         self.request.session.set_expiry(60 * 60 * 12 if form.cleaned_data['remember'] else 0)
         return response
     def get_success_url(self):
@@ -32,7 +48,8 @@ def root(request):
 @login_required
 @never_cache
 def change_password(request):
-    form = PasswordChangeForm(request.user, request.POST or None)
+    form_class = SetPasswordForm if request.user.must_change_password and not request.user.has_usable_password() else PasswordChangeForm
+    form = form_class(request.user, request.POST or None)
     if request.method == 'POST' and form.is_valid():
         user = form.save()
         user.must_change_password = False

@@ -1,0 +1,16 @@
+{% extends 'workspace/base.html' %}{% load static %}
+{% block title %}Hesap oluşturuldu{% endblock %}
+{% block content %}
+<div class="page-heading"><div><h1>Hesap oluşturuldu</h1><p>{{ created_user.get_full_name }} · {{ assigned_audit.organization.name }} · {{ assigned_audit.title }}</p></div></div>
+<section class="panel prose account-panel">
+<p>E-posta taslağı hazır. Uygulamanız açılmadıysa aşağıdaki düğmeyi kullanın. Gönderimi e-posta uygulamanızdan siz yapacaksınız.</p>
+<p class="notice">Geçici parola yalnızca bu ekrandaki taslakta gösterilir. Sayfadan ayrılmadan taslağı kaydedin.</p>
+<label>Alıcı<input id="draft-email" type="email" value="{{ draft.email }}" readonly></label>
+<label>Konu<input id="draft-subject" type="text" value="{{ draft.subject }}"></label>
+<label>E-posta metni<textarea id="draft-body" rows="22">{{ draft.body }}</textarea></label>
+<div class="action-row"><a class="primary" id="open-draft" href="{{ draft.mailto }}">Varsayılan e-posta uygulamasında aç</a><button class="secondary" type="button" id="download-draft">Taslağı .eml indir</button><button class="secondary" type="button" id="copy-draft">Metni kopyala</button></div>
+<p class="subtle" id="draft-feedback" role="status">Uzun stajyer e-postası uygulamanızda eksik açılırsa .eml dosyasını kullanabilir veya metni kopyalayabilirsiniz.</p>
+<a href="{% url 'create_account' %}">Başka kullanıcı oluştur</a>
+</section>
+{% endblock %}
+{% block scripts %}<script defer src="{% static 'js/email-draft.js' %}"></script>{% endblock %}

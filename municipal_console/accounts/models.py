@@ -16,6 +16,7 @@ class UserManager(BaseUserManager):
         return self.create_user(email, password, **extra)
 
 class User(AbstractUser):
+    temporary_password = models.BooleanField(default=False,editable=False)
     privacy_accepted_at = models.DateTimeField(null=True,blank=True,editable=False)
     privacy_version = models.CharField(max_length=30,blank=True,default='',editable=False)
     username = None

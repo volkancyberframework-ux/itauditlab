@@ -12,13 +12,19 @@
     select.addEventListener('change',update);update();
   });
   document.querySelectorAll('select[name="assessment"]').forEach(assessment => {
-    const deficiency = assessment.form.querySelector('select[name="deficiency"]');
+    const form = assessment.closest('form');
+    const deficiency = form?.querySelector('select[name="deficiency"]');
     if (!deficiency) return;
     const update = () => {
       const required = ['partial', 'noncompliant'].includes(assessment.value);
       deficiency.required = required;
       deficiency.disabled = !required;
-      deficiency.closest('p').hidden = !required;
+      if (deficiency.closest('p')) deficiency.closest('p').hidden = !required;
+      const dueDate = form.querySelector('input[name="due_date"]');
+      if (dueDate) {
+        dueDate.disabled = !required;
+        if (dueDate.closest('p')) dueDate.closest('p').hidden = !required;
+      }
     };
     assessment.addEventListener('change', update);
     update();

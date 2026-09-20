@@ -67,6 +67,7 @@ def evaluate(audit,control,actor,role,data,preview=False,writable=False):
     else:data['deficiency']=''
     recommendation=data.pop('recommendation')
     due_date=data.pop('due_date',None)
+    if data.get('assessment')=='compliant':due_date=None
     if due_date:
         from django.utils import timezone
         existing_due=Finding.objects.filter(control=control).values_list('due_date',flat=True).first()
