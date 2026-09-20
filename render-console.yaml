@@ -1,0 +1,75 @@
+# Separate Blueprint. Existing render.yaml and its services are unchanged.
+databases:
+  - name: municipal-console-db
+    databaseName: municipal_console
+    user: municipal_console
+    region: frankfurt
+    plan: 0.1c-256mb
+services:
+  - type: web
+    name: municipal-console
+    runtime: python
+    region: frankfurt
+    plan: 0.5c-512mb
+    rootDir: municipal_console
+    buildCommand: bash build.sh
+    preDeployCommand: python manage.py migrate --noinput
+    startCommand: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --access-logfile -
+    healthCheckPath: /signin/
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.14
+      - key: DJANGO_SETTINGS_MODULE
+        value: config.settings
+      - key: DEBUG
+        value: "false"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: municipal-console-db
+          property: connectionString
+      - key: ALLOWED_HOSTS
+        value: .grcustasi.com
+      - key: CSRF_TRUSTED_ORIGINS
+        value: https://torbalibld.grcustasi.com
+      - key: TENANT_DOMAIN
+        value: torbalibld.grcustasi.com
+      - key: GRCUSTASI_TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: GRCUSTASI_TELEGRAM_ADMIN_CHAT_ID
+        sync: false
+  - type: cron
+    name: municipal-notification-retry
+    runtime: python
+    region: frankfurt
+    rootDir: municipal_console
+    schedule: "*/5 * * * *"
+    buildCommand: pip install -r requirements.txt
+    startCommand: python manage.py send_notifications
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.14
+      - key: DJANGO_SETTINGS_MODULE
+        value: config.settings
+      - key: DEBUG
+        value: "false"
+      - key: SECRET_KEY
+        fromService:
+          type: web
+          name: municipal-console
+          envVarKey: SECRET_KEY
+      - key: DATABASE_URL
+        fromDatabase:
+          name: municipal-console-db
+          property: connectionString
+      - key: GRCUSTASI_TELEGRAM_BOT_TOKEN
+        fromService:
+          type: web
+          name: municipal-console
+          envVarKey: GRCUSTASI_TELEGRAM_BOT_TOKEN
+      - key: GRCUSTASI_TELEGRAM_ADMIN_CHAT_ID
+        fromService:
+          type: web
+          name: municipal-console
+          envVarKey: GRCUSTASI_TELEGRAM_ADMIN_CHAT_ID

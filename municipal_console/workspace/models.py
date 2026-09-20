@@ -1,0 +1,108 @@
+from django.conf import settings
+from django.db import models
+from django.utils import timezone
+
+ROLES = [('admin','Platform yöneticisi'),('executive','Kurum yöneticisi'),('it','BT sorumlusu'),('auditor','Denetçi'),('intern','Stajyer')]
+STATUSES = [('implemented','Yapılıyor'),('partial','Kısmen yapılıyor'),('missing','Yapılmıyor'),('na','Uygulanamaz'),('unanswered','Başlanmadı')]
+ASSESSMENTS = [('compliant','Uygun'),('partial','Kısmen uygun'),('noncompliant','Uygun değil'),('pending','İnceleme bekliyor')]
+class Organization(models.Model):
+    name=models.CharField(max_length=180)
+    slug=models.SlugField(unique=True)
+    subdomain=models.SlugField(max_length=63,unique=True,null=True,blank=True,help_text='Örnek: torbalibld. DNS/Render alan adı ayrıca yapılandırılmalıdır.')
+    def __str__(self):return self.name
+class Audit(models.Model):
+    organization=models.ForeignKey(Organization,on_delete=models.PROTECT)
+    title=models.CharField(max_length=180)
+    is_demo=models.BooleanField(default=False)
+    archived=models.BooleanField(default=False)
+    phase=models.CharField(max_length=20,default='responses',choices=[('responses','BT yanıtları'),('fieldwork','Saha denetimi'),('remediation','Bulgu giderme'),('completed','Sürekli kontrol')])
+    appointment_at=models.DateTimeField(null=True,blank=True)
+    appointment_status=models.CharField(max_length=20,default='none',choices=[('none','Planlanmadı'),('proposed','BT onayı bekleniyor'),('counter','Denetim ekibi onayı bekleniyor'),('confirmed','Onaylandı')])
+    appointment_note=models.TextField(blank=True)
+    def __str__(self):return self.title
+class Membership(models.Model):
+    user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    audit=models.ForeignKey(Audit,on_delete=models.CASCADE)
+    role=models.CharField(max_length=20,choices=ROLES[1:])
+    class Meta:
+        constraints=[models.UniqueConstraint(fields=['user','audit'],name='one_membership_per_audit')]
+class Control(models.Model):
+    audit=models.ForeignKey(Audit,on_delete=models.PROTECT,related_name='controls')
+    code=models.CharField(max_length=30)
+    title=models.CharField(max_length=180)
+    description=models.TextField()
+    evidence_guidance=models.TextField()
+    framework=models.CharField(max_length=60)
+    theme=models.CharField(max_length=80)
+    risk=models.CharField(max_length=10,choices=[('high','Yüksek'),('medium','Orta'),('low','Düşük')])
+    intern_visible=models.BooleanField(default=False)
+    class Meta:
+        ordering=['code']
+        constraints=[models.UniqueConstraint(fields=['audit','code'],name='unique_audit_control_code')]
+class ResponseRevision(models.Model):
+    control=models.ForeignKey(Control,on_delete=models.PROTECT,related_name='revisions')
+    actor=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.PROTECT)
+    status=models.CharField(max_length=20,choices=STATUSES)
+    explanation=models.TextField()
+    declaration=models.BooleanField(default=True)
+    created_at=models.DateTimeField(auto_now_add=True)
+    class Meta:ordering=['-created_at','-pk']
+    def save(self,*args,**kwargs):
+        if self.pk:raise ValueError('Yanıt geçmişi değiştirilemez.')
+        return super().save(*args,**kwargs)
+    def delete(self,*args,**kwargs):raise ValueError('Yanıt geçmişi silinemez.')
+class Evaluation(models.Model):
+    control=models.OneToOneField(Control,on_delete=models.PROTECT,related_name='evaluation')
+    assessment=models.CharField(max_length=20,choices=ASSESSMENTS)
+    rationale=models.TextField()
+    private_note=models.TextField(blank=True)
+    customer_visible=models.BooleanField(default=True)
+    updated_at=models.DateTimeField(auto_now=True)
+class Finding(models.Model):
+    audit=models.ForeignKey(Audit,on_delete=models.PROTECT,related_name='findings')
+    title=models.CharField(max_length=180)
+    recommendation=models.TextField()
+    severity=models.CharField(max_length=10,choices=[('high','Yüksek'),('medium','Orta')])
+    customer_visible=models.BooleanField(default=True)
+
+    control=models.OneToOneField(Control,on_delete=models.PROTECT,null=True,blank=True,related_name='finding')
+    status=models.CharField(max_length=25,default='open',choices=[('open','Açık'),('remediation_submitted','Giderim incelemede'),('disputed','İtiraz incelemede'),('closed','Kapatıldı')])
+    created_at=models.DateTimeField(default=timezone.now,editable=False)
+    updated_at=models.DateTimeField(auto_now=True)
+
+class FindingUpdate(models.Model):
+    finding=models.ForeignKey(Finding,on_delete=models.PROTECT,related_name='updates')
+    actor=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.PROTECT)
+    role=models.CharField(max_length=20)
+    action=models.CharField(max_length=30,choices=[('remediate','Giderim bildirimi'),('dispute','İtiraz'),('close','Kapanış onayı'),('reopen','Tekrar açıldı'),('reject','İtiraz/giderim reddi')])
+    explanation=models.TextField()
+    created_at=models.DateTimeField(auto_now_add=True)
+    class Meta:ordering=['-created_at','-pk']
+
+class Suggestion(models.Model):
+    audit=models.ForeignKey(Audit,on_delete=models.PROTECT,related_name='suggestions')
+    author=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.PROTECT)
+    title=models.CharField(max_length=180)
+    framework=models.CharField(max_length=80)
+    description=models.TextField()
+    test_steps=models.TextField()
+    status=models.CharField(max_length=15,default='pending',choices=[('pending','İnceleme bekliyor'),('accepted','Kontrole dönüştürüldü'),('rejected','Revizyon istendi')])
+    review_note=models.TextField(blank=True)
+    control=models.OneToOneField(Control,on_delete=models.PROTECT,null=True,blank=True)
+    created_at=models.DateTimeField(auto_now_add=True)
+    class Meta:ordering=['-created_at','-pk']
+
+class Activity(models.Model):
+    audit=models.ForeignKey(Audit,on_delete=models.PROTECT)
+    actor=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.PROTECT,null=True)
+    role=models.CharField(max_length=20)
+    action=models.CharField(max_length=80)
+    metadata=models.JSONField(default=dict)
+    created_at=models.DateTimeField(auto_now_add=True)
+    class Meta:ordering=['-created_at','-pk']
+
+class Notification(models.Model):
+    message=models.TextField()
+    delivered_at=models.DateTimeField(null=True,blank=True)
+    attempts=models.PositiveIntegerField(default=0)
+    created_at=models.DateTimeField(auto_now_add=True)
