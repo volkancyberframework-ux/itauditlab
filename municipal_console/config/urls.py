@@ -19,3 +19,6 @@ from django.views.generic.base import RedirectView
 urlpatterns += [path('console/users/new/', RedirectView.as_view(pattern_name='create_account'))]
 urlpatterns += [path('privacy/', views.privacy, name='privacy')]
 urlpatterns += [path('branding/<int:organization_id>/logo/', organization_logo, name='organization_logo')]
+
+from workspace import cards
+urlpatterns += [path('cards/', cards.entry, name='card_entry'), path('cards/work/', cards.workspace, name='card_workspace'), path('cards/save/', cards.save, name='card_save'), path('cards/leave/', cards.leave, name='card_leave'), path('console/<int:audit_id>/send-controls/', cards.dispatch, name='card_dispatch')]

@@ -191,3 +191,20 @@ class ControlEmail(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
     class Meta:
         constraints=[models.UniqueConstraint(fields=['control','recipient'],name='one_new_control_email_per_recipient')]
+
+class CardAccess(models.Model):
+    audit=models.ForeignKey(Audit,on_delete=models.CASCADE)
+    user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    code_digest=models.CharField(max_length=64,unique=True)
+    session_digest=models.CharField(max_length=64,blank=True)
+    expires_at=models.DateTimeField()
+    used_at=models.DateTimeField(null=True,blank=True)
+    revoked=models.BooleanField(default=False)
+    created_at=models.DateTimeField(auto_now_add=True)
+
+class CardDraft(models.Model):
+    control=models.OneToOneField(Control,on_delete=models.CASCADE,related_name='card_draft')
+    actor=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.PROTECT)
+    status=models.CharField(max_length=20,choices=STATUSES[:-1])
+    explanation=models.TextField(blank=True)
+    updated_at=models.DateTimeField(auto_now=True)

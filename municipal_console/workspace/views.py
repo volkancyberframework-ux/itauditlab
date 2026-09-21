@@ -146,6 +146,10 @@ def console(request):
     if role in ('admin','executive','auditor','intern'):
         from .legislation import compliance_context
         ctx.update(compliance_context(audit,role), show_legal_compliance=True)
+    if role in ('it','admin','auditor'):
+        from .cards import pending_controls
+        pending_cards=pending_controls(audit)
+        ctx.update(card_pending_count=len(pending_cards),card_deferred_count=sum(c['deferred'] for c in pending_cards))
     ctx['charts']=charts
     return render(request,'workspace/console.html',ctx)
 

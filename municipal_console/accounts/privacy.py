@@ -17,6 +17,6 @@ class PrivacyMiddleware:
                 match = resolve(request.path_info)
             except Resolver404:
                 return self.get_response(request)
-            if match.url_name not in {'privacy', 'signin', 'root', 'signout', 'logout', 'change_password', 'organization_logo'}:
+            if match.url_name not in {'card_entry', 'card_workspace', 'card_save', 'card_leave', 'privacy', 'signin', 'root', 'signout', 'logout', 'change_password', 'organization_logo'}:
                 return redirect('privacy')
         return self.get_response(request)

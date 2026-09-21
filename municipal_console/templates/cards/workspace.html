@@ -1,0 +1,14 @@
+{% extends 'cards/base.html' %}{% load static %}{% block content %}
+<section class="journey"><div><strong id="remaining-count"></strong><span id="deferred-count"></span></div><progress id="card-progress" max="1" value="0" aria-label="Bu oturumda tamamlama"></progress><p class="muted">Yanıtı seçin, açıklamayı şimdi veya sonra yazın. Açıklama ve doğruluk onayıyla tamamlanan kart listeden çıkar.</p></section>
+<div class="tabs"><button id="show-all" class="quiet" aria-pressed="true">Tüm bekleyenler</button><button id="show-deferred" class="quiet" aria-pressed="false">Açıklama bekleyenler</button></div>
+<p id="card-feedback" role="status" aria-live="polite"></p>
+<section id="active-card" class="card" data-save-url="{% url 'card_save' %}">
+<span id="control-code" class="eyebrow"></span><h2 id="control-title" tabindex="-1"></h2><p id="control-question" class="question"></p><details><summary>Nasıl kontrol edebilirim?</summary><p id="control-guidance"></p></details>
+<form id="card-form" method="post">{% csrf_token %}<input type="hidden" name="control"><fieldset><legend>Bu kontrol kurumunuzda uygulanıyor mu?</legend><div class="choices"><label><input type="radio" name="status" value="implemented" required><span>✓ Yapılıyor</span></label><label><input type="radio" name="status" value="partial" required><span>◐ Kısmen yapılıyor</span></label><label><input type="radio" name="status" value="missing" required><span>× Yapılamıyor</span></label><label><input type="radio" name="status" value="na" required><span>— Uygulanamaz</span></label></div></fieldset>
+<label class="explanation">Açıklama <span class="muted">Tüm yanıtlar için zorunlu; sonra tamamlayabilirsiniz.</span><textarea name="explanation" rows="4" maxlength="4000" placeholder="Mevcut durumu, varsa engeli veya uygulama örneğini kısaca anlatın."></textarea></label>
+<label class="declaration"><input type="checkbox" name="declaration">Bilgilerin doğru ve mevcut durumu yansıttığını onaylıyorum.</label>
+<div class="card-actions"><button class="primary" type="submit">Kaydet ve devam et →</button><button type="button" id="defer-card" class="quiet">Açıklamayı sonra yaz</button></div></form></section>
+<section id="card-empty" class="card finished" hidden><span class="finish-icon">✓</span><h2 id="empty-title">Bitti!</h2><p id="empty-text"></p></section>
+<nav id="card-queue" class="card-queue" aria-label="Bekleyen kontrol kartları"></nav>
+{{ cards|json_script:'cards-data' }}<noscript>Bu interaktif sayfa için JavaScript etkin olmalıdır. Standart denetim konsolundan da yanıt verebilirsiniz.</noscript>
+{% endblock %}{% block scripts %}<script defer src="{% static 'js/cards.js' %}"></script>{% endblock %}

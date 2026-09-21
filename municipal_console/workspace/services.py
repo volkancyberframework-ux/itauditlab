@@ -34,6 +34,8 @@ def answer(audit,control,actor,role,data,preview=False,writable=False):
     control=Control.objects.select_for_update().get(pk=control.pk,audit=audit)
     if not data.get('declaration'):raise ValidationError('Bilgilerin doğruluğunu onaylayın.')
     ResponseRevision.objects.create(control=control,actor=actor,**data)
+    from .models import CardDraft
+    CardDraft.objects.filter(control=control).delete()
     Evaluation.objects.filter(control=control,verified=True).update(verified=False)
     log(audit,actor,role,'BT yanıtı kaydedildi',control=control.code,status=data['status'])
 

@@ -1,0 +1,23 @@
+Merhaba {{ recipient.first_name|default:recipient.email }} Bey/Hanım,
+
+{{ audit.organization.name }} · {{ audit.title }} kapsamında aşağıdaki kontrol sorularını yanıtlamanızı rica ederim.
+
+Kontrol sorusu, cevap ve açıklama olmak üzere tüm kolonların doldurulması zorunludur. Cevap seçenekleri: Yapılıyor, Kısmen yapılıyor, Yapılamıyor, Uygulanamaz. Sorular hazırdır; her satırda yanıtınızı ve açıklamanızı tamamlayın.
+
+Kolay kart ekranı: {{ portal_url }}
+Tek kullanımlık giriş kodunuz: {{ code }}
+Kod 7 gün geçerlidir ve bir kez kullanılabilir. Açılan oturum 12 saat sürer. Kod size özeldir. Önceki gönderimdeki kod varsa bu yeni kodla geçersiz olur.
+
+Kartlarda açıklamayı daha sonra tamamlayabilirsiniz; açıklama yazılmadan kontrol tamamlanmış sayılmaz. Tamamlanmış kontroller kart ekranında tekrar sorulmaz.
+
+KONTROL SORUSU | CEVAP | AÇIKLAMA
+{% for row in rows %}
+{{ row.code }} · {{ row.title }}
+{{ row.question }}
+Cevap: [Doldurunuz]
+Açıklama: [Doldurunuz]
+{% if row.previous %}Önceki cevap: {{ row.previous.get_status_display }} · {{ row.previous.created_at|date:'d.m.Y H:i' }} (İstanbul)
+Önceki açıklama: {{ row.previous.explanation|default:'Açıklama yok' }}
+{% endif %}----------------------------------------
+{% endfor %}
+Teşekkürler.
