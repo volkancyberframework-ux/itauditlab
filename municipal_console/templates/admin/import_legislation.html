@@ -1,0 +1,8 @@
+{% extends 'admin/base_site.html' %}
+{% block content %}
+<p>Kanunları / düzenlemeleri maddeleriyle toplu yükleyin. Aynı kanun kodu ve madde numarası tekrar yüklenirse metin güncellenir; kontrol eşleştirmeleri silinmez.</p>
+<p><a href="?sample=1">Örnek CSV indir</a> · <a href="{% url 'admin:workspace_legislation_changelist' %}">Kanunları yönet</a> · <a href="{% url 'admin:workspace_control_changelist' %}">Denetim kontrollerini maddelerle eşleştir</a> · <a href="{% url 'admin:workspace_controldefinition_changelist' %}">Katalog kontrollerini eşleştir</a></p>
+<p>Sütunlar: kanun_kodu, kanun_adi, madde, metin, kaynak_url. Her satır bir madde/fıkradır. Metindeki virgül ve satır sonlarını CSV kurallarına göre çift tırnak içine alın. Kaynak URL isteğe bağlıdır.</p>
+<form method="post" enctype="multipart/form-data">{% csrf_token %}{{ form.as_p }}<input type="submit" value="Kanunları ve maddeleri yükle"></form>
+<p>Katalogdaki eşleştirmeler yeni denetim kontrollerine kopyalanır. Mevcut denetimleri değiştirmek için ilgili denetimin kontrol kaydındaki “Kanun / madde referansları” alanını kullanın.</p>
+{% endblock %}

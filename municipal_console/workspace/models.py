@@ -11,7 +11,29 @@ STATUSES = [('implemented','Yapılıyor'),('partial','Kısmen yapılıyor'),('mi
 ASSESSMENTS = [('compliant','Uygun'),('partial','Kısmen uygun'),('noncompliant','Uygun değil'),('pending','İnceleme bekliyor')]
 DEFICIENCIES = [('design','Tasarım'),('implementation','Uygulama'),('both','Tasarım ve uygulama')]
 
+class Legislation(models.Model):
+    code = models.CharField('Kanun / düzenleme kodu', max_length=80, unique=True)
+    title = models.CharField('Adı', max_length=250)
+    source_url = models.URLField('Resmî kaynak', blank=True)
+    class Meta:
+        ordering = ['code']
+        verbose_name = 'Kanun / düzenleme'
+        verbose_name_plural = 'Kanunlar / düzenlemeler'
+    def __str__(self):return f'{self.code} · {self.title}'
+
+class LegalArticle(models.Model):
+    legislation = models.ForeignKey(Legislation, on_delete=models.PROTECT, related_name='articles', verbose_name='Kanun / düzenleme')
+    number = models.CharField('Madde / fıkra', max_length=80)
+    text = models.TextField('Madde metni')
+    class Meta:
+        ordering = ['legislation__code', 'number']
+        verbose_name = 'Mevzuat maddesi'
+        verbose_name_plural = 'Mevzuat maddeleri'
+        constraints = [models.UniqueConstraint(fields=['legislation', 'number'], name='unique_legal_article')]
+    def __str__(self):return f'{self.legislation.code} · Madde {self.number}'
+
 class ControlDefinition(models.Model):
+    legal_articles=models.ManyToManyField(LegalArticle, blank=True, related_name="catalog_controls", verbose_name="Kanun / madde referansları")
     code=models.CharField(max_length=30,unique=True)
     title=models.CharField(max_length=180)
     description=models.TextField()
@@ -68,6 +90,7 @@ class Membership(models.Model):
     class Meta:
         constraints=[models.UniqueConstraint(fields=['user','audit'],name='one_membership_per_audit')]
 class Control(models.Model):
+    legal_articles=models.ManyToManyField(LegalArticle, blank=True, related_name="audit_controls", verbose_name="Kanun / madde referansları")
     source=models.ForeignKey(ControlDefinition,on_delete=models.SET_NULL,null=True,blank=True,related_name='audit_controls')
     audit=models.ForeignKey(Audit,on_delete=models.PROTECT,related_name='controls')
     code=models.CharField(max_length=30)

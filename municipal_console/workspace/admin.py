@@ -3,7 +3,7 @@ from PIL import Image, UnidentifiedImageError
 from django.contrib import admin
 from django.core.exceptions import ValidationError
 from django import forms
-from .models import Organization,Audit,Membership,Control,Notification,ControlEmail,AuditTemplate,ControlDefinition
+from .models import Organization,Audit,Membership,Control,Notification,ControlEmail,AuditTemplate,ControlDefinition,Legislation,LegalArticle
 
 class OrganizationForm(forms.ModelForm):
     logo=forms.ImageField(label='Kurum logosu',required=False,help_text='PNG, JPEG veya GIF; en fazla 2 MB. Veritabanında kalıcı saklanır.')
@@ -71,6 +71,7 @@ class AuditForm(forms.ModelForm):
 
 @admin.register(ControlDefinition)
 class ControlDefinitionAdmin(SuperuserAdmin):
+    autocomplete_fields=("legal_articles",)
     list_display=('code','title','framework','theme','risk')
     list_filter=('framework','theme','risk')
     search_fields=('code','title','description')
@@ -103,9 +104,12 @@ class ControlAdmin(SuperuserAdmin):
     list_display=('code','title','audit','risk')
     list_filter=('audit','risk','framework')
     search_fields=('code','title','description')
-    autocomplete_fields=['audit']
+    autocomplete_fields=['audit', 'legal_articles']
     def get_readonly_fields(self,request,obj=None):return ('audit',) if obj else ()
     def save_model(self,request,obj,form,change):
+        # Changing reference links alone does not change the tested control.
+        if change and set(form.changed_data) <= {'legal_articles'}:
+            return
         super().save_model(request,obj,form,change)
         if not change and obj.audit.phase=='completed' and not obj.audit.membership_set.filter(role='it',user__is_active=True).exists():
             from django.contrib import messages
@@ -142,3 +146,20 @@ class ControlEmailAdmin(SuperuserAdmin):
 admin.site.site_header='Merkezi denetim yönetimi'
 admin.site.site_title='Merkezi yönetim'
 admin.site.index_title='Kurumlar, denetimler ve kullanıcılar'
+
+class LegalArticleInline(admin.TabularInline):
+    model = LegalArticle
+    extra = 1
+
+@admin.register(Legislation)
+class LegislationAdmin(SuperuserAdmin):
+    list_display = ('code', 'title', 'source_url')
+    search_fields = ('code', 'title')
+    inlines = [LegalArticleInline]
+
+@admin.register(LegalArticle)
+class LegalArticleAdmin(SuperuserAdmin):
+    list_display = ('legislation', 'number')
+    search_fields = ('legislation__code', 'legislation__title', 'number', 'text')
+    list_filter = ('legislation',)
+    autocomplete_fields = ('legislation',)

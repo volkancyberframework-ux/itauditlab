@@ -73,12 +73,13 @@ def evaluation_form(control):
     return EvaluationForm(initial=initial,auto_id=f'evaluation_{control.pk}_%s')
 
 def visible_controls(audit,role):
-    qs=Control.objects.filter(audit=audit)
+    qs=Control.objects.filter(audit=audit).prefetch_related('legal_articles__legislation')
     return qs.filter(intern_visible=True) if role=='intern' else qs
 
 def serialize_control(control,role):
     # Intern paths stop before querying any responses or evaluations.
     data={'id':control.pk,'code':control.code,'title':control.title,'description':control.description,'evidence_guidance':control.evidence_guidance,'framework':control.framework,'theme':control.theme,'risk':control.risk,'risk_label':control.get_risk_display()}
+    data['legal_articles']=list(control.legal_articles.all())
     if role=='intern':return data
     revision=ResponseRevision.objects.filter(control=control).select_related('actor').first()
     data.update(status=revision.status if revision else 'unanswered',status_label=revision.get_status_display() if revision else 'Başlanmadı',response=revision)
@@ -142,6 +143,9 @@ def console(request):
             charts['evaluations']={'labels':[label for _,label in labels],'values':[evaluations[key] for key,_ in labels]}
             ctx['evaluation_legend']=[{'key':key,'label':label,'count':evaluations[key]} for key,label in labels]
             ctx['reviewed']=len(all_rows)-evaluations['pending']
+    if role in ('admin','executive','auditor','intern'):
+        from .legislation import compliance_context
+        ctx.update(compliance_context(audit,role), show_legal_compliance=True)
     ctx['charts']=charts
     return render(request,'workspace/console.html',ctx)
 

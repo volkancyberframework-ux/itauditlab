@@ -15,7 +15,9 @@ def add_catalog_controls(audit,definitions):
             suffix+=1
             code=f'{definition.code[:23]}-{suffix}'
         values={field:getattr(definition,field) for field in ('title','description','evidence_guidance','framework','theme','risk','intern_visible')}
-        created.append(Control.objects.create(audit=audit,source=definition,code=code,**values))
+        control = Control.objects.create(audit=audit,source=definition,code=code,**values)
+        control.legal_articles.set(definition.legal_articles.all())
+        created.append(control)
     return created
 
 def log(audit,actor,role,action,**metadata):

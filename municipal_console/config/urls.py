@@ -10,8 +10,9 @@ urlpatterns += [path('console/<int:audit_id>/workflow/', workspace_views.workflo
 
 urlpatterns += [path('console/<int:audit_id>/controls.pdf', workspace_views.controls_pdf, name='controls_pdf')]
 
+from workspace.legislation import import_legislation, compliance_panel
 from workspace.invitations import create_account
-urlpatterns += [path('admin/users/new/', admin.site.admin_view(create_account), name='create_account'), path('admin/', admin.site.urls)]
+urlpatterns += [path('admin/legislation/import/', admin.site.admin_view(import_legislation), name='import_legislation'), path('console/<int:audit_id>/compliance/', compliance_panel, name='legal_compliance'), path('admin/users/new/', admin.site.admin_view(create_account), name='create_account'), path('admin/', admin.site.urls)]
 
 from workspace.logo import organization_logo
 from django.views.generic.base import RedirectView
