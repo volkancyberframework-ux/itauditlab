@@ -1,7 +1,7 @@
-{% extends 'workspace/base.html' %}{% load static %}
+{% extends 'admin/account_base.html' %}{% load static %}
 {% block title %}Kullanıcı oluştur{% endblock %}
 {% block content %}
-<div class="page-heading"><div><h1>Kullanıcı oluştur</h1><p>Kurum, denetim ve rol seçin. İlk girişte değiştirilecek 12 karakterlik tek kullanımlık parola otomatik üretilir.</p></div></div>
+<div class="page-heading"><div><p>Kurum, denetim ve rol seçin. İlk girişte değiştirilecek 12 karakterlik tek kullanımlık parola otomatik üretilir.</p></div></div>
 <section class="panel prose account-panel">
 <form method="post" class="response-form" id="create-account-form">{% csrf_token %}{{ form.as_p }}
 <p class="subtle">Kayıttan sonra varsayılan e-posta uygulamanızda rolüne uygun bir taslak açılır. E-postayı kontrol edip kendiniz gönderirsiniz.</p>
@@ -9,4 +9,4 @@
 </form></section>
 {{ account_audits|json_script:'account-audits' }}
 {% endblock %}
-{% block scripts %}<script defer src="{% static 'js/create-account.js' %}"></script>{% endblock %}
+{% block account_scripts %}<script defer src="{% static 'js/create-account.js' %}"></script>{% endblock %}

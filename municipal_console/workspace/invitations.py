@@ -3,13 +3,14 @@ import string
 from urllib.parse import quote, urlencode
 from django import forms
 from django.conf import settings
+from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.db import transaction, IntegrityError
 from django.http import HttpResponseForbidden
 from django.shortcuts import render
 from django.urls import reverse
 from .models import Organization, Audit, Membership, ROLES
-from .views import ready, scope, shared
+from .views import ready, scope
 from .services import log
 
 SECTORS = {
@@ -93,7 +94,9 @@ def invitation_draft(request, user, audit, role, password, sector, readonly):
 Bu doğrultuda aşağıdaki konularda çalışma yapılmasını rica ederim:
 
 1. {plural} BT, bilgi güvenliği, siber güvenlik, kişisel verilerin korunması ve ilgili süreçlerde uyması gereken kanun, yönetmelik, rehber, tebliğ, genelge ve diğer düzenlemelerin belirlenmesi.
+
 2. Bu mevzuat ve düzenlemeler kapsamında {at} bulunması veya uygulanması beklenen kontrollerin çıkarılması.
+
 3. Mevzuatta doğrudan zorunlu tutulmasa dahi ISO 27001, COBIT, CIS Controls, NIST gibi iyi uygulamalar dikkate alınarak {location} bulunmasını beklediğimiz ek BT ve siber güvenlik kontrollerinin belirlenmesi.
 
 Çalışmanın Excel formatında hazırlanmasını ve en az aşağıdaki sütunları içermesini rica ederim:
@@ -114,11 +117,14 @@ Mümkün olduğunca her kontrolün doğrudan ilgili madde veya referansla eşle�
     paragraphs.append(f'''Kurum: {audit.organization.name}
 Proje / denetim: {audit.title}
 Hesap türü: {role_name}
+
 Kullanıcı adı: {user.email}
 Tek kullanımlık geçici parola: {password}
+
 Projeye giriş: {project_url(request, audit)}
 
 Geçici parola 12 karakterlidir ve ilk başarılı girişte geçersiz olur. Açılan ekranda yeni parolanızı belirleyin. Yeni parolayı belirlemeden oturumu kapatırsanız yeniden erişim için kurum yöneticinize başvurun.
+
 İlk erişimde gizlilik sözleşmesini kabul etmeniz ve “okudum, anladım” yazmanız istenecektir.
 
 Teşekkürler.''')
@@ -126,7 +132,7 @@ Teşekkürler.''')
     subject = subject.replace('\r', ' ').replace('\n', ' ')
     body = '\n\n'.join(paragraphs)
     return {'email': user.email, 'subject': subject, 'body': body,
-            'mailto': 'mailto:'+quote(user.email, safe='@')+'?'+urlencode({'subject': subject, 'body': body}, quote_via=quote)}
+            'mailto': 'mailto:'+quote(user.email, safe='@')+'?'+urlencode({'subject': subject, 'body': body.replace('\n', '\r\n')}, quote_via=quote)}
 
 
 @ready
@@ -135,7 +141,7 @@ def create_account(request):
     audit, _, _ = scope(request)
     initial = {'organization': audit.organization_id, 'audit': audit.pk, 'sector': sector_for(audit), 'role': 'intern'} if audit else {'role': 'intern', 'sector': 'sirket'}
     form = CreateAccountForm(request.POST if request.method == 'POST' else None, initial=initial, tenant=getattr(request, 'tenant', None))
-    ctx = shared(request, audit, 'admin', False)
+    ctx = {**admin.site.each_context(request), 'title': 'Kullanıcı ve denetim üyeliği oluştur'}
     if request.method == 'POST' and form.is_valid():
         data = form.cleaned_data
         password = temporary_password()
@@ -147,7 +153,7 @@ def create_account(request):
         except IntegrityError:
             form.add_error('email', 'Bu e-posta eşzamanlı bir işlemle kaydedilmiş olabilir. Kullanıcı listesini kontrol edin.')
         else:
-            ctx.update(draft=invitation_draft(request, user, data['audit'], data['role'], password, data['sector'], data['auditor_readonly']), created_user=user, assigned_audit=data['audit'])
+            ctx.update(title='Hesap oluşturuldu', draft=invitation_draft(request, user, data['audit'], data['role'], password, data['sector'], data['auditor_readonly']), created_user=user, assigned_audit=data['audit'])
             response = render(request, 'workspace/account_created.html', ctx)
             response['Referrer-Policy'] = 'no-referrer'
             return response

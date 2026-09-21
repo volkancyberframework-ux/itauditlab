@@ -1,7 +1,7 @@
-{% extends 'workspace/base.html' %}{% load static %}
+{% extends 'admin/account_base.html' %}{% load static %}
 {% block title %}Hesap oluşturuldu{% endblock %}
 {% block content %}
-<div class="page-heading"><div><h1>Hesap oluşturuldu</h1><p>{{ created_user.get_full_name }} · {{ assigned_audit.organization.name }} · {{ assigned_audit.title }}</p></div></div>
+<div class="page-heading"><div><p>{{ created_user.get_full_name }} · {{ assigned_audit.organization.name }} · {{ assigned_audit.title }}</p></div></div>
 <section class="panel prose account-panel">
 <p>E-posta taslağı hazır. Uygulamanız açılmadıysa aşağıdaki düğmeyi kullanın. Gönderimi e-posta uygulamanızdan siz yapacaksınız.</p>
 <p class="notice">Geçici parola yalnızca bu ekrandaki taslakta gösterilir. Sayfadan ayrılmadan taslağı kaydedin.</p>
@@ -13,4 +13,4 @@
 <a href="{% url 'create_account' %}">Başka kullanıcı oluştur</a>
 </section>
 {% endblock %}
-{% block scripts %}<script defer src="{% static 'js/email-draft.js' %}"></script>{% endblock %}
+{% block account_scripts %}<script defer src="{% static 'js/email-draft.js' %}"></script>{% endblock %}

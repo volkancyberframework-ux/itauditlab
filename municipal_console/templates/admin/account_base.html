@@ -1,0 +1,7 @@
+{% extends 'admin/base_site.html' %}{% load static %}
+{% block extrastyle %}{{ block.super }}
+<style>
+.account-panel{max-width:900px}.account-panel form>p,.account-panel>label{display:block;margin:20px 0}.account-panel label{display:block;margin-bottom:8px}.account-panel input:not([type=checkbox]),.account-panel select,.account-panel textarea{box-sizing:border-box;width:100%;max-width:100%;padding:10px}.account-panel textarea{line-height:1.7}.account-panel .primary,.account-panel .secondary{display:inline-block;padding:12px 16px;border:0;border-radius:4px;background:var(--button-bg);color:var(--button-fg);cursor:pointer}.account-panel .action-row{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0}.account-panel .notice{padding:14px;background:var(--darkened-bg)}
+</style>{% endblock %}
+{% block breadcrumbs %}<div class="breadcrumbs"><a href="{% url 'admin:index' %}">Merkezi yönetim</a> › <a href="{% url 'admin:accounts_user_changelist' %}">Kullanıcılar</a> › Kullanıcı ve üyelik oluştur</div>{% endblock %}
+{% block footer %}{{ block.super }}{% block account_scripts %}{% endblock %}{% endblock %}

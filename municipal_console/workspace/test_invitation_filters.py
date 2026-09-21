@@ -12,6 +12,42 @@ from .invitations import invitation_draft, temporary_password
 
 @override_settings(DEBUG=False, SECURE_SSL_REDIRECT=False, EMAIL_BACKEND='django.core.mail.backends.locmem.EmailBackend', STORAGES={'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'}, 'staticfiles': {'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage'}})
 class ConsoleChangesTests(TestCase):
+    def test_account_creation_is_in_admin_and_legacy_link_redirects(self):
+        response = self.client.get('/admin/users/new/')
+        self.assertContains(response, 'Merkezi yönetim')
+        self.assertTemplateUsed(response, 'admin/account_base.html')
+        self.assertNotContains(self.client.get('/console/'), '＋ Kullanıcı oluştur')
+        self.assertRedirects(self.client.get('/console/users/new/'), '/admin/users/new/')
+
+    def test_telegram_only_for_requested_working_roles(self):
+        from .services import log
+        for role, _ in ROLES:
+            with self.subTest(role=role):
+                Notification.objects.all().delete()
+                log(self.audit, self.admin, role, 'Bildirim testi')
+                self.assertEqual(Notification.objects.count(), int(role in {'intern', 'it', 'executive'}))
+                self.assertTrue(Activity.objects.filter(audit=self.audit, role=role, action='Bildirim testi').exists())
+
+    def test_login_telegram_uses_active_membership_role(self):
+        from .notifications import login_notification
+        from django.test import RequestFactory
+        for role in ('auditor', 'intern', 'it', 'executive'):
+            user = get_user_model().objects.create_user(f'{role}@login.test')
+            Membership.objects.create(user=user, audit=self.audit, role=role)
+            request = RequestFactory().get('/signin/')
+            request.session = {'selected_audit': self.audit.pk}
+            request.tenant = self.org
+            Notification.objects.all().delete()
+            login_notification(None, request, user)
+            self.assertEqual(Notification.objects.count(), int(role != 'auditor'))
+
+    def test_email_paragraphs_survive_mailto_encoding(self):
+        request = self.client.get('/admin/users/new/').wsgi_request
+        draft = invitation_draft(request, self.admin, self.audit, 'intern', 'Temp-Pass123!', 'hastane', False)
+        self.assertIn('\n\n2. ', draft['body'])
+        self.assertIn('\n\nKullanıcı adı:', draft['body'])
+        self.assertIn('\r\n\r\n', parse_qs(urlsplit(draft['mailto']).query)['body'][0])
+
     def test_visible_console_actions_are_enabled_for_every_working_role(self):
         class Buttons(HTMLParser):
             def __init__(self):
@@ -51,7 +87,7 @@ class ConsoleChangesTests(TestCase):
         return {'first_name':'Deniz','last_name':'Yılmaz','email':'deniz@example.test','organization':self.org.pk,'audit':self.audit.pk,'role':'intern','auditor_readonly':'on','sector':'hastane',**extra}
 
     def test_create_user_draft_password_and_first_use_lifecycle(self):
-        response=self.client.post('/console/users/new/',self.payload())
+        response=self.client.post('/admin/users/new/',self.payload())
         self.assertEqual(response.status_code,200)
         draft=response.context['draft']
         user=get_user_model().objects.get(email='deniz@example.test')
@@ -67,7 +103,7 @@ class ConsoleChangesTests(TestCase):
         self.assertNotIn('belediye',draft['body'])
         self.assertIn('Excel',draft['body'])
         self.assertIn(f'https://hospital.grcustasi.com/console/?audit={self.audit.pk}',draft['body'])
-        self.assertEqual(parse_qs(urlsplit(draft['mailto']).query)['body'][0],draft['body'])
+        self.assertEqual(parse_qs(urlsplit(draft['mailto']).query)['body'][0].replace('\r\n','\n'),draft['body'])
         self.assertIn('no-store',response['Cache-Control'])
         self.assertNotIn(password,str(dict(self.client.session)))
         self.assertNotIn(password,str(list(Activity.objects.values_list('metadata',flat=True))))
@@ -96,16 +132,16 @@ class ConsoleChangesTests(TestCase):
 
     def test_duplicate_does_not_reset_existing_account(self):
         original=self.admin.password
-        response=self.client.post('/console/users/new/',self.payload(email=self.admin.email.upper()))
+        response=self.client.post('/admin/users/new/',self.payload(email=self.admin.email.upper()))
         self.assertContains(response,'zaten kayıtlı')
         self.admin.refresh_from_db()
         self.assertEqual(self.admin.password,original)
         self.assertFalse(Membership.objects.filter(user=self.admin).exists())
 
     def test_mismatched_company_and_tenant_scope_rejected(self):
-        response=self.client.post('/console/users/new/',self.payload(organization=self.other.pk))
+        response=self.client.post('/admin/users/new/',self.payload(organization=self.other.pk))
         self.assertContains(response,'bu kuruma ait değil')
-        response=self.client.post('/console/users/new/',self.payload(organization=self.other.pk,audit=self.other_audit.pk),HTTP_HOST='hospital.grcustasi.com')
+        response=self.client.post('/admin/users/new/',self.payload(organization=self.other.pk,audit=self.other_audit.pk),HTTP_HOST='hospital.grcustasi.com')
         self.assertNotIn('draft',response.context)
         self.assertFalse(get_user_model().objects.filter(email='deniz@example.test').exists())
 
@@ -113,11 +149,11 @@ class ConsoleChangesTests(TestCase):
         u=get_user_model().objects.create_user('intern@new.test',must_change_password=False,privacy_version=PRIVACY_VERSION,privacy_accepted_at=timezone.now())
         Membership.objects.create(user=u,audit=self.audit,role='intern',auditor_readonly=True)
         self.client.force_login(u,backend='django.contrib.auth.backends.ModelBackend')
-        for method in (self.client.get,self.client.post):self.assertEqual(method('/console/users/new/',self.payload()).status_code,403)
+        for method in (self.client.get,self.client.post):self.assertEqual(method('/admin/users/new/',self.payload()).status_code,302)
         self.assertEqual(self.client.post(self.url,{'action':'add_controls','controls':[self.c.source_id]}).status_code,403)
 
     def test_role_specific_drafts_and_shared_central_link(self):
-        self.client.post('/console/users/new/',self.payload(role='executive',auditor_readonly=''))
+        self.client.post('/admin/users/new/',self.payload(role='executive',auditor_readonly=''))
         user=get_user_model().objects.get(email='deniz@example.test')
         request=self.client.get('/console/').wsgi_request
         with override_settings(PUBLIC_CONSOLE_URL='https://www.grcustasi.com/denetim'):

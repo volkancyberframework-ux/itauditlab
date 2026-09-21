@@ -41,10 +41,6 @@ class SuperuserAdmin(admin.ModelAdmin):
     def has_change_permission(self,request,obj=None):return request.user.is_superuser
     def has_add_permission(self,request):return request.user.is_superuser
     def has_delete_permission(self,request,obj=None):return request.user.is_superuser
-    def save_model(self,request,obj,form,change):
-        super().save_model(request,obj,form,change)
-        from .notifications import queue
-        queue(f'Merkezi yönetim güncellemesi · {obj._meta.verbose_name} #{obj.pk}\nKullanıcı: {request.user.email}')
 
 @admin.register(Organization)
 class OrganizationAdmin(SuperuserAdmin):

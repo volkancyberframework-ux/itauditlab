@@ -6,7 +6,7 @@
   const body = document.querySelector('#draft-body');
   const feedback = document.querySelector('#draft-feedback');
   const updateLink = () => {
-    open.href = `mailto:${encodeURIComponent(recipient.value)}?subject=${encodeURIComponent(subject.value)}&body=${encodeURIComponent(body.value)}`;
+    open.href = `mailto:${encodeURIComponent(recipient.value)}?subject=${encodeURIComponent(subject.value)}&body=${encodeURIComponent(body.value.replace(/\r?\n/g, '\r\n'))}`;
   };
   subject.addEventListener('input', updateLink);
   body.addEventListener('input', updateLink);
@@ -35,7 +35,7 @@
     }
     subjectChunks.push(chunk);
     const encodedSubject = subjectChunks.map(s => `=?UTF-8?B?${base64(s)}?=`).join('\r\n ');
-    const encodedBody = base64(body.value).match(/.{1,76}/g)?.join('\r\n') || '';
+    const encodedBody = base64(body.value.replace(/\r?\n/g, '\r\n')).match(/.{1,76}/g)?.join('\r\n') || '';
     const content = `To: ${recipient.value.replace(/[\r\n]/g, '')}\r\nSubject: ${encodedSubject}\r\nX-Unsent: 1\r\nMIME-Version: 1.0\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n\r\n${encodedBody}\r\n`;
     const url = URL.createObjectURL(new Blob([content], {type: 'message/rfc822'}));
     const link = document.createElement('a');

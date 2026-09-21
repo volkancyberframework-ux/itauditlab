@@ -9,6 +9,7 @@ from django.dispatch import receiver
 from .models import Activity, Notification
 from django.utils import timezone
 logger=logging.getLogger(__name__)
+TELEGRAM_ROLES = {'intern', 'it', 'executive'}
 
 def send(message):
     if not settings.TELEGRAM_BOT_TOKEN or not settings.TELEGRAM_CHAT_ID:
@@ -25,11 +26,19 @@ def send(message):
 
 @receiver(user_logged_in)
 def login_notification(sender,request,user,**kwargs):
+    if user.is_superuser:
+        if request.session.get('view_as', 'admin') not in TELEGRAM_ROLES:return
+    else:
+        memberships = Membership.objects.filter(user=user, audit__archived=False)
+        if getattr(request, 'tenant', None):
+            memberships = memberships.filter(audit__organization=request.tenant)
+        selected = memberships.filter(audit_id=request.session.get('selected_audit')).first() or memberships.order_by('audit_id').first()
+        if not selected or selected.role not in TELEGRAM_ROLES:return
     queue((request.tenant.name if getattr(request,'tenant',None) else 'Denetim Konsolu')+' · Başarılı giriş\n'+user.email)
 
 @receiver(post_save,sender=Activity)
 def activity_notification(sender,instance,created,**kwargs):
-    if created:
+    if created and instance.role in TELEGRAM_ROLES:
         message=f'{instance.audit.organization.name} · {instance.action}\nDenetim: {instance.audit.title}\nRol: {instance.role}\nKullanıcı: {instance.actor.email if instance.actor else "Sistem"}'
         queue(message)
 
