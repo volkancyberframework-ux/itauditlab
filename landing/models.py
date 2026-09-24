@@ -241,7 +241,7 @@ class Certificate(models.Model):
 
 
 class SiteSetting(models.Model):
-    bootcamp_price = models.PositiveIntegerField('Bootcamp fiyatı', default=59999)
+    bootcamp_price = models.PositiveIntegerField('Bootcamp fiyatı', default=89999)
     payment_url = models.URLField('Ödeme URL', blank=True)
     program_start_date = models.CharField('Program başlangıcı', max_length=80, default='Yakında')
     seats_remaining = models.PositiveSmallIntegerField('Kalan kontenjan', default=12)

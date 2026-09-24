@@ -100,7 +100,7 @@ def create_checkout(request):
     product = product or {
         'key': 'grc_ustasi_80_saat', 'title': '80 Saatlik GRC Ustası Yoğun Eğitim Programı',
         'description': '6 ay eğitim ve uygulama, 6 ay kariyer desteği, ömür boyu içerik erişimi.',
-        'price': 59_999,
+        'price': 89_999,
     }
     if not django_settings.STRIPE_SECRET_KEY:
         return JsonResponse({'ok': False, 'message': 'Stripe ödeme ayarı eksik.'}, status=503)

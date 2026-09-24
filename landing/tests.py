@@ -46,9 +46,11 @@ class LandingTests(TestCase):
         self.assertNotContains(response, 'Haritada gösterilen Türkiye deneyimi')
         self.assertNotContains(response, 'CREDENDO VE KBC BELÇİKA DÖNEMİYLE PARALEL İLERLEYEN DENEYİMLER')
         self.assertContains(response, 'FREELANCE ÇALIŞMALARIM')
-        self.assertContains(response, '59.999 TL')
-        self.assertContains(response, '3 × 25.000 TL')
-        self.assertContains(response, 'toplam 75.000 TL')
+        self.assertContains(response, '89.999 TL', count=3)
+        self.assertNotContains(response, '59.999')
+        self.assertNotContains(response, 'Taksit')
+        self.assertNotContains(response, '3 × 25.000 TL')
+        self.assertNotContains(response, 'toplam 75.000 TL')
         self.assertContains(response, '199 USD değerinde Skool topluluğu')
         self.assertNotContains(response, '6 Ay Yakın Takip')
         self.assertContains(response, '12 Ay Birebir Çalışma')
@@ -103,7 +105,7 @@ class LandingTests(TestCase):
         self.assertEqual(response.url, 'https://checkout.stripe.com/test-session')
         payload = create_session.call_args.kwargs
         self.assertEqual(payload['mode'], 'payment')
-        self.assertEqual(payload['line_items'][0]['price_data']['unit_amount'], 5_999_900)
+        self.assertEqual(payload['line_items'][0]['price_data']['unit_amount'], 8_999_900)
         self.assertEqual(payload['line_items'][0]['price_data']['currency'], 'try')
 
     @override_settings(STRIPE_SECRET_KEY='sk_test_placeholder')
@@ -115,7 +117,7 @@ class LandingTests(TestCase):
         payload = create_session.call_args.kwargs
         self.assertEqual(payload['metadata']['product'], 'cisa')
         self.assertEqual(payload['line_items'][0]['price_data']['product_data']['name'], 'CISA Bootcamp')
-        self.assertEqual(payload['line_items'][0]['price_data']['unit_amount'], 5_999_900)
+        self.assertEqual(payload['line_items'][0]['price_data']['unit_amount'], 8_999_900)
 
     def test_checkout_rejects_unknown_bootcamp(self):
         response = self.client.post(reverse('landing:checkout'), {'product': 'unknown'})
