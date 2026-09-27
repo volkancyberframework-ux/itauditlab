@@ -74,7 +74,7 @@ class LandingTests(TestCase):
         self.assertContains(response, 'Savunma Sanayii Şirketleri')
         self.assertContains(response, 'Gizlilik nedeniyle kurum isimleri paylaşılmamaktadır')
         self.assertContains(response, 'Bart Preneel ile akademik çalışmalar')
-        self.assertContains(response, 'İlgili kurumların GRC Ustası programını desteklediği')
+        self.assertContains(response, "İlgili kurumların GRC Ustası'nın müşterisi olduğu")
         self.assertContains(response, f'href="{reverse("login")}"')
         self.assertContains(response, 'volkan@grcustasi.com')
         self.assertContains(response, 'Tüm programlarda %5 indirim kazan.')
