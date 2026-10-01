@@ -361,6 +361,29 @@ class BookingTests(TestCase):
         self.assertEqual(len(first), 3)
         self.assertEqual([x.pk for x in first], [x.pk for x in second])
 
+    def test_deleting_travel_cascades_only_its_slots_and_exceptions(self):
+        target = timezone.localdate() + timedelta(days=2)
+        slots = generate_slots(self.availability, target)
+        slots[0].status = 'disabled'
+        slots[0].save()
+        AvailabilityException.objects.create(availability=self.availability, start_date=target, end_date=target)
+        other = TravelAvailability.objects.create(location_name='Other', timezone='UTC', start_date=target, end_date=target, local_available_start=time(1), local_available_end=time(8))
+        other_slots = generate_slots(other, target)
+        travel_id = self.availability.pk
+        TravelAvailability.objects.filter(pk=travel_id).delete()
+        self.assertFalse(MeetingSlot.objects.filter(availability_id=travel_id).exists())
+        self.assertFalse(AvailabilityException.objects.filter(availability_id=travel_id).exists())
+        self.assertEqual(MeetingSlot.objects.filter(availability=other).count(), len(other_slots))
+
+    def test_travel_deletion_preserves_real_bookings(self):
+        from django.db.models.deletion import ProtectedError
+        slot = generate_slots(self.availability, timezone.localdate() + timedelta(days=2))[0]
+        booking = MeetingBooking.objects.create(user=self.user, slot=slot, meeting_url='https://example.com/meeting')
+        with self.assertRaises(ProtectedError):
+            self.availability.delete()
+        self.assertTrue(MeetingBooking.objects.filter(pk=booking.pk).exists())
+        self.assertTrue(MeetingSlot.objects.filter(pk=slot.pk).exists())
+
     def test_expired_enabled_schedule_is_safely_renewed(self):
         self.availability.start_date = timezone.localdate() - timedelta(days=5)
         self.availability.end_date = timezone.localdate() - timedelta(days=1)

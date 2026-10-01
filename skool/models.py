@@ -222,7 +222,7 @@ class AvailabilityException(models.Model):
 
 class MeetingSlot(models.Model):
     STATUS = [("available", "Müsait"), ("booked", "Dolu"), ("disabled", "Kapalı")]
-    availability = models.ForeignKey(TravelAvailability, on_delete=models.PROTECT, related_name="slots")
+    availability = models.ForeignKey(TravelAvailability, on_delete=models.CASCADE, related_name="slots")
     local_date = models.DateField(db_index=True)
     start_at_utc = models.DateTimeField(unique=True)
     end_at_utc = models.DateTimeField()
