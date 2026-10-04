@@ -87,6 +87,9 @@ def checkout(request):
         response['X-Payment-Error'] = type(exc).__name__
         response['X-Payment-Code'] = str(getattr(exc, 'code', '') or '')[:80]
         response['X-Payment-Param'] = str(getattr(exc, 'param', '') or '')[:80]
+        if getattr(exc, 'param', '') == 'payment_method_types':
+            from urllib.parse import quote
+            response['X-Payment-Detail'] = quote(getattr(exc, 'user_message', '') or '')[:1500]
         return response
     if request.headers.get('Accept') == 'application/json':
         return JsonResponse({'url': session.url})
