@@ -100,3 +100,9 @@ and the legacy checkout endpoint redirects there without trying to create a Sess
 This public URL is not a credential. Configure the Payment Link's product metadata as
 `travel_bootcamp` and its completion redirect to the existing success route; signed
 webhooks remain the only source of paid registration records.
+
+Production diagnosis: Stripe rejected `payment_method_types` because the current
+Checkout API no longer accepts that parameter. It was removed from every Checkout
+creator (landing, travel, legacy bootcamps, memberships and corporate subscription).
+Payment methods now follow Stripe Dashboard settings. The local CLI restricted-key
+permission issue is separate from this production API compatibility problem.
