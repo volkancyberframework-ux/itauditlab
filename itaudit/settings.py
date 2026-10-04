@@ -37,6 +37,7 @@ import os
 
 STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY", default="")
 TRAVEL_BOOTCAMP_WEBHOOK_SECRET = config("TRAVEL_BOOTCAMP_WEBHOOK_SECRET", default="")
+TRAVEL_BOOTCAMP_PAYMENT_LINK = config("TRAVEL_BOOTCAMP_PAYMENT_LINK", default="")
 
 EMAIL_BACKEND = config(
     "EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend"

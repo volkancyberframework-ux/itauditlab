@@ -51,6 +51,7 @@ def page(request):
         'next_monday': display_date(next_monday()), 'program': PROGRAM,
         'canonical': settings.PUBLIC_BASE_URL.rstrip('/') + reverse('landing:travel_bootcamp'),
         'cancelled': request.GET.get('cancelled') == '1',
+        'payment_link': settings.TRAVEL_BOOTCAMP_PAYMENT_LINK or reverse('landing:travel_checkout'),
     })
 
 
@@ -58,6 +59,10 @@ def page(request):
 @require_http_methods(['GET', 'POST'])
 def checkout(request):
     # The same local endpoint is used by every CTA. No hand-made Payment Link needed.
+    if settings.TRAVEL_BOOTCAMP_PAYMENT_LINK:
+        response = redirect(settings.TRAVEL_BOOTCAMP_PAYMENT_LINK)
+        response.status_code = 303
+        return response
     if not settings.STRIPE_SECRET_KEY:
         return render(request, 'landing/travel_success.html', {'unavailable': True}, status=503)
     base = settings.PUBLIC_BASE_URL.rstrip('/')

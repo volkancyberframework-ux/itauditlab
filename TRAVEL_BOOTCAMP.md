@@ -93,3 +93,10 @@ change deliberately does not generate or apply unrelated core migrations.
 Update: the CTA now goes directly to server-generated Stripe Checkout even while webhook
 configuration is pending, as requested. This does not bypass webhook verification or
 create paid records from success URLs.
+
+A persistent Stripe Payment Link can be configured through the server environment
+variable `TRAVEL_BOOTCAMP_PAYMENT_LINK`. When supplied, CTAs link to that URL directly,
+and the legacy checkout endpoint redirects there without trying to create a Session.
+This public URL is not a credential. Configure the Payment Link's product metadata as
+`travel_bootcamp` and its completion redirect to the existing success route; signed
+webhooks remain the only source of paid registration records.
