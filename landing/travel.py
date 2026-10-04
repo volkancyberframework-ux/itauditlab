@@ -81,9 +81,13 @@ def checkout(request):
             success_url=base + reverse('landing:travel_success') + '?session_id={CHECKOUT_SESSION_ID}',
             cancel_url=base + reverse('landing:travel_bootcamp') + '?cancelled=1',
         )
-    except stripe.StripeError:
+    except stripe.StripeError as exc:
         logger.warning('Travel Checkout oluşturulamadı.')
-        return render(request, 'landing/travel_success.html', {'unavailable': True}, status=502)
+        response = render(request, 'landing/travel_success.html', {'unavailable': True}, status=502)
+        response['X-Payment-Error'] = type(exc).__name__
+        response['X-Payment-Code'] = str(getattr(exc, 'code', '') or '')[:80]
+        response['X-Payment-Param'] = str(getattr(exc, 'param', '') or '')[:80]
+        return response
     if request.headers.get('Accept') == 'application/json':
         return JsonResponse({'url': session.url})
     response = redirect(session.url)

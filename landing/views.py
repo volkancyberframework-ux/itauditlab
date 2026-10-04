@@ -127,8 +127,13 @@ def create_checkout(request):
             success_url=request.build_absolute_uri(reverse('landing:home') + '?payment=success#bootcamp'),
             cancel_url=request.build_absolute_uri(reverse('landing:home') + '?payment=cancel#bootcamp'),
         )
-    except Exception:
-        return JsonResponse({'ok': False, 'message': 'Ödeme şu anda başlatılamadı. Lütfen volkan@grcustasi.com adresine yazın.'}, status=502)
+    except Exception as exc:
+        # Return only non-sensitive Stripe diagnostics, never its message/key.
+        response = JsonResponse({'ok': False, 'message': 'Ödeme şu anda başlatılamadı. Lütfen volkan@grcustasi.com adresine yazın.'}, status=502)
+        response['X-Payment-Error'] = type(exc).__name__
+        response['X-Payment-Code'] = str(getattr(exc, 'code', '') or '')[:80]
+        response['X-Payment-Param'] = str(getattr(exc, 'param', '') or '')[:80]
+        return response
     return redirect(session.url, permanent=False)
 
 
