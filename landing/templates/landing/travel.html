@@ -1,0 +1,72 @@
+{% extends 'landing/travel_base.html' %}{% load static %}
+{% block meta %}
+<link rel="canonical" href="{{ canonical }}">
+<meta property="og:type" content="website"><meta property="og:locale" content="tr_TR">
+<meta property="og:title" content="Travel Bootcamp | Ekonomi Bütçesiyle Business Class | Volkan Güler">
+<meta property="og:description" content="7 gün, 7+ saat eğitim. Ömür boyu erişim ve 6 ay birebir WhatsApp desteği. Bugün sınırlı kontenjan: $249.">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'img/instructor.jpg' %}">
+{% endblock %}
+{% block content %}
+<main id="main">
+<section class="tb-hero">
+  <div class="tb-wrap tb-hero-grid">
+    <div class="tb-hero-copy">
+      <div class="tb-eyebrow"><span class="tb-plane" aria-hidden="true">✈️</span> VOLKAN GÜLER İLE TRAVEL BOOTCAMP</div>
+      <h1>Business Class<br>pahalı değil.<br><em>Sistemi bilmemek pahalı.</em></h1>
+      <p class="tb-lead">Ekonomi bütçesiyle Business Class uçma stratejilerini öğren. Sana özel en hızlı <strong>Elite → Elite Plus</strong> yolunu oluştur.</p>
+      <ul class="tb-highlights"><li>7 gün / 7+ saat eğitim</li><li>Ömür boyu video erişimi</li><li>6 ay birebir WhatsApp desteği</li></ul>
+      <div class="tb-hero-buy"><div class="tb-price"><del>$599</del><strong>$249</strong><span>Bugün sınırlı<br>kontenjan için</span></div>
+        {% include 'landing/_travel_cta.html' with location='hero' %}
+        <small class="tb-trust">Güvenli ödeme · Stripe · Tek ödeme, USD</small>
+      </div>
+      {% if cancelled %}<p class="tb-notice" role="status">Ödeme tamamlanmadı. Hazır olduğunda tekrar katılabilirsin.</p>{% endif %}
+    </div>
+    <aside class="tb-pass" aria-label="Bootcamp özeti">
+      <div class="tb-pass-top"><span>YENİ BİR SEYAHAT ANLAYIŞI</span><span aria-hidden="true">↗</span></div>
+      <div class="tb-pass-art" aria-hidden="true">
+        <svg viewBox="0 0 400 245" fill="none"><circle cx="200" cy="134" r="102"/><ellipse cx="200" cy="134" rx="53" ry="102"/><ellipse cx="200" cy="134" rx="102" ry="38"/><path d="M98 134h204M200 32v204"/><path class="tb-flight-path" d="M52 187Q200 -13 348 87"/><circle class="tb-route-dot" cx="52" cy="187" r="4"/><circle class="tb-route-dot" cx="348" cy="87" r="4"/></svg>
+        <span class="tb-globe-plane">✈</span>
+        <span class="tb-country-count">103<small>/ 196 ÜLKE</small></span>
+      </div>
+      <div class="tb-pass-route"><div><small>BAŞLANGIÇ</small><strong>Economy</strong></div><span aria-hidden="true">⟶</span><div><small>HEDEF</small><strong>Business</strong></div></div>
+      <div class="tb-pass-stub"><div><small>BİR SONRAKİ GRUP</small><strong>{{ next_monday }} Pazartesi</strong></div><span class="tb-pass-seal" aria-hidden="true">VG</span></div>
+      <div class="tb-pass-bottom">7 GÜN <span>DAHA AKILLI SEYAHAT ET.</span> ∞ ERİŞİM</div>
+    </aside>
+  </div>
+</section>
+<section class="tb-section tb-wrap" id="ogreneceklerin">
+  <div class="tb-section-heading"><span class="tb-eyebrow">01 / NE ÖĞRENECEKSİN?</span><h2>Daha fazla harcama.<br><em>Daha akıllı seyahat et.</em></h2></div>
+  <div class="tb-benefit-grid">
+    <article class="tb-benefit"><span aria-hidden="true">💺</span><div><h3>Ekonomi bütçesiyle Business Class</h3><p>Rota, tarih, çıkış noktası ve mil/nakit seçeneklerini karşılaştır. Doğru fırsatı araştırmayı öğren.</p></div></article>
+    <article class="tb-benefit"><span class="tb-star" aria-hidden="true">⭐</span><div><h3>Sana özel Elite → Elite Plus yolu</h3><p>Uçuş alışkanlıklarına ve bütçene göre en hızlı yolu planla. Kendi 12 aylık seyahat stratejini oluştur.</p></div></article>
+  </div>
+  <p class="tb-note">Eğitim ve strateji geliştirme programıdır; belirli bir bilet fiyatı veya statü sonucu garanti edilmez.</p>
+</section>
+<section class="tb-program-band" id="program"><div class="tb-section tb-wrap tb-program-layout">
+  <div class="tb-section-heading"><span class="tb-eyebrow">02 / 7 GÜNLÜK PROGRAM</span><h2>Her gün bir adım.<br><em>Sonunda kendi planın.</em></h2><p>7+ saat eğitim. Her Pazartesi yeni grup.<br>Videolarına ömür boyu erişim.</p><span class="tb-date">↗ {{ next_monday }} Pazartesi</span></div>
+  <ol class="tb-program">{% for title, description in program %}<li><span class="tb-day">0{{ forloop.counter }}</span><div><h3>{{ title }}</h3><p>{{ description }}</p></div></li>{% endfor %}</ol>
+</div></section>
+<section class="tb-section tb-wrap tb-instructor" id="volkan">
+  <div class="tb-portrait"><img src="{% static 'img/instructor.jpg' %}" alt="Volkan Güler" loading="lazy" width="360" height="390"><span>🌍 103 / 196 ÜLKE</span></div>
+  <div><span class="tb-eyebrow">03 / KİMDEN ÖĞRENECEKSİN?</span><h2>103 ülke. Yüzlerce uçuş.<br><em>Biriktirilmiş deneyim.</em></h2><h3>Ben Volkan Güler.</h3><p>Kendi seyahatlerimde kullandığım mil, statü ve Business Class araştırma yöntemlerini bu 7 günlük programda paylaşıyorum.</p><p>Teoriyi kendi rotana uygula; eğitimden sonra da 6 ay boyunca birebir WhatsApp desteğiyle ilerle.</p></div>
+</section>
+<section class="tb-offer-band" id="paket"><div class="tb-section tb-wrap tb-offer">
+  <div><span class="tb-eyebrow">04 / PAKET & FİYAT</span><h2>7 gün biter.<br><em>Erişimin bitmez.</em></h2><ul class="tb-included"><li>7 günlük / 7+ saatlik eğitim</li><li>Ömür boyu video erişimi</li><li>6 ay birebir WhatsApp desteği</li><li>Business Class, mil ve statü stratejileri</li><li>12 aylık kişisel seyahat planı</li><li><strong>$499 değerindeki Skool topluluğuna ömür boyu ücretsiz erişim</strong><small class="tb-community-note">Senin gibi seyahat tutkunlarıyla bir arada ol. Her daim güncel kal.</small></li></ul></div>
+  <div class="tb-offer-purchase"><span class="tb-eyebrow">TRAVEL BOOTCAMP · TAM PAKET</span><div class="tb-price"><del>$599</del><strong>$249</strong></div><p>Bugün sınırlı kontenjan için.<br>Tek ödeme. Tüm paket dahil.</p>{% include 'landing/_travel_cta.html' with location='package' %}<small class="tb-trust">Güvenli ödeme · Stripe · USD</small><div class="tb-offer-start">Başlangıç: {{ next_monday }} Pazartesi</div></div>
+</div></section>
+<section class="tb-section tb-wrap tb-faq" id="sorular">
+  <div class="tb-section-heading"><span class="tb-eyebrow">05 / SIK SORULAN SORULAR</span><h2>Aklındaki son sorular.</h2></div>
+  <div class="tb-faq-grid">
+    <details><summary>Bootcamp ne zaman başlıyor?</summary><p>Kaydından sonraki ilk Pazartesi. Bir sonraki grup {{ next_monday }} Pazartesi başlıyor.</p></details>
+    <details><summary>Dersleri kaçırırsam ne olur?</summary><p>Tüm eğitim videolarına ömür boyu erişebilirsin. Kendi hızında tekrar edebilirsin.</p></details>
+    <details><summary>Mil veya statü bilgim yok. Katılabilir miyim?</summary><p>Evet. Program temelden başlar; kendi seyahat stratejini adım adım oluşturursun.</p></details>
+    <details><summary>Elite / Elite Plus olmam garanti mi?</summary><p>Hayır. Sonuç uçuşlarına, harcamalarına ve havayolunun güncel kurallarına bağlıdır; sana uygun stratejiyi planlamayı öğrenirsin.</p></details>
+    <details><summary>Business Class her zaman ekonomi fiyatına mı?</summary><p>Hayır. Fiyatlar rota, tarih ve müsaitliğe göre değişir; eğitim fırsatları araştırma yöntemlerini öğretir.</p></details>
+    <details><summary>WhatsApp desteği ne kadar sürüyor?</summary><p>Kayıt tarihinden itibaren 6 ay boyunca birebir WhatsApp desteği alırsın.</p></details>
+  </div>
+  <div class="tb-final"><div><h3>Bir sonraki uçuşuna başka gözle bak.</h3><p>7 gün eğitim. Ömür boyu erişim. 6 ay yanında.</p></div>{% include 'landing/_travel_cta.html' with location='faq' %}</div>
+</section>
+</main>
+<div class="tb-sticky" aria-label="Hızlı kayıt">{% include 'landing/_travel_cta.html' with location='mobile_sticky' %}</div>
+{% endblock %}

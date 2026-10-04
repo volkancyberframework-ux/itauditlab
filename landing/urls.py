@@ -1,8 +1,15 @@
 from django.urls import path
 from . import views
+from . import travel
 
 app_name = 'landing'
 urlpatterns = [
+    path('travelbootcamp', travel.page, name='travel_bootcamp'),
+    path('travelbootcamp/', travel.page),
+    path('travelbootcamp/checkout', travel.checkout, name='travel_checkout'),
+    path('travelbootcamp/success', travel.success, name='travel_success'),
+    path('travelbootcamp/status', travel.status, name='travel_status'),
+    path('travelbootcamp/webhook', travel.webhook, name='travel_webhook'),
     path('', views.home, name='home'),
     path('kariyer-pusulasi/', views.home, name='career_compass'),
     path('kurumsal/', views.corporate_home, name='corporate'),

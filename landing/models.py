@@ -265,3 +265,36 @@ class SiteSetting(models.Model):
     def load(cls):
         obj, _ = cls.objects.get_or_create(pk=1)
         return obj
+
+
+class TravelRegistration(models.Model):
+    """One participant per normalized email; only a verified webhook creates it."""
+    name = models.CharField(max_length=255, blank=True)
+    email = models.EmailField(unique=True)
+    phone = models.CharField(max_length=80, blank=True)
+    product = models.CharField(max_length=80, default='Travel Bootcamp', editable=False)
+    registered_at = models.DateTimeField()
+    starts_on = models.DateField()
+    payment_status = models.CharField(max_length=10, default='paid', editable=False)
+    telegram_sent_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['-registered_at']
+        constraints = [models.UniqueConstraint(
+            models.functions.Lower('email'), name='travel_email_case_insensitive'
+        )]
+
+    def __str__(self):
+        return self.email
+
+
+class TravelPayment(models.Model):
+    """Retain every distinct payment without enrolling the same email twice."""
+    registration = models.ForeignKey(TravelRegistration, on_delete=models.PROTECT, related_name='payments')
+    checkout_session_id = models.CharField(max_length=255, unique=True)
+    payment_intent_id = models.CharField(max_length=255, unique=True)
+    customer_id = models.CharField(max_length=255, blank=True)
+    stripe_event_id = models.CharField(max_length=255, unique=True)
+    amount_minor = models.PositiveIntegerField()
+    currency = models.CharField(max_length=3)
+    paid_at = models.DateTimeField()
