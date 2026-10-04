@@ -109,7 +109,6 @@ def create_checkout(request):
     try:
         session = stripe.checkout.Session.create(
             mode='payment',
-            payment_method_types=['card'],
             allow_promotion_codes=True,
             billing_address_collection='required',
             line_items=[{
@@ -133,9 +132,6 @@ def create_checkout(request):
         response['X-Payment-Error'] = type(exc).__name__
         response['X-Payment-Code'] = str(getattr(exc, 'code', '') or '')[:80]
         response['X-Payment-Param'] = str(getattr(exc, 'param', '') or '')[:80]
-        if getattr(exc, 'param', '') == 'payment_method_types':
-            from urllib.parse import quote
-            response['X-Payment-Detail'] = quote(getattr(exc, 'user_message', '') or '')[:1500]
         return response
     return redirect(session.url, permanent=False)
 

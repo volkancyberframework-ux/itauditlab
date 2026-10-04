@@ -52,6 +52,7 @@ class TravelTests(TestCase):
             response = self.client.post(reverse('landing:travel_checkout'), {'amount': 1, 'currency': 'try'})
         self.assertEqual(response.status_code, 303)
         args = create.call_args.kwargs
+        self.assertNotIn('payment_method_types', args)
         self.assertEqual(args['line_items'][0]['price_data']['unit_amount'], 24900)
         self.assertEqual(args['line_items'][0]['price_data']['currency'], 'usd')
         self.assertEqual(args['metadata']['product'], 'travel_bootcamp')

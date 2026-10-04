@@ -586,7 +586,6 @@ def bootcamp_checkout(request, slug):
 
     session = stripe.checkout.Session.create(
         mode="payment",
-        payment_method_types=["card"],
         customer_email=email or None,
         line_items=[
             {
@@ -622,7 +621,6 @@ def corporate_assurance_checkout(request):
     try:
         checkout_session = stripe.checkout.Session.create(
             mode="subscription",
-            payment_method_types=["card"],
             customer_email=(
                 request.user.email
                 if request.user.is_authenticated and request.user.email
@@ -698,7 +696,6 @@ def create_membership_checkout(request, plan):
     try:
         checkout_session = stripe.checkout.Session.create(
             mode="subscription",
-            payment_method_types=["card"],
             customer_email=(
                 request.user.email
                 if request.user.is_authenticated and request.user.email

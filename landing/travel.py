@@ -69,7 +69,7 @@ def checkout(request):
     try:
         session = stripe.checkout.Session.create(
             api_key=settings.STRIPE_SECRET_KEY,
-            mode='payment', payment_method_types=['card'], customer_creation='always',
+            mode='payment', customer_creation='always',
             phone_number_collection={'enabled': True},
             billing_address_collection='required',
             line_items=[{'price_data': {
@@ -87,9 +87,6 @@ def checkout(request):
         response['X-Payment-Error'] = type(exc).__name__
         response['X-Payment-Code'] = str(getattr(exc, 'code', '') or '')[:80]
         response['X-Payment-Param'] = str(getattr(exc, 'param', '') or '')[:80]
-        if getattr(exc, 'param', '') == 'payment_method_types':
-            from urllib.parse import quote
-            response['X-Payment-Detail'] = quote(getattr(exc, 'user_message', '') or '')[:1500]
         return response
     if request.headers.get('Accept') == 'application/json':
         return JsonResponse({'url': session.url})

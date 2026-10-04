@@ -104,6 +104,7 @@ class LandingTests(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, 'https://checkout.stripe.com/test-session')
         payload = create_session.call_args.kwargs
+        self.assertNotIn('payment_method_types', payload)
         self.assertEqual(payload['mode'], 'payment')
         self.assertEqual(payload['line_items'][0]['price_data']['unit_amount'], 8_999_900)
         self.assertEqual(payload['line_items'][0]['price_data']['currency'], 'try')
@@ -115,6 +116,7 @@ class LandingTests(TestCase):
             response = self.client.post(reverse('landing:checkout'), {'product': 'cisa'})
         self.assertEqual(response.status_code, 302)
         payload = create_session.call_args.kwargs
+        self.assertNotIn('payment_method_types', payload)
         self.assertEqual(payload['metadata']['product'], 'cisa')
         self.assertEqual(payload['line_items'][0]['price_data']['product_data']['name'], 'CISA Bootcamp')
         self.assertEqual(payload['line_items'][0]['price_data']['unit_amount'], 8_999_900)
@@ -126,6 +128,7 @@ class LandingTests(TestCase):
             response = self.client.post(reverse('landing:checkout'), {'product': 'grc_student', 'price': '1'})
         self.assertEqual(response.status_code, 302)
         payload = create_session.call_args.kwargs
+        self.assertNotIn('payment_method_types', payload)
         self.assertEqual(payload['metadata']['product'], 'grc_student')
         self.assertEqual(payload['line_items'][0]['price_data']['unit_amount'], 1_399_900)
         self.assertEqual(payload['line_items'][0]['price_data']['currency'], 'try')
