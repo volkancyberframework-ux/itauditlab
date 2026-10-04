@@ -36,6 +36,7 @@ SKOOL_AUDIO_URL = config("SKOOL_AUDIO_URL", default="")
 import os
 
 STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY", default="")
+TRAVEL_BOOTCAMP_WEBHOOK_SECRET = config("TRAVEL_BOOTCAMP_WEBHOOK_SECRET", default="")
 
 EMAIL_BACKEND = config(
     "EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend"

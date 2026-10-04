@@ -1,0 +1,20 @@
+{% load static %}<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}Travel Bootcamp | Ekonomi Bütçesiyle Business Class | Volkan Güler{% endblock %}</title>
+  <meta name="description" content="103 ülkelik seyahat deneyiminden doğan 7 günlük Travel Bootcamp. Business Class fırsatlarını, mil ve statü sistemlerini ve Elite → Elite Plus stratejilerini öğren.">
+  {% block meta %}{% endblock %}
+  <link rel="icon" href="{% static 'img/favicon.ico' %}">
+  <link rel="stylesheet" href="{% static 'css/travel-bootcamp.css' %}">
+  <script defer src="{% static 'js/travel-bootcamp.js' %}"></script>
+</head>
+<body>
+<a class="tb-skip" href="#main">İçeriğe geç</a>
+<header class="tb-header"><div class="tb-wrap tb-header-inner">
+  <a class="tb-brand" href="{% url 'landing:home' %}" aria-label="GRC Ustası ana sayfa"><img src="{% static 'img/grc-ustasi-logo.png' %}" width="38" height="38" alt=""><span>GRC <b>Ustası</b><small>VOLKAN GÜLER</small></span></a>
+  <a class="tb-wordmark" href="{% url 'landing:travel_bootcamp' %}">TRAVEL <span>BOOTCAMP</span> <span aria-hidden="true">↗</span></a>
+</div></header>
+{% block content %}{% endblock %}
+<footer class="tb-footer tb-wrap"><span>© {% now 'Y' %} GRC Ustası · Volkan Güler</span><a href="mailto:volkan@grcustasi.com">volkan@grcustasi.com ↗</a></footer>
+</body></html>

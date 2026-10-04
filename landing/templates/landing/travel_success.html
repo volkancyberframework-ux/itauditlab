@@ -1,0 +1,24 @@
+{% extends 'landing/travel_base.html' %}
+{% block title %}Travel Bootcamp | Kayıt{% endblock %}
+{% block meta %}<meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer">{% endblock %}
+{% block content %}
+<main id="main" class="tb-wrap tb-success" {% if pending %}data-payment-pending data-status-url="{% url 'landing:travel_status' %}"{% endif %}>
+<div class="tb-success-icon" aria-hidden="true">✈️</div>
+{% if confirmed %}
+<h1>Travel Bootcamp’e<br><em>Hoş Geldin!</em></h1>
+<p>Kaydın başarıyla tamamlandı.<br>Bootcamp’in <strong>{{ starts_on }} Pazartesi</strong> başlıyor.</p>
+<p>Eğitim ve iletişim detaylarını e-posta üzerinden alacaksın.</p>
+{% elif unavailable %}
+<h1>Ödeme şu anda<br><em>başlatılamadı.</em></h1>
+<p>Lütfen biraz sonra tekrar dene veya bize e-posta gönder.</p>
+{% elif pending %}
+<h1>Kaydını<br><em>doğruluyoruz.</em></h1>
+<p role="status" id="payment-status">Ödeme onayını bekliyoruz. Doğrulama tamamlandığında bu sayfa otomatik güncellenecek.</p>
+<p>Tekrar ödeme yapmana gerek yok. Bu işlem birkaç dakika sürebilir.</p>
+<button class="tb-button tb-refresh" type="button">Durumu tekrar kontrol et</button>
+{% else %}
+<h1>Travel Bootcamp</h1><p>Onaylanmış bir kayıt görüntülenemiyor.</p>
+{% endif %}
+<div class="tb-success-links"><a href="mailto:volkan@grcustasi.com">volkan@grcustasi.com ↗</a><a href="{% url 'landing:travel_bootcamp' %}">Programa dön →</a></div>
+</main>
+{% endblock %}

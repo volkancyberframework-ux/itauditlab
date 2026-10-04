@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import (
     AssessmentSession, Certificate, CorporateInquiry, DailyTrafficMetric, DailyTrafficReport,
     JobMarketCount, LandingVisit, Lead, NewsletterSubscriber, PartnerApplication,
-    SiteSetting, WaitingList,
+    SiteSetting, WaitingList, TravelRegistration, TravelPayment,
 )
 
 
@@ -85,3 +85,28 @@ class CertificateAdmin(admin.ModelAdmin):
 class SiteSettingAdmin(admin.ModelAdmin):
     def has_add_permission(self, request): return not SiteSetting.objects.exists()
     def has_delete_permission(self, request, obj=None): return False
+
+
+class TravelPaymentInline(admin.TabularInline):
+    model = TravelPayment
+    extra = 0
+    can_delete = False
+    readonly_fields = tuple(field.name for field in TravelPayment._meta.fields)
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(TravelRegistration)
+class TravelRegistrationAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'starts_on', 'payment_status', 'registered_at', 'telegram_sent_at')
+    search_fields = ('name', 'email', 'payments__checkout_session_id', 'payments__payment_intent_id')
+    list_filter = ('starts_on', 'payment_status')
+    readonly_fields = tuple(field.name for field in TravelRegistration._meta.fields)
+    inlines = [TravelPaymentInline]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
