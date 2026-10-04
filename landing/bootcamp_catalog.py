@@ -42,3 +42,13 @@ BOOTCAMPS = (
 )
 
 BOOTCAMPS_BY_KEY = {item["key"]: item for item in BOOTCAMPS}
+
+
+STUDENT_PACKAGE = {
+    "key": "grc_student",
+    "title": "GRC Ustası Öğrenci Paketi",
+    "description": "1 aylık GRC programı: bootcamp dersleri, lab ortamı ve uygulamalı vakalar. Her Pazartesi yeni sınıf, içeriklere ömür boyu erişim.",
+    "price": 13_999,
+    "price_display": "13.999 TL",
+}
+BOOTCAMPS_BY_KEY[STUDENT_PACKAGE["key"]] = STUDENT_PACKAGE

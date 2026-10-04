@@ -5,7 +5,7 @@
 <meta property="og:title" content="Travel Bootcamp | Ekonomi Bütçesiyle Business Class | Volkan Güler">
 <meta property="og:description" content="7 gün, 7+ saat eğitim. Ömür boyu erişim ve 6 ay birebir WhatsApp desteği. Bugün sınırlı kontenjan: $249.">
 <meta property="og:url" content="{{ canonical }}">
-<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'img/instructor.jpg' %}">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'img/travel-business-class.jpg' %}">
 {% endblock %}
 {% block content %}
 <main id="main">
@@ -22,17 +22,10 @@
       </div>
       {% if cancelled %}<p class="tb-notice" role="status">Ödeme tamamlanmadı. Hazır olduğunda tekrar katılabilirsin.</p>{% endif %}
     </div>
-    <aside class="tb-pass" aria-label="Bootcamp özeti">
-      <div class="tb-pass-top"><span>YENİ BİR SEYAHAT ANLAYIŞI</span><span aria-hidden="true">↗</span></div>
-      <div class="tb-pass-art" aria-hidden="true">
-        <svg viewBox="0 0 400 245" fill="none"><circle cx="200" cy="134" r="102"/><ellipse cx="200" cy="134" rx="53" ry="102"/><ellipse cx="200" cy="134" rx="102" ry="38"/><path d="M98 134h204M200 32v204"/><path class="tb-flight-path" d="M52 187Q200 -13 348 87"/><circle class="tb-route-dot" cx="52" cy="187" r="4"/><circle class="tb-route-dot" cx="348" cy="87" r="4"/></svg>
-        <span class="tb-globe-plane">✈</span>
-        <span class="tb-country-count">103<small>/ 196 ÜLKE</small></span>
-      </div>
-      <div class="tb-pass-route"><div><small>BAŞLANGIÇ</small><strong>Economy</strong></div><span aria-hidden="true">⟶</span><div><small>HEDEF</small><strong>Business</strong></div></div>
-      <div class="tb-pass-stub"><div><small>BİR SONRAKİ GRUP</small><strong>{{ next_monday }} Pazartesi</strong></div><span class="tb-pass-seal" aria-hidden="true">VG</span></div>
-      <div class="tb-pass-bottom">7 GÜN <span>DAHA AKILLI SEYAHAT ET.</span> ∞ ERİŞİM</div>
-    </aside>
+    <figure class="tb-hero-photo">
+      <img src="{% static 'img/travel-business-class.jpg' %}" alt="Volkan Güler Business Class uçuşunda" width="2048" height="1153" fetchpriority="high">
+      <figcaption><span>🌍 103 / 196 ÜLKE</span><strong>Deneyimden stratejiye.</strong><small>Bir sonraki grup: {{ next_monday }} Pazartesi</small></figcaption>
+    </figure>
   </div>
 </section>
 <section class="tb-section tb-wrap" id="ogreneceklerin">

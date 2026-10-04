@@ -64,11 +64,19 @@ class TravelTests(TestCase):
             response = self.client.post(reverse('landing:travel_checkout'), HTTP_ACCEPT='application/json')
         self.assertEqual(response.json()['url'], 'https://checkout.stripe.com/test')
 
-    @override_settings(TRAVEL_BOOTCAMP_WEBHOOK_SECRET='')
-    def test_checkout_closed_without_webhook_configuration(self):
+    @override_settings(STRIPE_SECRET_KEY='')
+    def test_checkout_closed_without_stripe_key(self):
         with patch('landing.travel.stripe.checkout.Session.create') as create:
             self.assertEqual(self.client.post(reverse('landing:travel_checkout')).status_code, 503)
             create.assert_not_called()
+
+    @override_settings(TRAVEL_BOOTCAMP_WEBHOOK_SECRET='')
+    def test_direct_checkout_without_webhook_does_not_mark_paid(self):
+        with patch('landing.travel.stripe.checkout.Session.create', return_value=SimpleNamespace(url='https://checkout.stripe.com/c/pay/cs_test')):
+            response = self.client.get(reverse('landing:travel_checkout'))
+        self.assertEqual(response.status_code, 303)
+        self.assertEqual(response.url, 'https://checkout.stripe.com/c/pay/cs_test')
+        self.assertEqual(TravelRegistration.objects.count(), 0)
 
     def test_valid_webhook_persists_required_fields(self):
         self.assertEqual(self.deliver().status_code, 200)

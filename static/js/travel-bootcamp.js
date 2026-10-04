@@ -7,30 +7,10 @@
       window.dispatchEvent(new CustomEvent(name, {detail: {location}}));
     } catch (_) { /* Analytics must never prevent checkout. */ }
   }
-  document.querySelectorAll('.tb-checkout').forEach(form => {
-    form.addEventListener('submit', async event => {
-      event.preventDefault();
-      const buttons = document.querySelectorAll('.tb-checkout button');
-      const error = form.querySelector('.tb-checkout-error');
-      error.textContent = '';
-      buttons.forEach(button => { button.disabled = true; });
-      form.setAttribute('aria-busy', 'true');
-      track('travel_bootcamp_cta_click', form.dataset.location);
-      try {
-        const response = await fetch(form.action, {
-          method: 'POST', body: new FormData(form), headers: {'Accept': 'application/json'}, credentials: 'same-origin'
-        });
-        if (!response.ok) throw new Error('Checkout unavailable');
-        const data = await response.json();
-        const url = new URL(data.url);
-        if (url.protocol !== 'https:' || url.hostname !== 'checkout.stripe.com') throw new Error('Invalid Checkout URL');
-        track('travel_bootcamp_checkout', form.dataset.location);
-        window.location.assign(url.href);
-      } catch (_) {
-        error.textContent = 'Ödeme başlatılamadı. Tekrar dene veya volkan@grcustasi.com adresine yaz.';
-        buttons.forEach(button => { button.disabled = false; });
-        form.removeAttribute('aria-busy');
-      }
+  document.querySelectorAll('.tb-direct-checkout').forEach(link => {
+    link.addEventListener('click', () => {
+      track('travel_bootcamp_cta_click', link.dataset.location);
+      track('travel_bootcamp_checkout', link.dataset.location);
     });
   });
   const pending = document.querySelector('[data-payment-pending]');

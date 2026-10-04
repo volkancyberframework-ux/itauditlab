@@ -1,4 +1,1 @@
-<form method="post" action="{% url 'landing:travel_checkout' %}" class="tb-checkout" data-location="{{ location }}">
-  {% csrf_token %}<button class="tb-button" type="submit">Travel Bootcamp’e Katıl — $249</button>
-  <span class="tb-checkout-error" role="alert"></span>
-</form>
+<a href="{% url 'landing:travel_checkout' %}" class="tb-button tb-direct-checkout" data-location="{{ location }}">Travel Bootcamp’e Katıl — $249</a>

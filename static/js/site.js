@@ -74,6 +74,6 @@ if(newsletterModal&&newsletterForm){
     try{const response=await fetch(newsletterForm.dataset.newsletterUrl,{method:'POST',body:data,headers:{'X-Requested-With':'XMLHttpRequest'}}),json=await response.json();if(!response.ok)throw json;newsletterForm.closest('.newsletter-offer').hidden=true;$('.newsletter-brand',newsletterModal).hidden=true;$('.newsletter-success',newsletterModal).hidden=false;localStorage.setItem(newsletterSeen,'true')}
     catch(json){error.textContent=json.message||'Kayıt tamamlanamadı. Lütfen yeniden dene.';button.disabled=false}
   });
-  if(!quizAutoOpen&&!localStorage.getItem(newsletterSeen))setTimeout(()=>{if(!modal?.open)newsletterModal.showModal()},1400);
+  if(!document.querySelector('#student-package-modal')&&!quizAutoOpen&&!localStorage.getItem(newsletterSeen))setTimeout(()=>{if(!modal?.open)newsletterModal.showModal()},1400);
 }
 })();

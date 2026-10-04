@@ -13,7 +13,7 @@ from .forms import CorporateInquiryForm, LeadForm, PartnerApplicationForm, Waiti
 from .models import AssessmentSession, Certificate, JobMarketCount, NewsletterSubscriber, SiteSetting
 from .traffic import period_page_views, period_unique_visitors, traffic_stats
 from .curriculum import CURRICULUM, CURRICULUM_STATS
-from .bootcamp_catalog import BOOTCAMPS, BOOTCAMPS_BY_KEY
+from .bootcamp_catalog import BOOTCAMPS, BOOTCAMPS_BY_KEY, STUDENT_PACKAGE
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +39,7 @@ def home(request):
     return render(request, 'landing/index.html', {
         'site': site, 'payment_url': payment_url, 'jobs': JobMarketCount.objects.all(),
         'curriculum': CURRICULUM, 'curriculum_stats': CURRICULUM_STATS,
-        'bootcamps': BOOTCAMPS,
+        'bootcamps': BOOTCAMPS, 'student_package': STUDENT_PACKAGE,
         'open_assessment': request.path.rstrip('/').endswith('kariyer-pusulasi'),
     })
 

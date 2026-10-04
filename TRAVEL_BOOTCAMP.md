@@ -1,7 +1,7 @@
 # Travel Bootcamp
 
 Six-section Django landing page: `/travelbootcamp` (also accepts a trailing slash).
-Every CTA posts to the single named route `landing:travel_checkout`. The server
+Every CTA links directly to the single named route `landing:travel_checkout`. The server
 creates a new $249 USD Stripe-hosted Checkout URL automatically, so no manually
 supplied Payment Link is required. Price, currency and product identity are
 server-owned constants in `landing/travel.py`.
@@ -20,8 +20,9 @@ and `checkout.session.async_payment_succeeded`. Save its signing secret in the
 Render environment; never commit it or put it in client code.
 
 Apply migrations using the existing Render pre-deploy command (`python manage.py
-migrate --noinput`). Checkout fails closed until the key and signing secret are
-configured. No existing checkout route is changed.
+migrate --noinput`). Checkout requires the Stripe key; the signing secret is independently required for
+automated registration and Telegram notifications. Missing webhook configuration
+does not prevent opening Stripe Checkout. No existing checkout route is changed.
 
 The existing Telegram helper uses `GRCUSTASI_TELEGRAM_BOT_TOKEN` and
 `GRCUSTASI_TELEGRAM_ADMIN_CHAT_ID`, falling back to the existing legacy variables.
@@ -74,7 +75,7 @@ python manage.py makemigrations --check --dry-run
 
 Browser verification: 390px mobile layout has no horizontal overflow, six sections,
 consistent CTAs, working FAQ and recoverable checkout errors. Reduced-motion settings
-disable animation. JavaScript-free checkout works with ordinary POST/303 redirect.
+disable animation. JavaScript-free checkout works with a direct GET/303 redirect.
 
 ## Current activation status (4 October 2026)
 
@@ -88,3 +89,7 @@ The scoped `makemigrations landing --check --dry-run` passes. The repository-wid
 migration check reports pre-existing unmigrated `core` model changes (Bootcamp,
 NewsletterLead, PageVisit, BootcampInterest and DigitalProduct.difficulty); this
 change deliberately does not generate or apply unrelated core migrations.
+
+Update: the CTA now goes directly to server-generated Stripe Checkout even while webhook
+configuration is pending, as requested. This does not bypass webhook verification or
+create paid records from success URLs.

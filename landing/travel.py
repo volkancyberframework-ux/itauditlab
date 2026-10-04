@@ -16,7 +16,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.http import require_GET, require_POST, require_http_methods
 
 from .models import TravelPayment, TravelRegistration
 
@@ -55,10 +55,10 @@ def page(request):
 
 
 @never_cache
-@require_POST
+@require_http_methods(['GET', 'POST'])
 def checkout(request):
     # The same local endpoint is used by every CTA. No hand-made Payment Link needed.
-    if not settings.STRIPE_SECRET_KEY or not settings.TRAVEL_BOOTCAMP_WEBHOOK_SECRET:
+    if not settings.STRIPE_SECRET_KEY:
         return render(request, 'landing/travel_success.html', {'unavailable': True}, status=503)
     base = settings.PUBLIC_BASE_URL.rstrip('/')
     try:

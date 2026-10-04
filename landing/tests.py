@@ -119,6 +119,17 @@ class LandingTests(TestCase):
         self.assertEqual(payload['line_items'][0]['price_data']['product_data']['name'], 'CISA Bootcamp')
         self.assertEqual(payload['line_items'][0]['price_data']['unit_amount'], 8_999_900)
 
+    @override_settings(STRIPE_SECRET_KEY='sk_test_placeholder')
+    def test_student_package_checkout_uses_13999_try(self):
+        with patch('stripe.checkout.Session.create') as create_session:
+            create_session.return_value.url = 'https://checkout.stripe.com/student'
+            response = self.client.post(reverse('landing:checkout'), {'product': 'grc_student', 'price': '1'})
+        self.assertEqual(response.status_code, 302)
+        payload = create_session.call_args.kwargs
+        self.assertEqual(payload['metadata']['product'], 'grc_student')
+        self.assertEqual(payload['line_items'][0]['price_data']['unit_amount'], 1_399_900)
+        self.assertEqual(payload['line_items'][0]['price_data']['currency'], 'try')
+
     def test_checkout_rejects_unknown_bootcamp(self):
         response = self.client.post(reverse('landing:checkout'), {'product': 'unknown'})
         self.assertEqual(response.status_code, 400)
