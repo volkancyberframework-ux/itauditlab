@@ -55,6 +55,7 @@ class WebPaymentTests(TestCase):
             response=self.client.post('/mobiluygulama/checkout',{'token':token_for(self.user),'amount':'1','user_id':'999'})
             self.assertEqual(response.status_code,303)
             kwargs=create.call_args.kwargs
+            self.assertNotIn('payment_method_types',kwargs)
             self.assertEqual(kwargs['client_reference_id'],str(self.user.pk));self.assertEqual(kwargs['line_items'][0]['price_data']['unit_amount'],209900)
         self.assertEqual(self.client.post('/mobiluygulama/checkout',{'token':'tampered'}).status_code,400)
 

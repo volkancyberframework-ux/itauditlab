@@ -86,7 +86,6 @@ def checkout(request):
         session = stripe.checkout.Session.create(
             api_key=settings.STRIPE_SECRET_KEY, mode='payment',
             customer_email=user.email, client_reference_id=str(user.pk),
-            payment_method_types=['card'],
             line_items=[{'price_data': {'currency': 'try', 'unit_amount': AMOUNT,
                 'product_data': {'name': 'GRC Ustası • 1 aylık mobil tam erişim'}}, 'quantity': 1}],
             metadata={'product': PRODUCT, 'mobile_user_id': str(user.pk)},
