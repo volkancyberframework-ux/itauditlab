@@ -301,3 +301,17 @@ class MobileSettings(models.Model):
 
     def __str__(self):
         return "Ücretsiz yol ve erişim ayarları"
+
+
+class MobilePayment(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    checkout_session_id = models.CharField(max_length=255, unique=True)
+    payment_intent_id = models.CharField(max_length=255, unique=True)
+    stripe_event_id = models.CharField(max_length=255, unique=True)
+    paid_at = models.DateTimeField()
+    access_until = models.DateTimeField()
+    amount_minor = models.PositiveIntegerField(default=209900)
+
+    class Meta:
+        verbose_name = "Mobil uygulama ödemesi"
+        verbose_name_plural = "Mobil uygulama ödemeleri"

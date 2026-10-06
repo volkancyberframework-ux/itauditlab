@@ -229,3 +229,18 @@ class MobileSettingsAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+
+from .models import MobilePayment
+
+@admin.register(MobilePayment)
+class MobilePaymentAdmin(admin.ModelAdmin):
+    list_display = ('user', 'paid_at', 'access_until', 'amount_minor', 'checkout_session_id')
+    search_fields = ('user__email', 'checkout_session_id', 'payment_intent_id')
+    readonly_fields = ('user', 'paid_at', 'access_until', 'amount_minor', 'checkout_session_id', 'payment_intent_id', 'stripe_event_id')
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False

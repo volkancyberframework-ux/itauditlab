@@ -1,9 +1,11 @@
 from django.urls import path
 from . import views
+from .web_billing import PaymentLink
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 
 urlpatterns = [
+    path("payments/link/", PaymentLink.as_view()),
     path("audio/<int:pk>/", views.AudioDownload.as_view()),
     path("questions/<int:pk>/image/", views.ImageDownload.as_view()),
     path("subscriptions/webhook/", views.BillingWebhook.as_view()),

@@ -165,7 +165,7 @@ def xp(user):
 
 
 def premium(user):
-    return user.mobile_full_access or Subscription.objects.filter(
+    return user.mobile_paid or Subscription.objects.filter(
         user=user,
         status__in=["active", "trial", "grace_period"],
         expires_at__gt=timezone.now(),
@@ -254,6 +254,7 @@ class Profile(MobileView):
                 "xp": total_xp,
                 **level_data(total_xp, request.user),
                 "premium": premium(request.user),
+                "paid_until": request.user.mobile_paid_until,
                 "completed": QuestionAttempt.objects.filter(
                     session__user=request.user, is_correct=True, question__kind__in=[k for k, _ in Question.TYPES if k != "info"]
                 )

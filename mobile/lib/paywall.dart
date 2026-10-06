@@ -1,6 +1,5 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'main.dart' show api;
 import 'theme.dart';
 
@@ -11,88 +10,69 @@ class Paywall extends StatefulWidget {
   State<Paywall> createState() => _PaywallState();
 }
 
-class _PaywallState extends State<Paywall> {
-  Package? product;
+class _PaywallState extends State<Paywall> with WidgetsBindingObserver {
   bool busy = false;
+  bool opened = false;
   String? error;
+
   @override
   void initState() {
     super.initState();
-    load();
+    WidgetsBinding.instance.addObserver(this);
   }
 
-  Future<void> load() async {
-    try {
-      final key = Platform.isIOS
-          ? const String.fromEnvironment('REVENUECAT_IOS_KEY')
-          : const String.fromEnvironment('REVENUECAT_ANDROID_KEY');
-      if (key.isEmpty) {
-        throw Exception('Mağaza üyeliği henüz yapılandırılmadı.');
-      }
-      if (await Purchases.isConfigured) {
-        await Purchases.logIn(widget.userId);
-      } else {
-        await Purchases.configure(
-          PurchasesConfiguration(key)..appUserID = widget.userId,
-        );
-      }
-      final offerings = await Purchases.getOfferings();
-      final packages = offerings.current?.availablePackages ?? [];
-      final matches = packages.where(
-        (p) =>
-            p.storeProduct.identifier == 'grcustasi_premium_monthly' ||
-            p.storeProduct.identifier.startsWith('grcustasi_premium_monthly:'),
-      );
-      if (matches.isEmpty) {
-        throw Exception('Üyelik ürünü mağazada bulunamadı.');
-      }
-      if (mounted) {
-        setState(() => product = matches.first);
-      }
-    } catch (e) {
-      if (mounted) {
-        setState(() => error = '$e');
-      }
-    }
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
-  Future<void> buy(bool restore) async {
-    setState(() {
-      busy = true;
-      error = null;
-    });
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && opened) checkAccess();
+  }
+
+  Future<void> checkAccess() async {
     try {
-      if (restore) {
-        await Purchases.restorePurchases();
-      } else {
-        await Purchases.purchase(PurchaseParams.package(product!));
-      }
-      final result = await api.request('subscriptions/sync/', body: {});
-      if (result['premium'] != true) {
-        throw Exception(
-          'Etkin üyelik bulunamadı. Biraz sonra tekrar deneyebilirsin.',
-        );
-      }
-      if (mounted) {
+      final profile = await api.request('profile/');
+      if (mounted && profile['premium'] == true) {
         Navigator.pop(context);
       }
     } catch (_) {
       if (mounted) {
         setState(
-          () => error =
-              'Üyelik tamamlanamadı. Tekrar deneyebilir veya satın alımını geri yükleyebilirsin.',
+          () => error = 'Erişim kontrol edilemedi. Tekrar deneyebilirsin.',
+        );
+      }
+    }
+  }
+
+  Future<void> openPayment() async {
+    setState(() {
+      busy = true;
+      error = null;
+    });
+    try {
+      final data = await api.request('payments/link/', body: {});
+      final url = Uri.parse(data['url'] as String);
+      if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+        throw Exception('Browser unavailable');
+      }
+      opened = true;
+    } catch (_) {
+      if (mounted) {
+        setState(
+          () => error = 'Ödeme sayfası açılamadı. Tekrar deneyebilirsin.',
         );
       }
     } finally {
-      if (mounted) {
-        setState(() => busy = false);
-      }
+      if (mounted) setState(() => busy = false);
     }
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('GRC Ustası • Tam Erişim')),
+    appBar: AppBar(title: const Text('GRC Ustası • Tam erişim')),
     body: ListView(
       padding: const EdgeInsets.all(24),
       children: [
@@ -101,31 +81,37 @@ class _PaywallState extends State<Paywall> {
           size: 64,
           color: AppColors.primary,
         ),
-        const SizedBox(height: 32),
+        const SizedBox(height: 28),
         Text(
           'Uzmanlığına yatırım yap.',
           style: Theme.of(context).textTheme.headlineLarge,
         ),
         const SizedBox(height: 24),
         const Text(
-          'Tüm yollar, sesli senaryolar, kişisel öğrenme planı ve sesli yanıtlar.',
+          'Tüm öğrenme yolları, interaktif sorular ve gerçek hayat senaryoları.',
         ),
-        const SizedBox(height: 32),
-        if (product != null) ...[
-          PrimaryButton(
-            label: '${product!.storeProduct.priceString} / ay • Tam erişimi aç',
-            busy: busy,
-            onPressed: () => buy(false),
-          ),
+        const SizedBox(height: 28),
+        Text(
+          '2.099 TL / 1 ay',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        const SizedBox(height: 24),
+        PrimaryButton(
+          label: 'GRC Ustası websitesinden öde',
+          busy: busy,
+          onPressed: openPayment,
+        ),
+        const SizedBox(height: 16),
+        const Text(
+          'grcustasi.com/mobiluygulama\nÖdeme doğrulandıktan sonra hesabına 1 aylık tam erişim eklenir. Otomatik yenilenmez.',
+        ),
+        if (opened)
           TextButton(
-            onPressed: busy ? null : () => buy(true),
-            child: const Text('Satın Alımları Geri Yükle'),
+            onPressed: checkAccess,
+            child: const Text('Ödedim • Erişimi kontrol et'),
           ),
-          const Text(
-            'Abonelik otomatik yenilenir. Mağaza hesabından yönetebilir ve iptal edebilirsin.',
-          ),
-        ],
-        if (error != null) Text(error!),
+        if (error != null)
+          Padding(padding: const EdgeInsets.only(top: 16), child: Text(error!)),
       ],
     ),
   );

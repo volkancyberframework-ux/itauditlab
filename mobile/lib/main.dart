@@ -249,7 +249,18 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with WidgetsBindingObserver {
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) load();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
   int tab = 0;
   Map<String, dynamic>? profile;
   List<dynamic> paths = [];
@@ -257,6 +268,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     load();
   }
 
@@ -427,21 +439,22 @@ class _HomeState extends State<Home> {
                   const SizedBox(height: 24),
                   LevelRewards(profile: profile!),
                   const SizedBox(height: 32),
-                  if (profile!['premium'] != true)
-                    TextButton(
-                      onPressed: () async {
-                        await Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) =>
-                                Paywall(userId: profile!['billing_id']),
-                          ),
-                        );
-                        load();
-                      },
-                      child: const Text(
-                        'Tam erişim / Satın alımları geri yükle',
-                      ),
+                  if (profile!['paid_until'] != null)
+                    Text(
+                      'Ücretli erişim bitişi: ${DateTime.parse(profile!['paid_until']).toLocal().toString().substring(0, 16)}',
                     ),
+                  TextButton(
+                    onPressed: () async {
+                      await Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              Paywall(userId: profile!['billing_id']),
+                        ),
+                      );
+                      load();
+                    },
+                    child: const Text('Tam erişim • Üyelik ve ödeme'),
+                  ),
                   PrimaryButton(
                     label: 'Çıkış Yap',
                     onPressed: () async {

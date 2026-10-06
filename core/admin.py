@@ -529,14 +529,41 @@ class QuickStudentCreateForm(forms.Form):
         return cleaned
 
 
+class MobileMembershipFilter(admin.SimpleListFilter):
+    title = "Mobil üyelik"
+    parameter_name = "mobile_membership"
+
+    def lookups(self, request, model_admin):
+        return [("paid", "Ücretli"), ("free", "Ücretsiz")]
+
+    def queryset(self, request, queryset):
+        from django.db.models import Q
+        from django.utils import timezone
+        paid = Q(mobile_full_access=True) | Q(mobile_paid_until__gt=timezone.now())
+        if self.value() == "paid":
+            return queryset.filter(is_mobile=True).filter(paid)
+        if self.value() == "free":
+            return queryset.filter(is_mobile=True).exclude(paid)
+        return queryset
+
+
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
+    readonly_fields = UserAdmin.readonly_fields + ("mobile_paid_tick", "mobile_free_tick")
+    @admin.display(boolean=True, description="Ücretli mobil")
+    def mobile_paid_tick(self, obj):
+        return obj.mobile_paid
+
+    @admin.display(boolean=True, description="Ücretsiz mobil")
+    def mobile_free_tick(self, obj):
+        return obj.mobile_free
+
     list_display = (
         "username", "email", "is_active", "is_staff",
-        "is_first_login", "is_english", "is_turkish", "is_mobile", "mobile_full_access", "mobile_last_date"
+        "is_first_login", "is_english", "is_turkish", "is_mobile", "mobile_paid_tick", "mobile_free_tick", "mobile_full_access", "mobile_paid_until", "mobile_last_date"
     )
     list_filter = UserAdmin.list_filter + (
-        "is_first_login", "is_english", "is_turkish", "is_mobile", "mobile_full_access"
+        "is_first_login", "is_english", "is_turkish", "is_mobile", "mobile_full_access", MobileMembershipFilter
     )
     search_fields = UserAdmin.search_fields + ("email",)
     filter_horizontal = ("allowed_tests",)
@@ -546,7 +573,7 @@ class CustomUserAdmin(UserAdmin):
 
     fieldsets = UserAdmin.fieldsets + (
         (_("Mobile access"), {
-            "fields": ("is_mobile", "mobile_full_access", "mobile_last_date")
+            "fields": ("is_mobile", "mobile_paid_tick", "mobile_free_tick", "mobile_full_access", "mobile_paid_until", "mobile_last_date")
         }),
         (_("Profile flags"), {
             "fields": ("is_first_login", "is_english", "is_turkish")
@@ -559,7 +586,7 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = UserAdmin.add_fieldsets + (
         (_("Mobile access"), {
             "classes": ("wide",),
-            "fields": ("is_mobile", "mobile_full_access", "mobile_last_date")
+            "fields": ("is_mobile", "mobile_full_access", "mobile_paid_until", "mobile_last_date")
         }),
         (_("Profile flags"), {
             "classes": ("wide",),

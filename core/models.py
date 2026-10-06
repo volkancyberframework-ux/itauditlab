@@ -426,6 +426,17 @@ class CustomUser(AbstractUser):
         "Mobil tam erişim", default=False, db_index=True,
         help_text="Bütün öğrenme yollarını açar. Kapalı hesap yalnızca ücretsiz yolu görür.",
     )
+    mobile_paid_until = models.DateTimeField("Ücretli mobil erişim bitişi", null=True, blank=True, db_index=True)
+
+    @property
+    def mobile_paid(self):
+        from django.utils import timezone
+        return self.is_mobile and (self.mobile_full_access or bool(self.mobile_paid_until and self.mobile_paid_until > timezone.now()))
+
+    @property
+    def mobile_free(self):
+        return self.is_mobile and not self.mobile_paid
+
     mobile_last_date = models.DateField(
         "Last date", null=True, blank=True,
         help_text="Mobil erişimin son günü (Türkiye saati). Boşsa sınırsız erişim.",
