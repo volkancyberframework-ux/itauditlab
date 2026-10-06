@@ -1,4 +1,4 @@
-# GRC Ustası 1.0.0 (2) — App Store submission
+# GRC Ustası 1.0.0 (3) — App Store submission
 
 Metadata is in metadata.json. Initial release targets portrait iPhone; iPad-specific screenshots are not required. Store review determines eligibility of account-based content access; removing external purchase calls to action is not an approval guarantee for interactive educational content.
 
@@ -20,6 +20,8 @@ Upload the resulting IPA through Xcode Organizer/Transporter or authenticated Ap
 
 App Store Connect record: https://appstoreconnect.apple.com/apps/6819632974/distribution
 
-Version 1.0.0 build 2 was exported with App Store distribution signing and uploaded successfully via Xcode (Upload succeeded / EXPORT SUCCEEDED). The profile build was separately installed and launched on the connected iPhone. Production commit cd59e36 is live; public support/privacy pages return HTTP 200. Flutter analysis, 25 mobile tests and 77 backend tests passed. Four real iPhone screenshots are in screenshots/.
+Version 1.0.0 builds 2 and 3 were exported with App Store distribution signing and uploaded successfully via Xcode (Upload succeeded / EXPORT SUCCEEDED). The profile build was separately installed and launched on the connected iPhone. Production commit 53858c3 is live; public support/privacy pages return HTTP 200. Flutter analysis, 25 mobile tests and 81 backend tests passed (22 affected backend tests rerun after final edits). Four real iPhone screenshots are in screenshots/.
 
-Remaining: verify/save store text (native Safari timed out during entry), upload screenshots, complete categories/subtitle, privacy disclosures and age/content-rights questionnaire, free download price/availability, enter approved demo credentials privately, select processed build, submit review. No review submission or publication has been completed. The initial agreement/certificate error was resolved before the successful export.
+Remaining: verify/save store text (native Safari timed out during entry), upload screenshots, complete categories/subtitle, privacy disclosures and age/content-rights questionnaire, free download price/availability, enter approved demo credentials privately (user approved sharing mobile.demo@grcustasi.com credentials with Apple review), select processed build 3, submit review. No review submission or publication has been completed. The initial agreement/certificate error was resolved before the successful export.
+
+Build 3 adds email verification to public registrations and new website-payment accounts. Existing/trusted administrator-created accounts remain verified. Verification links last 24 hours and require explicit CSRF-protected confirmation; no session is issued before verification. Resend uses a generic response and registration throttling. Build 3 has been installed and launched on the connected iPhone. Safari native UI remains unresponsive; Chrome is accessible but is awaiting the user’s App Store Connect sign-in.
