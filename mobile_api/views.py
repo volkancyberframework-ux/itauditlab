@@ -135,6 +135,10 @@ def accessible_questions(path, user):
     return qs
 
 
+def session_size(path):
+    return 10 if path.preferences.get("demo_all_types") is True else 8
+
+
 def path_data(path, user):
     total = path.questions.filter(published=True).count()
     progress = UserPathProgress.objects.filter(user=user, path=path).first()
@@ -149,6 +153,7 @@ def path_data(path, user):
         "color": path.color,
         "difficulty": path.difficulty,
         "minutes": path.minutes,
+        "session_size": session_size(path),
         "premium": path.premium,
         "question_count": total,
         "completed": done,
@@ -316,7 +321,7 @@ class Sessions(MobileView):
         progress = UserPathProgress.objects.filter(user=request.user, path=p).first()
         if progress:
             qs = qs.exclude(pk__in=progress.completed.values("pk"))
-        ids = list(qs.values_list("pk", flat=True)[:8])
+        ids = list(qs.values_list("pk", flat=True)[:session_size(p)])
         if not ids:
             raise ValidationError("Bu yoldaki erişilebilir görevleri tamamladın.")
         s = LearningSession.objects.create(user=request.user, path=p, questions=ids)
@@ -499,7 +504,7 @@ class Voice(MobileView):
                     s.save(update_fields=["completed_at"])
         return Response(
             {
-                "detail": "Yanıtın bize ulaştı 🎙️ İnceledikten sonra geri bildirimini e-posta adresine göndereceğiz.",
+                "detail": "Kaydın alındı 🎙️ Yönetici incelemesi bekleniyor; bu görev için henüz XP verilmedi.",
                 "session": session_data(s, request),
             }
         )

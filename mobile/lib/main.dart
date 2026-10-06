@@ -820,7 +820,7 @@ class _SessionState extends State<Session> {
               ),
               const SizedBox(height: 16),
               Text(
-                'En fazla 8 soru · yaklaşık ${widget.path['minutes']} dakika',
+                'En fazla ${widget.path['session_size'] ?? 8} soru · yaklaşık ${widget.path['minutes']} dakika',
               ),
               const SizedBox(height: 32),
               PrimaryButton(label: 'Başla', busy: busy, onPressed: start),

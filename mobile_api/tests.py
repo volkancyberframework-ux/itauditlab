@@ -485,3 +485,51 @@ class MobileAccessTests(TestCase):
         }, format="json")
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(mail.outbox), 0)
+
+
+class AllTypesDemoTests(TestCase):
+    def setUp(self):
+        self.user = get_user_model().objects.create_user(username='all-types', is_mobile=True)
+        self.client = APIClient()
+        self.client.force_authenticate(self.user)
+        self.path = LearningPath.objects.get(title='Demo • Tüm Soru Tipleri', owner=None)
+
+    def test_every_type_once_in_one_session_and_assets_authorized(self):
+        self.assertCountEqual(self.path.questions.values_list('kind', flat=True), [k for k, _ in Question.TYPES])
+        response = self.client.post('/api/mobile/v1/sessions/', {'path_id': self.path.pk}, format='json')
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.data['total'], 10)
+        self.assertEqual(response.data['path']['session_size'], 10)
+        from .storage import PrivateVoiceStorage
+        storage = PrivateVoiceStorage()
+        for name, signature in [('demo/access-review.png', b'\x89PNG'), ('demo/mfa.m4a', None)]:
+            with storage.open(name) as file:
+                data = file.read()
+            self.assertGreater(len(data), 1000)
+            if signature:
+                self.assertTrue(data.startswith(signature))
+            else:
+                self.assertIn(b'ftyp', data[:32])
+        with self.assertRaises(FileNotFoundError):
+            storage.open('demo/../storage.py')
+        image = self.path.questions.get(kind='image')
+        audio = self.path.questions.get(kind='audio')
+        for url in [f'/api/mobile/v1/questions/{image.pk}/image/', f'/api/mobile/v1/audio/{audio.audio_id}/']:
+            result = self.client.get(url)
+            self.assertEqual(result.status_code, 200)
+            result.close()
+            self.client.force_authenticate(None)
+            self.assertIn(self.client.get(url).status_code, [401, 403])
+            self.client.force_authenticate(self.user)
+
+    def test_nine_automatic_questions_advance_to_voice(self):
+        s = self.client.post('/api/mobile/v1/sessions/', {'path_id': self.path.pk}, format='json').data
+        for q in self.path.questions.exclude(kind='voice'):
+            self.assertEqual(s['question']['id'], q.pk)
+            value = q.answer[0] if q.kind in ['text', 'fill_blank'] else q.answer
+            result = self.client.post(f"/api/mobile/v1/sessions/{s['id']}/answer/", {'question_id': q.pk, 'answer': value}, format='json')
+            self.assertEqual(result.status_code, 200, result.data)
+            self.assertTrue(result.data['correct'])
+            s = result.data['session']
+        self.assertEqual(s['question']['kind'], 'voice')
+        self.assertEqual(s['answered'], 9)
