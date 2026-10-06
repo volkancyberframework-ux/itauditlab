@@ -98,7 +98,10 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         theme: AppTheme.create(Brightness.light),
-        home: Login(onLogin: () {}),
+        home: MediaQuery(
+          data: const MediaQueryData(disableAnimations: true),
+          child: Login(onLogin: () {}),
+        ),
       ),
     );
     final signup = find.text('Yeni misin? Ücretsiz hesap oluştur');

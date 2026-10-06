@@ -13,9 +13,10 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenRefreshView
 from .access import (
     MobileAccessPermission, MobileTokenRefreshSerializer,
-    MobilePasswordResetForm, check_mobile_access,
+    MobilePasswordResetForm, check_mobile_access, validate_mobile_password,
 )
 from .levels import level_data
+from .contacts import contact_data
 from .models import (
     LearningPath,
     Question,
@@ -72,7 +73,6 @@ class Register(Login):
     throttle_classes = [RegistrationThrottle]
 
     def post(self, request):
-        from django.contrib.auth.password_validation import validate_password
         from django.core.validators import validate_email
         from django.db import IntegrityError
         import hashlib
@@ -95,10 +95,7 @@ class Register(Login):
         user = User(username=username, email=email, first_name=first, last_name=last,
                     is_mobile=True, mobile_full_access=False, mobile_last_date=None,
                     is_staff=False, is_superuser=False)
-        try:
-            validate_password(password, user)
-        except DjangoValidationError as error:
-            raise ValidationError(" ".join(error.messages))
+        validate_mobile_password(password, user)
         try:
             with transaction.atomic():
                 if User.objects.filter(email__iexact=email, is_mobile=True).exists():
@@ -109,6 +106,38 @@ class Register(Login):
         except IntegrityError:
             raise ValidationError("Bu e-posta için mobil hesap zaten var.")
         return Response({"access": str(refresh.access_token), "refresh": str(refresh)}, status=201)
+
+
+class PasswordChangeThrottle(UserRateThrottle):
+    scope = "mobile_password"
+
+
+class ChangePassword(MobileView):
+    throttle_classes = [PasswordChangeThrottle]
+
+    def post(self, request):
+        from rest_framework_simplejwt.token_blacklist.models import OutstandingToken, BlacklistedToken
+        current = request.data.get("current_password")
+        password = request.data.get("new_password")
+        confirmation = request.data.get("confirm_password")
+        if any(not isinstance(value, str) or not value or len(value) > 256 for value in [current, password, confirmation]):
+            raise ValidationError("Mevcut şifreni ve yeni şifreni iki kez gir.")
+        if password != confirmation:
+            raise ValidationError("Yeni şifreler birbiriyle eşleşmiyor.")
+        with transaction.atomic():
+            user = get_user_model().objects.select_for_update().get(pk=request.user.pk)
+            if not user.check_password(current):
+                raise ValidationError("Mevcut şifren doğru değil.")
+            if current == password:
+                raise ValidationError("Yeni şifren mevcut şifrenden farklı olmalı.")
+            validate_mobile_password(password, user)
+            user.set_password(password)
+            user.save(update_fields=["password"])
+            for token in OutstandingToken.objects.filter(user=user, expires_at__gt=timezone.now()):
+                BlacklistedToken.objects.get_or_create(token=token)
+            refresh = RefreshToken.for_user(user)
+        return Response({"detail": "Şifren yenilendi. Diğer oturumların kapatıldı.",
+                         "access": str(refresh.access_token), "refresh": str(refresh)})
 
 
 class Refresh(TokenRefreshView):
@@ -221,6 +250,7 @@ class Profile(MobileView):
                 ),
                 "first_name": request.user.first_name or request.user.username,
                 "full_name": request.user.get_full_name(),
+                "contact": contact_data(),
                 "xp": total_xp,
                 **level_data(total_xp, request.user),
                 "premium": premium(request.user),

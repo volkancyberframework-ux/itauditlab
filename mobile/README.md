@@ -153,3 +153,11 @@ Choose the one free shared, published learning path in **Mobile API → Mobil uy
 Create `Question.kind=info`, assign it to a path, and set its order between questions. The admin page editor supports multiple swipe pages, bold/italic toolbar buttons and optional tap-to-reveal text. `card_pages` remains the stored JSON representation. Reading a card uses `POST /sessions/<id>/continue/`, is idempotent and grants no XP. Progress denominators exclude information cards. Sessions contain up to eight questions (ten for the all-types demo), plus intervening cards, bounded to 50 steps. A 250-question path uses the same fixed-size home card as a ten-question path.
 
 The all-types demo now contains ten questions and a three-page information card after its first three questions. Voice questions offer either a canonical written answer or a recording; only written answers are graded automatically. Recording uploads are stored privately and receive the 24-hour email-review message. The VoiceSubmission admin shows review_due_at and feedback_sent_at; sending requires existing Django SMTP configuration.
+
+## Profile contact, password renewal and animated welcome
+
+Mobile settings now contains **Volkan WhatsApp numarası**, initially `0032 476 073 171`. Profile returns a normalized international number; the button launches the native WhatsApp conversation, with a `wa.me` browser fallback, without sending or pre-filling any message. Clear the number to hide the contact button. No phone number is hardcoded in Flutter.
+
+Authenticated `POST /auth/change-password/` requires the current password, a validated new password and matching confirmation. It locks the account, changes the password, blacklists outstanding unexpired refresh tokens and returns fresh tokens for the current device. Existing access tokens fail the configured password revocation check. The profile form obscures all password fields and prevents repeat submission. Forgotten-password email reset remains available on login.
+
+The splash and login share a gently floating logo, orbiting accents, staggered topic chips and rotating case/lab/exam/scenario/interaction headlines. Reduced motion stops continuous animation and topic rotation. The native OS launch screen is followed by the animated Flutter welcome.

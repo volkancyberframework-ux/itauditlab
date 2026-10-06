@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>LSApplicationQueriesSchemes</key>
+	<array><string>whatsapp</string></array>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Senaryo sorularına sesli yanıt verebilmen için mikrofonunu kullanıyoruz.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>

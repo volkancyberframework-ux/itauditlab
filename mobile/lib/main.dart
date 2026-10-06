@@ -12,6 +12,8 @@ import 'dashboard_widgets.dart';
 import 'interactive_questions.dart';
 import 'level_rewards.dart';
 import 'information_card.dart';
+import 'brand_welcome.dart';
+import 'profile_actions.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,7 +53,7 @@ class _EntryState extends State<Entry> {
   Future<void> boot() async {
     await Future.wait([
       api.restore(),
-      Future<void>.delayed(const Duration(milliseconds: 1400)),
+      Future<void>.delayed(const Duration(milliseconds: 2100)),
     ]);
     if (mounted) {
       setState(() {
@@ -64,19 +66,7 @@ class _EntryState extends State<Entry> {
   @override
   Widget build(BuildContext context) {
     if (!ready) {
-      return Scaffold(
-        body: Center(
-          child: TweenAnimationBuilder<double>(
-            tween: Tween(begin: 0, end: 1),
-            duration: const Duration(seconds: 1),
-            builder: (_, v, child) => Opacity(
-              opacity: v,
-              child: Transform.scale(scale: .9 + .1 * v, child: child),
-            ),
-            child: Image.asset('assets/logo.png', width: 200),
-          ),
-        ),
-      );
+      return const WelcomeSplash();
     }
     return authenticated
         ? Home(onLogout: () => setState(() => authenticated = false))
@@ -152,33 +142,15 @@ class _LoginState extends State<Login> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(
-                  child: Image.asset(
-                    'assets/logo.png',
-                    width: 200,
-                    height: 200,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                const Center(
-                  child: Text(
-                    'UZMANLIĞA GİDEN YOL',
-                    style: TextStyle(
-                      color: AppColors.teal,
-                      letterSpacing: 2,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 11,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 28),
+                const BrandWelcome(),
+                const SizedBox(height: 24),
                 Text(
-                  'Küçük adımlar.\nGüçlü uzmanlık.',
-                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    fontWeight: FontWeight.w800,
+                  'Öğren. Uygula. Ustalaş.',
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.w900,
                   ),
                 ),
-                const SizedBox(height: 14),
+                const SizedBox(height: 12),
                 Text(
                   registering
                       ? 'Ücretsiz hesabını oluştur, başlangıç yolunu hemen dene.'
@@ -422,6 +394,35 @@ class _HomeState extends State<Home> {
                     profile!['premium']
                         ? 'Tam erişim • tüm öğrenme yolları'
                         : 'Ücretsiz başlangıç • bir öğrenme yolu',
+                  ),
+                  const SizedBox(height: 24),
+                  ProfileActions(
+                    contact: (profile!['contact'] as Map?)
+                        ?.cast<String, dynamic>(),
+                    onPassword: () async {
+                      final changed = await Navigator.of(context).push<bool>(
+                        MaterialPageRoute(
+                          builder: (_) => PasswordChange(
+                            onSave: (current, password, confirm) async {
+                              final result = await api.request(
+                                'auth/change-password/',
+                                body: {
+                                  'current_password': current,
+                                  'new_password': password,
+                                  'confirm_password': confirm,
+                                },
+                              );
+                              await api.save(result);
+                            },
+                          ),
+                        ),
+                      );
+                      if (changed == true && context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Şifren yenilendi.')),
+                        );
+                      }
+                    },
                   ),
                   const SizedBox(height: 24),
                   LevelRewards(profile: profile!),

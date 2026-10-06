@@ -3,6 +3,7 @@ from django.conf import settings
 from django.db import models
 from django.core.validators import MinValueValidator
 from .storage import PrivateVoiceStorage
+from .contacts import validate_whatsapp_number
 
 
 class LearningPath(models.Model):
@@ -282,6 +283,12 @@ class MobileSettings(models.Model):
         LearningPath, null=True, blank=True, on_delete=models.SET_NULL,
         verbose_name="Ücretsiz öğrenme yolu",
         help_text="Ücretsiz hesaplara yalnızca bu yayınlanmış, ortak yol gösterilir. Soruların eski premium işaretleri erişimi etkilemez.",
+    )
+
+    whatsapp_phone = models.CharField(
+        "Volkan WhatsApp numarası", max_length=32, blank=True, default="0032 476 073 171",
+        validators=[validate_whatsapp_number],
+        help_text="Ülke koduyla yazın (+32 veya 0032). Boş bırakılırsa iletişim düğmesi gizlenir.",
     )
 
     class Meta:

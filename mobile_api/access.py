@@ -34,3 +34,16 @@ class MobileTokenRefreshSerializer(TokenRefreshSerializer):
 class MobilePasswordResetForm(PasswordResetForm):
     def get_users(self, email):
         return (user for user in super().get_users(email) if user.is_mobile)
+
+
+def validate_mobile_password(password, user):
+    from django.contrib.auth.password_validation import validate_password
+    from django.core.exceptions import ValidationError as DjangoValidationError
+    from django.utils.translation import override
+    from rest_framework.exceptions import ValidationError
+
+    with override("tr"):
+        try:
+            validate_password(password, user)
+        except DjangoValidationError as error:
+            raise ValidationError(" ".join(error.messages))

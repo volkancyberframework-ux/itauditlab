@@ -238,7 +238,7 @@ SIMPLE_JWT = {
     'CHECK_REVOKE_TOKEN': True,
 }
 REST_FRAMEWORK = {
-    'DEFAULT_THROTTLE_RATES': {'mobile': '120/min', 'mobile_login': '5/min', 'mobile_register': '10/hour'},
+    'DEFAULT_THROTTLE_RATES': {'mobile': '120/min', 'mobile_login': '5/min', 'mobile_register': '10/hour', 'mobile_password': '5/min'},
 }
 
 MOBILE_VOICE_ROOT = config('MOBILE_VOICE_ROOT', default='/data/mobile_private')

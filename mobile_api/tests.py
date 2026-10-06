@@ -655,3 +655,59 @@ class MobileProductTests(TestCase):
         form = QuestionForm(data={'kind':'info', 'prompt':'Read', 'card_pages':'[{"body": 9}]', 'base_xp':0, 'order':0, 'difficulty':'beginner'})
         self.assertFalse(form.is_valid())
         self.assertIn('card_pages', form.errors)
+
+
+class ProfileContactAndPasswordTests(TestCase):
+    def setUp(self):
+        from django.core.cache import cache
+        cache.clear()
+        self.user = get_user_model().objects.create_user(username='password-test', email='password@example.com', password='Original!Pass1357', is_mobile=True)
+        self.client = APIClient()
+        self.client.force_authenticate(self.user)
+
+    def test_admin_number_formats_normalize_and_profile_updates(self):
+        from .contacts import whatsapp_number
+        from .models import MobileSettings
+        from django.core.exceptions import ValidationError
+        for value in ['0032 476 073 171', '+32 476 073 171', '32476073171']:
+            self.assertEqual(whatsapp_number(value), '32476073171')
+        for value in ['0476 073 171', 'https://example.com', '123', '+32hello']:
+            with self.assertRaises(ValidationError):
+                whatsapp_number(value)
+        MobileSettings.objects.filter(pk=1).update(whatsapp_phone='0032 476 073 171')
+        contact = self.client.get('/api/mobile/v1/profile/').data['contact']
+        self.assertEqual(contact['whatsapp_url'], 'https://wa.me/32476073171')
+        MobileSettings.objects.filter(pk=1).update(whatsapp_phone='+90 532 123 45 67')
+        self.assertEqual(self.client.get('/api/mobile/v1/profile/').data['contact']['phone'], '905321234567')
+        MobileSettings.objects.filter(pk=1).update(whatsapp_phone='')
+        self.assertIsNone(self.client.get('/api/mobile/v1/profile/').data['contact']['whatsapp_url'])
+
+    def change(self, current, password, confirm=None):
+        return self.client.post('/api/mobile/v1/auth/change-password/', {'current_password':current, 'new_password':password, 'confirm_password':password if confirm is None else confirm}, format='json')
+
+    def test_wrong_current_mismatch_and_weak_password_do_not_change_credentials(self):
+        for current, password, confirm in [('Wrong!Pass1357', 'New!Pass02468', None), ('Original!Pass1357','New!Pass02468','different'), ('Original!Pass1357','123',None), ('Original!Pass1357','Original!Pass1357',None)]:
+            self.assertEqual(self.change(current,password,confirm).status_code, 400)
+        self.user.refresh_from_db()
+        self.assertTrue(self.user.check_password('Original!Pass1357'))
+
+    def test_password_change_revokes_old_tokens_and_returns_a_working_new_session(self):
+        from rest_framework_simplejwt.tokens import RefreshToken
+        old = RefreshToken.for_user(self.user)
+        old_access = str(old.access_token)
+        result = self.change('Original!Pass1357', 'New!Pass02468')
+        self.assertEqual(result.status_code, 200, result.data)
+        self.user.refresh_from_db()
+        self.assertTrue(self.user.check_password('New!Pass02468'))
+        self.client.force_authenticate(None)
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer '+old_access)
+        self.assertEqual(self.client.get('/api/mobile/v1/profile/').status_code, 401)
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer '+result.data['access'])
+        self.assertEqual(self.client.get('/api/mobile/v1/profile/').status_code, 200)
+        self.client.credentials()
+        self.assertEqual(self.client.post('/api/mobile/v1/auth/refresh/', {'refresh':str(old)}, format='json').status_code, 401)
+        self.assertEqual(self.client.post('/api/mobile/v1/auth/refresh/', {'refresh':result.data['refresh']}, format='json').status_code, 200)
+
+    def test_password_change_requires_login(self):
+        self.client.force_authenticate(None)
+        self.assertEqual(self.change('Original!Pass1357','New!Pass02468').status_code, 401)

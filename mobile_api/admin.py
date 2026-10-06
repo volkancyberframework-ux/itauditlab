@@ -214,7 +214,7 @@ class UserLevelRewardAdmin(admin.ModelAdmin):
 
 @admin.register(MobileSettings)
 class MobileSettingsAdmin(admin.ModelAdmin):
-    fields = ['free_path']
+    fields = ['free_path', 'whatsapp_phone']
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'free_path':

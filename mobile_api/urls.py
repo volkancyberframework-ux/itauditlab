@@ -27,6 +27,7 @@ urlpatterns = [
     path("subscriptions/sync/", views.SubscriptionSync.as_view()),
     path("submissions/<int:pk>/audio/", views.VoiceDownload.as_view()),
     path("sessions/<uuid:pk>/voice/", views.Voice.as_view()),
+    path("auth/change-password/", views.ChangePassword.as_view()),
     path("auth/register/", views.Register.as_view()),
     path("sessions/<uuid:pk>/continue/", views.ContinueCard.as_view()),
     path("auth/login/", views.Login.as_view()),
