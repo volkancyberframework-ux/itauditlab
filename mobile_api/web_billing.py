@@ -57,7 +57,9 @@ def page(request):
     response = render(request, 'mobile_api/membership.html', {
         'email': user.email if user else '', 'token': request.GET.get('token', '') if user else '',
         'cancelled': request.GET.get('cancelled') == '1'})
-    response['Referrer-Policy'] = 'no-referrer'
+    # HTTPS CSRF validation needs a same-origin Referer when Origin is absent.
+    # Only the origin is sent, so signed identity tokens stay out of referrers.
+    response['Referrer-Policy'] = 'strict-origin'
     response['X-Robots-Tag'] = 'noindex, nofollow'
     return response
 

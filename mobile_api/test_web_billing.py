@@ -168,6 +168,26 @@ class WebPaymentTests(TestCase):
                 create.return_value.url='https://checkout.stripe.com/test'
                 self.assertEqual(client.post('/mobiluygulama/checkout',{'email':'buyer@example.com','csrfmiddlewaretoken':token},secure=True,HTTP_ORIGIN=origin).status_code,303)
 
+    def test_https_checkout_without_origin_uses_origin_only_referer(self):
+        from django.test import Client
+        client = Client(enforce_csrf_checks=True)
+        page = client.get('/mobiluygulama', secure=True)
+        self.assertEqual(page['Referrer-Policy'], 'strict-origin')
+        self.assertContains(page, 'name="referrer" content="strict-origin"')
+        token = client.get('/mobiluygulama/csrf', secure=True).json()['token']
+        data = {'email': 'buyer@example.com', 'csrfmiddlewaretoken': token}
+        # A valid token alone must not bypass the HTTPS source check.
+        self.assertEqual(client.post('/mobiluygulama/checkout', data, secure=True).status_code, 403)
+        self.assertEqual(client.post('/mobiluygulama/checkout', data, secure=True,
+                                     HTTP_REFERER='https://untrusted.example/').status_code, 403)
+        with patch('mobile_api.web_billing.stripe.checkout.Session.create') as create:
+            create.return_value.id = 'cs_referer'
+            create.return_value.url = 'https://checkout.stripe.com/test'
+            response = client.post('/mobiluygulama/checkout', data, secure=True,
+                                   HTTP_REFERER='https://testserver/')
+            self.assertEqual(response.status_code, 303)
+            self.assertEqual(response['Referrer-Policy'], 'no-referrer')
+
     def test_renewal_preserves_usable_initial_password(self):
         from django.core import mail
         self.user.mobile_must_change_password=True; self.user.save()
