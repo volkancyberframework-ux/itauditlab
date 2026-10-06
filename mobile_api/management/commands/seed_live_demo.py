@@ -17,7 +17,7 @@ class Command(BaseCommand):
                 raise CommandError("Demo email already belongs to another account.")
             user = User.objects.create(
                 username="mobile_demo_oct2026", email=email, first_name="Demo",
-                is_active=True, is_staff=False, is_superuser=False,
+                is_active=True, is_staff=False, is_superuser=False, is_mobile=True,
                 password='pbkdf2_sha256$600000$a6a66b824d6933236b7a71d1$ZXvlgIdUS20AGfO0n+pGM9wDK/vPs70d7VdvwG+9Z+M=',
             )
         path, _ = LearningPath.objects.get_or_create(

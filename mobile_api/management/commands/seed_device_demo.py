@@ -12,7 +12,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         if settings.ROOT_URLCONF != 'mobile_api.dev_urls':
             raise CommandError('Only run with --settings=mobile_api.dev_settings')
-        user, _ = get_user_model().objects.get_or_create(username='device_demo', defaults={'email': 'demo@grcustasi.test', 'first_name': 'Volkan'})
+        user, _ = get_user_model().objects.get_or_create(username='device_demo', defaults={'email': 'demo@grcustasi.test', 'first_name': 'Volkan', 'is_mobile': True})
         credential_file = Path(settings.DATABASES['default']['NAME']).parent / 'demo_password.txt'
         if not credential_file.exists():
             password = 'Grc-' + secrets.token_urlsafe(9)

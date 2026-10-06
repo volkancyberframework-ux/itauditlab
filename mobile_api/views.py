@@ -11,6 +11,10 @@ from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenRefreshView
+from .access import (
+    MobileAccessPermission, MobileTokenRefreshSerializer,
+    MobilePasswordResetForm, check_mobile_access,
+)
 from .models import (
     LearningPath,
     Question,
@@ -33,7 +37,7 @@ class LoginThrottle(AnonRateThrottle):
 
 class MobileView(APIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, MobileAccessPermission]
     throttle_classes = [MobileThrottle]
 
 
@@ -45,7 +49,7 @@ class Login(MobileView):
     def post(self, request):
         email = str(request.data.get("email", "")).strip()
         password = request.data.get("password", "")
-        users = list(get_user_model().objects.filter(email__iexact=email)[:2])
+        users = list(get_user_model().objects.filter(email__iexact=email, is_mobile=True)[:2])
         # Legacy emails are not unique. Fail closed until the administrator resolves duplicates.
         username = users[0].get_username() if len(users) == 1 else "__mobile_invalid__"
         user = authenticate(request=request, username=username, password=password)
@@ -53,12 +57,14 @@ class Login(MobileView):
             return Response(
                 {"detail": "E-posta veya şifreyi kontrol eder misin?"}, status=401
             )
+        check_mobile_access(user)
         refresh = RefreshToken.for_user(user)
         return Response({"access": str(refresh.access_token), "refresh": str(refresh)})
 
 
 class Refresh(TokenRefreshView):
     throttle_classes = [LoginThrottle]
+    serializer_class = MobileTokenRefreshSerializer
 
 
 class Logout(MobileView):
@@ -592,9 +598,7 @@ class PasswordReset(MobileView):
     throttle_classes = [LoginThrottle]
 
     def post(self, request):
-        from django.contrib.auth.forms import PasswordResetForm
-
-        form = PasswordResetForm({"email": request.data.get("email", "")})
+        form = MobilePasswordResetForm({"email": request.data.get("email", "")})
         if not form.is_valid():
             raise ValidationError("Geçerli bir e-posta adresi gir.")
         form.save(

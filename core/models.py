@@ -418,6 +418,14 @@ class CourseFAQ(models.Model):
 # Custom user w/ test access
 # =========================
 class CustomUser(AbstractUser):
+    is_mobile = models.BooleanField(
+        "Mobile", default=False, db_index=True,
+        help_text="Bu hesabın mobil uygulamaya giriş yapmasına izin verir.",
+    )
+    mobile_last_date = models.DateField(
+        "Last date", null=True, blank=True,
+        help_text="Mobil erişimin son günü (Türkiye saati). Boşsa sınırsız erişim.",
+    )
     is_first_login = models.BooleanField(default=True)
     is_english = models.BooleanField(default=False)
     is_turkish = models.BooleanField(default=False)

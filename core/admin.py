@@ -533,10 +533,10 @@ class QuickStudentCreateForm(forms.Form):
 class CustomUserAdmin(UserAdmin):
     list_display = (
         "username", "email", "is_active", "is_staff",
-        "is_first_login", "is_english", "is_turkish"
+        "is_first_login", "is_english", "is_turkish", "is_mobile", "mobile_last_date"
     )
     list_filter = UserAdmin.list_filter + (
-        "is_first_login", "is_english", "is_turkish"
+        "is_first_login", "is_english", "is_turkish", "is_mobile"
     )
     search_fields = UserAdmin.search_fields + ("email",)
     filter_horizontal = ("allowed_tests",)
@@ -545,6 +545,9 @@ class CustomUserAdmin(UserAdmin):
     change_list_template = "admin/customuser_changelist.html"
 
     fieldsets = UserAdmin.fieldsets + (
+        (_("Mobile access"), {
+            "fields": ("is_mobile", "mobile_last_date")
+        }),
         (_("Profile flags"), {
             "fields": ("is_first_login", "is_english", "is_turkish")
         }),
@@ -554,6 +557,10 @@ class CustomUserAdmin(UserAdmin):
     )
 
     add_fieldsets = UserAdmin.add_fieldsets + (
+        (_("Mobile access"), {
+            "classes": ("wide",),
+            "fields": ("is_mobile", "mobile_last_date")
+        }),
         (_("Profile flags"), {
             "classes": ("wide",),
             "fields": ("is_first_login", "is_english", "is_turkish")

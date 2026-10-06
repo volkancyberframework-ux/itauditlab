@@ -13,9 +13,10 @@ class LearningTests(TestCase):
             email="volkan@example.com",
             password="test-pass",
             first_name="Volkan",
+            is_mobile=True,
         )
         self.other = get_user_model().objects.create_user(
-            username="other", password="test-pass"
+            username="other", password="test-pass", is_mobile=True
         )
         self.client = APIClient()
         self.client.force_authenticate(self.user)
@@ -334,3 +335,79 @@ class LearningTests(TestCase):
         data = self.session()
         self.assertIn(f"/api/mobile/v1/audio/{asset.pk}/", data["question"]["audio"][0])
         self.assertNotIn("/media/", data["question"]["audio"][0])
+
+
+class MobileAccessTests(TestCase):
+    def setUp(self):
+        from django.core.cache import cache
+        cache.clear()
+        self.user = get_user_model().objects.create_user(
+            username="mobile_access", email="access@example.com",
+            password="test-pass", is_mobile=True,
+        )
+        self.client = APIClient()
+
+    def login(self):
+        return self.client.post("/api/mobile/v1/auth/login/", {
+            "email": self.user.email, "password": "test-pass",
+        }, format="json")
+
+    def test_website_only_account_cannot_login(self):
+        self.user.is_mobile = False
+        self.user.save()
+        self.assertEqual(self.login().status_code, 401)
+
+    def test_mobile_account_is_distinct_from_same_email_website_account(self):
+        get_user_model().objects.create_user(
+            username="website_access", email=self.user.email, password="web-pass",
+        )
+        self.assertEqual(self.login().status_code, 200)
+
+    def test_blank_last_date_is_unlimited(self):
+        self.assertIsNone(self.user.mobile_last_date)
+        self.assertEqual(self.login().status_code, 200)
+
+    def test_last_date_is_inclusive_in_istanbul_timezone(self):
+        from unittest.mock import patch
+        from datetime import datetime, timezone as dt_timezone
+        self.user.mobile_last_date = timezone.localdate()
+        self.user.save()
+        # UTC 21:00 is already the next day in Turkey.
+        boundary = datetime.combine(self.user.mobile_last_date, datetime.min.time()).replace(
+            hour=21, tzinfo=dt_timezone.utc
+        )
+        with timezone.override("Europe/Istanbul"):
+            with patch("django.utils.timezone.now", return_value=boundary - timedelta(seconds=1)):
+                self.assertEqual(self.login().status_code, 200)
+            with patch("django.utils.timezone.now", return_value=boundary):
+                self.assertEqual(self.login().status_code, 403)
+
+    def test_expired_account_cannot_login(self):
+        self.user.mobile_last_date = timezone.localdate() - timedelta(days=1)
+        self.user.save()
+        self.assertEqual(self.login().status_code, 403)
+
+    def test_existing_tokens_stop_working_after_access_is_removed_or_expired(self):
+        tokens = self.login().data
+        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + tokens["access"])
+        self.assertEqual(self.client.get("/api/mobile/v1/profile/").status_code, 200)
+        for attrs in [
+            {"is_mobile": False},
+            {"is_mobile": True, "mobile_last_date": timezone.localdate() - timedelta(days=1)},
+            {"is_mobile": True, "mobile_last_date": None, "is_active": False},
+        ]:
+            get_user_model().objects.filter(pk=self.user.pk).update(**attrs)
+            self.assertIn(self.client.get("/api/mobile/v1/profile/").status_code, [401, 403])
+            self.assertIn(self.client.post("/api/mobile/v1/auth/refresh/", {
+                "refresh": tokens["refresh"],
+            }, format="json").status_code, [401, 403])
+
+    def test_mobile_reset_does_not_send_to_website_only_account(self):
+        from django.core import mail
+        self.user.is_mobile = False
+        self.user.save()
+        response = self.client.post("/api/mobile/v1/auth/password-reset/", {
+            "email": self.user.email,
+        }, format="json")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(mail.outbox), 0)

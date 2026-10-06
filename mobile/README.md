@@ -18,7 +18,7 @@ export DATABASE_URL=sqlite:////tmp/grc-mobile-dev.sqlite3
 .mobile-venv/bin/python manage.py runserver
 ```
 
-Assign a unique email to the existing account before mobile login. Legacy CustomUser emails are not unique; ambiguous emails intentionally fail login. The seed command creates six paths and one free demonstration question, preserving existing content. Other paths need content authored and published in Django admin. It does not fabricate a complete curriculum.
+Mobile login only searches accounts with `Mobile` enabled in the user admin. Create a dedicated account for the app and enable this flag; website-only accounts cannot log in to the mobile API. Duplicate emails among mobile-enabled accounts fail closed, while a website-only account with the same email does not interfere. `Last date` is inclusive through that day in the site timezone (Europe/Istanbul); blank means unlimited. Login, every authenticated mobile request and refresh check the current flag/date, including already-issued tokens. The mobile password-reset route only sends mail for mobile-enabled accounts. Existing accounts default to Mobile disabled; migrations enable only the named demo accounts. The seed command preserves existing content and includes the free ten-question demo path. Other paths need authored, published content.
 
 ```sh
 cd mobile
@@ -26,7 +26,7 @@ flutter pub get
 flutter run --dart-define=API_BASE_URL=https://YOUR-STAGING-HOST/api/mobile/v1/
 ```
 
-Use HTTPS for device/staging traffic. The default production API URL will work only after the backend changes are deployed and migrated. Production was not modified by this development work.
+Use HTTPS for device/staging traffic. The production API is deployed at `https://www.grcustasi.com/api/mobile/v1/`. Apply migrations during deployment before running the new code.
 
 ## Content
 
@@ -34,7 +34,7 @@ In existing Django admin (`/bulamazsinki/`), author LearningPath, Module, Questi
 
 Prompt/explanation templates support `{first_name}`, `{full_name}`, `{current_path}`, `{xp}`, `{level}`. Intro and body audio are played in sequence; an AudioAsset with `name_key` matching the case-folded first name adds the name clip. Missing names fall back to intro+body. Gapless behavior needs real-device QA. Name clips should be separately recorded with appropriate pacing.
 
-`core.TestQuestion` is an existing course-specific test model with only single/multiple choice. Mobile Question extends to scenarios, voice/media, paths and XP. Existing tests and course access are unchanged; no automatic content import bypasses legacy course permissions. Accounts are reused directly.
+`core.TestQuestion` is an existing course-specific test model with only single/multiple choice. Mobile Question extends to scenarios, voice/media, paths and XP. Existing tests and course access are unchanged; no automatic content import bypasses legacy course permissions. Accounts share the existing user database but mobile login/access is explicitly enabled and managed independently through the Mobile fields.
 
 Personalized paths select the requested source path and difficulty, prioritize matching `goals`, and size the pool from the daily minute target. `RecommendationProvider` allows a later AI implementation. Questions are still ordered by editorial order during a session. Goals are editorial metadata, not inferred competence.
 
