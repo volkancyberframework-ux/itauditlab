@@ -174,7 +174,7 @@ def webhook(request):
                     if matches:
                         user, created = matches[0], False
                     else:
-                        user, created = User.objects.get_or_create(username=username, defaults={'email': pending.email, 'first_name': pending.email.split('@')[0][:150], 'is_mobile': True, 'mobile_must_change_password': True})
+                        user, created = User.objects.get_or_create(username=username, defaults={'email': pending.email, 'first_name': pending.email.split('@')[0][:150], 'is_mobile': True, 'mobile_must_change_password': True, 'mobile_email_verified': False})
                     user = User.objects.select_for_update().get(pk=user.pk, is_active=True)
                     if created:
                         user.set_unusable_password()

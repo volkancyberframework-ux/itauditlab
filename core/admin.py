@@ -563,7 +563,7 @@ class CustomUserAdmin(UserAdmin):
         "is_first_login", "is_english", "is_turkish", "is_mobile", "mobile_paid_tick", "mobile_free_tick", "mobile_full_access", "mobile_paid_until", "mobile_last_date"
     )
     list_filter = UserAdmin.list_filter + (
-        "is_first_login", "is_english", "is_turkish", "is_mobile", "mobile_full_access", MobileMembershipFilter
+        "is_first_login", "is_english", "is_turkish", "is_mobile", "mobile_full_access", "mobile_email_verified", MobileMembershipFilter
     )
     search_fields = UserAdmin.search_fields + ("email",)
     filter_horizontal = ("allowed_tests",)
@@ -573,7 +573,7 @@ class CustomUserAdmin(UserAdmin):
 
     fieldsets = UserAdmin.fieldsets + (
         (_("Mobile access"), {
-            "fields": ("is_mobile", "mobile_paid_tick", "mobile_free_tick", "mobile_full_access", "mobile_paid_until", "mobile_last_date", "mobile_must_change_password")
+            "fields": ("is_mobile", "mobile_paid_tick", "mobile_free_tick", "mobile_full_access", "mobile_paid_until", "mobile_last_date", "mobile_must_change_password", "mobile_email_verified")
         }),
         (_("Profile flags"), {
             "fields": ("is_first_login", "is_english", "is_turkish")
@@ -586,7 +586,7 @@ class CustomUserAdmin(UserAdmin):
     add_fieldsets = UserAdmin.add_fieldsets + (
         (_("Mobile access"), {
             "classes": ("wide",),
-            "fields": ("is_mobile", "mobile_full_access", "mobile_paid_until", "mobile_last_date", "mobile_must_change_password")
+            "fields": ("is_mobile", "mobile_full_access", "mobile_paid_until", "mobile_last_date", "mobile_must_change_password", "mobile_email_verified")
         }),
         (_("Profile flags"), {
             "classes": ("wide",),

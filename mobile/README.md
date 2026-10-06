@@ -190,3 +190,7 @@ Login and Profile provide **Şifremi sıfırla**. Recovery mails are sent only f
 The iPhone release hides website purchase buttons, prices and purchase routing. Website purchases still activate the same login; Android retains the website checkout. The unused RevenueCat client SDK was removed. App Store eligibility is determined by Apple review.
 
 Profile also provides privacy information and a password-confirmed account deletion request. Administrators must process **Mobil hesap silme talepleri** within seven days, including external personal records, and send the completion confirmation through the admin action. See [App Store preparation](app_store/README.md) for metadata, privacy declarations, screenshots and archive/export steps.
+
+## Email verification — build 3
+
+New public mobile registrations return verification_required without issuing JWTs. A signed, email-bound link expires after 24 hours; its GET only displays a CSRF-protected confirmation form. Login, token refresh and authenticated mobile APIs reject unverified accounts. Login provides a throttled, generic resend action. New accounts created by website payment receive the same verification link in their payment email, alongside their initial password. Existing accounts and trusted administrator-created accounts retain access; the admin exposes Mobil e-posta doğrulandı.

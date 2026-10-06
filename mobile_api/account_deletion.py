@@ -50,7 +50,7 @@ def complete_deletion(pk):
             # Retain a non-loginable anonymous identifier for mandatory payment audit records.
             user.username = f'deleted_mobile_{user.pk}_{secrets.token_hex(8)}'
             user.email = user.first_name = user.last_name = ''
-            user.is_active = user.is_mobile = user.mobile_full_access = user.mobile_must_change_password = False
+            user.is_active = user.is_mobile = user.mobile_full_access = user.mobile_must_change_password = user.mobile_email_verified = False
             user.mobile_paid_until = user.mobile_last_date = None
             user.set_unusable_password()
             user.save()

@@ -127,16 +127,22 @@ class _LoginState extends State<Login> {
     });
     try {
       if (registering) {
-        await api.save(
-          await api.request(
-            'auth/register/',
-            body: {
-              'name': name.text.trim(),
-              'email': email.text.trim(),
-              'password': password.text,
-            },
-          ),
+        final result = await api.request(
+          'auth/register/',
+          body: {
+            'name': name.text.trim(),
+            'email': email.text.trim(),
+            'password': password.text,
+          },
         );
+        password.clear();
+        if (mounted) {
+          setState(() {
+            registering = false;
+            error = result['detail'] as String?;
+          });
+        }
+        return;
       } else {
         await api.login(email.text.trim(), password.text);
       }
@@ -153,6 +159,29 @@ class _LoginState extends State<Login> {
       if (mounted) {
         setState(() => busy = false);
       }
+    }
+  }
+
+  Future<void> resendVerification() async {
+    if (busy) return;
+    if (!email.text.contains('@')) {
+      setState(() => error = 'Önce e-posta adresini gir.');
+      return;
+    }
+    setState(() {
+      busy = true;
+      error = null;
+    });
+    try {
+      final result = await api.request(
+        'auth/resend-verification/',
+        body: {'email': email.text.trim()},
+      );
+      if (mounted) setState(() => error = result['detail'] as String?);
+    } catch (e) {
+      if (mounted) setState(() => error = '$e');
+    } finally {
+      if (mounted) setState(() => busy = false);
     }
   }
 
@@ -220,6 +249,11 @@ class _LoginState extends State<Login> {
                         ? null
                         : () => openPasswordReset(context, email.text.trim()),
                     child: const Text('Şifremi sıfırla'),
+                  ),
+                if (!registering)
+                  TextButton(
+                    onPressed: busy ? null : resendVerification,
+                    child: const Text('Doğrulama e-postasını tekrar gönder'),
                   ),
                 PrimaryButton(
                   label: registering ? 'Ücretsiz Hesap Oluştur' : 'Giriş Yap',

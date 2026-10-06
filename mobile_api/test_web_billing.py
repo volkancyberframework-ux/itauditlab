@@ -124,6 +124,13 @@ class WebPaymentTests(TestCase):
         password=mail.outbox[0].body.split('İlk giriş şifreniz: ')[1].split('\n')[0]
         self.assertTrue(user.check_password(password))
         client=APIClient(); login=client.post('/api/mobile/v1/auth/login/',{'email':user.email,'password':password},format='json')
+        self.assertEqual(login.status_code,403)
+        self.assertFalse(user.mobile_email_verified)
+        from .email_verification import verification_url
+        from urllib.parse import urlparse
+        self.assertIn(verification_url(user).split('/auth/verify-email/')[0], mail.outbox[0].body)
+        self.assertEqual(self.client.post(urlparse(verification_url(user)).path).status_code,200)
+        login=client.post('/api/mobile/v1/auth/login/',{'email':user.email,'password':password},format='json')
         self.assertEqual(login.status_code,200)
         client.credentials(HTTP_AUTHORIZATION='Bearer '+login.data['access'])
         self.assertTrue(client.get('/api/mobile/v1/profile/').data['must_change_password'])

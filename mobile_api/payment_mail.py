@@ -21,6 +21,9 @@ def send_payment_receipt(pk):
                 message = f'Hesabınız oluşturuldu ve 1 aylık ücretli mobil erişiminiz açıldı.\n\nE-posta: {user.email}\nİlk giriş şifreniz: {password}\n\nBu e-posta ve ilk giriş şifrenizle mobil uygulamadan giriş yapın. İlk girişte yeni şifrenizi belirlemeniz istenecektir.'
             else:
                 message = 'Ödemeniz alındı ve 1 aylık ücretli mobil erişiminiz açıldı.\n\nGRC Ustası hesabınızın mevcut şifresi geçerlidir. Aynı e-posta ve şifreyle mobil uygulamaya giriş yapabilirsiniz.'
+            if not user.mobile_email_verified:
+                from .email_verification import verification_url
+                message += '\n\nGiriş yapmadan önce e-postanızı doğrulayın (24 saat geçerli):\n' + verification_url(user)
             message += f'\n\nÜcret: 2.099 TL\nErişim bitişi: {timezone.localtime(payment.access_until):%d.%m.%Y %H:%M}\nOtomatik yenileme yoktur.\n\nBir sorununuz olursa volkan@grcustasi.com adresine ulaşabilirsiniz.'
             if send_mail('GRC Ustası • Mobil üyeliğiniz aktif', message, settings.DEFAULT_FROM_EMAIL, [user.email], fail_silently=False, connection=get_connection(timeout=10)) != 1:
                 raise RuntimeError('Mail not accepted')

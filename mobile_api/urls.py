@@ -6,8 +6,11 @@ from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 from .password_reset import MobileResetConfirm
 from .account_deletion import RequestDeletion
+from .email_verification import VerifyEmail, ResendVerification
 
 urlpatterns = [
+    path("auth/verify-email/<str:token>/", VerifyEmail.as_view(), name="mobile_verify_email"),
+    path("auth/resend-verification/", ResendVerification.as_view()),
     path("auth/delete-account/", RequestDeletion.as_view()),
     path("activity/", Activity.as_view()),
     path("notifications/plan/", NotificationPlan.as_view()),

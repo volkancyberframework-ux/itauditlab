@@ -569,9 +569,15 @@ class MobileProductTests(TestCase):
         self.assertTrue(user.is_mobile)
         self.assertFalse(user.mobile_full_access or user.is_staff or user.is_superuser)
         self.assertIsNone(user.mobile_last_date)
-        self.client.credentials(HTTP_AUTHORIZATION='Bearer '+result.data['access'])
+        self.assertNotIn('access', result.data)
+        self.assertFalse(user.mobile_email_verified)
+        self.client.force_authenticate(user)
+        self.assertEqual(self.client.get('/api/mobile/v1/paths/').status_code, 403)
+        user.mobile_email_verified = True
+        user.save(update_fields=['mobile_email_verified'])
         self.assertEqual([p['id'] for p in self.client.get('/api/mobile/v1/paths/').data], [self.path.pk])
         self.assertFalse(self.client.get('/api/mobile/v1/profile/').data['premium'])
+        self.client.force_authenticate(None)
         self.assertEqual(self.client.post('/api/mobile/v1/auth/register/', {
             'name': 'Duplicate', 'email': 'NEW@example.com', 'password': 'StrongDemo!45823',
         }, format='json').status_code, 400)

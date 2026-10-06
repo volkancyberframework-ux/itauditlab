@@ -11,6 +11,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 def check_mobile_access(user):
     if not user or not user.is_active or not user.is_mobile:
         raise PermissionDenied("Bu hesap için mobil erişim açık değil.")
+    if not user.mobile_email_verified:
+        raise PermissionDenied("E-postanı doğrulayarak giriş yap. Doğrulama e-postasını tekrar gönderebilirsin.")
     if user.mobile_last_date and user.mobile_last_date < timezone.localdate():
         raise PermissionDenied("Mobil erişim süren doldu. Yöneticiyle iletişime geçebilirsin.")
 

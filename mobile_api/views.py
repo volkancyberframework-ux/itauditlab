@@ -93,19 +93,20 @@ class Register(Login):
         username = "mobile_" + hashlib.sha256(email.encode()).hexdigest()[:40]
         first, _, last = name.partition(" ")
         user = User(username=username, email=email, first_name=first, last_name=last,
-                    is_mobile=True, mobile_full_access=False, mobile_last_date=None,
+                    is_mobile=True, mobile_full_access=False, mobile_last_date=None, mobile_email_verified=False,
                     is_staff=False, is_superuser=False)
         validate_mobile_password(password, user)
         try:
             with transaction.atomic():
                 if User.objects.filter(email__iexact=email, is_mobile=True).exists():
-                    raise ValidationError("Bu e-posta için mobil hesap zaten var. Giriş yapabilir veya şifreni sıfırlayabilirsin.")
+                    raise ValidationError("Bu e-posta için mobil hesap zaten var. E-postanı henüz onaylamadıysan doğrulama e-postasını tekrar gönder; aksi halde giriş yapabilir veya şifreni sıfırlayabilirsin.")
                 user.set_password(password)
                 user.save(force_insert=True)
-                refresh = RefreshToken.for_user(user)
         except IntegrityError:
             raise ValidationError("Bu e-posta için mobil hesap zaten var.")
-        return Response({"access": str(refresh.access_token), "refresh": str(refresh)}, status=201)
+        from .email_verification import send_verification_email
+        sent = send_verification_email(user.pk)
+        return Response({"verification_required": True, "email_sent": sent, "detail": "Hesabın oluşturuldu. E-postandaki doğrulama bağlantısını onayladıktan sonra giriş yapabilirsin. E-posta gelmezse doğrulama e-postasını tekrar gönder."}, status=201)
 
 
 class PasswordChangeThrottle(UserRateThrottle):
@@ -262,6 +263,7 @@ class Profile(MobileView):
                 "xp": total_xp,
                 **level_data(total_xp, request.user),
                 "must_change_password": request.user.mobile_must_change_password,
+                "email_verified": request.user.mobile_email_verified,
                 "premium": premium(request.user),
                 "paid_until": request.user.mobile_paid_until,
                 "completed": QuestionAttempt.objects.filter(
