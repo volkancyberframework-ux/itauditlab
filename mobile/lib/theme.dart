@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const primary = Color(0xFF123653);
-  static const ink = Color(0xFF132B40);
-  static const background = Color(0xFFF5F7FA);
+  static const gold = Color(0xFFF6C453);
+  static const teal = Color(0xFF19B69A);
+  static const primary = Color(0xFF19B69A);
+  static const ink = Color(0xFF142C46);
+  static const background = Color(0xFFF7F8FC);
 }
 
 class AppSpacing {
@@ -21,32 +23,50 @@ class AppTheme {
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColors.primary,
       brightness: brightness,
+      surface: brightness == Brightness.light
+          ? Colors.white
+          : const Color(0xFF182B42),
     ),
     scaffoldBackgroundColor: brightness == Brightness.light
         ? AppColors.background
-        : const Color(0xFF101C1A),
+        : const Color(0xFF0D1C30),
     appBarTheme: const AppBarTheme(
       centerTitle: false,
       backgroundColor: Colors.transparent,
       elevation: 0,
     ),
+    navigationBarTheme: NavigationBarThemeData(
+      backgroundColor: brightness == Brightness.light
+          ? Colors.white
+          : const Color(0xFF182B42),
+      indicatorColor: AppColors.teal.withValues(alpha: .18),
+      labelTextStyle: WidgetStateProperty.all(
+        const TextStyle(fontSize: 11, fontWeight: FontWeight.w800),
+      ),
+    ),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: AppColors.teal,
+      linearTrackColor: AppColors.teal.withValues(alpha: .12),
+    ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
+      contentPadding: const EdgeInsets.all(20),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide.none,
+        borderSide: const BorderSide(color: Color(0xFFCCD6E1), width: 2),
       ),
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
         minimumSize: const Size.fromHeight(54),
+        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       ),
     ),
   );
 }
 
-class PrimaryButton extends StatelessWidget {
+class PrimaryButton extends StatefulWidget {
   final String label;
   final VoidCallback? onPressed;
   final bool busy;
@@ -57,19 +77,55 @@ class PrimaryButton extends StatelessWidget {
     this.busy = false,
   });
   @override
-  Widget build(BuildContext context) => FilledButton(
-    onPressed: busy ? null : onPressed,
-    child: AnimatedSwitcher(
-      duration: const Duration(milliseconds: 200),
-      child: busy
-          ? const SizedBox(
-              height: 20,
-              width: 20,
-              child: CircularProgressIndicator(strokeWidth: 2),
-            )
-          : Text(label),
-    ),
-  );
+  State<PrimaryButton> createState() => _PrimaryButtonState();
+}
+
+class _PrimaryButtonState extends State<PrimaryButton> {
+  bool pressed = false;
+  @override
+  Widget build(BuildContext context) {
+    final enabled = widget.onPressed != null && !widget.busy;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 5),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 90),
+        transform: Matrix4.translationValues(0, pressed && enabled ? 4 : 0, 0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18),
+          boxShadow: [
+            BoxShadow(
+              color: enabled
+                  ? const Color(0xFF0B806D)
+                  : Theme.of(context).colorScheme.outlineVariant,
+              offset: Offset(0, pressed && enabled ? 1 : 5),
+            ),
+          ],
+        ),
+        child: Listener(
+          onPointerDown: (_) => setState(() => pressed = true),
+          onPointerUp: (_) => setState(() => pressed = false),
+          onPointerCancel: (_) => setState(() => pressed = false),
+          child: FilledButton(
+            style: FilledButton.styleFrom(
+              backgroundColor: AppColors.teal,
+              foregroundColor: AppColors.ink,
+            ),
+            onPressed: enabled ? widget.onPressed : null,
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 200),
+              child: widget.busy
+                  ? const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : Text(widget.label),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class ErrorState extends StatelessWidget {
@@ -118,10 +174,18 @@ class AnswerOption extends StatelessWidget {
           color: selected
               ? colors.primaryContainer
               : colors.surfaceContainerLow,
+          boxShadow: [
+            BoxShadow(
+              color: selected
+                  ? AppColors.teal.withValues(alpha: .35)
+                  : colors.outlineVariant,
+              offset: const Offset(0, 4),
+            ),
+          ],
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: selected ? colors.primary : colors.outlineVariant,
-            width: selected ? 2 : 1,
+            width: 2,
           ),
         ),
         child: Material(

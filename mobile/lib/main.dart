@@ -7,6 +7,7 @@ import 'voice.dart';
 import 'paywall.dart';
 import 'analytics.dart';
 import 'answer_feedback.dart';
+import 'dashboard_widgets.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -131,19 +132,26 @@ class _LoginState extends State<Login> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Image.asset('assets/logo.png', width: 64, height: 64),
-                    const SizedBox(width: 12),
-                    Text(
-                      'GRC Ustası',
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                  ],
+                Center(
+                  child: Image.asset(
+                    'assets/logo.png',
+                    width: 200,
+                    height: 200,
+                  ),
                 ),
-                const SizedBox(height: 48),
+                const SizedBox(height: 16),
+                const Center(
+                  child: Text(
+                    'UZMANLIĞA GİDEN YOL',
+                    style: TextStyle(
+                      color: AppColors.teal,
+                      letterSpacing: 2,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 11,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 28),
                 Text(
                   'Küçük adımlar.\nGüçlü uzmanlık.',
                   style: Theme.of(context).textTheme.headlineLarge?.copyWith(
@@ -263,7 +271,16 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('GRC Ustası')),
+    appBar: AppBar(
+      toolbarHeight: 76,
+      title: const BrandHeader(),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 18),
+          child: Icon(Icons.auto_awesome_rounded, color: AppColors.gold),
+        ),
+      ],
+    ),
     bottomNavigationBar: NavigationBar(
       selectedIndex: tab,
       onDestinationSelected: (v) => setState(() => tab = v),
@@ -296,36 +313,19 @@ class _HomeState extends State<Home> {
               padding: const EdgeInsets.all(24),
               children: [
                 if (tab == 0) ...[
+                  DashboardHero(name: profile!['first_name']),
+                  const SizedBox(height: 22),
+                  LearningStats(profile: profile!),
+                  const SizedBox(height: 30),
                   Text(
-                    'Merhaba ${profile!['first_name']} 👋',
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      fontWeight: FontWeight.w800,
+                    'Bir sonraki maceran',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.w900,
                     ),
                   ),
-                  const SizedBox(height: 12),
-                  const Text('Bugün uzmanlığına bir adım daha ekle.'),
-                  const SizedBox(height: 24),
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(24),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '⚡ ${profile!['xp']} XP',
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                          Text('${profile!['completed']} görev'),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 28),
-                  Text(
-                    'Bugün ne öğrenmek istiyorsun?',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 6),
+                  const Text('Bir yol seç, ilk adımını at.'),
+                  const SizedBox(height: 18),
                 ],
                 if (tab <= 1) ...[
                   if (paths.isEmpty)
@@ -422,60 +422,169 @@ class PathCard extends StatelessWidget {
   final VoidCallback onTap;
   const PathCard({super.key, required this.path, required this.onTap});
   @override
-  Widget build(BuildContext context) => Card(
-    margin: const EdgeInsets.only(bottom: 16),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(AppRadius.card),
-    ),
-    child: InkWell(
-      borderRadius: BorderRadius.circular(AppRadius.card),
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final progress = ((path['progress'] as num).toDouble() / 100).clamp(
+      0.0,
+      1.0,
+    );
+    final completed = path['completed'] as int;
+    final count = path['question_count'] as int;
+    return Container(
+      margin: const EdgeInsets.only(bottom: 20),
+      decoration: BoxDecoration(
+        color: scheme.surface,
+        borderRadius: BorderRadius.circular(26),
+        border: Border.all(color: scheme.outlineVariant, width: 2),
+        boxShadow: [
+          BoxShadow(color: scheme.outlineVariant, offset: const Offset(0, 5)),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(26),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.all(22),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(
-                  Icons.shield_outlined,
-                  color: AppColors.primary,
-                  size: 30,
+                Row(
+                  children: [
+                    Container(
+                      width: 52,
+                      height: 52,
+                      decoration: BoxDecoration(
+                        color: AppColors.teal.withValues(alpha: .14),
+                        borderRadius: BorderRadius.circular(17),
+                      ),
+                      child: const Icon(
+                        Icons.shield_rounded,
+                        color: AppColors.teal,
+                        size: 30,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            path['premium'] ? 'PREMIUM YOL' : 'ÖĞRENME YOLU',
+                            style: const TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w900,
+                              color: AppColors.teal,
+                              letterSpacing: 1,
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            path['title'],
+                            style: const TextStyle(
+                              fontSize: 19,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    if (path['premium'])
+                      const Icon(
+                        Icons.workspace_premium_rounded,
+                        color: AppColors.gold,
+                      ),
+                  ],
                 ),
-                const Spacer(),
-                if (path['premium']) const Chip(label: Text('Premium')),
+                const SizedBox(height: 14),
+                Text(
+                  path['description'],
+                  style: TextStyle(
+                    color: scheme.onSurfaceVariant,
+                    height: 1.45,
+                  ),
+                ),
+                const SizedBox(height: 18),
+                Row(
+                  children: [
+                    for (var i = 0; i < (count < 6 ? count : 6); i++) ...[
+                      if (i > 0)
+                        Expanded(
+                          child: Container(
+                            height: 3,
+                            color: i <= completed
+                                ? AppColors.teal
+                                : scheme.outlineVariant,
+                          ),
+                        ),
+                      Container(
+                        width: 32,
+                        height: 32,
+                        decoration: BoxDecoration(
+                          color: i < completed
+                              ? AppColors.teal
+                              : i == completed
+                              ? AppColors.gold
+                              : scheme.surfaceContainerHighest,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          i < completed
+                              ? Icons.check_rounded
+                              : i == completed
+                              ? Icons.play_arrow_rounded
+                              : Icons.circle_outlined,
+                          size: 18,
+                          color: i <= completed
+                              ? AppColors.ink
+                              : scheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+                const SizedBox(height: 16),
+                LinearProgressIndicator(
+                  value: progress,
+                  minHeight: 10,
+                  borderRadius: BorderRadius.circular(12),
+                  color: AppColors.teal,
+                ),
+                const SizedBox(height: 14),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        '$completed / $count görev · ${path['minutes']} dk',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: scheme.onSurfaceVariant,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      progress == 1
+                          ? 'TAMAMLANDI ✓'
+                          : completed > 0
+                          ? 'DEVAM ET →'
+                          : 'BAŞLA →',
+                      style: const TextStyle(
+                        color: AppColors.teal,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
-            const SizedBox(height: 14),
-            Text(
-              path['title'],
-              style: Theme.of(
-                context,
-              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
-            ),
-            const SizedBox(height: 8),
-            Text(path['description']),
-            const SizedBox(height: 18),
-            TweenAnimationBuilder<double>(
-              tween: Tween(
-                begin: 0,
-                end: (path['progress'] as num).toDouble() / 100,
-              ),
-              duration: const Duration(milliseconds: 500),
-              builder: (_, v, _) => LinearProgressIndicator(
-                value: v,
-                borderRadius: BorderRadius.circular(4),
-              ),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              '%${path['progress']} tamamlandı  ·  ${path['question_count']} görev  →',
-            ),
-          ],
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 class Session extends StatefulWidget {
@@ -586,7 +695,18 @@ class _SessionState extends State<Session> {
       );
     }
     return Scaffold(
-      appBar: AppBar(title: Text(widget.path['title'])),
+      appBar: AppBar(
+        title: Text(
+          widget.path['title'],
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: Image.asset('assets/logo.png', width: 42),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(24),
@@ -630,10 +750,34 @@ class _SessionState extends State<Session> {
                 onPressed: () => Navigator.pop(context),
               ),
             ] else if (q != null) ...[
-              Text('${session!['answered'] + 1} / ${session!['total']}'),
+              Row(
+                children: [
+                  const Icon(Icons.bolt_rounded, color: AppColors.gold),
+                  const SizedBox(width: 8),
+                  Text(
+                    'GÖREV ${session!['answered'] + 1} / ${session!['total']}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                  const Spacer(),
+                  const Text(
+                    'ADIM ADIM',
+                    style: TextStyle(
+                      color: AppColors.teal,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(height: 12),
               LinearProgressIndicator(
                 value: session!['answered'] / session!['total'],
+                minHeight: 12,
+                color: AppColors.teal,
+                borderRadius: BorderRadius.circular(12),
               ),
               const SizedBox(height: 32),
               if (q['context'] != '') Text(q['context']),

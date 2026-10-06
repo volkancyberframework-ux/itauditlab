@@ -128,3 +128,7 @@ Configuration lives in `flutter_launcher_icons.yaml`. iOS icons use an opaque na
 Answer feedback now uses a full-screen confetti layer on correct answers and a short damped shake on mistakes. Displayed XP is the confirmed backend amount, including no deduction at zero XP. Reduced-motion preferences suppress the large effects. The isolated SQLite backend begins write transactions with BEGIN IMMEDIATE to prevent analytics/answer write collisions; production PostgreSQL retains per-user transaction locks. Tokens are namespaced by API environment to keep demo credentials separate from live sessions.
 
 Regression run: 148 of 149 existing+mobile backend tests pass; the unchanged student-meeting notification test expects an on_commit callback inside a TestCase transaction and does not execute it. Mobile tests all pass. Flutter login/feedback tests pass.
+
+## Playful brand theme and answer celebrations
+
+The app uses the supplied GRC Ustası logo, navy/gold hero panels, teal controls, raised answer cards/buttons, XP/level tiles and task markers. Light/dark layouts were visually checked at 430 and 320 logical pixels. Correct answers randomly choose confetti, fireworks, stars or XP coins; the previous effect cannot repeat on the next answer. Selection is stable during widget rebuilds, and reduced-motion settings suppress effects. All XP values remain server-confirmed. Celebration lifecycle tests cover leaving while an effect is playing.

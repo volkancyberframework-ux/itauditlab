@@ -1,5 +1,6 @@
 import 'dart:math' as math;
-import 'package:confetti/confetti.dart';
+import 'celebrations.dart';
+import 'theme.dart';
 import 'package:flutter/material.dart';
 
 /// Full-screen result layer. XP always comes from the confirmed server response.
@@ -17,9 +18,7 @@ class AnswerFeedback extends StatefulWidget {
 
 class _AnswerFeedbackState extends State<AnswerFeedback>
     with SingleTickerProviderStateMixin {
-  late final ConfettiController confetti = ConfettiController(
-    duration: const Duration(milliseconds: 1800),
-  );
+  late final CelebrationKind celebration = CelebrationPicker.next();
   late final AnimationController motion = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 650),
@@ -33,9 +32,6 @@ class _AnswerFeedbackState extends State<AnswerFeedback>
       started = true;
       if (!MediaQuery.of(context).disableAnimations) {
         motion.forward();
-        if (correct && widget.result['pending'] != true) {
-          confetti.play();
-        }
       } else {
         motion.value = 1;
       }
@@ -45,7 +41,6 @@ class _AnswerFeedbackState extends State<AnswerFeedback>
   @override
   void dispose() {
     motion.dispose();
-    confetti.dispose();
     super.dispose();
   }
 
@@ -54,7 +49,7 @@ class _AnswerFeedbackState extends State<AnswerFeedback>
     final pending = widget.result['pending'] == true;
     final change = widget.result['xp_change'] as int;
     final scheme = Theme.of(context).colorScheme;
-    final accent = correct ? const Color(0xFF20B889) : const Color(0xFFDE9B47);
+    final accent = correct ? AppColors.teal : AppColors.gold;
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -93,7 +88,23 @@ class _AnswerFeedbackState extends State<AnswerFeedback>
                               fontWeight: FontWeight.w800,
                             ),
                           ),
-                          const SizedBox(height: 38),
+                          const SizedBox(height: 12),
+                          if (correct && !pending)
+                            Text(
+                              [
+                                'KONFETİ ZAMANI',
+                                'BİLGİNLE PARLADIN',
+                                'YILDIZ GİBİSİN',
+                                'XP YAĞMURU',
+                              ][celebration.index],
+                              style: TextStyle(
+                                color: scheme.onSurfaceVariant,
+                                fontSize: 10,
+                                letterSpacing: 1.5,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                          const SizedBox(height: 30),
                           ScaleTransition(
                             scale: Tween<double>(begin: .75, end: 1).animate(
                               CurvedAnimation(
@@ -117,7 +128,12 @@ class _AnswerFeedbackState extends State<AnswerFeedback>
                                   pending
                                       ? '🎙️'
                                       : correct
-                                      ? '🥳'
+                                      ? [
+                                          '🥳',
+                                          '🚀',
+                                          '🌟',
+                                          '🏆',
+                                        ][celebration.index]
                                       : '🥺',
                                   style: const TextStyle(fontSize: 78),
                                 ),
@@ -180,6 +196,10 @@ class _AnswerFeedbackState extends State<AnswerFeedback>
                             decoration: BoxDecoration(
                               color: scheme.surfaceContainer,
                               borderRadius: BorderRadius.circular(24),
+                              border: Border.all(
+                                color: scheme.outlineVariant,
+                                width: 2,
+                              ),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -225,9 +245,9 @@ class _AnswerFeedbackState extends State<AnswerFeedback>
                             ),
                           ),
                           const SizedBox(height: 32),
-                          FilledButton(
+                          PrimaryButton(
+                            label: 'Devam Et →',
                             onPressed: widget.onContinue,
-                            child: const Text('Devam Et →'),
                           ),
                         ],
                       ),
@@ -238,72 +258,7 @@ class _AnswerFeedbackState extends State<AnswerFeedback>
             ),
           ),
         ),
-        if (correct && !pending)
-          IgnorePointer(
-            child: Stack(
-              children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: ConfettiWidget(
-                    confettiController: confetti,
-                    blastDirection: math.pi / 3,
-                    emissionFrequency: .12,
-                    numberOfParticles: 16,
-                    maxBlastForce: 30,
-                    minBlastForce: 12,
-                    gravity: .16,
-                    shouldLoop: false,
-                    colors: const [
-                      Color(0xFF20B889),
-                      Color(0xFFFFC857),
-                      Color(0xFF60A5FA),
-                      Color(0xFFF69DBB),
-                      Colors.white,
-                    ],
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: ConfettiWidget(
-                    confettiController: confetti,
-                    blastDirection: 2 * math.pi / 3,
-                    emissionFrequency: .12,
-                    numberOfParticles: 16,
-                    maxBlastForce: 30,
-                    minBlastForce: 12,
-                    gravity: .16,
-                    shouldLoop: false,
-                    colors: const [
-                      Color(0xFF20B889),
-                      Color(0xFFFFC857),
-                      Color(0xFF60A5FA),
-                      Color(0xFFF69DBB),
-                      Colors.white,
-                    ],
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: ConfettiWidget(
-                    confettiController: confetti,
-                    blastDirectionality: BlastDirectionality.explosive,
-                    emissionFrequency: .04,
-                    numberOfParticles: 22,
-                    maxBlastForce: 25,
-                    minBlastForce: 8,
-                    gravity: .18,
-                    shouldLoop: false,
-                    colors: const [
-                      Color(0xFF20B889),
-                      Color(0xFFFFC857),
-                      Color(0xFF60A5FA),
-                      Color(0xFFF69DBB),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+        if (correct && !pending) CelebrationOverlay(kind: celebration),
       ],
     );
   }
