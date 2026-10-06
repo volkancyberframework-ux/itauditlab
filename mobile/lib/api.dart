@@ -63,7 +63,9 @@ class Api {
                   ? client.get(uri, headers: headers)
                   : client.post(uri, headers: headers, body: jsonEncode(body)))
               .timeout(const Duration(seconds: 20));
-      if (response.statusCode == 401 && retry && path != 'auth/login/') {
+      if (response.statusCode == 401 &&
+          retry &&
+          !['auth/login/', 'auth/register/'].contains(path)) {
         refreshing ??= refresh();
         try {
           await refreshing;

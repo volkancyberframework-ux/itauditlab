@@ -51,6 +51,7 @@ class Question(models.Model):
     TYPES = [
         (v, v)
         for v in [
+            "info",
             "choice",
             "multi_select",
             "fill_blank",
@@ -92,6 +93,10 @@ class Question(models.Model):
         default=list,
         blank=True,
         help_text="Hedef adları: Sertifika, Denetim, Teknik bilgi vb.",
+    )
+    card_pages = models.JSONField(
+        "Bilgi kartı sayfaları", default=list, blank=True,
+        help_text='info türünde: [{"title":"Başlık","body":"**Kalın**, *italik* metin","reveal":"Dokununca açılan açıklama"}]. Her sayfa kaydırılarak geçilir.',
     )
     base_xp = models.PositiveIntegerField(default=10)
     premium = models.BooleanField(default=False)
@@ -180,7 +185,13 @@ class VoiceSubmission(models.Model):
         choices=[("pending", "pending"), ("reviewed", "reviewed")],
     )
     feedback = models.TextField(blank=True)
+    feedback_sent_at = models.DateTimeField("E-posta gönderildi", null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def review_due_at(self):
+        from datetime import timedelta
+        return self.created_at + timedelta(hours=24)
 
 
 class AnalyticsEvent(models.Model):
@@ -263,3 +274,23 @@ class UserLevelReward(models.Model):
 
     def __str__(self):
         return f'{self.user} • {self.reward}'
+
+
+class MobileSettings(models.Model):
+    id = models.PositiveSmallIntegerField(primary_key=True, default=1, editable=False)
+    free_path = models.ForeignKey(
+        LearningPath, null=True, blank=True, on_delete=models.SET_NULL,
+        verbose_name="Ücretsiz öğrenme yolu",
+        help_text="Ücretsiz hesaplara yalnızca bu yayınlanmış, ortak yol gösterilir. Soruların eski premium işaretleri erişimi etkilemez.",
+    )
+
+    class Meta:
+        verbose_name = "Mobil uygulama ayarları"
+        verbose_name_plural = "Mobil uygulama ayarları"
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return "Ücretsiz yol ve erişim ayarları"

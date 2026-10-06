@@ -422,6 +422,10 @@ class CustomUser(AbstractUser):
         "Mobile", default=False, db_index=True,
         help_text="Bu hesabın mobil uygulamaya giriş yapmasına izin verir.",
     )
+    mobile_full_access = models.BooleanField(
+        "Mobil tam erişim", default=False, db_index=True,
+        help_text="Bütün öğrenme yollarını açar. Kapalı hesap yalnızca ücretsiz yolu görür.",
+    )
     mobile_last_date = models.DateField(
         "Last date", null=True, blank=True,
         help_text="Mobil erişimin son günü (Türkiye saati). Boşsa sınırsız erişim.",

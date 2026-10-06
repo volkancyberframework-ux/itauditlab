@@ -92,7 +92,7 @@ class _PaywallState extends State<Paywall> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('GRC Ustası Premium')),
+    appBar: AppBar(title: const Text('GRC Ustası • Tam Erişim')),
     body: ListView(
       padding: const EdgeInsets.all(24),
       children: [
@@ -113,7 +113,7 @@ class _PaywallState extends State<Paywall> {
         const SizedBox(height: 32),
         if (product != null) ...[
           PrimaryButton(
-            label: '${product!.storeProduct.priceString} / ay • Premium’a geç',
+            label: '${product!.storeProduct.priceString} / ay • Tam erişimi aç',
             busy: busy,
             onPressed: () => buy(false),
           ),

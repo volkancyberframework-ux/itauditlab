@@ -11,6 +11,7 @@ import 'answer_feedback.dart';
 import 'dashboard_widgets.dart';
 import 'interactive_questions.dart';
 import 'level_rewards.dart';
+import 'information_card.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -91,12 +92,15 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final name = TextEditingController();
+  bool registering = false;
   final email = TextEditingController();
   final password = TextEditingController();
   bool busy = false;
   String? error;
   @override
   void dispose() {
+    name.dispose();
     email.dispose();
     password.dispose();
     super.dispose();
@@ -108,7 +112,20 @@ class _LoginState extends State<Login> {
       error = null;
     });
     try {
-      await api.login(email.text.trim(), password.text);
+      if (registering) {
+        await api.save(
+          await api.request(
+            'auth/register/',
+            body: {
+              'name': name.text.trim(),
+              'email': email.text.trim(),
+              'password': password.text,
+            },
+          ),
+        );
+      } else {
+        await api.login(email.text.trim(), password.text);
+      }
       password.clear();
       analytics.emit('login_completed');
       if (mounted) {
@@ -162,8 +179,21 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 const SizedBox(height: 14),
-                const Text('GRC Ustası hesabınla öğrenmeye devam et.'),
+                Text(
+                  registering
+                      ? 'Ücretsiz hesabını oluştur, başlangıç yolunu hemen dene.'
+                      : 'GRC Ustası hesabınla öğrenmeye devam et.',
+                ),
                 const SizedBox(height: 32),
+                if (registering) ...[
+                  TextField(
+                    controller: name,
+                    textCapitalization: TextCapitalization.words,
+                    autofillHints: const [AutofillHints.name],
+                    decoration: const InputDecoration(labelText: 'Ad soyad'),
+                  ),
+                  const SizedBox(height: 14),
+                ],
                 TextField(
                   controller: email,
                   keyboardType: TextInputType.emailAddress,
@@ -174,7 +204,11 @@ class _LoginState extends State<Login> {
                 TextField(
                   controller: password,
                   obscureText: true,
-                  autofillHints: const [AutofillHints.password],
+                  autofillHints: [
+                    registering
+                        ? AutofillHints.newPassword
+                        : AutofillHints.password,
+                  ],
                   decoration: const InputDecoration(labelText: 'Şifre'),
                   onSubmitted: (_) => busy ? null : submit(),
                 ),
@@ -184,30 +218,48 @@ class _LoginState extends State<Login> {
                     padding: const EdgeInsets.only(bottom: 16),
                     child: Text(error!),
                   ),
-                TextButton(
-                  onPressed: busy
-                      ? null
-                      : () async {
-                          try {
-                            final result = await api.request(
-                              'auth/password-reset/',
-                              body: {'email': email.text.trim()},
-                            );
-                            if (mounted) {
-                              setState(() => error = result['detail']);
+                if (!registering)
+                  TextButton(
+                    onPressed: busy
+                        ? null
+                        : () async {
+                            try {
+                              final result = await api.request(
+                                'auth/password-reset/',
+                                body: {'email': email.text.trim()},
+                              );
+                              if (mounted) {
+                                setState(() => error = result['detail']);
+                              }
+                            } catch (e) {
+                              if (mounted) {
+                                setState(() => error = '$e');
+                              }
                             }
-                          } catch (e) {
-                            if (mounted) {
-                              setState(() => error = '$e');
-                            }
-                          }
-                        },
-                  child: const Text('Şifremi Unuttum'),
-                ),
+                          },
+                    child: const Text('Şifremi Unuttum'),
+                  ),
                 PrimaryButton(
-                  label: 'Giriş Yap',
+                  label: registering ? 'Ücretsiz Hesap Oluştur' : 'Giriş Yap',
                   busy: busy,
                   onPressed: submit,
+                ),
+                const SizedBox(height: 12),
+                Center(
+                  child: TextButton(
+                    onPressed: busy
+                        ? null
+                        : () => setState(() {
+                            registering = !registering;
+                            error = null;
+                            password.clear();
+                          }),
+                    child: Text(
+                      registering
+                          ? 'Zaten hesabım var • Giriş yap'
+                          : 'Yeni misin? Ücretsiz hesap oluştur',
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -258,17 +310,9 @@ class _HomeState extends State<Home> {
 
   Future<void> open(Map<String, dynamic> path) async {
     analytics.emit('path_opened');
-    if (path['premium'] && profile?['premium'] != true) {
-      await Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (_) => Paywall(userId: profile!['billing_id']),
-        ),
-      );
-    } else {
-      await Navigator.of(
-        context,
-      ).push(MaterialPageRoute(builder: (_) => Session(path: path)));
-    }
+    await Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (_) => Session(path: path)));
     load();
   }
 
@@ -339,27 +383,18 @@ class _HomeState extends State<Home> {
                   for (final p in paths)
                     PathCard(path: p, onTap: () => open(p)),
                   const SizedBox(height: 12),
-                  PrimaryButton(
-                    label: 'Bana Özel Yol Oluştur',
-                    onPressed: () async {
-                      if (profile!['premium'] != true) {
+                  if (profile!['premium'] == true)
+                    PrimaryButton(
+                      label: 'Bana Özel Yol Oluştur',
+                      onPressed: () async {
                         await Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (_) =>
-                                Paywall(userId: profile!['billing_id']),
+                            builder: (_) => Personalize(paths: paths),
                           ),
                         );
-                        await load();
-                        return;
-                      }
-                      await Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => Personalize(paths: paths),
-                        ),
-                      );
-                      load();
-                    },
-                  ),
+                        load();
+                      },
+                    ),
                 ],
                 if (tab == 2) ...[
                   Text(
@@ -384,23 +419,28 @@ class _HomeState extends State<Home> {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    profile!['premium'] ? 'Premium üyelik' : 'Ücretsiz üyelik',
+                    profile!['premium']
+                        ? 'Tam erişim • tüm öğrenme yolları'
+                        : 'Ücretsiz başlangıç • bir öğrenme yolu',
                   ),
                   const SizedBox(height: 24),
                   LevelRewards(profile: profile!),
                   const SizedBox(height: 32),
-                  TextButton(
-                    onPressed: () async {
-                      await Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              Paywall(userId: profile!['billing_id']),
-                        ),
-                      );
-                      load();
-                    },
-                    child: const Text('Üyeliğim / Satın alımları geri yükle'),
-                  ),
+                  if (profile!['premium'] != true)
+                    TextButton(
+                      onPressed: () async {
+                        await Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) =>
+                                Paywall(userId: profile!['billing_id']),
+                          ),
+                        );
+                        load();
+                      },
+                      child: const Text(
+                        'Tam erişim / Satın alımları geri yükle',
+                      ),
+                    ),
                   PrimaryButton(
                     label: 'Çıkış Yap',
                     onPressed: () async {
@@ -432,162 +472,103 @@ class PathCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final progress = ((path['progress'] as num).toDouble() / 100).clamp(
-      0.0,
-      1.0,
-    );
-    final completed = path['completed'] as int;
-    final count = path['question_count'] as int;
-    return Container(
-      margin: const EdgeInsets.only(bottom: 20),
-      decoration: BoxDecoration(
-        color: scheme.surface,
-        borderRadius: BorderRadius.circular(26),
-        border: Border.all(color: scheme.outlineVariant, width: 2),
-        boxShadow: [
-          BoxShadow(color: scheme.outlineVariant, offset: const Offset(0, 5)),
-        ],
+    final completed = (path['completed'] as num?)?.toInt() ?? 0;
+    final count = (path['question_count'] as num?)?.toInt() ?? 0;
+    final progress = count == 0 ? 0.0 : (completed / count).clamp(0.0, 1.0);
+    return Card(
+      color: scheme.surface,
+      elevation: 2,
+      shadowColor: scheme.outlineVariant,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24),
+        side: BorderSide(color: scheme.outlineVariant),
       ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(26),
-          onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.all(22),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      width: 52,
-                      height: 52,
-                      decoration: BoxDecoration(
-                        color: AppColors.teal.withValues(alpha: .14),
-                        borderRadius: BorderRadius.circular(17),
-                      ),
-                      child: const Icon(
-                        Icons.shield_rounded,
-                        color: AppColors.teal,
-                        size: 30,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            path['premium'] ? 'PREMIUM YOL' : 'ÖĞRENME YOLU',
-                            style: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w900,
-                              color: AppColors.teal,
-                              letterSpacing: 1,
-                            ),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            path['title'],
-                            style: const TextStyle(
-                              fontSize: 19,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    if (path['premium'])
-                      const Icon(
-                        Icons.workspace_premium_rounded,
-                        color: AppColors.gold,
-                      ),
-                  ],
-                ),
-                const SizedBox(height: 14),
-                Text(
-                  path['description'],
-                  style: TextStyle(
-                    color: scheme.onSurfaceVariant,
-                    height: 1.45,
+      margin: const EdgeInsets.only(bottom: 16),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(24),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(
+                    Icons.route_rounded,
+                    color: AppColors.teal,
+                    size: 32,
                   ),
-                ),
-                const SizedBox(height: 18),
-                Row(
-                  children: [
-                    for (var i = 0; i < (count < 6 ? count : 6); i++) ...[
-                      if (i > 0)
-                        Expanded(
-                          child: Container(
-                            height: 3,
-                            color: i <= completed
-                                ? AppColors.teal
-                                : scheme.outlineVariant,
-                          ),
-                        ),
-                      Container(
-                        width: 32,
-                        height: 32,
-                        decoration: BoxDecoration(
-                          color: i < completed
-                              ? AppColors.teal
-                              : i == completed
-                              ? AppColors.gold
-                              : scheme.surfaceContainerHighest,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(
-                          i < completed
-                              ? Icons.check_rounded
-                              : i == completed
-                              ? Icons.play_arrow_rounded
-                              : Icons.circle_outlined,
-                          size: 18,
-                          color: i <= completed
-                              ? AppColors.ink
-                              : scheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
-                const SizedBox(height: 16),
-                LinearProgressIndicator(
-                  value: progress,
-                  minHeight: 10,
-                  borderRadius: BorderRadius.circular(12),
-                  color: AppColors.teal,
-                ),
-                const SizedBox(height: 14),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        '$completed / $count görev · ${path['minutes']} dk',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: scheme.onSurfaceVariant,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      progress == 1
-                          ? 'TAMAMLANDI ✓'
-                          : completed > 0
-                          ? 'DEVAM ET →'
-                          : 'BAŞLA →',
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      path['title'],
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
-                        color: AppColors.teal,
-                        fontSize: 12,
+                        fontSize: 19,
                         fontWeight: FontWeight.w900,
                       ),
                     ),
-                  ],
+                  ),
+                  const SizedBox(width: 8),
+                  const Icon(Icons.chevron_right_rounded),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Text(
+                path['description'] ?? '',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: scheme.onSurfaceVariant, height: 1.4),
+              ),
+              const SizedBox(height: 18),
+              LinearProgressIndicator(
+                value: progress,
+                minHeight: 9,
+                color: AppColors.teal,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      '$completed / $count soru • %${(progress * 100).round()}',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    progress == 1 && count > 0
+                        ? 'TAMAMLANDI ✓'
+                        : completed > 0
+                        ? 'DEVAM ET →'
+                        : 'BAŞLA →',
+                    style: const TextStyle(
+                      color: AppColors.teal,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+              if ((path['information_count'] ?? 0) > 0) ...[
+                const SizedBox(height: 8),
+                Text(
+                  '${path['information_count']} bilgi kartı • kısa oturumlarla ilerle',
+                  style: TextStyle(
+                    color: scheme.onSurfaceVariant,
+                    fontSize: 12,
+                  ),
                 ),
               ],
-            ),
+            ],
           ),
         ),
       ),
@@ -612,6 +593,7 @@ class _SessionState extends State<Session> {
   Timer? dragScrollTimer;
   Offset? dragPointer;
   bool draggingCard = false;
+  bool voiceMode = false;
 
   void beginCardDrag() {
     dragPointer = null;
@@ -699,7 +681,7 @@ class _SessionState extends State<Session> {
         'sessions/${session!['id']}/answer/',
         body: {
           'question_id': q['id'],
-          'answer': ['text', 'fill_blank'].contains(q['kind'])
+          'answer': ['text', 'fill_blank', 'voice'].contains(q['kind'])
               ? input.text
               : ['sentence_order', 'drag_select'].contains(q['kind'])
               ? arranged
@@ -741,8 +723,32 @@ class _SessionState extends State<Session> {
           selected.clear();
           arranged = [];
           input.clear();
+          voiceMode = false;
           viewed = DateTime.now();
+          if (questionScroll.hasClients) questionScroll.jumpTo(0);
         }),
+      );
+    }
+    if (q != null && q['kind'] == 'info') {
+      return InformationCard(
+        key: ValueKey(q['id']),
+        question: q,
+        pathTitle: widget.path['title'],
+        answered: session!['answered'],
+        total: session!['total'],
+        onContinue: () async {
+          final next = await api.request(
+            'sessions/${session!['id']}/continue/',
+            body: {'question_id': q['id']},
+          );
+          if (mounted) {
+            setState(() {
+              session = next;
+              error = null;
+              viewed = DateTime.now();
+            });
+          }
+        },
       );
     }
     return Scaffold(
@@ -820,7 +826,7 @@ class _SessionState extends State<Session> {
               ),
               const SizedBox(height: 16),
               Text(
-                'En fazla ${widget.path['session_size'] ?? 8} soru · yaklaşık ${widget.path['minutes']} dakika',
+                'Bu oturumda en fazla ${widget.path['session_size'] ?? 8} soru ve aradaki bilgi kartları. İlerlemen kaydedilir; kaldığın yerden devam edebilirsin.',
               ),
               const SizedBox(height: 32),
               PrimaryButton(label: 'Başla', busy: busy, onPressed: start),
@@ -837,7 +843,7 @@ class _SessionState extends State<Session> {
               ),
               const SizedBox(height: 24),
               Text(
-                '${session!['total']} soru çözdün\n${session!['correct']} doğru\n${session!['xp_earned']} XP\nYolun %${session!['path']['progress']} tamamlandı',
+                '${session!['question_total'] ?? session!['total']} soru tamamladın\n${session!['correct']} doğru • ${session!['pending_reviews'] ?? 0} ses kaydı incelemede\n${session!['information_read'] ?? 0} bilgi kartı\n${session!['xp_earned']} XP\nYolun %${session!['path']['progress']} tamamlandı',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 32),
@@ -975,7 +981,35 @@ class _SessionState extends State<Session> {
                     },
                   ),
                 ),
-              if (['text', 'fill_blank'].contains(q['kind']))
+              if (q['kind'] == 'voice') ...[
+                Wrap(
+                  spacing: 10,
+                  children: [
+                    ChoiceChip(
+                      label: const Text('✍️ Yazarak yanıtla'),
+                      selected: !voiceMode,
+                      onSelected: busy
+                          ? null
+                          : (_) => setState(() => voiceMode = false),
+                    ),
+                    ChoiceChip(
+                      label: const Text('🎙️ Sesli yanıtla'),
+                      selected: voiceMode,
+                      onSelected: busy
+                          ? null
+                          : (_) => setState(() => voiceMode = true),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'Yazılı yanıtın tek doğru cevaba göre kontrol edilir. Sesli mesaj üzerinden geri bildirim e-posta yoluyla 24 saat içinde incelenip verilecektir.',
+                  style: TextStyle(height: 1.5),
+                ),
+                const SizedBox(height: 16),
+              ],
+              if (['text', 'fill_blank', 'voice'].contains(q['kind']) &&
+                  !voiceMode)
                 TextField(
                   controller: input,
                   maxLength: 4000,
@@ -1004,27 +1038,32 @@ class _SessionState extends State<Session> {
                   onDragEnd: endCardDrag,
                   onDragPosition: (p) => dragPointer = p,
                 )
-              else if (q['kind'] == 'voice')
+              else if (q['kind'] == 'voice' && voiceMode)
                 VoiceRecorder(
                   key: ValueKey(q['id']),
                   onSubmit: (file, duration) async {
-                    final result = await api.uploadVoice(
-                      session!['id'],
-                      q['id'],
-                      file,
-                      duration,
-                    );
-                    if (mounted) {
-                      setState(() {
-                        feedback = {
-                          'correct': true,
-                          'pending': true,
-                          'xp_change': 0,
-                          'explanation': result['detail'],
-                          'hint': '',
-                          'session': result['session'],
-                        };
-                      });
+                    setState(() => busy = true);
+                    try {
+                      final result = await api.uploadVoice(
+                        session!['id'],
+                        q['id'],
+                        file,
+                        duration,
+                      );
+                      if (mounted) {
+                        setState(
+                          () => feedback = {
+                            'correct': true,
+                            'pending': true,
+                            'xp_change': 0,
+                            'explanation': result['detail'],
+                            'hint': '',
+                            'session': result['session'],
+                          },
+                        );
+                      }
+                    } finally {
+                      if (mounted) setState(() => busy = false);
                     }
                   },
                 )
@@ -1051,23 +1090,24 @@ class _SessionState extends State<Session> {
                     ),
                   ),
               const SizedBox(height: 24),
-              PrimaryButton(
-                label: 'Yanıtı kontrol et',
-                busy: busy,
-                onPressed:
-                    q['kind'] == 'voice' ||
-                        busy ||
-                        (['text', 'fill_blank'].contains(q['kind'])
-                            ? input.text.trim().isEmpty
-                            : [
-                                'sentence_order',
-                                'drag_select',
-                              ].contains(q['kind'])
-                            ? arranged.isEmpty
-                            : selected.isEmpty)
-                    ? null
-                    : submit,
-              ),
+              if (!(q['kind'] == 'voice' && voiceMode))
+                PrimaryButton(
+                  label: 'Yanıtı kontrol et',
+                  busy: busy,
+                  onPressed:
+                      (q['kind'] == 'voice' && voiceMode) ||
+                          busy ||
+                          (['text', 'fill_blank', 'voice'].contains(q['kind'])
+                              ? input.text.trim().isEmpty
+                              : [
+                                  'sentence_order',
+                                  'drag_select',
+                                ].contains(q['kind'])
+                              ? arranged.isEmpty
+                              : selected.isEmpty)
+                      ? null
+                      : submit,
+                ),
             ],
             if (error != null)
               Padding(

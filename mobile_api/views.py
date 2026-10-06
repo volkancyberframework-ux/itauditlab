@@ -25,6 +25,7 @@ from .models import (
     XPTransaction,
     Subscription,
     BillingIdentity,
+    MobileSettings,
 )
 
 
@@ -63,6 +64,53 @@ class Login(MobileView):
         return Response({"access": str(refresh.access_token), "refresh": str(refresh)})
 
 
+class RegistrationThrottle(AnonRateThrottle):
+    scope = "mobile_register"
+
+
+class Register(Login):
+    throttle_classes = [RegistrationThrottle]
+
+    def post(self, request):
+        from django.contrib.auth.password_validation import validate_password
+        from django.core.validators import validate_email
+        from django.db import IntegrityError
+        import hashlib
+
+        email = request.data.get("email")
+        password = request.data.get("password")
+        name = request.data.get("name", "")
+        if not isinstance(email, str) or not isinstance(password, str) or not isinstance(name, str):
+            raise ValidationError("Ad, e-posta ve şifre alanlarını kontrol et.")
+        email, name = email.strip().casefold(), name.strip()
+        if not name or len(name) > 150 or len(email) > 254 or len(password) > 256:
+            raise ValidationError("Adını, geçerli e-posta adresini ve şifreni gir.")
+        try:
+            validate_email(email)
+        except DjangoValidationError:
+            raise ValidationError("Geçerli bir e-posta adresi gir.")
+        User = get_user_model()
+        username = "mobile_" + hashlib.sha256(email.encode()).hexdigest()[:40]
+        first, _, last = name.partition(" ")
+        user = User(username=username, email=email, first_name=first, last_name=last,
+                    is_mobile=True, mobile_full_access=False, mobile_last_date=None,
+                    is_staff=False, is_superuser=False)
+        try:
+            validate_password(password, user)
+        except DjangoValidationError as error:
+            raise ValidationError(" ".join(error.messages))
+        try:
+            with transaction.atomic():
+                if User.objects.filter(email__iexact=email, is_mobile=True).exists():
+                    raise ValidationError("Bu e-posta için mobil hesap zaten var. Giriş yapabilir veya şifreni sıfırlayabilirsin.")
+                user.set_password(password)
+                user.save(force_insert=True)
+                refresh = RefreshToken.for_user(user)
+        except IntegrityError:
+            raise ValidationError("Bu e-posta için mobil hesap zaten var.")
+        return Response({"access": str(refresh.access_token), "refresh": str(refresh)}, status=201)
+
+
 class Refresh(TokenRefreshView):
     throttle_classes = [LoginThrottle]
     serializer_class = MobileTokenRefreshSerializer
@@ -88,7 +136,7 @@ def xp(user):
 
 
 def premium(user):
-    return Subscription.objects.filter(
+    return user.mobile_full_access or Subscription.objects.filter(
         user=user,
         status__in=["active", "trial", "grace_period"],
         expires_at__gt=timezone.now(),
@@ -121,18 +169,17 @@ def options(q):
 
 
 def paths(user):
-    return LearningPath.objects.filter(published=True).filter(
-        Q(owner=None) | Q(owner=user)
-    )
+    qs = LearningPath.objects.filter(published=True).filter(Q(owner=None) | Q(owner=user))
+    if not premium(user):
+        free_id = MobileSettings.objects.filter(pk=1).values_list("free_path_id", flat=True).first()
+        qs = qs.filter(pk=free_id, owner=None)
+    return qs
 
 
 def accessible_questions(path, user):
-    qs = path.questions.filter(published=True)
-    if not premium(user):
-        if path.premium:
-            raise PermissionDenied("Bu yol Premium üyeliğe açık.")
-        qs = qs.filter(premium=False)
-    return qs
+    if not paths(user).filter(pk=path.pk).exists():
+        raise PermissionDenied("Bu öğrenme yolu hesabına açık değil.")
+    return path.questions.filter(published=True)
 
 
 def session_size(path):
@@ -140,10 +187,11 @@ def session_size(path):
 
 
 def path_data(path, user):
-    total = path.questions.filter(published=True).count()
+    total = path.questions.filter(published=True).exclude(kind="info").count()
+    cards = path.questions.filter(published=True, kind="info").count()
     progress = UserPathProgress.objects.filter(user=user, path=path).first()
     done = (
-        progress.completed.filter(published=True, paths=path).count() if progress else 0
+        progress.completed.filter(published=True, paths=path).exclude(kind="info").count() if progress else 0
     )
     return {
         "id": path.pk,
@@ -154,7 +202,8 @@ def path_data(path, user):
         "difficulty": path.difficulty,
         "minutes": path.minutes,
         "session_size": session_size(path),
-        "premium": path.premium,
+        "premium": False,
+        "information_count": cards,
         "question_count": total,
         "completed": done,
         "progress": round(done / total * 100) if total else 0,
@@ -176,7 +225,7 @@ class Profile(MobileView):
                 **level_data(total_xp, request.user),
                 "premium": premium(request.user),
                 "completed": QuestionAttempt.objects.filter(
-                    session__user=request.user, is_correct=True
+                    session__user=request.user, is_correct=True, question__kind__in=[k for k, _ in Question.TYPES if k != "info"]
                 )
                 .values("question")
                 .distinct()
@@ -276,7 +325,8 @@ def question_data(q, session, request):
             else None
         ),
         "audio": audio,
-        "base_xp": q.base_xp,
+        "base_xp": 0 if q.kind == "info" else q.base_xp,
+        "card_pages": q.card_pages if q.kind == "info" else [],
     }
 
 
@@ -302,7 +352,10 @@ def session_data(session, request):
         "answered": len(answered),
         "question": question_data(q, session, request) if q else None,
         "complete": not remaining,
-        "correct": session.attempts.filter(is_correct=True).count(),
+        "correct": session.attempts.filter(is_correct=True).exclude(question__kind="info").count(),
+        "question_total": Question.objects.filter(pk__in=session.questions).exclude(kind="info").count(),
+        "information_read": session.attempts.filter(question__kind="info").count(),
+        "pending_reviews": session.attempts.filter(voicesubmission__isnull=False, voicesubmission__review_status="pending").count(),
         "xp_earned": session.attempts.aggregate(total=Sum("xp_change"))["total"] or 0,
         "path": path_data(session.path, request.user),
     }
@@ -311,7 +364,8 @@ def session_data(session, request):
 class Sessions(MobileView):
     def post(self, request):
         p = (
-            paths(request.user)
+            LearningPath.objects.filter(published=True)
+            .filter(Q(owner=None) | Q(owner=request.user))
             .filter(pk=integer_id(request.data.get("path_id")))
             .first()
         )
@@ -321,7 +375,15 @@ class Sessions(MobileView):
         progress = UserPathProgress.objects.filter(user=request.user, path=p).first()
         if progress:
             qs = qs.exclude(pk__in=progress.completed.values("pk"))
-        ids = list(qs.values_list("pk", flat=True)[:session_size(p)])
+        ids, question_count = [], 0
+        for question in qs.only("pk", "kind").iterator():
+            if question.kind != "info":
+                if question_count >= session_size(p):
+                    break
+                question_count += 1
+            ids.append(question.pk)
+            if len(ids) >= 50:
+                break
         if not ids:
             raise ValidationError("Bu yoldaki erişilebilir görevleri tamamladın.")
         s = LearningSession.objects.create(user=request.user, path=p, questions=ids)
@@ -369,9 +431,9 @@ class Answer(MobileView):
             if qid != next((i for i in s.questions if i not in answered), None):
                 raise ValidationError("Önce mevcut görevi tamamla.")
             answer = request.data.get("answer")
-            if q.kind == "voice":
-                raise ValidationError("Sesli yanıt yükleme henüz etkin değil.")
-            if q.kind in ["text", "fill_blank"]:
+            if q.kind == "info":
+                raise ValidationError("Bilgi kartını devam düğmesiyle geçebilirsin.")
+            if q.kind in ["text", "fill_blank", "voice"]:
                 if not isinstance(answer, str) or len(answer) > 4000:
                     raise ValidationError("Geçerli bir metin gir.")
                 correct = answer.strip().casefold() in [
@@ -443,13 +505,37 @@ class Answer(MobileView):
             )
 
 
+class ContinueCard(MobileView):
+    def post(self, request, pk):
+        with transaction.atomic():
+            get_user_model().objects.select_for_update().get(pk=request.user.pk)
+            session = LearningSession.objects.select_for_update().filter(pk=pk, user=request.user).first()
+            if not session:
+                return Response(status=404)
+            qid = integer_id(request.data.get("question_id"))
+            q = accessible_questions(session.path, request.user).filter(pk=qid, kind="info").first()
+            if not q or qid not in session.questions:
+                raise ValidationError("Bilgi kartı bulunamadı.")
+            previous = session.attempts.filter(question=q).first()
+            if not previous:
+                answered = set(session.attempts.values_list("question_id", flat=True))
+                if qid != next((i for i in session.questions if i not in answered), None):
+                    raise ValidationError("Önce mevcut görevi tamamla.")
+                QuestionAttempt.objects.create(session=session, question=q, answer={"read": True}, is_correct=False)
+                progress, _ = UserPathProgress.objects.get_or_create(user=request.user, path=session.path)
+                progress.completed.add(q)
+                progress.save()
+                if session.attempts.count() == len(session.questions):
+                    session.completed_at = timezone.now()
+                    session.save(update_fields=["completed_at"])
+        return Response(session_data(session, request))
+
+
 class Voice(MobileView):
     def post(self, request, pk):
         import uuid
         from .models import VoiceSubmission
 
-        if not premium(request.user):
-            raise PermissionDenied("Sesli yanıtlar Premium üyeliğe açık.")
         upload = request.FILES.get("file")
         try:
             duration = int(request.data.get("duration", 0))
@@ -485,6 +571,8 @@ class Voice(MobileView):
             if not q or qid not in s.questions:
                 raise ValidationError("Sesli soru bulunamadı.")
             previous = s.attempts.filter(question=q).first()
+            if previous and not VoiceSubmission.objects.filter(attempt=previous).exists():
+                raise ValidationError("Bu görev için yazılı yanıt zaten gönderildi.")
             if not previous:
                 answered = set(s.attempts.values_list("question_id", flat=True))
                 if qid != next((i for i in s.questions if i not in answered), None):
@@ -499,12 +587,15 @@ class Voice(MobileView):
                 VoiceSubmission.objects.create(
                     attempt=a, file=upload, duration=duration
                 )
+                progress, _ = UserPathProgress.objects.get_or_create(user=request.user, path=s.path)
+                progress.completed.add(q)
+                progress.save()
                 if s.attempts.count() == len(s.questions):
                     s.completed_at = timezone.now()
                     s.save(update_fields=["completed_at"])
         return Response(
             {
-                "detail": "Kaydın alındı 🎙️ Yönetici incelemesi bekleniyor; bu görev için henüz XP verilmedi.",
+                "detail": "Sesli mesajın alındı 🎙️ Yanıtın 24 saat içinde incelenecek ve geri bildirimin e-posta adresine gönderilecektir.",
                 "session": session_data(s, request),
             }
         )
@@ -668,8 +759,6 @@ class BillingWebhook(APIView):
 
 def visible_questions(user):
     qs = Question.objects.filter(published=True, paths__in=paths(user))
-    if not premium(user):
-        qs = qs.filter(premium=False, paths__premium=False)
     return qs.distinct()
 
 

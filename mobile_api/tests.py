@@ -14,6 +14,7 @@ class LearningTests(TestCase):
             password="test-pass",
             first_name="Volkan",
             is_mobile=True,
+            mobile_full_access=True,
         )
         self.other = get_user_model().objects.create_user(
             username="other", password="test-pass", is_mobile=True
@@ -75,6 +76,8 @@ class LearningTests(TestCase):
         self.assertEqual(self.answer(data, ["a"]).status_code, 404)
 
     def test_premium_gate(self):
+        self.user.mobile_full_access = False
+        self.user.save()
         self.path.premium = True
         self.path.save()
         self.assertEqual(
@@ -94,6 +97,8 @@ class LearningTests(TestCase):
         self.session()
 
     def test_expired_subscription_denied(self):
+        self.user.mobile_full_access = False
+        self.user.save()
         self.path.premium = True
         self.path.save()
         Subscription.objects.create(
@@ -233,43 +238,37 @@ class LearningTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn("/api/mobile/v1/auth/reset/", mail.outbox[0].body)
 
-    def test_voice_upload_requires_premium_and_container(self):
+    def test_free_voice_upload_validates_container_without_upsell(self):
         from django.core.files.uploadedfile import SimpleUploadedFile
-
-        s = self.session()
+        from .models import MobileSettings, VoiceSubmission
+        MobileSettings.objects.update_or_create(pk=1, defaults={'free_path': self.path})
+        self.user.mobile_full_access = False
+        self.user.save()
         self.q.kind = "voice"
+        self.q.answer = ['veri kaybı']
+        self.q.premium = True  # The old feature flag must not gate free-path tasks.
         self.q.save()
+        s = self.session()
         url = f"/api/mobile/v1/sessions/{s['id']}/voice/"
-        self.assertEqual(
-            self.client.post(
-                url,
-                {
-                    "question_id": self.q.pk,
-                    "duration": 2,
-                    "file": SimpleUploadedFile("x.m4a", b"fake"),
-                },
-            ).status_code,
-            403,
-        )
-        Subscription.objects.create(
-            user=self.user,
-            provider="test",
-            transaction_id="voice",
-            status="active",
-            expires_at=timezone.now() + timedelta(days=1),
-            verified_at=timezone.now(),
-        )
-        self.assertEqual(
-            self.client.post(
-                url,
-                {
-                    "question_id": self.q.pk,
-                    "duration": 2,
-                    "file": SimpleUploadedFile("x.m4a", b"fake"),
-                },
-            ).status_code,
-            400,
-        )
+        self.assertEqual(self.client.post(url, {
+            'question_id': self.q.pk, 'duration': 2,
+            'file': SimpleUploadedFile('x.m4a', b'fake'),
+        }).status_code, 400)
+        audio = (__import__('pathlib').Path(__file__).parent / 'demo_assets' / 'mfa.m4a').read_bytes()
+        result = self.client.post(url, {'question_id': self.q.pk, 'duration': 2,
+            'file': SimpleUploadedFile('x.m4a', audio, content_type='audio/mp4')})
+        self.assertEqual(result.status_code, 200, result.data)
+        self.assertIn('24 saat', result.data['detail'])
+        self.assertTrue(result.data['session']['complete'])
+        self.assertEqual(result.data['session']['pending_reviews'], 1)
+        self.assertEqual(result.data['session']['path']['progress'], 100)
+        retry = self.client.post(url, {'question_id': self.q.pk, 'duration': 2,
+            'file': SimpleUploadedFile('x.m4a', audio)})
+        self.assertEqual(retry.status_code, 200)
+        self.assertEqual(VoiceSubmission.objects.count(), 1)
+        self.assertEqual(XPTransaction.objects.count(), 0)
+        voice = VoiceSubmission.objects.get()
+        voice.file.delete()
 
     def test_store_sync_uses_backend_identity_and_expiry(self):
         from unittest.mock import patch, Mock
@@ -498,7 +497,8 @@ class AllTypesDemoTests(TestCase):
         self.assertCountEqual(self.path.questions.values_list('kind', flat=True), [k for k, _ in Question.TYPES])
         response = self.client.post('/api/mobile/v1/sessions/', {'path_id': self.path.pk}, format='json')
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(response.data['total'], 10)
+        self.assertEqual(response.data['total'], 11)
+        self.assertEqual(response.data['question_total'], 10)
         self.assertEqual(response.data['path']['session_size'], 10)
         from .storage import PrivateVoiceStorage
         storage = PrivateVoiceStorage()
@@ -525,6 +525,9 @@ class AllTypesDemoTests(TestCase):
     def test_nine_automatic_questions_advance_to_voice(self):
         s = self.client.post('/api/mobile/v1/sessions/', {'path_id': self.path.pk}, format='json').data
         for q in self.path.questions.exclude(kind='voice'):
+            if q.kind == 'info':
+                s = self.client.post(f"/api/mobile/v1/sessions/{s['id']}/continue/", {'question_id': q.pk}, format='json').data
+                continue
             self.assertEqual(s['question']['id'], q.pk)
             value = q.answer[0] if q.kind in ['text', 'fill_blank'] else q.answer
             result = self.client.post(f"/api/mobile/v1/sessions/{s['id']}/answer/", {'question_id': q.pk, 'answer': value}, format='json')
@@ -532,4 +535,123 @@ class AllTypesDemoTests(TestCase):
             self.assertTrue(result.data['correct'])
             s = result.data['session']
         self.assertEqual(s['question']['kind'], 'voice')
-        self.assertEqual(s['answered'], 9)
+        self.assertEqual(s['answered'], 10)
+        self.assertEqual(s['information_read'], 1)
+
+
+class MobileProductTests(TestCase):
+    def setUp(self):
+        from django.core.cache import cache
+        from .models import MobileSettings
+        cache.clear()
+        self.user = get_user_model().objects.create_user(username='free', email='free@example.com', is_mobile=True)
+        self.path = LearningPath.objects.create(title='Free', published=True, premium=True)
+        self.other_path = LearningPath.objects.create(title='Full', published=True)
+        MobileSettings.objects.update_or_create(pk=1, defaults={'free_path': self.path})
+        self.client = APIClient()
+        self.client.force_authenticate(self.user)
+
+    def test_registration_creates_free_mobile_account_and_prevents_escalation(self):
+        self.client.force_authenticate(None)
+        result = self.client.post('/api/mobile/v1/auth/register/', {
+            'name': 'Yeni Öğrenci', 'email': ' NEW@example.com ', 'password': 'StrongDemo!45823',
+            'is_staff': True, 'is_superuser': True, 'mobile_full_access': True,
+        }, format='json')
+        self.assertEqual(result.status_code, 201, result.data)
+        user = get_user_model().objects.get(email='new@example.com')
+        self.assertTrue(user.is_mobile)
+        self.assertFalse(user.mobile_full_access or user.is_staff or user.is_superuser)
+        self.assertIsNone(user.mobile_last_date)
+        self.client.credentials(HTTP_AUTHORIZATION='Bearer '+result.data['access'])
+        self.assertEqual([p['id'] for p in self.client.get('/api/mobile/v1/paths/').data], [self.path.pk])
+        self.assertFalse(self.client.get('/api/mobile/v1/profile/').data['premium'])
+        self.assertEqual(self.client.post('/api/mobile/v1/auth/register/', {
+            'name': 'Duplicate', 'email': 'NEW@example.com', 'password': 'StrongDemo!45823',
+        }, format='json').status_code, 400)
+
+    def test_registration_validates_email_password_and_keeps_website_accounts_separate(self):
+        self.client.force_authenticate(None)
+        for email, password in [('bad', 'StrongDemo!45823'), ('weak@example.com', '123')]:
+            result = self.client.post('/api/mobile/v1/auth/register/', {'name': 'New', 'email': email, 'password': password}, format='json')
+            self.assertEqual(result.status_code, 400)
+        get_user_model().objects.create_user(username='web-only', email='separate@example.com')
+        result = self.client.post('/api/mobile/v1/auth/register/', {'name': 'Mobile', 'email': 'separate@example.com', 'password': 'StrongDemo!45823'}, format='json')
+        self.assertEqual(result.status_code, 201, result.data)
+        self.assertEqual(get_user_model().objects.filter(email='separate@example.com').count(), 2)
+
+    def test_free_path_selection_controls_visibility_and_all_task_features(self):
+        from .models import MobileSettings
+        self.assertEqual([p['id'] for p in self.client.get('/api/mobile/v1/paths/').data], [self.path.pk])
+        self.assertEqual(self.client.post('/api/mobile/v1/sessions/', {'path_id': self.other_path.pk}, format='json').status_code, 403)
+        MobileSettings.objects.filter(pk=1).update(free_path=self.other_path)
+        self.assertEqual([p['id'] for p in self.client.get('/api/mobile/v1/paths/').data], [self.other_path.pk])
+        self.user.mobile_full_access = True
+        self.user.save()
+        self.assertIn(self.path.pk, [p['id'] for p in self.client.get('/api/mobile/v1/paths/').data])
+
+    def test_long_path_batches_questions_and_inserts_cards_without_xp(self):
+        for order in range(101):
+            q = Question.objects.create(kind='choice', prompt=str(order), options=[{'id':'a','text':'A'}], answer=['a'], published=True, premium=True, order=order*2)
+            q.paths.add(self.path)
+        card = Question.objects.create(kind='info', prompt='Learn', card_pages=[{'title':'Risk','body':'**Neden** → *olay* → etki'}], published=True, order=5)
+        card.paths.add(self.path)
+        session = self.client.post('/api/mobile/v1/sessions/', {'path_id': self.path.pk}, format='json').data
+        self.assertEqual(session['total'], 9)
+        self.assertEqual(session['question_total'], 8)
+        self.assertEqual(session['path']['question_count'], 101)
+        self.assertEqual(session['path']['information_count'], 1)
+        for _ in range(3):
+            qid = session['question']['id']
+            result = self.client.post(f"/api/mobile/v1/sessions/{session['id']}/answer/", {'question_id': qid, 'answer':['a']}, format='json')
+            self.assertEqual(result.status_code, 200, result.data)
+            session = result.data['session']
+        self.assertEqual(session['question']['kind'], 'info')
+        self.assertEqual(session['path']['completed'], 3)
+        transactions = XPTransaction.objects.count()
+        url = f"/api/mobile/v1/sessions/{session['id']}/continue/"
+        for _ in range(2):
+            result = self.client.post(url, {'question_id': card.pk}, format='json')
+            self.assertEqual(result.status_code, 200, result.data)
+            self.assertEqual(result.data['answered'], 4)
+            self.assertEqual(result.data['path']['completed'], 3)
+        self.assertEqual(XPTransaction.objects.count(), transactions)
+        self.assertEqual(result.data['correct'], 3)
+
+    def test_voice_question_accepts_one_written_answer(self):
+        q = Question.objects.create(kind='voice', prompt='Risk?', answer=['veri kaybı'], published=True, premium=True)
+        q.paths.add(self.path)
+        session = self.client.post('/api/mobile/v1/sessions/', {'path_id': self.path.pk}, format='json').data
+        result = self.client.post(f"/api/mobile/v1/sessions/{session['id']}/answer/", {'question_id':q.pk, 'answer':' Veri Kaybı '}, format='json')
+        self.assertEqual(result.status_code, 200, result.data)
+        self.assertTrue(result.data['correct'])
+        self.assertTrue(result.data['session']['complete'])
+
+    def test_feedback_email_is_retryable_and_sent_once(self):
+        from unittest.mock import patch
+        from django.core import mail
+        from .models import VoiceSubmission
+        from .feedback import send_voice_feedback
+        q = Question.objects.create(kind='voice', prompt='Risk?', answer=['veri kaybı'])
+        session = __import__('mobile_api.models', fromlist=['LearningSession']).LearningSession.objects.create(user=self.user, path=self.path, questions=[q.pk])
+        attempt = __import__('mobile_api.models', fromlist=['QuestionAttempt']).QuestionAttempt.objects.create(session=session, question=q, answer={'review':'pending'}, is_correct=False)
+        voice = VoiceSubmission.objects.create(attempt=attempt, file='missing.m4a', duration=2, review_status='reviewed', feedback='Etkiyi daha somut anlatabilirsin.')
+        self.assertEqual(voice.review_due_at - voice.created_at, timedelta(hours=24))
+        with patch('mobile_api.feedback.send_mail', side_effect=RuntimeError('SMTP unavailable')):
+            with self.assertRaises(RuntimeError):
+                send_voice_feedback(voice.pk)
+        voice.refresh_from_db()
+        self.assertIsNone(voice.feedback_sent_at)
+        self.assertTrue(send_voice_feedback(voice.pk))
+        self.assertFalse(send_voice_feedback(voice.pk))
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, ['free@example.com'])
+        self.assertIn(voice.feedback, mail.outbox[0].body)
+
+    def test_admin_requires_single_voice_answer_and_valid_information_pages(self):
+        from .admin import QuestionForm
+        form = QuestionForm(data={'kind':'voice', 'prompt':'Risk?', 'answer':'["a", "b"]', 'base_xp':10, 'order':0, 'difficulty':'beginner'})
+        self.assertFalse(form.is_valid())
+        self.assertIn('answer', form.errors)
+        form = QuestionForm(data={'kind':'info', 'prompt':'Read', 'card_pages':'[{"body": 9}]', 'base_xp':0, 'order':0, 'difficulty':'beginner'})
+        self.assertFalse(form.is_valid())
+        self.assertIn('card_pages', form.errors)
