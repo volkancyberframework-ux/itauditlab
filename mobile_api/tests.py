@@ -1,0 +1,336 @@
+from datetime import timedelta
+from django.contrib.auth import get_user_model
+from django.test import TestCase
+from django.utils import timezone
+from rest_framework.test import APIClient
+from .models import LearningPath, Question, XPTransaction, Subscription
+
+
+class LearningTests(TestCase):
+    def setUp(self):
+        self.user = get_user_model().objects.create_user(
+            username="volkan",
+            email="volkan@example.com",
+            password="test-pass",
+            first_name="Volkan",
+        )
+        self.other = get_user_model().objects.create_user(
+            username="other", password="test-pass"
+        )
+        self.client = APIClient()
+        self.client.force_authenticate(self.user)
+        self.path = LearningPath.objects.create(title="GRC", published=True)
+        self.q = Question.objects.create(
+            kind="choice",
+            prompt="{first_name}, risk?",
+            options=[{"id": "a", "text": "Risk"}],
+            answer=["a"],
+            published=True,
+            base_xp=20,
+        )
+        self.q.paths.add(self.path)
+
+    def session(self):
+        response = self.client.post(
+            "/api/mobile/v1/sessions/", {"path_id": self.path.pk}, format="json"
+        )
+        self.assertEqual(response.status_code, 201, response.data)
+        return response.data
+
+    def answer(self, session, value):
+        return self.client.post(
+            f"/api/mobile/v1/sessions/{session['id']}/answer/",
+            {"question_id": self.q.pk, "answer": value},
+            format="json",
+        )
+
+    def test_answer_hidden_and_personalization(self):
+        data = self.session()
+        self.assertNotIn("answer", data["question"])
+        self.assertEqual(data["question"]["prompt"], "Volkan, risk?")
+
+    def test_retry_is_idempotent_and_server_progress(self):
+        data = self.session()
+        first = self.answer(data, ["a"])
+        second = self.answer(data, ["a"])
+        self.assertEqual(first.data["xp_change"], 20)
+        self.assertEqual(second.data["xp_change"], 20)
+        self.assertEqual(XPTransaction.objects.count(), 1)
+        self.assertEqual(first.data["session"]["path"]["progress"], 100)
+
+    def test_wrong_answer_never_negative(self):
+        result = self.answer(self.session(), ["b"])
+        self.assertEqual(result.data["xp_change"], 0)
+        self.assertEqual(result.data["session"]["path"]["progress"], 0)
+
+    def test_no_reward_twice_across_sessions(self):
+        s1, s2 = self.session(), self.session()
+        self.answer(s1, ["a"])
+        self.assertEqual(self.answer(s2, ["a"]).data["xp_change"], 0)
+
+    def test_session_owner_isolation(self):
+        data = self.session()
+        self.client.force_authenticate(self.other)
+        self.assertEqual(self.answer(data, ["a"]).status_code, 404)
+
+    def test_premium_gate(self):
+        self.path.premium = True
+        self.path.save()
+        self.assertEqual(
+            self.client.post(
+                "/api/mobile/v1/sessions/", {"path_id": self.path.pk}
+            ).status_code,
+            403,
+        )
+        Subscription.objects.create(
+            user=self.user,
+            provider="test",
+            transaction_id="test",
+            status="active",
+            expires_at=timezone.now() + timedelta(days=1),
+            verified_at=timezone.now(),
+        )
+        self.session()
+
+    def test_expired_subscription_denied(self):
+        self.path.premium = True
+        self.path.save()
+        Subscription.objects.create(
+            user=self.user,
+            provider="test",
+            transaction_id="test",
+            status="active",
+            expires_at=timezone.now() - timedelta(seconds=1),
+            verified_at=timezone.now(),
+        )
+        self.assertEqual(
+            self.client.post(
+                "/api/mobile/v1/sessions/", {"path_id": self.path.pk}
+            ).status_code,
+            403,
+        )
+
+    def test_login_uses_existing_account_and_refresh(self):
+        self.client.force_authenticate(None)
+        response = self.client.post(
+            "/api/mobile/v1/auth/login/",
+            {"email": self.user.email, "password": "test-pass"},
+            format="json",
+        )
+        self.assertEqual(response.status_code, 200)
+        self.client.credentials(HTTP_AUTHORIZATION="Bearer " + response.data["access"])
+        self.assertEqual(self.client.get("/api/mobile/v1/profile/").status_code, 200)
+        refresh = self.client.post(
+            "/api/mobile/v1/auth/refresh/",
+            {"refresh": response.data["refresh"]},
+            format="json",
+        )
+        self.assertEqual(refresh.status_code, 200)
+        reused = self.client.post(
+            "/api/mobile/v1/auth/refresh/",
+            {"refresh": response.data["refresh"]},
+            format="json",
+        )
+        self.assertEqual(reused.status_code, 401)
+
+    def test_no_store_configuration_fails_closed(self):
+        self.assertEqual(
+            self.client.post(
+                "/api/mobile/v1/subscriptions/sync/", {}, format="json"
+            ).status_code,
+            503,
+        )
+
+    def test_bad_path_id_returns_validation_error(self):
+        self.assertEqual(
+            self.client.post(
+                "/api/mobile/v1/sessions/", {"path_id": "broken"}, format="json"
+            ).status_code,
+            400,
+        )
+
+    def test_unpublished_question_excluded(self):
+        self.q.published = False
+        self.q.save()
+        self.assertEqual(
+            self.client.post(
+                "/api/mobile/v1/sessions/", {"path_id": self.path.pk}, format="json"
+            ).status_code,
+            400,
+        )
+
+    def test_relational_options_do_not_leak_correctness(self):
+        from .models import QuestionOption
+
+        QuestionOption.objects.create(
+            question=self.q, key="b", text="New answer", correct=True
+        )
+        data = self.session()
+        self.assertEqual(
+            data["question"]["options"], [{"id": "b", "text": "New answer"}]
+        )
+        self.assertTrue(self.answer(data, ["b"]).data["correct"])
+
+    def test_question_order_enforced(self):
+        q2 = Question.objects.create(
+            kind="choice",
+            prompt="Later",
+            options=[],
+            answer=["a"],
+            published=True,
+            order=2,
+        )
+        q2.paths.add(self.path)
+        data = self.session()
+        response = self.client.post(
+            f"/api/mobile/v1/sessions/{data['id']}/answer/",
+            {"question_id": q2.pk, "answer": ["a"]},
+            format="json",
+        )
+        self.assertEqual(response.status_code, 400)
+
+    def test_private_recording_owner_isolation(self):
+        from .models import VoiceSubmission, QuestionAttempt, LearningSession
+
+        session = LearningSession.objects.create(
+            user=self.user, path=self.path, questions=[self.q.pk]
+        )
+        attempt = QuestionAttempt.objects.create(
+            session=session, question=self.q, answer={}, is_correct=False
+        )
+        voice = VoiceSubmission.objects.create(
+            attempt=attempt, file="recordings/missing.m4a", duration=3
+        )
+        self.client.force_authenticate(self.other)
+        self.assertEqual(
+            self.client.get(
+                f"/api/mobile/v1/submissions/{voice.pk}/audio/"
+            ).status_code,
+            404,
+        )
+
+    def test_analytics_drops_unnecessary_attributes(self):
+        from .models import AnalyticsEvent
+
+        response = self.client.post(
+            "/api/mobile/v1/events/",
+            {"name": "question_answered", "email": "private@example.com"},
+            format="json",
+        )
+        self.assertEqual(response.status_code, 204)
+        self.assertEqual(AnalyticsEvent.objects.get().name, "question_answered")
+
+    def test_reset_email_contains_working_route(self):
+        from django.core import mail
+
+        self.client.force_authenticate(None)
+        response = self.client.post(
+            "/api/mobile/v1/auth/password-reset/",
+            {"email": self.user.email},
+            format="json",
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("/api/mobile/v1/auth/reset/", mail.outbox[0].body)
+
+    def test_voice_upload_requires_premium_and_container(self):
+        from django.core.files.uploadedfile import SimpleUploadedFile
+
+        s = self.session()
+        self.q.kind = "voice"
+        self.q.save()
+        url = f"/api/mobile/v1/sessions/{s['id']}/voice/"
+        self.assertEqual(
+            self.client.post(
+                url,
+                {
+                    "question_id": self.q.pk,
+                    "duration": 2,
+                    "file": SimpleUploadedFile("x.m4a", b"fake"),
+                },
+            ).status_code,
+            403,
+        )
+        Subscription.objects.create(
+            user=self.user,
+            provider="test",
+            transaction_id="voice",
+            status="active",
+            expires_at=timezone.now() + timedelta(days=1),
+            verified_at=timezone.now(),
+        )
+        self.assertEqual(
+            self.client.post(
+                url,
+                {
+                    "question_id": self.q.pk,
+                    "duration": 2,
+                    "file": SimpleUploadedFile("x.m4a", b"fake"),
+                },
+            ).status_code,
+            400,
+        )
+
+    def test_store_sync_uses_backend_identity_and_expiry(self):
+        from unittest.mock import patch, Mock
+        from django.test import override_settings
+
+        response = Mock()
+        response.json.return_value = {
+            "subscriber": {
+                "entitlements": {
+                    "premium": {
+                        "expires_date": (
+                            timezone.now() + timedelta(days=1)
+                        ).isoformat(),
+                        "product_identifier": "grcustasi_premium_monthly",
+                    }
+                },
+                "subscriptions": {"grcustasi_premium_monthly": {"store": "app_store"}},
+            }
+        }
+        with override_settings(REVENUECAT_SECRET_KEY="server-only"), patch(
+            "requests.get", return_value=response
+        ) as get:
+            result = self.client.post(
+                "/api/mobile/v1/subscriptions/sync/", {"premium": True}, format="json"
+            )
+            self.assertEqual(result.status_code, 200)
+            self.assertTrue(result.data["premium"])
+            self.assertIn("Authorization", get.call_args.kwargs["headers"])
+
+    def test_webhook_denies_unsigned_requests(self):
+        self.assertEqual(
+            self.client.post(
+                "/api/mobile/v1/subscriptions/webhook/", {"event": {}}, format="json"
+            ).status_code,
+            403,
+        )
+
+    def test_premium_media_is_not_public(self):
+        from .models import AudioAsset
+
+        asset = AudioAsset.objects.create(
+            title="private audio", file="audio/missing.mp3"
+        )
+        self.q.audio = asset
+        self.q.premium = True
+        self.q.save()
+        self.assertEqual(
+            self.client.get(f"/api/mobile/v1/audio/{asset.pk}/").status_code, 404
+        )
+        self.client.force_authenticate(None)
+        self.assertEqual(
+            self.client.get(f"/api/mobile/v1/audio/{asset.pk}/").status_code, 401
+        )
+        with self.assertRaises(ValueError):
+            _ = asset.file.url
+
+    def test_audio_manifest_uses_authorized_route(self):
+        from .models import AudioAsset
+
+        asset = AudioAsset.objects.create(title="intro", file="audio/missing.mp3")
+        self.q.intro = asset
+        self.q.save()
+        data = self.session()
+        self.assertIn(f"/api/mobile/v1/audio/{asset.pk}/", data["question"]["audio"][0])
+        self.assertNotIn("/media/", data["question"]["audio"][0])

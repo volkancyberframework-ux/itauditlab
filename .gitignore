@@ -40,3 +40,11 @@ runtime.txt
 Procfile
 
 *.map
+
+# Mobile private uploads and signing secrets
+private_voice/
+mobile/android/key.properties
+*.jks
+*.keystore
+
+.mobile-venv/

@@ -7,6 +7,7 @@ from django.views.generic import RedirectView
 from itaudit.health import readiness
 
 urlpatterns = [
+    path('api/mobile/v1/', include('mobile_api.urls')),
     path(
         'media/__static__/img/course-covers/<str:filename>',
         RedirectView.as_view(

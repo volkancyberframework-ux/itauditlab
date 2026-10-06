@@ -24,3 +24,6 @@ stripe
 # Audit console uses the same runtime; Django/ITAudit pins stay unchanged.
 django-axes==8.3.1
 pypdf==6.19.0
+
+djangorestframework==3.16.1
+djangorestframework-simplejwt==5.5.1

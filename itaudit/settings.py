@@ -95,6 +95,9 @@ INSTALLED_APPS = [
     'core',
     'landing',
     'skool',
+    'rest_framework',
+    'rest_framework_simplejwt.token_blacklist',
+    'mobile_api',
 ]
 
 MIDDLEWARE = [
@@ -223,3 +226,22 @@ BUNNY_LIBRARY_ID = os.environ.get("BUNNY_LIBRARY_ID")
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Mobile APIs use the same CustomUser. Settings are scoped to mobile views.
+from datetime import timedelta
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'UPDATE_LAST_LOGIN': False,
+    'CHECK_REVOKE_TOKEN': True,
+}
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_RATES': {'mobile': '120/min', 'mobile_login': '5/min'},
+}
+
+MOBILE_VOICE_ROOT = config('MOBILE_VOICE_ROOT', default='/data/mobile_private')
+REVENUECAT_SECRET_KEY = config('REVENUECAT_SECRET_KEY', default='')
+
+REVENUECAT_WEBHOOK_TOKEN = config('REVENUECAT_WEBHOOK_TOKEN', default='')
