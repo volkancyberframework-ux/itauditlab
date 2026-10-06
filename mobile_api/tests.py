@@ -366,6 +366,50 @@ class LearningTests(TestCase):
         self.assertEqual(self.answer(session, ['a', 'b']).status_code, 400)
         self.assertTrue(self.answer(session, ['a']).data['correct'])
 
+    def test_profile_starts_at_level_zero_and_admin_settings_change_thresholds(self):
+        from .models import LevelSettings, LevelReward
+        profile = self.client.get('/api/mobile/v1/profile/').data
+        self.assertEqual(profile['level'], 0)
+        self.assertEqual(profile['next_level_xp'], 100)
+        settings = LevelSettings.objects.get(pk=1)
+        settings.xp_per_level = 20
+        settings.save()
+        reward = LevelReward.objects.create(level=2, title='Özel hediye', kind='gift', published=True)
+        self.answer(self.session(), ['a'])
+        profile = self.client.get('/api/mobile/v1/profile/').data
+        self.assertEqual(profile['level'], 1)
+        gift = next(r for r in profile['rewards'] if r['id'] == reward.pk)
+        self.assertEqual(gift['required_xp'], 40)
+        self.assertEqual(gift['remaining_xp'], 20)
+        self.assertFalse(gift['unlocked'])
+
+    def test_reward_is_earned_once_and_survives_later_xp_deduction(self):
+        from .models import UserLevelReward, LevelReward
+        from .levels import level_data
+        self.q.base_xp = 100
+        self.q.save()
+        result = self.answer(self.session(), ['a'])
+        reward = LevelReward.objects.get(level=1)
+        self.assertTrue(result.data['correct'])
+        self.assertTrue(UserLevelReward.objects.filter(user=self.user, reward=reward).exists())
+        level_data(100, self.user)
+        self.assertEqual(UserLevelReward.objects.filter(user=self.user, reward=reward).count(), 1)
+        data = level_data(95, self.user)
+        self.assertEqual(data['level'], 0)
+        self.assertTrue(next(r for r in data['rewards'] if r['id'] == reward.pk)['unlocked'])
+
+    def test_unpublished_rewards_hidden_and_gift_delivery_visible(self):
+        from .models import LevelReward, UserLevelReward
+        hidden = LevelReward.objects.create(level=8, title='Taslak hediye', published=False)
+        gift = LevelReward.objects.create(level=0, title='Karşılama hediyesi', kind='gift', published=True)
+        profile = self.client.get('/api/mobile/v1/profile/').data
+        self.assertNotIn(hidden.pk, [r['id'] for r in profile['rewards']])
+        claim = UserLevelReward.objects.get(user=self.user, reward=gift)
+        claim.delivered_at = timezone.now()
+        claim.save()
+        profile = self.client.get('/api/mobile/v1/profile/').data
+        self.assertTrue(next(r for r in profile['rewards'] if r['id'] == gift.pk)['delivered'])
+
 
 class MobileAccessTests(TestCase):
     def setUp(self):

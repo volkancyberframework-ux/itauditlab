@@ -9,6 +9,7 @@ import 'analytics.dart';
 import 'answer_feedback.dart';
 import 'dashboard_widgets.dart';
 import 'interactive_questions.dart';
+import 'level_rewards.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -284,7 +285,10 @@ class _HomeState extends State<Home> {
     ),
     bottomNavigationBar: NavigationBar(
       selectedIndex: tab,
-      onDestinationSelected: (v) => setState(() => tab = v),
+      onDestinationSelected: (v) {
+        setState(() => tab = v);
+        if (v == 3) load();
+      },
       destinations: const [
         NavigationDestination(
           icon: Icon(Icons.home_outlined),
@@ -381,6 +385,8 @@ class _HomeState extends State<Home> {
                   Text(
                     profile!['premium'] ? 'Premium üyelik' : 'Ücretsiz üyelik',
                   ),
+                  const SizedBox(height: 24),
+                  LevelRewards(profile: profile!),
                   const SizedBox(height: 32),
                   TextButton(
                     onPressed: () async {

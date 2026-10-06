@@ -145,7 +145,7 @@ class SentenceBuilder extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         const Text(
-          'Basılı tutup taşı. Sıralamak için tutamacı sürükle.',
+          'Kartın tamamına dokunarak ekle. Taşımak için sağdaki tutamacı sürükle.',
           style: TextStyle(fontSize: 12, height: 1.4),
         ),
         const SizedBox(height: 12),
@@ -191,6 +191,29 @@ class _DragRiskQuestionState extends State<DragRiskQuestion> {
 
   void select(String id) {
     if (widget.enabled) widget.onChanged([id]);
+  }
+
+  double cardHeight(BuildContext context, double width) {
+    double height = 220;
+    for (final option in widget.options) {
+      final painter = TextPainter(
+        text: TextSpan(
+          text: option['text'],
+          style: DefaultTextStyle.of(context).style.merge(
+            const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+              height: 1.45,
+            ),
+          ),
+        ),
+        textDirection: Directionality.of(context),
+        textScaler: MediaQuery.textScalerOf(context),
+      )..layout(maxWidth: (width * .92 - 94).clamp(60.0, double.infinity));
+      if (painter.height + 80 > height) height = painter.height + 80;
+      painter.dispose();
+    }
+    return height;
   }
 
   @override
@@ -246,24 +269,28 @@ class _DragRiskQuestionState extends State<DragRiskQuestion> {
         ),
         const SizedBox(height: 16),
         const Text(
-          'Kartları kaydır. Risk kartını basılı tutup yukarı taşı\nveya dokunarak seç.',
+          'Kartı kaydır veya okları kullan. Seçmek için karta dokun; taşımak için sağdaki tutamacı sürükle.',
           style: TextStyle(fontSize: 12, height: 1.5),
         ),
         const SizedBox(height: 14),
-        SizedBox(
-          height: 185,
-          child: PageView.builder(
-            controller: pages,
-            itemCount: widget.options.length,
-            onPageChanged: (v) => setState(() => page = v),
-            itemBuilder: (_, i) => Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: _MovableCard(
-                id: widget.options[i]['id'],
-                label: widget.options[i]['text'],
-                enabled: widget.enabled,
-                onTap: () => select(widget.options[i]['id']),
-                selected: widget.value.contains(widget.options[i]['id']),
+        LayoutBuilder(
+          builder: (context, constraints) => SizedBox(
+            height: cardHeight(context, constraints.maxWidth),
+            child: PageView.builder(
+              controller: pages,
+              physics: const PageScrollPhysics(),
+              itemCount: widget.options.length,
+              onPageChanged: (v) => setState(() => page = v),
+              itemBuilder: (_, i) => Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: _MovableCard(
+                  id: widget.options[i]['id'],
+                  label: widget.options[i]['text'],
+                  enabled: widget.enabled,
+                  onTap: () => select(widget.options[i]['id']),
+                  selected: widget.value.contains(widget.options[i]['id']),
+                  actionLabel: 'Riski seç',
+                ),
               ),
             ),
           ),
@@ -273,6 +300,8 @@ class _DragRiskQuestionState extends State<DragRiskQuestion> {
           children: [
             IconButton(
               tooltip: 'Önceki kart',
+              constraints: const BoxConstraints(minWidth: 56, minHeight: 56),
+              iconSize: 32,
               onPressed: page > 0
                   ? () => pages.previousPage(
                       duration: const Duration(milliseconds: 200),
@@ -290,6 +319,8 @@ class _DragRiskQuestionState extends State<DragRiskQuestion> {
             ),
             IconButton(
               tooltip: 'Sonraki kart',
+              constraints: const BoxConstraints(minWidth: 56, minHeight: 56),
+              iconSize: 32,
               onPressed: page < widget.options.length - 1
                   ? () => pages.nextPage(
                       duration: const Duration(milliseconds: 200),
@@ -306,7 +337,7 @@ class _DragRiskQuestionState extends State<DragRiskQuestion> {
 }
 
 class _MovableCard extends StatelessWidget {
-  final String id, label;
+  final String id, label, actionLabel;
   final bool enabled, selected;
   final VoidCallback onTap;
   const _MovableCard({
@@ -315,16 +346,19 @@ class _MovableCard extends StatelessWidget {
     required this.enabled,
     required this.onTap,
     this.selected = false,
+    this.actionLabel = 'Cümleme ekle',
   });
+
   Widget card(BuildContext context, {bool floating = false}) => Material(
     color: Theme.of(context).colorScheme.surface,
     elevation: floating ? 8 : 0,
     borderRadius: BorderRadius.circular(18),
     child: InkWell(
-      onTap: enabled ? onTap : null,
+      onTap: enabled && !floating ? onTap : null,
       borderRadius: BorderRadius.circular(18),
       child: Container(
-        padding: const EdgeInsets.all(18),
+        constraints: const BoxConstraints(minHeight: 88),
+        padding: const EdgeInsets.fromLTRB(16, 16, 8, 16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
           border: Border.all(
@@ -336,21 +370,73 @@ class _MovableCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(
-              selected ? Icons.check_circle_rounded : Icons.open_with_rounded,
-              color: AppColors.teal,
-              size: 22,
-            ),
-            const SizedBox(width: 12),
             Expanded(
-              child: Text(
-                label,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w700,
-                  height: 1.45,
-                ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    label,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      height: 1.45,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Icon(
+                        selected
+                            ? Icons.check_circle_rounded
+                            : Icons.touch_app_rounded,
+                        size: 18,
+                        color: AppColors.teal,
+                      ),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          selected ? 'Seçildi' : actionLabel,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
+            const SizedBox(width: 8),
+            if (enabled && !floating)
+              Draggable<String>(
+                data: id,
+                affinity: Axis.vertical,
+                dragAnchorStrategy: pointerDragAnchorStrategy,
+                feedback: SizedBox(
+                  width: MediaQuery.sizeOf(context).width - 64,
+                  child: card(context, floating: true),
+                ),
+                childWhenDragging: const SizedBox(width: 52, height: 64),
+                child: Tooltip(
+                  message: 'Taşı',
+                  child: Container(
+                    width: 52,
+                    height: 64,
+                    decoration: BoxDecoration(
+                      color: AppColors.teal.withValues(alpha: .12),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: const Icon(
+                      Icons.drag_indicator_rounded,
+                      color: AppColors.teal,
+                      size: 30,
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
       ),
@@ -361,16 +447,6 @@ class _MovableCard extends StatelessWidget {
     button: true,
     selected: selected,
     label: label,
-    child: enabled
-        ? LongPressDraggable<String>(
-            data: id,
-            feedback: SizedBox(
-              width: MediaQuery.sizeOf(context).width - 64,
-              child: card(context, floating: true),
-            ),
-            childWhenDragging: Opacity(opacity: .3, child: card(context)),
-            child: card(context),
-          )
-        : card(context),
+    child: card(context),
   );
 }

@@ -11,6 +11,9 @@ from .models import (
     Subscription,
     VoiceSubmission,
     QuestionOption,
+    LevelSettings,
+    LevelReward,
+    UserLevelReward,
 )
 
 
@@ -106,3 +109,35 @@ class VoiceAdmin(admin.ModelAdmin):
             '<audio controls src="{}"></audio>',
             reverse("admin:mobile_voice_listen", args=[obj.pk]),
         )
+
+
+@admin.register(LevelSettings)
+class LevelSettingsAdmin(admin.ModelAdmin):
+    fields = ['xp_per_level']
+
+    def has_add_permission(self, request):
+        return not LevelSettings.objects.exists() and super().has_add_permission(request)
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(LevelReward)
+class LevelRewardAdmin(admin.ModelAdmin):
+    list_display = ['level', 'title', 'kind', 'published']
+    list_filter = ['published', 'kind']
+    search_fields = ['title', 'description']
+
+
+@admin.register(UserLevelReward)
+class UserLevelRewardAdmin(admin.ModelAdmin):
+    list_display = ['user', 'reward', 'earned_at', 'delivered_at']
+    list_filter = ['reward', 'delivered_at']
+    search_fields = ['user__username', 'user__email', 'reward__title']
+    readonly_fields = ['user', 'reward', 'earned_at']
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False

@@ -1,6 +1,7 @@
 import uuid
 from django.conf import settings
 from django.db import models
+from django.core.validators import MinValueValidator
 from .storage import PrivateVoiceStorage
 
 
@@ -211,3 +212,54 @@ class QuestionOption(models.Model):
 class BillingIdentity(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+
+class LevelSettings(models.Model):
+    id = models.PositiveSmallIntegerField(primary_key=True, default=1, editable=False)
+    xp_per_level = models.PositiveIntegerField(
+        'Seviye başına XP', default=100,
+        validators=[MinValueValidator(1)],
+        help_text='Seviye 0’dan başlar. Örneğin 100 ise 100 XP = seviye 1.',
+    )
+
+    class Meta:
+        verbose_name = 'Mobil seviye ayarı'
+        verbose_name_plural = 'Mobil seviye ayarları'
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f'Her {self.xp_per_level} XP bir seviye'
+
+
+class LevelReward(models.Model):
+    level = models.PositiveIntegerField('Seviye', unique=True)
+    title = models.CharField('Hediye / rozet adı', max_length=180)
+    description = models.TextField('Açıklama', blank=True)
+    kind = models.CharField('Tür', max_length=12, choices=[('badge', 'Dijital rozet'), ('gift', 'Yönetici tarafından teslim edilen hediye')], default='badge')
+    published = models.BooleanField('Profilde göster', default=False)
+
+    class Meta:
+        ordering = ['level']
+        verbose_name = 'Mobil seviye hediyesi'
+        verbose_name_plural = 'Mobil seviye hediyeleri'
+
+    def __str__(self):
+        return f'Seviye {self.level} • {self.title}'
+
+
+class UserLevelReward(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    reward = models.ForeignKey(LevelReward, on_delete=models.PROTECT)
+    earned_at = models.DateTimeField('Kazanılma tarihi', auto_now_add=True)
+    delivered_at = models.DateTimeField('Hediye teslim tarihi', null=True, blank=True)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['user', 'reward'], name='mobile_user_level_reward_unique')]
+        verbose_name = 'Mobil kazanılan hediye'
+        verbose_name_plural = 'Mobil kazanılan hediyeler'
+
+    def __str__(self):
+        return f'{self.user} • {self.reward}'

@@ -34,9 +34,19 @@ void main() {
     await tester.pumpAndSettle();
     expect(value, ['a']);
     final gesture = await tester.startGesture(
-      tester.getCenter(find.text('Olay parçası')),
+      tester.getCenter(
+        find.descendant(
+          of: find
+              .ancestor(
+                of: find.text('Olay parçası'),
+                matching: find.byType(InkWell),
+              )
+              .first,
+          matching: find.byType(Draggable<String>),
+        ),
+      ),
     );
-    await tester.pump(const Duration(milliseconds: 600));
+    await tester.pump(const Duration(milliseconds: 30));
     await gesture.moveTo(tester.getCenter(find.byType(DragTarget<String>)));
     await tester.pump();
     await gesture.up();
@@ -68,9 +78,19 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('2 / 3'), findsOneWidget);
     final gesture = await tester.startGesture(
-      tester.getCenter(find.text('Olay parçası')),
+      tester.getCenter(
+        find.descendant(
+          of: find
+              .ancestor(
+                of: find.text('Olay parçası'),
+                matching: find.byType(InkWell),
+              )
+              .first,
+          matching: find.byType(Draggable<String>),
+        ),
+      ),
     );
-    await tester.pump(const Duration(milliseconds: 600));
+    await tester.pump(const Duration(milliseconds: 30));
     await gesture.moveTo(tester.getCenter(find.byType(DragTarget<String>)));
     await tester.pump();
     await gesture.up();
@@ -79,6 +99,12 @@ void main() {
     await tester.tap(find.text('Seçimi değiştir'));
     await tester.pumpAndSettle();
     expect(value, isEmpty);
+    final visibleCard = find
+        .ancestor(of: find.text('Olay parçası'), matching: find.byType(InkWell))
+        .first;
+    await tester.tapAt(tester.getTopLeft(visibleCard) + const Offset(8, 8));
+    await tester.pumpAndSettle();
+    expect(value, ['b']);
     expect(tester.takeException(), isNull);
   });
 }

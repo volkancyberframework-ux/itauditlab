@@ -161,7 +161,7 @@ class LearningStats extends StatelessWidget {
         child: _Stat(
           icon: Icons.workspace_premium_rounded,
           color: const Color(0xFF9A7CF5),
-          value: '${profile['level']}',
+          value: '${profile['level'] ?? 0}',
           label: 'SEVİYE',
         ),
       ),

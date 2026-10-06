@@ -136,3 +136,9 @@ The app uses the supplied GRC Ustası logo, navy/gold hero panels, teal controls
 ## Interactive risk workshop
 
 `Risk Atölyesi • Sürükle ve Kur` contains six free demo tasks (migration 0010). `drag_select` displays swipeable risk cards that can be dragged into a target or tapped. `sentence_order` uses a piece bank, a reorderable draft and a persistent bottom drop target for long scenarios. Tap pieces to add and use remove controls to undo. The server checks the ordered ID list against `Question.answer`, validates IDs/duplicates, and never sends the solution to the client. In admin, enter the intended ordered IDs in Answer; QuestionOption correct flags do not define sentence order. `drag_select` uses one correct option as normal. Free text uses exact accepted strings, not semantic grading.
+
+## Levels and rewards
+
+Profiles include an integer level starting at 0, per-level XP, progress and published rewards. Admin manages **Mobil seviye ayarları** (`xp_per_level`, default 100), **Mobil seviye hediyeleri** (target level, title, description, badge/gift and publication) and **Mobil kazanılan hediyeler** (earned records and manual delivery date). Default published examples are digital badges at levels 1, 3 and 5. Reaching a target creates one persistent record; later XP deductions do not remove it. Physical/custom gifts require manual delivery; marking delivered is visible in profile. Entering Profile refreshes these settings. Question placeholders use the same zero-based level calculation.
+
+Risk cards now use single-tap selection over the entire card; only the dedicated 52×64 drag handle starts an immediate vertical drag. Swipe remains on the card body, navigation arrows are 56×56, and card height adapts to the longest text and text scaling.

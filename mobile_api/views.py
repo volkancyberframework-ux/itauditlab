@@ -15,6 +15,7 @@ from .access import (
     MobileAccessPermission, MobileTokenRefreshSerializer,
     MobilePasswordResetForm, check_mobile_access,
 )
+from .levels import level_data
 from .models import (
     LearningPath,
     Question,
@@ -157,6 +158,7 @@ def path_data(path, user):
 
 class Profile(MobileView):
     def get(self, request):
+        total_xp = xp(request.user)
         return Response(
             {
                 "id": request.user.pk,
@@ -165,7 +167,8 @@ class Profile(MobileView):
                 ),
                 "first_name": request.user.first_name or request.user.username,
                 "full_name": request.user.get_full_name(),
-                "xp": xp(request.user),
+                "xp": total_xp,
+                **level_data(total_xp, request.user),
                 "premium": premium(request.user),
                 "completed": QuestionAttempt.objects.filter(
                     session__user=request.user, is_correct=True
@@ -234,7 +237,7 @@ def render_text(text, user, path):
         "full_name": user.get_full_name(),
         "current_path": path.title,
         "xp": str(xp(user)),
-        "level": str(1 + xp(user) // 100),
+        "level": str(level_data(xp(user))["level"]),
     }
     for key, value in values.items():
         text = text.replace("{" + key + "}", value)
@@ -414,6 +417,7 @@ class Answer(MobileView):
                 amount=delta,
                 reason="correct" if correct else "practice",
             )
+            level_data(xp(request.user), request.user)
             progress, _ = UserPathProgress.objects.get_or_create(
                 user=request.user, path=s.path
             )
