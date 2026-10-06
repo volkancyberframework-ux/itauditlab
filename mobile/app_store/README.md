@@ -15,3 +15,11 @@ Apple account owner must accept any updated Developer Program License Agreement.
     flutter build ipa --release --export-method app-store
 
 Upload the resulting IPA through Xcode Organizer/Transporter or authenticated App Store Connect tooling. Do not upload a development/profile build. The release archive lives at build/ios/archive/Runner.xcarchive. Successful archive creation alone does not prove export, upload, review submission or publication.
+
+## Submission status — 2026-10-06
+
+App Store Connect record: https://appstoreconnect.apple.com/apps/6819632974/distribution
+
+Version 1.0.0 build 2 was exported with App Store distribution signing and uploaded successfully via Xcode (Upload succeeded / EXPORT SUCCEEDED). The profile build was separately installed and launched on the connected iPhone. Production commit cd59e36 is live; public support/privacy pages return HTTP 200. Flutter analysis, 25 mobile tests and 77 backend tests passed. Four real iPhone screenshots are in screenshots/.
+
+Remaining: verify/save store text (native Safari timed out during entry), upload screenshots, complete categories/subtitle, privacy disclosures and age/content-rights questionnaire, free download price/availability, enter approved demo credentials privately, select processed build, submit review. No review submission or publication has been completed. The initial agreement/certificate error was resolved before the successful export.
