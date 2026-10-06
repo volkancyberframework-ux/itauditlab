@@ -1,0 +1,3 @@
+{% extends 'admin/base_site.html' %}
+{% block breadcrumbs %}<div class="breadcrumbs"><a href="{% url 'admin:index' %}">Ana sayfa</a> › <a href="{% url 'admin:core_customuser_changelist' %}">Kullanıcılar</a> › Mobil kullanıcı oluştur</div>{% endblock %}
+{% block content %}<div id="content-main"><form method="post">{% csrf_token %}<fieldset class="module aligned">{{ form.as_p }}</fieldset><div class="submit-row"><input type="submit" value="Mobil kullanıcı oluştur" class="default"></div></form></div>{% endblock %}

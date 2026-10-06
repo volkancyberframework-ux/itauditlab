@@ -214,7 +214,7 @@ class UserLevelRewardAdmin(admin.ModelAdmin):
 
 @admin.register(MobileSettings)
 class MobileSettingsAdmin(admin.ModelAdmin):
-    fields = ['free_path', 'whatsapp_phone']
+    fields = ['free_path', 'whatsapp_phone', 'notifications_enabled', 'notification_hour']
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'free_path':
@@ -238,6 +238,34 @@ class MobilePaymentAdmin(admin.ModelAdmin):
     list_display = ('user', 'paid_at', 'access_until', 'amount_minor', 'checkout_session_id')
     search_fields = ('user__email', 'checkout_session_id', 'payment_intent_id')
     readonly_fields = ('user', 'paid_at', 'access_until', 'amount_minor', 'checkout_session_id', 'payment_intent_id', 'stripe_event_id')
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+from .models import MotivationMessage, MobileAdminAlert
+
+@admin.register(MotivationMessage)
+class MotivationMessageAdmin(admin.ModelAdmin):
+    list_display = ('body', 'day', 'published', 'order')
+    list_editable = ('published', 'order')
+    list_filter = ('published',)
+    search_fields = ('title', 'body')
+
+
+@admin.register(MobileAdminAlert)
+class MobileAdminAlertAdmin(admin.ModelAdmin):
+    list_display = ('key', 'created_at', 'sent_at', 'last_error')
+    readonly_fields = ('key', 'text', 'created_at', 'sent_at', 'last_error')
+    actions = ('retry_alerts',)
+
+    @admin.action(description='Bekleyen Telegram bildirimlerini yeniden gönder')
+    def retry_alerts(self, request, queryset):
+        from .alerts import deliver_alert
+        sent = sum(deliver_alert(pk) for pk in queryset.filter(sent_at=None).values_list('pk', flat=True))
+        self.message_user(request, f'{sent} bildirim gönderildi.')
 
     def has_add_permission(self, request):
         return False

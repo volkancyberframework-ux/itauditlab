@@ -1,7 +1,7 @@
 import uuid
 from django.conf import settings
 from django.db import models
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from .storage import PrivateVoiceStorage
 from .contacts import validate_whatsapp_number
 
@@ -279,6 +279,8 @@ class UserLevelReward(models.Model):
 
 
 class MobileSettings(models.Model):
+    notifications_enabled = models.BooleanField("Günlük motivasyon bildirimleri", default=True)
+    notification_hour = models.PositiveSmallIntegerField("Bildirim saati (telefonun yerel saati)", default=19, validators=[MaxValueValidator(23)])
     id = models.PositiveSmallIntegerField(primary_key=True, default=1, editable=False)
     free_path = models.ForeignKey(
         LearningPath, null=True, blank=True, on_delete=models.SET_NULL,
@@ -316,3 +318,31 @@ class MobilePayment(models.Model):
     class Meta:
         verbose_name = "Mobil uygulama ödemesi"
         verbose_name_plural = "Mobil uygulama ödemeleri"
+
+
+class MotivationMessage(models.Model):
+    title = models.CharField("Başlık", max_length=80, default="GRC Ustası • Bugünün adımı")
+    body = models.CharField("Motivasyon mesajı", max_length=240)
+    published = models.BooleanField("Yayınlandı", default=True)
+    day = models.DateField("Özel gün", null=True, blank=True, unique=True, help_text="Boşsa günlük mesajlar arasında dönüşümlü kullanılır. Doluysa yalnızca bu gün gönderilir.")
+    order = models.PositiveIntegerField("Sıra", default=0)
+
+    class Meta:
+        ordering = ["order", "pk"]
+        verbose_name = "Mobil motivasyon mesajı"
+        verbose_name_plural = "Mobil motivasyon mesajları"
+
+    def __str__(self):
+        return self.body[:80]
+
+
+class MobileAdminAlert(models.Model):
+    key = models.CharField(max_length=100, unique=True)
+    text = models.TextField()
+    sent_at = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    last_error = models.CharField(max_length=160, blank=True)
+
+    class Meta:
+        verbose_name = "Mobil Telegram bildirimi"
+        verbose_name_plural = "Mobil Telegram bildirimleri"

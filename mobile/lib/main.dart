@@ -14,6 +14,10 @@ import 'level_rewards.dart';
 import 'information_card.dart';
 import 'brand_welcome.dart';
 import 'profile_actions.dart';
+import 'learning_experience.dart';
+import 'daily_activity.dart';
+import 'daily_notifications.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -264,6 +268,8 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
   int tab = 0;
   Map<String, dynamic>? profile;
   List<dynamic> paths = [];
+  Map<String, dynamic> activity = {};
+  bool paymentBusy = false;
   String? error;
   @override
   void initState() {
@@ -275,20 +281,63 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
   Future<void> load() async {
     setState(() => error = null);
     try {
+      final zone = await dailyNotifications.timezoneName();
       final values = await Future.wait([
         api.request('profile/'),
         api.request('paths/'),
+        api
+            .request('activity/?timezone=${Uri.encodeComponent(zone)}')
+            .catchError((_) => <String, dynamic>{'days': <dynamic>[]}),
       ]);
       if (mounted) {
         setState(() {
           profile = values[0];
           paths = values[1];
+          activity = Map<String, dynamic>.from(values[2]);
+          if (profile!['premium'] != true && tab == 2) tab = 0;
         });
+        unawaited(syncNotifications());
       }
     } catch (e) {
       if (mounted) {
         setState(() => error = '$e');
       }
+    }
+  }
+
+  Future<void> syncNotifications() async {
+    try {
+      final zone = await dailyNotifications.timezoneName();
+      final plan = await api.request(
+        'notifications/plan/?timezone=${Uri.encodeComponent(zone)}',
+      );
+      if (!mounted) return;
+      await dailyNotifications.sync(Map<String, dynamic>.from(plan));
+      if (mounted) setState(() {});
+    } catch (_) {
+      // Keep the last valid phone schedule if the connection is interrupted.
+    }
+  }
+
+  Future<void> openMembership() async {
+    if (paymentBusy) return;
+    setState(() => paymentBusy = true);
+    try {
+      final data = await api.request('payments/link/', body: {});
+      if (!await launchUrl(
+        Uri.parse(data['url']),
+        mode: LaunchMode.externalApplication,
+      )) {
+        throw Exception('Ödeme sayfası açılamadı.');
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('$e')));
+      }
+    } finally {
+      if (mounted) setState(() => paymentBusy = false);
     }
   }
 
@@ -355,28 +404,84 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
         ),
       ],
     ),
-    bottomNavigationBar: NavigationBar(
-      selectedIndex: tab,
-      onDestinationSelected: (v) {
-        setState(() => tab = v);
-        if (v == 3) load();
-      },
-      destinations: const [
-        NavigationDestination(
-          icon: Icon(Icons.home_outlined),
-          label: 'Ana Sayfa',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.route_outlined),
-          label: 'Yollar',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.insights_outlined),
-          label: 'İlerlemem',
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.person_outline),
-          label: 'Profil',
+    bottomNavigationBar: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (profile != null && profile!['premium'] != true)
+          SafeArea(
+            bottom: false,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+              child: SizedBox(
+                width: double.infinity,
+                child: FilledButton.icon(
+                  style: FilledButton.styleFrom(
+                    backgroundColor: const Color(0xFFC9343E),
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 17),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                  ),
+                  onPressed: paymentBusy ? null : openMembership,
+                  icon: const Icon(Icons.workspace_premium_rounded),
+                  label: Text(
+                    paymentBusy
+                        ? 'Ödeme sayfası açılıyor…'
+                        : 'Premium’a geç • 2.099 TL / ay',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        NavigationBar(
+          selectedIndex: tab,
+          onDestinationSelected: (v) {
+            if (v == 2 && profile != null && profile!['premium'] != true) {
+              openMembership();
+              return;
+            }
+            setState(() => tab = v);
+            if (v == 2 || v == 3) load();
+          },
+          destinations: [
+            const NavigationDestination(
+              icon: Icon(Icons.home_outlined),
+              label: 'Ana Sayfa',
+            ),
+            const NavigationDestination(
+              icon: Icon(Icons.route_outlined),
+              label: 'Yollar',
+            ),
+            if (profile != null && profile!['premium'] != true)
+              NavigationDestination(
+                icon: Container(
+                  padding: const EdgeInsets.all(7),
+                  decoration: BoxDecoration(
+                    color: AppColors.gold,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Icon(
+                    Icons.workspace_premium_rounded,
+                    color: Color(0xFF102039),
+                  ),
+                ),
+                label: 'Premium ol',
+              )
+            else
+              const NavigationDestination(
+                icon: Icon(Icons.insights_outlined),
+                label: 'İlerlemem',
+              ),
+            const NavigationDestination(
+              icon: Icon(Icons.person_outline),
+              label: 'Profil',
+            ),
+          ],
         ),
       ],
     ),
@@ -414,20 +519,10 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                       onRestart: () => restart(p),
                     ),
                   const SizedBox(height: 12),
-                  if (profile!['premium'] == true)
-                    PrimaryButton(
-                      label: 'Bana Özel Yol Oluştur',
-                      onPressed: () async {
-                        await Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => Personalize(paths: paths),
-                          ),
-                        );
-                        load();
-                      },
-                    ),
                 ],
                 if (tab == 2) ...[
+                  DailyActivityChart(activity: activity),
+                  const SizedBox(height: 24),
                   Text(
                     'İlerlemen',
                     style: Theme.of(context).textTheme.headlineLarge,
@@ -489,6 +584,43 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                   ),
                   const SizedBox(height: 24),
                   LevelRewards(profile: profile!),
+                  const SizedBox(height: 20),
+                  SwitchListTile.adaptive(
+                    contentPadding: EdgeInsets.zero,
+                    title: const Text('Günlük motivasyon bildirimi'),
+                    subtitle: Text(
+                      'Günde en fazla 1 bildirim${dailyNotifications.latestPlan == null ? '' : ' • saat ${dailyNotifications.latestPlan!['hour'] ?? 19}:00'}',
+                    ),
+                    value: dailyNotifications.enabled,
+                    onChanged: (value) async {
+                      try {
+                        final enabled = await dailyNotifications.setEnabled(
+                          value,
+                        );
+                        if (!mounted) return;
+                        setState(() {});
+                        if (value && !enabled && context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Bildirim izni kapalı. Telefon ayarlarından GRC Ustası bildirimlerini açabilirsin.',
+                              ),
+                            ),
+                          );
+                        }
+                      } catch (_) {
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Bildirim ayarı kaydedilemedi. Tekrar deneyebilirsin.',
+                              ),
+                            ),
+                          );
+                        }
+                      }
+                    },
+                  ),
                   const SizedBox(height: 32),
                   if (profile!['paid_until'] != null)
                     Text(
@@ -511,6 +643,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                     onPressed: () async {
                       try {
                         await api.logout();
+                        await dailyNotifications.clearForLogout();
                         if (mounted) {
                           widget.onLogout();
                         }
@@ -920,6 +1053,8 @@ class _SessionState extends State<Session> {
               ),
               const SizedBox(height: 32),
               PrimaryButton(label: 'Başla', busy: busy, onPressed: start),
+              const SizedBox(height: 30),
+              const LearningExperience(),
             ] else if (session!['complete']) ...[
               const Icon(
                 Icons.emoji_events_outlined,
@@ -1209,116 +1344,4 @@ class _SessionState extends State<Session> {
       ),
     );
   }
-}
-
-class Personalize extends StatefulWidget {
-  final List<dynamic> paths;
-  const Personalize({super.key, required this.paths});
-  @override
-  State<Personalize> createState() => _PersonalizeState();
-}
-
-class _PersonalizeState extends State<Personalize> {
-  int? path;
-  String level = 'beginner';
-  int minutes = 10;
-  String goal = 'Sertifika';
-  bool busy = false;
-  String? error;
-  @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Bana özel yol')),
-    body: ListView(
-      padding: const EdgeInsets.all(24),
-      children: [
-        const Text('Ne öğrenmek istiyorsun?'),
-        DropdownButton<int>(
-          isExpanded: true,
-          value: path,
-          items: [
-            for (final p in widget.paths)
-              DropdownMenuItem(value: p['id'], child: Text(p['title'])),
-          ],
-          onChanged: (v) => setState(() => path = v),
-        ),
-        const SizedBox(height: 24),
-        const Text('Seviyen nedir?'),
-        DropdownButton<String>(
-          isExpanded: true,
-          value: level,
-          items: const [
-            DropdownMenuItem(value: 'beginner', child: Text('Başlangıç')),
-            DropdownMenuItem(value: 'intermediate', child: Text('Orta')),
-            DropdownMenuItem(value: 'advanced', child: Text('İleri')),
-          ],
-          onChanged: (v) => setState(() => level = v!),
-        ),
-        const SizedBox(height: 24),
-        const Text('Günde ne kadar zaman ayırabilirsin?'),
-        DropdownButton<int>(
-          isExpanded: true,
-          value: minutes,
-          items: [
-            for (final m in [5, 10, 20])
-              DropdownMenuItem(value: m, child: Text('$m dakika')),
-          ],
-          onChanged: (v) => setState(() => minutes = v!),
-        ),
-        const SizedBox(height: 24),
-        const Text('Amacın nedir?'),
-        DropdownButton<String>(
-          isExpanded: true,
-          value: goal,
-          items: [
-            for (final g in [
-              'Yeni işe girmek',
-              'Mevcut işimde gelişmek',
-              'Sertifika',
-              'Teknik bilgi',
-              'Denetim',
-              'Kariyer değişikliği',
-            ])
-              DropdownMenuItem(value: g, child: Text(g)),
-          ],
-          onChanged: (v) => setState(() => goal = v!),
-        ),
-        const SizedBox(height: 32),
-        PrimaryButton(
-          label: 'Yolumu oluştur',
-          busy: busy,
-          onPressed: path == null
-              ? null
-              : () async {
-                  setState(() {
-                    busy = true;
-                    error = null;
-                  });
-                  try {
-                    await api.request(
-                      'paths/personalize/',
-                      body: {
-                        'path_id': path,
-                        'level': level,
-                        'minutes': minutes,
-                        'goal': goal,
-                      },
-                    );
-                    if (context.mounted) {
-                      Navigator.pop(context);
-                    }
-                  } catch (e) {
-                    if (mounted) {
-                      setState(() => error = '$e');
-                    }
-                  } finally {
-                    if (mounted) {
-                      setState(() => busy = false);
-                    }
-                  }
-                },
-        ),
-        if (error != null) Text(error!),
-      ],
-    ),
-  );
 }

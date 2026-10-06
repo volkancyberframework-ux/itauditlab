@@ -198,7 +198,7 @@ def options(q):
 
 
 def paths(user):
-    qs = LearningPath.objects.filter(published=True).filter(Q(owner=None) | Q(owner=user))
+    qs = LearningPath.objects.filter(published=True, owner=None)
     if not premium(user):
         free_id = MobileSettings.objects.filter(pk=1).values_list("free_path_id", flat=True).first()
         qs = qs.filter(pk=free_id, owner=None)
@@ -272,52 +272,6 @@ class Profile(MobileView):
 class Paths(MobileView):
     def get(self, request):
         return Response([path_data(p, request.user) for p in paths(request.user)])
-
-
-class Personalize(MobileView):
-    def post(self, request):
-        if not premium(request.user):
-            raise PermissionDenied("Kişisel yollar Premium üyeliğe açık.")
-        level = request.data.get("level")
-        minutes = request.data.get("minutes")
-        source = (
-            paths(request.user)
-            .filter(pk=integer_id(request.data.get("path_id")), owner=None)
-            .first()
-        )
-        if (
-            not source
-            or level not in ["beginner", "intermediate", "advanced"]
-            or minutes not in [5, 10, 20]
-        ):
-            raise ValidationError("Yol, seviye ve süre seçimini kontrol et.")
-        from .recommendations import RuleRecommendationProvider
-
-        ids = RuleRecommendationProvider().recommend(
-            accessible_questions(source, request.user),
-            level=level,
-            minutes=minutes,
-            goal=str(request.data.get("goal", ""))[:120],
-        )
-        if not ids:
-            raise ValidationError(
-                "Bu seviyede henüz içerik yok. Başka bir seviye deneyebilirsin."
-            )
-        with transaction.atomic():
-            p = LearningPath.objects.create(
-                title=f"{source.title} • Bana özel",
-                owner=request.user,
-                published=True,
-                premium=True,
-                minutes=minutes,
-                difficulty=level,
-                preferences={
-                    "source": source.pk,
-                    "goal": str(request.data.get("goal", ""))[:120],
-                },
-            )
-            p.questions.set(ids)
-        return Response(path_data(p, request.user), status=201)
 
 
 def render_text(text, user, path):

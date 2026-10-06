@@ -36,7 +36,7 @@ Prompt/explanation templates support `{first_name}`, `{full_name}`, `{current_pa
 
 `core.TestQuestion` is an existing course-specific test model with only single/multiple choice. Mobile Question extends to scenarios, voice/media, paths and XP. Existing tests and course access are unchanged; no automatic content import bypasses legacy course permissions. Accounts share the existing user database but mobile login/access is explicitly enabled and managed independently through the Mobile fields.
 
-Personalized paths select the requested source path and difficulty, prioritize matching `goals`, and size the pool from the daily minute target. `RecommendationProvider` allows a later AI implementation. Questions are still ordered by editorial order during a session. Goals are editorial metadata, not inferred competence.
+Personalized path creation has been removed. Only shared published paths are offered; old private paths remain stored for historical records.
 
 ## Private recordings
 
@@ -160,3 +160,16 @@ Authenticated `POST /auth/change-password/` requires the current password, a val
 The splash and login share a gently floating logo, orbiting accents, staggered topic chips and rotating case/lab/exam/scenario/interaction headlines. Reduced motion stops continuous animation and topic rotation. The native OS launch screen is followed by the animated Flutter welcome.
 
 Completed paths offer a confirmed restart. `POST paths/<id>/restart/` clears only that user's path progress and archives old session IDs; attempts, XP and voice reviews remain. Correct questions earn XP again in a restarted path or a different path. Duplicate answers and parallel sessions within the same active path run cannot award XP twice. `remaining_tasks` / `is_complete` include published information cards as well as questions. Newly published tasks automatically reopen the path, preserving prior completed tasks. Refresh the home screen or return to the app to load current content.
+
+
+## Daily learning and administration
+
+The task introduction explains cases, scenarios, labs, risk sentence building and voice feedback. Progress contains a selectable 7/28-day chart based on actual task attempts, including information cards and voice submissions. It does not fabricate activity.
+
+Free users have a prominent red website payment button and a yellow Premium ol navigation item replacing Progress. The signed checkout link binds payment to the current mobile account.
+
+In Mobile API admin, **Motivasyon mesajları** contains published rotating messages or one date-specific message per day. **Mobil uygulama ayarları** controls global enablement and the notification hour (default 19:00 in the phone's timezone). The app asks notification permission and schedules at most one local notification per day, up to 60 days ahead. Admin changes refresh when the app opens; these are device-scheduled notifications, not immediate remote APNs/FCM pushes. Profile can disable reminders. Date-based IDs and persisted delivery guards prevent repeat reminders after refreshing or changing accounts.
+
+The Users page has **Mobil kullanıcı oluştur**. It creates a non-staff mobile account with a hashed password; choose free access, paid access until an inclusive date, or unlimited paid access with no date.
+
+New mobile accounts and newly submitted voice recordings create transactional Telegram alerts with admin links. Existing GRCUSTASI_TELEGRAM_BOT_TOKEN / GRCUSTASI_TELEGRAM_ADMIN_CHAT_ID settings are used. Alerts are sent only after database commit, failures do not block signup or uploads, and **Mobil yönetim bildirimleri** exposes pending status and a retry action. Voice feedback itself is still emailed after administrator review.

@@ -1,10 +1,13 @@
 from django.urls import path
 from . import views
 from .web_billing import PaymentLink
+from .engagement import Activity, NotificationPlan
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 
 urlpatterns = [
+    path("activity/", Activity.as_view()),
+    path("notifications/plan/", NotificationPlan.as_view()),
     path("payments/link/", PaymentLink.as_view()),
     path("audio/<int:pk>/", views.AudioDownload.as_view()),
     path("questions/<int:pk>/image/", views.ImageDownload.as_view()),
@@ -38,7 +41,7 @@ urlpatterns = [
     path("profile/", views.Profile.as_view()),
     path("paths/", views.Paths.as_view()),
     path("paths/<int:pk>/restart/", views.RestartPath.as_view()),
-    path("paths/personalize/", views.Personalize.as_view()),
+
     path("sessions/", views.Sessions.as_view()),
     path("sessions/<uuid:pk>/", views.SessionDetail.as_view()),
     path("sessions/<uuid:pk>/answer/", views.Answer.as_view()),

@@ -597,6 +597,7 @@ class CustomUserAdmin(UserAdmin):
     def get_urls(self):
         urls = super().get_urls()
         custom_urls = [
+            path("create-mobile-user/", self.admin_site.admin_view(self.create_mobile_user), name="create_mobile_user"),
             path(
                 "quick-create-student/",
                 self.admin_site.admin_view(self.quick_create_student),
@@ -604,6 +605,24 @@ class CustomUserAdmin(UserAdmin):
             ),
         ]
         return custom_urls + urls
+
+    def create_mobile_user(self, request):
+        from django.core.exceptions import PermissionDenied
+        from django.db import IntegrityError, transaction
+        from .mobile_user_form import MobileUserCreateForm
+        if not self.has_add_permission(request):
+            raise PermissionDenied
+        form = MobileUserCreateForm(request.POST or None)
+        if request.method == "POST" and form.is_valid():
+            try:
+                with transaction.atomic():
+                    user = form.save()
+            except IntegrityError:
+                form.add_error(None, "Bu e-posta için mobil hesap zaten var.")
+            else:
+                self.message_user(request, "Mobil kullanıcı oluşturuldu.")
+                return redirect("admin:core_customuser_change", user.pk)
+        return render(request, "admin/mobile_user_create.html", {**self.admin_site.each_context(request), "title": "Mobil kullanıcı oluştur", "form": form, "opts": self.model._meta})
 
     def quick_create_student(self, request):
         if request.method == "POST":
