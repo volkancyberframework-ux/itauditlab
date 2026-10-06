@@ -37,6 +37,7 @@ urlpatterns = [
     path("auth/logout/", views.Logout.as_view()),
     path("profile/", views.Profile.as_view()),
     path("paths/", views.Paths.as_view()),
+    path("paths/<int:pk>/restart/", views.RestartPath.as_view()),
     path("paths/personalize/", views.Personalize.as_view()),
     path("sessions/", views.Sessions.as_view()),
     path("sessions/<uuid:pk>/", views.SessionDetail.as_view()),

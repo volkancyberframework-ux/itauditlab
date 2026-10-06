@@ -222,7 +222,11 @@ def path_data(path, user):
     done = (
         progress.completed.filter(published=True, paths=path).exclude(kind="info").count() if progress else 0
     )
+    tasks = path.questions.filter(published=True)
+    remaining = tasks.exclude(pk__in=progress.completed.values("pk")).count() if progress else tasks.count()
     return {
+        "remaining_tasks": remaining,
+        "is_complete": tasks.exists() and remaining == 0,
         "id": path.pk,
         "title": path.title,
         "description": path.description,
@@ -392,8 +396,28 @@ def session_data(session, request):
     }
 
 
+class RestartPath(MobileView):
+    def post(self, request, pk):
+        with transaction.atomic():
+            get_user_model().objects.select_for_update().get(pk=request.user.pk)
+            path = paths(request.user).filter(pk=pk).first()
+            if not path:
+                return Response(status=404)
+            data = path_data(path, request.user)
+            if not data["is_complete"]:
+                return Response({"detail": "Bu yolda tamamlanmamış görevler var. Yeni görevlerle devam edebilirsin.", "path": data}, status=409)
+            progress = UserPathProgress.objects.get(user=request.user, path=path)
+            # Retain attempts, XP and voice reviews; invalidate earlier session IDs.
+            LearningSession.objects.filter(user=request.user, path=path).update(is_archived=True)
+            progress.completed.clear()
+            progress.save()
+            return Response(path_data(path, request.user))
+
+
 class Sessions(MobileView):
+    @transaction.atomic
     def post(self, request):
+        get_user_model().objects.select_for_update().get(pk=request.user.pk)
         p = (
             LearningPath.objects.filter(published=True)
             .filter(Q(owner=None) | Q(owner=request.user))
@@ -423,7 +447,7 @@ class Sessions(MobileView):
 
 class SessionDetail(MobileView):
     def get(self, request, pk):
-        s = LearningSession.objects.filter(pk=pk, user=request.user).first()
+        s = LearningSession.objects.filter(pk=pk, user=request.user, is_archived=False).first()
         if not s:
             return Response(status=404)
         return Response(session_data(s, request))
@@ -436,7 +460,7 @@ class Answer(MobileView):
             get_user_model().objects.select_for_update().get(pk=request.user.pk)
             s = (
                 LearningSession.objects.select_for_update()
-                .filter(pk=pk, user=request.user)
+                .filter(pk=pk, user=request.user, is_archived=False)
                 .first()
             )
             if not s:
@@ -540,7 +564,7 @@ class ContinueCard(MobileView):
     def post(self, request, pk):
         with transaction.atomic():
             get_user_model().objects.select_for_update().get(pk=request.user.pk)
-            session = LearningSession.objects.select_for_update().filter(pk=pk, user=request.user).first()
+            session = LearningSession.objects.select_for_update().filter(pk=pk, user=request.user, is_archived=False).first()
             if not session:
                 return Response(status=404)
             qid = integer_id(request.data.get("question_id"))
@@ -589,7 +613,7 @@ class Voice(MobileView):
             get_user_model().objects.select_for_update().get(pk=request.user.pk)
             s = (
                 LearningSession.objects.select_for_update()
-                .filter(pk=pk, user=request.user)
+                .filter(pk=pk, user=request.user, is_archived=False)
                 .first()
             )
             if not s:

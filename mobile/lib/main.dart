@@ -293,11 +293,51 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
   }
 
   Future<void> open(Map<String, dynamic> path) async {
+    if (path['is_complete'] == true) {
+      await restart(path);
+      return;
+    }
     analytics.emit('path_opened');
     await Navigator.of(
       context,
     ).push(MaterialPageRoute(builder: (_) => Session(path: path)));
     load();
+  }
+
+  Future<void> restart(Map<String, dynamic> path) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Sıfırdan başla'),
+        content: const Text(
+          'Bu yolun sorularını ve bilgi kartlarını yeniden baştan göreceksin. Kazandığın XP, seviyen ve önceki yanıtların korunur. Daha önce doğru çözdüğün sorular tekrar XP kazandırmaz.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Vazgeç'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Sıfırdan başla'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !mounted) return;
+    try {
+      final fresh = await api.request('paths/${path['id']}/restart/', body: {});
+      if (!mounted) return;
+      await open(Map<String, dynamic>.from(fresh));
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('$e')));
+      }
+    } finally {
+      if (mounted) load();
+    }
   }
 
   @override
@@ -365,7 +405,11 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                   if (paths.isEmpty)
                     const Text('Yeni öğrenme yolları yakında burada.'),
                   for (final p in paths)
-                    PathCard(path: p, onTap: () => open(p)),
+                    PathCard(
+                      path: p,
+                      onTap: () => open(p),
+                      onRestart: () => restart(p),
+                    ),
                   const SizedBox(height: 12),
                   if (profile!['premium'] == true)
                     PrimaryButton(
@@ -392,7 +436,11 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                   ),
                   const SizedBox(height: 24),
                   for (final p in paths)
-                    PathCard(path: p, onTap: () => open(p)),
+                    PathCard(
+                      path: p,
+                      onTap: () => open(p),
+                      onRestart: () => restart(p),
+                    ),
                 ],
                 if (tab == 3) ...[
                   Text(
@@ -482,12 +530,19 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
 class PathCard extends StatelessWidget {
   final Map<String, dynamic> path;
   final VoidCallback onTap;
-  const PathCard({super.key, required this.path, required this.onTap});
+  final VoidCallback? onRestart;
+  const PathCard({
+    super.key,
+    required this.path,
+    required this.onTap,
+    this.onRestart,
+  });
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final completed = (path['completed'] as num?)?.toInt() ?? 0;
     final count = (path['question_count'] as num?)?.toInt() ?? 0;
+    final complete = path['is_complete'] == true;
     final progress = count == 0 ? 0.0 : (completed / count).clamp(0.0, 1.0);
     return Card(
       color: scheme.surface,
@@ -559,7 +614,7 @@ class PathCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    progress == 1 && count > 0
+                    complete
                         ? 'TAMAMLANDI ✓'
                         : completed > 0
                         ? 'DEVAM ET →'
@@ -572,6 +627,24 @@ class PathCard extends StatelessWidget {
                   ),
                 ],
               ),
+              if (complete && onRestart != null) ...[
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  child: FilledButton.icon(
+                    onPressed: onRestart,
+                    icon: const Icon(Icons.replay_rounded),
+                    label: const Text('Sıfırdan başla'),
+                  ),
+                ),
+              ] else if (completed > 0 &&
+                  (path['remaining_tasks'] ?? 0) > 0) ...[
+                const SizedBox(height: 8),
+                Text(
+                  '${path['remaining_tasks']} görev seni bekliyor',
+                  style: TextStyle(color: scheme.onSurfaceVariant),
+                ),
+              ],
               if ((path['information_count'] ?? 0) > 0) ...[
                 const SizedBox(height: 8),
                 Text(

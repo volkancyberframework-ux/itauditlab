@@ -112,6 +112,7 @@ class Question(models.Model):
 
 
 class LearningSession(models.Model):
+    is_archived = models.BooleanField(default=False)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     path = models.ForeignKey(LearningPath, on_delete=models.CASCADE)
