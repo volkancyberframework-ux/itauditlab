@@ -35,7 +35,16 @@ class MobileTokenRefreshSerializer(TokenRefreshSerializer):
 
 class MobilePasswordResetForm(PasswordResetForm):
     def get_users(self, email):
-        return (user for user in super().get_users(email) if user.is_mobile)
+        users = list(get_user_model().objects.filter(email__iexact=email, is_active=True, is_mobile=True)[:2])
+        return iter(users if len(users) == 1 else [])
+
+    def send_mail(self, subject_template_name, email_template_name, context, from_email, to_email, html_email_template_name=None):
+        from django.core.mail import EmailMultiAlternatives, get_connection
+        from django.template import loader
+        subject = ''.join(loader.render_to_string(subject_template_name, context).splitlines())
+        body = loader.render_to_string(email_template_name, context)
+        message = EmailMultiAlternatives(subject, body, from_email, [to_email], connection=get_connection(timeout=10))
+        message.send()
 
 
 def validate_mobile_password(password, user):

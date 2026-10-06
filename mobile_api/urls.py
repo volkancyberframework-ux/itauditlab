@@ -4,8 +4,11 @@ from .web_billing import PaymentLink
 from .engagement import Activity, NotificationPlan
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
+from .password_reset import MobileResetConfirm
+from .account_deletion import RequestDeletion
 
 urlpatterns = [
+    path("auth/delete-account/", RequestDeletion.as_view()),
     path("activity/", Activity.as_view()),
     path("notifications/plan/", NotificationPlan.as_view()),
     path("payments/link/", PaymentLink.as_view()),
@@ -16,7 +19,7 @@ urlpatterns = [
     path("auth/password-reset/", views.PasswordReset.as_view()),
     path(
         "auth/reset/<uidb64>/<token>/",
-        auth_views.PasswordResetConfirmView.as_view(
+        MobileResetConfirm.as_view(
             template_name="mobile_api/reset_form.html",
             success_url=reverse_lazy("mobile_reset_done"),
         ),

@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>LSApplicationQueriesSchemes</key>
-	<array><string>whatsapp</string></array>
+	<array>
+		<string>whatsapp</string>
+	</array>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Senaryo sorularına sesli yanıt verebilmen için mikrofonunu kullanıyoruz.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
@@ -60,8 +62,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -70,5 +70,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>

@@ -319,3 +319,24 @@ class MobileAdminAlertAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+
+from .models import AccountDeletionRequest
+
+@admin.register(AccountDeletionRequest)
+class AccountDeletionAdmin(admin.ModelAdmin):
+    list_display = ('user', 'requested_at', 'erased_at', 'completed_at', 'confirmation_sent_at')
+    readonly_fields = ('user', 'requested_at', 'erased_at', 'completed_at', 'pending_files', 'email_to_notify', 'confirmation_sent_at')
+    actions = ('complete_requests',)
+
+    @admin.action(description='Seçili talepleri işleyip hesabı ve mobil verileri kalıcı olarak sil')
+    def complete_requests(self, request, queryset):
+        from .account_deletion import complete_deletion
+        count = sum(complete_deletion(pk) for pk in queryset.filter(confirmation_sent_at=None).values_list('pk', flat=True))
+        self.message_user(request, f'{count} hesap silme işlemi tamamlandı. Uygulama dışındaki ilişkili kişisel verileri de silin; zorunlu mali kayıtları koruyun.')
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False

@@ -356,3 +356,17 @@ class MobileCheckoutRequest(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.PROTECT)
     checkout_session_id = models.CharField(max_length=255, unique=True, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class AccountDeletionRequest(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    requested_at = models.DateTimeField(auto_now_add=True)
+    completed_at = models.DateTimeField(null=True, blank=True)
+    erased_at = models.DateTimeField(null=True, blank=True)
+    pending_files = models.JSONField(default=list, blank=True)
+    email_to_notify = models.EmailField(blank=True)
+    confirmation_sent_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Mobil hesap silme talebi'
+        verbose_name_plural = 'Mobil hesap silme talepleri'

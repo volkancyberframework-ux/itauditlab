@@ -182,3 +182,11 @@ The public payment page asks only for email and fetches a fresh CSRF token immed
 A verified paid webhook enables one calendar month of mobile access and sends one payment receipt. Existing usable passwords remain valid. New/unusable-password accounts get a random first-login password by email; only its hash is stored. The mobile API allows profile, logout and password change while initial-password renewal is required, and blocks learning/payment endpoints until renewal. The app shows the required password form before loading learning content; successful renewal revokes older tokens. User-created passwords from free registration are already personal and are not forced to change.
 
 Failed receipt delivery preserves paid access and remains visible on the payment record. The payment admin action retries pending receipts. Initial-password retries generate a new password only until the user has chosen a personal password; sent receipts and duplicate webhooks cannot reset that password. Support contact is volkan@grcustasi.com.
+
+## App Store release 1.0.0 (2)
+
+Login and Profile provide **Şifremi sıfırla**. Recovery mails are sent only for active mobile accounts with an unambiguous email, including accounts awaiting an initial password. Reset links use the public HTTPS domain and Django's single-use password-reset tokens; successful recovery clears the first-login gate and revokes refresh tokens.
+
+The iPhone release hides website purchase buttons, prices and purchase routing. Website purchases still activate the same login; Android retains the website checkout. The unused RevenueCat client SDK was removed. App Store eligibility is determined by Apple review.
+
+Profile also provides privacy information and a password-confirmed account deletion request. Administrators must process **Mobil hesap silme talepleri** within seven days, including external personal records, and send the completion confirmation through the admin action. See [App Store preparation](app_store/README.md) for metadata, privacy declarations, screenshots and archive/export steps.

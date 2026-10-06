@@ -2,3 +2,6 @@ GRC Ustası hesabının şifresini yenilemek için:
 {{ protocol }}://{{ domain }}{% url 'mobile_reset_confirm' uidb64=uid token=token %}
 
 Bu isteği sen yapmadıysan bu e-postayı yok sayabilirsin.
+
+Bağlantıyı açıp yeni şifreni belirledikten sonra mobil uygulamaya yeni şifrenle giriş yapabilirsin.
+Destek: volkan@grcustasi.com

@@ -1,10 +1,12 @@
 from django.urls import path
 from . import views
 from . import travel
-from mobile_api import web_billing
+from mobile_api import web_billing, store_pages
 
 app_name = 'landing'
 urlpatterns = [
+    path('mobiluygulama/gizlilik', store_pages.privacy, name='mobile_privacy'),
+    path('mobiluygulama/destek', store_pages.support, name='mobile_support'),
     path('mobiluygulama', web_billing.page, name='mobile_membership'),
     path('mobiluygulama/', web_billing.page),
     path('mobiluygulama/csrf', web_billing.csrf_token, name='mobile_csrf'),

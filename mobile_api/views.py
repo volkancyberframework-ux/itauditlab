@@ -728,7 +728,10 @@ class PasswordReset(MobileView):
         form = MobilePasswordResetForm({"email": request.data.get("email", "")})
         if not form.is_valid():
             raise ValidationError("Geçerli bir e-posta adresi gir.")
+        from django.conf import settings
+        from urllib.parse import urlparse
         form.save(
+            domain_override=urlparse(settings.PUBLIC_BASE_URL).netloc,
             request=request,
             use_https=True,
             email_template_name="mobile_api/reset_email.txt",

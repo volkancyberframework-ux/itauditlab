@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
+import 'password_reset.dart';
+import 'account_deletion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:just_audio/just_audio.dart';
@@ -26,6 +29,23 @@ void main() {
 
 final api = Api();
 final analytics = Analytics(api);
+bool get externalPaymentsAllowed => defaultTargetPlatform != TargetPlatform.iOS;
+
+Future<void> openPasswordReset(BuildContext context, [String email = '']) =>
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => PasswordResetScreen(
+          initialEmail: email,
+          onRequest: (address) async {
+            final result = await api.request(
+              'auth/password-reset/',
+              body: {'email': address},
+            );
+            return result['detail'];
+          },
+        ),
+      ),
+    );
 
 class GrcApp extends StatelessWidget {
   const GrcApp({super.key});
@@ -198,22 +218,8 @@ class _LoginState extends State<Login> {
                   TextButton(
                     onPressed: busy
                         ? null
-                        : () async {
-                            try {
-                              final result = await api.request(
-                                'auth/password-reset/',
-                                body: {'email': email.text.trim()},
-                              );
-                              if (mounted) {
-                                setState(() => error = result['detail']);
-                              }
-                            } catch (e) {
-                              if (mounted) {
-                                setState(() => error = '$e');
-                              }
-                            }
-                          },
-                    child: const Text('Şifremi Unuttum'),
+                        : () => openPasswordReset(context, email.text.trim()),
+                    child: const Text('Şifremi sıfırla'),
                   ),
                 PrimaryButton(
                   label: registering ? 'Ücretsiz Hesap Oluştur' : 'Giriş Yap',
@@ -299,7 +305,11 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
           profile = values[0];
           paths = values[1];
           activity = Map<String, dynamic>.from(values[2]);
-          if (profile!['premium'] != true && tab == 2) tab = 0;
+          if (externalPaymentsAllowed &&
+              profile!['premium'] != true &&
+              tab == 2) {
+            tab = 0;
+          }
         });
         unawaited(syncNotifications());
       }
@@ -431,7 +441,9 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
           bottomNavigationBar: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (profile != null && profile!['premium'] != true)
+              if (externalPaymentsAllowed &&
+                  profile != null &&
+                  profile!['premium'] != true)
                 SafeArea(
                   bottom: false,
                   child: Padding(
@@ -465,7 +477,8 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
               NavigationBar(
                 selectedIndex: tab,
                 onDestinationSelected: (v) {
-                  if (v == 2 &&
+                  if (externalPaymentsAllowed &&
+                      v == 2 &&
                       profile != null &&
                       profile!['premium'] != true) {
                     openMembership();
@@ -483,7 +496,9 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                     icon: Icon(Icons.route_outlined),
                     label: 'Yollar',
                   ),
-                  if (profile != null && profile!['premium'] != true)
+                  if (externalPaymentsAllowed &&
+                      profile != null &&
+                      profile!['premium'] != true)
                     NavigationDestination(
                       icon: Container(
                         padding: const EdgeInsets.all(7),
@@ -654,17 +669,52 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                           Text(
                             'Ücretli erişim bitişi: ${DateTime.parse(profile!['paid_until']).toLocal().toString().substring(0, 16)}',
                           ),
-                        TextButton(
-                          onPressed: () async {
-                            await Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) =>
-                                    Paywall(userId: profile!['billing_id']),
+                        if (externalPaymentsAllowed)
+                          TextButton(
+                            onPressed: () async {
+                              await Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) =>
+                                      Paywall(userId: profile!['billing_id']),
+                                ),
+                              );
+                              load();
+                            },
+                            child: const Text('Tam erişim • Üyelik ve ödeme'),
+                          ),
+                        TextButton.icon(
+                          onPressed: () => openPasswordReset(context),
+                          icon: const Icon(Icons.lock_reset),
+                          label: const Text('Şifremi sıfırla'),
+                        ),
+                        TextButton.icon(
+                          onPressed: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => AccountDeletionScreen(
+                                onRequest: (password) async {
+                                  final result = await api.request(
+                                    'auth/delete-account/',
+                                    body: {
+                                      'password': password,
+                                      'confirm': true,
+                                    },
+                                  );
+                                  return result['detail'];
+                                },
                               ),
-                            );
-                            load();
-                          },
-                          child: const Text('Tam erişim • Üyelik ve ödeme'),
+                            ),
+                          ),
+                          icon: const Icon(Icons.person_remove_outlined),
+                          label: const Text('Hesabımı sil'),
+                        ),
+                        TextButton(
+                          onPressed: () => launchUrl(
+                            Uri.parse(
+                              'https://www.grcustasi.com/mobiluygulama/gizlilik',
+                            ),
+                            mode: LaunchMode.externalApplication,
+                          ),
+                          child: const Text('Gizlilik politikası'),
                         ),
                         PrimaryButton(
                           label: 'Çıkış Yap',
