@@ -1,3 +1,4 @@
+from django.core.management import call_command
 from django.core.management.base import BaseCommand
 from mobile_api.models import LearningPath, Question
 
@@ -43,4 +44,5 @@ class Command(BaseCommand):
                     base_xp=20,
                 )
                 q.paths.add(p)
+        call_command("seed_live_demo", stdout=self.stdout)
         self.stdout.write(self.style.SUCCESS("Başlangıç içeriği hazır."))
