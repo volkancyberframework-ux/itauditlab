@@ -160,3 +160,13 @@ class WebPaymentTests(TestCase):
                 create.return_value.id='cs_'+origin.split('//')[1]
                 create.return_value.url='https://checkout.stripe.com/test'
                 self.assertEqual(client.post('/mobiluygulama/checkout',{'email':'buyer@example.com','csrfmiddlewaretoken':token},secure=True,HTTP_ORIGIN=origin).status_code,303)
+
+    def test_renewal_preserves_usable_initial_password(self):
+        from django.core import mail
+        self.user.mobile_must_change_password=True; self.user.save()
+        password_hash=self.user.password
+        with self.captureOnCommitCallbacks(execute=True): self.send()
+        self.user.refresh_from_db()
+        self.assertEqual(self.user.password,password_hash)
+        self.assertTrue(self.user.mobile_must_change_password)
+        self.assertIn('mevcut şifresi geçerlidir',mail.outbox[0].body)
