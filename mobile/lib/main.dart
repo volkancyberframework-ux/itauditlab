@@ -308,16 +308,19 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Sıfırdan başla'),
+        title: const Text(
+          'Sıfırdan başla',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+        ),
         content: const Text(
-          'Bu yolun sorularını ve bilgi kartlarını yeniden baştan göreceksin. Kazandığın XP, seviyen ve önceki yanıtların korunur. Daha önce doğru çözdüğün sorular tekrar XP kazandırmaz.',
+          'Bu yolu yeniden başlatmak ister misin? XP ve seviyen korunur; doğru cevaplarla tekrar puan kazanırsın.',
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
             child: const Text('Vazgeç'),
           ),
-          FilledButton(
+          TextButton(
             onPressed: () => Navigator.pop(context, true),
             child: const Text('Sıfırdan başla'),
           ),
@@ -582,7 +585,16 @@ class PathCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  const Icon(Icons.chevron_right_rounded),
+                  if (complete && onRestart != null)
+                    IconButton(
+                      onPressed: onRestart,
+                      tooltip: 'Sıfırdan başla',
+                      iconSize: 18,
+                      color: scheme.onSurfaceVariant,
+                      icon: const Icon(Icons.replay_rounded),
+                    )
+                  else
+                    const Icon(Icons.chevron_right_rounded),
                 ],
               ),
               const SizedBox(height: 10),
@@ -627,17 +639,8 @@ class PathCard extends StatelessWidget {
                   ),
                 ],
               ),
-              if (complete && onRestart != null) ...[
-                const SizedBox(height: 12),
-                SizedBox(
-                  width: double.infinity,
-                  child: FilledButton.icon(
-                    onPressed: onRestart,
-                    icon: const Icon(Icons.replay_rounded),
-                    label: const Text('Sıfırdan başla'),
-                  ),
-                ),
-              ] else if (completed > 0 &&
+              if (!complete &&
+                  completed > 0 &&
                   (path['remaining_tasks'] ?? 0) > 0) ...[
                 const SizedBox(height: 8),
                 Text(

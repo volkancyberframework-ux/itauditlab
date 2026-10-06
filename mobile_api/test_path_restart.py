@@ -28,7 +28,10 @@ class PathRestartTests(TestCase):
         session=self.client.post('/api/mobile/v1/sessions/',{'path_id':self.path.pk},format='json').data
         self.assertEqual(session['question']['id'],self.q.pk)
         answer=self.client.post(f"/api/mobile/v1/sessions/{session['id']}/answer/",{'question_id':self.q.pk,'answer':['a']},format='json')
-        self.assertEqual(answer.status_code,200);self.assertEqual(answer.data['xp_change'],0)
+        self.assertEqual(answer.status_code,200);self.assertEqual(answer.data['xp_change'],20)
+        retry=self.client.post(f"/api/mobile/v1/sessions/{session['id']}/answer/",{'question_id':self.q.pk,'answer':['a']},format='json')
+        self.assertEqual(retry.data['xp_change'],20)
+        self.assertEqual(sum(XPTransaction.objects.values_list('amount',flat=True)),40)
 
     def test_new_published_question_reopens_without_resetting_completed_questions(self):
         extra=Question.objects.create(kind='choice',prompt='New?',options=[{'id':'b','text':'Yes'}],answer=['b'],published=False)

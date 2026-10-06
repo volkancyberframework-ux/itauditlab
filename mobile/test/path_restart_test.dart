@@ -24,10 +24,12 @@ void main() {
     );
     await tester.pumpWidget(card(true));
     expect(find.text('TAMAMLANDI ✓'), findsOneWidget);
-    await tester.tap(find.widgetWithText(FilledButton, 'Sıfırdan başla'));
+    expect(find.byType(FilledButton), findsNothing);
+    expect(tester.widget<IconButton>(find.byType(IconButton)).iconSize, 18);
+    await tester.tap(find.byTooltip('Sıfırdan başla'));
     expect(restarted, isTrue);
     await tester.pumpWidget(card(false));
-    expect(find.text('Sıfırdan başla'), findsNothing);
+    expect(find.byTooltip('Sıfırdan başla'), findsNothing);
     expect(find.text('DEVAM ET →'), findsOneWidget);
     expect(find.text('1 görev seni bekliyor'), findsOneWidget);
     expect(tester.takeException(), isNull);

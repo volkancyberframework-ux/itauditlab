@@ -518,7 +518,8 @@ class Answer(MobileView):
             if type(duration) is not int or not 0 <= duration <= 86400:
                 raise ValidationError("Süre geçersiz.")
             already_rewarded = QuestionAttempt.objects.filter(
-                session__user=request.user, question=q, is_correct=True
+                session__user=request.user, session__path=s.path,
+                session__is_archived=False, question=q, is_correct=True
             ).exists()
             delta = (
                 (0 if already_rewarded else q.base_xp)

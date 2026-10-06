@@ -70,6 +70,13 @@ class LearningTests(TestCase):
         self.answer(s1, ["a"])
         self.assertEqual(self.answer(s2, ["a"]).data["xp_change"], 0)
 
+    def test_shared_question_rewards_each_learning_path(self):
+        self.answer(self.session(), ["a"])
+        other_path = LearningPath.objects.create(title="Another path", published=True)
+        other_path.questions.add(self.q)
+        session = self.client.post("/api/mobile/v1/sessions/", {"path_id": other_path.pk}, format="json").data
+        self.assertEqual(self.answer(session, ["a"]).data["xp_change"], 20)
+
     def test_session_owner_isolation(self):
         data = self.session()
         self.client.force_authenticate(self.other)
