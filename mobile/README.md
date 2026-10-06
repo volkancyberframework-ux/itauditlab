@@ -194,3 +194,7 @@ Profile also provides privacy information and a password-confirmed account delet
 ## Email verification — build 3
 
 New public mobile registrations return verification_required without issuing JWTs. A signed, email-bound link expires after 24 hours; its GET only displays a CSRF-protected confirmation form. Login, token refresh and authenticated mobile APIs reject unverified accounts. Login provides a throttled, generic resend action. New accounts created by website payment receive the same verification link in their payment email, alongside their initial password. Existing accounts and trusted administrator-created accounts retain access; the admin exposes Mobil e-posta doğrulandı.
+
+## Protected scenario playback — build 4
+
+Scenario audio is fetched through an authenticated HTTPS request and played from an app-private temporary file with a MIME-derived extension. No local HTTP header proxy or ATS exception is required. The downloader rejects other origins, redirects, non-audio responses and files larger than 20 MiB, retries expired authentication once, and deletes session files after player disposal. A native iOS integration test decoded the real production m4a and observed playback advancing. App Store screenshots are now native 1206×2622 captures for the required medium iPhone display slot.

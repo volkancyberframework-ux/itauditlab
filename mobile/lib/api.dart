@@ -15,7 +15,8 @@ class Api {
     defaultValue: 'https://www.grcustasi.com/api/mobile/v1/',
   );
   final storage = const FlutterSecureStorage();
-  final http.Client client = http.Client();
+  final http.Client client;
+  Api({http.Client? client}) : client = client ?? http.Client();
   String? access;
   Future<void>? refreshing;
   Future<void> restore() async {

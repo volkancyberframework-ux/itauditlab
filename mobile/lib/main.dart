@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:just_audio/just_audio.dart';
 import 'api.dart';
+import 'scenario_audio.dart';
 import 'theme.dart';
 import 'voice.dart';
 import 'paywall.dart';
@@ -674,7 +675,9 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                             try {
                               final enabled = await dailyNotifications
                                   .setEnabled(value);
-                              if (!mounted) return;
+                              if (!mounted) {
+                                return;
+                              }
                               setState(() {});
                               if (value && !enabled && context.mounted) {
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -963,6 +966,8 @@ class _SessionState extends State<Session> {
   }
 
   final player = AudioPlayer();
+  final scenarioAudio = ScenarioAudioFiles(api);
+  bool audioLoading = false;
   int? audioQuestion;
   bool busy = false;
   String? error;
@@ -972,7 +977,7 @@ class _SessionState extends State<Session> {
     dragScrollTimer?.cancel();
     questionScroll.dispose();
     input.dispose();
-    player.dispose();
+    player.dispose().then((_) => scenarioAudio.dispose());
     super.dispose();
   }
 
@@ -1284,38 +1289,59 @@ class _SessionState extends State<Session> {
                           ? Icons.pause
                           : Icons.play_arrow,
                     ),
-                    label: const Text('Senaryoyu dinle'),
-                    onPressed: () async {
-                      try {
-                        if (player.playing) {
-                          await player.pause();
-                        } else {
-                          if (audioQuestion != q['id'] ||
-                              player.audioSource == null ||
-                              player.processingState ==
-                                  ProcessingState.completed) {
-                            audioQuestion = q['id'];
-                            await player.setAudioSources([
-                              for (final url in q['audio'])
-                                AudioSource.uri(
-                                  Uri.parse(url),
-                                  headers: {
-                                    'Authorization': 'Bearer ${api.access}',
-                                  },
-                                ),
-                            ]);
-                          }
-                          player.play();
-                        }
-                      } catch (_) {
-                        if (mounted) {
-                          setState(
-                            () => error =
-                                'Ses yüklenemedi. Tekrar deneyebilirsin.',
-                          );
-                        }
-                      }
-                    },
+                    label: Text(
+                      audioLoading ? 'Ses hazırlanıyor…' : 'Senaryoyu dinle',
+                    ),
+                    onPressed: audioLoading
+                        ? null
+                        : () async {
+                            setState(() {
+                              audioLoading = true;
+                              error = null;
+                            });
+                            try {
+                              if (player.playing) {
+                                await player.pause();
+                              } else {
+                                if (audioQuestion != q['id'] ||
+                                    player.audioSource == null ||
+                                    player.processingState ==
+                                        ProcessingState.completed) {
+                                  await player.stop();
+                                  await scenarioAudio.clear();
+                                  final sources = <AudioSource>[];
+                                  for (final url in q['audio']) {
+                                    final file = await scenarioAudio.download(
+                                      url as String,
+                                    );
+                                    if (!mounted) {
+                                      return;
+                                    }
+                                    sources.add(AudioSource.file(file));
+                                  }
+                                  await player.setAudioSources(sources);
+                                  audioQuestion = q['id'];
+                                }
+                                player.play().catchError((Object e) {
+                                  if (mounted) {
+                                    setState(
+                                      () => error =
+                                          'Ses oynatılamadı. Tekrar deneyebilirsin.',
+                                    );
+                                  }
+                                });
+                              }
+                            } catch (_) {
+                              if (mounted) {
+                                setState(
+                                  () => error =
+                                      'Ses yüklenemedi. Tekrar deneyebilirsin.',
+                                );
+                              }
+                            } finally {
+                              if (mounted) setState(() => audioLoading = false);
+                            }
+                          },
                   ),
                 ),
               if (q['kind'] == 'voice') ...[
