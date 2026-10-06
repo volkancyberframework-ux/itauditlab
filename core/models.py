@@ -426,6 +426,7 @@ class CustomUser(AbstractUser):
         "Mobil tam erişim", default=False, db_index=True,
         help_text="Bütün öğrenme yollarını açar. Kapalı hesap yalnızca ücretsiz yolu görür.",
     )
+    mobile_must_change_password = models.BooleanField("İlk girişte şifre yenileme", default=False)
     mobile_paid_until = models.DateTimeField("Ücretli mobil erişim bitişi", null=True, blank=True, db_index=True)
 
     @property

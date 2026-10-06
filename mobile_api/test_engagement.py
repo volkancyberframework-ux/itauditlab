@@ -84,3 +84,23 @@ class EngagementTests(TestCase):
         staff=get_user_model().objects.create_user(username='restricted-staff',is_staff=True)
         self.client.force_login(staff)
         self.assertEqual(self.client.get('/bulamazsinki/core/customuser/create-mobile-user/').status_code,403)
+
+    def test_free_path_tick_replaces_previous_selection_and_preserves_list_edits(self):
+        from django.test import RequestFactory
+        from django.contrib.admin.sites import AdminSite
+        from .admin import PathForm, PathAdmin
+        first=LearningPath.objects.create(title='First',published=True)
+        second=LearningPath.objects.create(title='Second',published=True)
+        config,_=MobileSettings.objects.get_or_create(pk=1)
+        config.free_path=first; config.save()
+        self.assertTrue(PathForm(instance=first).fields['free_for_mobile'].initial)
+        self.assertFalse(PathForm(instance=second).fields['free_for_mobile'].initial)
+        from types import SimpleNamespace
+        form=SimpleNamespace(cleaned_data={'free_for_mobile': True})
+        admin=PathAdmin(LearningPath,AdminSite())
+        admin.save_model(RequestFactory().post('/',{}),second,form,True)
+        config.refresh_from_db(); self.assertEqual(config.free_path,second)
+        admin.save_model(RequestFactory().post('/',{'form-TOTAL_FORMS':1}),second,SimpleNamespace(cleaned_data={'free_for_mobile':False}),True)
+        config.refresh_from_db(); self.assertEqual(config.free_path,second)
+        admin.save_model(RequestFactory().post('/',{}),second,SimpleNamespace(cleaned_data={'free_for_mobile':False}),True)
+        config.refresh_from_db(); self.assertIsNone(config.free_path)

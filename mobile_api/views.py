@@ -113,6 +113,7 @@ class PasswordChangeThrottle(UserRateThrottle):
 
 
 class ChangePassword(MobileView):
+    allow_initial_password = True
     throttle_classes = [PasswordChangeThrottle]
 
     def post(self, request):
@@ -120,19 +121,20 @@ class ChangePassword(MobileView):
         current = request.data.get("current_password")
         password = request.data.get("new_password")
         confirmation = request.data.get("confirm_password")
-        if any(not isinstance(value, str) or not value or len(value) > 256 for value in [current, password, confirmation]):
+        if any(not isinstance(value, str) or not value or len(value) > 256 for value in [password, confirmation]):
             raise ValidationError("Mevcut şifreni ve yeni şifreni iki kez gir.")
         if password != confirmation:
             raise ValidationError("Yeni şifreler birbiriyle eşleşmiyor.")
         with transaction.atomic():
             user = get_user_model().objects.select_for_update().get(pk=request.user.pk)
-            if not user.check_password(current):
+            if not user.mobile_must_change_password and (not isinstance(current, str) or len(current) > 256 or not user.check_password(current)):
                 raise ValidationError("Mevcut şifren doğru değil.")
             if current == password:
                 raise ValidationError("Yeni şifren mevcut şifrenden farklı olmalı.")
             validate_mobile_password(password, user)
             user.set_password(password)
-            user.save(update_fields=["password"])
+            user.mobile_must_change_password = False
+            user.save(update_fields=["password", "mobile_must_change_password"])
             for token in OutstandingToken.objects.filter(user=user, expires_at__gt=timezone.now()):
                 BlacklistedToken.objects.get_or_create(token=token)
             refresh = RefreshToken.for_user(user)
@@ -146,6 +148,7 @@ class Refresh(TokenRefreshView):
 
 
 class Logout(MobileView):
+    allow_initial_password = True
     def post(self, request):
         try:
             token = RefreshToken(request.data.get("refresh", ""))
@@ -244,6 +247,7 @@ def path_data(path, user):
 
 
 class Profile(MobileView):
+    allow_initial_password = True
     def get(self, request):
         total_xp = xp(request.user)
         return Response(
@@ -257,6 +261,7 @@ class Profile(MobileView):
                 "contact": contact_data(),
                 "xp": total_xp,
                 **level_data(total_xp, request.user),
+                "must_change_password": request.user.mobile_must_change_password,
                 "premium": premium(request.user),
                 "paid_until": request.user.mobile_paid_until,
                 "completed": QuestionAttempt.objects.filter(

@@ -281,9 +281,14 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
   Future<void> load() async {
     setState(() => error = null);
     try {
+      final freshProfile = await api.request('profile/');
+      if (freshProfile['must_change_password'] == true) {
+        if (mounted) setState(() => profile = freshProfile);
+        return;
+      }
       final zone = await dailyNotifications.timezoneName();
       final values = await Future.wait([
-        api.request('profile/'),
+        Future.value(freshProfile),
         api.request('paths/'),
         api
             .request('activity/?timezone=${Uri.encodeComponent(zone)}')
@@ -393,274 +398,297 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      toolbarHeight: 76,
-      title: const BrandHeader(),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 18),
-          child: Icon(Icons.auto_awesome_rounded, color: AppColors.gold),
-        ),
-      ],
-    ),
-    bottomNavigationBar: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        if (profile != null && profile!['premium'] != true)
-          SafeArea(
-            bottom: false,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-              child: SizedBox(
-                width: double.infinity,
-                child: FilledButton.icon(
-                  style: FilledButton.styleFrom(
-                    backgroundColor: const Color(0xFFC9343E),
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 17),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                  ),
-                  onPressed: paymentBusy ? null : openMembership,
-                  icon: const Icon(Icons.workspace_premium_rounded),
-                  label: Text(
-                    paymentBusy
-                        ? 'Ödeme sayfası açılıyor…'
-                        : 'Premium’a geç • 2.099 TL / ay',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
+  Widget build(BuildContext context) => profile?['must_change_password'] == true
+      ? PasswordChange(
+          requiredAtLogin: true,
+          onSave: (current, password, confirmation) async {
+            await api.save(
+              await api.request(
+                'auth/change-password/',
+                body: {
+                  'new_password': password,
+                  'confirm_password': confirmation,
+                },
               ),
-            ),
-          ),
-        NavigationBar(
-          selectedIndex: tab,
-          onDestinationSelected: (v) {
-            if (v == 2 && profile != null && profile!['premium'] != true) {
-              openMembership();
-              return;
-            }
-            setState(() => tab = v);
-            if (v == 2 || v == 3) load();
+            );
           },
-          destinations: [
-            const NavigationDestination(
-              icon: Icon(Icons.home_outlined),
-              label: 'Ana Sayfa',
-            ),
-            const NavigationDestination(
-              icon: Icon(Icons.route_outlined),
-              label: 'Yollar',
-            ),
-            if (profile != null && profile!['premium'] != true)
-              NavigationDestination(
-                icon: Container(
-                  padding: const EdgeInsets.all(7),
-                  decoration: BoxDecoration(
-                    color: AppColors.gold,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: const Icon(
-                    Icons.workspace_premium_rounded,
-                    color: Color(0xFF102039),
-                  ),
-                ),
-                label: 'Premium ol',
-              )
-            else
-              const NavigationDestination(
-                icon: Icon(Icons.insights_outlined),
-                label: 'İlerlemem',
+          onFinished: () {
+            setState(() => profile = null);
+            load();
+          },
+        )
+      : Scaffold(
+          appBar: AppBar(
+            toolbarHeight: 76,
+            title: const BrandHeader(),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 18),
+                child: Icon(Icons.auto_awesome_rounded, color: AppColors.gold),
               ),
-            const NavigationDestination(
-              icon: Icon(Icons.person_outline),
-              label: 'Profil',
-            ),
-          ],
-        ),
-      ],
-    ),
-    body: error != null
-        ? ErrorState(message: error!, retry: load)
-        : profile == null
-        ? const Center(child: CircularProgressIndicator())
-        : RefreshIndicator(
-            onRefresh: load,
-            child: ListView(
-              padding: const EdgeInsets.all(24),
-              children: [
-                if (tab == 0) ...[
-                  DashboardHero(name: profile!['first_name']),
-                  const SizedBox(height: 22),
-                  LearningStats(profile: profile!),
-                  const SizedBox(height: 30),
-                  Text(
-                    'Bir sonraki maceran',
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  const Text('Bir yol seç, ilk adımını at.'),
-                  const SizedBox(height: 18),
-                ],
-                if (tab <= 1) ...[
-                  if (paths.isEmpty)
-                    const Text('Yeni öğrenme yolları yakında burada.'),
-                  for (final p in paths)
-                    PathCard(
-                      path: p,
-                      onTap: () => open(p),
-                      onRestart: () => restart(p),
-                    ),
-                  const SizedBox(height: 12),
-                ],
-                if (tab == 2) ...[
-                  DailyActivityChart(activity: activity),
-                  const SizedBox(height: 24),
-                  Text(
-                    'İlerlemen',
-                    style: Theme.of(context).textTheme.headlineLarge,
-                  ),
-                  const SizedBox(height: 24),
-                  Text(
-                    '⚡ ${profile!['xp']} toplam XP',
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                  const SizedBox(height: 24),
-                  for (final p in paths)
-                    PathCard(
-                      path: p,
-                      onTap: () => open(p),
-                      onRestart: () => restart(p),
-                    ),
-                ],
-                if (tab == 3) ...[
-                  Text(
-                    profile!['full_name'].toString().isEmpty
-                        ? profile!['first_name']
-                        : profile!['full_name'],
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    profile!['premium']
-                        ? 'Tam erişim • tüm öğrenme yolları'
-                        : 'Ücretsiz başlangıç • bir öğrenme yolu',
-                  ),
-                  const SizedBox(height: 24),
-                  ProfileActions(
-                    contact: (profile!['contact'] as Map?)
-                        ?.cast<String, dynamic>(),
-                    onPassword: () async {
-                      final changed = await Navigator.of(context).push<bool>(
-                        MaterialPageRoute(
-                          builder: (_) => PasswordChange(
-                            onSave: (current, password, confirm) async {
-                              final result = await api.request(
-                                'auth/change-password/',
-                                body: {
-                                  'current_password': current,
-                                  'new_password': password,
-                                  'confirm_password': confirm,
-                                },
-                              );
-                              await api.save(result);
-                            },
+            ],
+          ),
+          bottomNavigationBar: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (profile != null && profile!['premium'] != true)
+                SafeArea(
+                  bottom: false,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: FilledButton.icon(
+                        style: FilledButton.styleFrom(
+                          backgroundColor: const Color(0xFFC9343E),
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 17),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
                           ),
                         ),
-                      );
-                      if (changed == true && context.mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Şifren yenilendi.')),
-                        );
-                      }
-                    },
-                  ),
-                  const SizedBox(height: 24),
-                  LevelRewards(profile: profile!),
-                  const SizedBox(height: 20),
-                  SwitchListTile.adaptive(
-                    contentPadding: EdgeInsets.zero,
-                    title: const Text('Günlük motivasyon bildirimi'),
-                    subtitle: Text(
-                      'Günde en fazla 1 bildirim${dailyNotifications.latestPlan == null ? '' : ' • saat ${dailyNotifications.latestPlan!['hour'] ?? 19}:00'}',
-                    ),
-                    value: dailyNotifications.enabled,
-                    onChanged: (value) async {
-                      try {
-                        final enabled = await dailyNotifications.setEnabled(
-                          value,
-                        );
-                        if (!mounted) return;
-                        setState(() {});
-                        if (value && !enabled && context.mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text(
-                                'Bildirim izni kapalı. Telefon ayarlarından GRC Ustası bildirimlerini açabilirsin.',
-                              ),
-                            ),
-                          );
-                        }
-                      } catch (_) {
-                        if (context.mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text(
-                                'Bildirim ayarı kaydedilemedi. Tekrar deneyebilirsin.',
-                              ),
-                            ),
-                          );
-                        }
-                      }
-                    },
-                  ),
-                  const SizedBox(height: 32),
-                  if (profile!['paid_until'] != null)
-                    Text(
-                      'Ücretli erişim bitişi: ${DateTime.parse(profile!['paid_until']).toLocal().toString().substring(0, 16)}',
-                    ),
-                  TextButton(
-                    onPressed: () async {
-                      await Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              Paywall(userId: profile!['billing_id']),
+                        onPressed: paymentBusy ? null : openMembership,
+                        icon: const Icon(Icons.workspace_premium_rounded),
+                        label: Text(
+                          paymentBusy
+                              ? 'Ödeme sayfası açılıyor…'
+                              : 'Premium’a geç • 2.099 TL / ay',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w900,
+                          ),
                         ),
-                      );
-                      load();
-                    },
-                    child: const Text('Tam erişim • Üyelik ve ödeme'),
+                      ),
+                    ),
                   ),
-                  PrimaryButton(
-                    label: 'Çıkış Yap',
-                    onPressed: () async {
-                      try {
-                        await api.logout();
-                        await dailyNotifications.clearForLogout();
-                        if (mounted) {
-                          widget.onLogout();
-                        }
-                      } catch (e) {
-                        if (context.mounted) {
-                          ScaffoldMessenger.of(
-                            context,
-                          ).showSnackBar(SnackBar(content: Text('$e')));
-                        }
-                      }
-                    },
+                ),
+              NavigationBar(
+                selectedIndex: tab,
+                onDestinationSelected: (v) {
+                  if (v == 2 &&
+                      profile != null &&
+                      profile!['premium'] != true) {
+                    openMembership();
+                    return;
+                  }
+                  setState(() => tab = v);
+                  if (v == 2 || v == 3) load();
+                },
+                destinations: [
+                  const NavigationDestination(
+                    icon: Icon(Icons.home_outlined),
+                    label: 'Ana Sayfa',
+                  ),
+                  const NavigationDestination(
+                    icon: Icon(Icons.route_outlined),
+                    label: 'Yollar',
+                  ),
+                  if (profile != null && profile!['premium'] != true)
+                    NavigationDestination(
+                      icon: Container(
+                        padding: const EdgeInsets.all(7),
+                        decoration: BoxDecoration(
+                          color: AppColors.gold,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Icon(
+                          Icons.workspace_premium_rounded,
+                          color: Color(0xFF102039),
+                        ),
+                      ),
+                      label: 'Premium ol',
+                    )
+                  else
+                    const NavigationDestination(
+                      icon: Icon(Icons.insights_outlined),
+                      label: 'İlerlemem',
+                    ),
+                  const NavigationDestination(
+                    icon: Icon(Icons.person_outline),
+                    label: 'Profil',
                   ),
                 ],
-              ],
-            ),
+              ),
+            ],
           ),
-  );
+          body: error != null
+              ? ErrorState(message: error!, retry: load)
+              : profile == null
+              ? const Center(child: CircularProgressIndicator())
+              : RefreshIndicator(
+                  onRefresh: load,
+                  child: ListView(
+                    padding: const EdgeInsets.all(24),
+                    children: [
+                      if (tab == 0) ...[
+                        DashboardHero(name: profile!['first_name']),
+                        const SizedBox(height: 22),
+                        LearningStats(profile: profile!),
+                        const SizedBox(height: 30),
+                        Text(
+                          'Bir sonraki maceran',
+                          style: Theme.of(context).textTheme.titleLarge
+                              ?.copyWith(fontWeight: FontWeight.w900),
+                        ),
+                        const SizedBox(height: 6),
+                        const Text('Bir yol seç, ilk adımını at.'),
+                        const SizedBox(height: 18),
+                      ],
+                      if (tab <= 1) ...[
+                        if (paths.isEmpty)
+                          const Text('Yeni öğrenme yolları yakında burada.'),
+                        for (final p in paths)
+                          PathCard(
+                            path: p,
+                            onTap: () => open(p),
+                            onRestart: () => restart(p),
+                          ),
+                        const SizedBox(height: 12),
+                      ],
+                      if (tab == 2) ...[
+                        DailyActivityChart(activity: activity),
+                        const SizedBox(height: 24),
+                        Text(
+                          'İlerlemen',
+                          style: Theme.of(context).textTheme.headlineLarge,
+                        ),
+                        const SizedBox(height: 24),
+                        Text(
+                          '⚡ ${profile!['xp']} toplam XP',
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                        const SizedBox(height: 24),
+                        for (final p in paths)
+                          PathCard(
+                            path: p,
+                            onTap: () => open(p),
+                            onRestart: () => restart(p),
+                          ),
+                      ],
+                      if (tab == 3) ...[
+                        Text(
+                          profile!['full_name'].toString().isEmpty
+                              ? profile!['first_name']
+                              : profile!['full_name'],
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          profile!['premium']
+                              ? 'Tam erişim • tüm öğrenme yolları'
+                              : 'Ücretsiz başlangıç • bir öğrenme yolu',
+                        ),
+                        const SizedBox(height: 24),
+                        ProfileActions(
+                          contact: (profile!['contact'] as Map?)
+                              ?.cast<String, dynamic>(),
+                          onPassword: () async {
+                            final changed = await Navigator.of(context)
+                                .push<bool>(
+                                  MaterialPageRoute(
+                                    builder: (_) => PasswordChange(
+                                      onSave:
+                                          (current, password, confirm) async {
+                                            final result = await api.request(
+                                              'auth/change-password/',
+                                              body: {
+                                                'current_password': current,
+                                                'new_password': password,
+                                                'confirm_password': confirm,
+                                              },
+                                            );
+                                            await api.save(result);
+                                          },
+                                    ),
+                                  ),
+                                );
+                            if (changed == true && context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Şifren yenilendi.'),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                        const SizedBox(height: 24),
+                        LevelRewards(profile: profile!),
+                        const SizedBox(height: 20),
+                        SwitchListTile.adaptive(
+                          contentPadding: EdgeInsets.zero,
+                          title: const Text('Günlük motivasyon bildirimi'),
+                          subtitle: Text(
+                            'Günde en fazla 1 bildirim${dailyNotifications.latestPlan == null ? '' : ' • saat ${dailyNotifications.latestPlan!['hour'] ?? 19}:00'}',
+                          ),
+                          value: dailyNotifications.enabled,
+                          onChanged: (value) async {
+                            try {
+                              final enabled = await dailyNotifications
+                                  .setEnabled(value);
+                              if (!mounted) return;
+                              setState(() {});
+                              if (value && !enabled && context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      'Bildirim izni kapalı. Telefon ayarlarından GRC Ustası bildirimlerini açabilirsin.',
+                                    ),
+                                  ),
+                                );
+                              }
+                            } catch (_) {
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      'Bildirim ayarı kaydedilemedi. Tekrar deneyebilirsin.',
+                                    ),
+                                  ),
+                                );
+                              }
+                            }
+                          },
+                        ),
+                        const SizedBox(height: 32),
+                        if (profile!['paid_until'] != null)
+                          Text(
+                            'Ücretli erişim bitişi: ${DateTime.parse(profile!['paid_until']).toLocal().toString().substring(0, 16)}',
+                          ),
+                        TextButton(
+                          onPressed: () async {
+                            await Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    Paywall(userId: profile!['billing_id']),
+                              ),
+                            );
+                            load();
+                          },
+                          child: const Text('Tam erişim • Üyelik ve ödeme'),
+                        ),
+                        PrimaryButton(
+                          label: 'Çıkış Yap',
+                          onPressed: () async {
+                            try {
+                              await api.logout();
+                              await dailyNotifications.clearForLogout();
+                              if (mounted) {
+                                widget.onLogout();
+                              }
+                            } catch (e) {
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(
+                                  context,
+                                ).showSnackBar(SnackBar(content: Text('$e')));
+                              }
+                            }
+                          },
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+        );
 }
 
 class PathCard extends StatelessWidget {

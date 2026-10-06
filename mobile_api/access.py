@@ -18,6 +18,8 @@ def check_mobile_access(user):
 class MobileAccessPermission(BasePermission):
     def has_permission(self, request, view):
         check_mobile_access(request.user)
+        if request.user.mobile_must_change_password and not getattr(view, 'allow_initial_password', False):
+            raise PermissionDenied("İlk giriş şifreni yenileyerek devam et.")
         return True
 
 

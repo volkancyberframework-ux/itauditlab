@@ -314,6 +314,8 @@ class MobilePayment(models.Model):
     paid_at = models.DateTimeField()
     access_until = models.DateTimeField()
     amount_minor = models.PositiveIntegerField(default=209900)
+    receipt_sent_at = models.DateTimeField("Ödeme e-postası gönderildi", null=True, blank=True)
+    receipt_error = models.CharField(max_length=160, blank=True)
 
     class Meta:
         verbose_name = "Mobil uygulama ödemesi"
@@ -346,3 +348,11 @@ class MobileAdminAlert(models.Model):
     class Meta:
         verbose_name = "Mobil Telegram bildirimi"
         verbose_name_plural = "Mobil Telegram bildirimleri"
+
+
+class MobileCheckoutRequest(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    email = models.EmailField()
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.PROTECT)
+    checkout_session_id = models.CharField(max_length=255, unique=True, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)

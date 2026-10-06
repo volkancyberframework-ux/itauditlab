@@ -9,7 +9,7 @@ from django.test import TestCase, override_settings
 from django.core.cache import cache
 from django.utils import timezone
 from .web_billing import token_for, add_month, PRODUCT
-from .models import MobilePayment
+from .models import MobilePayment, MobileCheckoutRequest
 
 @override_settings(STRIPE_SECRET_KEY='sk_test_fixture', MOBILE_STRIPE_WEBHOOK_SECRET='whsec_fixture')
 class WebPaymentTests(TestCase):
@@ -51,12 +51,12 @@ class WebPaymentTests(TestCase):
 
     def test_checkout_is_bound_to_signed_mobile_account(self):
         with patch('mobile_api.web_billing.stripe.checkout.Session.create') as create:
-            create.return_value.url='https://checkout.stripe.com/test'
+            create.return_value.url='https://checkout.stripe.com/test'; create.return_value.id='cs_test_checkout'
             response=self.client.post('/mobiluygulama/checkout',{'token':token_for(self.user),'amount':'1','user_id':'999'})
             self.assertEqual(response.status_code,303)
             kwargs=create.call_args.kwargs
             self.assertNotIn('payment_method_types',kwargs)
-            self.assertEqual(kwargs['client_reference_id'],str(self.user.pk));self.assertEqual(kwargs['line_items'][0]['price_data']['unit_amount'],209900)
+            self.assertEqual(MobileCheckoutRequest.objects.get(pk=kwargs['client_reference_id']).user,self.user);self.assertEqual(kwargs['line_items'][0]['price_data']['unit_amount'],209900)
         self.assertEqual(self.client.post('/mobiluygulama/checkout',{'token':'tampered'}).status_code,400)
 
     def test_token_invalid_after_password_change_and_for_web_account(self):
@@ -75,7 +75,88 @@ class WebPaymentTests(TestCase):
         self.assertEqual(add_month(datetime(2028,1,31,tzinfo=utc.utc)).day,29)
         self.assertEqual(add_month(datetime(2027,1,31,tzinfo=utc.utc)).day,28)
 
-    def test_direct_website_mobile_login(self):
-        response=self.client.post('/mobiluygulama',{'email':'BUYER@example.com','password':'Strong-Sample-834'})
-        self.assertEqual(response.status_code,302)
-        self.assertContains(self.client.get(response.url),'buyer@example.com')
+    def test_page_only_asks_email(self):
+        response = self.client.get('/mobiluygulama')
+        self.assertContains(response, 'name="email"')
+        self.assertNotContains(response, 'type="password"')
+        self.assertContains(response, 'volkan@grcustasi.com')
+
+    def checkout_event(self, email):
+        with patch('mobile_api.web_billing.stripe.checkout.Session.create') as create:
+            create.return_value.url = 'https://checkout.stripe.com/test'
+            create.return_value.id = 'cs_test_email'
+            response = self.client.post('/mobiluygulama/checkout', {'email':email})
+            self.assertEqual(response.status_code,303)
+            pending = MobileCheckoutRequest.objects.get(pk=create.call_args.kwargs['client_reference_id'])
+        event = json.loads(json.dumps(self.event))
+        obj = event['data']['object']
+        obj['id'] = pending.checkout_session_id
+        obj['client_reference_id'] = str(pending.pk)
+        obj['metadata'] = {'product': PRODUCT, 'mobile_checkout_id': str(pending.pk)}
+        return event
+
+    def test_existing_website_password_is_preserved_and_receipt_sent_once(self):
+        from django.core import mail
+        self.user.is_mobile=False; self.user.save()
+        password_hash=self.user.password
+        event=self.checkout_event('BUYER@example.com')
+        with self.captureOnCommitCallbacks(execute=True):
+            self.assertEqual(self.send(event).status_code,200)
+        self.user.refresh_from_db()
+        self.assertTrue(self.user.mobile_paid); self.assertTrue(self.user.is_mobile)
+        self.assertEqual(self.user.password,password_hash)
+        self.assertFalse(self.user.mobile_must_change_password)
+        self.assertEqual(len(mail.outbox),1)
+        self.assertIn('mevcut şifresi geçerlidir',mail.outbox[0].body)
+        with self.captureOnCommitCallbacks(execute=True): self.send(event)
+        self.assertEqual(len(mail.outbox),1)
+
+    def test_new_account_created_only_after_payment_and_forced_to_change_password(self):
+        from django.core import mail
+        from rest_framework.test import APIClient
+        User=get_user_model()
+        event=self.checkout_event('new@example.com')
+        self.assertFalse(User.objects.filter(email='new@example.com').exists())
+        with self.captureOnCommitCallbacks(execute=True): self.send(event)
+        user=User.objects.get(email='new@example.com')
+        self.assertTrue(user.mobile_paid); self.assertTrue(user.mobile_must_change_password)
+        self.assertFalse(user.is_staff); self.assertFalse(user.is_superuser)
+        password=mail.outbox[0].body.split('İlk giriş şifreniz: ')[1].split('\n')[0]
+        self.assertTrue(user.check_password(password))
+        client=APIClient(); login=client.post('/api/mobile/v1/auth/login/',{'email':user.email,'password':password},format='json')
+        self.assertEqual(login.status_code,200)
+        client.credentials(HTTP_AUTHORIZATION='Bearer '+login.data['access'])
+        self.assertTrue(client.get('/api/mobile/v1/profile/').data['must_change_password'])
+        self.assertEqual(client.get('/api/mobile/v1/paths/').status_code,403)
+        response=client.post('/api/mobile/v1/auth/change-password/',{'new_password':'My-New-Secure-7189','confirm_password':'My-New-Secure-7189'},format='json')
+        self.assertEqual(response.status_code,200)
+        user.refresh_from_db(); self.assertFalse(user.mobile_must_change_password)
+        self.assertTrue(user.check_password('My-New-Secure-7189'))
+        client.credentials(HTTP_AUTHORIZATION='Bearer '+response.data['access'])
+        self.assertEqual(client.get('/api/mobile/v1/paths/').status_code,200)
+        with self.captureOnCommitCallbacks(execute=True): self.send(event)
+        user.refresh_from_db(); self.assertTrue(user.check_password('My-New-Secure-7189'))
+        self.assertEqual(len(mail.outbox),1)
+
+    def test_mail_failure_keeps_paid_access_and_can_retry(self):
+        from .payment_mail import send_payment_receipt
+        event=self.checkout_event('pending@example.com')
+        with patch('mobile_api.payment_mail.send_mail',side_effect=RuntimeError('SMTP')):
+            with self.captureOnCommitCallbacks(execute=True): self.send(event)
+        payment=MobilePayment.objects.get(); user=payment.user
+        self.assertTrue(user.mobile_paid); self.assertFalse(user.has_usable_password())
+        self.assertIsNone(payment.receipt_sent_at)
+        self.assertTrue(payment.receipt_error)
+        self.assertTrue(send_payment_receipt(payment.pk))
+        user.refresh_from_db(); self.assertTrue(user.has_usable_password())
+
+    def test_csrf_is_required_and_fresh_token_handles_both_origins(self):
+        from django.test import Client
+        client=Client(enforce_csrf_checks=True)
+        self.assertEqual(client.post('/mobiluygulama/checkout',{'email':'buyer@example.com'}).status_code,403)
+        for origin in ['https://grcustasi.com','https://www.grcustasi.com']:
+            token=client.get('/mobiluygulama/csrf').json()['token']
+            with patch('mobile_api.web_billing.stripe.checkout.Session.create') as create:
+                create.return_value.id='cs_'+origin.split('//')[1]
+                create.return_value.url='https://checkout.stripe.com/test'
+                self.assertEqual(client.post('/mobiluygulama/checkout',{'email':'buyer@example.com','csrfmiddlewaretoken':token},secure=True,HTTP_ORIGIN=origin).status_code,303)

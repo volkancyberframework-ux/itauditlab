@@ -4,6 +4,25 @@
 <div class="brand"><img src="{% static 'img/grc-ustasi-logo.png' %}" alt="GRC Ustası" width="110" height="110" style="object-fit:contain;display:block;margin-bottom:14px">GRC USTASI / MOBİL</div><h1>Bilgini gerçek hayatta<br>ustalığa dönüştür.</h1><p>Vakalar, lablar, sınav soruları ve gerçek hayat senaryoları. Kendi hızında öğren, uygula ve ilerle.</p>
 {% if error %}<div class="notice" role="alert">{{ error }}</div>{% endif %}{% if cancelled %}<div class="notice">Ödeme iptal edildi. Hazır olduğunda yeniden başlayabilirsin.</div>{% endif %}
 <section class="card"><div class="price">2.099 TL <small>/ 1 ay</small></div><ul><li>Tüm öğrenme yollarına tam erişim</li><li>İnteraktif sorular ve bilgi kartları</li><li>Gerçek hayat senaryoları ve kişisel gelişim</li></ul>
-{% if member %}<p>Mobil hesap: <strong>{{ member.email }}</strong></p><form method="post" action="{% url 'landing:mobile_checkout' %}">{% csrf_token %}<input type="hidden" name="token" value="{{ token }}"><button type="submit">2.099 TL öde • 1 aylık erişimi aç</button></form><p class="muted">Ödeme Stripe'ın güvenli sayfasında yapılır. Ödeme doğrulanınca bu mobil hesaba 1 takvim ayı erişim eklenir. Otomatik yenilenmez; yeniden ödeme yaparak uzatabilirsin.</p>
-{% else %}<h2>Mobil hesabınla giriş yap</h2><p>Ödeme erişimini doğru hesaba tanımlayabilmemiz için uygulamada kullandığın hesabı yaz.</p><form method="post">{% csrf_token %}<label>E-posta<input type="email" name="email" autocomplete="username" required maxlength="254"></label><label>Şifre<input type="password" name="password" autocomplete="current-password" required></label><button type="submit">Devam et</button></form><p class="muted">Hesabın yoksa GRC Ustası uygulamasından ücretsiz hesap oluşturabilirsin.</p>{% endif %}</section><p class="muted">Ücretli süre bittiğinde ücretsiz öğrenme yoluna erişimin devam eder.</p><a href="/">GRC Ustası ana sayfa</a>
-</main></body></html>
+<h2>E-postanı yaz, öğrenmeye başla</h2><p>GRC Ustası hesabın varsa <strong>mevcut şifren mobil uygulamada da geçerli olacak.</strong></p><p>Hesabın yoksa ödeme sonrasında hesabın oluşturulacak ve bu e-posta adresine <strong>ilk giriş şifren gönderilecek.</strong> Mobil uygulamada ilk girişinde yeni şifreni belirleyebilirsin.</p>
+<form id="payment-form" method="post" action="{% url 'landing:mobile_checkout' %}">{% csrf_token %}<input type="hidden" name="token" value="{{ token }}"><label>E-posta<input type="email" name="email" value="{{ email }}" autocomplete="email" required maxlength="254"{% if token %} readonly{% endif %}></label><button id="pay-button" type="submit">Ödemeye geç • 2.099 TL</button><p id="payment-error" class="notice" role="alert" hidden></p></form><p class="muted">Ödeme Stripe'ın güvenli sayfasında yapılır. Ödeme doğrulanınca 1 takvim ayı ücretli mobil erişim açılır ve e-posta gönderilir. Otomatik yenilenmez; yeniden ödeme yaparak uzatabilirsin.</p><p class="muted">Bir sorunun olursa <a href="mailto:volkan@grcustasi.com">volkan@grcustasi.com</a> adresine ulaş.</p>
+</section><p class="muted">Ücretli süre bittiğinde ücretsiz öğrenme yoluna erişimin devam eder.</p><a href="/">GRC Ustası ana sayfa</a>
+</main><script>
+const form = document.getElementById('payment-form');
+form.addEventListener('submit', async function(event) {
+  event.preventDefault();
+  const button = document.getElementById('pay-button');
+  const error = document.getElementById('payment-error');
+  button.disabled = true; button.textContent = 'Ödeme hazırlanıyor…'; error.hidden = true;
+  try {
+    const response = await fetch('{% url "landing:mobile_csrf" %}', {credentials: 'same-origin', cache: 'no-store'});
+    if (!response.ok) throw new Error();
+    const data = await response.json();
+    form.elements.csrfmiddlewaretoken.value = data.token;
+    form.submit();
+  } catch (_) {
+    error.textContent = 'Bağlantı kurulamadı. Yeniden deneyebilir veya volkan@grcustasi.com adresine ulaşabilirsin.';
+    error.hidden = false; button.disabled = false; button.textContent = 'Ödemeye geç • 2.099 TL';
+  }
+});
+</script></body></html>

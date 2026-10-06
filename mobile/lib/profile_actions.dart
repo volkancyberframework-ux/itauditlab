@@ -101,7 +101,14 @@ class _ProfileActionsState extends State<ProfileActions> {
 
 class PasswordChange extends StatefulWidget {
   final Future<void> Function(String, String, String) onSave;
-  const PasswordChange({super.key, required this.onSave});
+  final bool requiredAtLogin;
+  final VoidCallback? onFinished;
+  const PasswordChange({
+    super.key,
+    required this.onSave,
+    this.requiredAtLogin = false,
+    this.onFinished,
+  });
   @override
   State<PasswordChange> createState() => _PasswordChangeState();
 }
@@ -126,7 +133,11 @@ class _PasswordChangeState extends State<PasswordChange> {
       setState(() => error = 'Yeni şifreler birbiriyle eşleşmiyor.');
       return;
     }
-    if ([current.text, password.text, confirm.text].any((v) => v.isEmpty)) {
+    if ([
+      if (!widget.requiredAtLogin) current.text,
+      password.text,
+      confirm.text,
+    ].any((v) => v.isEmpty)) {
       setState(() => error = 'Bütün şifre alanlarını doldur.');
       return;
     }
@@ -139,7 +150,13 @@ class _PasswordChangeState extends State<PasswordChange> {
       current.clear();
       password.clear();
       confirm.clear();
-      if (mounted) Navigator.pop(context, true);
+      if (mounted) {
+        if (widget.onFinished != null) {
+          widget.onFinished!();
+        } else {
+          Navigator.pop(context, true);
+        }
+      }
     } on ApiFailure catch (e) {
       if (mounted) setState(() => error = e.message);
     } catch (_) {
@@ -153,9 +170,12 @@ class _PasswordChangeState extends State<PasswordChange> {
 
   @override
   Widget build(BuildContext context) => PopScope(
-    canPop: !busy,
+    canPop: !busy && !widget.requiredAtLogin,
     child: Scaffold(
-      appBar: AppBar(title: const Text('Şifreni yenile')),
+      appBar: AppBar(
+        automaticallyImplyLeading: !widget.requiredAtLogin,
+        title: const Text('Şifreni yenile'),
+      ),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(24),
@@ -171,22 +191,25 @@ class _PasswordChangeState extends State<PasswordChange> {
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
             ),
             const SizedBox(height: 12),
-            const Text(
-              'Şifren değişince diğer cihazlardaki oturumların kapanır. Bu cihazda öğrenmeye devam edebilirsin.',
+            Text(
+              widget.requiredAtLogin
+                  ? 'İlk girişin için kişisel şifreni belirle. E-postayla gelen ilk giriş şifresini bundan sonra kullanmayacaksın.'
+                  : 'Şifren değişince diğer cihazlardaki oturumların kapanır. Bu cihazda öğrenmeye devam edebilirsin.',
             ),
             const SizedBox(height: 24),
             AutofillGroup(
               child: Column(
                 children: [
-                  TextField(
-                    controller: current,
-                    obscureText: true,
-                    enabled: !busy,
-                    autofillHints: const [AutofillHints.password],
-                    decoration: const InputDecoration(
-                      labelText: 'Mevcut şifre',
+                  if (!widget.requiredAtLogin)
+                    TextField(
+                      controller: current,
+                      obscureText: true,
+                      enabled: !busy,
+                      autofillHints: const [AutofillHints.password],
+                      decoration: const InputDecoration(
+                        labelText: 'Mevcut şifre',
+                      ),
                     ),
-                  ),
                   const SizedBox(height: 16),
                   TextField(
                     controller: password,

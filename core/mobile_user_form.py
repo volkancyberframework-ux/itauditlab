@@ -37,7 +37,7 @@ class MobileUserCreateForm(forms.Form):
     def save(self):
         data = self.cleaned_data
         first, _, last = data['name'].strip().partition(' ')
-        user = CustomUser(username='mobile_' + hashlib.sha256(data['email'].encode()).hexdigest()[:40], email=data['email'], first_name=first, last_name=last, is_mobile=True, mobile_full_access=data['paid'] and not data['last_date'])
+        user = CustomUser(username='mobile_' + hashlib.sha256(data['email'].encode()).hexdigest()[:40], email=data['email'], first_name=first, last_name=last, is_mobile=True, mobile_must_change_password=True, mobile_full_access=data['paid'] and not data['last_date'])
         if data['paid'] and data['last_date']:
             user.mobile_paid_until = timezone.make_aware(datetime.combine(data['last_date'] + timedelta(days=1), time.min))
         user.set_password(data['password'])

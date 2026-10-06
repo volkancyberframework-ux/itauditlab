@@ -7,6 +7,7 @@ app_name = 'landing'
 urlpatterns = [
     path('mobiluygulama', web_billing.page, name='mobile_membership'),
     path('mobiluygulama/', web_billing.page),
+    path('mobiluygulama/csrf', web_billing.csrf_token, name='mobile_csrf'),
     path('mobiluygulama/checkout', web_billing.checkout, name='mobile_checkout'),
     path('mobiluygulama/success', web_billing.success, name='mobile_success'),
     path('mobiluygulama/webhook', web_billing.webhook, name='mobile_webhook'),

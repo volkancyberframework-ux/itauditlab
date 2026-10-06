@@ -44,11 +44,11 @@ Audio, images and recordings use authenticated API downloads. Set `MOBILE_VOICE_
 
 ## Website payments
 
-The app opens `https://www.grcustasi.com/mobiluygulama` in the external browser. Authenticated `POST payments/link/` creates a 30-minute signed payment-only identity link. Direct website visitors sign in with their mobile account. Account creation remains free in the app.
+The app opens `https://www.grcustasi.com/mobiluygulama` in the external browser. Authenticated `POST payments/link/` creates a 30-minute signed payment-only identity link. Direct website visitors enter only their email. Existing website accounts keep their password and gain mobile access after payment; new accounts are created only on a verified payment. Account creation remains free in the app.
 
 Stripe Checkout charges TRY 209900 minor units (2,099 TL) for one calendar month. It is a one-time payment, without automatic renewal. A renewed payment extends the existing future end date. Price, currency and account binding are owned by the backend; billing email changes cannot move access to another account.
 
-Configure `STRIPE_SECRET_KEY` and `MOBILE_STRIPE_WEBHOOK_SECRET` on the backend. Stripe endpoint `https://www.grcustasi.com/mobiluygulama/webhook` subscribes to `checkout.session.completed` and `checkout.session.async_payment_succeeded`. Only a signed, paid event with matching account, mode, currency and amount grants access. Session/payment/event uniqueness plus user row locks prevent duplicate grants. The success page never grants access. See [Stripe fulfillment documentation](https://docs.stripe.com/checkout/fulfillment).
+Configure `STRIPE_SECRET_KEY` and `MOBILE_STRIPE_WEBHOOK_SECRET` on the backend. Stripe endpoint `https://www.grcustasi.com/mobiluygulama/webhook` subscribes to `checkout.session.completed` and `checkout.session.async_payment_succeeded`. Only a signed, paid event with matching account, mode, currency and amount grants access. Session/payment/event uniqueness plus checkout and user row locks prevent duplicate grants. Pending checkout UUIDs bind email-only payments to server-owned identities; older account-bound sessions remain supported. The success page never grants access. See [Stripe fulfillment documentation](https://docs.stripe.com/checkout/fulfillment).
 
 Admin users show separate paid/free ticks and a mobile membership filter. `mobile_paid_until` controls payment expiry; expiration automatically falls back to the configured free path without blocking login. `mobile_full_access` remains the explicit unlimited admin override; `mobile_last_date` remains the separate manual login cutoff. Payment records are read-only in admin. Legacy provider endpoints remain for previously configured store entitlements; the current app initiates website payments only.
 
@@ -145,7 +145,7 @@ Risk cards accept horizontal swipes and immediate vertical drags from the entire
 
 Public `POST /api/mobile/v1/auth/register/` creates a non-staff mobile account with `mobile_full_access=False` and no expiry. Existing mobile accounts keep full access through migration 0016. Core User admin exposes **Mobil tam erişim** independently of the Mobile enablement and Last date. Full access is also recognized from a verified active store subscription. Path/question-level legacy premium flags no longer gate individual features.
 
-Choose the one free shared, published learning path in **Mobile API → Mobil uygulama ayarları**. Free users only receive that path and its authorized media; changing the choice or unpublishing the path applies to existing sessions too. Full accounts receive all accessible published paths.
+Choose the one free shared, published learning path by ticking **Ücretsiz mobil kullanıcıların öğrenme yolu** on its LearningPath admin form (also visible in Mobile settings). Free users only receive that path and its authorized media; changing the choice or unpublishing the path applies to existing sessions too. Full accounts receive all accessible published paths.
 
 Create `Question.kind=info`, assign it to a path, and set its order between questions. The admin page editor supports multiple swipe pages, bold/italic toolbar buttons and optional tap-to-reveal text. `card_pages` remains the stored JSON representation. Reading a card uses `POST /sessions/<id>/continue/`, is idempotent and grants no XP. Progress denominators exclude information cards. Sessions contain up to eight questions (ten for the all-types demo), plus intervening cards, bounded to 50 steps. A 250-question path uses the same fixed-size home card as a ten-question path.
 
@@ -173,3 +173,12 @@ In Mobile API admin, **Motivasyon mesajları** contains published rotating messa
 The Users page has **Mobil kullanıcı oluştur**. It creates a non-staff mobile account with a hashed password; choose free access, paid access until an inclusive date, or unlimited paid access with no date.
 
 New mobile accounts and newly submitted voice recordings create transactional Telegram alerts with admin links. Existing GRCUSTASI_TELEGRAM_BOT_TOKEN / GRCUSTASI_TELEGRAM_ADMIN_CHAT_ID settings are used. Alerts are sent only after database commit, failures do not block signup or uploads, and **Mobil yönetim bildirimleri** exposes pending status and a retry action. Voice feedback itself is still emailed after administrator review.
+
+
+## Email-only checkout and first login
+
+The public payment page asks only for email and fetches a fresh CSRF token immediately before posting. CSRF protection remains enabled. Authenticated app payment links prefill and bind the current account; entering another email cannot change this binding.
+
+A verified paid webhook enables one calendar month of mobile access and sends one payment receipt. Existing usable passwords remain valid. New/unusable-password accounts get a random first-login password by email; only its hash is stored. The mobile API allows profile, logout and password change while initial-password renewal is required, and blocks learning/payment endpoints until renewal. The app shows the required password form before loading learning content; successful renewal revokes older tokens. User-created passwords from free registration are already personal and are not forced to change.
+
+Failed receipt delivery preserves paid access and remains visible on the payment record. The payment admin action retries pending receipts. Initial-password retries generate a new password only until the user has chosen a personal password; sent receipts and duplicate webhooks cannot reset that password. Support contact is volkan@grcustasi.com.

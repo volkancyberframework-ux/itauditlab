@@ -18,13 +18,52 @@ from .models import (
 )
 
 
+from django import forms
+
+
+class PathForm(forms.ModelForm):
+    free_for_mobile = forms.BooleanField(label='Ücretsiz mobil kullanıcıların öğrenme yolu', required=False, help_text='Yalnızca bir yol seçilebilir. İşaretlediğinde önceki ücretsiz yolun yerini bu yol alır.')
+
+    class Meta:
+        model = LearningPath
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance.pk:
+            self.fields['free_for_mobile'].initial = MobileSettings.objects.filter(pk=1, free_path=self.instance).exists()
+
+    def clean(self):
+        data = super().clean()
+        if data.get('free_for_mobile') and (not data.get('published') or data.get('owner')):
+            self.add_error('free_for_mobile', 'Ücretsiz yol yayınlanmış ve herkese ortak bir yol olmalı.')
+        return data
+
+
 @admin.register(LearningPath)
 class PathAdmin(admin.ModelAdmin):
-    exclude = ["premium"]
-    list_display = ["title", "published", "difficulty", "order"]
-    list_editable = ["order"]
-    list_filter = ["published", "difficulty"]
-    search_fields = ["title"]
+    form = PathForm
+    exclude = ['premium']
+    list_display = ['title', 'published', 'free_for_mobile', 'difficulty', 'order']
+    list_editable = ['order']
+    list_filter = ['published', 'difficulty']
+    search_fields = ['title']
+
+    @admin.display(boolean=True, description='Ücretsiz mobil yol')
+    def free_for_mobile(self, obj):
+        return MobileSettings.objects.filter(pk=1, free_path=obj).exists()
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        if 'form-TOTAL_FORMS' in request.POST:
+            return
+        config, _ = MobileSettings.objects.get_or_create(pk=1)
+        if form.cleaned_data.get('free_for_mobile'):
+            config.free_path = obj
+            config.save(update_fields=['free_path'])
+        elif 'free_for_mobile' in form.cleaned_data and config.free_path_id == obj.pk:
+            config.free_path = None
+            config.save(update_fields=['free_path'])
 
 
 class OptionInline(admin.TabularInline):
@@ -237,7 +276,15 @@ from .models import MobilePayment
 class MobilePaymentAdmin(admin.ModelAdmin):
     list_display = ('user', 'paid_at', 'access_until', 'amount_minor', 'checkout_session_id')
     search_fields = ('user__email', 'checkout_session_id', 'payment_intent_id')
-    readonly_fields = ('user', 'paid_at', 'access_until', 'amount_minor', 'checkout_session_id', 'payment_intent_id', 'stripe_event_id')
+    readonly_fields = ('user', 'paid_at', 'access_until', 'amount_minor', 'checkout_session_id', 'payment_intent_id', 'stripe_event_id', 'receipt_sent_at', 'receipt_error')
+
+    actions = ('resend_receipts',)
+
+    @admin.action(description='Bekleyen ödeme e-postalarını yeniden gönder')
+    def resend_receipts(self, request, queryset):
+        from .payment_mail import send_payment_receipt
+        sent = sum(send_payment_receipt(pk) for pk in queryset.filter(receipt_sent_at=None).values_list('pk', flat=True))
+        self.message_user(request, f'{sent} ödeme e-postası gönderildi.')
 
     def has_add_permission(self, request):
         return False
