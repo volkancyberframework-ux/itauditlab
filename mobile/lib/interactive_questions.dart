@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'theme.dart';
 
 class SentenceBuilder extends StatelessWidget {
@@ -6,12 +7,17 @@ class SentenceBuilder extends StatelessWidget {
   final List<String> value;
   final ValueChanged<List<String>> onChanged;
   final bool enabled;
+  final VoidCallback? onDragStart, onDragEnd;
+  final ValueChanged<Offset>? onDragPosition;
   const SentenceBuilder({
     super.key,
     required this.options,
     required this.value,
     required this.onChanged,
     required this.enabled,
+    this.onDragStart,
+    this.onDragEnd,
+    this.onDragPosition,
   });
   String label(String id) => options.firstWhere((o) => o['id'] == id)['text'];
   void add(String id) {
@@ -65,57 +71,69 @@ class SentenceBuilder extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         buildDefaultDragHandles: false,
                         itemCount: value.length,
+                        onReorderStart: (_) => onDragStart?.call(),
+                        onReorderEnd: (_) => onDragEnd?.call(),
                         onReorderItem: (oldIndex, newIndex) {
                           if (!enabled) return;
                           final items = [...value];
                           items.insert(newIndex, items.removeAt(oldIndex));
                           onChanged(items);
                         },
-                        itemBuilder: (_, i) => Container(
+                        itemBuilder: (_, i) => Listener(
                           key: ValueKey(value[i]),
-                          margin: const EdgeInsets.only(bottom: 8),
-                          decoration: BoxDecoration(
-                            color: AppColors.teal.withValues(alpha: .12),
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          child: Row(
-                            children: [
-                              if (enabled)
-                                ReorderableDragStartListener(
-                                  index: i,
-                                  child: const Padding(
+                          onPointerMove: (event) =>
+                              onDragPosition?.call(event.position),
+                          child: ReorderableDragStartListener(
+                            enabled: enabled,
+                            index: i,
+                            key: ValueKey(value[i]),
+                            child: Container(
+                              key: ValueKey(value[i]),
+                              margin: const EdgeInsets.only(bottom: 8),
+                              decoration: BoxDecoration(
+                                color: AppColors.teal.withValues(alpha: .12),
+                                borderRadius: BorderRadius.circular(14),
+                              ),
+                              child: Row(
+                                children: [
+                                  const Padding(
                                     padding: EdgeInsets.all(10),
                                     child: Icon(
                                       Icons.drag_indicator_rounded,
                                       color: AppColors.teal,
                                     ),
                                   ),
-                                ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 12,
-                                  ),
-                                  child: Text(
-                                    '${i + 1}. ${label(value[i])}',
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      height: 1.4,
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 12,
+                                      ),
+                                      child: Text(
+                                        '${i + 1}. ${label(value[i])}',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          height: 1.4,
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                  IconButton(
+                                    tooltip: 'Parçayı geri al',
+                                    onPressed: enabled
+                                        ? () {
+                                            final items = [...value]
+                                              ..removeAt(i);
+                                            onChanged(items);
+                                          }
+                                        : null,
+                                    icon: const Icon(
+                                      Icons.close_rounded,
+                                      size: 18,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              IconButton(
-                                tooltip: 'Parçayı geri al',
-                                onPressed: enabled
-                                    ? () {
-                                        final items = [...value]..removeAt(i);
-                                        onChanged(items);
-                                      }
-                                    : null,
-                                icon: const Icon(Icons.close_rounded, size: 18),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                       ),
@@ -145,7 +163,7 @@ class SentenceBuilder extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         const Text(
-          'Kartın tamamına dokunarak ekle. Taşımak için sağdaki tutamacı sürükle.',
+          'Karta dokunarak ekle veya kartın herhangi bir yerinden sürükle.',
           style: TextStyle(fontSize: 12, height: 1.4),
         ),
         const SizedBox(height: 12),
@@ -157,6 +175,9 @@ class SentenceBuilder extends StatelessWidget {
               label: option['text'],
               enabled: enabled,
               onTap: () => add(option['id']),
+              onDragStart: onDragStart,
+              onDragEnd: onDragEnd,
+              onDragPosition: onDragPosition,
             ),
           ),
       ],
@@ -169,12 +190,17 @@ class DragRiskQuestion extends StatefulWidget {
   final List<String> value;
   final ValueChanged<List<String>> onChanged;
   final bool enabled;
+  final VoidCallback? onDragStart, onDragEnd;
+  final ValueChanged<Offset>? onDragPosition;
   const DragRiskQuestion({
     super.key,
     required this.options,
     required this.value,
     required this.onChanged,
     required this.enabled,
+    this.onDragStart,
+    this.onDragEnd,
+    this.onDragPosition,
   });
   @override
   State<DragRiskQuestion> createState() => _DragRiskQuestionState();
@@ -269,7 +295,7 @@ class _DragRiskQuestionState extends State<DragRiskQuestion> {
         ),
         const SizedBox(height: 16),
         const Text(
-          'Kartı kaydır veya okları kullan. Seçmek için karta dokun; taşımak için sağdaki tutamacı sürükle.',
+          'Sağa-sola kaydır: kartları değiştir. Yukarı sürükle: riski taşı. Dokun: riski seç.',
           style: TextStyle(fontSize: 12, height: 1.5),
         ),
         const SizedBox(height: 14),
@@ -290,6 +316,10 @@ class _DragRiskQuestionState extends State<DragRiskQuestion> {
                   onTap: () => select(widget.options[i]['id']),
                   selected: widget.value.contains(widget.options[i]['id']),
                   actionLabel: 'Riski seç',
+                  verticalOnly: true,
+                  onDragStart: widget.onDragStart,
+                  onDragEnd: widget.onDragEnd,
+                  onDragPosition: widget.onDragPosition,
                 ),
               ),
             ),
@@ -338,8 +368,10 @@ class _DragRiskQuestionState extends State<DragRiskQuestion> {
 
 class _MovableCard extends StatelessWidget {
   final String id, label, actionLabel;
-  final bool enabled, selected;
+  final bool enabled, selected, verticalOnly;
   final VoidCallback onTap;
+  final VoidCallback? onDragStart, onDragEnd;
+  final ValueChanged<Offset>? onDragPosition;
   const _MovableCard({
     required this.id,
     required this.label,
@@ -347,14 +379,17 @@ class _MovableCard extends StatelessWidget {
     required this.onTap,
     this.selected = false,
     this.actionLabel = 'Cümleme ekle',
+    this.verticalOnly = false,
+    this.onDragStart,
+    this.onDragEnd,
+    this.onDragPosition,
   });
 
-  Widget card(BuildContext context, {bool floating = false}) => Material(
+  Widget card(BuildContext context) => Material(
     color: Theme.of(context).colorScheme.surface,
-    elevation: floating ? 8 : 0,
     borderRadius: BorderRadius.circular(18),
     child: InkWell(
-      onTap: enabled && !floating ? onTap : null,
+      onTap: enabled ? onTap : null,
       borderRadius: BorderRadius.circular(18),
       child: Container(
         constraints: const BoxConstraints(minHeight: 88),
@@ -410,33 +445,19 @@ class _MovableCard extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 8),
-            if (enabled && !floating)
-              Draggable<String>(
-                data: id,
-                affinity: Axis.vertical,
-                dragAnchorStrategy: pointerDragAnchorStrategy,
-                feedback: SizedBox(
-                  width: MediaQuery.sizeOf(context).width - 64,
-                  child: card(context, floating: true),
-                ),
-                childWhenDragging: const SizedBox(width: 52, height: 64),
-                child: Tooltip(
-                  message: 'Taşı',
-                  child: Container(
-                    width: 52,
-                    height: 64,
-                    decoration: BoxDecoration(
-                      color: AppColors.teal.withValues(alpha: .12),
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    child: const Icon(
-                      Icons.drag_indicator_rounded,
-                      color: AppColors.teal,
-                      size: 30,
-                    ),
-                  ),
-                ),
+            Container(
+              width: 52,
+              height: 64,
+              decoration: BoxDecoration(
+                color: AppColors.teal.withValues(alpha: .12),
+                borderRadius: BorderRadius.circular(14),
               ),
+              child: const Icon(
+                Icons.drag_indicator_rounded,
+                color: AppColors.teal,
+                size: 30,
+              ),
+            ),
           ],
         ),
       ),
@@ -447,6 +468,45 @@ class _MovableCard extends StatelessWidget {
     button: true,
     selected: selected,
     label: label,
-    child: card(context),
+    child: enabled
+        ? Draggable<String>(
+            data: id,
+            affinity: verticalOnly ? Axis.vertical : null,
+            maxSimultaneousDrags: 1,
+            dragAnchorStrategy: pointerDragAnchorStrategy,
+            onDragStarted: () {
+              HapticFeedback.selectionClick();
+              onDragStart?.call();
+            },
+            onDragUpdate: (details) =>
+                onDragPosition?.call(details.globalPosition),
+            onDragEnd: (_) => onDragEnd?.call(),
+            feedback: Transform.translate(
+              offset: const Offset(-110, -84),
+              child: SizedBox(
+                width: 220,
+                child: Material(
+                  color: Theme.of(context).colorScheme.surface,
+                  elevation: 10,
+                  borderRadius: BorderRadius.circular(16),
+                  child: Padding(
+                    padding: const EdgeInsets.all(14),
+                    child: Text(
+                      label,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w800,
+                        height: 1.4,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            childWhenDragging: Opacity(opacity: .35, child: card(context)),
+            child: card(context),
+          )
+        : card(context),
   );
 }

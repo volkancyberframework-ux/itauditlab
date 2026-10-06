@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:just_audio/just_audio.dart';
@@ -607,6 +608,43 @@ class _SessionState extends State<Session> {
   final input = TextEditingController();
   final selected = <String>{};
   List<String> arranged = [];
+  final questionScroll = ScrollController();
+  Timer? dragScrollTimer;
+  Offset? dragPointer;
+  bool draggingCard = false;
+
+  void beginCardDrag() {
+    dragPointer = null;
+    dragScrollTimer?.cancel();
+    setState(() => draggingCard = true);
+    dragScrollTimer = Timer.periodic(const Duration(milliseconds: 35), (_) {
+      if (!mounted || dragPointer == null || !questionScroll.hasClients) return;
+      final media = MediaQuery.of(context);
+      final top = media.padding.top + 130;
+      final bottom = media.size.height - media.padding.bottom - 120;
+      final y = dragPointer!.dy;
+      final delta = y < top
+          ? -14.0
+          : y > bottom
+          ? 14.0
+          : 0.0;
+      if (delta == 0) return;
+      final position = questionScroll.position;
+      questionScroll.jumpTo(
+        (position.pixels + delta).clamp(
+          position.minScrollExtent,
+          position.maxScrollExtent,
+        ),
+      );
+    });
+  }
+
+  void endCardDrag() {
+    dragScrollTimer?.cancel();
+    dragPointer = null;
+    if (mounted) setState(() => draggingCard = false);
+  }
+
   final player = AudioPlayer();
   int? audioQuestion;
   bool busy = false;
@@ -614,6 +652,8 @@ class _SessionState extends State<Session> {
   DateTime viewed = DateTime.now();
   @override
   void dispose() {
+    dragScrollTimer?.cancel();
+    questionScroll.dispose();
     input.dispose();
     player.dispose();
     super.dispose();
@@ -763,6 +803,8 @@ class _SessionState extends State<Session> {
       ),
       body: SafeArea(
         child: ListView(
+          controller: questionScroll,
+          physics: draggingCard ? const NeverScrollableScrollPhysics() : null,
           padding: const EdgeInsets.all(24),
           children: [
             if (session == null) ...[
@@ -947,6 +989,9 @@ class _SessionState extends State<Session> {
                   value: arranged,
                   enabled: !busy,
                   onChanged: (v) => setState(() => arranged = v),
+                  onDragStart: beginCardDrag,
+                  onDragEnd: endCardDrag,
+                  onDragPosition: (p) => dragPointer = p,
                 )
               else if (q['kind'] == 'drag_select')
                 DragRiskQuestion(
@@ -955,6 +1000,9 @@ class _SessionState extends State<Session> {
                   value: arranged,
                   enabled: !busy,
                   onChanged: (v) => setState(() => arranged = v),
+                  onDragStart: beginCardDrag,
+                  onDragEnd: endCardDrag,
+                  onDragPosition: (p) => dragPointer = p,
                 )
               else if (q['kind'] == 'voice')
                 VoiceRecorder(
