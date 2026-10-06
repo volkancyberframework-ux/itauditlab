@@ -8,6 +8,7 @@ import 'paywall.dart';
 import 'analytics.dart';
 import 'answer_feedback.dart';
 import 'dashboard_widgets.dart';
+import 'interactive_questions.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -599,6 +600,7 @@ class _SessionState extends State<Session> {
   Map<String, dynamic>? feedback;
   final input = TextEditingController();
   final selected = <String>{};
+  List<String> arranged = [];
   final player = AudioPlayer();
   int? audioQuestion;
   bool busy = false;
@@ -653,6 +655,8 @@ class _SessionState extends State<Session> {
           'question_id': q['id'],
           'answer': ['text', 'fill_blank'].contains(q['kind'])
               ? input.text
+              : ['sentence_order', 'drag_select'].contains(q['kind'])
+              ? arranged
               : selected.toList(),
           'duration_seconds': DateTime.now().difference(viewed).inSeconds,
         },
@@ -689,12 +693,56 @@ class _SessionState extends State<Session> {
           session = feedback!['session'];
           feedback = null;
           selected.clear();
+          arranged = [];
           input.clear();
           viewed = DateTime.now();
         }),
       );
     }
     return Scaffold(
+      bottomNavigationBar: q != null && q['kind'] == 'sentence_order'
+          ? SafeArea(
+              child: DragTarget<String>(
+                onWillAcceptWithDetails: (d) =>
+                    !busy &&
+                    !arranged.contains(d.data) &&
+                    (q['options'] as List).any((o) => o['id'] == d.data),
+                onAcceptWithDetails: (d) =>
+                    setState(() => arranged = [...arranged, d.data]),
+                builder: (_, candidates, _) => Container(
+                  margin: const EdgeInsets.fromLTRB(18, 8, 18, 8),
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppColors.teal.withValues(
+                      alpha: candidates.isNotEmpty ? .28 : .12,
+                    ),
+                    borderRadius: BorderRadius.circular(18),
+                    border: Border.all(color: AppColors.teal, width: 2),
+                  ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.add_circle_outline_rounded,
+                        color: AppColors.teal,
+                      ),
+                      SizedBox(width: 8),
+                      Flexible(
+                        child: Text(
+                          'Cümleme ekle • kartı buraya bırak',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w800,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            )
+          : null,
       appBar: AppBar(
         title: Text(
           widget.path['title'],
@@ -780,7 +828,48 @@ class _SessionState extends State<Session> {
                 borderRadius: BorderRadius.circular(12),
               ),
               const SizedBox(height: 32),
-              if (q['context'] != '') Text(q['context']),
+              if (q['context'] != '') ...[
+                Container(
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surface,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.outlineVariant,
+                      width: 2,
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Row(
+                        children: [
+                          Icon(
+                            Icons.description_rounded,
+                            color: AppColors.teal,
+                            size: 20,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            'SENARYO',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 1,
+                              fontSize: 11,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        q['context'],
+                        style: const TextStyle(height: 1.6, fontSize: 15),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 22),
+              ],
               Text(
                 q['prompt'],
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -845,6 +934,22 @@ class _SessionState extends State<Session> {
                   onChanged: (_) => setState(() {}),
                   decoration: const InputDecoration(labelText: 'Yanıtın'),
                 )
+              else if (q['kind'] == 'sentence_order')
+                SentenceBuilder(
+                  key: ValueKey(q['id']),
+                  options: q['options'],
+                  value: arranged,
+                  enabled: !busy,
+                  onChanged: (v) => setState(() => arranged = v),
+                )
+              else if (q['kind'] == 'drag_select')
+                DragRiskQuestion(
+                  key: ValueKey(q['id']),
+                  options: q['options'],
+                  value: arranged,
+                  enabled: !busy,
+                  onChanged: (v) => setState(() => arranged = v),
+                )
               else if (q['kind'] == 'voice')
                 VoiceRecorder(
                   key: ValueKey(q['id']),
@@ -900,6 +1005,11 @@ class _SessionState extends State<Session> {
                         busy ||
                         (['text', 'fill_blank'].contains(q['kind'])
                             ? input.text.trim().isEmpty
+                            : [
+                                'sentence_order',
+                                'drag_select',
+                              ].contains(q['kind'])
+                            ? arranged.isEmpty
                             : selected.isEmpty)
                     ? null
                     : submit,

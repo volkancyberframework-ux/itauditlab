@@ -336,6 +336,36 @@ class LearningTests(TestCase):
         self.assertIn(f"/api/mobile/v1/audio/{asset.pk}/", data["question"]["audio"][0])
         self.assertNotIn("/media/", data["question"]["audio"][0])
 
+    def test_sentence_order_preserves_order_and_hides_solution(self):
+        self.q.kind = 'sentence_order'
+        self.q.options = [{'id': 'cause', 'text': 'Neden'}, {'id': 'event', 'text': 'Olay'}, {'id': 'impact', 'text': 'Etki'}]
+        self.q.answer = ['cause', 'event', 'impact']
+        self.q.save()
+        session = self.session()
+        self.assertNotIn('answer', session['question'])
+        wrong = self.answer(session, ['impact', 'event', 'cause'])
+        self.assertEqual(wrong.status_code, 200)
+        self.assertFalse(wrong.data['correct'])
+        correct = self.answer(self.session(), ['cause', 'event', 'impact'])
+        self.assertTrue(correct.data['correct'])
+        self.assertEqual(correct.data['xp_change'], 20)
+
+    def test_interactive_answer_rejects_unknown_duplicate_and_empty_pieces(self):
+        self.q.kind = 'sentence_order'
+        self.q.save()
+        session = self.session()
+        for answer in [[], ['unknown'], ['a', 'a'], 'a', [1]]:
+            self.assertEqual(self.answer(session, answer).status_code, 400)
+        self.assertEqual(XPTransaction.objects.filter(user=self.user).count(), 0)
+
+    def test_drag_select_requires_exactly_one_valid_card(self):
+        self.q.kind = 'drag_select'
+        self.q.options.append({'id': 'b', 'text': 'Distractor'})
+        self.q.save()
+        session = self.session()
+        self.assertEqual(self.answer(session, ['a', 'b']).status_code, 400)
+        self.assertTrue(self.answer(session, ['a']).data['correct'])
+
 
 class MobileAccessTests(TestCase):
     def setUp(self):

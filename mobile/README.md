@@ -30,7 +30,7 @@ Use HTTPS for device/staging traffic. The production API is deployed at `https:/
 
 ## Content
 
-In existing Django admin (`/bulamazsinki/`), author LearningPath, Module, Question and AudioAsset. Publish paths and questions explicitly. Add options using the QuestionOption inline form and tick correct answers. For text/fill_blank, `answer` contains accepted exact strings (trimmed, case insensitive); this is not semantic AI grading. Option JSON remains a compatibility fallback. The eight question types have generic renderers; image/audio/scenario can use choice answers. AudioAsset can be shared by any number of questions.
+In existing Django admin (`/bulamazsinki/`), author LearningPath, Module, Question and AudioAsset. Publish paths and questions explicitly. Add options using the QuestionOption inline form and tick correct answers. For text/fill_blank, `answer` contains accepted exact strings (trimmed, case insensitive); this is not semantic AI grading. Option JSON remains a compatibility fallback. Media and choice question types have generic renderers; image/audio/scenario can use choice answers. AudioAsset can be shared by any number of questions.
 
 Prompt/explanation templates support `{first_name}`, `{full_name}`, `{current_path}`, `{xp}`, `{level}`. Intro and body audio are played in sequence; an AudioAsset with `name_key` matching the case-folded first name adds the name clip. Missing names fall back to intro+body. Gapless behavior needs real-device QA. Name clips should be separately recorded with appropriate pacing.
 
@@ -132,3 +132,7 @@ Regression run: 148 of 149 existing+mobile backend tests pass; the unchanged stu
 ## Playful brand theme and answer celebrations
 
 The app uses the supplied GRC Ustası logo, navy/gold hero panels, teal controls, raised answer cards/buttons, XP/level tiles and task markers. Light/dark layouts were visually checked at 430 and 320 logical pixels. Correct answers randomly choose confetti, fireworks, stars or XP coins; the previous effect cannot repeat on the next answer. Selection is stable during widget rebuilds, and reduced-motion settings suppress effects. All XP values remain server-confirmed. Celebration lifecycle tests cover leaving while an effect is playing.
+
+## Interactive risk workshop
+
+`Risk Atölyesi • Sürükle ve Kur` contains six free demo tasks (migration 0010). `drag_select` displays swipeable risk cards that can be dragged into a target or tapped. `sentence_order` uses a piece bank, a reorderable draft and a persistent bottom drop target for long scenarios. Tap pieces to add and use remove controls to undo. The server checks the ordered ID list against `Question.answer`, validates IDs/duplicates, and never sends the solution to the client. In admin, enter the intended ordered IDs in Answer; QuestionOption correct flags do not define sentence order. `drag_select` uses one correct option as normal. Free text uses exact accepted strings, not semantic grading.

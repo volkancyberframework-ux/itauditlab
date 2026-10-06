@@ -58,6 +58,8 @@ class Question(models.Model):
             "audio",
             "scenario",
             "voice",
+            "sentence_order",
+            "drag_select",
         ]
     ]
     module = models.ForeignKey(Module, null=True, blank=True, on_delete=models.SET_NULL)
@@ -71,7 +73,7 @@ class Question(models.Model):
     answer = models.JSONField(
         default=list,
         blank=True,
-        help_text="Doğru seçenek ID listesi veya kabul edilen metinler",
+        help_text="Doğru seçenek ID listesi veya kabul edilen metinler. sentence_order için ID'leri doğru cümle sırasıyla yazın; şıklardaki correct işaretleri bu türde kullanılmaz.",
     )
     explanation = models.TextField(blank=True)
     hint = models.TextField(blank=True)

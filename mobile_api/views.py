@@ -369,6 +369,18 @@ class Answer(MobileView):
                 correct = answer.strip().casefold() in [
                     str(a).strip().casefold() for a in q.answer
                 ]
+            elif q.kind in ["sentence_order", "drag_select"]:
+                keys = {option["id"] for option in options(q)[0]}
+                if (
+                    not isinstance(answer, list)
+                    or not answer
+                    or len(answer) > 30
+                    or any(not isinstance(a, str) or a not in keys for a in answer)
+                    or len(set(answer)) != len(answer)
+                    or (q.kind == "drag_select" and len(answer) != 1)
+                ):
+                    raise ValidationError("Cümle parçalarını veya risk kartını seç.")
+                correct = answer == q.answer if q.kind == "sentence_order" else set(answer) == set(options(q)[1])
             else:
                 if (
                     not isinstance(answer, list)
