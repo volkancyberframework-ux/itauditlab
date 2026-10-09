@@ -120,12 +120,10 @@ class Api {
     await request('auth/logout/', body: {'refresh': refresh});
     await clear();
   }
-}
 
-extension VoiceApi on Api {
   Future<dynamic> uploadVoice(
     String session,
-    int question,
+    int questionId,
     String file,
     int seconds,
   ) async {
@@ -145,7 +143,7 @@ extension VoiceApi on Api {
               Uri.parse('${Api.base}sessions/$session/voice/'),
             )
             ..headers['Authorization'] = 'Bearer $access'
-            ..fields['question_id'] = '$question'
+            ..fields['question_id'] = '$questionId'
             ..fields['duration'] = '$seconds'
             ..files.add(await http.MultipartFile.fromPath('file', file));
       final response = await http.Response.fromStream(

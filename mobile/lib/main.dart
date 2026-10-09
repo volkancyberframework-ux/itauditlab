@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'password_reset.dart';
 import 'practice_lab.dart';
+import 'workshop_questions.dart';
 import 'apple_store.dart';
 import 'apple_membership.dart';
 import 'account_deletion.dart';
@@ -952,7 +953,14 @@ class PathCard extends StatelessWidget {
 
 class Session extends StatefulWidget {
   final Map<String, dynamic> path;
-  const Session({super.key, required this.path});
+  final Api? sessionApi;
+  final bool workshop;
+  const Session({
+    super.key,
+    required this.path,
+    this.sessionApi,
+    this.workshop = false,
+  });
   @override
   State<Session> createState() => _SessionState();
 }
@@ -1002,7 +1010,8 @@ class _SessionState extends State<Session> {
   }
 
   final player = AudioPlayer();
-  final scenarioAudio = ScenarioAudioFiles(api);
+  Api get sessionApi => widget.sessionApi ?? api;
+  late final scenarioAudio = ScenarioAudioFiles(sessionApi);
   bool audioLoading = false;
   int? audioQuestion;
   bool busy = false;
@@ -1023,8 +1032,8 @@ class _SessionState extends State<Session> {
       error = null;
     });
     try {
-      analytics.emit('session_started');
-      final s = await api.request(
+      if (!widget.workshop) analytics.emit('session_started');
+      final s = await sessionApi.request(
         'sessions/',
         body: {'path_id': widget.path['id']},
       );
@@ -1053,7 +1062,7 @@ class _SessionState extends State<Session> {
       error = null;
     });
     try {
-      final result = await api.request(
+      final result = await sessionApi.request(
         'sessions/${session!['id']}/answer/',
         body: {
           'question_id': q['id'],
@@ -1066,8 +1075,12 @@ class _SessionState extends State<Session> {
         },
       );
       await player.stop();
-      analytics.emit(result['correct'] ? 'question_correct' : 'question_wrong');
-      analytics.emit('question_answered');
+      if (!widget.workshop) {
+        analytics.emit(
+          result['correct'] ? 'question_correct' : 'question_wrong',
+        );
+        analytics.emit('question_answered');
+      }
       if (result['correct']) {
         HapticFeedback.mediumImpact();
       } else {
@@ -1113,7 +1126,7 @@ class _SessionState extends State<Session> {
         answered: session!['answered'],
         total: session!['total'],
         onContinue: () async {
-          final next = await api.request(
+          final next = await sessionApi.request(
             'sessions/${session!['id']}/continue/',
             body: {'question_id': q['id']},
           );
@@ -1197,12 +1210,14 @@ class _SessionState extends State<Session> {
               ),
               const SizedBox(height: 32),
               Text(
-                'Bugünkü görev',
+                widget.workshop ? 'Vaka atölyesi' : 'Bugünkü görev',
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               const SizedBox(height: 16),
               Text(
-                'Bu oturumda en fazla ${widget.path['session_size'] ?? 8} soru ve aradaki bilgi kartları. İlerlemen kaydedilir; kaldığın yerden devam edebilirsin.',
+                widget.workshop
+                    ? 'Giriş yapmadan alıştırma yapabilirsin. Sonucun cihazda saklanır. Ses ve görseller ile sesli yanıt gönderimi için internet gerekir. Hesap XP’sine eklenmez.'
+                    : 'Bu oturumda en fazla ${widget.path['session_size'] ?? 8} soru ve aradaki bilgi kartları. İlerlemen kaydedilir; kaldığın yerden devam edebilirsin.',
               ),
               const SizedBox(height: 32),
               PrimaryButton(label: 'Başla', busy: busy, onPressed: start),
@@ -1221,7 +1236,9 @@ class _SessionState extends State<Session> {
               ),
               const SizedBox(height: 24),
               Text(
-                '${session!['question_total'] ?? session!['total']} soru tamamladın\n${session!['correct']} doğru • ${session!['pending_reviews'] ?? 0} ses kaydı incelemede\n${session!['information_read'] ?? 0} bilgi kartı\n${session!['xp_earned']} XP\nYolun %${session!['path']['progress']} tamamlandı',
+                widget.workshop
+                    ? 'Alıştırmayı tamamladın. ${session!['correct']} doğru karar • ${session!['pending_reviews']} ses kaydı incelemede.'
+                    : '${session!['question_total'] ?? session!['total']} soru tamamladın\n${session!['correct']} doğru • ${session!['pending_reviews'] ?? 0} ses kaydı incelemede\n${session!['information_read'] ?? 0} bilgi kartı\n${session!['xp_earned']} XP\nYolun %${session!['path']['progress']} tamamlandı',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 32),
@@ -1312,7 +1329,7 @@ class _SessionState extends State<Session> {
               if (q['image'] != null)
                 Image.network(
                   q['image'],
-                  headers: {'Authorization': 'Bearer ${api.access}'},
+                  headers: {'Authorization': 'Bearer ${sessionApi.access}'},
                   errorBuilder: (_, _, _) =>
                       const Text('Görsel yüklenemedi. Bağlantını kontrol et.'),
                 ),
@@ -1406,6 +1423,15 @@ class _SessionState extends State<Session> {
                   style: TextStyle(height: 1.5),
                 ),
                 const SizedBox(height: 16),
+                if (widget.workshop && voiceMode)
+                  TextField(
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      labelText: 'Geri bildirim e-postan',
+                    ),
+                    onChanged: (value) =>
+                        (sessionApi as WorkshopQuestionApi).email = value,
+                  ),
               ],
               if (['text', 'fill_blank', 'voice'].contains(q['kind']) &&
                   !voiceMode)
@@ -1443,7 +1469,7 @@ class _SessionState extends State<Session> {
                   onSubmit: (file, duration) async {
                     setState(() => busy = true);
                     try {
-                      final result = await api.uploadVoice(
+                      final result = await sessionApi.uploadVoice(
                         session!['id'],
                         q['id'],
                         file,
@@ -1454,6 +1480,7 @@ class _SessionState extends State<Session> {
                           () => feedback = {
                             'correct': true,
                             'pending': true,
+                            'practice': widget.workshop,
                             'xp_change': 0,
                             'explanation': result['detail'],
                             'hint': '',

@@ -18,8 +18,11 @@ class ScenarioAudioFiles {
   Future<String> download(String url, {bool retry = true}) async {
     final uri = Uri.parse(url);
     final base = Uri.parse(Api.base);
+    final publicAudio =
+        uri.path.startsWith('${base.path}workshop/questions/') &&
+        RegExp(r'/workshop/questions/[0-9]+/audio/[0-9]+/$').hasMatch(uri.path);
     if (uri.origin != base.origin ||
-        !uri.path.startsWith('${base.path}audio/')) {
+        !(uri.path.startsWith('${base.path}audio/') || publicAudio)) {
       throw ApiFailure('Ses adresi geçersiz.');
     }
     final request = http.Request('GET', uri)..followRedirects = false;

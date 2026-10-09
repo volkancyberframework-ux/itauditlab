@@ -9,7 +9,13 @@ from .account_deletion import RequestDeletion
 from .email_verification import VerifyEmail, ResendVerification
 from .apple_billing import ApplePurchase, AppleNotification
 
+from . import workshop
+
 urlpatterns = [
+    path("workshop/questions/", workshop.Questions.as_view()),
+    path("workshop/questions/<int:pk>/image/", workshop.Image.as_view()),
+    path("workshop/questions/<int:pk>/audio/<int:audio_id>/", workshop.Audio.as_view()),
+    path("workshop/questions/<int:pk>/voice/", workshop.Voice.as_view()),
     path("practice-cases/", views.PracticeCases.as_view()),
     path("payments/apple/verify/", ApplePurchase.as_view()),
     path("payments/apple/notifications/", AppleNotification.as_view()),

@@ -116,9 +116,9 @@ class QuestionAdmin(admin.ModelAdmin):
         django_models.FileField: {"widget": forms.FileInput},
         django_models.ImageField: {"widget": forms.FileInput},
     }
-    list_display = ["__str__", "kind", "published", "base_xp", "order"]
+    list_display = ["__str__", "kind", "published", "in_workshop", "base_xp", "order"]
     list_editable = ["order"]
-    list_filter = ["kind", "paths", "published", "difficulty"]
+    list_filter = ["kind", "paths", "published", "in_workshop", "difficulty"]
     filter_horizontal = ["paths"]
     search_fields = ["prompt"]
 
@@ -187,6 +187,12 @@ class VoiceAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request):
         return False
+
+    def get_readonly_fields(self, request, obj=None):
+        fields = list(self.readonly_fields)
+        if obj and obj.feedback_sent_at:
+            fields.append("feedback")
+        return fields
 
     def get_urls(self):
         from django.urls import path
@@ -380,3 +386,50 @@ class PracticeCaseAdmin(admin.ModelAdmin):
         ("Kanıt", {"fields": ["evidence", "proof", "evidence_reason"]}),
         ("Risk matrisi", {"fields": ["likelihood", "impact"]}),
     ]
+
+
+from .models import WorkshopVoice
+
+
+@admin.register(WorkshopVoice)
+class WorkshopVoiceAdmin(admin.ModelAdmin):
+    list_display = ["email", "question", "created_at", "feedback_sent_at"]
+    readonly_fields = ["question", "email", "duration", "created_at", "feedback_sent_at", "listen"]
+    exclude = ["file"]
+    search_fields = ["email", "question__prompt"]
+
+    def has_add_permission(self, request):
+        return False
+
+    def get_readonly_fields(self, request, obj=None):
+        fields = list(self.readonly_fields)
+        if obj and obj.feedback_sent_at:
+            fields.append("feedback")
+        return fields
+
+    def get_urls(self):
+        from django.urls import path
+        return [path("<uuid:pk>/listen/", self.admin_site.admin_view(self.audio), name="workshop_voice_audio")] + super().get_urls()
+
+    def audio(self, request, pk):
+        from django.shortcuts import get_object_or_404
+        from django.core.exceptions import PermissionDenied
+        from .views import private_file
+        if not self.has_view_permission(request):
+            raise PermissionDenied
+        return private_file(get_object_or_404(WorkshopVoice, pk=pk).file, "audio/mp4")
+
+    def listen(self, obj):
+        from django.urls import reverse
+        from django.utils.html import format_html
+        return format_html('<a href="{}" target="_blank">Ses kaydını dinle</a>', reverse('admin:workshop_voice_audio', args=[obj.pk]))
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        if obj.feedback.strip() and not obj.feedback_sent_at:
+            from .workshop import send_feedback
+            try:
+                send_feedback(obj.pk)
+                self.message_user(request, "Geri bildirim e-posta ile gönderildi.")
+            except Exception:
+                self.message_user(request, "E-posta gönderilemedi. Yanıt kaydedildi; tekrar kaydederek deneyin.", level="error")

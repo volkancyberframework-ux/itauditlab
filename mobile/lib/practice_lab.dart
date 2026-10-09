@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'interactive_questions.dart';
 import 'theme.dart';
 import 'api.dart';
+import 'workshop_questions.dart';
 
 class PracticeCase {
   final String id, title, situation, controlReason, evidenceReason;
@@ -233,13 +234,14 @@ class _PracticeLabState extends State<PracticeLab> {
             ),
             const SizedBox(height: 12),
             const Text(
-              'Vakayı oku, risk cümlesini kur, kontrolü ve kanıtı seç. Olasılık ve etkiyle önceliklendir. İnternetsiz de çalışır; sonuçların yalnızca bu cihazda saklanır. Hesabındaki XP ayrı takip edilir.',
+              'Vaka, ses, görsel, sürükleme ve bilgi kartlarıyla alıştırma yap. İndirilen metinli alıştırmalar çevrim dışı da açılır; ses ve görseller ile sesli yanıt gönderimi için internet gerekir. Çalışma sonuçların bu cihazda saklanır; sesli yanıtını e-posta geri bildirimi için eğitmene gönderebilirsin. Hesabındaki XP ayrı takip edilir.',
             ),
             const SizedBox(height: 24),
             if (cases.isEmpty)
               const Text(
                 'Yeni vakalar hazırlanıyor. Daha sonra tekrar bakabilirsin.',
               ),
+            WorkshopQuestionList(onCompleted: load),
             for (final scenario in cases)
               Card(
                 child: ListTile(
@@ -282,7 +284,7 @@ class _PracticeLabState extends State<PracticeLab> {
                 child: ListTile(
                   title: Text('${result['title']}'),
                   subtitle: Text(
-                    '${result['score']}/3 doğru karar • ${result['date'].toString().split('T').first}',
+                    '${result['score']}/${result['total'] ?? 3} doğru karar • ${result['date'].toString().split('T').first}',
                   ),
                   trailing: const Icon(Icons.description_outlined),
                   onTap: () => showDialog(

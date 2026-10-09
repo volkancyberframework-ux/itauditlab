@@ -167,6 +167,10 @@ class _AnswerFeedbackState extends State<AnswerFeedback>
                               builder: (_, value, _) => Text(
                                 pending
                                     ? 'İnceleme bekleniyor'
+                                    : widget.result['practice'] == true
+                                    ? (correct
+                                          ? 'Doğru karar!'
+                                          : 'Birlikte öğrenelim')
                                     : correct
                                     ? '+${value.round()} XP kazandın'
                                     : change < 0
@@ -181,7 +185,7 @@ class _AnswerFeedbackState extends State<AnswerFeedback>
                             ),
                           ),
                           const SizedBox(height: 12),
-                          if (!correct)
+                          if (!correct && widget.result['practice'] != true)
                             Text(
                               change < 0
                                   ? 'Moralini bozma. Bir sonraki görevde geri kazanabilirsin.'

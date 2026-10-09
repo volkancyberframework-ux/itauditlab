@@ -65,6 +65,8 @@ class Question(models.Model):
             "drag_select",
         ]
     ]
+    in_workshop = models.BooleanField("Giriş öncesi vaka atölyesinde göster", default=False,
+        help_text="Yayınlanmış soru giriş yapmadan herkese açılır; yanıt anahtarı cihazda değerlendirme için indirilir. Özel/ücretli içerik seçmeyin.")
     module = models.ForeignKey(Module, null=True, blank=True, on_delete=models.SET_NULL)
     paths = models.ManyToManyField(LearningPath, related_name="questions", blank=True)
     kind = models.CharField(max_length=20, choices=TYPES)
@@ -415,3 +417,18 @@ class PracticeCase(models.Model):
                 errors[field] = "Seçeneklerden birinin sıra numarasını yazın (1'den başlar)."
         if errors:
             raise ValidationError(errors)
+
+
+class WorkshopVoice(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    question = models.ForeignKey(Question, on_delete=models.PROTECT)
+    email = models.EmailField("Geri bildirim e-postası")
+    file = models.FileField(upload_to="workshop_voice/", storage=PrivateVoiceStorage())
+    duration = models.PositiveSmallIntegerField()
+    feedback = models.TextField("Geri bildirim", blank=True)
+    feedback_sent_at = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Atölye sesli yanıtı"
+        verbose_name_plural = "Atölye sesli yanıtları"
