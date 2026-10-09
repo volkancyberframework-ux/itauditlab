@@ -246,3 +246,9 @@ MOBILE_VOICE_ROOT = config('MOBILE_VOICE_ROOT', default='/data/mobile_private')
 REVENUECAT_SECRET_KEY = config('REVENUECAT_SECRET_KEY', default='')
 
 REVENUECAT_WEBHOOK_TOKEN = config('REVENUECAT_WEBHOOK_TOKEN', default='')
+
+# StoreKit 2 JWS verification uses Apple's public root certificates, never client flags.
+APPLE_BUNDLE_ID = 'com.grcustasi.grcUstasi'
+APPLE_APP_ID = 6819632974
+APPLE_MONTHLY_PRODUCT_ID = 'grcustasi_premium_monthly'
+APPLE_ALLOW_SANDBOX = config('APPLE_ALLOW_SANDBOX', default=True, cast=bool)

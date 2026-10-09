@@ -24,7 +24,7 @@ void main() {
           ),
         ),
       );
-      await tester.tap(find.text('WhatsApp’tan Volkan’a eriş'));
+      await tester.tap(find.text('Öğrenme desteği • WhatsApp'));
       await tester.pumpAndSettle();
       expect(launched.length, 2);
       expect(launched.first.scheme, 'whatsapp');
@@ -48,7 +48,7 @@ void main() {
           ),
         ),
       );
-      expect(find.text('WhatsApp’tan Volkan’a eriş'), findsNothing);
+      expect(find.text('Öğrenme desteği • WhatsApp'), findsNothing);
       await tester.tap(find.text('Şifreni yenile'));
       expect(clicked, isTrue);
     },

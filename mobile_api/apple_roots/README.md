@@ -1,0 +1,1 @@
+Public Apple root certificates downloaded from https://www.apple.com/certificateauthority/ on 2026-10-09. The official Apple App Store Server Library verifies StoreKit 2 transaction and notification JWS signatures with online certificate checks enabled. No private key or user receipt is stored here. Xcode-local unsigned/test-signed receipts are intentionally rejected.

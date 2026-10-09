@@ -370,3 +370,9 @@ class AccountDeletionRequest(models.Model):
     class Meta:
         verbose_name = 'Mobil hesap silme talebi'
         verbose_name_plural = 'Mobil hesap silme talepleri'
+
+
+class AppleEntitlement(models.Model):
+    subscription = models.OneToOneField(Subscription, on_delete=models.CASCADE)
+    latest_transaction_id = models.CharField(max_length=100)
+    signed_at = models.DateTimeField()

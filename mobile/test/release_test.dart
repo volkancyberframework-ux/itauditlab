@@ -4,7 +4,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:grc_ustasi/password_reset.dart';
 import 'package:grc_ustasi/account_deletion.dart';
-import 'package:grc_ustasi/paywall.dart';
+import 'package:grc_ustasi/apple_membership.dart';
+import 'package:grc_ustasi/apple_store.dart';
+import 'package:grc_ustasi/api.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
+
+class UnavailableStore extends Fake implements InAppPurchase {
+  @override
+  Stream<List<PurchaseDetails>> get purchaseStream => const Stream.empty();
+  @override
+  Future<bool> isAvailable() async => false;
+}
 
 void main() {
   testWidgets('reset sends entered email and blocks duplicate requests', (
@@ -33,11 +43,22 @@ void main() {
     expect(find.text('Hesabın varsa e-posta gönderdik.'), findsOneWidget);
     expect(find.textContaining('spam klasörünü'), findsOneWidget);
   });
-  testWidgets('iOS has no price or external purchase action', (tester) async {
+  testWidgets('iOS offers Apple restore and no external checkout', (
+    tester,
+  ) async {
     debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
     addTearDown(() => debugDefaultTargetPlatformOverride = null);
-    await tester.pumpWidget(const MaterialApp(home: Paywall(userId: 'demo')));
-    expect(find.text('Hesap erişimi'), findsOneWidget);
+    await tester.pumpWidget(
+      MaterialApp(
+        home: AppleMembership(
+          store: AppleStore(Api(), store: UnavailableStore()),
+          accountId: 'demo',
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('Premium ol'), findsOneWidget);
+    expect(find.text('Satın alımları geri yükle'), findsOneWidget);
     expect(find.textContaining('2.099'), findsNothing);
     expect(find.text('GRC Ustası websitesinden öde'), findsNothing);
     debugDefaultTargetPlatformOverride = null;

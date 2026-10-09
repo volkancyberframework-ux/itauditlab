@@ -57,10 +57,9 @@ class _ProfileActionsState extends State<ProfileActions> {
       if ((widget.contact?['phone'] ?? '').toString().isNotEmpty) ...[
         SizedBox(
           width: double.infinity,
-          child: FilledButton.icon(
-            style: FilledButton.styleFrom(
-              backgroundColor: const Color(0xFF137D5E),
-              foregroundColor: Colors.white,
+          child: OutlinedButton.icon(
+            style: OutlinedButton.styleFrom(
+              foregroundColor: const Color(0xFF137D5E),
               padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
             ),
             onPressed: opening ? null : whatsapp,
@@ -72,7 +71,7 @@ class _ProfileActionsState extends State<ProfileActions> {
                   )
                 : const Icon(Icons.chat_rounded),
             label: const Text(
-              "WhatsApp’tan Volkan’a eriş",
+              "Öğrenme desteği • WhatsApp",
               textAlign: TextAlign.center,
             ),
           ),

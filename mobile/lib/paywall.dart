@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'main.dart' show api, externalPaymentsAllowed;
+import 'main.dart' show api, externalPaymentsAllowed, appleStore;
+import 'apple_membership.dart';
 import 'theme.dart';
 
 class Paywall extends StatefulWidget {
@@ -72,15 +73,7 @@ class _PaywallState extends State<Paywall> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) => !externalPaymentsAllowed
-      ? Scaffold(
-          appBar: AppBar(title: const Text('Hesap erişimi')),
-          body: const Padding(
-            padding: EdgeInsets.all(24),
-            child: Text(
-              'Hesabına tanımlanmış öğrenme yollarıyla devam edebilirsin.',
-            ),
-          ),
-        )
+      ? AppleMembership(store: appleStore, accountId: widget.userId)
       : Scaffold(
           appBar: AppBar(title: const Text('GRC Ustası • Tam erişim')),
           body: ListView(

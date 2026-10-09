@@ -110,3 +110,12 @@ class TravelRegistrationAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+from .models import MobileWaitlist
+
+@admin.register(MobileWaitlist)
+class MobileWaitlistAdmin(admin.ModelAdmin):
+    list_display = ('email', 'created_at')
+    search_fields = ('email',)
+    list_filter = ('created_at',)
+    readonly_fields = ('created_at',)

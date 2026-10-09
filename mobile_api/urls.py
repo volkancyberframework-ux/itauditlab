@@ -7,8 +7,11 @@ from django.urls import reverse_lazy
 from .password_reset import MobileResetConfirm
 from .account_deletion import RequestDeletion
 from .email_verification import VerifyEmail, ResendVerification
+from .apple_billing import ApplePurchase, AppleNotification
 
 urlpatterns = [
+    path("payments/apple/verify/", ApplePurchase.as_view()),
+    path("payments/apple/notifications/", AppleNotification.as_view()),
     path("auth/verify-email/<str:token>/", VerifyEmail.as_view(), name="mobile_verify_email"),
     path("auth/resend-verification/", ResendVerification.as_view()),
     path("auth/delete-account/", RequestDeletion.as_view()),

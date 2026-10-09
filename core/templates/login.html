@@ -24,12 +24,12 @@
 <link rel="stylesheet" href="{% static 'assets/css/theme.min.css' %}">
     <link rel="canonical" href="https://geeksui.codescandy.com/geeks/pages/sign-in.html" />
     <title>GRC Ustası | Öğrenci Girişi</title>
-  </head>
+  <link rel="stylesheet" href="{% static 'css/mobile-promo.css' %}"></head>
 
   <body>
     <!-- Sayfa içeriği -->
     <main>
-      <section class="container d-flex flex-column vh-100">
+      <section class="container d-flex flex-column min-vh-100">
         <div class="row align-items-center justify-content-center g-0 h-lg-100 py-8">
           <div class="col-lg-5 col-md-8 py-8 py-xl-0">
             <!-- Kart -->
@@ -47,6 +47,7 @@
                   </div>
 
                 </div>
+                <div><strong>GRC Ustası Mobil yakında</strong>{% include "landing/_mobile_badges.html" %}<a href="{% url 'landing:mobile_waitlist' %}">İndirimli başlangıç için bekleme listesine katıl →</a></div>
                 <!-- Form -->
                 <form method="post" class="needs-validation" novalidate>
                  {% csrf_token %}
@@ -152,6 +153,7 @@
         </div>
       </div>
     </main>
+    <div class="container" style="max-width:980px">{% include "landing/_mobile_promo.html" %}</div>
     <!-- Scriptler -->
     <!-- Libs JS -->
 <script src="{% static 'assets/libs/@popperjs/core/dist/umd/popper.min.js' %}"></script>

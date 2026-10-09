@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'password_reset.dart';
+import 'practice_lab.dart';
+import 'apple_store.dart';
+import 'apple_membership.dart';
 import 'account_deletion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,6 +33,8 @@ void main() {
 
 final api = Api();
 final analytics = Analytics(api);
+AppleStore? _appleStore;
+AppleStore get appleStore => _appleStore ??= AppleStore(api);
 bool get externalPaymentsAllowed => defaultTargetPlatform != TargetPlatform.iOS;
 
 Future<void> openPasswordReset(BuildContext context, [String email = '']) =>
@@ -197,6 +202,8 @@ class _LoginState extends State<Login> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const BrandWelcome(),
+                const SizedBox(height: 16),
+                const PracticeInvitation(),
                 const SizedBox(height: 24),
                 Text(
                   'Öğren. Uygula. Ustalaş.',
@@ -303,7 +310,16 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    _appleStore?.removeListener(onAppleAccess);
     super.dispose();
+  }
+
+  int appleRevision = 0;
+  void onAppleAccess() {
+    if (mounted && appleStore.accessRevision != appleRevision) {
+      appleRevision = appleStore.accessRevision;
+      load();
+    }
   }
 
   int tab = 0;
@@ -316,6 +332,9 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    if (defaultTargetPlatform == TargetPlatform.iOS) {
+      appleStore.addListener(onAppleAccess);
+    }
     load();
   }
 
@@ -323,6 +342,9 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
     setState(() => error = null);
     try {
       final freshProfile = await api.request('profile/');
+      if (defaultTargetPlatform == TargetPlatform.iOS) {
+        appleStore.bind(freshProfile['billing_id']);
+      }
       if (freshProfile['must_change_password'] == true) {
         if (mounted) setState(() => profile = freshProfile);
         return;
@@ -340,9 +362,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
           profile = values[0];
           paths = values[1];
           activity = Map<String, dynamic>.from(values[2]);
-          if (externalPaymentsAllowed &&
-              profile!['premium'] != true &&
-              tab == 2) {
+          if (profile!['premium'] != true && tab == 2) {
             tab = 0;
           }
         });
@@ -371,6 +391,18 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
 
   Future<void> openMembership() async {
     if (paymentBusy) return;
+    if (defaultTargetPlatform == TargetPlatform.iOS && profile != null) {
+      await Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => AppleMembership(
+            store: appleStore,
+            accountId: profile!['billing_id'],
+          ),
+        ),
+      );
+      if (mounted) load();
+      return;
+    }
     setState(() => paymentBusy = true);
     try {
       final data = await api.request('payments/link/', body: {});
@@ -476,9 +508,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
           bottomNavigationBar: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (externalPaymentsAllowed &&
-                  profile != null &&
-                  profile!['premium'] != true)
+              if (profile != null && profile!['premium'] != true)
                 SafeArea(
                   bottom: false,
                   child: Padding(
@@ -498,7 +528,9 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                         icon: const Icon(Icons.workspace_premium_rounded),
                         label: Text(
                           paymentBusy
-                              ? 'Ödeme sayfası açılıyor…'
+                              ? 'Üyelik açılıyor…'
+                              : defaultTargetPlatform == TargetPlatform.iOS
+                              ? 'Premium ol • Apple ile satın al'
                               : 'Premium’a geç • 2.099 TL / ay',
                           style: const TextStyle(
                             fontSize: 16,
@@ -512,8 +544,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
               NavigationBar(
                 selectedIndex: tab,
                 onDestinationSelected: (v) {
-                  if (externalPaymentsAllowed &&
-                      v == 2 &&
+                  if (v == 2 &&
                       profile != null &&
                       profile!['premium'] != true) {
                     openMembership();
@@ -531,9 +562,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                     icon: Icon(Icons.route_outlined),
                     label: 'Yollar',
                   ),
-                  if (externalPaymentsAllowed &&
-                      profile != null &&
-                      profile!['premium'] != true)
+                  if (profile != null && profile!['premium'] != true)
                     NavigationDestination(
                       icon: Container(
                         padding: const EdgeInsets.all(7),
@@ -571,10 +600,29 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                     padding: const EdgeInsets.all(24),
                     children: [
                       if (tab == 0) ...[
-                        DashboardHero(name: profile!['first_name']),
+                        Text(
+                          'Bugünkü çalışman',
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                        const SizedBox(height: 12),
+                        if (paths.isNotEmpty)
+                          FilledButton.icon(
+                            onPressed: () => open(
+                              Map<String, dynamic>.from(
+                                paths.firstWhere(
+                                  (p) => p['is_complete'] != true,
+                                  orElse: () => paths.first,
+                                ),
+                              ),
+                            ),
+                            icon: const Icon(Icons.play_arrow_rounded),
+                            label: const Text('Öğrenme görevine devam et'),
+                          ),
+                        const SizedBox(height: 16),
+                        const PracticeInvitation(),
                         const SizedBox(height: 22),
                         LearningStats(profile: profile!),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 24),
                         Text(
                           'Bir sonraki maceran',
                           style: Theme.of(context).textTheme.titleLarge
@@ -706,19 +754,23 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                           Text(
                             'Ücretli erişim bitişi: ${DateTime.parse(profile!['paid_until']).toLocal().toString().substring(0, 16)}',
                           ),
-                        if (externalPaymentsAllowed)
-                          TextButton(
-                            onPressed: () async {
-                              await Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (_) =>
-                                      Paywall(userId: profile!['billing_id']),
-                                ),
-                              );
-                              load();
-                            },
-                            child: const Text('Tam erişim • Üyelik ve ödeme'),
-                          ),
+                        TextButton(
+                          onPressed: () async {
+                            await Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    defaultTargetPlatform == TargetPlatform.iOS
+                                    ? AppleMembership(
+                                        store: appleStore,
+                                        accountId: profile!['billing_id'],
+                                      )
+                                    : Paywall(userId: profile!['billing_id']),
+                              ),
+                            );
+                            load();
+                          },
+                          child: const Text('Tam erişim • Üyelik ve ödeme'),
+                        ),
                         TextButton.icon(
                           onPressed: () => openPasswordReset(context),
                           icon: const Icon(Icons.lock_reset),

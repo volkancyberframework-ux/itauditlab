@@ -298,3 +298,20 @@ class TravelPayment(models.Model):
     amount_minor = models.PositiveIntegerField()
     currency = models.CharField(max_length=3)
     paid_at = models.DateTimeField()
+
+
+class MobileWaitlist(models.Model):
+    email = models.EmailField('E-posta', unique=True, max_length=254)
+    created_at = models.DateTimeField('Kayıt tarihi', auto_now_add=True)
+
+    class Meta:
+        ordering = ('-created_at',)
+        verbose_name = 'Mobil uygulama bekleme kaydı'
+        verbose_name_plural = 'Mobil uygulama bekleme listesi'
+
+    def save(self, *args, **kwargs):
+        self.email = self.email.strip().casefold()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.email
