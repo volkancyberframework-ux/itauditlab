@@ -10,6 +10,7 @@ from .email_verification import VerifyEmail, ResendVerification
 from .apple_billing import ApplePurchase, AppleNotification
 
 urlpatterns = [
+    path("practice-cases/", views.PracticeCases.as_view()),
     path("payments/apple/verify/", ApplePurchase.as_view()),
     path("payments/apple/notifications/", AppleNotification.as_view()),
     path("auth/verify-email/<str:token>/", VerifyEmail.as_view(), name="mobile_verify_email"),

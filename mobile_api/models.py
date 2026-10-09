@@ -376,3 +376,42 @@ class AppleEntitlement(models.Model):
     subscription = models.OneToOneField(Subscription, on_delete=models.CASCADE)
     latest_transaction_id = models.CharField(max_length=100)
     signed_at = models.DateTimeField()
+
+
+class PracticeCase(models.Model):
+    title = models.CharField("Başlık", max_length=180)
+    situation = models.TextField("Vaka / senaryo")
+    sentence = models.JSONField("Doğru risk cümlesinin parçaları", help_text='Doğru sırayla yazın: ["Neden nedeniyle", "olay gerçekleşebilir", "ve sonuç oluşabilir."]')
+    controls = models.JSONField("Kontrol seçenekleri", help_text='["Birinci seçenek", "İkinci seçenek", "Üçüncü seçenek"]')
+    control = models.PositiveSmallIntegerField("Doğru kontrolün sıra numarası", help_text="İlk seçenek 1, ikinci 2, üçüncü 3.")
+    control_reason = models.TextField("Kontrol açıklaması")
+    evidence = models.JSONField("Kanıt seçenekleri", help_text='["Birinci kanıt", "İkinci kanıt", "Üçüncü kanıt"]')
+    proof = models.PositiveSmallIntegerField("Doğru kanıtın sıra numarası", help_text="İlk seçenek 1, ikinci 2, üçüncü 3.")
+    evidence_reason = models.TextField("Kanıt açıklaması")
+    likelihood = models.PositiveSmallIntegerField("Örnek olasılık", validators=[MinValueValidator(1), MaxValueValidator(5)])
+    impact = models.PositiveSmallIntegerField("Örnek etki", validators=[MinValueValidator(1), MaxValueValidator(5)])
+    published = models.BooleanField("Atölyede göster", default=False, help_text="Giriş yapmadan herkese gösterilir. Yanıtlar cihazda değerlendirilir; özel/ücretli içerik eklemeyin.")
+    order = models.PositiveIntegerField("Gösterim sırası", default=0)
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "Vaka atölyesi sorusu"
+        verbose_name_plural = "Vaka atölyesi soruları"
+
+    def __str__(self):
+        return self.title
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        errors = {}
+        for field in ["sentence", "controls", "evidence"]:
+            value = getattr(self, field)
+            if not isinstance(value, list) or not 2 <= len(value) <= 12 or any(not isinstance(item, str) or not item.strip() for item in value):
+                errors[field] = "2–12 boş olmayan metinden oluşan bir liste yazın."
+        for field, choices in [("control", "controls"), ("proof", "evidence")]:
+            value = getattr(self, field)
+            options = getattr(self, choices)
+            if not isinstance(value, int) or not isinstance(options, list) or not 1 <= value <= len(options):
+                errors[field] = "Seçeneklerden birinin sıra numarasını yazın (1'den başlar)."
+        if errors:
+            raise ValidationError(errors)

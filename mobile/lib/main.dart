@@ -601,29 +601,9 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                     children: [
                       if (tab == 0) ...[
                         DashboardHero(
-                          name: (profile!['first_name'] as String? ?? '').trim(),
+                          name: (profile!['first_name'] as String? ?? '')
+                              .trim(),
                         ),
-                        const SizedBox(height: 22),
-                        Text(
-                          'Bugünkü çalışman',
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
-                        const SizedBox(height: 12),
-                        if (paths.isNotEmpty)
-                          FilledButton.icon(
-                            onPressed: () => open(
-                              Map<String, dynamic>.from(
-                                paths.firstWhere(
-                                  (p) => p['is_complete'] != true,
-                                  orElse: () => paths.first,
-                                ),
-                              ),
-                            ),
-                            icon: const Icon(Icons.play_arrow_rounded),
-                            label: const Text('Öğrenme görevine devam et'),
-                          ),
-                        const SizedBox(height: 16),
-                        const PracticeInvitation(),
                         const SizedBox(height: 22),
                         LearningStats(profile: profile!),
                         const SizedBox(height: 24),

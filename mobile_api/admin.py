@@ -340,3 +340,43 @@ class AccountDeletionAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+
+from .models import PracticeCase
+
+
+class PracticeCaseForm(forms.ModelForm):
+    class Meta:
+        model = PracticeCase
+        fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for name in ["sentence", "controls", "evidence"]:
+            label = self.fields[name].label
+            self.fields[name] = forms.CharField(label=label, widget=forms.Textarea,
+                help_text="Her satıra bir parça / seçenek yazın. Risk cümlesinin parçalarını doğru sırayla yazın.",
+                initial="\n".join(getattr(self.instance, name) or []))
+
+    def clean(self):
+        data = super().clean()
+        for name in ["sentence", "controls", "evidence"]:
+            if isinstance(data.get(name), str):
+                data[name] = [line.strip() for line in data[name].splitlines() if line.strip()]
+        return data
+
+
+@admin.register(PracticeCase)
+class PracticeCaseAdmin(admin.ModelAdmin):
+    form = PracticeCaseForm
+    list_display = ["title", "published", "order"]
+    list_editable = ["published", "order"]
+    list_filter = ["published"]
+    search_fields = ["title", "situation"]
+    fieldsets = [
+        ("Vaka ve görünürlük", {"fields": ["title", "situation", "published", "order"]}),
+        ("Risk cümlesi", {"fields": ["sentence"]}),
+        ("Kontrol", {"fields": ["controls", "control", "control_reason"]}),
+        ("Kanıt", {"fields": ["evidence", "proof", "evidence_reason"]}),
+        ("Risk matrisi", {"fields": ["likelihood", "impact"]}),
+    ]

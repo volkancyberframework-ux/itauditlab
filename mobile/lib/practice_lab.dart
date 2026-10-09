@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'interactive_questions.dart';
 import 'theme.dart';
+import 'api.dart';
 
 class PracticeCase {
   final String id, title, situation, controlReason, evidenceReason;
@@ -22,6 +23,21 @@ class PracticeCase {
     required this.likelihood,
     required this.impact,
   });
+
+  factory PracticeCase.fromJson(Map<String, dynamic> json) => PracticeCase(
+    id: json['id'] as String,
+    title: json['title'] as String,
+    situation: json['situation'] as String,
+    sentence: List<String>.from(json['sentence']),
+    controls: List<String>.from(json['controls']),
+    control: json['control'] as int,
+    controlReason: json['controlReason'] as String,
+    evidence: List<String>.from(json['evidence']),
+    proof: json['proof'] as int,
+    evidenceReason: json['evidenceReason'] as String,
+    likelihood: json['likelihood'] as int,
+    impact: json['impact'] as int,
+  );
 }
 
 const practiceCases = [
@@ -144,13 +160,15 @@ const practiceCases = [
 ];
 
 class PracticeLab extends StatefulWidget {
-  const PracticeLab({super.key});
+  final Api? api;
+  const PracticeLab({super.key, this.api});
   @override
   State<PracticeLab> createState() => _PracticeLabState();
 }
 
 class _PracticeLabState extends State<PracticeLab> {
   List<dynamic> history = [];
+  List<PracticeCase> cases = practiceCases;
   bool ready = false;
   @override
   void initState() {
@@ -168,11 +186,35 @@ class _PracticeLabState extends State<PracticeLab> {
     } catch (_) {
       /* Ignore corrupted local history. */
     }
+    List<PracticeCase> cached = practiceCases;
+    try {
+      final data = prefs.getString('grc.practice.cases.v1');
+      if (data != null) {
+        cached = (jsonDecode(data) as List)
+            .map(
+              (item) => PracticeCase.fromJson(Map<String, dynamic>.from(item)),
+            )
+            .toList();
+      }
+    } catch (_) {
+      /* Use bundled cases if the local catalog is corrupted. */
+    }
     if (mounted) {
       setState(() {
         history = saved;
+        cases = cached;
         ready = true;
       });
+    }
+    try {
+      final data = await (widget.api ?? Api()).request('practice-cases/');
+      final updated = (data as List)
+          .map((item) => PracticeCase.fromJson(Map<String, dynamic>.from(item)))
+          .toList();
+      await prefs.setString('grc.practice.cases.v1', jsonEncode(data));
+      if (mounted) setState(() => cases = updated);
+    } catch (_) {
+      /* Keep the last downloaded catalog available offline. */
     }
   }
 
@@ -194,7 +236,11 @@ class _PracticeLabState extends State<PracticeLab> {
               'Vakayı oku, risk cümlesini kur, kontrolü ve kanıtı seç. Olasılık ve etkiyle önceliklendir. İnternetsiz de çalışır; sonuçların yalnızca bu cihazda saklanır. Hesabındaki XP ayrı takip edilir.',
             ),
             const SizedBox(height: 24),
-            for (final scenario in practiceCases)
+            if (cases.isEmpty)
+              const Text(
+                'Yeni vakalar hazırlanıyor. Daha sonra tekrar bakabilirsin.',
+              ),
+            for (final scenario in cases)
               Card(
                 child: ListTile(
                   contentPadding: const EdgeInsets.all(18),

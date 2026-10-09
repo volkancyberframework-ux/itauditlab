@@ -831,3 +831,20 @@ class ImageDownload(MobileView):
             question.image,
             mimetypes.guess_type(question.image.name)[0] or "application/octet-stream",
         )
+
+
+class PracticeCases(APIView):
+    authentication_classes = []
+    permission_classes = [AllowAny]
+    throttle_classes = [MobileThrottle]
+
+    def get(self, request):
+        from .models import PracticeCase
+        return Response([
+            {"id": f"admin-{case.pk}", "title": case.title, "situation": case.situation,
+             "sentence": case.sentence, "controls": case.controls, "control": case.control - 1,
+             "controlReason": case.control_reason, "evidence": case.evidence,
+             "proof": case.proof - 1, "evidenceReason": case.evidence_reason,
+             "likelihood": case.likelihood, "impact": case.impact}
+            for case in PracticeCase.objects.filter(published=True)
+        ])

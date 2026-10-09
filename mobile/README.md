@@ -198,3 +198,10 @@ New public mobile registrations return verification_required without issuing JWT
 ## Protected scenario playback — build 4
 
 Scenario audio is fetched through an authenticated HTTPS request and played from an app-private temporary file with a MIME-derived extension. No local HTTP header proxy or ATS exception is required. The downloader rejects other origins, redirects, non-audio responses and files larger than 20 MiB, retries expired authentication once, and deletes session files after player disposal. A native iOS integration test decoded the real production m4a and observed playback advancing. App Store screenshots are now native 1206×2622 captures for the required medium iPhone display slot.
+
+
+## Vaka atölyesi içerik yönetimi
+
+`/bulamazsinki/` → Mobile API → **Vaka atölyesi soruları**. Yeni bir vaka ekleyin; senaryoyu, doğru sıradaki risk cümlesi parçalarını, kontrol ve kanıt seçeneklerini her satıra bir seçenek olarak yazın. Doğru kontrol/kanıt sıra numarası 1'den başlar. Açıklamalar ve 1–5 olasılık/etki değerlerini doldurun. **Atölyede göster** işaretli vakalar **Gösterim sırası** ile sıralanır. Mevcut dört örnek vaka veri migrasyonuyla eklenir ve panelden düzenlenebilir/kapatılabilir.
+
+Atölye giriş ekranından erişilir; giriş sonrası ana sayfada atölye kartı ve “Bugünkü çalışman” bölümü yoktur. Yeni katalog atölye açıldığında indirilir; son indirilen katalog çevrim dışı saklanır. İlk kurulum çevrim dışıysa paketli dört örnek gösterilir. Çevrim içi boş katalog, paketli örnekleri geri getirmez. Bunlar herkese açık alıştırmalardır; öğrenme yolu sorularından ve hesap XP'sinden bağımsızdır. Yeni içerik için uygulamayı yeniden yayınlamak gerekmez.

@@ -3,8 +3,77 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:grc_ustasi/practice_lab.dart';
+import 'package:grc_ustasi/api.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/testing.dart';
 
 void main() {
+  testWidgets(
+    'admin catalog loads, replaces bundled cases and stays cached offline',
+    (tester) async {
+      SharedPreferences.setMockInitialValues({});
+      final record = {
+        'id': 'admin-9',
+        'title': 'Admin vakası',
+        'situation': 'Senaryo',
+        'sentence': ['Neden', 'Olay', 'Sonuç'],
+        'controls': ['Bir', 'İki'],
+        'control': 1,
+        'controlReason': 'Açıklama',
+        'evidence': ['A', 'B'],
+        'proof': 0,
+        'evidenceReason': 'Kanıt',
+        'likelihood': 3,
+        'impact': 4,
+      };
+      await tester.pumpWidget(
+        MaterialApp(
+          home: PracticeLab(
+            api: Api(
+              client: MockClient((request) async {
+                expect(request.url.path, endsWith('/practice-cases/'));
+                return http.Response(
+                  jsonEncode([record]),
+                  200,
+                  headers: {'content-type': 'application/json; charset=utf-8'},
+                );
+              }),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Admin vakası'), findsOneWidget);
+      expect(find.text(practiceCases.first.title), findsNothing);
+      final prefs = await SharedPreferences.getInstance();
+      expect(jsonDecode(prefs.getString('grc.practice.cases.v1')!), [record]);
+      await tester.pumpWidget(const SizedBox());
+      await tester.pumpWidget(
+        MaterialApp(
+          home: PracticeLab(
+            api: Api(client: MockClient((_) async => http.Response('', 503))),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Admin vakası'), findsOneWidget);
+      await tester.pumpWidget(const SizedBox());
+      await tester.pumpWidget(
+        MaterialApp(
+          home: PracticeLab(
+            api: Api(client: MockClient((_) async => http.Response('[]', 200))),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Admin vakası'), findsNothing);
+      expect(
+        find.text('Yeni vakalar hazırlanıyor. Daha sonra tekrar bakabilirsin.'),
+        findsOneWidget,
+      );
+    },
+  );
+
   for (final c in practiceCases) {
     for (final correct in [true, false]) {
       testWidgets(
@@ -47,7 +116,15 @@ void main() {
           expect(saved.single['score'], score);
           expect(saved.single['summary'], contains('BT ekibi bu hafta'));
           expect(saved.single['summary'], contains(c.evidenceReason));
-          await tester.pumpWidget(const MaterialApp(home: PracticeLab()));
+          await tester.pumpWidget(
+            MaterialApp(
+              home: PracticeLab(
+                api: Api(
+                  client: MockClient((_) async => http.Response('[]', 200)),
+                ),
+              ),
+            ),
+          );
           await tester.pumpAndSettle();
           await tester.scrollUntilVisible(
             find.textContaining('$score/3 doğru karar'),
