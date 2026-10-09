@@ -76,7 +76,7 @@ class DashboardHero extends StatelessWidget {
                   ),
                   const SizedBox(height: 14),
                   Text(
-                    'Merhaba $name!',
+                    name.trim().isEmpty ? 'Merhaba!' : 'Merhaba ${name.trim()}!',
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 26,

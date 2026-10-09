@@ -600,6 +600,10 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                     padding: const EdgeInsets.all(24),
                     children: [
                       if (tab == 0) ...[
+                        DashboardHero(
+                          name: (profile!['first_name'] as String? ?? '').trim(),
+                        ),
+                        const SizedBox(height: 22),
                         Text(
                           'Bugünkü çalışman',
                           style: Theme.of(context).textTheme.headlineMedium,
