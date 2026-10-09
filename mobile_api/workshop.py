@@ -24,13 +24,21 @@ def selected():
     return Question.objects.filter(published=True, in_workshop=True)
 
 
+def guest_text(text):
+    values = {'first_name':'Misafir', 'full_name':'Misafir',
+              'current_path':'Vaka atölyesi', 'xp':'0', 'level':'0'}
+    for key, value in values.items():
+        text = text.replace('{'+key+'}', value)
+    return text
+
+
 class Questions(PublicView):
     def get(self, request):
         result = []
         for q in selected().select_related('audio', 'intro'):
             opts, correct = options(q)
             base = f'/api/mobile/v1/workshop/questions/{q.pk}/'
-            result.append(dict(id=q.pk, kind=q.kind, prompt=q.prompt, context=q.context,
+            result.append(dict(id=q.pk, kind=q.kind, prompt=guest_text(q.prompt), context=guest_text(q.context),
                 options=opts, answer=q.answer if q.kind in ['text', 'fill_blank', 'voice', 'sentence_order'] else correct,
                 explanation=q.explanation, hint=q.hint, card_pages=q.card_pages,
                 base_xp=0, image=request.build_absolute_uri(base+'image/') if q.image else None,

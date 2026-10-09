@@ -10,7 +10,7 @@ class WorkshopTests(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.audio = AudioAsset.objects.create(title='Ses', file='demo/mfa.m4a')
-        self.voice = Question.objects.create(kind='voice', prompt='Söyle', published=True,
+        self.voice = Question.objects.create(kind='voice', prompt='Merhaba {first_name}', published=True,
             in_workshop=True, answer=['risk'], audio=self.audio)
         Question.objects.create(kind='text', prompt='Özel', published=True, answer=['gizli'])
 
@@ -21,6 +21,7 @@ class WorkshopTests(TestCase):
         Question.objects.create(kind='text',prompt='Taslak',published=False,in_workshop=True)
         data = self.client.get('/api/mobile/v1/workshop/questions/').data
         self.assertEqual({q['kind'] for q in data}, {k for k,_ in Question.TYPES})
+        self.assertIn('Merhaba Misafir', [q['prompt'] for q in data])
         self.assertNotIn('Özel', [q['prompt'] for q in data])
         self.assertNotIn('Taslak', [q['prompt'] for q in data])
         url = f'/api/mobile/v1/workshop/questions/{self.voice.pk}/audio/{self.audio.pk}/'
