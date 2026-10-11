@@ -123,10 +123,12 @@ class LandingLegalMiddleware:
                 and not response.streaming and response.status_code < 400
                 and response.get('Content-Type', '').startswith('text/html')):
             from django.template.loader import render_to_string
+            from django.templatetags.static import static
             from django.utils.cache import patch_cache_control, patch_vary_headers
             content = response.content.decode(response.charset)
             if '</body>' in content:
                 panel = render_to_string('landing/_cookie_consent.html', request=request)
+                content = content.replace('</head>', '<script src="' + static('js/legal-theme.js') + '"></script></head>')
                 response.content = content.replace('</body>', panel + '</body>')
                 if response.has_header('Content-Length'):
                     response['Content-Length'] = len(response.content)
