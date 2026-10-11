@@ -333,6 +333,9 @@ class LandingTests(TestCase):
 
 @override_settings(STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage')
 class TrafficTrackingTests(TestCase):
+    def setUp(self):
+        self.client.post('/api/cerez-tercihi/', {'analytics': 'true'})
+
     browser_headers = {'HTTP_USER_AGENT': 'Mozilla/5.0 Safari/605.1.15'}
 
     def test_same_browser_counts_once_per_day_and_increments_page_views(self):
@@ -346,6 +349,7 @@ class TrafficTrackingTests(TestCase):
     def test_different_browsers_count_as_two_unique_visitors(self):
         self.client.get('/', **self.browser_headers)
         second_client = self.client_class()
+        second_client.post('/api/cerez-tercihi/', {'analytics': 'true'})
         second_client.get('/', **self.browser_headers)
         self.assertEqual(LandingVisit.objects.count(), 2)
 

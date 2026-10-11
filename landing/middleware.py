@@ -7,6 +7,7 @@ from django.db.models import F
 from django.utils import timezone
 from django.utils.crypto import salted_hmac
 
+from .legal import analytics_allowed
 from .models import DailyTrafficMetric, LandingVisit
 
 
@@ -45,6 +46,11 @@ class LandingTrafficMiddleware:
             or match.view_name not in TRACKED_URL_NAMES
             or not response.get('Content-Type', '').startswith('text/html')
         ):
+            return response
+
+        if not analytics_allowed(request):
+            if request.COOKIES.get(COOKIE_NAME):
+                response.delete_cookie(COOKIE_NAME, samesite='Lax')
             return response
 
         try:
@@ -104,3 +110,26 @@ class LandingTrafficMiddleware:
                 secure=not settings.DEBUG,
                 samesite='Lax',
             )
+
+
+class LandingLegalMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        response = self.get_response(request)
+        match = getattr(request, 'resolver_match', None)
+        if (match and match.namespace == 'landing' and match.url_name != 'traffic_dashboard'
+                and not response.streaming and response.status_code < 400
+                and response.get('Content-Type', '').startswith('text/html')):
+            from django.template.loader import render_to_string
+            from django.utils.cache import patch_cache_control, patch_vary_headers
+            content = response.content.decode(response.charset)
+            if '</body>' in content:
+                panel = render_to_string('landing/_cookie_consent.html', request=request)
+                response.content = content.replace('</body>', panel + '</body>')
+                if response.has_header('Content-Length'):
+                    response['Content-Length'] = len(response.content)
+                patch_cache_control(response, private=True, no_store=True)
+                patch_vary_headers(response, ['Cookie'])
+        return response

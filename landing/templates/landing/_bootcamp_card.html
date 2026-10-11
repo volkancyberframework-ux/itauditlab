@@ -13,6 +13,6 @@
   <div class="bootcamp-duration"><span>{{ product.duration }}</span><strong>{{ product.duration_detail }}</strong></div>
   <div class="bootcamp-purchase">
     <div><strong>{{ product.price_display }}</strong><small>{{ product.price_note }}</small></div>
-    <form method="post" action="{% url 'landing:checkout' %}">{% csrf_token %}<input type="hidden" name="product" value="{{ product.key }}"><button class="btn" type="submit">{{ product.cta }} <span aria-hidden="true">→</span></button></form>
+    <form method="post" action="{% url 'landing:checkout' %}">{% csrf_token %}<p class="privacy-notice">Bu formdaki verilerin işlenmesi hakkında <a href="/yasal/kvkk/" target="_blank" rel="noopener">KVKK Aydınlatma Metni</a> ve <a href="/yasal/gizlilik/" target="_blank" rel="noopener">Gizlilik Politikası</a>.</p><input type="hidden" name="product" value="{{ product.key }}"><button class="btn" type="submit">{{ product.cta }} <span aria-hidden="true">→</span></button></form>
   </div>
 </article>

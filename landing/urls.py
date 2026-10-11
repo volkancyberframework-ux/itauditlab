@@ -1,4 +1,5 @@
 from django.urls import path
+from . import legal
 from . import views
 from . import travel
 from . import mobile_waitlist
@@ -6,6 +7,8 @@ from mobile_api import web_billing, store_pages
 
 app_name = 'landing'
 urlpatterns = [
+    path('yasal/<slug:slug>/', legal.document, name='legal'),
+    path('api/cerez-tercihi/', legal.cookie_consent, name='cookie_consent'),
     path('mobil-bekleme-listesi/', mobile_waitlist.page, name='mobile_waitlist'),
     path('mobiluygulama/gizlilik', store_pages.privacy, name='mobile_privacy'),
     path('mobiluygulama/destek', store_pages.support, name='mobile_support'),
