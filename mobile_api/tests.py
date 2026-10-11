@@ -575,7 +575,7 @@ class MobileProductTests(TestCase):
         self.assertEqual(self.client.get('/api/mobile/v1/paths/').status_code, 403)
         user.mobile_email_verified = True
         user.save(update_fields=['mobile_email_verified'])
-        self.assertEqual([p['id'] for p in self.client.get('/api/mobile/v1/paths/').data], [self.path.pk])
+        self.assertEqual({p['id'] for p in self.client.get('/api/mobile/v1/paths/').data}, {self.path.pk, LearningPath.objects.get(title='Demo Web • Tüm Soru Tipleri').pk})
         self.assertFalse(self.client.get('/api/mobile/v1/profile/').data['premium'])
         self.client.force_authenticate(None)
         self.assertEqual(self.client.post('/api/mobile/v1/auth/register/', {
@@ -594,10 +594,10 @@ class MobileProductTests(TestCase):
 
     def test_free_path_selection_controls_visibility_and_all_task_features(self):
         from .models import MobileSettings
-        self.assertEqual([p['id'] for p in self.client.get('/api/mobile/v1/paths/').data], [self.path.pk])
+        self.assertEqual({p['id'] for p in self.client.get('/api/mobile/v1/paths/').data}, {self.path.pk, LearningPath.objects.get(title='Demo Web • Tüm Soru Tipleri').pk})
         self.assertEqual(self.client.post('/api/mobile/v1/sessions/', {'path_id': self.other_path.pk}, format='json').status_code, 403)
         MobileSettings.objects.filter(pk=1).update(free_path=self.other_path)
-        self.assertEqual([p['id'] for p in self.client.get('/api/mobile/v1/paths/').data], [self.other_path.pk])
+        self.assertEqual({p['id'] for p in self.client.get('/api/mobile/v1/paths/').data}, {self.other_path.pk, LearningPath.objects.get(title='Demo Web • Tüm Soru Tipleri').pk})
         self.user.mobile_full_access = True
         self.user.save()
         self.assertIn(self.path.pk, [p['id'] for p in self.client.get('/api/mobile/v1/paths/').data])

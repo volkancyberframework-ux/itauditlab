@@ -206,7 +206,7 @@ def paths(user):
     qs = LearningPath.objects.filter(published=True, owner=None)
     if not premium(user):
         free_id = MobileSettings.objects.filter(pk=1).values_list("free_path_id", flat=True).first()
-        qs = qs.filter(pk=free_id, owner=None)
+        qs = qs.filter(Q(pk=free_id) | Q(preferences__web_all_types_demo=True))
     return qs
 
 
