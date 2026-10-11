@@ -1,3 +1,4 @@
+import 'recording_file.dart';
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
@@ -145,7 +146,7 @@ class Api {
             ..headers['Authorization'] = 'Bearer $access'
             ..fields['question_id'] = '$questionId'
             ..fields['duration'] = '$seconds'
-            ..files.add(await http.MultipartFile.fromPath('file', file));
+            ..files.add(await recordingUpload(file));
       final response = await http.Response.fromStream(
         await client.send(upload).timeout(const Duration(seconds: 40)),
       );

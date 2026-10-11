@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'dart:io';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -17,7 +18,7 @@ class DailyNotifications {
   Map<String, dynamic>? latestPlan;
 
   Future<String> timezoneName() async {
-    if (Platform.isIOS || Platform.isAndroid) {
+    if (!kIsWeb && (Platform.isIOS || Platform.isAndroid)) {
       try {
         zone = (await FlutterTimezone.getLocalTimezone()).identifier;
       } catch (_) {}
@@ -26,7 +27,9 @@ class DailyNotifications {
   }
 
   Future<void> initialize() {
-    if (!(Platform.isIOS || Platform.isAndroid)) return Future.value();
+    if (kIsWeb || !(Platform.isIOS || Platform.isAndroid)) {
+      return Future.value();
+    }
     return initialization ??= initializeOnce();
   }
 

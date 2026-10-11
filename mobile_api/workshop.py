@@ -1,3 +1,4 @@
+from .recording_formats import recording_extension
 import uuid
 from django.core import signing
 from django.core.validators import validate_email
@@ -54,7 +55,7 @@ class Audio(PublicView):
             return Response(status=404)
         asset = q.audio if q.audio_id == audio_id else q.intro
         import mimetypes
-        return private_file(asset.file, mimetypes.guess_type(asset.file.name)[0] or 'audio/mp4')
+        return private_file(asset.file, 'audio/mp4' if asset.file.name.lower().endswith('.m4a') else mimetypes.guess_type(asset.file.name)[0] or 'audio/mp4')
 
 
 class Image(PublicView):
@@ -93,14 +94,12 @@ class Voice(PublicView):
         upload = request.FILES.get('file')
         if not upload or not 0 < upload.size <= 10*1024*1024 or not 1 <= duration <= 180:
             raise ValidationError('En fazla 3 dakika ve 10 MB M4A kayıt gönderebilirsin.')
-        head = upload.read(16); upload.seek(0)
-        if len(head)<12 or head[4:8] != b'ftyp':
-            raise ValidationError('M4A ses kaydı gerekli.')
+        extension = recording_extension(upload)
         previous = WorkshopVoice.objects.filter(pk=key).first()
         if previous and (previous.email != email or previous.question_id != q.pk):
             raise ValidationError('Kayıt bilgileri geçersiz.')
         if not previous:
-            upload.name = f'{uuid.uuid4()}.m4a'
+            upload.name = f'{uuid.uuid4()}.{extension}'
             WorkshopVoice.objects.create(id=key,question=q,email=email,file=upload,duration=duration)
         return Response({'detail':'Sesli yanıtın alındı. Geri bildirimin 24 saat içinde e-posta adresine gönderilecektir.'})
 

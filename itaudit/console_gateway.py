@@ -4,7 +4,7 @@ from urllib.parse import quote
 
 SOCKET_PATH=os.getenv('CONSOLE_SOCKET','/tmp/itaudit-console.sock')
 BASE_DOMAIN=os.getenv('TENANT_BASE_DOMAIN','grcustasi.com').lower()
-RESERVED={'www','admin','api','mail','core','akademi','itauditlab'}
+RESERVED={'app','www','admin','api','mail','core','akademi','itauditlab'}
 HOP={'connection','keep-alive','proxy-authenticate','proxy-authorization','te','trailer','transfer-encoding','upgrade'}
 
 class UnixConnection(http.client.HTTPConnection):

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/semantics.dart';
 import 'password_reset.dart';
 import 'practice_lab.dart';
 import 'workshop_questions.dart';
@@ -29,6 +30,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  if (kIsWeb) SemanticsBinding.instance.ensureSemantics();
   runApp(const GrcApp());
 }
 
@@ -36,7 +38,8 @@ final api = Api();
 final analytics = Analytics(api);
 AppleStore? _appleStore;
 AppleStore get appleStore => _appleStore ??= AppleStore(api);
-bool get externalPaymentsAllowed => defaultTargetPlatform != TargetPlatform.iOS;
+bool get externalPaymentsAllowed =>
+    kIsWeb || defaultTargetPlatform != TargetPlatform.iOS;
 
 Future<void> openPasswordReset(BuildContext context, [String email = '']) =>
     Navigator.of(context).push(
@@ -62,6 +65,12 @@ class GrcApp extends StatelessWidget {
     debugShowCheckedModeBanner: false,
     theme: AppTheme.create(Brightness.light),
     darkTheme: AppTheme.create(Brightness.dark),
+    builder: (context, child) => kIsWeb
+        ? ColoredBox(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            child: Center(child: SizedBox(width: 720, child: child)),
+          )
+        : child!,
     home: const Entry(),
   );
 }
@@ -333,7 +342,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    if (defaultTargetPlatform == TargetPlatform.iOS) {
+    if (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS) {
       appleStore.addListener(onAppleAccess);
     }
     load();
@@ -343,7 +352,7 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
     setState(() => error = null);
     try {
       final freshProfile = await api.request('profile/');
-      if (defaultTargetPlatform == TargetPlatform.iOS) {
+      if (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS) {
         appleStore.bind(freshProfile['billing_id']);
       }
       if (freshProfile['must_change_password'] == true) {
@@ -392,7 +401,9 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
 
   Future<void> openMembership() async {
     if (paymentBusy) return;
-    if (defaultTargetPlatform == TargetPlatform.iOS && profile != null) {
+    if (!kIsWeb &&
+        defaultTargetPlatform == TargetPlatform.iOS &&
+        profile != null) {
       await Navigator.of(context).push(
         MaterialPageRoute(
           builder: (_) => AppleMembership(
@@ -530,7 +541,8 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                         label: Text(
                           paymentBusy
                               ? 'Üyelik açılıyor…'
-                              : defaultTargetPlatform == TargetPlatform.iOS
+                              : !kIsWeb &&
+                                    defaultTargetPlatform == TargetPlatform.iOS
                               ? 'Premium ol • Apple ile satın al'
                               : 'Premium’a geç • 2.099 TL / ay',
                           style: const TextStyle(
@@ -701,38 +713,46 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                           contentPadding: EdgeInsets.zero,
                           title: const Text('Günlük motivasyon bildirimi'),
                           subtitle: Text(
-                            'Günde en fazla 1 bildirim${dailyNotifications.latestPlan == null ? '' : ' • saat ${dailyNotifications.latestPlan!['hour'] ?? 19}:00'}',
+                            kIsWeb
+                                ? 'Günlük hatırlatmalar mobil uygulamada kullanılabilir.'
+                                : 'Günde en fazla 1 bildirim${dailyNotifications.latestPlan == null ? '' : ' • saat ${dailyNotifications.latestPlan!['hour'] ?? 19}:00'}',
                           ),
                           value: dailyNotifications.enabled,
-                          onChanged: (value) async {
-                            try {
-                              final enabled = await dailyNotifications
-                                  .setEnabled(value);
-                              if (!mounted) {
-                                return;
-                              }
-                              setState(() {});
-                              if (value && !enabled && context.mounted) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                      'Bildirim izni kapalı. Telefon ayarlarından GRC Ustası bildirimlerini açabilirsin.',
-                                    ),
-                                  ),
-                                );
-                              }
-                            } catch (_) {
-                              if (context.mounted) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                      'Bildirim ayarı kaydedilemedi. Tekrar deneyebilirsin.',
-                                    ),
-                                  ),
-                                );
-                              }
-                            }
-                          },
+                          onChanged: kIsWeb
+                              ? null
+                              : (value) async {
+                                  try {
+                                    final enabled = await dailyNotifications
+                                        .setEnabled(value);
+                                    if (!mounted) {
+                                      return;
+                                    }
+                                    setState(() {});
+                                    if (value && !enabled && context.mounted) {
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                            'Bildirim izni kapalı. Telefon ayarlarından GRC Ustası bildirimlerini açabilirsin.',
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  } catch (_) {
+                                    if (context.mounted) {
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                            'Bildirim ayarı kaydedilemedi. Tekrar deneyebilirsin.',
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  }
+                                },
                         ),
                         const SizedBox(height: 32),
                         if (profile!['paid_until'] != null)
@@ -744,7 +764,9 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                             await Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (_) =>
-                                    defaultTargetPlatform == TargetPlatform.iOS
+                                    !kIsWeb &&
+                                        defaultTargetPlatform ==
+                                            TargetPlatform.iOS
                                     ? AppleMembership(
                                         store: appleStore,
                                         accountId: profile!['billing_id'],
@@ -1370,7 +1392,11 @@ class _SessionState extends State<Session> {
                                     if (!mounted) {
                                       return;
                                     }
-                                    sources.add(AudioSource.file(file));
+                                    sources.add(
+                                      kIsWeb
+                                          ? AudioSource.uri(Uri.parse(file))
+                                          : AudioSource.file(file),
+                                    );
                                   }
                                   await player.setAudioSources(sources);
                                   audioQuestion = q['id'];

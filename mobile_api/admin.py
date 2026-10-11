@@ -1,3 +1,4 @@
+from .recording_formats import recording_content_type
 from django.contrib import admin
 from .models import (
     LearningPath,
@@ -213,7 +214,7 @@ class VoiceAdmin(admin.ModelAdmin):
         voice = VoiceSubmission.objects.filter(pk=pk).first()
         if not voice:
             raise Http404()
-        return FileResponse(voice.file.open("rb"), content_type="audio/mp4")
+        return FileResponse(voice.file.open("rb"), content_type=recording_content_type(voice.file))
 
     def listen(self, obj):
         from django.utils.html import format_html
@@ -417,7 +418,8 @@ class WorkshopVoiceAdmin(admin.ModelAdmin):
         from .views import private_file
         if not self.has_view_permission(request):
             raise PermissionDenied
-        return private_file(get_object_or_404(WorkshopVoice, pk=pk).file, "audio/mp4")
+        voice = get_object_or_404(WorkshopVoice, pk=pk)
+        return private_file(voice.file, recording_content_type(voice.file))
 
     def listen(self, obj):
         from django.urls import reverse

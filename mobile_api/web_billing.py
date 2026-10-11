@@ -46,7 +46,7 @@ def token_user(token):
 
 class PaymentLink(MobileView):
     def post(self, request):
-        return Response({'url': settings.PUBLIC_BASE_URL.rstrip('/') + reverse('landing:mobile_membership') + '?' + urlencode({'token': token_for(request.user)})})
+        return Response({'url': settings.PUBLIC_BASE_URL.rstrip('/') + reverse('landing:mobile_membership', urlconf='itaudit.urls') + '?' + urlencode({'token': token_for(request.user)})})
 
 
 @never_cache

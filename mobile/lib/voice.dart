@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'dart:io';
+import 'package:flutter/foundation.dart';
+import 'recording_file.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'theme.dart';
 
@@ -26,7 +26,7 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
     timer?.cancel();
     recorder.dispose();
     if (file != null) {
-      File(file!).delete().catchError((_) => File(file!));
+      deleteRecording(file!);
     }
     super.dispose();
   }
@@ -36,11 +36,15 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
       if (!await recorder.hasPermission()) {
         throw Exception('Sesli yanıt için mikrofon izni gerekli.');
       }
-      final directory = await getTemporaryDirectory();
-      file =
-          '${directory.path}/grc_${DateTime.now().millisecondsSinceEpoch}.m4a';
+      file = await recordingPath();
       await recorder.start(
-        const RecordConfig(encoder: AudioEncoder.aacLc),
+        kIsWeb
+            ? const RecordConfig(
+                encoder: AudioEncoder.wav,
+                sampleRate: 16000,
+                numChannels: 1,
+              )
+            : const RecordConfig(encoder: AudioEncoder.aacLc),
         path: file!,
       );
       if (!mounted) {
@@ -68,7 +72,8 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
 
   Future<void> stop() async {
     timer?.cancel();
-    await recorder.stop();
+    final recorded = await recorder.stop();
+    if (recorded != null) file = recorded;
     if (mounted) {
       setState(() {
         recording = false;
@@ -80,7 +85,7 @@ class _VoiceRecorderState extends State<VoiceRecorder> {
   Future<void> cancel() async {
     await stop();
     if (file != null) {
-      await File(file!).delete().catchError((_) => File(file!));
+      await deleteRecording(file!);
     }
     if (mounted) {
       setState(() {

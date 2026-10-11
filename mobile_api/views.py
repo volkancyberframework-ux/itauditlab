@@ -1,3 +1,4 @@
+from .recording_formats import recording_extension, recording_content_type
 from django.contrib.auth import authenticate, get_user_model
 from django.db import transaction
 from django.db.models import Q, Sum
@@ -565,12 +566,8 @@ class Voice(MobileView):
             or not 1 <= duration <= 180
         ):
             raise ValidationError("En fazla 3 dakika ve 10 MB ses gönderebilirsin.")
-        # Inspect the container signature rather than trusting a filename or MIME header.
-        head = upload.read(16)
-        upload.seek(0)
-        if len(head) < 12 or head[4:8] != b"ftyp":
-            raise ValidationError("M4A ses kaydı gerekli.")
-        upload.name = f"{uuid.uuid4()}.m4a"
+        extension = recording_extension(upload)
+        upload.name = f"{uuid.uuid4()}.{extension}"
         with transaction.atomic():
             get_user_model().objects.select_for_update().get(pk=request.user.pk)
             s = (
@@ -630,7 +627,7 @@ class VoiceDownload(MobileView):
         if not voice:
             return Response(status=404)
         try:
-            return FileResponse(voice.file.open("rb"), content_type="audio/mp4")
+            return FileResponse(voice.file.open("rb"), content_type=recording_content_type(voice.file))
         except FileNotFoundError:
             return Response(status=404)
 
@@ -816,7 +813,7 @@ class AudioDownload(MobileView):
 
         return private_file(
             asset.file,
-            mimetypes.guess_type(asset.file.name)[0] or "application/octet-stream",
+            'audio/mp4' if asset.file.name.lower().endswith('.m4a') else mimetypes.guess_type(asset.file.name)[0] or 'application/octet-stream',
         )
 
 

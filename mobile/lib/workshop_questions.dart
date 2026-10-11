@@ -1,3 +1,4 @@
+import 'recording_file.dart';
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
@@ -123,7 +124,7 @@ class WorkshopQuestionApi extends Api {
           ..fields['token'] = question['voice_token']
           ..fields['submission_id'] = submissionId
           ..fields['duration'] = '$seconds'
-          ..files.add(await http.MultipartFile.fromPath('file', file));
+          ..files.add(await recordingUpload(file));
     final response = await http.Response.fromStream(
       await client.send(upload).timeout(const Duration(seconds: 40)),
     );
