@@ -251,9 +251,11 @@ def path_data(path, user):
 class Profile(MobileView):
     allow_initial_password = True
     def get(self, request):
+        from .personal_address import address_data
         total_xp = xp(request.user)
         return Response(
             {
+                "personal_address": address_data(request.user),
                 "id": request.user.pk,
                 "billing_id": str(
                     BillingIdentity.objects.get_or_create(user=request.user)[0].pk

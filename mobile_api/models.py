@@ -432,3 +432,9 @@ class WorkshopVoice(models.Model):
     class Meta:
         verbose_name = "Atölye sesli yanıtı"
         verbose_name_plural = "Atölye sesli yanıtları"
+
+
+class PersonalAppAddress(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=30, unique=True)
+    updated_at = models.DateTimeField(auto_now=True)

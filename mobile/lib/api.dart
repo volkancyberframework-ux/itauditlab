@@ -1,4 +1,5 @@
 import 'recording_file.dart';
+import 'package:flutter/foundation.dart';
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
@@ -11,10 +12,12 @@ class ApiFailure implements Exception {
 }
 
 class Api {
-  static const base = String.fromEnvironment(
-    'API_BASE_URL',
-    defaultValue: 'https://www.grcustasi.com/api/mobile/v1/',
-  );
+  static final base = kIsWeb
+      ? '${Uri.base.origin}/api/mobile/v1/'
+      : const String.fromEnvironment(
+          'API_BASE_URL',
+          defaultValue: 'https://www.grcustasi.com/api/mobile/v1/',
+        );
   final storage = const FlutterSecureStorage();
   final http.Client client;
   Api({http.Client? client}) : client = client ?? http.Client();

@@ -63,6 +63,29 @@ class Organization(models.Model):
     subdomain=models.SlugField(max_length=63,unique=True,null=True,blank=True,help_text='Örnek: torbalibld. DNS/Render alan adı ayrıca yapılandırılmalıdır.')
     logo_data=models.BinaryField(blank=True,default=bytes,editable=False)
     def __str__(self):return self.name
+    def _check_personal_address(self, lock=False):
+        from django.db import connection
+        from django.core.exceptions import ValidationError
+        if not self.subdomain or connection.vendor != 'postgresql':
+            return
+        with connection.cursor() as cursor:
+            if lock:
+                cursor.execute('SELECT pg_advisory_xact_lock(74123, hashtext(%s))', [self.subdomain.lower()])
+            cursor.execute("SELECT to_regclass('public.mobile_api_personalappaddress')")
+            if cursor.fetchone()[0]:
+                cursor.execute('SELECT 1 FROM public.mobile_api_personalappaddress WHERE slug = %s', [self.subdomain.lower()])
+                if cursor.fetchone():
+                    raise ValidationError({'subdomain': 'Bu adres kişisel uygulama hesabı tarafından kullanılıyor.'})
+    def clean(self):
+        super().clean()
+        self._check_personal_address()
+    def save(self, *args, **kwargs):
+        from django.db import transaction
+        with transaction.atomic():
+            if self.subdomain:
+                self.subdomain = self.subdomain.lower()
+            self._check_personal_address(lock=True)
+            super().save(*args, **kwargs)
 class Audit(models.Model):
     template=models.ForeignKey(AuditTemplate,on_delete=models.PROTECT,null=True,blank=True,verbose_name='Hazır denetim şablonu')
     organization=models.ForeignKey(Organization,on_delete=models.PROTECT)

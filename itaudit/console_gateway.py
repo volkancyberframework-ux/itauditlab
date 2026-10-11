@@ -26,6 +26,12 @@ class ConsoleGateway:
     def __init__(self,application):self.application=application
     def __call__(self,environ,start_response):
         route=console_route(environ)
+        if route is not None and route[1] == "":
+            from django.db import close_old_connections
+            close_old_connections()
+            from mobile_api.personal_address import personal_host
+            if personal_host(environ.get("HTTP_HOST", "")):
+                route = None
         if route is None:return self.application(environ,start_response)
         path,prefix=route
         if environ.get('PATH_INFO')=='/denetim':

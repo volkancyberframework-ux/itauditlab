@@ -9,6 +9,7 @@ from .account_deletion import RequestDeletion
 from .email_verification import VerifyEmail, ResendVerification
 from .apple_billing import ApplePurchase, AppleNotification
 
+from .personal_address import PersonalAddress
 from . import workshop
 
 urlpatterns = [
@@ -54,6 +55,7 @@ urlpatterns = [
     path("auth/login/", views.Login.as_view()),
     path("auth/refresh/", views.Refresh.as_view()),
     path("auth/logout/", views.Logout.as_view()),
+    path("profile/address/", PersonalAddress.as_view()),
     path("profile/", views.Profile.as_view()),
     path("paths/", views.Paths.as_view()),
     path("paths/<int:pk>/restart/", views.RestartPath.as_view()),

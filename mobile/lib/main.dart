@@ -23,6 +23,7 @@ import 'level_rewards.dart';
 import 'information_card.dart';
 import 'brand_welcome.dart';
 import 'profile_actions.dart';
+import 'personal_address.dart';
 import 'learning_experience.dart';
 import 'daily_activity.dart';
 import 'daily_notifications.dart';
@@ -672,6 +673,17 @@ class _HomeState extends State<Home> with WidgetsBindingObserver {
                           profile!['premium']
                               ? 'Tam erişim • tüm öğrenme yolları'
                               : 'Ücretsiz başlangıç • bir öğrenme yolu',
+                        ),
+                        const SizedBox(height: 24),
+                        PersonalAddressSettings(
+                          api: api,
+                          address:
+                              (profile!['personal_address'] as Map?)
+                                  ?.cast<String, dynamic>() ??
+                              {},
+                          onSaved: (address) => setState(
+                            () => profile!['personal_address'] = address,
+                          ),
                         ),
                         const SizedBox(height: 24),
                         ProfileActions(
