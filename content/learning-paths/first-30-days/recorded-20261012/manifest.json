@@ -1,0 +1,112 @@
+[
+  {
+    "chapter": 1,
+    "source_filename": "DJI_29_20261012_154221.WAV",
+    "filename": "grc_day_01.mp3",
+    "source_seconds": 211.525,
+    "seconds": 176.327,
+    "speed": 1.2,
+    "pitch_preserved": true,
+    "sha256": "81219ffc59c49fd76d77f75d832faa3d128132c4655585a6376952226d18dfdc",
+    "bytes": 2821685
+  },
+  {
+    "chapter": 2,
+    "source_filename": "DJI_30_20261012_154741.WAV",
+    "filename": "grc_day_02.mp3",
+    "source_seconds": 215.722,
+    "seconds": 179.827,
+    "speed": 1.2,
+    "pitch_preserved": true,
+    "sha256": "e58b4e0811092d99ea6c500fb9555c7ce08743c77f2bc754b6443cf9b2e1654a",
+    "bytes": 2877692
+  },
+  {
+    "chapter": 3,
+    "source_filename": "DJI_31_20261012_155121.WAV",
+    "filename": "grc_day_03.mp3",
+    "source_seconds": 188.443,
+    "seconds": 157.1,
+    "speed": 1.2,
+    "pitch_preserved": true,
+    "sha256": "412d4a1c479e89bfd549e8f23204be59b12034e56a8db833269eba4086660d5d",
+    "bytes": 2514067
+  },
+  {
+    "chapter": 4,
+    "source_filename": "DJI_32_20261012_155431.WAV",
+    "filename": "grc_day_04.mp3",
+    "source_seconds": 188.757,
+    "seconds": 157.362,
+    "speed": 1.2,
+    "pitch_preserved": true,
+    "sha256": "9941e14af9db3d2dab632b31c5af7bb2c3ae14c82f62bfdabc67a372c7d053d4",
+    "bytes": 2518247
+  },
+  {
+    "chapter": 5,
+    "source_filename": "DJI_33_20261012_155742.WAV",
+    "filename": "grc_day_05.mp3",
+    "source_seconds": 153.665,
+    "seconds": 128.104,
+    "speed": 1.2,
+    "pitch_preserved": true,
+    "sha256": "10be1daea3aa5e39faa638ca794c4c4f6181e725d85e5d5a6ca00a1bc59d04e3",
+    "bytes": 2050132
+  },
+  {
+    "chapter": 6,
+    "source_filename": "DJI_34_20261012_160020.WAV",
+    "filename": "grc_day_06.mp3",
+    "source_seconds": 183.409,
+    "seconds": 152.895,
+    "speed": 1.2,
+    "pitch_preserved": true,
+    "sha256": "a361edc96a22e713a685cca4d2057be8af4858ed1b19cbc375a6be782d60f69f",
+    "bytes": 2446776
+  },
+  {
+    "chapter": 7,
+    "source_filename": "DJI_35_20261012_160344.WAV",
+    "filename": "grc_day_07.mp3",
+    "source_seconds": 171.545,
+    "seconds": 142.994,
+    "speed": 1.2,
+    "pitch_preserved": true,
+    "sha256": "b67bf1d0c2d3f024509a95445ca976fc59797baeaeacb9ad78425c058ec157fa",
+    "bytes": 2288369
+  },
+  {
+    "chapter": 8,
+    "source_filename": "DJI_36_20261012_160640.WAV",
+    "filename": "grc_day_08.mp3",
+    "source_seconds": 162.385,
+    "seconds": 135.367,
+    "speed": 1.2,
+    "pitch_preserved": true,
+    "sha256": "0fc83a114a58c9b461641d4c1eac4c27fef0fe7e0b51c7755baf768e43457b85",
+    "bytes": 2166325
+  },
+  {
+    "chapter": 9,
+    "source_filename": "DJI_37_20261012_160933.WAV",
+    "filename": "grc_day_09.mp3",
+    "source_seconds": 151.64,
+    "seconds": 126.407,
+    "speed": 1.2,
+    "pitch_preserved": true,
+    "sha256": "20494c725755ec0d9b19e2e7cf6a1019a2936740cbac2900b746e4468fba8bf7",
+    "bytes": 2022965
+  },
+  {
+    "chapter": 10,
+    "source_filename": "DJI_38_20261012_161207.WAV",
+    "filename": "grc_day_10.mp3",
+    "source_seconds": 159.385,
+    "seconds": 132.885,
+    "speed": 1.2,
+    "pitch_preserved": true,
+    "sha256": "c1e8bf7f4fb7f486b8a332a933c3d914e57ebe018b698aef63e1289eaa9aa6c6",
+    "bytes": 2126619
+  }
+]
