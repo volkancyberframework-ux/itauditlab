@@ -1,0 +1,25 @@
+Bölüm 03 — Intro kayıt metni
+question_id: grc-first30-q-021 (kalıcı içerik kimliği; DB ID import registry içinde)
+Konuşmacılar: Anlatıcı, Selin, Murat, Ece
+Ton: Doğal ofis konuşması. Anlatıcı sakin; Selin net ve destekleyici; Murat zaman baskısı altında; Ece kontrollü; Deniz kararlı; Arda krizde kısa ve odaklı; Ayşe sorgulayıcı.
+Tahmini süre: 2:13 (115 kelime/dakika, duraklarla biraz uzayabilir)
+Sabit dosya adı: grc_day_03.mp3
+Bağlantı: AudioAsset.name_key=grc_day_03; yalnız bölümün ilk Question.intro alanı. Gerçek MP3 yüklenene kadar intro=NULL.
+
+Anlatıcı: NEXORA, 2.400 çalışanı ve 1,8 milyon müşterisi olan kurgusal bir fintech şirketi. Sen burada Junior GRC Specialist olarak çalışıyorsun. Bugün ekibin konuşmasını dinleyeceksin. Önünde bir ders anlatımı değil, karar bekleyen bir iş günü var. Söylenenlerin hangisi doğrulanmış bilgi, hangisi beklenti ya da varsayım? Konuşma sırasında buna dikkat et. Herkesin iyi niyeti olabilir; yine de farklı sorumluluklar ve zaman baskısı kararları zorlaştırabilir.
+
+Murat: NEX-PAY dün 25 dakika durdu. Sunucu yeniden başladı. Teknik ekip hizmeti geri getirdi.
+
+Ece: Yirmi beş dakika kulağa kısa geliyor ama ödeme bekleyen müşteri için aynı şey değil. Kaç işlem etkilenmiş, henüz bilmiyoruz.
+
+Selin: Bugün teknik bir olayı iş diliyle anlamaya çalışacağız. Ödeme hizmeti, işlem kaydı ve mutabakat birbirine bağlı. Tek sunucuya bakmak resmin tamamını göstermiyor.
+
+Murat: NEX-LEDGER kayıtlarını da isteyelim. İşlemler sistem döndükten sonra tamamlanmış olabilir.
+
+Ece: İş birimiyle hedefleri konuştum. Hizmetin 60 dakika içinde dönmesi bekleniyor. Veri kaybı için en fazla beş dakikalık aralık kabul ediliyor.
+
+Selin: Bunları ayrı değerlendireceğiz. Sistem açıldı demek, verinin eksiksiz olduğu anlamına gelmez.
+
+Murat: Yeni arkadaşımız, bize kaç işlemin beklediğini sorabilir. Bu sorunun cevabı yalnız teknik ekipte olmayabilir. Müşteri hizmetleri ve ödeme süreç ekibi de konuşmaya katılmalı.
+
+Anlatıcı: Konuşma burada bitiyor. Şimdi bu iş gününün içine gireceksin. Karar verirken yalnız en hızlı seçeneği düşünme. Hangi bilginin eksik olduğunu, kararı kimin verebileceğini ve sonucun müşteriyi nasıl etkileyebileceğini de tart. Emin olmadığın noktayı açıkça söyleyebilirsin. Bir sonraki adımın, belirsizliği nasıl gidereceğini göstermeli. Ekipteki kişiler sonraki bölümlerde yeniden karşına çıkacak. Bugün oluşturduğun kayıtlar ve seçtiğin iletişim biçimi, bu ortak hikâyenin devamında önem taşıyacak. Hazırsan ilk duruma geç.

@@ -1,0 +1,25 @@
+Bölüm 10 — Intro kayıt metni
+question_id: grc-first30-q-091 (kalıcı içerik kimliği; DB ID import registry içinde)
+Konuşmacılar: Anlatıcı, Selin, Ece, Murat
+Ton: Doğal ofis konuşması. Anlatıcı sakin; Selin net ve destekleyici; Murat zaman baskısı altında; Ece kontrollü; Deniz kararlı; Arda krizde kısa ve odaklı; Ayşe sorgulayıcı.
+Tahmini süre: 2:19 (115 kelime/dakika, duraklarla biraz uzayabilir)
+Sabit dosya adı: grc_day_10.mp3
+Bağlantı: AudioAsset.name_key=grc_day_10; yalnız bölümün ilk Question.intro alanı. Gerçek MP3 yüklenene kadar intro=NULL.
+
+Anlatıcı: NEXORA, 2.400 çalışanı ve 1,8 milyon müşterisi olan kurgusal bir fintech şirketi. Sen burada Junior GRC Specialist olarak çalışıyorsun. Bugün ekibin konuşmasını dinleyeceksin. Önünde bir ders anlatımı değil, karar bekleyen bir iş günü var. Söylenenlerin hangisi doğrulanmış bilgi, hangisi beklenti ya da varsayım? Konuşma sırasında buna dikkat et. Herkesin iyi niyeti olabilir; yine de farklı sorumluluklar ve zaman baskısı kararları zorlaştırabilir.
+
+Selin: İlk ayın bitti. Giriş kartından başlayıp bir olay toplantısına kadar çok farklı kararlar gördün. Bugün kaç saat çalıştığından çok, hangi işi hangi kanıtla tamamladığını konuşacağız.
+
+Murat: Yetki düzeltme planında destek aldık. Aksiyonun bir kısmı hâlâ açık. Kapanış panelinde sıfır görünmesi beni şaşırttı. Kaynakları eşleştirmek gerekiyor.
+
+Ece: Açık kayıt sunumu uzatabilir. Ama farklı sayıları aynı anda kullanamayız. Önce kapsam ve tarihi kontrol edeceğim.
+
+Selin: Gelişim planında tamamlanan işler kadar açık sorular da olsun. Yeni arkadaşımızın her teknik ayrıntıyı ilk ayda bilmesini beklemiyorum. Bilmediği noktayı zamanında görünür yapmasını bekliyorum.
+
+Murat: Krizde veri kaybı kontrolünü biraz geç konuştuk. Sonraki olay için ortak bir liste hazırlayabiliriz.
+
+Selin: Güzel bir öğrenme konusu. Bir de kariyer baskısı altında kayıt değiştirmemek önemli. Güvenilirlik kısa vadeli övgüden daha uzun yaşar.
+
+Ece: Önümüzdeki ay risk kayıtları ve aksiyon takibinde daha fazla birlikte çalışacağız. Net hedefler belirleyelim.
+
+Anlatıcı: Konuşma burada bitiyor. Şimdi bu iş gününün içine gireceksin. Karar verirken yalnız en hızlı seçeneği düşünme. Hangi bilginin eksik olduğunu, kararı kimin verebileceğini ve sonucun müşteriyi nasıl etkileyebileceğini de tart. Emin olmadığın noktayı açıkça söyleyebilirsin. Bir sonraki adımın, belirsizliği nasıl gidereceğini göstermeli. Ekipteki kişiler sonraki bölümlerde yeniden karşına çıkacak. Bugün oluşturduğun kayıtlar ve seçtiğin iletişim biçimi, bu ortak hikâyenin devamında önem taşıyacak. Hazırsan ilk duruma geç.

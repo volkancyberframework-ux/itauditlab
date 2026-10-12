@@ -1,0 +1,25 @@
+{
+  "total": 100,
+  "graded": 90,
+  "modules": 10,
+  "types": {
+    "scenario": 22,
+    "multi_select": 10,
+    "sentence_order": 10,
+    "choice": 19,
+    "drag_select": 10,
+    "fill_blank": 10,
+    "info": 10,
+    "image": 9
+  },
+  "audio_questions": 0,
+  "voice_questions": 0,
+  "image_assets": 9,
+  "audio_intros_pending": 10,
+  "text_mapping": "10 professional written tasks → scenario: select a sound professional reply. No semantic prose grading is claimed.",
+  "difficulty": {
+    "beginner": 30,
+    "intermediate": 40,
+    "advanced": 30
+  }
+}

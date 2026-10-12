@@ -1,0 +1,23 @@
+Bölüm 01 — Intro kayıt metni
+question_id: grc-first30-q-001 (kalıcı içerik kimliği; DB ID import registry içinde)
+Konuşmacılar: Anlatıcı, Selin, Murat
+Ton: Doğal ofis konuşması. Anlatıcı sakin; Selin net ve destekleyici; Murat zaman baskısı altında; Ece kontrollü; Deniz kararlı; Arda krizde kısa ve odaklı; Ayşe sorgulayıcı.
+Tahmini süre: 2:09 (115 kelime/dakika, duraklarla biraz uzayabilir)
+Sabit dosya adı: grc_day_01.mp3
+Bağlantı: AudioAsset.name_key=grc_day_01; yalnız bölümün ilk Question.intro alanı. Gerçek MP3 yüklenene kadar intro=NULL.
+
+Anlatıcı: NEXORA, 2.400 çalışanı ve 1,8 milyon müşterisi olan kurgusal bir fintech şirketi. Sen burada Junior GRC Specialist olarak çalışıyorsun. Bugün ekibin konuşmasını dinleyeceksin. Önünde bir ders anlatımı değil, karar bekleyen bir iş günü var. Söylenenlerin hangisi doğrulanmış bilgi, hangisi beklenti ya da varsayım? Konuşma sırasında buna dikkat et. Herkesin iyi niyeti olabilir; yine de farklı sorumluluklar ve zaman baskısı kararları zorlaştırabilir.
+
+Selin: Hoş geldin. Yarın sabah önce güvenlik masasına uğra. Masan hazır ama hesabın için onay tamamlanmadı. İlk gününde seni dosyalarla boğmak istemiyorum. Önce insanları ve işin neden yapıldığını tanımanı istiyorum.
+
+Murat: Küçük bir pürüz var. Kart basımı gecikti. Ekibimizde boşta bir kart bulunuyor, istersen sabah onunla geçersin. Sonra hallederiz.
+
+Selin: Hızlı başlamak istiyoruz, evet. Ama bu küçük kararlar ileride kayıtları nasıl okuyacağımızı da belirliyor. Güvenlik görevlisiyle konuşup süreci netleştirelim.
+
+Murat: Anladım. Bir de üretim erişimini geniş açsak iyi olur. Yeni arkadaşımız bir daha talep beklemez.
+
+Selin: Görevler henüz belli değil. Önce hangi işi yapacağını konuşalım. Sonra uygun erişimi birlikte isteyelim.
+
+Murat: Peki. Burada herkesin işi yoğun. Bazen kolay yolu önerdiğimi fark etmiyorum. Yeni biri bize farklı gözle bakabilir.
+
+Anlatıcı: Konuşma burada bitiyor. Şimdi bu iş gününün içine gireceksin. Karar verirken yalnız en hızlı seçeneği düşünme. Hangi bilginin eksik olduğunu, kararı kimin verebileceğini ve sonucun müşteriyi nasıl etkileyebileceğini de tart. Emin olmadığın noktayı açıkça söyleyebilirsin. Bir sonraki adımın, belirsizliği nasıl gidereceğini göstermeli. Ekipteki kişiler sonraki bölümlerde yeniden karşına çıkacak. Bugün oluşturduğun kayıtlar ve seçtiğin iletişim biçimi, bu ortak hikâyenin devamında önem taşıyacak. Hazırsan ilk duruma geç.

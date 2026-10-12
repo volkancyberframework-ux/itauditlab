@@ -1,0 +1,25 @@
+Bölüm 06 — Intro kayıt metni
+question_id: grc-first30-q-051 (kalıcı içerik kimliği; DB ID import registry içinde)
+Konuşmacılar: Anlatıcı, Arda, Murat, Selin
+Ton: Doğal ofis konuşması. Anlatıcı sakin; Selin net ve destekleyici; Murat zaman baskısı altında; Ece kontrollü; Deniz kararlı; Arda krizde kısa ve odaklı; Ayşe sorgulayıcı.
+Tahmini süre: 2:11 (115 kelime/dakika, duraklarla biraz uzayabilir)
+Sabit dosya adı: grc_day_06.mp3
+Bağlantı: AudioAsset.name_key=grc_day_06; yalnız bölümün ilk Question.intro alanı. Gerçek MP3 yüklenene kadar intro=NULL.
+
+Anlatıcı: NEXORA, 2.400 çalışanı ve 1,8 milyon müşterisi olan kurgusal bir fintech şirketi. Sen burada Junior GRC Specialist olarak çalışıyorsun. Bugün ekibin konuşmasını dinleyeceksin. Önünde bir ders anlatımı değil, karar bekleyen bir iş günü var. Söylenenlerin hangisi doğrulanmış bilgi, hangisi beklenti ya da varsayım? Konuşma sırasında buna dikkat et. Herkesin iyi niyeti olabilir; yine de farklı sorumluluklar ve zaman baskısı kararları zorlaştırabilir.
+
+Arda: svc-pay-prod hesabına ilişkin dikkatimi çeken bir durum var. Hesapta MFA görünmüyor. Ayrıca kullanıcı oluşturma yetkisi listelenmiş. Kullanım kayıtlarını topluyorum.
+
+Murat: Bu hesap ödeme akışında kullanılıyor. Kapatırsak bazı işler durabilir. Önce bağımlılıklarını çıkarmalıyız.
+
+Selin: İki konuyu ayıralım. Gözlenen yetkiyi doğrulamak bir iş; güvenli müdahale planlamak başka bir iş. Henüz saldırı olduğunu söylemiyoruz.
+
+Arda: Bazı giriş denemeleri var, ama bunların anlamını henüz doğrulamadım. Kayıtları aynı zaman aralığında eşleştireceğim.
+
+Murat: Servis hesabı için kullanıcıya uygulanan MFA yöntemi uygun olmayabilir. Alternatif korumayı teknik ekiple konuşacağım.
+
+Selin: Yeni arkadaşımız, teknik durumun iş etkisini anlatmaya yardımcı olacak. Fazla yetki nerede kullanılabilir, hangi işlemleri etkiler, bunları açık yazalım.
+
+Arda: Bir de dünkü kesintiyle bağlantı soruluyor. Şimdilik bağlantıyı destekleyen kanıt yok. Aynı haftada görülmüş olmaları tek başına neden ilişkisi kurmaz.
+
+Anlatıcı: Konuşma burada bitiyor. Şimdi bu iş gününün içine gireceksin. Karar verirken yalnız en hızlı seçeneği düşünme. Hangi bilginin eksik olduğunu, kararı kimin verebileceğini ve sonucun müşteriyi nasıl etkileyebileceğini de tart. Emin olmadığın noktayı açıkça söyleyebilirsin. Bir sonraki adımın, belirsizliği nasıl gidereceğini göstermeli. Ekipteki kişiler sonraki bölümlerde yeniden karşına çıkacak. Bugün oluşturduğun kayıtlar ve seçtiğin iletişim biçimi, bu ortak hikâyenin devamında önem taşıyacak. Hazırsan ilk duruma geç.

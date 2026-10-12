@@ -1,0 +1,27 @@
+Bölüm 07 — Intro kayıt metni
+question_id: grc-first30-q-061 (kalıcı içerik kimliği; DB ID import registry içinde)
+Konuşmacılar: Anlatıcı, Ece, Selin, Murat
+Ton: Doğal ofis konuşması. Anlatıcı sakin; Selin net ve destekleyici; Murat zaman baskısı altında; Ece kontrollü; Deniz kararlı; Arda krizde kısa ve odaklı; Ayşe sorgulayıcı.
+Tahmini süre: 2:13 (115 kelime/dakika, duraklarla biraz uzayabilir)
+Sabit dosya adı: grc_day_07.mp3
+Bağlantı: AudioAsset.name_key=grc_day_07; yalnız bölümün ilk Question.intro alanı. Gerçek MP3 yüklenene kadar intro=NULL.
+
+Anlatıcı: NEXORA, 2.400 çalışanı ve 1,8 milyon müşterisi olan kurgusal bir fintech şirketi. Sen burada Junior GRC Specialist olarak çalışıyorsun. Bugün ekibin konuşmasını dinleyeceksin. Önünde bir ders anlatımı değil, karar bekleyen bir iş günü var. Söylenenlerin hangisi doğrulanmış bilgi, hangisi beklenti ya da varsayım? Konuşma sırasında buna dikkat et. Herkesin iyi niyeti olabilir; yine de farklı sorumluluklar ve zaman baskısı kararları zorlaştırabilir.
+
+Ece: Bu bulgu raporda çok sert duruyor. Yönetim bütün hesapların güvensiz olduğunu düşünebilir. Çıkarsak daha iyi olmaz mı?
+
+Selin: Kapsamı düzeltelim. İncelediğimiz belirli hesapta, iş ihtiyacı dışında bir yetki gördük. Bütün hesaplar hakkında sonuç yazmıyoruz.
+
+Murat: Yetkinin geçmişte neden verildiğini araştırıyorum. Belki eski bir iş akışı vardı. Şu anki ihtiyaçla aynı olmayabilir.
+
+Ece: Ben yine de toplantıda kötü görünmesini istemiyorum. Risk kabulünü yazıp kapatmayı düşünüyorum.
+
+Selin: Yetki, kalan risk ve süre açıklanmadan kapatamayız. Yeni belge bulguyu değiştirebilir. Görünüş kaygısı ise kanıtın yerine geçmez.
+
+Murat: Kullanıcı oluşturma yetkisini güvenle kaldırmanın yolunu test edelim. Aksiyon planı daha işe yarar olabilir.
+
+Ece: İtirazımı kayda alın. Ama kullanılan cümleyi birlikte okuyalım.
+
+Selin: Elbette. Yeni arkadaşımız için zor bir toplantı olabilir. Kişisel tartışmaya girmeden, bildiğimiz durumla açık kalan soruları ayrı tutacağız.
+
+Anlatıcı: Konuşma burada bitiyor. Şimdi bu iş gününün içine gireceksin. Karar verirken yalnız en hızlı seçeneği düşünme. Hangi bilginin eksik olduğunu, kararı kimin verebileceğini ve sonucun müşteriyi nasıl etkileyebileceğini de tart. Emin olmadığın noktayı açıkça söyleyebilirsin. Bir sonraki adımın, belirsizliği nasıl gidereceğini göstermeli. Ekipteki kişiler sonraki bölümlerde yeniden karşına çıkacak. Bugün oluşturduğun kayıtlar ve seçtiğin iletişim biçimi, bu ortak hikâyenin devamında önem taşıyacak. Hazırsan ilk duruma geç.

@@ -13,6 +13,8 @@ class PrivateVoiceStorage(FileSystemStorage):
     bundled = {
         "demo/access-review.png": "access-review.png",
         "demo/mfa.m4a": "mfa.m4a",
+        **{f"first30/evidence_{n:03}.png": f"first30/evidence_{n:03}.png"
+           for n in (18,27,38,47,57,68,77,87,97)},
     }
 
     def _open(self, name, mode="rb"):
