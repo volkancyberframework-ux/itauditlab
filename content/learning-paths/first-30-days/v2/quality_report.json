@@ -1,0 +1,33 @@
+{
+  "total": 100,
+  "graded": 90,
+  "modules": 10,
+  "types": {
+    "audio": 10,
+    "multi_select": 10,
+    "sentence_order": 10,
+    "drag_select": 10,
+    "fill_blank": 10,
+    "image": 10,
+    "scenario": 20,
+    "choice": 10,
+    "info": 10
+  },
+  "cycle": [
+    "audio",
+    "multi_select",
+    "sentence_order",
+    "drag_select",
+    "fill_blank",
+    "image",
+    "scenario",
+    "choice",
+    "scenario",
+    "info"
+  ],
+  "audio_recordings": 10,
+  "image_assets": 10,
+  "lesson_pages": 40,
+  "stable_identities_preserved": true,
+  "answer_keys_unchanged": true
+}

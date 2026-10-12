@@ -1,0 +1,82 @@
+[
+  {
+    "file": "grc_day_01.mp3",
+    "decoded": true,
+    "volume": [
+      "[Parsed_volumedetect_0 @ 0x972c58600] mean_volume: -17.5 dB",
+      "[Parsed_volumedetect_0 @ 0x972c58600] max_volume: -1.3 dB"
+    ]
+  },
+  {
+    "file": "grc_day_02.mp3",
+    "decoded": true,
+    "volume": [
+      "[Parsed_volumedetect_0 @ 0x754c74600] mean_volume: -17.4 dB",
+      "[Parsed_volumedetect_0 @ 0x754c74600] max_volume: -1.6 dB"
+    ]
+  },
+  {
+    "file": "grc_day_03.mp3",
+    "decoded": true,
+    "volume": [
+      "[Parsed_volumedetect_0 @ 0xb47004b40] mean_volume: -17.6 dB",
+      "[Parsed_volumedetect_0 @ 0xb47004b40] max_volume: -0.7 dB"
+    ]
+  },
+  {
+    "file": "grc_day_04.mp3",
+    "decoded": true,
+    "volume": [
+      "[Parsed_volumedetect_0 @ 0xc35064600] mean_volume: -17.4 dB",
+      "[Parsed_volumedetect_0 @ 0xc35064600] max_volume: -1.0 dB"
+    ]
+  },
+  {
+    "file": "grc_day_05.mp3",
+    "decoded": true,
+    "volume": [
+      "[Parsed_volumedetect_0 @ 0x89cc74600] mean_volume: -17.5 dB",
+      "[Parsed_volumedetect_0 @ 0x89cc74600] max_volume: -1.0 dB"
+    ]
+  },
+  {
+    "file": "grc_day_06.mp3",
+    "decoded": true,
+    "volume": [
+      "[Parsed_volumedetect_0 @ 0xa9ac39140] mean_volume: -17.4 dB",
+      "[Parsed_volumedetect_0 @ 0xa9ac39140] max_volume: -1.0 dB"
+    ]
+  },
+  {
+    "file": "grc_day_07.mp3",
+    "decoded": true,
+    "volume": [
+      "[Parsed_volumedetect_0 @ 0xb89035e00] mean_volume: -17.6 dB",
+      "[Parsed_volumedetect_0 @ 0xb89035e00] max_volume: -1.6 dB"
+    ]
+  },
+  {
+    "file": "grc_day_08.mp3",
+    "decoded": true,
+    "volume": [
+      "[Parsed_volumedetect_0 @ 0x8a4c9c600] mean_volume: -17.6 dB",
+      "[Parsed_volumedetect_0 @ 0x8a4c9c600] max_volume: -0.7 dB"
+    ]
+  },
+  {
+    "file": "grc_day_09.mp3",
+    "decoded": true,
+    "volume": [
+      "[Parsed_volumedetect_0 @ 0x958c31440] mean_volume: -17.4 dB",
+      "[Parsed_volumedetect_0 @ 0x958c31440] max_volume: -1.8 dB"
+    ]
+  },
+  {
+    "file": "grc_day_10.mp3",
+    "decoded": true,
+    "volume": [
+      "[Parsed_volumedetect_0 @ 0xbb0848600] mean_volume: -17.5 dB",
+      "[Parsed_volumedetect_0 @ 0xbb0848600] max_volume: -1.6 dB"
+    ]
+  }
+]

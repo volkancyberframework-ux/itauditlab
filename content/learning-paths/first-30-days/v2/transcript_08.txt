@@ -1,0 +1,19 @@
+Anlatıcı: NEXORA, 2.400 çalışanı ve 1,8 milyon müşterisi olan kurgusal bir fintech şirketi. Sen burada Junior GRC Specialist olarak çalışıyorsun. Bugün ekibin konuşmasını dinleyeceksin. Önünde bir ders anlatımı değil, karar bekleyen bir iş günü var. Söylenenlerin hangisi doğrulanmış bilgi, hangisi beklenti ya da varsayım? Konuşma sırasında buna dikkat et. Herkesin iyi niyeti olabilir; yine de farklı sorumluluklar ve zaman baskısı kararları zorlaştırabilir.
+
+Arda: Saat 02.10. NEX-PAY'e erişim sorunları geliyor. Alarm sayısı yükseldi. Olay ekibini çağırıyorum. Henüz veri sızıntısını doğrulamadık.
+
+Murat: Ödeme işlemleri durdu. Kurtarma ekibi alternatif sunucuyu hazırlıyor. Değişiklikleri olay kaydıyla izleyeceğiz.
+
+Selin: Ben iş sahibiyle görüşüp etkilenen işlem bilgisini topluyorum. Yönetimin ilk sorusu müşterinin ne yaşadığı olacak.
+
+Arda: Nedeni henüz bilmiyoruz. Şüpheli giriş kayıtlarını korumak için kopya alıyoruz. Lütfen tahminleri kesin bilgi diye göndermeyin.
+
+Murat: Hedefimiz hizmeti 60 dakika içinde döndürmek. Ama henüz kesin dönüş saati veremem.
+
+Selin: Kısa güncellemelerde doğrulanan bilgi, belirsizlik ve sonraki güncelleme saati olsun. Her yeni bilgiyle mesajı düzeltebiliriz.
+
+Arda: Yeni arkadaşımız kayıtları düzenlerken olay saatini ve kaynak saatini karıştırmasın. Acele ediyoruz, ama sonradan kararı nasıl aldığımızı anlayabilmemiz gerekiyor.
+
+Murat: Teknik ekibin müdahale alanına girmeden destek alabileceğimiz çok iş var. Etki ve karar kaydını siz takip edin.
+
+Anlatıcı: Konuşma burada bitiyor. Şimdi bu iş gününün içine gireceksin. Karar verirken yalnız en hızlı seçeneği düşünme. Hangi bilginin eksik olduğunu, kararı kimin verebileceğini ve sonucun müşteriyi nasıl etkileyebileceğini de tart. Emin olmadığın noktayı açıkça söyleyebilirsin. Bir sonraki adımın, belirsizliği nasıl gidereceğini göstermeli. Ekipteki kişiler sonraki bölümlerde yeniden karşına çıkacak. Bugün oluşturduğun kayıtlar ve seçtiğin iletişim biçimi, bu ortak hikâyenin devamında önem taşıyacak. Hazırsan ilk duruma geç.

@@ -15,6 +15,8 @@ class PrivateVoiceStorage(FileSystemStorage):
         "demo/mfa.m4a": "mfa.m4a",
         **{f"first30/evidence_{n:03}.png": f"first30/evidence_{n:03}.png"
            for n in (18,27,38,47,57,68,77,87,97)},
+        "first30-v2/evidence_008.png": "first30_v2/evidence_008.png",
+        **{f"first30-v2/grc_day_{n:02}.mp3": f"first30_v2/grc_day_{n:02}.mp3" for n in range(1,11)},
     }
 
     def _open(self, name, mode="rb"):

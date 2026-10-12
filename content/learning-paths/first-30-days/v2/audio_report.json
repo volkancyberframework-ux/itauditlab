@@ -1,0 +1,102 @@
+[
+  {
+    "file": "grc_day_01.mp3",
+    "seconds": 153.36,
+    "bytes": 1840652,
+    "synthetic": true,
+    "voices": [
+      "Yelda",
+      "Cem (Enhanced)"
+    ]
+  },
+  {
+    "file": "grc_day_02.mp3",
+    "seconds": 157.87,
+    "bytes": 1894796,
+    "synthetic": true,
+    "voices": [
+      "Yelda",
+      "Cem (Enhanced)"
+    ]
+  },
+  {
+    "file": "grc_day_03.mp3",
+    "seconds": 159.72,
+    "bytes": 1916972,
+    "synthetic": true,
+    "voices": [
+      "Yelda",
+      "Cem (Enhanced)"
+    ]
+  },
+  {
+    "file": "grc_day_04.mp3",
+    "seconds": 159.26,
+    "bytes": 1911500,
+    "synthetic": true,
+    "voices": [
+      "Yelda",
+      "Cem (Enhanced)"
+    ]
+  },
+  {
+    "file": "grc_day_05.mp3",
+    "seconds": 165.6,
+    "bytes": 1987532,
+    "synthetic": true,
+    "voices": [
+      "Yelda",
+      "Cem (Enhanced)"
+    ]
+  },
+  {
+    "file": "grc_day_06.mp3",
+    "seconds": 162.82,
+    "bytes": 1954124,
+    "synthetic": true,
+    "voices": [
+      "Yelda",
+      "Cem (Enhanced)"
+    ]
+  },
+  {
+    "file": "grc_day_07.mp3",
+    "seconds": 163.8,
+    "bytes": 1965932,
+    "synthetic": true,
+    "voices": [
+      "Yelda",
+      "Cem (Enhanced)"
+    ]
+  },
+  {
+    "file": "grc_day_08.mp3",
+    "seconds": 166.51,
+    "bytes": 1998476,
+    "synthetic": true,
+    "voices": [
+      "Yelda",
+      "Cem (Enhanced)"
+    ]
+  },
+  {
+    "file": "grc_day_09.mp3",
+    "seconds": 163.68,
+    "bytes": 1964492,
+    "synthetic": true,
+    "voices": [
+      "Yelda",
+      "Cem (Enhanced)"
+    ]
+  },
+  {
+    "file": "grc_day_10.mp3",
+    "seconds": 167.16,
+    "bytes": 2006252,
+    "synthetic": true,
+    "voices": [
+      "Yelda",
+      "Cem (Enhanced)"
+    ]
+  }
+]

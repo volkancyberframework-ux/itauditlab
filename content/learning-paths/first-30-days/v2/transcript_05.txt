@@ -1,0 +1,17 @@
+Anlatıcı: NEXORA, 2.400 çalışanı ve 1,8 milyon müşterisi olan kurgusal bir fintech şirketi. Sen burada Junior GRC Specialist olarak çalışıyorsun. Bugün ekibin konuşmasını dinleyeceksin. Önünde bir ders anlatımı değil, karar bekleyen bir iş günü var. Söylenenlerin hangisi doğrulanmış bilgi, hangisi beklenti ya da varsayım? Konuşma sırasında buna dikkat et. Herkesin iyi niyeti olabilir; yine de farklı sorumluluklar ve zaman baskısı kararları zorlaştırabilir.
+
+Selin: Bugün iç denetimle açılış toplantısına katılacaksın. Senin rolün süreci öğrenmek ve istenen bilgileri düzenlemek. Bağımsız incelemenin sınırlarını birlikte koruyacağız.
+
+Murat: MFA konusunu sonraki aya bıraksak olmaz mı? Ekibin zamanı dar. Üretimde başka işler var.
+
+Selin: Kaynak sorunu gerçek olabilir. Ama kapsam kararını, risk gerekçesini duymadan vermek doğru olmaz. Talebini toplantıda açıkça konuşalım.
+
+Murat: Kontrol yaptığımızı söyleyebilirim. Fakat geçen ayın onaylı listesini bulmam biraz sürebilir.
+
+Selin: Söylediğin bilgi başlangıç noktası. İnceleme dönemi için kayıtları da görmemiz gerekiyor. Talebi açık yazarsak ekibinin işi kolaylaşır.
+
+Murat: Hangi alanlar lazım, onu bilmek isterim. Her şeyi gönderince dosyada çok gereksiz veri oluyor.
+
+Selin: Hesap listesi, yetki ve giriş kayıtları gibi alanları amacıyla birlikte belirteceğiz. Eksik kayıt varsa bunu sonuçtan saklamayacağız. Yeni arkadaşımızın bugün öğreneceği şey, bir dosyanın varlığı ile güçlü kanıtın aynı olmadığı.
+
+Anlatıcı: Konuşma burada bitiyor. Şimdi bu iş gününün içine gireceksin. Karar verirken yalnız en hızlı seçeneği düşünme. Hangi bilginin eksik olduğunu, kararı kimin verebileceğini ve sonucun müşteriyi nasıl etkileyebileceğini de tart. Emin olmadığın noktayı açıkça söyleyebilirsin. Bir sonraki adımın, belirsizliği nasıl gidereceğini göstermeli. Ekipteki kişiler sonraki bölümlerde yeniden karşına çıkacak. Bugün oluşturduğun kayıtlar ve seçtiğin iletişim biçimi, bu ortak hikâyenin devamında önem taşıyacak. Hazırsan ilk duruma geç.
