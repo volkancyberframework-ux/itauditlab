@@ -14,7 +14,7 @@ void main(){
  });
  testWidgets('pinch, pan and close work in the viewer', (tester)async{
   await tester.pumpWidget(MaterialApp(home:FullscreenImageViewer(imageProvider:provider)));await tester.pumpAndSettle();final iv=tester.widget<InteractiveViewer>(find.byType(InteractiveViewer));
-  final a=await tester.startGesture(const Offset(300,250),pointer:1);final b=await tester.startGesture(const Offset(400,250),pointer:2);await tester.pump();await a.moveTo(const Offset(250,250));await b.moveTo(const Offset(450,250));await tester.pump();expect(iv.transformationController!.value.getMaxScaleOnAxis(),greaterThan(1));await a.up();await b.up();
+  final a=await tester.startGesture(const Offset(300,250),pointer:1);final b=await tester.startGesture(const Offset(400,250),pointer:2);await tester.pump();await a.moveTo(const Offset(250,250));await b.moveTo(const Offset(450,250));await tester.pump();expect(iv.transformationController!.value.getMaxScaleOnAxis(),greaterThan(1));await a.up();await b.up();await tester.pump(const Duration(milliseconds:400));final before=iv.transformationController!.value.getTranslation().x;await tester.drag(find.byType(InteractiveViewer),const Offset(50,0));await tester.pumpAndSettle();expect(iv.transformationController!.value.getTranslation().x,isNot(before));
   await tester.tap(find.byTooltip('Ekrana sığdır'));await tester.pump();expect(iv.transformationController!.value.getMaxScaleOnAxis(),1);await tester.pump(const Duration(seconds:1));expect(tester.takeException(),isNull);
  });
 }
