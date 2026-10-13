@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="{% static 'assets/css/theme.min.css' %}">
     <link rel="canonical" href="https://geeksui.codescandy.com/geeks/pages/sign-in.html" />
     <title>GRC Ustası | Öğrenci Girişi</title>
-  <link rel="stylesheet" href="{% static 'css/mobile-promo.css' %}"></head>
+  </head>
 
   <body>
     <!-- Sayfa içeriği -->
@@ -47,7 +47,6 @@
                   </div>
 
                 </div>
-                <div><strong>GRC Ustası Mobil yakında</strong>{% include "landing/_mobile_badges.html" %}<a href="{% url 'landing:mobile_waitlist' %}">İndirimli başlangıç için bekleme listesine katıl →</a></div>
                 <!-- Form -->
                 <form method="post" class="needs-validation" novalidate>
                  {% csrf_token %}
