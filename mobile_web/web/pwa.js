@@ -1,9 +1,38 @@
 (()=>{
- let pending=null;const installed=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
- const button=document.createElement('button');button.id='grc-install';button.type='button';button.textContent='📲 Uygulamayı yükle';button.setAttribute('aria-label','GRC Ustası uygulamasını yükle');button.hidden=installed();
- const style=document.createElement('style');style.textContent='#grc-install{position:fixed;bottom:calc(88px + env(safe-area-inset-bottom));left:12px;z-index:10000;border:1px solid #6ae0c1;border-radius:24px;background:#10382f;color:white;padding:12px 18px;font:600 14px system-ui;cursor:pointer;box-shadow:0 4px 16px #0005}.grc-install-guide{max-width:min(460px,90vw);border:1px solid #466d70;border-radius:18px;padding:24px;background:#102333;color:white;font:16px/1.6 system-ui}.grc-install-guide::backdrop{background:#0009}.grc-install-guide button{padding:12px 18px;border-radius:10px;background:#176854;color:white;border:0;font:inherit}';document.head.append(style);document.body.append(button);
- window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();pending=e;button.hidden=installed();});window.addEventListener('appinstalled',()=>{pending=null;button.hidden=true;});
- function guide(){const ios=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),d=document.createElement('dialog');d.className='grc-install-guide';d.setAttribute('aria-label','Uygulamayı yükleme rehberi');const h=document.createElement('h2');h.textContent='GRC Ustası’nı yükle';const p=document.createElement('p');p.textContent=ios?'Safari’de app.grcustasi.com adresini aç. Paylaş simgesine dokun, “Ana Ekrana Ekle” seçeneğini seç ve “Ekle” ile tamamla.':'Tarayıcı menüsünden “Uygulamayı yükle” veya “Ana ekrana ekle” seçeneğini kullan. Seçenek görünmüyorsa güncel Chrome veya Edge ile aç.';const n=document.createElement('p');n.textContent='Ana ekranındaki simgeden güncel web sürümü açılır. Dersler için internet bağlantısı gerekir.';const b=document.createElement('button');b.textContent='Tamam';b.onclick=()=>d.close();d.append(h,p,n,b);d.addEventListener('close',()=>{d.remove();button.focus();});document.body.append(d);d.showModal();b.focus();}
- button.onclick=async()=>{if(!pending){guide();return;}const e=pending;pending=null;try{await e.prompt();if((await e.userChoice).outcome==='accepted')button.hidden=true;}catch{guide();}};
+ let pending=null,busy=false;
+ const installed=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+ // Installation is requested by the authenticated Flutter profile card only.
+ window.grcPwaInstalled=installed;
+ window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();pending=e;});
+ window.addEventListener('appinstalled',()=>{pending=null;});
+ function guide(){
+  if(document.querySelector('.grc-install-guide'))return;
+  const ios=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  const d=document.createElement('dialog');d.className='grc-install-guide';d.setAttribute('aria-label','Uygulamayı yükleme rehberi');
+  const title=document.createElement('h2');title.textContent=ios?'iPhone’a yükle':'Ana ekranına ekle';
+  const intro=document.createElement('p');intro.textContent=ios?'iPhone’da son onay Safari menüsünden verilir.':'Tarayıcının yükleme menüsünü kullanabilirsin.';
+  const steps=document.createElement('ol');
+  for(const text of ios?[
+   'Bu adresi Safari’de aç: app.grcustasi.com',
+   'Safari’nin menüsünü (•••) açıp Paylaş’ı seç; doğrudan Paylaş simgesi görünüyorsa ona dokun.',
+   'Ana Ekrana Ekle’yi seç. “Web Uygulaması Olarak Aç” görünüyorsa açık bırak ve Ekle’ye dokun.',
+  ]:[
+   'Chrome veya Edge menüsünü aç.',
+   'Uygulamayı yükle veya Ana ekrana ekle seçeneğini seç.',
+   'Yüklemeyi onayla; ana ekranındaki GRC Ustası simgesinden aç.',
+  ]){const li=document.createElement('li');li.textContent=text;steps.append(li);}
+  const help=document.createElement('p');help.className='grc-install-note';help.textContent=ios?'Paylaş menüsü Safari’ye aittir; uygulamanın içinden otomatik açılamaz. Önce bu rehberi kapat, sonra Safari menüsünü aç.':'Yükleme seçeneği görünmüyorsa bu adresi güncel Chrome veya Edge ile aç.';
+  const actions=document.createElement('div');actions.className='grc-install-actions';
+  const copy=document.createElement('button');copy.type='button';copy.className='grc-install-copy';copy.textContent='Adresi kopyala';copy.onclick=async()=>{try{await navigator.clipboard.writeText('https://app.grcustasi.com/');copy.textContent='Adres kopyalandı';}catch{copy.textContent='app.grcustasi.com';}};
+  const close=document.createElement('button');close.type='button';close.className='grc-install-done';close.textContent=ios?'Rehberi kapat, Safari’den devam et':'Tamam';close.onclick=()=>d.close();
+  const focus=document.activeElement;d.addEventListener('close',()=>{d.remove();focus?.focus();});actions.append(copy,close);d.append(title,intro,steps,help,actions);document.body.append(d);d.showModal();close.focus();
+ }
+ const style=document.createElement('style');style.textContent='.grc-install-guide{box-sizing:border-box;max-width:min(480px,calc(100vw - 32px));max-height:calc(100dvh - 32px);border:1px solid #294657;border-radius:24px;padding:28px;background:#0e2030;color:#e8f1f7;font:16px/1.65 system-ui;box-shadow:0 20px 80px #0008}.grc-install-guide::backdrop{background:#020b15bb;backdrop-filter:blur(5px)}.grc-install-guide h2{font-size:24px;margin:0 0 12px}.grc-install-guide ol{padding-left:24px}.grc-install-guide li{padding:6px 0}.grc-install-note{font-size:14px;color:#abc4d2}.grc-install-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.grc-install-guide button{font:600 14px/1.5 system-ui;min-height:44px;border-radius:12px;padding:12px 16px;cursor:pointer}.grc-install-copy{border:1px solid #46606f;background:transparent;color:#d9e7ef}.grc-install-done{border:0;background:#84d8bd;color:#06271e;flex:1}.grc-install-guide button:focus-visible{outline:3px solid #d6ba77;outline-offset:3px}';document.head.append(style);
+ window.grcPwaInstall=async()=>{
+  if(installed()||busy)return;
+  if(!pending){guide();return;}
+  const event=pending;pending=null;busy=true;
+  try{await event.prompt();await event.userChoice;}catch{guide();}finally{busy=false;}
+ };
  if('serviceWorker' in navigator)navigator.serviceWorker.register('/grc-pwa-sw.js',{scope:'/',updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});
 })();

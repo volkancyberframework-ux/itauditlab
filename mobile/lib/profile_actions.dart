@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'api.dart';
+import 'pwa_install_card.dart';
 import 'theme.dart';
 
 typedef ExternalLauncher = Future<bool> Function(Uri);
@@ -54,6 +55,7 @@ class _ProfileActionsState extends State<ProfileActions> {
   @override
   Widget build(BuildContext context) => Column(
     children: [
+      const PwaInstallCard(),
       if ((widget.contact?['phone'] ?? '').toString().isNotEmpty) ...[
         SizedBox(
           width: double.infinity,
