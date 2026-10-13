@@ -841,5 +841,7 @@
       "full_answer": true,
       "reference_visible": false
     }
-  ]
+  ],
+  "deployment_commit": "48e95d969f53e6e173b257ec36486d9c9d24176a",
+  "web_bundle_sha256": "421217507e0cccd72f2aac481126443cb37f7b509cf029cf11fe2b3c87ff8918"
 }

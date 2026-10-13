@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-13",
+  "path_id": 28,
+  "title": "CISA: Gerçek Bir IT Denetçisi Olabilir misin? 🎯",
+  "questions": 100,
+  "domains": {
+    "1": 20,
+    "2": 20,
+    "3": 20,
+    "4": 20,
+    "5": 20
+  },
+  "audio": 0,
+  "types": {
+    "choice": 20,
+    "multi_select": 10,
+    "sentence_order": 20,
+    "drag_select": 20,
+    "fill_blank": 10,
+    "scenario": 20
+  },
+  "commit": "48e95d969f53e6e173b257ec36486d9c9d24176a",
+  "render_deploy": "dep-db6oguqjnfac73e6heng",
+  "render_status": "Live",
+  "health_http": 200,
+  "live_web_bundle_matches": true,
+  "live_answer_keys": 100,
+  "live_teaching_feedback": 100,
+  "second_live_import_create": 0,
+  "original_questions": 100,
+  "original_content_unchanged": true,
+  "original_sha256": "3a524e0b9961d188e8a68433fce1b4350c49af9372fca3d2d3a54e3da4a446f3",
+  "tests": {
+    "backend": 14,
+    "flutter_widgets": 18,
+    "analyze": "No issues"
+  },
+  "manual_authenticated_web_click": "Application login is pending; card and automatic start verified in widget tests.",
+  "native_release": "Updated source prepared; new native app distribution required for direct start and summaries."
+}

@@ -18,8 +18,18 @@ void main() {
       final q=Map<String,dynamic>.from(records[index] as Map);
       q['id']=index+1;q['audio']=<String>[];q['image']=null;
       final api=WorkshopQuestionApi(q);
-      await tester.pumpWidget(MaterialApp(theme:AppTheme.create(Brightness.light),home:Session(path:const {'id':99,'title':'CISA: Gerçek Bir IT Denetçisi Olabilir misin? 🎯','direct_start':true},sessionApi:api,workshop:true)));
-      await tester.pumpAndSettle();expect(find.text('Başla'),findsNothing);
+      const path = {'id':99,'title':'CISA: Gerçek Bir IT Denetçisi Olabilir misin? 🎯','direct_start':true,'question_count':100};
+      await tester.pumpWidget(MaterialApp(
+        theme:AppTheme.create(Brightness.light),
+        home:Builder(builder:(context) => Scaffold(
+          body:PathCard(path:path,onTap:() {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => Session(path:path,sessionApi:api,workshop:true),
+            ));
+          }),
+        )),
+      ));
+      await tester.pumpAndSettle();await tester.tap(find.byType(PathCard));await tester.pumpAndSettle();expect(find.text('Başla'),findsNothing);
       await tester.scrollUntilVisible(find.text(q['prompt'] as String),200,scrollable:find.byType(Scrollable).first);
       expect(find.text(q['prompt'] as String),findsOneWidget);expect(find.text('Senaryoyu dinle'),findsNothing);
       if(q['kind']=='sentence_order' || q['kind']=='drag_select') {
