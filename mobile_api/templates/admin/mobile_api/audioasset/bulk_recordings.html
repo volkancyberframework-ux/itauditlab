@@ -1,0 +1,6 @@
+{% extends "admin/base_site.html" %}{% block content %}
+<h1>Ses kayıtlarını toplu yükle</h1><p>ses1–ses18 ve tanıtım: mevcut kayıt kimlikleri ve soru bağlantıları korunur. Önce paket ve dosyalar doğrulanır; eski sesler saklanır.</p>
+{% if error %}<p class="errornote">{{ error }}</p>{% endif %}
+{% if results %}<h2>{{ changed }} ses kaydı güncellendi</h2><table><tr><th>Audio asset</th><th>ID</th><th>Sonuç</th></tr>{% for row in results %}<tr><td>{{ row.title }}</td><td>{{ row.id }}</td><td>{% if row.changed %}1,2× MP3 yüklendi{% else %}Zaten güncel{% endif %}</td></tr>{% endfor %}</table>{% endif %}
+<form method="post" enctype="multipart/form-data">{% csrf_token %}<p><label for="package">Ses paketi (ZIP)</label><input type="file" name="package" id="package" accept=".zip" required></p><button type="submit">19 kaydı tek seferde yükle</button></form>
+{% endblock %}

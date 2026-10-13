@@ -15,7 +15,7 @@ def app(request, path=''):
         # Never edit or rebuild the Flutter source or generated distribution.
         html = target.read_text()
         html = html.replace('</head>', '<link rel="stylesheet" href="/web-features/web-learning.css"></head>')
-        html = html.replace('<script src="flutter_bootstrap.js"', '<script src="/web-features/bridge.js"></script><script src="flutter_bootstrap.js"')
+        html = html.replace('<script src="flutter_bootstrap.js"', '<script src="/web-features/bridge.js"></script><script src="/web-features/pwa.js" defer></script><script src="flutter_bootstrap.js"')
         response = StreamingHttpResponse(iter([html.encode()]), content_type='text/html; charset=utf-8')
     else:
         response = FileResponse(target.open('rb'))
@@ -28,7 +28,13 @@ def app(request, path=''):
 @require_safe
 def web_asset(request,path):
     root=(Path(__file__).parent/'web').resolve();target=(root/path).resolve()
-    if not target.is_relative_to(root) or not target.is_file() or target.suffix not in ('.js','.mjs','.css') or any(part.startswith('.') for part in Path(path).parts):
+    if not target.is_relative_to(root) or not target.is_file() or target.suffix not in ('.js','.mjs','.css','.html') or any(part.startswith('.') for part in Path(path).parts):
         raise Http404
-    response=FileResponse(target.open('rb'),content_type='text/css' if target.suffix=='.css' else 'text/javascript')
+    response=FileResponse(target.open('rb'),content_type='text/css' if target.suffix=='.css' else 'text/html' if target.suffix=='.html' else 'text/javascript')
     response['Cache-Control']='no-cache';response['X-Content-Type-Options']='nosniff';return response
+
+@require_safe
+def pwa_worker(request):
+    response=web_asset(request,'grc-pwa-sw.js')
+    response['Service-Worker-Allowed']='/'
+    return response

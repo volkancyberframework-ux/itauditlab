@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'fullscreen_image_viewer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/semantics.dart';
 import 'password_reset.dart';
@@ -1247,7 +1248,8 @@ class _SessionState extends State<Session> {
           padding: const EdgeInsets.all(24),
           children: [
             if (session == null && widget.path['direct_start'] == true) ...[
-              if (busy || error == null) const Center(child: CircularProgressIndicator()),
+              if (busy || error == null)
+                const Center(child: CircularProgressIndicator()),
               if (error != null) ErrorState(message: error!, retry: start),
             ] else if (session == null) ...[
               const Icon(
@@ -1290,10 +1292,17 @@ class _SessionState extends State<Session> {
               ),
               const SizedBox(height: 32),
               if (session!['evaluation'] != null) ...[
-                Text(session!['evaluation']['text'] ?? '', style: const TextStyle(height: 1.5)),
+                Text(
+                  session!['evaluation']['text'] ?? '',
+                  style: const TextStyle(height: 1.5),
+                ),
                 const SizedBox(height: 24),
                 if (session!['evaluation']['complete'] != true)
-                  PrimaryButton(label: 'Sonraki Domain', busy: busy, onPressed: start),
+                  PrimaryButton(
+                    label: 'Sonraki Domain',
+                    busy: busy,
+                    onPressed: start,
+                  ),
                 const SizedBox(height: 16),
               ],
               PrimaryButton(
@@ -1381,11 +1390,11 @@ class _SessionState extends State<Session> {
               ),
               const SizedBox(height: 24),
               if (q['image'] != null)
-                Image.network(
-                  q['image'],
-                  headers: {'Authorization': 'Bearer ${sessionApi.access}'},
-                  errorBuilder: (_, _, _) =>
-                      const Text('Görsel yüklenemedi. Bağlantını kontrol et.'),
+                QuestionImagePreview(
+                  imageProvider: NetworkImage(
+                    q['image'],
+                    headers: {'Authorization': 'Bearer ${sessionApi.access}'},
+                  ),
                 ),
               if ((q['audio'] as List).isNotEmpty)
                 StreamBuilder<PlayerState>(

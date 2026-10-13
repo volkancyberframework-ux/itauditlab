@@ -144,6 +144,27 @@ admin.site.register(Module)
 
 @admin.register(AudioAsset)
 class AudioAdmin(admin.ModelAdmin):
+    def get_urls(self):
+        from django.urls import path
+        return [path('bulk-recordings/',self.admin_site.admin_view(self.bulk_recordings),name='mobile_api_audioasset_bulk_recordings')]+super().get_urls()
+
+    def bulk_recordings(self,request):
+        from django.core.exceptions import PermissionDenied,ValidationError
+        from django.template.response import TemplateResponse
+        from .case_recordings import replace_package
+        from zipfile import BadZipFile
+        if not self.has_change_permission(request):raise PermissionDenied
+        context={**self.admin_site.each_context(request),'title':'Ses kayıtlarını toplu yükle','opts':self.model._meta}
+        if request.method=='POST':
+            upload=request.FILES.get('package')
+            try:
+                if not upload or upload.size>30*1024*1024:raise ValidationError('En fazla 30 MB ZIP paketi gerekli.')
+                rows=replace_package(upload,apply=True);context.update(results=rows,changed=sum(r['changed'] for r in rows))
+                for row in rows:
+                    if row['changed']:self.log_change(request,AudioAsset.objects.get(pk=row['id']),'1,2× MP3 toplu ses yüklemesi')
+            except (ValidationError,ValueError,KeyError,OSError,BadZipFile) as error:context['error']=str(error)
+        return TemplateResponse(request,'admin/mobile_api/audioasset/bulk_recordings.html',context)
+
     from django.db import models as django_models
     from django import forms
 
