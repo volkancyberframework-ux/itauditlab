@@ -1,0 +1,602 @@
+[
+  {
+    "number": 1,
+    "file": "ad-auditor/screen_001.png",
+    "sha256": "cda3cbc4f1072023868b020f076767ff3bd47b151da95178f259f6de16ad44a9",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 2,
+    "file": "ad-auditor/screen_002.png",
+    "sha256": "a3d13bec169cff8bf14064e8230ad1bfdd7d87cd450c5dd54d050327e4178130",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 3,
+    "file": "ad-auditor/screen_003.png",
+    "sha256": "1da708f1d7c2b5af62e2a366bc4c217b1d82085a967fcaf11728244e06da174c",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 4,
+    "file": "ad-auditor/screen_004.png",
+    "sha256": "9282a6f931e4ca7a4e157ed8124a44477ac7a0c89f5330ad9921fcb8b23b3404",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 5,
+    "file": "ad-auditor/screen_005.png",
+    "sha256": "6c7ea5ffa044a9a583ce635aa4f01cbaa247a74f01cfe60f4ce2cdbae0241bec",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 6,
+    "file": "ad-auditor/screen_006.png",
+    "sha256": "9e29f35131895e7dcb9ec67871ea995ea3cd40d7dea1323acf51dec1e4388879",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 7,
+    "file": "ad-auditor/screen_007.png",
+    "sha256": "befbcaa6abbda77ce9b6ec7a27c302d2fd8324fe3e1db12d0b9c7b79cdf89a68",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 8,
+    "file": "ad-auditor/screen_008.png",
+    "sha256": "f31a89869760913a18ee41abdf84709f78f00ae54ce6f933d5173a857e2a72be",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 9,
+    "file": "ad-auditor/screen_009.png",
+    "sha256": "563a5658876ad8ae75b08e298f5db2a5b9d7711438c2d2fd85b364d39e5df5b9",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 10,
+    "file": "ad-auditor/screen_010.png",
+    "sha256": "a9ec04d054feacf86108600b362d8354a0ca89c9a1fe47183d49e5597c6b21fc",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 11,
+    "file": "ad-auditor/screen_011.png",
+    "sha256": "3f90777c11a4c859202cf437b2b15228fd05ec9ecad9fc6e38ad35b93dc074e5",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 12,
+    "file": "ad-auditor/screen_012.png",
+    "sha256": "30e748dd74ccb489334ea224e7cc12bc87428cc9338876a43edfb0aea7f84680",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 13,
+    "file": "ad-auditor/screen_013.png",
+    "sha256": "148617d5befcf8b7fa50cbc4dad75e2dc55f1f808eebb29eedb2de4a3251d8ad",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 14,
+    "file": "ad-auditor/screen_014.png",
+    "sha256": "154b68b40008b89e70d0db4974f5589bc10c842a5c3708356a0a1bf5bbc835d4",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 15,
+    "file": "ad-auditor/screen_015.png",
+    "sha256": "2b89d70711545cf9bd1c116aed500933ddd0c44b75fe7421ec2b9b7b69da8bd4",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 16,
+    "file": "ad-auditor/screen_016.png",
+    "sha256": "2786c00ccc4c3fd5a5fb7bb80e9450f9f7dea1eb9c7a41ba2cb227c0367f5463",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 17,
+    "file": "ad-auditor/screen_017.png",
+    "sha256": "29cfcbea5999df51acb647452634dfda81a5a14009bce4810cc0f33496a9c058",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 18,
+    "file": "ad-auditor/screen_018.png",
+    "sha256": "6bf14990c82004b01fa987a6fcd5f854e06a83a696dbb11427f082be3feb6066",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 19,
+    "file": "ad-auditor/screen_019.png",
+    "sha256": "c1e6b9c27bd2f63a635254a42ed95d4f41a5940c5150fd1694ebd1aba99f4c7b",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 20,
+    "file": "ad-auditor/screen_020.png",
+    "sha256": "7d000fdc865700c7ff8c8344045badeff226b0427dce2e2af4e0cff57a194aae",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 21,
+    "file": "ad-auditor/screen_021.png",
+    "sha256": "a44c6c2fa8a8313478ef542f31f9682bb1e40a9b8585f87e0a482f18f1b3f757",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 22,
+    "file": "ad-auditor/screen_022.png",
+    "sha256": "6fd615076cea994a21cb0fb6cd900f75a21c3cf01474a011dd4d273687d7063d",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 23,
+    "file": "ad-auditor/screen_023.png",
+    "sha256": "c0c2c1ff56519304701407ec6fc7e9f1fa9cd9544509e7af3c0aa99da0625e5a",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 24,
+    "file": "ad-auditor/screen_024.png",
+    "sha256": "7206d9bf331f358a26330e80f284828680b1f35ea547f65acb447a6d242a3e9c",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 25,
+    "file": "ad-auditor/screen_025.png",
+    "sha256": "89d8219d2630d226e5aca8740cf77f77abe8886df32bcbe38fc4247c66f130fe",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 26,
+    "file": "ad-auditor/screen_026.png",
+    "sha256": "34710f4b2d19f42014b1f45bf1af4194e24ed411436572b76728e29e1955ceba",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 27,
+    "file": "ad-auditor/screen_027.png",
+    "sha256": "c033a78e7088f1e26fdc6be6aa545f7d0b39014b24124dfa1fb21935af74cd2d",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 28,
+    "file": "ad-auditor/screen_028.png",
+    "sha256": "1d4a8e173e1a1495a5ba9437c21b98308b74c92cf9e158f8bcec4935161a1946",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 29,
+    "file": "ad-auditor/screen_029.png",
+    "sha256": "0cb7b6de1948525ceb03efdc703c18ef522abd50d9294eab15ac4163089b2ea3",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 30,
+    "file": "ad-auditor/screen_030.png",
+    "sha256": "b5e656fcd47e8631146390fa48f6a1bad64472dc4e28738cf9e0fe0d35b114f7",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 31,
+    "file": "ad-auditor/screen_031.png",
+    "sha256": "93741a0537daf7886109e7eee230dd10349f6fca5ccb89ed6d7a12f422860ef7",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 32,
+    "file": "ad-auditor/screen_032.png",
+    "sha256": "b7ee994847af2816e1b3999168869c2b7a369d7709cc8d90e5e229bddb7f6545",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 33,
+    "file": "ad-auditor/screen_033.png",
+    "sha256": "ba8aa0c5b6298e598eb71cd823dfcfa01dd15912052c6ff261e7c0ec09b46e0e",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 34,
+    "file": "ad-auditor/screen_034.png",
+    "sha256": "8458281809824059c06240eb0fe8e5824f63369124ed8e71d74c86134eb528c4",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 35,
+    "file": "ad-auditor/screen_035.png",
+    "sha256": "2c5bb33eddd9f2e6d17bdcddce26fb7e536620c01b2c2e53a130fe61eca2df7e",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 36,
+    "file": "ad-auditor/screen_036.png",
+    "sha256": "38a426bb1b091b703f4d2c748aa94aa3a9a48c59fdd3fc4da4e967231b8334a5",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 37,
+    "file": "ad-auditor/screen_037.png",
+    "sha256": "fc6260cd21e855ce50826a1964bd1b1b410eb730f767db0647457d426dabd3c0",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 38,
+    "file": "ad-auditor/screen_038.png",
+    "sha256": "1cc7fc249275ec02032eeec162b558c33831db74a731d95f1155fbd42bd19c11",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 39,
+    "file": "ad-auditor/screen_039.png",
+    "sha256": "987373c46fce4a6a2d139248401aada17520bfcb4bcb2cd01849bf92f42c0915",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 40,
+    "file": "ad-auditor/screen_040.png",
+    "sha256": "ea4f7a83d838b915c93797291d0fcc721a7505fa1aa5e51bb17297c799456047",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 41,
+    "file": "ad-auditor/screen_041.png",
+    "sha256": "a8de7ebe277f8afbdbd6ff79291e388f1a9215926de9f7872c62c14fae022e0f",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 42,
+    "file": "ad-auditor/screen_042.png",
+    "sha256": "309bf186ea1d63ff3e90b31748098cd0e41c7c3432cf3f4b6742873fb555b018",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 43,
+    "file": "ad-auditor/screen_043.png",
+    "sha256": "7dabd726ebb8c6fa5e7b15dd104e1f385fc3f6f1d4a6ddee27709de562243d5b",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 44,
+    "file": "ad-auditor/screen_044.png",
+    "sha256": "5ddfb25680e7e1fa99bd8f1f9335a63823df44a5e07ee07b6e0b9af4bc12965e",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 45,
+    "file": "ad-auditor/screen_045.png",
+    "sha256": "9758dec180778fb1fbbbdc389da6963fb0c838ff4fe4659de34c77a20204d2dc",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 46,
+    "file": "ad-auditor/screen_046.png",
+    "sha256": "3c8dc8e7941fa871e5912955785f2f041c602a000456d727518fe1f83c59291d",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 47,
+    "file": "ad-auditor/screen_047.png",
+    "sha256": "501cffa48b9a951e3ca534f8bf1d8c65cc9d4066e184fbb5e0f348f7a737a505",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 48,
+    "file": "ad-auditor/screen_048.png",
+    "sha256": "e1e61c8363eba8e0da67d58b689472e888d4eac57b884ad77edb3564ae0d25ce",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 49,
+    "file": "ad-auditor/screen_049.png",
+    "sha256": "dbd803415e0ae5c8968aa3f6433c9a1e04d0ddde1ede4a0bde39535deedf4c1b",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 50,
+    "file": "ad-auditor/screen_050.png",
+    "sha256": "c4a91bed0747b258136bb3e0cfa9943ffc599be27ee5ad678960c1a782b2ac5e",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 51,
+    "file": "ad-auditor/screen_051.png",
+    "sha256": "280bd52291d30bf4fd0466a36892825615a1703e8398c3b78b6b680f25677c1b",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 52,
+    "file": "ad-auditor/screen_052.png",
+    "sha256": "301251784b2847432008d1ea80be5a7a458419bcb6ed5177b75050d6e94e469b",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 53,
+    "file": "ad-auditor/screen_053.png",
+    "sha256": "b53492ce90fbb907b50d419462b8a745dbcea25c3d0025c9df42c9f367526683",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 54,
+    "file": "ad-auditor/screen_054.png",
+    "sha256": "7d320e024e81827f28f4afa3afe5dc4e9a9e05a761307684071565d832107449",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 55,
+    "file": "ad-auditor/screen_055.png",
+    "sha256": "f6ef742fbdcdc04f02de80d4fd92e62d01e67fdf3a4a2eef4c0cfd3c97dd3ecc",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 56,
+    "file": "ad-auditor/screen_056.png",
+    "sha256": "4c8f04f8e730a0509f451f54a5c0ce004e16fdd1c504d174b20695c46fa69ca2",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 57,
+    "file": "ad-auditor/screen_057.png",
+    "sha256": "8e714ef0f2e1488267e0f31c58f6b85406a8376fe95ee467dfc751c1a45a1890",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 58,
+    "file": "ad-auditor/screen_058.png",
+    "sha256": "c9c03f135a36e1b6eef77d123e5961fb01a88cf1f3cbbaa2151bcbd1c5a737ae",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 59,
+    "file": "ad-auditor/screen_059.png",
+    "sha256": "dd7bc2830340a5d7157d2ab596cd76434d4e0787f2950ff36a4fc28a59c498b4",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 60,
+    "file": "ad-auditor/screen_060.png",
+    "sha256": "aa52da752c09a301cec218c72044a2bfe9ade36dad3fe3de9db184d7040b7f26",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 61,
+    "file": "ad-auditor/screen_061.png",
+    "sha256": "09e922e094e7781fe5e37d3537904db8508971c0547f66c70e49834ae298289c",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 62,
+    "file": "ad-auditor/screen_062.png",
+    "sha256": "cb9b59f67d0ea8cb830a4271ff87f7f518b1e238627bd31075ec9c458b0cd9d7",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 63,
+    "file": "ad-auditor/screen_063.png",
+    "sha256": "0d35c219f3338a97adcefabaa8f82cd4274d4543bf5ef3016231e2635ba9ad57",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 64,
+    "file": "ad-auditor/screen_064.png",
+    "sha256": "f0d78cd0deaf187f884fb2f7c1c908c56b350f5bd68fa0c1ec879170ba1fea18",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 65,
+    "file": "ad-auditor/screen_065.png",
+    "sha256": "127f3bc3754ca5e668d4a8507b0e207c50aef748643477bc64fb8397aa40bedb",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 66,
+    "file": "ad-auditor/screen_066.png",
+    "sha256": "4616b7faaa65c272a05e96d79fe4c4b0980b053417772dbcd8285a975e266d5f",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 67,
+    "file": "ad-auditor/screen_067.png",
+    "sha256": "99d103604bb5205d3466a2bb498737bd8bb0408e4d2496166f40886525c7cbf9",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 68,
+    "file": "ad-auditor/screen_068.png",
+    "sha256": "13e71472bcd9564fa1410ddd81b959a7ffdb14c340b539cea204304cc5e61a5e",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 69,
+    "file": "ad-auditor/screen_069.png",
+    "sha256": "a0f5d3c041db61dd63d4c1b17070a8d87467442a214662e69927c54282367658",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 70,
+    "file": "ad-auditor/screen_070.png",
+    "sha256": "eb715f5743c3953bcca09b13373fa3a6cd5fb62ef1082d38021e97e6c65b9abe",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 71,
+    "file": "ad-auditor/screen_071.png",
+    "sha256": "10b844cc64ab9cf0b36bc1e8ffe4850f38ee951db6909a223267b1ab9fb0f123",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 72,
+    "file": "ad-auditor/screen_072.png",
+    "sha256": "62ef525c12f00c47740d5d860b9f89ceafff78efd2993fc749ffb1742bad4d2d",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 73,
+    "file": "ad-auditor/screen_073.png",
+    "sha256": "373fe87606423c16f482081297689f4a290902bb1dd2f6f78c8318de0aa0e682",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 74,
+    "file": "ad-auditor/screen_074.png",
+    "sha256": "8b98bcc88159466fcf6ef3a988d8d8ccbc53c731e96dd2bb4327dfb0394fae85",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  },
+  {
+    "number": 75,
+    "file": "ad-auditor/screen_075.png",
+    "sha256": "9033363596d94cf57451c8b6e01edce3139d6dd3e302710ec01892d2c3fa54d3",
+    "width": 2560,
+    "height": 1440,
+    "synthetic": true
+  }
+]

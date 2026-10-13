@@ -1,0 +1,6074 @@
+{
+  "slug": "ad-auditor-v1",
+  "title": "🔍 Active Directory: Denetçi Gözüyle",
+  "description": "75 Ekran Görüntüsü • 75 Denetim Kararı • Sıfırdan Active Directory\n\nBir şirketin Active Directory ortamını denetlemekle görevlendirildin! Kullanıcı hesaplarını, yönetici yetkilerini, güvenlik gruplarını, parolaları, Group Policy ayarlarını ve şüpheli olayları inceleyeceksin. Active Directory bilmiyor olsan bile sorun değil; her adımda öğrenerek ilerleyeceksin.",
+  "modules": [
+    "🏢 Active Directory ile Tanışma",
+    "👤 Kullanıcılar, Gruplar ve Yetkiler",
+    "🔐 Parolalar ve Group Policy",
+    "🚨 Loglar, Güvenlik ve Şüpheli İşlemler",
+    "🕵️ Gerçek Active Directory Denetimi"
+  ],
+  "questions": [
+    {
+      "external_id": "ad-auditor-v1-001",
+      "number": 1,
+      "chapter": 1,
+      "kind": "image",
+      "topic": "Merkezi dizin",
+      "context": "Harun (IT Müdürü) eğitim labının yönetim ekranını açtı. Sol ağacı ve sağdaki nesne türlerini incele.",
+      "prompt": "Bu ekran hangi işi merkezi olarak yapmaya yardımcı olur?",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Bu bilgisayarın yerel kullanıcılarını tek başına yönetmek"
+        },
+        {
+          "id": "k3",
+          "text": "Yalnız e-posta dağıtım listelerini düzenlemek"
+        },
+        {
+          "id": "k4",
+          "text": "Ağ cihazlarının performans değerlerini izlemek"
+        },
+        {
+          "id": "k1",
+          "text": "Kullanıcı, bilgisayar ve erişim gruplarını yönetmek"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Üç nesne türü dizinde birlikte görünüyor.",
+        "k2": "Domain ağacı ve dizin nesneleri yalnız yerel hesap yönetimi değildir.",
+        "k3": "Ekranda kullanıcı ve bilgisayar nesneleri de bulunuyor.",
+        "k4": "Bu ekran kapasite izleme paneli değil, dizin yönetim aracıdır."
+      },
+      "explanation": "💡 Active Directory bilgisi\nActive Directory Domain Services kurumsal kullanıcı, bilgisayar ve grupları bir dizinde tutar. ADUC bu nesneleri yönetmek için kullanılan araçlardan biridir.\n\n🔍 Denetçi gözüyle\nMerkezi bir yanlış yetki çok sayıda sisteme yansıyabilir; bu yüzden nesne ve erişim yapısı denetimde önemlidir.\n\n💼 Gerçek iş hayatında\nÖnce hangi domain ve araçta olduğuna bak; tek bir bilgisayardaki yerel listeyle karıştırma.",
+      "hint": "Dizin, nesneler ve özellikleri arasında ilişkiler kurar.",
+      "difficulty": "beginner",
+      "goals": [
+        "Merkezi dizin"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 1,
+      "card_pages": [],
+      "evidence": {
+        "tool": "aduc",
+        "title": "Active Directory Users and Computers",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "ayse.yilmaz",
+            "User",
+            "Finance"
+          ],
+          [
+            "PC-014",
+            "Computer",
+            "Finance desktop"
+          ],
+          [
+            "GG_Finance_Read",
+            "Security Group",
+            "Shared folder read"
+          ]
+        ],
+        "fields": [],
+        "tree": [
+          "corp.local",
+          "Builtin",
+          "Computers",
+          "Users",
+          "Finance",
+          "IT"
+        ],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_001.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-002",
+      "number": 2,
+      "chapter": 1,
+      "kind": "multi_select",
+      "topic": "Nesne türleri",
+      "context": "Sağ listede farklı simgeler ve Type sütunu var. İki satır insan hesabı, biri cihaz, biri grup.",
+      "prompt": "İnsan kullanıcı hesabı olan iki satırı seç.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "GG_Finance_Read"
+        },
+        {
+          "id": "k1",
+          "text": "ayse.yilmaz"
+        },
+        {
+          "id": "k3",
+          "text": "PC-014"
+        },
+        {
+          "id": "k2",
+          "text": "emre.kaya"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "feedback": {
+        "k1": "Type sütunu User.",
+        "k2": "Type sütunu User.",
+        "k3": "Type sütunu Computer; insan hesabı değildir.",
+        "k4": "Bu bir gruptur; üyeleri ayrı nesnelerdir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nUser, Computer ve Group farklı nesne türleridir. Nesne adına değil tür sütununa bakmak ilk güvenilir adımdır.\n\n🔍 Denetçi gözüyle\nKullanıcı evrenini çıkarırken cihaz ve grup kayıtlarını dahil etmek test sonucunu bozabilir.\n\n💼 Gerçek iş hayatında\nHR listesiyle eşleştirmede önce gerçekten kullanıcı nesnelerini seç.",
+      "hint": "Type sütunu kaydın ne olduğunu açıklar.",
+      "difficulty": "beginner",
+      "goals": [
+        "Nesne türleri"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 2,
+      "card_pages": [],
+      "evidence": {
+        "tool": "aduc",
+        "title": "corp.local / Users",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "ayse.yilmaz",
+            "User",
+            "Finance analyst"
+          ],
+          [
+            "emre.kaya",
+            "User",
+            "Operations"
+          ],
+          [
+            "PC-014",
+            "Computer",
+            "Desktop"
+          ],
+          [
+            "GG_Finance_Read",
+            "Security Group",
+            "Read role"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_002.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-003",
+      "number": 3,
+      "chapter": 1,
+      "kind": "choice",
+      "topic": "Domain sınırı",
+      "context": "ADUC sol ağacında corp.local görünüyor. Yerel makine adı LAPTOP-014.",
+      "prompt": "“corp.local burada domain adıdır.” Doğru mu?",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Doğru"
+        },
+        {
+          "id": "k2",
+          "text": "Yanlış"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Sol ağaçtaki dizin domain adıdır.",
+        "k2": "Yerel bilgisayar adı ayrı; ekran corp.local domainini gösteriyor.",
+        "k3": "Domain ve bilgisayar adının aynı olması gerekmez.",
+        "k4": "AD domain adı ile e-posta alanı aynı olmak zorunda değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nDomain, dizin nesnelerinin ve yönetiminin önemli bir sınırıdır. Bir bilgisayar adıyla aynı kavram değildir.\n\n🔍 Denetçi gözüyle\nKanıtı hangi domain için aldığını kaydet; başka ortamın çıktısını hedef evren diye kullanma.\n\n💼 Gerçek iş hayatında\nBir kurumun birden fazla domaini olabilir. Kapsamı sistem adıyla doğrula.",
+      "hint": "Sol ağaç hangi dizin alanında olduğunu gösterir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Domain sınırı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 3,
+      "card_pages": [],
+      "evidence": {
+        "tool": "aduc",
+        "title": "Active Directory Users and Computers",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "Users",
+            "Container",
+            "Default user container"
+          ],
+          [
+            "Computers",
+            "Container",
+            "Default computer container"
+          ]
+        ],
+        "fields": [],
+        "tree": [
+          "corp.local",
+          "Builtin",
+          "Users",
+          "Computers"
+        ],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_003.png",
+      "presentation": "true_false"
+    },
+    {
+      "external_id": "ad-auditor-v1-004",
+      "number": 4,
+      "chapter": 1,
+      "kind": "scenario",
+      "topic": "Domain Controller",
+      "context": "Harun (IT Müdürü) Domain Controllers OU’sunu açtı. Listede DC01 ve DC02 var.",
+      "prompt": "Bu listeden hangi sonuç çıkarılabilir?",
+      "options": [
+        {
+          "id": "k1",
+          "text": "İki domain controller bilgisayar nesnesi listeleniyor"
+        },
+        {
+          "id": "k3",
+          "text": "Kurumdaki tüm Windows sunucuları yalnız bunlardır"
+        },
+        {
+          "id": "k2",
+          "text": "İki sunucunun da şu an sağlıklı çalıştığı kanıtlandı"
+        },
+        {
+          "id": "k4",
+          "text": "Bu sunucular normal kullanıcı hesabıdır"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Ekranda iki nesne bu OU içinde görünür.",
+        "k2": "Liste nesne varlığını gösterir; hizmet sağlığını kanıtlamaz.",
+        "k3": "OU listesi tüm sunucu envanteri değildir.",
+        "k4": "Type sütunu Computer gösteriyor."
+      },
+      "explanation": "💡 Active Directory bilgisi\nDomain controller, AD DS hizmetini çalıştıran ve kimlik doğrulama gibi dizin işlevlerine katılan sunucudur. Liste, hizmetin anlık sağlığı değildir.\n\n🔍 Denetçi gözüyle\nVarlık kanıtı ile çalışırlık kanıtını ayır.\n\n💼 Gerçek iş hayatında\nKurtarma ve erişim kapsamını belirlerken DC listesini doğrula; sağlık için ayrıca uygun test yap.",
+      "hint": "Bir nesnenin listede görünmesi, hizmetinin sağlıklı olduğunu tek başına göstermez.",
+      "difficulty": "beginner",
+      "goals": [
+        "Domain Controller"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 4,
+      "card_pages": [],
+      "evidence": {
+        "tool": "aduc",
+        "title": "corp.local / Domain Controllers",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "DC01",
+            "Computer",
+            "Domain controller"
+          ],
+          [
+            "DC02",
+            "Computer",
+            "Domain controller"
+          ]
+        ],
+        "fields": [],
+        "tree": [
+          "corp.local",
+          "Domain Controllers",
+          "Users",
+          "Computers"
+        ],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_004.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-005",
+      "number": 5,
+      "chapter": 1,
+      "kind": "fill_blank",
+      "topic": "Organizational Unit",
+      "context": "Finance satırının Type alanını oku. Bu yapı nesneleri bölüm bazında düzenlemek için kullanılıyor.",
+      "prompt": "Bu nesne türünün yaygın iki harfli kısaltması nedir?",
+      "options": [],
+      "answer": [
+        "OU",
+        "organizational unit"
+      ],
+      "feedback": {},
+      "explanation": "💡 Active Directory bilgisi\nOU, Organizational Unit anlamına gelir. Nesneleri düzenlemeye, belirli yönetim görevlerini devretmeye ve GPO bağlamaya yarar. Varsayılan Users ve Computers birer container’dır; OU değildir.\n\n🔍 Denetçi gözüyle\nYapının türünü bilmeden GPO kapsamı veya delegasyon değerlendirmesi yapma.\n\n💼 Gerçek iş hayatında\nBölüm adıyla görünen her klasörün OU olduğunu varsayma.",
+      "hint": "OU ve varsayılan container aynı şey değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Organizational Unit"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 5,
+      "card_pages": [],
+      "evidence": {
+        "tool": "aduc",
+        "title": "corp.local",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "Finance",
+            "Organizational Unit",
+            "Finance objects"
+          ],
+          [
+            "Users",
+            "Container",
+            "Default users"
+          ],
+          [
+            "Computers",
+            "Container",
+            "Default computers"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_005.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-006",
+      "number": 6,
+      "chapter": 1,
+      "kind": "sentence_order",
+      "topic": "Kullanıcı özelliklerini açma",
+      "context": "Harun senden listede görünen ayse.yilmaz hesabının Account sekmesini incelemeni istedi. Henüz bir kayıt seçmedin.",
+      "prompt": "Bu ekranı incelemek için adımları doğru sıraya koy.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "ayse.yilmaz kullanıcı nesnesini seç"
+        },
+        {
+          "id": "k1",
+          "text": "Doğru domain ve OU konumunu doğrula"
+        },
+        {
+          "id": "k4",
+          "text": "Account sekmesini incele"
+        },
+        {
+          "id": "k3",
+          "text": "Properties penceresini aç"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "feedback": {
+        "k1": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k2": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k3": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k4": "Bu adım önceki incelemenin sonucuna bağlıdır."
+      },
+      "explanation": "💡 Active Directory bilgisi\nADUC’de bir nesnenin özellikleri seçilen kayda aittir. Account sekmesi oturum ve hesap seçenekleri içerir.\n\n🔍 Denetçi gözüyle\nYanlış nesnenin ekranını kanıt diye almak kolay bir başlangıç hatasıdır.\n\n💼 Gerçek iş hayatında\nEkran kanıtında hesap adını ve domain konumunu birlikte tut.",
+      "hint": "Önce hangi nesneyi incelediğini doğrula.",
+      "difficulty": "beginner",
+      "goals": [
+        "Kullanıcı özelliklerini açma"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 6,
+      "card_pages": [],
+      "evidence": {
+        "tool": "aduc",
+        "title": "corp.local / Finance",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "ayse.yilmaz",
+            "User",
+            "Finance"
+          ],
+          [
+            "PC-014",
+            "Computer",
+            "Desktop"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": "Context menu: Properties → tabs: General | Account | Member Of"
+      },
+      "image": "ad-auditor/screen_006.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-007",
+      "number": 7,
+      "chapter": 1,
+      "kind": "image",
+      "topic": "Devre dışı hesap",
+      "context": "Üç hesap var. Enabled sütunu açık bir export görünümüdür; isim benzerliğine göre karar verme.",
+      "prompt": "Hangi hesap devre dışı?",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Üç hesabın tamamı"
+        },
+        {
+          "id": "k2",
+          "text": "ayse.yilmaz"
+        },
+        {
+          "id": "k1",
+          "text": "emre.kaya"
+        },
+        {
+          "id": "k3",
+          "text": "selin.demir"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Enabled=False görünüyor.",
+        "k2": "Enabled=True; devre dışı değildir.",
+        "k3": "Enabled=True; devre dışı değildir.",
+        "k4": "Yalnız bir satır False gösteriyor."
+      },
+      "explanation": "💡 Active Directory bilgisi\nEnabled=False hesabın etkin olmadığını gösterir. Bu, nesnenin silindiği veya bütün aktif oturumlarının sona erdiği anlamına gelmez.\n\n🔍 Denetçi gözüyle\nKapanış testinde hesap durumu ile ilgili oturum ve uygulama erişimini ayrı doğrula.\n\n💼 Gerçek iş hayatında\nAyrılan çalışanı listede görmek tek başına aktif erişim kanıtı değildir; durumu oku.",
+      "hint": "True/False sütunu hesabın etkinlik durumudur.",
+      "difficulty": "beginner",
+      "goals": [
+        "Devre dışı hesap"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 7,
+      "card_pages": [],
+      "evidence": {
+        "tool": "powershell",
+        "title": "Get-ADUser -Filter * | Select Name,Enabled",
+        "headers": [
+          "Name",
+          "Enabled",
+          "DistinguishedName"
+        ],
+        "rows": [
+          [
+            "ayse.yilmaz",
+            "True",
+            "CN=Ayse,OU=Finance,DC=corp,DC=local"
+          ],
+          [
+            "emre.kaya",
+            "False",
+            "CN=Emre,OU=Operations,DC=corp,DC=local"
+          ],
+          [
+            "selin.demir",
+            "True",
+            "CN=Selin,OU=IT,DC=corp,DC=local"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_007.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-008",
+      "number": 8,
+      "chapter": 1,
+      "kind": "drag_select",
+      "topic": "Bilgisayar nesnesi",
+      "context": "Denetim evrenine yalnız cihazları alacaksın. Sağdaki Type sütununu kullan.",
+      "prompt": "Hangi satır bilgisayar nesnesidir?",
+      "options": [
+        {
+          "id": "k1",
+          "text": "PC-025"
+        },
+        {
+          "id": "k2",
+          "text": "ayse.yilmaz"
+        },
+        {
+          "id": "k4",
+          "text": "Finance"
+        },
+        {
+          "id": "k3",
+          "text": "GG_Finance_Read"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Type=Computer.",
+        "k2": "Bu kullanıcı nesnesidir.",
+        "k3": "Bu güvenlik grubudur.",
+        "k4": "Bu OU yapısıdır."
+      },
+      "explanation": "💡 Active Directory bilgisi\nBilgisayarlar da AD içinde hesap/nesne olarak temsil edilir. Cihaz kaydı bir insan kullanıcısı değildir.\n\n🔍 Denetçi gözüyle\nKullanıcı ve cihaz yaşam döngüsü farklı kaynaklardan doğrulanır.\n\n💼 Gerçek iş hayatında\nBilgisayar evrenini varlık envanteriyle; insan hesaplarını HR kaydıyla karşılaştır.",
+      "hint": "Adın biçimi yardımcı olabilir; nesne türü daha güvenilir bir göstergedir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Bilgisayar nesnesi"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 8,
+      "card_pages": [],
+      "evidence": {
+        "tool": "aduc",
+        "title": "corp.local / Finance",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "PC-025",
+            "Computer",
+            "Finance workstation"
+          ],
+          [
+            "ayse.yilmaz",
+            "User",
+            "Finance analyst"
+          ],
+          [
+            "GG_Finance_Read",
+            "Security Group",
+            "Read role"
+          ],
+          [
+            "Finance",
+            "Organizational Unit",
+            "Department OU"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_008.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-009",
+      "number": 9,
+      "chapter": 1,
+      "kind": "multi_select",
+      "topic": "Temel ekran eşleştirme",
+      "context": "ADUC listesi ile seçilen kullanıcı özellikleri yan yana.",
+      "prompt": "Doğru iki araç–bilgi ilişkisini seç.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Account sekmesi → hesap seçeneklerini görmek"
+        },
+        {
+          "id": "k3",
+          "text": "Member Of sekmesi → CPU kullanımını görmek"
+        },
+        {
+          "id": "k1",
+          "text": "ADUC listesi → nesneleri ve türlerini görmek"
+        },
+        {
+          "id": "k4",
+          "text": "General sekmesi → gerçekleşmiş tüm girişleri görmek"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "feedback": {
+        "k1": "Dizin içindeki nesne görünümüdür.",
+        "k2": "Etkinlik ve hesap seçenekleri bu bağlamdadır.",
+        "k3": "Grup üyeliği ekranı işlemci ölçmez.",
+        "k4": "Özellik sekmesi Security log evreni değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nYönetim ekranlarının amaçları farklıdır. Özellikler, üyelik ve olay kayıtlarını aynı kanıt gibi kullanmamak gerekir.\n\n🔍 Denetçi gözüyle\nBir ekranın hangi soruya cevap verebildiğini baştan belirle.\n\n💼 Gerçek iş hayatında\nGiriş olayı için Event Viewer veya uygun log kaynağına geç.",
+      "hint": "Sekme adı ne tür bilgi gördüğünü anlamana yardımcı olur.",
+      "difficulty": "beginner",
+      "goals": [
+        "Temel ekran eşleştirme"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 9,
+      "card_pages": [],
+      "evidence": {
+        "tool": "properties",
+        "title": "ayse.yilmaz Properties",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [],
+        "fields": [
+          [
+            "User logon name",
+            "ayse.yilmaz@corp.local"
+          ],
+          [
+            "Department",
+            "Finance"
+          ],
+          [
+            "Account is disabled",
+            "Unchecked"
+          ]
+        ],
+        "tree": [],
+        "tab": "Account",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_009.png",
+      "presentation": "pair_matching"
+    },
+    {
+      "external_id": "ad-auditor-v1-010",
+      "number": 10,
+      "chapter": 1,
+      "kind": "choice",
+      "topic": "Oluşturma zamanı",
+      "context": "Attribute Editor sekmesi açık. whenCreated ile whenChanged farklı tarihler gösteriyor.",
+      "prompt": "Hesabın oluşturma zamanı hangisidir?",
+      "options": [
+        {
+          "id": "k3",
+          "text": "İki tarih aynı işlemi gösterir"
+        },
+        {
+          "id": "k2",
+          "text": "2026-10-12 14:30"
+        },
+        {
+          "id": "k1",
+          "text": "2026-08-01 09:12"
+        },
+        {
+          "id": "k4",
+          "text": "Oluşturma zamanı bu ekranda yok"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "whenCreated alanının değeridir.",
+        "k2": "Bu whenChanged, yani son değişim değeridir.",
+        "k3": "Farklı özellikler farklı olayları ifade eder.",
+        "k4": "whenCreated açıkça görünür."
+      },
+      "explanation": "💡 Active Directory bilgisi\nwhenCreated oluşturmayı, whenChanged değişikliği gösterir. Oluşturma tarihi kişinin işe başlama tarihine eşit olmak zorunda değildir.\n\n🔍 Denetçi gözüyle\nHR işe giriş ve hesap açılışını ayrı kaynaklarla eşleştir.\n\n💼 Gerçek iş hayatında\nErken açılmış hesap için onay ve kullanım başlangıcını incele.",
+      "hint": "Alan adlarını önce birbirinden ayır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Oluşturma zamanı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 10,
+      "card_pages": [],
+      "evidence": {
+        "tool": "properties",
+        "title": "selin.demir Properties",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [],
+        "fields": [
+          [
+            "whenCreated",
+            "2026-08-01 09:12"
+          ],
+          [
+            "whenChanged",
+            "2026-10-12 14:30"
+          ],
+          [
+            "sAMAccountName",
+            "selin.demir"
+          ],
+          [
+            "objectClass",
+            "user"
+          ]
+        ],
+        "tree": [],
+        "tab": "Attribute Editor",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_010.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-011",
+      "number": 11,
+      "chapter": 1,
+      "kind": "scenario",
+      "topic": "Last Logon sınırı",
+      "context": "DC01 çıktısında son giriş eski, DC02 çıktısında daha yeni. Aynı kullanıcı inceleniyor.",
+      "prompt": "En uygun yorum hangisi?",
+      "options": [
+        {
+          "id": "k4",
+          "text": "İki hesabın parolası farklıdır"
+        },
+        {
+          "id": "k3",
+          "text": "DC02 daha yeni olduğu için DC01 kesin bozuk"
+        },
+        {
+          "id": "k2",
+          "text": "DC01 eski olduğu için hesap kesin kullanılmıyor"
+        },
+        {
+          "id": "k1",
+          "text": "Bu özellik için ilgili DC değerleri birlikte değerlendirilmeli"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "lastLogon replike edilmez; tek DC son kullanımı eksik gösterebilir.",
+        "k2": "DC02 daha yeni kullanım değeri gösteriyor.",
+        "k3": "Fark, replike edilmeyen özelliğin normal davranışı olabilir.",
+        "k4": "Giriş zamanları parola değerlerini göstermez."
+      },
+      "explanation": "💡 Active Directory bilgisi\nlastLogon DC’ler arasında replike edilmez. lastLogonTimestamp ise replike edilen fakat kesin anlık giriş saati için uygun olmayan bir göstergedir.\n\n🔍 Denetçi gözüyle\nEski hesap analizi için özellik türü ve DC kapsamını kayıt altına al.\n\n💼 Gerçek iş hayatında\nTek bir tarihle otomatik silme kararı verme; iş ihtiyacını ve diğer kayıtları da doğrula.",
+      "hint": "Aynı kullanıcı için birden fazla DC sonucu olabilir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Last Logon sınırı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 11,
+      "card_pages": [],
+      "evidence": {
+        "tool": "powershell",
+        "title": "lastLogon comparison — same user, two DCs",
+        "headers": [
+          "DC",
+          "User",
+          "lastLogon (converted)"
+        ],
+        "rows": [
+          [
+            "DC01",
+            "ayse.yilmaz",
+            "2026-09-01 08:10"
+          ],
+          [
+            "DC02",
+            "ayse.yilmaz",
+            "2026-10-12 09:20"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_011.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-012",
+      "number": 12,
+      "chapter": 1,
+      "kind": "image",
+      "topic": "Account Expiration",
+      "context": "Bir danışmanın sözleşmesi 31 Ekim’de bitiyor. Account sekmesindeki bitiş ayarını oku.",
+      "prompt": "Ekranda hangi ayar var?",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Sözleşmenin uzatıldığı kanıtlanmıştır"
+        },
+        {
+          "id": "k1",
+          "text": "Hesap için 31 Ekim 2026 bitiş tarihi tanımlı"
+        },
+        {
+          "id": "k2",
+          "text": "Parola 31 Ekim’de kesin değiştirilecek"
+        },
+        {
+          "id": "k3",
+          "text": "Hesap bugün devre dışıdır"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Account expires alanı bunu gösterir.",
+        "k2": "Hesap bitişi parola değişiminden farklıdır.",
+        "k3": "Disabled işaretli değildir.",
+        "k4": "Teknik ayar sözleşme uzatma onayı değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nAccount Expiration hesabın süre sınırıdır; Password Expiration farklı bir kavramdır.\n\n🔍 Denetçi gözüyle\nDanışman erişiminin iş sözleşmesi ve teknik bitişi uyumlu mu bak.\n\n💼 Gerçek iş hayatında\nSüre uzatılması gerekiyorsa yetkili onayla takip et.",
+      "hint": "Hesap süresi ve parola yaşı farklı kontrollerdir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Account Expiration"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 12,
+      "card_pages": [],
+      "evidence": {
+        "tool": "properties",
+        "title": "danisman.eren Properties",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [],
+        "fields": [
+          [
+            "User logon name",
+            "danisman.eren@corp.local"
+          ],
+          [
+            "Account expires",
+            "End of: 2026-10-31"
+          ],
+          [
+            "Account is disabled",
+            "Unchecked"
+          ],
+          [
+            "Password never expires",
+            "Unchecked"
+          ]
+        ],
+        "tree": [],
+        "tab": "Account",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_012.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-013",
+      "number": 13,
+      "chapter": 1,
+      "kind": "sentence_order",
+      "topic": "Kapsamı doğru kaydetme",
+      "context": "Kanıt ekranı Finance OU’sunu ve iki kullanıcıyı gösteriyor. Bu tüm kurumun listesi değildir.",
+      "prompt": "Bu ekranı incelemek için adımları doğru sıraya koy.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Görüntünün Finance OU’suyla sınırlı olduğunu belirle"
+        },
+        {
+          "id": "k4",
+          "text": "Doğrulanan evrenden örnekleri seç"
+        },
+        {
+          "id": "k3",
+          "text": "Kapsamdaki kullanıcı listesinin tamlığını doğrula"
+        },
+        {
+          "id": "k2",
+          "text": "Test amacına göre gerekli diğer OU kapsamını tanımla"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "feedback": {
+        "k1": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k2": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k3": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k4": "Bu adım önceki incelemenin sonucuna bağlıdır."
+      },
+      "explanation": "💡 Active Directory bilgisi\nOU içinde görünen nesneler, bütün domain evreniyle aynı değildir.\n\n🔍 Denetçi gözüyle\nTamlık doğrulanmadan örneklem sonucu bütün kuruma genellenemez.\n\n💼 Gerçek iş hayatında\nKanıt dosyasına filtreyi, kapsamı ve alınma tarihini yaz.",
+      "hint": "Sol ağaçtaki seçim sağ listenin kapsamını etkiler.",
+      "difficulty": "beginner",
+      "goals": [
+        "Kapsamı doğru kaydetme"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 13,
+      "card_pages": [],
+      "evidence": {
+        "tool": "aduc",
+        "title": "corp.local / Finance",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "ayse.yilmaz",
+            "User",
+            "Finance"
+          ],
+          [
+            "burak.akin",
+            "User",
+            "Finance"
+          ]
+        ],
+        "fields": [],
+        "tree": [
+          "corp.local",
+          "Finance",
+          "Operations",
+          "IT"
+        ],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_013.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-014",
+      "number": 14,
+      "chapter": 1,
+      "kind": "drag_select",
+      "topic": "Yönetim aracı",
+      "context": "Ekranın başlığı ve sol ağacı farklı. Forest ve Group Policy Objects klasörü görünüyor.",
+      "prompt": "Açılan araç hangisidir?",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Yerel Kullanıcılar ve Gruplar"
+        },
+        {
+          "id": "k3",
+          "text": "Windows Event Viewer"
+        },
+        {
+          "id": "k1",
+          "text": "Group Policy Management"
+        },
+        {
+          "id": "k2",
+          "text": "Active Directory Users and Computers"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Başlık ve GPO yapısı bu aracı gösteriyor.",
+        "k2": "Bu araç nesne listesini yönetir; görünen başlık farklıdır.",
+        "k3": "Olay ID ve log listesi bu ekranda değil.",
+        "k4": "Forest ve domain politikası yerel kullanıcı konsolu değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nGPMC, GPO’ları ve bağlantılarını yönetmek için kullanılır. ADUC ise kullanıcı, grup ve bilgisayar nesneleriyle çalışır.\n\n🔍 Denetçi gözüyle\nDoğru kontrol için doğru yönetim aracının kanıtını iste.\n\n💼 Gerçek iş hayatında\nBir GPO ayarını kullanıcı listesi ekranıyla doğrulamaya çalışma.",
+      "hint": "Pencere başlığı güçlü bir ilk ipucudur.",
+      "difficulty": "beginner",
+      "goals": [
+        "Yönetim aracı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 14,
+      "card_pages": [],
+      "evidence": {
+        "tool": "gpmc",
+        "title": "Group Policy Management",
+        "headers": [
+          "Name",
+          "Link Enabled",
+          "GPO Status"
+        ],
+        "rows": [
+          [
+            "Default Domain Policy",
+            "Yes",
+            "Enabled"
+          ],
+          [
+            "Workstation Baseline",
+            "Yes",
+            "Enabled"
+          ]
+        ],
+        "fields": [],
+        "tree": [
+          "Forest: corp.local",
+          "Domains",
+          "corp.local",
+          "Group Policy Objects",
+          "Group Policy Results"
+        ],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_014.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-015",
+      "number": 15,
+      "chapter": 1,
+      "kind": "image",
+      "topic": "Denetim amacı",
+      "context": "İlk bölümün sonunda üç nesne türünü ve bölüm yapısını tanıyorsun. Harun erişim testinin amacını soruyor.",
+      "prompt": "Bu ekran için en uygun denetim amacı nedir?",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Yalnız nesne sayısının artmasını başarı saymak"
+        },
+        {
+          "id": "k1",
+          "text": "Kimlik ve erişim yapısının iş ihtiyacına uygunluğunu incelemek"
+        },
+        {
+          "id": "k4",
+          "text": "Kullanıcı adlarına bakarak çalışan performansı ölçmek"
+        },
+        {
+          "id": "k2",
+          "text": "Listede nesne varsa bütün yetkileri uygun saymak"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Dizin nesneleri ve roller bu kontrol amacına bağlanır.",
+        "k2": "Varlık, iş ihtiyacı veya onay kanıtı değildir.",
+        "k3": "Daha fazla nesne daha iyi erişim kontrolü anlamına gelmez.",
+        "k4": "Ad ve nesne listesi iş performansı kanıtı değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nAD görünümü kimlik ve rol yapısını anlamanın başlangıcıdır. Erişimin uygunluğu için iş rolü ve onay gerekir.\n\n🔍 Denetçi gözüyle\nDenetçi ekrandaki nesneyi iş ihtiyacı ve kontrol ölçütüne bağlar.\n\n💼 Gerçek iş hayatında\nArtık nesne türlerini tanıyorsun; sonraki bölümde grup üyeliklerine geçeceksin.",
+      "hint": "Kimlik listesi erişim değerlendirmesinin başlangıcıdır; tamamı değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Denetim amacı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 15,
+      "card_pages": [],
+      "evidence": {
+        "tool": "aduc",
+        "title": "corp.local / Finance",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "ayse.yilmaz",
+            "User",
+            "Finance analyst"
+          ],
+          [
+            "GG_Finance_Read",
+            "Security Group",
+            "Folder read"
+          ],
+          [
+            "PC-025",
+            "Computer",
+            "Finance workstation"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_015.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-016",
+      "number": 16,
+      "chapter": 2,
+      "kind": "image",
+      "topic": "Security group",
+      "context": "GG_Finance_Read grubunun General sekmesi açık. Grup türü ve kapsamı farklı satırlarda.",
+      "prompt": "Erişim izni vermek için kullanılan tür hangisi?",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Distribution"
+        },
+        {
+          "id": "k3",
+          "text": "Global"
+        },
+        {
+          "id": "k1",
+          "text": "Security"
+        },
+        {
+          "id": "k4",
+          "text": "Finance"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Bu tür güvenlik izinlerinde kullanılabilir.",
+        "k2": "Dağıtım grubu erişim izni vermek için tasarlanmamıştır.",
+        "k3": "Global tür değil, grup kapsamıdır.",
+        "k4": "Bu bir iş bölümü adıdır."
+      },
+      "explanation": "💡 Active Directory bilgisi\nSecurity grupları izin atamalarında kullanılabilir. Global, Domain Local ve Universal ise grup kapsamlarıdır.\n\n🔍 Denetçi gözüyle\nGrup türü ile kapsamını ayrı değerlendir.\n\n💼 Gerçek iş hayatında\nKlasör erişimini yalnız grup adına bakarak uygun sayma; gerçek izin bağını incele.",
+      "hint": "Group type ile Group scope farklıdır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Security group"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 16,
+      "card_pages": [],
+      "evidence": {
+        "tool": "group",
+        "title": "GG_Finance_Read Properties",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [],
+        "fields": [
+          [
+            "Group scope",
+            "Global"
+          ],
+          [
+            "Group type",
+            "Security"
+          ]
+        ],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_016.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-017",
+      "number": 17,
+      "chapter": 2,
+      "kind": "multi_select",
+      "topic": "Grup üyeleri",
+      "context": "GG_Finance_Read grubunun Members sekmesinde iki kişi ve iç içe bir grup var.",
+      "prompt": "Doğrudan üye olan iki kullanıcıyı seç.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "GG_Finance_Team bir kullanıcıdır"
+        },
+        {
+          "id": "k2",
+          "text": "burak.akin"
+        },
+        {
+          "id": "k4",
+          "text": "emre.kaya"
+        },
+        {
+          "id": "k1",
+          "text": "ayse.yilmaz"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "feedback": {
+        "k1": "Members listesinde user olarak bulunuyor.",
+        "k2": "Members listesinde user olarak bulunuyor.",
+        "k3": "Bu satırın sınıfı group.",
+        "k4": "Listede bu isim bulunmuyor."
+      },
+      "explanation": "💡 Active Directory bilgisi\nBir güvenlik grubunda kullanıcılar ve başka gruplar bulunabilir. İç içe üyelik etkili erişimi genişletebilir.\n\n🔍 Denetçi gözüyle\nDoğrudan üye listesi her zaman bütün etkili kullanıcıları göstermez.\n\n💼 Gerçek iş hayatında\nİç içe grubun üyelerini de açarak erişim evrenini tamamla.",
+      "hint": "Object Class insan kullanıcı ile grubu ayırır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Grup üyeleri"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 17,
+      "card_pages": [],
+      "evidence": {
+        "tool": "group",
+        "title": "GG_Finance_Read Properties",
+        "headers": [
+          "Name",
+          "Object Class",
+          "Location"
+        ],
+        "rows": [
+          [
+            "ayse.yilmaz",
+            "user",
+            "Finance"
+          ],
+          [
+            "burak.akin",
+            "user",
+            "Finance"
+          ],
+          [
+            "GG_Finance_Team",
+            "group",
+            "Groups"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "Members",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_017.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-018",
+      "number": 18,
+      "chapter": 2,
+      "kind": "choice",
+      "topic": "Distribution group",
+      "context": "Mail_Announcements grubunun türü Distribution.",
+      "prompt": "“Bu grup standart dosya izinlerini vermek için Security grubuyla aynı işlevi görür.” Doğru mu?",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Doğru"
+        },
+        {
+          "id": "k1",
+          "text": "Yanlış"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Distribution grubu güvenlik izin ataması için kullanılmaz.",
+        "k2": "E-posta dağıtımı güvenlik izniyle aynı işlev değildir.",
+        "k3": "Üye sayısı türün işlevini değiştirmez.",
+        "k4": "Kararı ad değil, gerçek tür belirler."
+      },
+      "explanation": "💡 Active Directory bilgisi\nDistribution grupları ileti dağıtımı amacıyla kullanılır. Tür değişimi ve izin bağlantısı ayrıca değerlendirilir.\n\n🔍 Denetçi gözüyle\nErişim testinde yanlış grup evrenini seçme.\n\n💼 Gerçek iş hayatında\nİş ekiplerinin e-posta grupları ile erişim rollerini karıştırdığı durumları netleştir.",
+      "hint": "İşlevi gösteren alan Group type’dır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Distribution group"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 18,
+      "card_pages": [],
+      "evidence": {
+        "tool": "group",
+        "title": "Mail_Announcements Properties",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [],
+        "fields": [
+          [
+            "Group scope",
+            "Universal"
+          ],
+          [
+            "Group type",
+            "Distribution"
+          ]
+        ],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_018.png",
+      "presentation": "true_false"
+    },
+    {
+      "external_id": "ad-auditor-v1-019",
+      "number": 19,
+      "chapter": 2,
+      "kind": "scenario",
+      "topic": "Domain Admins",
+      "context": "Domain Admins Members listesinde stajyer.destek hesabı var. İş rolü ve onayı bu ekranda bulunmuyor.",
+      "prompt": "İlk denetim adımın ne olur?",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Adına bakıp kesin kötüye kullanım yazmak"
+        },
+        {
+          "id": "k3",
+          "text": "Harun onayladı deyince başka kanıt aramamak"
+        },
+        {
+          "id": "k4",
+          "text": "Denetçi hesabın üyeliğini izinsiz kaldırmak"
+        },
+        {
+          "id": "k1",
+          "text": "İş ihtiyacını, onayı ve kullanımını doğrulamak"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Yüksek yetki şüpheli görünür ama bağlam kanıtı gerekir.",
+        "k2": "Ad tek başına kişinin niyetini kanıtlamaz.",
+        "k3": "Beyan, kapsam ve iş ihtiyacının doğrulanmasının yerine geçmez.",
+        "k4": "Kontrol uygulama yetkisi yönetimdedir; denetim bunu tek başına yapmaz."
+      },
+      "explanation": "💡 Active Directory bilgisi\nDomain Admins çok geniş domain yetkileri sağlar. İhtiyaç ve onay açıkça sınırlandırılmalıdır.\n\n🔍 Denetçi gözüyle\nŞüpheli üyelik inceleme sinyalidir; bulgu için ölçüt ve kanıt gerekir.\n\n💼 Gerçek iş hayatında\nAyrı yönetici kimliği ve sınırlı görev delegasyonu gibi seçenekleri yönetimle değerlendir.",
+      "hint": "Bir hesabın adı gerçek iş rolünü tek başına kanıtlamaz.",
+      "difficulty": "beginner",
+      "goals": [
+        "Domain Admins"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 19,
+      "card_pages": [],
+      "evidence": {
+        "tool": "group",
+        "title": "Domain Admins Properties",
+        "headers": [
+          "Name",
+          "Object Class",
+          "Location"
+        ],
+        "rows": [
+          [
+            "Administrator",
+            "user",
+            "Users"
+          ],
+          [
+            "adm.harun",
+            "user",
+            "Privileged"
+          ],
+          [
+            "adm.eren",
+            "user",
+            "Privileged"
+          ],
+          [
+            "stajyer.destek",
+            "user",
+            "Support"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "Members",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_019.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-020",
+      "number": 20,
+      "chapter": 2,
+      "kind": "fill_blank",
+      "topic": "Domain Users",
+      "context": "ayse.yilmaz Member Of sekmesinde varsayılan grup ve bölüm grubu var.",
+      "prompt": "Ekranda görünen varsayılan domain kullanıcı grubunun adını yaz.",
+      "options": [],
+      "answer": [
+        "Domain Users"
+      ],
+      "feedback": {},
+      "explanation": "💡 Active Directory bilgisi\nDomain Users varsayılan domain kullanıcı grubudur; üyelik doğrudan domain yönetici yetkisi anlamına gelmez.\n\n🔍 Denetçi gözüyle\nBir varsayılan üyeliği ayrıcalık diye raporlamadan gerçek izinleri incele.\n\n💼 Gerçek iş hayatında\nGeniş gruplara verilen kaynak izinlerini ayrıca doğrula.",
+      "hint": "Varsayılan kullanıcı üyeliği ile yönetici üyeliği aynı değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Domain Users"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 20,
+      "card_pages": [],
+      "evidence": {
+        "tool": "properties",
+        "title": "ayse.yilmaz Properties",
+        "headers": [
+          "Name",
+          "Location",
+          "Role"
+        ],
+        "rows": [
+          [
+            "Domain Users",
+            "corp.local/Users",
+            "Primary group"
+          ],
+          [
+            "GG_Finance_Read",
+            "corp.local/Groups",
+            "Read access"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "Member Of",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_020.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-021",
+      "number": 21,
+      "chapter": 2,
+      "kind": "sentence_order",
+      "topic": "Üyelik testi",
+      "context": "Ekranda adm.eren Domain Admins üyesi. Bir denetim kaydı hazırlayacaksın; onay kanıtı henüz yok.",
+      "prompt": "Bu ekranı incelemek için adımları doğru sıraya koy.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Hesabın kimliğini ve üyelik kanıtını kaydet"
+        },
+        {
+          "id": "k3",
+          "text": "Yetkili üyelik onayı ve kapsamını incele"
+        },
+        {
+          "id": "k2",
+          "text": "Hesabın görevini ve gerekli yetkiyi doğrula"
+        },
+        {
+          "id": "k4",
+          "text": "İş ihtiyacı ve kontrol ölçütüyle sonucu değerlendir"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "feedback": {
+        "k1": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k2": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k3": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k4": "Bu adım önceki incelemenin sonucuna bağlıdır."
+      },
+      "explanation": "💡 Active Directory bilgisi\nÜyelik bir teknik durumdur; uygunluğu görev, onay ve kullanım bağlamında anlaşılır.\n\n🔍 Denetçi gözüyle\nKanıtı bulguya dönüştürmeden önce neyin beklendiğini belirle.\n\n💼 Gerçek iş hayatında\nYönetici adını görüp her yetkiyi otomatik uygun sayma.",
+      "hint": "Teknik üyelik ve iş onayı iki ayrı kanıttır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Üyelik testi"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 21,
+      "card_pages": [],
+      "evidence": {
+        "tool": "group",
+        "title": "Domain Admins Properties",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "adm.eren",
+            "User",
+            "Privileged OU"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "Members",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_021.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-022",
+      "number": 22,
+      "chapter": 2,
+      "kind": "image",
+      "topic": "Enterprise Admins",
+      "context": "Forest kökünde Enterprise Admins grubunda iki hesap var.",
+      "prompt": "Bu üyeliği neden ayrıca incelersin?",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Bir dağıtım listesi olduğu için"
+        },
+        {
+          "id": "k1",
+          "text": "Forest düzeyindeki geniş yönetim etkisi nedeniyle"
+        },
+        {
+          "id": "k4",
+          "text": "Her çalışan otomatik üye olduğu için"
+        },
+        {
+          "id": "k2",
+          "text": "Yalnız tek bir kullanıcının klasör erişimini verdiği için"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Bu grup forest genelinde önemli yetkiler taşır.",
+        "k2": "Bu dar kapsam, grubun genel etkisini ifade etmez.",
+        "k3": "Group type Security görünüyor.",
+        "k4": "Ekran iki üyeyi gösteriyor; bütün çalışan üyeliği yok."
+      },
+      "explanation": "💡 Active Directory bilgisi\nForest bir veya daha fazla domain içerebilir. Enterprise Admins forest düzeyinde çok geniş yetkileri olan ayrıcalıklı gruptur.\n\n🔍 Denetçi gözüyle\nEtki alanı büyüdükçe üyelik gerekçesi, süre ve kullanım denetimi önem kazanır.\n\n💼 Gerçek iş hayatında\nGündelik çalışma kimliğiyle forest yönetimi yapılmasını gereklilik açısından sorgula.",
+      "hint": "Kök domain ve forest kapsamı burada önemlidir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Enterprise Admins"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 22,
+      "card_pages": [],
+      "evidence": {
+        "tool": "group",
+        "title": "Enterprise Admins Properties",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "Administrator",
+            "User",
+            "Users"
+          ],
+          [
+            "adm.forestop",
+            "User",
+            "Privileged"
+          ]
+        ],
+        "fields": [
+          [
+            "Group scope",
+            "Universal"
+          ],
+          [
+            "Group type",
+            "Security"
+          ],
+          [
+            "Forest root domain",
+            "corp.local"
+          ]
+        ],
+        "tree": [],
+        "tab": "Members",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_022.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-023",
+      "number": 23,
+      "chapter": 2,
+      "kind": "drag_select",
+      "topic": "En az ayrıcalık",
+      "context": "Yetki matrisinde destek çalışanının işi kullanıcı parola sıfırlama. Gerçek üyelik Domain Admins.",
+      "prompt": "Önce hangi uyumsuzluğu incelersin?",
+      "options": [
+        {
+          "id": "k3",
+          "text": "İş rolünün destek olarak adlandırılmasını"
+        },
+        {
+          "id": "k1",
+          "text": "Dar görev için geniş domain yetkisi verilmesini"
+        },
+        {
+          "id": "k2",
+          "text": "Hesabın kullanıcı nesnesi olarak açılmasını"
+        },
+        {
+          "id": "k4",
+          "text": "Matrisin yalnız bir kullanıcıyı göstermesini"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Görünen görev ile ayrıcalığın kapsamı uyumsuz görünüyor.",
+        "k2": "İnsan için kullanıcı nesnesi açılması tek başına açık değildir.",
+        "k3": "Rol adı sorunun kendisi değildir.",
+        "k4": "Kapsam sınırlı olabilir; somut yetki uyumsuzluğunu yok etmez."
+      },
+      "explanation": "💡 Active Directory bilgisi\nEn az ayrıcalık, görev için gereken yetkiyi vermektir. Bazı AD görevleri OU veya işlem bazında devredilebilir.\n\n🔍 Denetçi gözüyle\nGeniş grup yerine uygun dar yetki mümkün mü, onay ve kontrollerle araştır.\n\n💼 Gerçek iş hayatında\nÇözümü denetçi uygulamaz; kontrol sahibine risk ve seçenekleri sunar.",
+      "hint": "İş görevinin kapsamıyla teknik yetkinin kapsamını karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "En az ayrıcalık"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 23,
+      "card_pages": [],
+      "evidence": {
+        "tool": "powershell",
+        "title": "Role review — support.ozge",
+        "headers": [
+          "User",
+          "Business task",
+          "Current group"
+        ],
+        "rows": [
+          [
+            "support.ozge",
+            "Reset helpdesk users passwords",
+            "Domain Admins"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_023.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-024",
+      "number": 24,
+      "chapter": 2,
+      "kind": "multi_select",
+      "topic": "Ayrı yönetici kimliği",
+      "context": "Harun için iki kimlik var: harun normal çalışma, adm.harun yönetim. Kullanım kaydı bu ayrımı destekliyor.",
+      "prompt": "Doğru iki çıkarımı seç.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "İki kimlik kullanmak bütün riski sıfırlar"
+        },
+        {
+          "id": "k2",
+          "text": "Yönetim için ayrı bir kimlik tanımlanmış"
+        },
+        {
+          "id": "k4",
+          "text": "Normal hesabın bütün erişimleri uygundur"
+        },
+        {
+          "id": "k1",
+          "text": "Normal iş hesabı Domain Admins görünmüyor"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "feedback": {
+        "k1": "Gruplar sütununda böyle bir üyelik yok.",
+        "k2": "adm.harun satırı yönetim amacı gösteriyor.",
+        "k3": "Ayrı kimlik önemli bir kontrol olabilir; mutlak güvence değildir.",
+        "k4": "Bu ekran bütün kaynak izinlerini göstermiyor."
+      },
+      "explanation": "💡 Active Directory bilgisi\nAyrı yönetici kimliği gündelik işte geniş yetki kullanımını azaltabilir. Tek başına yeterli kontrol değildir.\n\n🔍 Denetçi gözüyle\nYetki, onay, oturum kayıtları ve kullanım sınırlarını birlikte incele.\n\n💼 Gerçek iş hayatında\nYönetici hesabıyla e-posta ve internette gündelik çalışma riskini ayrıca değerlendir.",
+      "hint": "Her satırın kullanım amacı ve üyeliği farklı olabilir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Ayrı yönetici kimliği"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 24,
+      "card_pages": [],
+      "evidence": {
+        "tool": "powershell",
+        "title": "Account usage review",
+        "headers": [
+          "Account",
+          "Groups",
+          "Purpose"
+        ],
+        "rows": [
+          [
+            "harun",
+            "Domain Users",
+            "Mail and daily work"
+          ],
+          [
+            "adm.harun",
+            "Domain Admins",
+            "Approved administration"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_024.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-025",
+      "number": 25,
+      "chapter": 2,
+      "kind": "choice",
+      "topic": "Servis hesabı",
+      "context": "svc.batch hesabının açıklaması gece aktarımı. Fakat owner alanı boş ve hangi servislerin kullandığı bilinmiyor.",
+      "prompt": "İlk uygun yaklaşım nedir?",
+      "options": [
+        {
+          "id": "k1",
+          "text": "İşlev, sahip ve kullanım bağımlılıklarını doğrulamak"
+        },
+        {
+          "id": "k4",
+          "text": "Parola seçeneği işaretli diye kesin ihlal yazmak"
+        },
+        {
+          "id": "k3",
+          "text": "Sahip boş diye hesabı hemen silmek"
+        },
+        {
+          "id": "k2",
+          "text": "svc ön eki nedeniyle hesabı otomatik uygun saymak"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Sahipsiz hesabı değerlendirmek için hizmet bağlamı gerekir.",
+        "k2": "Adlandırma gerçek kontrolü kanıtlamaz.",
+        "k3": "Bağımlılıklar bilinmeden hizmet kesilebilir.",
+        "k4": "Hesap türü, kurum ölçütü ve telafi kontrolleri incelenmelidir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nServis hesabı insan yerine uygulama veya hizmet için kullanılabilir. Sahiplik, ihtiyaç, yetki ve kimlik bilgisi yönetimi gerekir.\n\n🔍 Denetçi gözüyle\nİnsan hesaplarıyla aynı varsayımlar servisleri kesintiye uğratabilir.\n\n💼 Gerçek iş hayatında\nÖnce hizmet bağımlılığını anla; uygunluk değerlendirmesini kanıtla yap.",
+      "hint": "Servis hesabının sahibi ve işlevi bilinmelidir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Servis hesabı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 25,
+      "card_pages": [],
+      "evidence": {
+        "tool": "powershell",
+        "title": "Service account review — svc.batch",
+        "headers": [
+          "Account",
+          "Use / owner register",
+          "Account flags"
+        ],
+        "rows": [
+          [
+            "svc.batch",
+            "Nightly batch / owner not assigned",
+            "Enabled=True; PasswordNeverExpires=True"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_025.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-026",
+      "number": 26,
+      "chapter": 2,
+      "kind": "scenario",
+      "topic": "İşten ayrılan çalışan",
+      "context": "HR kaydı emre.kaya için 10 Ekim ayrılışını gösteriyor. 13 Ekim exportunda Enabled=True.",
+      "prompt": "Bu eşleşme neyi gösterir?",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Hesap kesin silinmiştir"
+        },
+        {
+          "id": "k1",
+          "text": "Aynı gün kapatma ölçütüne aykırı aktif hesap kaydı var"
+        },
+        {
+          "id": "k2",
+          "text": "Emre kesin veri çalmıştır"
+        },
+        {
+          "id": "k3",
+          "text": "Hesap listede olduğu için tüm erişimi uygun"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Ayrılış, etkin durum ve açık ölçüt birlikte görünüyor.",
+        "k2": "Aktif hesap tek başına gerçekleşmiş kullanım veya zarar kanıtı değildir.",
+        "k3": "HR ve kapatma ölçütüyle çelişiyor.",
+        "k4": "Enabled=True; silinmiş nesne gösterilmiyor."
+      },
+      "explanation": "💡 Active Directory bilgisi\nLeaver süreci işten ayrılmayla erişim kapanışını bağlar. Nesnenin listede kalmasıyla etkin olması farklıdır.\n\n🔍 Denetçi gözüyle\nÖlçüt, ayrılış tarihi ve teknik durum aynı kimlikle eşleşmelidir.\n\n💼 Gerçek iş hayatında\nHesap kapanışını ve ilgili oturum riskini yetkili ekibe bildir; kullanım iddiası için ek kanıt topla.",
+      "hint": "Bu tabloda iş durumu, teknik durum ve ölçüt birlikte bulunuyor.",
+      "difficulty": "beginner",
+      "goals": [
+        "İşten ayrılan çalışan"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 26,
+      "card_pages": [],
+      "evidence": {
+        "tool": "powershell",
+        "title": "JML reconciliation — 2026-10-13",
+        "headers": [
+          "Account",
+          "HR end date",
+          "Enabled",
+          "Policy deadline"
+        ],
+        "rows": [
+          [
+            "emre.kaya",
+            "2026-10-10",
+            "True",
+            "Same day disable"
+          ],
+          [
+            "ayse.yilmaz",
+            "Active",
+            "True",
+            "Not applicable"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_026.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-027",
+      "number": 27,
+      "chapter": 2,
+      "kind": "image",
+      "topic": "Joiner onayı",
+      "context": "Yeni çalışan Dilan için erişim talebi var. Rol matrisi okuma yetkisi istiyor; teknik listede düzenleme rolü görünüyor.",
+      "prompt": "İlk hangi farkı araştırırsın?",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Rol matrisini teknik gruba uysun diye değiştirmek"
+        },
+        {
+          "id": "k3",
+          "text": "Kullanıcı adına bakıp tüm yetkileri uygun saymak"
+        },
+        {
+          "id": "k2",
+          "text": "Hesabın yeni oluşturulmuş olmasını tek başına ihlal saymak"
+        },
+        {
+          "id": "k1",
+          "text": "Onaylı okuma rolü ile gerçek düzenleme grubunun farkını"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Talep ve teknik uygulama aynı kapsamda görünmüyor.",
+        "k2": "İşe girişte yeni hesap beklenen bir durum olabilir.",
+        "k3": "Ad uygun erişim onayı değildir.",
+        "k4": "Ölçüt, kanıtlanan durumun farkını gizlemek için değiştirilmez."
+      },
+      "explanation": "💡 Active Directory bilgisi\nJoiner süreci yeni çalışana onaylı iş rolüne uygun erişim verir.\n\n🔍 Denetçi gözüyle\nTalep, onay ve uygulanan grup aynı kimlikle karşılaştırılır.\n\n💼 Gerçek iş hayatında\nYanlış rol ataması için yetkili düzeltme ve yeniden test iste.",
+      "hint": "Onaylı rol ile gerçek grubun işlem kapsamını karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Joiner onayı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 27,
+      "card_pages": [],
+      "evidence": {
+        "tool": "powershell",
+        "title": "Joiner review — dilan.sari",
+        "headers": [
+          "Account",
+          "Approved role",
+          "Actual group"
+        ],
+        "rows": [
+          [
+            "dilan.sari",
+            "Finance Read",
+            "GG_Finance_Edit"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_027.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-028",
+      "number": 28,
+      "chapter": 2,
+      "kind": "sentence_order",
+      "topic": "Mover süreci",
+      "context": "Ayşe Finance’dan Operations’a geçti. Member Of ekranı eski Finance ve yeni Operations gruplarını birlikte gösteriyor.",
+      "prompt": "Bu ekranı incelemek için adımları doğru sıraya koy.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Uygulanan değişikliği teknik kanıtla yeniden test et"
+        },
+        {
+          "id": "k3",
+          "text": "Gereksiz kalan yetkiler için sahibinden aksiyon iste"
+        },
+        {
+          "id": "k2",
+          "text": "Eski ve yeni erişimleri rol matrisiyle karşılaştır"
+        },
+        {
+          "id": "k1",
+          "text": "Görev değişikliği tarihini ve yeni rolü doğrula"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "feedback": {
+        "k1": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k2": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k3": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k4": "Bu adım önceki incelemenin sonucuna bağlıdır."
+      },
+      "explanation": "💡 Active Directory bilgisi\nMover süreci rol değişikliğinde erişimi yeniden değerlendirir. Yeni grup eklemek eski yetkilerin gereksiz kalmadığını göstermez.\n\n🔍 Denetçi gözüyle\nYetki birikimini rol değişikliği kanıtıyla doğrula.\n\n💼 Gerçek iş hayatında\nSadece eklenen grupları değil, kaldırılması gerekenleri de takip et.",
+      "hint": "Yeni görev, eski erişimin devamını otomatik haklı çıkarmaz.",
+      "difficulty": "beginner",
+      "goals": [
+        "Mover süreci"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 28,
+      "card_pages": [],
+      "evidence": {
+        "tool": "properties",
+        "title": "ayse.yilmaz Properties",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "GG_Finance_Edit",
+            "Security Group",
+            "Former role"
+          ],
+          [
+            "GG_Operations_Read",
+            "Security Group",
+            "New role"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "Member Of",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_028.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-029",
+      "number": 29,
+      "chapter": 2,
+      "kind": "drag_select",
+      "topic": "İç içe grup",
+      "context": "Üyelik exportu bir zincir gösteriyor: ayse.yilmaz → GG_Team → GG_Finance_Edit.",
+      "prompt": "Doğru yorum hangisi?",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Bu zincir kaynak erişiminin kesin gerçekleştiğini kanıtlar"
+        },
+        {
+          "id": "k2",
+          "text": "Ayşe yalnız doğrudan gruptan etkilenir"
+        },
+        {
+          "id": "k1",
+          "text": "Ayşe dolaylı olarak Finance_Edit grubuna ulaşabilir"
+        },
+        {
+          "id": "k3",
+          "text": "GG_Team bir kullanıcı hesabıdır"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "İç içe grup zinciri etkili üyelik yaratabilir.",
+        "k2": "Dolaylı grup üyeliği erişimi etkileyebilir.",
+        "k3": "Zincirde grup nesnesidir.",
+        "k4": "Üyelik, kaynak izin ve işlem kullanımını ayrıca doğrulamak gerekir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nDoğrudan ve dolaylı üyelik farklı görünebilir; erişim analizi her ikisini dikkate alır.\n\n🔍 Denetçi gözüyle\nGrup üyeliğini kaynağın gerçek izin listesiyle bağla.\n\n💼 Gerçek iş hayatında\nİç içe yapı gözden geçirmelerde kolayca unutulan kullanıcılar yaratabilir.",
+      "hint": "Zincirdeki her bağlantıyı takip et.",
+      "difficulty": "beginner",
+      "goals": [
+        "İç içe grup"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 29,
+      "card_pages": [],
+      "evidence": {
+        "tool": "powershell",
+        "title": "Nested membership review",
+        "headers": [
+          "Member",
+          "Group",
+          "Membership"
+        ],
+        "rows": [
+          [
+            "ayse.yilmaz",
+            "GG_Team",
+            "Direct"
+          ],
+          [
+            "GG_Team",
+            "GG_Finance_Edit",
+            "Direct"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_029.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-030",
+      "number": 30,
+      "chapter": 2,
+      "kind": "image",
+      "topic": "Erişim gözden geçirmesi",
+      "context": "30. sorudasın. Finance yöneticisi erişim listesini onaylamış, ama listedeki burak.akin artık başka bölümde.",
+      "prompt": "En uygun denetim sonucu nedir?",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Onay var diye bütün erişimleri uygun saymak"
+        },
+        {
+          "id": "k3",
+          "text": "Burak adına bakıp ayrıcalık düzeyini varsaymak"
+        },
+        {
+          "id": "k1",
+          "text": "Onayın güncel görevle uyumunu ve inceleme kalitesini araştırmak"
+        },
+        {
+          "id": "k4",
+          "text": "Denetçi olarak bütün Finance gruplarını kaldırmak"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "İmzalı onay ile güncel görev bilgisi çelişiyor.",
+        "k2": "İmza yanlış veya yüzeysel incelemeyi dışlamaz.",
+        "k3": "Yetki ad ve rol kaydıyla değerlendirilir; isimle değil.",
+        "k4": "Toplu operasyonel müdahale denetim görevi değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nErişim gözden geçirmesi, güncel görev ve gerçek yetkilerin karşılaştırılmasıdır. Onay bir süreç kanıtı olabilir; kalitesi test edilmelidir.\n\n🔍 Denetçi gözüyle\nOnaylı listeden istisna seçip iş ihtiyacını bağımsız doğrula.\n\n💼 Gerçek iş hayatında\nArtık kullanıcı ve grup ekranından onay, ihtiyaç ve yaşam döngüsü soruları çıkarabiliyorsun.",
+      "hint": "Onay, doğru ve güncel bilgiyle desteklenmelidir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Erişim gözden geçirmesi"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 30,
+      "card_pages": [],
+      "evidence": {
+        "tool": "powershell",
+        "title": "Finance access review — 2026-10-13",
+        "headers": [
+          "Account",
+          "HR department",
+          "Access role",
+          "Review result"
+        ],
+        "rows": [
+          [
+            "ayse.yilmaz",
+            "Finance",
+            "Finance Read",
+            "Approved"
+          ],
+          [
+            "burak.akin",
+            "Operations",
+            "Finance Edit",
+            "Approved"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_030.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-031",
+      "number": 31,
+      "chapter": 3,
+      "kind": "image",
+      "topic": "GPO tanıma",
+      "context": "GPMC’de bir GPO seçildi. Scope sekmesinde bağlantı ve filtreleme var.",
+      "prompt": "Burada seçilen nesne nedir?",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Tek bir kullanıcı hesabı"
+        },
+        {
+          "id": "k4",
+          "text": "Bir dağıtım grubu"
+        },
+        {
+          "id": "k3",
+          "text": "Security log olayı"
+        },
+        {
+          "id": "k1",
+          "text": "Group Policy Object"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Politika ayarlarını içeren GPO seçilmiş.",
+        "k2": "Ekran bir GPO gösteriyor.",
+        "k3": "Event ID ve olay kaynağı yok.",
+        "k4": "Security filtering grubu GPO ile aynı nesne değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nGPO ayarları taşıyan bir politika nesnesidir. Bağlantısı hangi konuma iliştirildiğini gösterir.\n\n🔍 Denetçi gözüyle\nGPO varlığı ile uygulanmış sonuç farklı kanıtlardır.\n\n💼 Gerçek iş hayatında\nÖnce ayarı, ardından bağlantı ve gerçek uygulamayı kontrol et.",
+      "hint": "Scope, kapsam hakkında bilgi verir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "GPO tanıma"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 31,
+      "card_pages": [],
+      "evidence": {
+        "tool": "gpmc",
+        "title": "Workstation Baseline",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [],
+        "fields": [
+          [
+            "GPO name",
+            "Workstation Baseline"
+          ],
+          [
+            "Link location",
+            "OU=Workstations,DC=corp,DC=local"
+          ],
+          [
+            "Link enabled",
+            "Yes"
+          ],
+          [
+            "Security filtering",
+            "GG_Workstations"
+          ]
+        ],
+        "tree": [],
+        "tab": "Scope",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_031.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-032",
+      "number": 32,
+      "chapter": 3,
+      "kind": "multi_select",
+      "topic": "Parola ayarları",
+      "context": "Default Domain Policy editöründe iki parola kontrolü ve iki farklı başlık var.",
+      "prompt": "Parola politikasına ait iki satırı seç.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Audit Logon"
+        },
+        {
+          "id": "k1",
+          "text": "Minimum password length"
+        },
+        {
+          "id": "k2",
+          "text": "Enforce password history"
+        },
+        {
+          "id": "k4",
+          "text": "Clock synchronization tolerance"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "feedback": {
+        "k1": "Parola uzunluğu kontrolüdür.",
+        "k2": "Parola tekrar kullanımını sınırlar.",
+        "k3": "Olay kaydı ayarıdır; parola kuralı değil.",
+        "k4": "Kerberos zaman toleransı ayarıdır."
+      },
+      "explanation": "💡 Active Directory bilgisi\nParola, audit ve Kerberos başlıkları farklı kontrol amaçlarına sahiptir.\n\n🔍 Denetçi gözüyle\nBenzer yönetim ekranlarında yanlış kategorinin ayarını kanıt diye alma.\n\n💼 Gerçek iş hayatında\nAyar listesini kurumun ilgili ölçütleriyle doğru kategoride karşılaştır.",
+      "hint": "Category sütununu oku.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Parola ayarları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 32,
+      "card_pages": [],
+      "evidence": {
+        "tool": "policy",
+        "title": "Default Domain Policy / Password Policy",
+        "headers": [
+          "Policy",
+          "Security Setting",
+          "Category"
+        ],
+        "rows": [
+          [
+            "Minimum password length",
+            "14 characters",
+            "Password Policy"
+          ],
+          [
+            "Enforce password history",
+            "24 passwords",
+            "Password Policy"
+          ],
+          [
+            "Audit Logon",
+            "Success and Failure",
+            "Audit Policy"
+          ],
+          [
+            "Maximum tolerance for clock sync",
+            "5 minutes",
+            "Kerberos Policy"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_032.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-033",
+      "number": 33,
+      "chapter": 3,
+      "kind": "choice",
+      "topic": "Uzunluk ölçütü",
+      "context": "Kurgusal kurum ölçütü en az 14 karakter. Görünen minimum 8. Bu başka bir standardın evrensel şartı değildir.",
+      "prompt": "“Görünen ayar kurumun 14 karakter ölçütünü karşılıyor.” Doğru mu?",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Doğru"
+        },
+        {
+          "id": "k1",
+          "text": "Yanlış"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "8, bu kurumun 14 ölçütünü karşılamaz.",
+        "k2": "Görünen değer ölçütten küçüktür.",
+        "k3": "Tarih sayısal farkı kapatmaz.",
+        "k4": "İki karşılaştırılabilir değer açıkça var."
+      },
+      "explanation": "💡 Active Directory bilgisi\nMinimum uzunluk parola oluşturma/değiştirme kurallarından biridir. Buradaki uygunluk kararı onaylı kurum ölçütüne dayanır.\n\n🔍 Denetçi gözüyle\nStandart maddesi uydurmak yerine geçerli ölçütü açıkça kaydet.\n\n💼 Gerçek iş hayatında\nEtkin kullanıcı politikası için PSO istisnaları ve sonuç da kontrol edilir.",
+      "hint": "Konfigürasyon ile ölçütü aynı birimle karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Uzunluk ölçütü"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 33,
+      "card_pages": [],
+      "evidence": {
+        "tool": "policy",
+        "title": "Password Policy",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "Minimum password length",
+            "8 characters",
+            "Configured"
+          ],
+          [
+            "Internal approved requirement",
+            "14 characters",
+            "Comparison note"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_033.png",
+      "presentation": "true_false"
+    },
+    {
+      "external_id": "ad-auditor-v1-034",
+      "number": 34,
+      "chapter": 3,
+      "kind": "scenario",
+      "topic": "Parola geçmişi",
+      "context": "Politika görüntüsünde history=0. Kurumun hedefi son 12 parolanın tekrarını engellemek.",
+      "prompt": "Hangi farkı araştırırsın?",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Tüm kullanıcıların şu an aynı parolayı kullandığını"
+        },
+        {
+          "id": "k1",
+          "text": "Parola geçmişi ayarının onaylı hedefle uyuşmamasını"
+        },
+        {
+          "id": "k4",
+          "text": "Hesapların süresinin dolduğunu"
+        },
+        {
+          "id": "k3",
+          "text": "Bütün girişlerin başarısız olduğunu"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "0, tanımlı 12 geçmiş hedefini karşılamıyor.",
+        "k2": "Ayar gerçek parola değerlerini veya kullanımı göstermez.",
+        "k3": "Bu bir log ekranı değildir.",
+        "k4": "Parola geçmişi hesap bitişi değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nParola geçmişi eski parolaların yeniden seçilmesini sınırlayabilir. Tek ayar, kullanıcıların gerçek parolalarını göstermez.\n\n🔍 Denetçi gözüyle\nKontrol açığını olguyla yaz; gerçekleşmiş kötüye kullanım ekleme.\n\n💼 Gerçek iş hayatında\nEtkin politika ve kurumun parola yaklaşımıyla birlikte değerlendir.",
+      "hint": "Ayarın neyi kontrol ettiğini düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Parola geçmişi"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 34,
+      "card_pages": [],
+      "evidence": {
+        "tool": "policy",
+        "title": "Password Policy",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "Enforce password history",
+            "0 passwords",
+            "Configured"
+          ],
+          [
+            "Approved requirement",
+            "12 passwords",
+            "Internal measure"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_034.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-035",
+      "number": 35,
+      "chapter": 3,
+      "kind": "fill_blank",
+      "topic": "Lockout eşiği",
+      "context": "Account Lockout Policy ekranında eşik 5.",
+      "prompt": "Bu ayara göre kilitlenmeyi tetikleyen başarısız deneme sayısını rakamla yaz.",
+      "options": [],
+      "answer": [
+        "5",
+        "beş"
+      ],
+      "feedback": {},
+      "explanation": "💡 Active Directory bilgisi\nLockout threshold kilitlenme eşiğidir. Süre ve sayacın sıfırlanma aralığı başka ayarlardır.\n\n🔍 Denetçi gözüyle\nKonfigürasyon değerini olay kanıtı ve hizmet etkisiyle birlikte değerlendir.\n\n💼 Gerçek iş hayatında\nEşik çok düşük olduğunda hizmet hesaplarında kilitlenme etkisi olabilir; iş bağlamını incele.",
+      "hint": "Deneme sayısını süre alanıyla karıştırma.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Lockout eşiği"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 35,
+      "card_pages": [],
+      "evidence": {
+        "tool": "policy",
+        "title": "Account Lockout Policy",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "Account lockout threshold",
+            "5 invalid logon attempts",
+            "Configured"
+          ],
+          [
+            "Account lockout duration",
+            "15 minutes",
+            "Configured"
+          ],
+          [
+            "Reset account lockout counter after",
+            "15 minutes",
+            "Configured"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_035.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-036",
+      "number": 36,
+      "chapter": 3,
+      "kind": "sentence_order",
+      "topic": "Password never expires incelemesi",
+      "context": "svc.report Account sekmesinde süresiz parola seçeneği işaretli. Sahibin hesabı servis için kullandığını söylüyor.",
+      "prompt": "Bu ekranı incelemek için adımları doğru sıraya koy.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Kanıtla uygunluk ve kalan risk sonucunu yaz"
+        },
+        {
+          "id": "k2",
+          "text": "Kurum ölçütünü ve varsa istisna onayını incele"
+        },
+        {
+          "id": "k3",
+          "text": "Kimlik bilgisi koruması ve diğer kontrolleri değerlendir"
+        },
+        {
+          "id": "k1",
+          "text": "Hesap türünü ve hizmet kullanımını doğrula"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "feedback": {
+        "k1": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k2": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k3": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k4": "Bu adım önceki incelemenin sonucuna bağlıdır."
+      },
+      "explanation": "💡 Active Directory bilgisi\nPassword never expires, yaş nedeniyle parola bitişini kapatır. Her hesap için otomatik uygunsuzluk anlamına gelmez.\n\n🔍 Denetçi gözüyle\nModern parola yaklaşımı, hesap türü ve telafi kontrolleri bağlamında değerlendirme gerekir.\n\n💼 Gerçek iş hayatında\nSüresiz parola seçeneği için onay ve korunma kanıtını araştır.",
+      "hint": "Bir ayarı görmek, bağlam olmadan kesin ihlal yazmaya yetmez.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Password never expires incelemesi"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 36,
+      "card_pages": [],
+      "evidence": {
+        "tool": "properties",
+        "title": "svc.report Properties",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [],
+        "fields": [
+          [
+            "Password never expires",
+            "Checked"
+          ],
+          [
+            "Account is disabled",
+            "Unchecked"
+          ],
+          [
+            "Description",
+            "Reporting service"
+          ]
+        ],
+        "tree": [],
+        "tab": "Account",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_036.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-037",
+      "number": 37,
+      "chapter": 3,
+      "kind": "image",
+      "topic": "GPO bağlantısı",
+      "context": "GPO oluşturulmuş fakat Links bölümünde konum yok.",
+      "prompt": "Bu ekrandan hangi sonuç güvenle çıkar?",
+      "options": [
+        {
+          "id": "k4",
+          "text": "GPO silinmiş"
+        },
+        {
+          "id": "k3",
+          "text": "GPO bütün kullanıcılara silme yetkisi vermiş"
+        },
+        {
+          "id": "k2",
+          "text": "Ayar bütün domain cihazlarına kesin uygulanmış"
+        },
+        {
+          "id": "k1",
+          "text": "Bu görüntüde GPO için bir bağlantı listelenmiyor"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Links açıkça No links gösteriyor.",
+        "k2": "GPO varlığı ve enabled olması uygulama kanıtı değildir.",
+        "k3": "Bu tür kaynak izni ekranda yok.",
+        "k4": "GPO seçilmiş ve mevcut görünüyor."
+      },
+      "explanation": "💡 Active Directory bilgisi\nGPO’nun oluşturulması, site/domain/OU bağlantısı veya uygun uygulama kapsamı olduğu anlamına gelmez.\n\n🔍 Denetçi gözüyle\nBağlantı, filtre ve etkin sonuç ayrı doğrulanır.\n\n💼 Gerçek iş hayatında\nİşletim için yanlış varsayımı önce kapsam kanıtıyla düzelt.",
+      "hint": "GPO durumu ile link durumu farklıdır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "GPO bağlantısı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 37,
+      "card_pages": [],
+      "evidence": {
+        "tool": "gpmc",
+        "title": "USB Restriction",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [],
+        "fields": [
+          [
+            "GPO status",
+            "Enabled"
+          ],
+          [
+            "Links",
+            "No links"
+          ],
+          [
+            "Security filtering",
+            "Authenticated Users"
+          ]
+        ],
+        "tree": [],
+        "tab": "Scope",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_037.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-038",
+      "number": 38,
+      "chapter": 3,
+      "kind": "drag_select",
+      "topic": "Security Filtering",
+      "context": "GPO Workstations OU’suna bağlı. Scope filtrelemesinde yalnız GG_PilotPCs var. PC-025 bu grupta değil.",
+      "prompt": "PC-025 için önce hangi koşulu araştırırsın?",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Yalnız cihazın disk kapasitesini"
+        },
+        {
+          "id": "k2",
+          "text": "OU bağlantısı var diye politikanın kesin uygulandığını"
+        },
+        {
+          "id": "k1",
+          "text": "Filtreleme üyeliği ve Read/Apply izinlerini"
+        },
+        {
+          "id": "k3",
+          "text": "GPO adının yeterince açıklayıcı olmasını"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Konum bağlantısı tek başına uygulama yetkisini sağlamaz.",
+        "k2": "Filtre kapsamı da uygulamayı etkiler.",
+        "k3": "Ad, etkili izin ve sonuç kanıtı değildir.",
+        "k4": "Bu veri politika filtrelemesini doğrulamaz."
+      },
+      "explanation": "💡 Active Directory bilgisi\nSecurity Filtering, politikadan etkilenen kimlikleri izinlerle sınırlar. Uygulama için ilgili Read ve Apply Group Policy koşulları önemlidir.\n\n🔍 Denetçi gözüyle\nBağlantı ve filtreleme birlikte incelenir; etkin sonuç ayrıca doğrulanır.\n\n💼 Gerçek iş hayatında\nBir pilot gruptan çıkarılan cihazın baz çizgiden düşüp düşmediğini takip et.",
+      "hint": "Politikanın bağlı olması bütün cihazların kapsamda olduğu anlamına gelmez.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Security Filtering"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 38,
+      "card_pages": [],
+      "evidence": {
+        "tool": "gpmc",
+        "title": "Workstation Baseline / Scope",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [],
+        "fields": [
+          [
+            "Linked OU",
+            "Workstations"
+          ],
+          [
+            "Security filtering",
+            "GG_PilotPCs"
+          ],
+          [
+            "PC-025 member of GG_PilotPCs",
+            "No"
+          ]
+        ],
+        "tree": [],
+        "tab": "Scope",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_038.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-039",
+      "number": 39,
+      "chapter": 3,
+      "kind": "multi_select",
+      "topic": "Politika kapsamı eşleştirme",
+      "context": "Scope ve Results görünümü iki farklı kanıt sağlar.",
+      "prompt": "Doğru iki eşleştirmeyi seç.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "GPO adı → tüm cihazlarda uygulama garantisi"
+        },
+        {
+          "id": "k2",
+          "text": "Results applied list → ilgili hedefte uygulama sonucu"
+        },
+        {
+          "id": "k1",
+          "text": "Scope link → konum bağlantısı"
+        },
+        {
+          "id": "k4",
+          "text": "OU adı → güvenlik grubunun türü"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "feedback": {
+        "k1": "Bağlantının konumunu gösterir.",
+        "k2": "Hedef ve alınma zamanıyla etkin sonuca bilgi verir.",
+        "k3": "Ad tek başına uygulama kanıtı değildir.",
+        "k4": "OU ve grup türü farklıdır."
+      },
+      "explanation": "💡 Active Directory bilgisi\nTasarlanan kapsam ve elde edilen sonuç farklı bilgi sağlar. Results belirli hedef ve zamanda alınır.\n\n🔍 Denetçi gözüyle\nEtkinlik iddiasını hedef, tarih ve sonuç kanıtıyla sınırla.\n\n💼 Gerçek iş hayatında\nÖrnek sonuçları bütün evrene kanıtsız genelleme.",
+      "hint": "Scope ve Results aynı işlevi görmez.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Politika kapsamı eşleştirme"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 39,
+      "card_pages": [],
+      "evidence": {
+        "tool": "gpmc",
+        "title": "GPO scope vs results",
+        "headers": [
+          "Evidence",
+          "Observed field",
+          "Value"
+        ],
+        "rows": [
+          [
+            "Scope",
+            "Link",
+            "OU=Workstations"
+          ],
+          [
+            "Group Policy Results",
+            "Applied GPO",
+            "Workstation Baseline"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_039.png",
+      "presentation": "pair_matching"
+    },
+    {
+      "external_id": "ad-auditor-v1-040",
+      "number": 40,
+      "chapter": 3,
+      "kind": "choice",
+      "topic": "Fine-grained politika",
+      "context": "AD Administrative Center’da PSO_Finance görülüyor. Directly Applies To alanında GG_Finance_Users var.",
+      "prompt": "Hangi kapsam doğru?",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Belirtilen kullanıcı/grup kapsamına özel parola politikası"
+        },
+        {
+          "id": "k3",
+          "text": "Bütün forest için zorunlu aynı parola ayarı"
+        },
+        {
+          "id": "k4",
+          "text": "Kerberos bütün ticket sürelerini değiştiren kural"
+        },
+        {
+          "id": "k2",
+          "text": "OU içine bağlı normal bir GPO"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "PSO bu global security group üzerinden uygulanabilir.",
+        "k2": "PSO, OU’ya GPO gibi doğrudan bağlanmaz.",
+        "k3": "Directly Applies To sınırlı kapsam gösteriyor.",
+        "k4": "Fine-grained parola/lockout politikası Kerberos ayarlarıyla aynı değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nFine-grained password policy kullanıcı nesnelerine ve global security gruplara uygulanır. OU’ya doğrudan normal GPO gibi bağlanmaz.\n\n🔍 Denetçi gözüyle\nPSO kapsamını ve sonuç politikasını kullanıcı bazında doğrula.\n\n💼 Gerçek iş hayatında\nFarklı parola ayarları görünüyorsa önce PSO bağını araştır.",
+      "hint": "Directly Applies To hangi nesnelere özel olduğunu gösterir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Fine-grained politika"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 40,
+      "card_pages": [],
+      "evidence": {
+        "tool": "adac",
+        "title": "PSO_Finance / Password Settings",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [],
+        "fields": [
+          [
+            "Precedence",
+            "10"
+          ],
+          [
+            "Directly Applies To",
+            "GG_Finance_Users (Global Security Group)"
+          ],
+          [
+            "Minimum password length",
+            "16"
+          ]
+        ],
+        "tree": [],
+        "tab": "Password Settings",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_040.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-041",
+      "number": 41,
+      "chapter": 3,
+      "kind": "scenario",
+      "topic": "Etkin parola politikası",
+      "context": "Ayşe için Get-ADUserResultantPasswordPolicy sonucu PSO_Finance. Domain varsayılanı 14; PSO uzunluğu 16.",
+      "prompt": "Bu kullanıcı için hangi politikayı esas alırsın?",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Her durumda yalnız domain varsayılanı 14 değerini"
+        },
+        {
+          "id": "k4",
+          "text": "İki değerin ortalamasını etkin değer saymak"
+        },
+        {
+          "id": "k1",
+          "text": "Sonuçta görünen PSO_Finance ve 16 değerini"
+        },
+        {
+          "id": "k3",
+          "text": "En düşük görünen değeri keyfi olarak seçmek"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Kullanıcı için resultant PSO sonucu verilmiş.",
+        "k2": "Kullanıcıya uygulanan özel PSO görünüyor.",
+        "k3": "Politika seçimi rastgele minimum seçimi değildir.",
+        "k4": "Politika sonuçları aritmetik ortalamayla hesaplanmaz."
+      },
+      "explanation": "💡 Active Directory bilgisi\nResultant password policy, ilgili kullanıcıya uygulanan özel parola politikasını belirlemeye yardımcı olur.\n\n🔍 Denetçi gözüyle\nDoğru hedef kullanıcının sonuç kanıtını sakla.\n\n💼 Gerçek iş hayatında\nAynı departmandaki herkesin aynı PSO’da olduğunu ayrıca doğrula.",
+      "hint": "Varsayılanla özel sonucun farkına dikkat et.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Etkin parola politikası"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 41,
+      "card_pages": [],
+      "evidence": {
+        "tool": "powershell",
+        "title": "Get-ADUserResultantPasswordPolicy ayse.yilmaz",
+        "headers": [
+          "Name",
+          "MinPasswordLength",
+          "Precedence"
+        ],
+        "rows": [
+          [
+            "PSO_Finance",
+            "16",
+            "10"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": "Default domain minimum: 14"
+      },
+      "image": "ad-auditor/screen_041.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-042",
+      "number": 42,
+      "chapter": 3,
+      "kind": "image",
+      "topic": "Kerberos temel kavramı",
+      "context": "Editörde Kerberos Policy seçilmiş. Maximum lifetime for user ticket 10 hours.",
+      "prompt": "Bu ayar neyle ilgilidir?",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Event Viewer log dosyasının boyutuyla"
+        },
+        {
+          "id": "k3",
+          "text": "Parolanın minimum karakter sayısıyla"
+        },
+        {
+          "id": "k2",
+          "text": "Kullanıcı hesabının işe giriş tarihiyle"
+        },
+        {
+          "id": "k1",
+          "text": "Kerberos kimlik doğrulama ticket süresiyle"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Ayar kullanıcı ticket ömrünü gösterir.",
+        "k2": "Bu zaman bir HR tarihi değildir.",
+        "k3": "Süre, uzunluk ayarı değildir.",
+        "k4": "Log kapasite ayarı bu kategoride değil."
+      },
+      "explanation": "💡 Active Directory bilgisi\nKerberos, kimlik doğrulamada ticket kullanan bir protokoldür. Ticket ömrü parola yaşı veya hesap süresi değildir.\n\n🔍 Denetçi gözüyle\nKavramı doğru adlandır; kurum ölçütü ve hedef sistemle değerlendirme yap.\n\n💼 Gerçek iş hayatında\nUzun veya kısa süreyi bağlamdan koparıp otomatik ihlal diye yazma.",
+      "hint": "Ayar başlığı ve zaman birimi neyi anlattığını gösterir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Kerberos temel kavramı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 42,
+      "card_pages": [],
+      "evidence": {
+        "tool": "policy",
+        "title": "Default Domain Policy / Kerberos Policy",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "Maximum lifetime for user ticket",
+            "10 hours",
+            "Kerberos Policy"
+          ],
+          [
+            "Maximum lifetime for service ticket",
+            "600 minutes",
+            "Kerberos Policy"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_042.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-043",
+      "number": 43,
+      "chapter": 3,
+      "kind": "sentence_order",
+      "topic": "GPO uygulama doğrulaması",
+      "context": "PC-025 için güvenlik baz çizgisinin uygulandığını kanıtlamak istiyorsun. Scope açık; Results henüz alınmadı.",
+      "prompt": "Bu ekranı incelemek için adımları doğru sıraya koy.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "GPO bağlantısı ve ilgili ayarları incele"
+        },
+        {
+          "id": "k4",
+          "text": "Sonuç ile beklenen kontrolü karşılaştır"
+        },
+        {
+          "id": "k3",
+          "text": "Hedef için güncel sonuç raporunu al"
+        },
+        {
+          "id": "k1",
+          "text": "Hedef cihazın OU ve filtre üyeliğini doğrula"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "feedback": {
+        "k1": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k2": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k3": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k4": "Bu adım önceki incelemenin sonucuna bağlıdır."
+      },
+      "explanation": "💡 Active Directory bilgisi\nUygulama doğrulaması tasarım, kapsam ve hedef sonucu arasındaki bağı kurar.\n\n🔍 Denetçi gözüyle\nSadece editör ekranı kontrolün hedefte çalıştığını kanıtlamaz.\n\n💼 Gerçek iş hayatında\nSonuç raporunu hedef adı, zaman ve kullanıcı/bilgisayar kapsamıyla kaydet.",
+      "hint": "İstenen ayar ile elde edilen sonuç farklı kanıtlardır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "GPO uygulama doğrulaması"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 43,
+      "card_pages": [],
+      "evidence": {
+        "tool": "gpmc",
+        "title": "Workstation Baseline / Scope",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [],
+        "fields": [
+          [
+            "Link",
+            "OU=Workstations"
+          ],
+          [
+            "Link enabled",
+            "Yes"
+          ],
+          [
+            "Filtering",
+            "GG_Workstations"
+          ],
+          [
+            "Target computer",
+            "PC-025"
+          ]
+        ],
+        "tree": [],
+        "tab": "Scope",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_043.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-044",
+      "number": 44,
+      "chapter": 3,
+      "kind": "drag_select",
+      "topic": "Inheritance istisnası",
+      "context": "Workstations OU’sunda Block Inheritance=Yes. Domain baz çizgisi linki Enforced=Yes.",
+      "prompt": "Bu ekran için en doğru yorum hangisi?",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Bu ekran kesin etkin sonuç raporudur"
+        },
+        {
+          "id": "k2",
+          "text": "Block Inheritance bütün üst politikaları her zaman engeller"
+        },
+        {
+          "id": "k1",
+          "text": "Block Inheritance enforced linki otomatik engellemez"
+        },
+        {
+          "id": "k3",
+          "text": "Enforced GPO güvenlik filtrelemesini her koşulda kaldırır"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Enforced bağlantı normal miras engelinin istisnasıdır.",
+        "k2": "Enforced koşulunu göz ardı eder.",
+        "k3": "Enforced ile güvenlik izinleri farklı kapsam koşullarıdır.",
+        "k4": "Bu miras ayarıdır; hedefin gerçek sonucu ayrıca doğrulanır."
+      },
+      "explanation": "💡 Active Directory bilgisi\nNormal GPO işleme ve miras davranışı istisnalardan etkilenebilir. Enforced link, normal Block Inheritance engeline takılmaz; diğer uygulama koşulları yine önemlidir.\n\n🔍 Denetçi gözüyle\nÖncelik/miras yorumunu hedef sonuç raporuyla doğrula.\n\n💼 Gerçek iş hayatında\nTek ayardan bütün uygulama sonucunu kesinleştirme.",
+      "hint": "Enforced ve Block Inheritance birlikte okunmalı.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Inheritance istisnası"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 44,
+      "card_pages": [],
+      "evidence": {
+        "tool": "gpmc",
+        "title": "Workstations / Group Policy Inheritance",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [],
+        "fields": [
+          [
+            "Block Inheritance",
+            "Yes"
+          ],
+          [
+            "Domain Baseline link: Enforced",
+            "Yes"
+          ],
+          [
+            "Link enabled",
+            "Yes"
+          ]
+        ],
+        "tree": [],
+        "tab": "Group Policy Inheritance",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_044.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-045",
+      "number": 45,
+      "chapter": 3,
+      "kind": "image",
+      "topic": "Kanıt güncelliği",
+      "context": "Group Policy Results hedefi PC-025, alınma tarihi 1 Eylül. Ayar değişikliği 12 Ekim’de yapılmış.",
+      "prompt": "En uygun kanıt talebi nedir?",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Değişiklik sonrası aynı hedef için güncel sonuç"
+        },
+        {
+          "id": "k2",
+          "text": "Eski raporu bu ay için yeterli saymak"
+        },
+        {
+          "id": "k3",
+          "text": "GPO adının aynı kalmasını yeterli saymak"
+        },
+        {
+          "id": "k4",
+          "text": "Raporun kapağını yenileyip tarihi düzeltmek"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Eski rapor yeni ayarın uygulandığını doğrulamaz.",
+        "k2": "Dönem ve değişiklik farkı önemlidir.",
+        "k3": "Ad aynı olsa da içerik ve uygulama değişmiş olabilir.",
+        "k4": "Kanıtın tarihini değiştirmek yeni test değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nGPO sonucu belirli hedef ve zamanda alınır. Değişiklik sonrası güncel durum yeniden doğrulanmalıdır.\n\n🔍 Denetçi gözüyle\nKaynak, hedef, tarih ve sürümü aynı kanıt bağında tut.\n\n💼 Gerçek iş hayatında\nArtık ayar, kapsam ve etkin sonucu birbirinden ayırabiliyorsun.",
+      "hint": "Değişiklik tarihiyle kanıtın alınma tarihini karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Kanıt güncelliği"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 45,
+      "card_pages": [],
+      "evidence": {
+        "tool": "gpmc",
+        "title": "Group Policy Results / PC-025",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [],
+        "fields": [
+          [
+            "Report generated",
+            "2026-09-01 10:00"
+          ],
+          [
+            "Target",
+            "PC-025"
+          ],
+          [
+            "Applied GPO",
+            "Workstation Baseline"
+          ],
+          [
+            "Latest change ticket",
+            "CH-092 / 2026-10-12"
+          ]
+        ],
+        "tree": [],
+        "tab": "Results",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_045.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-046",
+      "number": 46,
+      "chapter": 4,
+      "kind": "image",
+      "topic": "4624 başarılı giriş",
+      "context": "Event Viewer’da bir olay seçildi. New Logon alanını ve Computer kaynağını oku.",
+      "prompt": "Bu olayın temel anlamı nedir?",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Kullanıcının bütün yetkileri onaylanmış"
+        },
+        {
+          "id": "k2",
+          "text": "Kullanıcı hesabı oluşturulmuş"
+        },
+        {
+          "id": "k1",
+          "text": "FS01 üzerinde başarılı bir oturum oluşturulmuş"
+        },
+        {
+          "id": "k3",
+          "text": "Security logu temizlenmiş"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "4624 başarıyı ve hedef bilgisayarda oturum oluşumunu gösterir.",
+        "k2": "Hesap oluşturma olayı 4720’dir.",
+        "k3": "Log temizleme olayı 1102’dir.",
+        "k4": "Başarılı giriş erişimin iş ihtiyacına uygunluğunu kanıtlamaz."
+      },
+      "explanation": "💡 Active Directory bilgisi\n4624 başarılı oturum oluşturmayı gösterir; olay erişilen bilgisayarda üretilir. LogonType=3 ağ oturumudur.\n\n🔍 Denetçi gözüyle\nBaşarılı giriş tek başına ihlal veya uygunluk kanıtı değildir.\n\n💼 Gerçek iş hayatında\nHedef, kimlik, zaman, kaynak ve oturum türünü beraber incele.",
+      "hint": "Event ID ve LogonType farklı bilgiler verir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "4624 başarılı giriş"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 46,
+      "card_pages": [],
+      "evidence": {
+        "tool": "event",
+        "title": "Event Viewer / Windows Logs / Security",
+        "headers": [
+          "Level",
+          "Date and Time",
+          "Source",
+          "Event ID"
+        ],
+        "rows": [
+          [
+            "Information",
+            "2026-10-13 02:14:00",
+            "Microsoft-Windows-Security-Auditing",
+            "4624"
+          ]
+        ],
+        "fields": [
+          [
+            "Event ID",
+            "4624"
+          ],
+          [
+            "Computer",
+            "FS01.corp.local"
+          ],
+          [
+            "Logged",
+            "2026-10-13 02:14:00"
+          ],
+          [
+            "Description",
+            "An account was successfully logged on."
+          ],
+          [
+            "TargetUserName",
+            "ayse.yilmaz"
+          ],
+          [
+            "LogonType",
+            "3"
+          ],
+          [
+            "IpAddress",
+            "10.20.4.15"
+          ]
+        ],
+        "tree": [
+          "Event Viewer (Local)",
+          "Custom Views",
+          "Windows Logs",
+          "Application",
+          "Security",
+          "System"
+        ],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_046.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-047",
+      "number": 47,
+      "chapter": 4,
+      "kind": "multi_select",
+      "topic": "4625 alanları",
+      "context": "Gece aynı servis hesabı için başarısız girişler var. İki alan doğrudan girişin nereden ve hangi türde denendiğini açıklıyor.",
+      "prompt": "Bu iki alanı seç.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "IpAddress: 10.20.8.40"
+        },
+        {
+          "id": "k2",
+          "text": "LogonType: 3"
+        },
+        {
+          "id": "k3",
+          "text": "TargetUserName: svc.batch"
+        },
+        {
+          "id": "k4",
+          "text": "Computer: FS01.corp.local"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "feedback": {
+        "k1": "Giriş denemesinin ağ kaynağı hakkında bilgi verir.",
+        "k2": "Denemenin ağ oturumu türünde olduğunu gösterir.",
+        "k3": "Bu hesap kimliğini açıklar; kaynak adresi veya oturum türünü değil.",
+        "k4": "Bu olayın üretildiği hedef makinedir; çağıran kaynağı gösteren IpAddress ile aynı değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\n4625 başarısız oturum açmayı gösterir. Kaynak adresi, hesap, tür ve hata kodu birlikte okunmalıdır.\n\n🔍 Denetçi gözüyle\nÇok sayıda deneme saldırı kadar eski servis kimlik bilgisi nedeniyle de oluşabilir.\n\n💼 Gerçek iş hayatında\nÖnce kaynağı ve hata bağlamını doğrula; ardından ilgili başarılı olaylarla ilişkilendir.",
+      "hint": "Kaynağı ve oturum türünü gösteren alan adlarını ara.",
+      "difficulty": "intermediate",
+      "goals": [
+        "4625 alanları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 47,
+      "card_pages": [],
+      "evidence": {
+        "tool": "event",
+        "title": "Event Viewer / Windows Logs / Security",
+        "headers": [
+          "Level",
+          "Date and Time",
+          "Source",
+          "Event ID"
+        ],
+        "rows": [
+          [
+            "Audit Failure",
+            "2026-10-13 02:14:00",
+            "Microsoft-Windows-Security-Auditing",
+            "4625"
+          ]
+        ],
+        "fields": [
+          [
+            "Event ID",
+            "4625"
+          ],
+          [
+            "Computer",
+            "FS01.corp.local"
+          ],
+          [
+            "Logged",
+            "2026-10-13 02:14:00"
+          ],
+          [
+            "Description",
+            "An account failed to log on."
+          ],
+          [
+            "TargetUserName",
+            "svc.batch"
+          ],
+          [
+            "IpAddress",
+            "10.20.8.40"
+          ],
+          [
+            "LogonType",
+            "3"
+          ],
+          [
+            "SubStatus",
+            "0xC000006A"
+          ]
+        ],
+        "tree": [
+          "Event Viewer (Local)",
+          "Custom Views",
+          "Windows Logs",
+          "Application",
+          "Security",
+          "System"
+        ],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_047.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-048",
+      "number": 48,
+      "chapter": 4,
+      "kind": "choice",
+      "topic": "4625 yorum sınırı",
+      "context": "SubStatus yanlış parola durumunu gösteriyor. Tek bir olay var, başka kanıt yok.",
+      "prompt": "“Bu tek olay saldırganın sisteme girdiğini kesin kanıtlar.” Doğru mu?",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Yanlış"
+        },
+        {
+          "id": "k2",
+          "text": "Doğru"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Başarısız giriş, başarılı erişim ve saldırgan niyetini tek başına kanıtlamaz.",
+        "k2": "Olay başarı değil başarısızlık gösteriyor.",
+        "k3": "Saat, başarı veya niyeti tek başına kanıtlamaz.",
+        "k4": "Hesap adı niyet ve sonuç kanıtı değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nHata kodu yanlış parola gibi bir nedeni gösterebilir; yorum için ilgili alanların bağlamı gerekir.\n\n🔍 Denetçi gözüyle\nOlgu, olasılık ve doğrulanmış olay ayrı yazılmalıdır.\n\n💼 Gerçek iş hayatında\nServis değişikliği, kaynak ve tekrar örüntüsünü incele.",
+      "hint": "Başarısız deneme ile başarılı erişim aynı değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "4625 yorum sınırı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 48,
+      "card_pages": [],
+      "evidence": {
+        "tool": "event",
+        "title": "Event Viewer / Windows Logs / Security",
+        "headers": [
+          "Level",
+          "Date and Time",
+          "Source",
+          "Event ID"
+        ],
+        "rows": [
+          [
+            "Audit Failure",
+            "2026-10-13 02:14:00",
+            "Microsoft-Windows-Security-Auditing",
+            "4625"
+          ]
+        ],
+        "fields": [
+          [
+            "Event ID",
+            "4625"
+          ],
+          [
+            "Computer",
+            "FS01.corp.local"
+          ],
+          [
+            "Logged",
+            "2026-10-13 02:14:00"
+          ],
+          [
+            "Description",
+            "An account failed to log on."
+          ],
+          [
+            "TargetUserName",
+            "svc.batch"
+          ],
+          [
+            "SubStatus",
+            "0xC000006A"
+          ],
+          [
+            "LogonType",
+            "3"
+          ],
+          [
+            "IpAddress",
+            "10.20.8.40"
+          ]
+        ],
+        "tree": [
+          "Event Viewer (Local)",
+          "Custom Views",
+          "Windows Logs",
+          "Application",
+          "Security",
+          "System"
+        ],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_048.png",
+      "presentation": "true_false"
+    },
+    {
+      "external_id": "ad-auditor-v1-049",
+      "number": 49,
+      "chapter": 4,
+      "kind": "scenario",
+      "topic": "4720 hesap oluşturma",
+      "context": "Selin (Denetim Yöneticin) gece açılan hesabın kim tarafından oluşturulduğunu soruyor.",
+      "prompt": "İlk hangi kimliği incelersin?",
+      "options": [
+        {
+          "id": "k1",
+          "text": "SubjectUserName: adm.harun"
+        },
+        {
+          "id": "k3",
+          "text": "Computer: DC01"
+        },
+        {
+          "id": "k4",
+          "text": "TargetDomainName: CORP"
+        },
+        {
+          "id": "k2",
+          "text": "TargetUserName: gecici.ozan"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Subject işlemi yapan kimliktir.",
+        "k2": "Target oluşturulan yeni hesabı gösterir.",
+        "k3": "Olay kaynağı işlemi yapan insan kimliği değildir.",
+        "k4": "Bu domain alanıdır, yapan kişi değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\n4720 kullanıcı hesabı oluşturulmasını gösterir. Subject yapan kimliği, Target oluşturulan hesabı ayırır.\n\n🔍 Denetçi gözüyle\nYeni hesabı talep ve yetkili onayla eşleştir.\n\n💼 Gerçek iş hayatında\nYönetici hesabının kullanımını kayıt altına al; kişi sahipliğini de doğrula.",
+      "hint": "Subject ve Target farklı rollerdir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "4720 hesap oluşturma"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 49,
+      "card_pages": [],
+      "evidence": {
+        "tool": "event",
+        "title": "Event Viewer / Windows Logs / Security",
+        "headers": [
+          "Level",
+          "Date and Time",
+          "Source",
+          "Event ID"
+        ],
+        "rows": [
+          [
+            "Information",
+            "2026-10-13 02:14:00",
+            "Microsoft-Windows-Security-Auditing",
+            "4720"
+          ]
+        ],
+        "fields": [
+          [
+            "Event ID",
+            "4720"
+          ],
+          [
+            "Computer",
+            "DC01.corp.local"
+          ],
+          [
+            "Logged",
+            "2026-10-13 02:14:00"
+          ],
+          [
+            "Description",
+            "A user account was created."
+          ],
+          [
+            "SubjectUserName",
+            "adm.harun"
+          ],
+          [
+            "TargetUserName",
+            "gecici.ozan"
+          ],
+          [
+            "TargetDomainName",
+            "CORP"
+          ]
+        ],
+        "tree": [
+          "Event Viewer (Local)",
+          "Custom Views",
+          "Windows Logs",
+          "Application",
+          "Security",
+          "System"
+        ],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_049.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-050",
+      "number": 50,
+      "chapter": 4,
+      "kind": "fill_blank",
+      "topic": "4726 hesap silme",
+      "context": "Olay açıklaması “A user account was deleted.” Seçilen kaydın Event ID alanı görünür.",
+      "prompt": "Bu kaydın olay numarasını yaz.",
+      "options": [],
+      "answer": [
+        "4726"
+      ],
+      "feedback": {},
+      "explanation": "💡 Active Directory bilgisi\n4726 kullanıcı hesabının silinmesini gösterir. Disabled durumu veya başarısız girişten farklı bir olaydır.\n\n🔍 Denetçi gözüyle\nSilme yetkisi, gerekçesi ve kanıt saklama gereksinimini doğrula.\n\n💼 Gerçek iş hayatında\nDenetçi silme işlemini uygulamak yerine yaşam döngüsü kontrolünü test eder.",
+      "hint": "Açıklama ile Event ID alanını birlikte oku.",
+      "difficulty": "intermediate",
+      "goals": [
+        "4726 hesap silme"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 50,
+      "card_pages": [],
+      "evidence": {
+        "tool": "event",
+        "title": "Event Viewer / Windows Logs / Security",
+        "headers": [
+          "Level",
+          "Date and Time",
+          "Source",
+          "Event ID"
+        ],
+        "rows": [
+          [
+            "Information",
+            "2026-10-13 02:14:00",
+            "Microsoft-Windows-Security-Auditing",
+            "4726"
+          ]
+        ],
+        "fields": [
+          [
+            "Event ID",
+            "4726"
+          ],
+          [
+            "Computer",
+            "DC01.corp.local"
+          ],
+          [
+            "Logged",
+            "2026-10-13 02:14:00"
+          ],
+          [
+            "Description",
+            "A user account was deleted."
+          ],
+          [
+            "SubjectUserName",
+            "adm.eren"
+          ],
+          [
+            "TargetUserName",
+            "gecici.ozan"
+          ],
+          [
+            "TargetDomainName",
+            "CORP"
+          ]
+        ],
+        "tree": [
+          "Event Viewer (Local)",
+          "Custom Views",
+          "Windows Logs",
+          "Application",
+          "Security",
+          "System"
+        ],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_050.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-051",
+      "number": 51,
+      "chapter": 4,
+      "kind": "sentence_order",
+      "topic": "4728 inceleme akışı",
+      "context": "Bir kullanıcı global Security grubuna eklenmiş. Olayda Subject, Member ve Group ayrı alanlarda.",
+      "prompt": "Bu ekranı incelemek için adımları doğru sıraya koy.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Olay kaynağı, zaman ve grup adını doğrula"
+        },
+        {
+          "id": "k3",
+          "text": "Üyelik talebi, iş ihtiyacı ve onayı incele"
+        },
+        {
+          "id": "k4",
+          "text": "İlgili üyelik ve kullanım kanıtıyla sonucu değerlendir"
+        },
+        {
+          "id": "k2",
+          "text": "Eklenen üye ile işlemi yapan kimliği ayır"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "feedback": {
+        "k1": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k2": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k3": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k4": "Bu adım önceki incelemenin sonucuna bağlıdır."
+      },
+      "explanation": "💡 Active Directory bilgisi\n4728 güvenlik etkin global gruba üye eklenmesini gösterir. Eklenen nesne kullanıcı veya grup olabilir.\n\n🔍 Denetçi gözüyle\nYüksek ayrıcalık grubu için onay ve kimlik bağını kur.\n\n💼 Gerçek iş hayatında\nOlay numarası tek başına bütün grup türleri için aynı değildir.",
+      "hint": "Grubun kapsamını ve üyenin kimliğini ayrı oku.",
+      "difficulty": "intermediate",
+      "goals": [
+        "4728 inceleme akışı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 51,
+      "card_pages": [],
+      "evidence": {
+        "tool": "event",
+        "title": "Event Viewer / Windows Logs / Security",
+        "headers": [
+          "Level",
+          "Date and Time",
+          "Source",
+          "Event ID"
+        ],
+        "rows": [
+          [
+            "Information",
+            "2026-10-13 02:14:00",
+            "Microsoft-Windows-Security-Auditing",
+            "4728"
+          ]
+        ],
+        "fields": [
+          [
+            "Event ID",
+            "4728"
+          ],
+          [
+            "Computer",
+            "DC01.corp.local"
+          ],
+          [
+            "Logged",
+            "2026-10-13 02:14:00"
+          ],
+          [
+            "Description",
+            "A member was added to a security-enabled global group."
+          ],
+          [
+            "SubjectUserName",
+            "adm.eren"
+          ],
+          [
+            "MemberName",
+            "CN=Destek Ozge,OU=Support,DC=corp,DC=local"
+          ],
+          [
+            "GroupName",
+            "Domain Admins"
+          ],
+          [
+            "GroupDomain",
+            "CORP"
+          ]
+        ],
+        "tree": [
+          "Event Viewer (Local)",
+          "Custom Views",
+          "Windows Logs",
+          "Application",
+          "Security",
+          "System"
+        ],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_051.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-052",
+      "number": 52,
+      "chapter": 4,
+      "kind": "image",
+      "topic": "4732 yerel grup",
+      "context": "WS-025’te Administrators grubuna destek.ozge eklenmiş.",
+      "prompt": "Bu kaydın anlamı nedir?",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Hesabın bütün domain yetkileri kaldırılmış"
+        },
+        {
+          "id": "k1",
+          "text": "WS-025 yerel güvenlik grubuna üye eklenmiş"
+        },
+        {
+          "id": "k3",
+          "text": "Kullanıcı hesabı tamamen silinmiş"
+        },
+        {
+          "id": "k2",
+          "text": "Domain Admins global grubuna üye eklenmiş"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "4732 ve kaynak bilgisayar bu bağlamı gösterir.",
+        "k2": "GroupName Administrators; olay global grup eklemesi değil.",
+        "k3": "Bu 4726 değildir.",
+        "k4": "Kayıt üye eklemeyi gösterir, kaldırmayı değil."
+      },
+      "explanation": "💡 Active Directory bilgisi\n4732 güvenlik etkin yerel gruba eklemeyi gösterir. DC üzerinde domain-local grup olayları da bu kategoriye girebilir; kaynak ve grup önemlidir.\n\n🔍 Denetçi gözüyle\nYerel yönetici erişimini domain yönetim üyeliğinden ayır.\n\n💼 Gerçek iş hayatında\nCihaz bazlı yönetici erişimi için iş ihtiyacı ve onayı incele.",
+      "hint": "Computer ve GroupName alanları yorumun kapsamını belirler.",
+      "difficulty": "intermediate",
+      "goals": [
+        "4732 yerel grup"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 52,
+      "card_pages": [],
+      "evidence": {
+        "tool": "event",
+        "title": "Event Viewer / Windows Logs / Security",
+        "headers": [
+          "Level",
+          "Date and Time",
+          "Source",
+          "Event ID"
+        ],
+        "rows": [
+          [
+            "Information",
+            "2026-10-13 02:14:00",
+            "Microsoft-Windows-Security-Auditing",
+            "4732"
+          ]
+        ],
+        "fields": [
+          [
+            "Event ID",
+            "4732"
+          ],
+          [
+            "Computer",
+            "WS-025.corp.local"
+          ],
+          [
+            "Logged",
+            "2026-10-13 02:14:00"
+          ],
+          [
+            "Description",
+            "A member was added to a security-enabled local group."
+          ],
+          [
+            "SubjectUserName",
+            "adm.harun"
+          ],
+          [
+            "MemberName",
+            "CORP\\destek.ozge"
+          ],
+          [
+            "GroupName",
+            "Administrators"
+          ]
+        ],
+        "tree": [
+          "Event Viewer (Local)",
+          "Custom Views",
+          "Windows Logs",
+          "Application",
+          "Security",
+          "System"
+        ],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_052.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-053",
+      "number": 53,
+      "chapter": 4,
+      "kind": "drag_select",
+      "topic": "4740 kilitlenme",
+      "context": "svc.batch hesabı kilitlenmiş. CallerComputerName alanında APP02 var.",
+      "prompt": "İlk araştırılacak kaynak hangisi?",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Hesabı doğrudan silmek"
+        },
+        {
+          "id": "k2",
+          "text": "Tüm Finance kullanıcılarının parolaları"
+        },
+        {
+          "id": "k1",
+          "text": "APP02 üzerinde bu hesapla çalışan işler"
+        },
+        {
+          "id": "k3",
+          "text": "Event Viewer’ın kurulduğu her bilgisayar"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "CallerComputerName kaynağı işaret eder; ayrıca doğrulanmalıdır.",
+        "k2": "Kayda bağlı somut kaynak yerine gereksiz geniş müdahaledir.",
+        "k3": "Olayın üretildiği makine ile çağıran kaynak farklıdır.",
+        "k4": "Kaynak ve hizmet bağımlılığı araştırılmadan kesinti yaratabilir."
+      },
+      "explanation": "💡 Active Directory bilgisi\n4740 hesap kilitlenmesini gösterir. CallerComputerName kaynağa ilişkin önemli bir ipucudur; bazı alanlar eksik olabilir.\n\n🔍 Denetçi gözüyle\nKilidi açmak tekrarın nedenini giderdiğini kanıtlamaz.\n\n💼 Gerçek iş hayatında\nEski parola kullanan görev veya servisi kontrollü biçimde araştır.",
+      "hint": "Çağıran makine ile log kaynağı aynı olmak zorunda değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "4740 kilitlenme"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 53,
+      "card_pages": [],
+      "evidence": {
+        "tool": "event",
+        "title": "Event Viewer / Windows Logs / Security",
+        "headers": [
+          "Level",
+          "Date and Time",
+          "Source",
+          "Event ID"
+        ],
+        "rows": [
+          [
+            "Information",
+            "2026-10-13 02:14:00",
+            "Microsoft-Windows-Security-Auditing",
+            "4740"
+          ]
+        ],
+        "fields": [
+          [
+            "Event ID",
+            "4740"
+          ],
+          [
+            "Computer",
+            "DC01.corp.local"
+          ],
+          [
+            "Logged",
+            "2026-10-13 02:14:00"
+          ],
+          [
+            "Description",
+            "A user account was locked out."
+          ],
+          [
+            "TargetUserName",
+            "svc.batch"
+          ],
+          [
+            "CallerComputerName",
+            "APP02"
+          ],
+          [
+            "SubjectUserName",
+            "DC01$"
+          ]
+        ],
+        "tree": [
+          "Event Viewer (Local)",
+          "Custom Views",
+          "Windows Logs",
+          "Application",
+          "Security",
+          "System"
+        ],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_053.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-054",
+      "number": 54,
+      "chapter": 4,
+      "kind": "multi_select",
+      "topic": "Kerberos olay eşleştirme",
+      "context": "İki kayıt DC01’de aynı kullanıcı için art arda oluşmuş.",
+      "prompt": "Doğru iki eşleştirmeyi seç.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "4769 → servis ticket talebi"
+        },
+        {
+          "id": "k1",
+          "text": "4768 → TGT talebi"
+        },
+        {
+          "id": "k3",
+          "text": "4768 → kullanıcı hesabı silme"
+        },
+        {
+          "id": "k4",
+          "text": "4769 → Security log temizleme"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "feedback": {
+        "k1": "Kerberos kimlik doğrulama ticket talebidir.",
+        "k2": "Belirli hizmet için ticket talebidir.",
+        "k3": "Silme olayı 4726’dır.",
+        "k4": "Log temizleme olayı 1102’dir."
+      },
+      "explanation": "💡 Active Directory bilgisi\n4768 TGT, 4769 servis ticket talebini gösterir. Sonuç kodu ve diğer alanlar başarı/başarısızlık yorumunda önemlidir.\n\n🔍 Denetçi gözüyle\nTicket talebi gerçekleşmiş kaynak kullanımının tamamı değildir.\n\n💼 Gerçek iş hayatında\nServis adı, hesap, sonuç ve zamanla diğer erişim kanıtını bağla.",
+      "hint": "Kimlik doğrulama ticketi ile servis ticketi farklıdır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Kerberos olay eşleştirme"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 54,
+      "card_pages": [],
+      "evidence": {
+        "tool": "event",
+        "title": "Security / Kerberos events",
+        "headers": [
+          "Event ID",
+          "Account",
+          "Service",
+          "Computer"
+        ],
+        "rows": [
+          [
+            "4768",
+            "ayse.yilmaz",
+            "krbtgt",
+            "DC01.corp.local"
+          ],
+          [
+            "4769",
+            "ayse.yilmaz",
+            "cifs/FS01",
+            "DC01.corp.local"
+          ]
+        ],
+        "fields": [
+          [
+            "Event 4768",
+            "A Kerberos authentication ticket (TGT) was requested."
+          ],
+          [
+            "Event 4769",
+            "A Kerberos service ticket was requested."
+          ]
+        ],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_054.png",
+      "presentation": "pair_matching"
+    },
+    {
+      "external_id": "ad-auditor-v1-055",
+      "number": 55,
+      "chapter": 4,
+      "kind": "choice",
+      "topic": "4768 kaynak ve sonuç",
+      "context": "4768 olayında Status=0x0. Kayıt DC01 üzerinde.",
+      "prompt": "En uygun yorum hangisi?",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Kullanıcı kesin bütün dosyaları okumuş"
+        },
+        {
+          "id": "k4",
+          "text": "Kayıt yalnız yerel dosya sunucusunda üretilir"
+        },
+        {
+          "id": "k3",
+          "text": "Parola bütün sistemlerde değiştirilmiş"
+        },
+        {
+          "id": "k1",
+          "text": "DC kaydında başarılı TGT talebi görülüyor"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Status=0x0 başarılı sonucu gösterir.",
+        "k2": "TGT talebi dosya kullanımının tamamını göstermez.",
+        "k3": "Bu olay parola değişikliği değildir.",
+        "k4": "Bu Kerberos DC olay kaydıdır."
+      },
+      "explanation": "💡 Active Directory bilgisi\nTGT alma, sonraki servis ticket akışından farklıdır. Başarılı sonuç her kaynakta yetkili kullanım anlamına gelmez.\n\n🔍 Denetçi gözüyle\nKaynak IP ve kullanıcıyı ilgili sistem işlemleriyle doğrula.\n\n💼 Gerçek iş hayatında\nOlay akışını takip et ama logun göstermediği eylemi rapora ekleme.",
+      "hint": "Başarı kodu, olayın kapsamını genişletmez.",
+      "difficulty": "intermediate",
+      "goals": [
+        "4768 kaynak ve sonuç"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 55,
+      "card_pages": [],
+      "evidence": {
+        "tool": "event",
+        "title": "Event Viewer / Windows Logs / Security",
+        "headers": [
+          "Level",
+          "Date and Time",
+          "Source",
+          "Event ID"
+        ],
+        "rows": [
+          [
+            "Information",
+            "2026-10-13 02:14:00",
+            "Microsoft-Windows-Security-Auditing",
+            "4768"
+          ]
+        ],
+        "fields": [
+          [
+            "Event ID",
+            "4768"
+          ],
+          [
+            "Computer",
+            "DC01.corp.local"
+          ],
+          [
+            "Logged",
+            "2026-10-13 02:14:00"
+          ],
+          [
+            "Description",
+            "A Kerberos authentication ticket (TGT) was requested."
+          ],
+          [
+            "TargetUserName",
+            "ayse.yilmaz"
+          ],
+          [
+            "ServiceName",
+            "krbtgt"
+          ],
+          [
+            "Status",
+            "0x0"
+          ],
+          [
+            "IpAddress",
+            "10.20.4.15"
+          ]
+        ],
+        "tree": [
+          "Event Viewer (Local)",
+          "Custom Views",
+          "Windows Logs",
+          "Application",
+          "Security",
+          "System"
+        ],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_055.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-056",
+      "number": 56,
+      "chapter": 4,
+      "kind": "scenario",
+      "topic": "4769 yorum",
+      "context": "Aynı hesap beş dakika içinde birçok servise ticket istemiş. Bir örnekte TicketEncryptionType=0x17.",
+      "prompt": "İlk uygun araştırma nedir?",
+      "options": [
+        {
+          "id": "k1",
+          "text": "İş kullanımını, örüntüyü ve ilgili hesap kontrollerini araştırmak"
+        },
+        {
+          "id": "k3",
+          "text": "Servis hesabı olduğu için bütün olayları normal saymak"
+        },
+        {
+          "id": "k4",
+          "text": "Başarı kodunu üyelik onayı gibi kabul etmek"
+        },
+        {
+          "id": "k2",
+          "text": "Tek ticket nedeniyle kesin saldırı ilan etmek"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Tek değer saldırıyı kesinleştirmez; bağlam ve ilişkili olaylar gerekir.",
+        "k2": "Örüntü ve niyet için yeterli kanıt yoktur.",
+        "k3": "Servis kimliği de kötüye kullanılabilir.",
+        "k4": "Başarı sonuç kodu iş yetkilendirme onayı değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\n4769 servis ticket talebidir. 0x17 RC4-HMAC türüdür; ortam uyumluluğu ve saldırı göstergeleri birlikte değerlendirilir.\n\n🔍 Denetçi gözüyle\nTek bir kriptografi değeriyle niyet iddiası kurma.\n\n💼 Gerçek iş hayatında\nNormal iş yüküyle karşılaştır, ilgili ayrıcalık ve parola yönetimi kontrollerini incele.",
+      "hint": "Sinyal ile kanıtlanmış olay arasındaki farkı koru.",
+      "difficulty": "intermediate",
+      "goals": [
+        "4769 yorum"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 56,
+      "card_pages": [],
+      "evidence": {
+        "tool": "event",
+        "title": "Event Viewer / Windows Logs / Security",
+        "headers": [
+          "Level",
+          "Date and Time",
+          "Source",
+          "Event ID"
+        ],
+        "rows": [
+          [
+            "Information",
+            "2026-10-13 02:14:00",
+            "Microsoft-Windows-Security-Auditing",
+            "4769"
+          ]
+        ],
+        "fields": [
+          [
+            "Event ID",
+            "4769"
+          ],
+          [
+            "Computer",
+            "DC01.corp.local"
+          ],
+          [
+            "Logged",
+            "2026-10-13 02:14:00"
+          ],
+          [
+            "Description",
+            "A Kerberos service ticket was requested."
+          ],
+          [
+            "TargetUserName",
+            "svc.monitor"
+          ],
+          [
+            "ServiceName",
+            "svc.report"
+          ],
+          [
+            "TicketEncryptionType",
+            "0x17"
+          ],
+          [
+            "Status",
+            "0x0"
+          ],
+          [
+            "IpAddress",
+            "10.20.8.40"
+          ]
+        ],
+        "tree": [
+          "Event Viewer (Local)",
+          "Custom Views",
+          "Windows Logs",
+          "Application",
+          "Security",
+          "System"
+        ],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_056.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-057",
+      "number": 57,
+      "chapter": 4,
+      "kind": "image",
+      "topic": "1102 log temizleme",
+      "context": "Security logu 02.20’de temizlenmiş; SubjectUserName adm.eren.",
+      "prompt": "En uygun ilk adım hangisi?",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Kesin kanıt gizleme diye doğrudan yazmak"
+        },
+        {
+          "id": "k4",
+          "text": "Yönetici yaptı diye kontrolü uygun saymak"
+        },
+        {
+          "id": "k3",
+          "text": "Log temizlenince bütün denetim kanıtını atmak"
+        },
+        {
+          "id": "k1",
+          "text": "Gerekçe, onay ve merkezi kayıt devamlılığını araştırmak"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Temizleme önemli bir sinyaldir; niyet ve kanıt sürekliliği doğrulanmalıdır.",
+        "k2": "Olayın gerekçesi henüz bilinmiyor.",
+        "k3": "Merkezi kopya ve diğer kaynaklar korunmuş olabilir.",
+        "k4": "Yönetici yetkisi her işlem için uygun gerekçe değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\n1102 Security audit logunun temizlenmesini gösterir. Merkezi kayıt, yetki ve saklama kontrolleri bu durumda önemlidir.\n\n🔍 Denetçi gözüyle\nOlayı koru; temizliğin onayı ve kapsamını araştır.\n\n💼 Gerçek iş hayatında\nYerel log boşluğu varsa merkezi SIEM kopyası ve iletim durumu incelenir.",
+      "hint": "Log temizleme, gerekçeyi tek başına açıklamaz.",
+      "difficulty": "intermediate",
+      "goals": [
+        "1102 log temizleme"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 57,
+      "card_pages": [],
+      "evidence": {
+        "tool": "event",
+        "title": "Event Viewer / Windows Logs / Security",
+        "headers": [
+          "Level",
+          "Date and Time",
+          "Source",
+          "Event ID"
+        ],
+        "rows": [
+          [
+            "Information",
+            "2026-10-13 02:14:00",
+            "Microsoft-Windows-Eventlog",
+            "1102"
+          ]
+        ],
+        "fields": [
+          [
+            "Event ID",
+            "1102"
+          ],
+          [
+            "Computer",
+            "DC01.corp.local"
+          ],
+          [
+            "Logged",
+            "2026-10-13 02:14:00"
+          ],
+          [
+            "Description",
+            "The audit log was cleared."
+          ],
+          [
+            "SubjectUserName",
+            "adm.eren"
+          ],
+          [
+            "SubjectDomainName",
+            "CORP"
+          ],
+          [
+            "SubjectLogonId",
+            "0x7a2"
+          ]
+        ],
+        "tree": [
+          "Event Viewer (Local)",
+          "Custom Views",
+          "Windows Logs",
+          "Application",
+          "Security",
+          "System"
+        ],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_057.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-058",
+      "number": 58,
+      "chapter": 4,
+      "kind": "sentence_order",
+      "topic": "Log ilişkilendirme",
+      "context": "Aynı servis hesabında 4625 olayları ardından 4740 var. Saatler aynı zaman diliminde.",
+      "prompt": "Bu ekranı incelemek için adımları doğru sıraya koy.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Doğrulanan sebep ve belirsizliği belgele"
+        },
+        {
+          "id": "k3",
+          "text": "Kaynak iş/servis ve hata nedenini araştır"
+        },
+        {
+          "id": "k2",
+          "text": "Olayları ortak zaman çizelgesinde sırala"
+        },
+        {
+          "id": "k1",
+          "text": "Hesap ve zaman dilimi eşleşmesini doğrula"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "feedback": {
+        "k1": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k2": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k3": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k4": "Bu adım önceki incelemenin sonucuna bağlıdır."
+      },
+      "explanation": "💡 Active Directory bilgisi\nBirden fazla olay ilişkili olabilir; ortak hesap ve saat bağını doğrulamak gerekir.\n\n🔍 Denetçi gözüyle\nZamansal sıra tek başına kesin teknik nedensellik değildir.\n\n💼 Gerçek iş hayatında\nEski kimlik bilgisi kullanan görev doğrulanırsa ilgili düzeltme ve tekrar testi izlenir.",
+      "hint": "Ortak kimlik ve zaman, korelasyonun başlangıcıdır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Log ilişkilendirme"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 58,
+      "card_pages": [],
+      "evidence": {
+        "tool": "event",
+        "title": "Security / correlated events",
+        "headers": [
+          "Time",
+          "Event ID",
+          "Account",
+          "Source"
+        ],
+        "rows": [
+          [
+            "02:14:01",
+            "4625",
+            "svc.batch",
+            "APP02"
+          ],
+          [
+            "02:14:12",
+            "4625",
+            "svc.batch",
+            "APP02"
+          ],
+          [
+            "02:14:33",
+            "4740",
+            "svc.batch",
+            "APP02"
+          ]
+        ],
+        "fields": [
+          [
+            "Time zone",
+            "UTC+3"
+          ],
+          [
+            "Capture time",
+            "2026-10-13 08:00"
+          ]
+        ],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_058.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-059",
+      "number": 59,
+      "chapter": 4,
+      "kind": "drag_select",
+      "topic": "Audit Policy",
+      "context": "DC01 sonucunda Audit User Account Management=No Auditing. Audit Logon açık.",
+      "prompt": "Hangi kanıt boşluğu öncelikli?",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Bütün giriş olayları kesin kapalıdır"
+        },
+        {
+          "id": "k1",
+          "text": "Hesap yaşam döngüsü olaylarının beklenen kaydı eksik olabilir"
+        },
+        {
+          "id": "k3",
+          "text": "Domain Admins grubunun bütün üyeleri silinmiştir"
+        },
+        {
+          "id": "k4",
+          "text": "Şifreleme bütün veri için kapalıdır"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Bu alt kategori hesap yönetim olaylarını etkiler.",
+        "k2": "Logon satırı etkin görünüyor.",
+        "k3": "Politika ekranı üyelik durumunu göstermez.",
+        "k4": "Bu bir audit alt kategori ekranıdır."
+      },
+      "explanation": "💡 Active Directory bilgisi\nAudit alt kategorileri farklı olayları yönetir. Birinin açık olması bütün olay evreninin kaydedildiği anlamına gelmez.\n\n🔍 Denetçi gözüyle\nPolitika sonuçlarını ve gerçek örnek olayların üretimini doğrula.\n\n💼 Gerçek iş hayatında\nKanıt evrenini oluştururken kaynağın neyi kaydettiğini bil.",
+      "hint": "Alt kategorileri ayrı ayrı oku.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Audit Policy"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 59,
+      "card_pages": [],
+      "evidence": {
+        "tool": "policy",
+        "title": "Advanced Audit Policy Configuration / DC01",
+        "headers": [
+          "Subcategory",
+          "Success",
+          "Failure"
+        ],
+        "rows": [
+          [
+            "User Account Management",
+            "No Auditing",
+            "No Auditing"
+          ],
+          [
+            "Logon",
+            "Enabled",
+            "Enabled"
+          ],
+          [
+            "Security Group Management",
+            "Enabled",
+            "Enabled"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_059.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-060",
+      "number": 60,
+      "chapter": 4,
+      "kind": "image",
+      "topic": "Log kanıtı tamlığı",
+      "context": "Security görünümü yalnız Event ID 4625 ile filtrelenmiş; seçili dönem 1 saat.",
+      "prompt": "Bu ekranı raporda nasıl kullanırsın?",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Bir saatten bütün yılın sonucunu çıkarmak"
+        },
+        {
+          "id": "k4",
+          "text": "Filtre metnini çıkarıp tam liste diye sunmak"
+        },
+        {
+          "id": "k2",
+          "text": "Bütün kurumda başarılı giriş olmadığını yazmak"
+        },
+        {
+          "id": "k1",
+          "text": "Filtreli kaynak ve dönemle sınırlı kanıt diye kaydetmek"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Görüntü bütün olayları ve dönemi kapsamıyor.",
+        "k2": "Filtre diğer olayları göstermiyor.",
+        "k3": "Dönem ve evren kanıtı yetersizdir.",
+        "k4": "Kanıtın kapsamını yanıltıcı hale getirir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nLog görünümü filtre ve zaman seçimine bağlıdır. Olay olmaması ile görünmemesi farklıdır.\n\n🔍 Denetçi gözüyle\nKaynak, zaman dilimi, filtre ve tamlığı belgele.\n\n💼 Gerçek iş hayatında\nArtık olay numarası kadar kaydın sınırını da okuyabiliyorsun.",
+      "hint": "Filtrelenen görünüm tüm log değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Log kanıtı tamlığı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 60,
+      "card_pages": [],
+      "evidence": {
+        "tool": "event",
+        "title": "Filtered Security Log",
+        "headers": [
+          "Time",
+          "Event ID",
+          "Account",
+          "Computer"
+        ],
+        "rows": [
+          [
+            "02:14",
+            "4625",
+            "svc.batch",
+            "FS01"
+          ],
+          [
+            "02:15",
+            "4625",
+            "svc.batch",
+            "FS01"
+          ]
+        ],
+        "fields": [
+          [
+            "Filter",
+            "Event ID = 4625"
+          ],
+          [
+            "Period",
+            "2026-10-13 02:00–03:00"
+          ],
+          [
+            "Source",
+            "FS01.corp.local"
+          ]
+        ],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_060.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-061",
+      "number": 61,
+      "chapter": 5,
+      "kind": "image",
+      "topic": "NovaBank kapsamı",
+      "context": "NovaBank · 850 çalışan · Denetim tarihi 13 Ekim 2026. Selin (Denetim Yöneticin) ilk kapsam notunu istiyor. Forest kökü ve child domain birlikte görünüyor.",
+      "prompt": "Denetim kapsamı için ilk doğru yaklaşım nedir?",
+      "options": [
+        {
+          "id": "k1",
+          "text": "İş süreçleriyle ilişkili domain ve bağımlılıkları doğrulamak"
+        },
+        {
+          "id": "k2",
+          "text": "Her iki domaini aynı risk ve testle incelemek"
+        },
+        {
+          "id": "k4",
+          "text": "Yalnız forest adını yazıp kapsamı tamamlamak"
+        },
+        {
+          "id": "k3",
+          "text": "Child domaini isimden dolayı tamamen kapsam dışı saymak"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "İki domain görünmesi kapsamı tek başına belirlemez; iş bağı gerekir.",
+        "k2": "Üretim ve test farklı iş etkileri taşıyabilir.",
+        "k3": "Test ortamının üretim bağımlılıkları ve güven ilişkileri incelenmelidir.",
+        "k4": "Domain ve kritik bağımlılıkların kapsamı eksik kalır."
+      },
+      "explanation": "💡 Active Directory bilgisi\nForest birden fazla domain içerebilir. Üretim ve test adları iş bağlamıyla doğrulanır.\n\n🔍 Denetçi gözüyle\nKapsamı teknik ağaca bakıp keyfi çizme.\n\n💼 Gerçek iş hayatında\nÖdeme hizmetinin kimlik bağımlılıklarını önce netleştir.",
+      "hint": "Domain adı kapsam kararının başlangıcıdır; iş etkisi de gerekir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "NovaBank kapsamı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 61,
+      "card_pages": [],
+      "evidence": {
+        "tool": "gpmc",
+        "title": "NovaBank / Forest overview",
+        "headers": [
+          "Domain",
+          "Purpose",
+          "DCs"
+        ],
+        "rows": [
+          [
+            "novabank.local",
+            "Bank staff and payments",
+            "NB-DC01, NB-DC02"
+          ],
+          [
+            "test.novabank.local",
+            "Non-production",
+            "NB-TDC01"
+          ]
+        ],
+        "fields": [],
+        "tree": [
+          "Forest: novabank.local",
+          "Domains",
+          "novabank.local",
+          "test.novabank.local"
+        ],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_061.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-062",
+      "number": 62,
+      "chapter": 5,
+      "kind": "multi_select",
+      "topic": "NovaBank OU yapısı",
+      "context": "NovaBank · 850 çalışan · Denetim tarihi 13 Ekim 2026. Üretim kullanıcıları ve test nesneleri aynı OU altında değil. İki kontrol sorusu istiyorsun.",
+      "prompt": "Ekranla ilişkili uygun iki araştırmayı seç.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Kritik GPO bağlantılarının uygun OU kapsamı"
+        },
+        {
+          "id": "k3",
+          "text": "OU sayısının çalışan sayısına eşit olması"
+        },
+        {
+          "id": "k4",
+          "text": "OU adından tüm kontrollerin etkinliğini varsaymak"
+        },
+        {
+          "id": "k1",
+          "text": "OU bazlı delegasyonun iş sorumluluklarına uyumu"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "feedback": {
+        "k1": "Nesne konumu yönetim yetkisine bağlanır.",
+        "k2": "OU politika kapsamı için anlamlıdır.",
+        "k3": "Böyle bir zorunluluk yoktur.",
+        "k4": "Adlandırma işletim etkinliği değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nOU düzeni yönetim ve politika kapsamını destekler; uygunluk için delegasyon ve bağlantı kanıtı gerekir.\n\n🔍 Denetçi gözüyle\nTemiz görünen ağaç tek başına etkili kontrol değildir.\n\n💼 Gerçek iş hayatında\nSonraki erişim ve GPO testlerini bu OU kapsamına bağla.",
+      "hint": "Yapı ile bu yapıda uygulanan kontrolü ayır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "NovaBank OU yapısı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 62,
+      "card_pages": [],
+      "evidence": {
+        "tool": "aduc",
+        "title": "novabank.local",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "Staff",
+            "Organizational Unit",
+            "850 employee identities"
+          ],
+          [
+            "Privileged",
+            "Organizational Unit",
+            "Administration"
+          ],
+          [
+            "Servers",
+            "Organizational Unit",
+            "Production servers"
+          ],
+          [
+            "Lab",
+            "Organizational Unit",
+            "Test objects"
+          ]
+        ],
+        "fields": [],
+        "tree": [
+          "novabank.local",
+          "Staff",
+          "Privileged",
+          "Servers",
+          "Lab"
+        ],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_062.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-063",
+      "number": 63,
+      "chapter": 5,
+      "kind": "choice",
+      "topic": "NovaBank hesap evreni",
+      "context": "NovaBank · 850 çalışan · Denetim tarihi 13 Ekim 2026. HR ayrılış listesi ile AD export aynı kimlik anahtarıyla eşleştirildi. 14 ayrılan çalışanın Enabled=True olduğu görülüyor.",
+      "prompt": "“Bu eşleşme, aynı gün kapatma ölçütü için incelenecek 14 istisna gösterir.” Doğru mu?",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Doğru"
+        },
+        {
+          "id": "k2",
+          "text": "Yanlış"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Aynı kimlik, dönem ve ölçütle 14 istisna verilmiş.",
+        "k2": "Ekran araştırılabilir kontrol istisnaları gösteriyor.",
+        "k3": "Kapatma ölçütü bütün ilgili çalışanları kapsıyor.",
+        "k4": "Kontrol istisnası için gerçekleşmiş zarar şart değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nAyrılan çalışan–aktif hesap eşleşmesi kontrol istisnasıdır. Nesne varlığı, etkinlik ve kullanım ayrı kavramlardır.\n\n🔍 Denetçi gözüyle\nTamlık ve kimlik eşleştirmesi bu evrenin dayanağıdır.\n\n💼 Gerçek iş hayatında\n14 hesabın izin ve oturum riskini derinleştir; saldırı iddiasını ek kanıt olmadan kurma.",
+      "hint": "Bir kontrol istisnası, gerçekleşmiş zarar iddiasından farklıdır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "NovaBank hesap evreni"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 63,
+      "card_pages": [],
+      "evidence": {
+        "tool": "powershell",
+        "title": "NovaBank / HR–AD reconciliation",
+        "headers": [
+          "Population",
+          "Count",
+          "Control result"
+        ],
+        "rows": [
+          [
+            "HR ended before 2026-10-12",
+            "14",
+            "Enabled=True on 2026-10-13"
+          ],
+          [
+            "Approved disable deadline",
+            "Same day",
+            "Internal control requirement"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": "Full population reconciled by employeeId; interactive use not yet tested."
+      },
+      "image": "ad-auditor/screen_063.png",
+      "presentation": "true_false"
+    },
+    {
+      "external_id": "ad-auditor-v1-064",
+      "number": 64,
+      "chapter": 5,
+      "kind": "scenario",
+      "topic": "NovaBank kapanmayan hesaplar",
+      "context": "NovaBank · 850 çalışan · Denetim tarihi 13 Ekim 2026. 14 istisnadan üç satır ekranda. Selin bunları rapora nasıl taşıyacağını soruyor.",
+      "prompt": "En uygun yaklaşım hangisi?",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Bu tarihlerden kesin başarılı saldırı sonucu çıkarmak"
+        },
+        {
+          "id": "k2",
+          "text": "Üç satır göründüğü için toplam bulguyu üç hesaba düşürmek"
+        },
+        {
+          "id": "k1",
+          "text": "14 istisnayı koruyup örnek satırların yetki ve kullanımını doğrulamak"
+        },
+        {
+          "id": "k3",
+          "text": "Eski zaman damgasıyla hesapları risksiz kabul etmek"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Üç satır görüntüsü tüm evreni yerine geçmez; kullanım ayrı testtir.",
+        "k2": "Ekran açıkça 14 istisnadan üç örnek olduğunu belirtiyor.",
+        "k3": "lastLogonTimestamp kesin kullanım yokluğu kanıtı değildir.",
+        "k4": "Giriş türü ve olay kanıtı burada yok."
+      },
+      "explanation": "💡 Active Directory bilgisi\nlastLogonTimestamp yaklaşık bir etkinlik göstergesidir. Kesin oturum saati veya kullanılmama kanıtı değildir.\n\n🔍 Denetçi gözüyle\n14 sayısını tam evrene, kullanım yorumunu uygun loglara bağla.\n\n💼 Gerçek iş hayatında\nYetkili ekiple kapanış ve gerekli kanıt saklamasını planla.",
+      "hint": "Örnek görüntü ile toplam evreni karıştırma.",
+      "difficulty": "intermediate",
+      "goals": [
+        "NovaBank kapanmayan hesaplar"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 64,
+      "card_pages": [],
+      "evidence": {
+        "tool": "powershell",
+        "title": "NovaBank / 14 exceptions — sample view",
+        "headers": [
+          "Account",
+          "HR ended",
+          "Enabled",
+          "LastLogonTimestamp"
+        ],
+        "rows": [
+          [
+            "selcuk.aydin",
+            "2026-10-10",
+            "True",
+            "2026-10-05"
+          ],
+          [
+            "merve.kilic",
+            "2026-10-11",
+            "True",
+            "2026-10-08"
+          ],
+          [
+            "ozan.yildiz",
+            "2026-10-11",
+            "True",
+            "2026-10-09"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": "Displayed 3 of 14 exceptions; lastLogonTimestamp is approximate."
+      },
+      "image": "ad-auditor/screen_064.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-065",
+      "number": 65,
+      "chapter": 5,
+      "kind": "fill_blank",
+      "topic": "NovaBank ayrıcalıklı grup",
+      "context": "NovaBank · 850 çalışan · Denetim tarihi 13 Ekim 2026. Bir normal destek kimliği yüksek yetkili grupta. Grubun pencere başlığını oku.",
+      "prompt": "Bu ayrıcalıklı grubun tam adını yaz.",
+      "options": [],
+      "answer": [
+        "Domain Admins"
+      ],
+      "feedback": {},
+      "explanation": "💡 Active Directory bilgisi\nDomain Admins geniş domain yönetim yetkisi verir. Normal iş kimliğiyle üyelik, gerekçe ve onay açısından incelenmelidir.\n\n🔍 Denetçi gözüyle\nGrup kimliğini belirledikten sonra yetkilendirme ve kullanım kanıtını topla.\n\n💼 Gerçek iş hayatında\nÖzge’nin iş görevi ve üyelik gerekçesi sonraki olayla ilişkilendirilecek.",
+      "hint": "Pencere başlığı hangi grubun incelendiğini gösterir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "NovaBank ayrıcalıklı grup"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 65,
+      "card_pages": [],
+      "evidence": {
+        "tool": "group",
+        "title": "Domain Admins Properties — novabank.local",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "adm.harun",
+            "User",
+            "Privileged"
+          ],
+          [
+            "adm.eren",
+            "User",
+            "Privileged"
+          ],
+          [
+            "destek.ozge",
+            "User",
+            "Staff/Support"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "Members",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_065.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-066",
+      "number": 66,
+      "chapter": 5,
+      "kind": "sentence_order",
+      "topic": "NovaBank servis hesabı",
+      "context": "NovaBank · 850 çalışan · Denetim tarihi 13 Ekim 2026. svc.payroll etkin, Domain Admins üyesi ve sahibi boş. Ödeme aktarımıyla bağı var; servis hemen durdurulamaz.",
+      "prompt": "Bu ekranı incelemek için adımları doğru sıraya koy.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Hizmet işlevi ve kritik bağımlılıkları doğrula"
+        },
+        {
+          "id": "k3",
+          "text": "Geniş üyelik için güvenli daraltma planını yönetimden iste"
+        },
+        {
+          "id": "k2",
+          "text": "Hesabın sahibi, gerekli izinleri ve onayı araştır"
+        },
+        {
+          "id": "k4",
+          "text": "Uygulama ve hizmet sonucunu yeniden test et"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "feedback": {
+        "k1": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k2": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k3": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k4": "Bu adım önceki incelemenin sonucuna bağlıdır."
+      },
+      "explanation": "💡 Active Directory bilgisi\nServis hesabının işlevi kesinti riskiyle birlikte değerlendirilir. Geniş ayrıcalığı azaltmak kontrollü geçiş gerektirir.\n\n🔍 Denetçi gözüyle\nSahipsizlik ve gereksiz yetkiyi ayrı olgularla belgeleyebilirsin.\n\n💼 Gerçek iş hayatında\nDenetçi üretimde izinsiz hesap silmez; risk ve doğrulama planı sunar.",
+      "hint": "Güvenlik ve hizmet sürekliliği birlikte düşünülmeli.",
+      "difficulty": "advanced",
+      "goals": [
+        "NovaBank servis hesabı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 66,
+      "card_pages": [],
+      "evidence": {
+        "tool": "powershell",
+        "title": "NovaBank / service account review",
+        "headers": [
+          "Account",
+          "Use / owner register",
+          "MemberOf"
+        ],
+        "rows": [
+          [
+            "svc.payroll",
+            "Payment export / owner not assigned",
+            "Domain Admins"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": "Service dependencies must be verified before changing the account."
+      },
+      "image": "ad-auditor/screen_066.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-067",
+      "number": 67,
+      "chapter": 5,
+      "kind": "image",
+      "topic": "NovaBank yetki birikimi",
+      "context": "NovaBank · 850 çalışan · Denetim tarihi 13 Ekim 2026. HR’ya göre Merve Operations’a geçti. Teknik üyelik eski ödeme düzenleme rolünü de içeriyor.",
+      "prompt": "Hangi kontrol eksikliği araştırılmalı?",
+      "options": [
+        {
+          "id": "k2",
+          "text": "İki grup üyeliğinin her durumda yasak olması"
+        },
+        {
+          "id": "k3",
+          "text": "Operations adının güvenlik grubu olmaması"
+        },
+        {
+          "id": "k1",
+          "text": "Görev değişikliğinde eski erişimin yeniden değerlendirilmemesi"
+        },
+        {
+          "id": "k4",
+          "text": "Merve’nin kesin ödeme değiştirmiş olması"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Eski ve yeni rol birlikte görünür; iş ihtiyacı doğrulanmalı.",
+        "k2": "Bir kullanıcı ihtiyaç nedeniyle birden fazla gruba üye olabilir.",
+        "k3": "Listede Security Group olarak gösteriliyor.",
+        "k4": "Üyelik, gerçekleşmiş işlem kanıtı değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nMover kontrolü yeni göreve geçerken önceki izinlerin gerekliliğini değerlendirir.\n\n🔍 Denetçi gözüyle\nİş ihtiyacı, onay ve gerçek izin bağlantısını doğrula.\n\n💼 Gerçek iş hayatında\nBu bulgu 14 leaver istisnasından farklı bir yaşam döngüsü sorunudur.",
+      "hint": "Eski ve yeni görev kapsamını karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "NovaBank yetki birikimi"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 67,
+      "card_pages": [],
+      "evidence": {
+        "tool": "workpaper",
+        "title": "NovaBank / mover reconciliation",
+        "headers": [
+          "Account / HR change",
+          "Current membership",
+          "Business role"
+        ],
+        "rows": [
+          [
+            "merve.demir / 2026-09-15",
+            "GG_Payment_Edit",
+            "Former Finance role"
+          ],
+          [
+            "merve.demir / 2026-09-15",
+            "GG_Operations_Read",
+            "Current Operations role"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_067.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-068",
+      "number": 68,
+      "chapter": 5,
+      "kind": "drag_select",
+      "topic": "NovaBank parola ölçütü",
+      "context": "NovaBank · 850 çalışan · Denetim tarihi 13 Ekim 2026. Kurum ölçütü 14 karakter. Kullanıcı için PSO sonucu yok; domain sonucu 8.",
+      "prompt": "Hangi durum doğrudan ölçütle uyuşmuyor?",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Domain adının local ile bitmesi"
+        },
+        {
+          "id": "k1",
+          "text": "Varsayılan minimumun kurum hedefinin altında olması"
+        },
+        {
+          "id": "k4",
+          "text": "PSO olmamasının her durumda kontrol ihlali olması"
+        },
+        {
+          "id": "k2",
+          "text": "Kullanıcının birden fazla güvenlik grubuna üye olması"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "8 değeri tanımlı 14 ölçütünü karşılamaz.",
+        "k2": "Bu kayıt üyelik evreni değildir.",
+        "k3": "Parola ölçütü farkını tek başına açıklamaz.",
+        "k4": "Varsayılan domain politikası uygun olduğunda PSO zorunlu değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nPSO yoksa domain parola politikası belirleyicidir. Burada karşılaştırma onaylı kurum ölçütüyle yapılır.\n\n🔍 Denetçi gözüyle\nEvrensel standart eşiği gibi sunma; hangi kullanıcı evrenine uygulandığını kaydet.\n\n💼 Gerçek iş hayatında\nParola yaklaşımı ve telafi kontrolleri kalan risk değerlendirmesine dahil edilir.",
+      "hint": "PSO yokluğu ile varsayılan ayarın uygunsuzluğu ayrı konulardır.",
+      "difficulty": "advanced",
+      "goals": [
+        "NovaBank parola ölçütü"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 68,
+      "card_pages": [],
+      "evidence": {
+        "tool": "powershell",
+        "title": "NovaBank / effective password evidence",
+        "headers": [
+          "Evidence",
+          "Target",
+          "Value"
+        ],
+        "rows": [
+          [
+            "Resultant PSO",
+            "selin.demir",
+            "None"
+          ],
+          [
+            "Default domain MinPasswordLength",
+            "novabank.local",
+            "8"
+          ],
+          [
+            "Approved minimum",
+            "Domain staff",
+            "14"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_068.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-069",
+      "number": 69,
+      "chapter": 5,
+      "kind": "multi_select",
+      "topic": "NovaBank kapsam boşluğu",
+      "context": "NovaBank · 850 çalışan · Denetim tarihi 13 Ekim 2026. WS-044 doğru OU’da. GPO filtrelemesinde GG_PilotPCs var; cihaz üye değil. Results baz çizgiyi Applied listesinde göstermiyor.",
+      "prompt": "Doğru iki çıkarımı seç.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "GPO adı aynı olduğu için sonuç göz ardı edilebilir"
+        },
+        {
+          "id": "k2",
+          "text": "Cihazın beklenen kapsam dışında kalması araştırılmalı"
+        },
+        {
+          "id": "k3",
+          "text": "Baz çizgi bütün cihazlarda kesin uygulanmış"
+        },
+        {
+          "id": "k1",
+          "text": "Bağlantı varlığı tek başına uygulama güvencesi değil"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "feedback": {
+        "k1": "Filtre ve sonuç bu varsayımı doğrulamıyor.",
+        "k2": "Üyelik ve sonuç baz çizgi boşluğunu işaret ediyor.",
+        "k3": "Bu hedefin sonucu iddiayı desteklemiyor.",
+        "k4": "Ad, etkin sonucu değiştirmez."
+      },
+      "explanation": "💡 Active Directory bilgisi\nKapsam, izin ve gerçek uygulama aynı hedef için karşılaştırılır. Tek cihaz sonucu bütün evrene genellenmez.\n\n🔍 Denetçi gözüyle\nWS-044 istisnasını kaydet; benzer cihaz evrenini ayrıca test et.\n\n💼 Gerçek iş hayatında\nMiras ve filtre sorunu için kontrol sahibiyle aksiyon ve yeniden test belirle.",
+      "hint": "Konum, filtre ve sonuç birlikte okunmalı.",
+      "difficulty": "advanced",
+      "goals": [
+        "NovaBank kapsam boşluğu"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 69,
+      "card_pages": [],
+      "evidence": {
+        "tool": "gpmc",
+        "title": "NovaBank / WS-044 results and scope",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [],
+        "fields": [
+          [
+            "OU",
+            "Workstations"
+          ],
+          [
+            "Security filtering",
+            "GG_PilotPCs"
+          ],
+          [
+            "WS-044 group membership",
+            "Not a member"
+          ],
+          [
+            "Applied GPOs",
+            "Local Policy only"
+          ],
+          [
+            "Report generated",
+            "2026-10-13 09:00"
+          ]
+        ],
+        "tree": [],
+        "tab": "Results",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_069.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-070",
+      "number": 70,
+      "chapter": 5,
+      "kind": "choice",
+      "topic": "NovaBank gece denemeleri",
+      "context": "NovaBank · 850 çalışan · Denetim tarihi 13 Ekim 2026. APP02’den svc.batch için 4625 kayıtları artıyor. Hata yanlış parola; ödeme aktarımı gecikmiş.",
+      "prompt": "İlk uygun araştırma nedir?",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Servis olduğu için bütün uyarıları kapatmak"
+        },
+        {
+          "id": "k4",
+          "text": "İlk iş bütün domain hesaplarını kilitlemek"
+        },
+        {
+          "id": "k2",
+          "text": "Gece olduğu için kesin saldırı raporlamak"
+        },
+        {
+          "id": "k1",
+          "text": "APP02 işleri, kimlik değişimi ve ilişkili olayları incelemek"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Kaynak ve hata servis kimlik bilgisi sorununu da düşündürür.",
+        "k2": "Zaman ve tekrar niyeti kesinleştirmez.",
+        "k3": "Kötüye kullanım veya operasyon riski yine mümkündür.",
+        "k4": "Kanıtsız geniş müdahale bankanın hizmetini kesebilir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nBaşarısız giriş, kaynak iş ve kimlik bilgisi değişikliğiyle açıklanabilir; saldırı olasılığı da kanıtla değerlendirilir.\n\n🔍 Denetçi gözüyle\nİş etkisini ve güvenlik sinyalini ayrı ama ilişkili kaydet.\n\n💼 Gerçek iş hayatında\nAPP02 görevinin eski parola kullandığı teyit edilirse kontrollü düzeltmeyi test et.",
+      "hint": "Önce kaynağı ve hata türünü doğrula.",
+      "difficulty": "advanced",
+      "goals": [
+        "NovaBank gece denemeleri"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 70,
+      "card_pages": [],
+      "evidence": {
+        "tool": "event",
+        "title": "Event Viewer / Windows Logs / Security",
+        "headers": [
+          "Level",
+          "Date and Time",
+          "Source",
+          "Event ID"
+        ],
+        "rows": [
+          [
+            "Audit Failure",
+            "2026-10-13 02:14:00",
+            "Microsoft-Windows-Security-Auditing",
+            "4625"
+          ]
+        ],
+        "fields": [
+          [
+            "Event ID",
+            "4625"
+          ],
+          [
+            "Computer",
+            "NB-FS01.novabank.local"
+          ],
+          [
+            "Logged",
+            "2026-10-13 02:14:00"
+          ],
+          [
+            "Description",
+            "An account failed to log on."
+          ],
+          [
+            "TargetUserName",
+            "svc.batch"
+          ],
+          [
+            "IpAddress",
+            "10.30.8.40 (APP02)"
+          ],
+          [
+            "LogonType",
+            "3"
+          ],
+          [
+            "SubStatus",
+            "0xC000006A"
+          ]
+        ],
+        "tree": [
+          "Event Viewer (Local)",
+          "Custom Views",
+          "Windows Logs",
+          "Application",
+          "Security",
+          "System"
+        ],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_070.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-071",
+      "number": 71,
+      "chapter": 5,
+      "kind": "scenario",
+      "topic": "NovaBank onay zamanlaması",
+      "context": "NovaBank · 850 çalışan · Denetim tarihi 13 Ekim 2026. destek.ozge Domain Admins üyeliği 02.16’da eklendi. CH-108 onayı 02.18. Kurum ön onay istiyor; acil istisna kaydı yok.",
+      "prompt": "En uygun ilk sonuç nedir?",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Event ID olduğu için iş onayı gereksizdir"
+        },
+        {
+          "id": "k2",
+          "text": "Sonradan onay bütün önceki riski otomatik kapatır"
+        },
+        {
+          "id": "k3",
+          "text": "Bu iki dakika kesin veri sızıntısı kanıtıdır"
+        },
+        {
+          "id": "k1",
+          "text": "Ön onay kontrolü için zamanlama istisnası var"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Verilen ortak zaman ve ölçütle onay üyelikten sonra görünüyor.",
+        "k2": "Ön onay ölçütü ve acil istisna koşulu ayrıca değerlendirilir.",
+        "k3": "Zamanlama farkı gerçekleşmiş zararı kanıtlamaz.",
+        "k4": "Teknik olay kaydı yetkilendirme onayı değildir."
+      },
+      "explanation": "💡 Active Directory bilgisi\nGrup değişikliği olayı ile iş onayı aynı kimlik ve zaman çizelgesinde eşleştirilir.\n\n🔍 Denetçi gözüyle\nOlguyu ön onay istisnası olarak yaz; nedensellik veya niyet ekleme.\n\n💼 Gerçek iş hayatında\nÜyelik kullanımı, acil süreç ve devam eden ayrıcalık riski araştırılır.",
+      "hint": "Teknik olay zamanı ve iş onayı zamanı farklı olabilir.",
+      "difficulty": "advanced",
+      "goals": [
+        "NovaBank onay zamanlaması"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 71,
+      "card_pages": [],
+      "evidence": {
+        "tool": "workpaper",
+        "title": "NovaBank - Event / Approval Reconciliation",
+        "headers": [
+          "Source",
+          "Time (UTC+3)",
+          "Record",
+          "Detail"
+        ],
+        "rows": [
+          [
+            "NB-DC01 Security",
+            "2026-10-13 02:16",
+            "Event 4728",
+            "adm.eren added destek.ozge to Domain Admins"
+          ],
+          [
+            "Change register",
+            "2026-10-13 02:18",
+            "CH-108 approved",
+            "Prior approval required"
+          ],
+          [
+            "Emergency register",
+            "2026-10-13",
+            "CH-108 exception",
+            "No matching record"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": "Separate source records reconciled by auditor; no causal conclusion"
+      },
+      "image": "ad-auditor/screen_071.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-072",
+      "number": 72,
+      "chapter": 5,
+      "kind": "image",
+      "topic": "NovaBank risk sırası",
+      "context": "NovaBank · 850 çalışan · Denetim tarihi 13 Ekim 2026. Üç bulgu özetlendi. Domain Admins üyeliği hâlâ aktif ve geniş ayrıcalıkla ödeme altyapısını etkileyebilir.",
+      "prompt": "İlk hangi risk kararını eskale edersin?",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Yalnız bulgu sayısı en çok olan F01’i her durumda öncelemek"
+        },
+        {
+          "id": "k1",
+          "text": "Aktif geniş yönetici yetkisinin uygunluğunu ve hızlı risk azaltımını"
+        },
+        {
+          "id": "k3",
+          "text": "En kolay düzeltileceği için yalnız F03’ü öncelemek"
+        },
+        {
+          "id": "k4",
+          "text": "Onay sonunda geldiği için F02’yi kapatmak"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Geniş ve aktif yetki ödeme altyapısında yüksek olası etki yaratır.",
+        "k2": "Sayı tek başına etki ve ayrıcalık düzeyinin yerine geçmez.",
+        "k3": "Kolaylık risk önceliğinin tek ölçütü değildir.",
+        "k4": "Yetki gerekliliği ve ön onay istisnası hâlâ açık."
+      },
+      "explanation": "💡 Active Directory bilgisi\nRisk sırası olasılık, etki ve mevcut kontrolleri birlikte değerlendirir. Geniş aktif yetki sayıdan daha önemli olabilir.\n\n🔍 Denetçi gözüyle\nBu vakada öncelik F02; diğer önemli bulgular da takipte kalır.\n\n💼 Gerçek iş hayatında\nYönetimle yetkili ve hizmeti koruyan azaltım planı belirle.",
+      "hint": "Risk adedi ile risk etkisi aynı değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "NovaBank risk sırası"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 72,
+      "card_pages": [],
+      "evidence": {
+        "tool": "workpaper",
+        "title": "NovaBank / Risk register",
+        "headers": [
+          "Finding",
+          "Observed exposure",
+          "Status"
+        ],
+        "rows": [
+          [
+            "F01",
+            "14 leaver accounts; standard staff rights",
+            "Open"
+          ],
+          [
+            "F02",
+            "destek.ozge: active Domain Admins; prior approval absent",
+            "Open"
+          ],
+          [
+            "F03",
+            "WS-044 missing workstation baseline",
+            "Open"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_072.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-073",
+      "number": 73,
+      "chapter": 5,
+      "kind": "sentence_order",
+      "topic": "NovaBank kanıt zinciri",
+      "context": "NovaBank · 850 çalışan · Denetim tarihi 13 Ekim 2026. F02 için üyelik ekranı, 4728 olayı ve CH-108 zamanlaması var. Çalışma kâğıdını tamamlayacaksın.",
+      "prompt": "Bu ekranı incelemek için adımları doğru sıraya koy.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Eksik iş ihtiyacı ve kullanım kanıtını tamamla"
+        },
+        {
+          "id": "k4",
+          "text": "Bulguyu kanıt bağlantıları ve sınırlarıyla yaz"
+        },
+        {
+          "id": "k2",
+          "text": "Teknik olayı onay ve ölçütle karşılaştır"
+        },
+        {
+          "id": "k1",
+          "text": "Kimlik, grup ve zaman dilimi bağını doğrula"
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "feedback": {
+        "k1": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k2": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k3": "Bu adım önceki incelemenin sonucuna bağlıdır.",
+        "k4": "Bu adım önceki incelemenin sonucuna bağlıdır."
+      },
+      "explanation": "💡 Active Directory bilgisi\nKanıt zinciri gözlenen durumu onaylı ölçüt ve iş etkisine bağlar.\n\n🔍 Denetçi gözüyle\nBağlantılar izlenebilir olmalı; eksik bilgi açıkça belirtilmelidir.\n\n💼 Gerçek iş hayatında\nBaşka denetçi senin çalışma kâğıdından değerlendirmeyi izleyebilmeli.",
+      "hint": "Her belge farklı bir soruyu yanıtlar.",
+      "difficulty": "advanced",
+      "goals": [
+        "NovaBank kanıt zinciri"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 73,
+      "card_pages": [],
+      "evidence": {
+        "tool": "workpaper",
+        "title": "NovaBank / Evidence index F02",
+        "headers": [
+          "Evidence",
+          "Target",
+          "Time / purpose"
+        ],
+        "rows": [
+          [
+            "ADUC Members",
+            "Domain Admins / destek.ozge",
+            "2026-10-13 09:05"
+          ],
+          [
+            "Security 4728",
+            "NB-DC01 / member added",
+            "02:16"
+          ],
+          [
+            "CH-108",
+            "Membership approval",
+            "02:18"
+          ],
+          [
+            "Control criterion",
+            "Prior approval; no emergency exception",
+            "Approved internal policy"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_073.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-074",
+      "number": 74,
+      "chapter": 5,
+      "kind": "drag_select",
+      "topic": "NovaBank bulgu yazımı",
+      "context": "NovaBank · 850 çalışan · Denetim tarihi 13 Ekim 2026. F02 için kullanıcı, grup, olay ve onay zamanı doğrulandı. Gerçekleşmiş zarar kanıtı yok.",
+      "prompt": "Hangi bulgu metni en uygun?",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Ön onaysız geniş üyelik, yetkisiz domain değişikliği riskini artırır"
+        },
+        {
+          "id": "k2",
+          "text": "Sonraki onay bulunduğu için süreç tam uygun işletilmiştir"
+        },
+        {
+          "id": "k3",
+          "text": "Özge tüm sistemleri değiştirmiş, bankada kesin zarar oluşmuştur"
+        },
+        {
+          "id": "k4",
+          "text": "İki dakikalık farkın hiçbir koşulda iş etkisi olamaz"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Ölçüt, olgu ve olası etkiyi kanıt sınırında birleştirir.",
+        "k2": "Ön onay ölçütünü ve zamanlama farkını çıkarır.",
+        "k3": "Verilen kanıt gerçekleşmiş eylem ve zarar göstermiyor.",
+        "k4": "Geniş ayrıcalığın olası etkisini kanıtsız küçümser."
+      },
+      "explanation": "💡 Active Directory bilgisi\nTeknik kayıt, ölçüt ve risk ayrı öğelerdir. Risk olası iş etkisidir; gerçekleşmiş zarar ayrı kanıt ister.\n\n🔍 Denetçi gözüyle\nProfesyonel bulgu kişiyi suçlamadan doğrulanan kontrol farkını anlatır.\n\n💼 Gerçek iş hayatında\nAksiyon sahibi, süre, geçici kontrol ve yeniden test planını ekle.",
+      "hint": "Olası etkiyle gerçekleşmiş zararı karıştırma.",
+      "difficulty": "advanced",
+      "goals": [
+        "NovaBank bulgu yazımı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 74,
+      "card_pages": [],
+      "evidence": {
+        "tool": "workpaper",
+        "title": "NovaBank / Finding F02 draft evidence",
+        "headers": [
+          "Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [],
+        "fields": [
+          [
+            "Criterion",
+            "Privileged membership requires prior approval"
+          ],
+          [
+            "Condition",
+            "destek.ozge added at 02:16; approved at 02:18"
+          ],
+          [
+            "Impact",
+            "Potential unauthorized domain-level changes"
+          ],
+          [
+            "Actual damage",
+            "Not established"
+          ]
+        ],
+        "tree": [],
+        "tab": "General",
+        "footer": ""
+      },
+      "image": "ad-auditor/screen_074.png"
+    },
+    {
+      "external_id": "ad-auditor-v1-075",
+      "number": 75,
+      "chapter": 5,
+      "kind": "image",
+      "topic": "NovaBank yönetim sunumu",
+      "context": "NovaBank · 850 çalışan · Denetim tarihi 13 Ekim 2026. Selin (Denetim Yöneticin) toplantıda F01–F03’ü sunmanı istiyor. Kapanışlar henüz test edilmedi.",
+      "prompt": "En uygun kapanış kararın nedir?",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Aksiyon sözüyle tüm bulguları aynı gün kapatmak"
+        },
+        {
+          "id": "k1",
+          "text": "İş etkisi ve açık riskleri anlatıp sahipli aksiyonları doğrulamaya bağlamak"
+        },
+        {
+          "id": "k3",
+          "text": "Yalnız ekran sayılarını okuyup risk kararını atlamak"
+        },
+        {
+          "id": "k4",
+          "text": "Denetim adına bütün riskleri kabul edip ortamı güvenli ilan etmek"
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "feedback": {
+        "k1": "Yönetim kararını ve denetim takibini netleştirir.",
+        "k2": "İşletim kanıtı ve yeniden test olmadan kapanış uygun değildir.",
+        "k3": "Sunum iş etkisini ve karar ihtiyacını açıklamalıdır.",
+        "k4": "Risk kabulü yetkili yönetimin sorumluluğudur; mutlak güvence verilmez."
+      },
+      "explanation": "💡 Active Directory bilgisi\nAD denetimi ekranları toplamakla bitmez; kimlik, onay, etkin ayar ve iş riskini birlikte yorumlar.\n\n🔍 Denetçi gözüyle\nKanıtla kapanış ve uygun yönetim kararı, raporun değerini oluşturur.\n\n💼 Gerçek iş hayatında\nİlk AD denetim simülasyonunu tamamladın. Bu temel deneyim uzmanlık belgesi değildir; bir sonraki adım yetkili bir labda gerçek kontrolleri güvenli biçimde gözlemlemektir.",
+      "hint": "Sunumda “kim, neyi, ne zaman yapacak ve nasıl doğrulanacak?” sorularını cevapla.",
+      "difficulty": "advanced",
+      "goals": [
+        "NovaBank yönetim sunumu"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": false,
+      "order": 75,
+      "card_pages": [],
+      "evidence": {
+        "tool": "workpaper",
+        "title": "NovaBank / Audit committee brief",
+        "headers": [
+          "Risk",
+          "Owner",
+          "Next verification"
+        ],
+        "rows": [
+          [
+            "F02 privileged membership",
+            "Harun — IT Manager",
+            "Need and controlled restriction"
+          ],
+          [
+            "F01 14 leaver accounts",
+            "Derya — IAM Lead",
+            "Disable + session review"
+          ],
+          [
+            "F03 WS-044 baseline",
+            "Eren — Endpoint Lead",
+            "Effective policy re-test"
+          ]
+        ],
+        "fields": [],
+        "tree": [],
+        "tab": "General",
+        "footer": "No finding is closed without verification. Actual breach not established."
+      },
+      "image": "ad-auditor/screen_075.png"
+    }
+  ]
+}
