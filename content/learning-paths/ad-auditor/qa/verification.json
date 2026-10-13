@@ -1,0 +1,39 @@
+{
+  "commit": "4f1a791146ad045acc305d82a062dcbedffc3d6f",
+  "render_status": "Live",
+  "path_id": 30,
+  "questions": 75,
+  "images": 75,
+  "image_size": [
+    2560,
+    1440
+  ],
+  "audio": 0,
+  "chapters": 5,
+  "per_chapter": 15,
+  "backend_tests": 19,
+  "node_tests": 2,
+  "frontend_renders": 75,
+  "flutter_files_checked": 199,
+  "flutter_files_changed": 0,
+  "existing_content_hash_before": "755f65c1cf1ba7e5b97f63f37bf756e3fb89f88b7eb1ffe534347b039ad18e76",
+  "existing_content_hash_after": "755f65c1cf1ba7e5b97f63f37bf756e3fb89f88b7eb1ffe534347b039ad18e76",
+  "existing_questions": 200,
+  "attempts_before_after": [
+    100,
+    100
+  ],
+  "progress_before_after": [
+    11,
+    11
+  ],
+  "xp_transactions_before_after": [
+    96,
+    96
+  ],
+  "idempotent_dryrun_create": 0,
+  "live_js_matches_local": true,
+  "live_authenticated_ui_checked": false,
+  "physical_mobile_device_checked": false,
+  "pinch_pointer_event_test_passed": true
+}

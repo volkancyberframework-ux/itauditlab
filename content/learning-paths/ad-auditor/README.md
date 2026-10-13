@@ -34,3 +34,11 @@ Tercih edilen geri alma: önceki uygulama commitini Render'da yeniden yayınlama
 Django: mobile_web.test_ad_web, mobile_web.test_web, mobile_api.test_cisa_simulator, mobile_api.test_first30_recordings: 19 test başarılı. AD test akışı 75 sorunun tamamını doğru cevapla, 5 bölüm özeti ve final sonucu, XP/ilerleme kayıtları, yanlış cevap, tekrar gönderim, resume, üyelik, native listeden izolasyon, 75 yetkili görsel ve refresh çerezi kontrollerini içerir. Node: viewer-math.test.mjs, 2 test başarılı.
 
 Gerçek Chrome'da yerel web bileşeni: tekerlek, çift tık, sürükleme, iki PointerEvent ile pinch, fit, %100 sıfırlama, ESC/close, seçili cevap korunması, yükleme hatası ve retry başarılı. 390×844 dar ekranda da test edilir. Fiziksel iOS/Android cihazıyla iki parmak testi yapılmadı; dokunma hareketi PointerEvents ile doğrulandı. Beş bölüm ve fullscreen QA görüntüleri qa/ altında.
+
+## Canlı doğrulama — 13 Ekim 2026
+
+Render 4f1a791 yayını 2m22s sonunda Live. Kalıcı yol ID: 30; 75 soru, 75 PNG, sıfır ses; web_published=true, native published=false. Production dry-run 0 ekleme gösterdi; tüm 75 manifest/PNG kontrolü geçti. Root HTML web adaptörünü içeriyor; canlı JS baytları yerel sürümle aynı; healthz 200; yetkisiz web API/görsel isteği 401.
+
+Mevcut yollar 26 ve 28: 100'er soru. İçerik SHA256 yayın öncesi/sonrası aynı: 755f65c1cf1ba7e5b97f63f37bf756e3fb89f88b7eb1ffe534347b039ad18e76. Cevap 100→100, ilerleme 11→11, XP transaction 96→96. Flutter dosya özeti 199 dosyada aynı.
+
+Gerçek Chrome yerel fixture: 75/75 ekranın tamamı, 7 soru türünün kontrolleri ve orijinal PNG boyutları başarılı. Web fetch adaptörü mevcut oturum yanıtını 45ms içinde döndürüp doğrudan soru ekranını açtı. 390×844 viewport testleri başarılı. Canlı uygulamada kullanıcı oturumu açılmadığı için girişli UI üzerinde son görsel tur yapılmadı; production kontrolü yetkili Render shell içinden salt okunur içerik doğrulaması ve public web dosya/sağlık kontrolleriyle yapıldı.
