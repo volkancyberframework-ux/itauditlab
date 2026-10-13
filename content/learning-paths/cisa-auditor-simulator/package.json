@@ -1,0 +1,4348 @@
+{
+  "slug": "cisa-auditor-simulator-v1",
+  "title": "CISA: Gerçek Bir IT Denetçisi Olabilir misin? 🎯",
+  "description": "Bir şirketin IT denetim ekibine katıldın. Önünde 5 farklı görev alanı, 100 kritik karar ve gerçek iş hayatından senaryolar var. Denetim planlayacak, riskleri değerlendirecek, sistemleri inceleyecek, bulgular yazacak ve krizlerle mücadele edeceksin. Peki gerçekten bir IT Auditor gibi düşünebiliyor musun?",
+  "modules": [
+    "Domain 1: Denetim süreci",
+    "Domain 2: IT yönetişimi ve yönetimi",
+    "Domain 3: Sistem edinimi, geliştirme ve uygulama",
+    "Domain 4: IT operasyonları ve iş sürekliliği",
+    "Domain 5: Bilgi varlıklarının korunması"
+  ],
+  "questions": [
+    {
+      "external_id": "cisa-auditor-v1-001",
+      "number": 1,
+      "domain": 1,
+      "kind": "choice",
+      "topic": "Bağımsız kanıt",
+      "prompt": "En uygun yanıtın hangisi?",
+      "context": "Domain 1 · Görev 1/20\n\nİlk sabahın, Kıyı Bankası. Murat (IT Müdürü), sertifikayı masaya koyuyor: “Geçen yıl denetlendik. Yeniden test zaman kaybı.” Bu yıl ödeme uygulaması değişmiş. Selin (Denetim Yöneticin) senden ilk yaklaşımını istiyor.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Güncel riskleri belirleyip ilgili kontrolleri kanıtla test etmek",
+          "feedback": "Sertifika geçmiş incelemeyi gösterir; değişen sistem için güncel kanıt gerekir."
+        },
+        {
+          "id": "k3",
+          "text": "Geçmiş rapordaki bulguları aynen yeni rapora taşımak",
+          "feedback": "Geçmiş bulgu yeni dönemin koşullarını ve uygulamasını kanıtlamaz."
+        },
+        {
+          "id": "k2",
+          "text": "Sertifikanın kapsamını okuyup bu yıl test yapmamak",
+          "feedback": "Kapsamı okumak yararlıdır; bu yılki uygulamayı tek başına doğrulamaz."
+        },
+        {
+          "id": "k4",
+          "text": "Müdürün beyanını alıp düşük riskli alanlarla başlamak",
+          "feedback": "Beyan, ödeme sisteminin değişen riskini öncelik dışına çıkarmaya yetmez."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nDenetim, güvenilir görünen beyanı bile risk ve dönemle uyumlu kanıtla sınar. Sertifika bir başlangıç bilgisi olabilir; kontrolün bugün çalıştığını göstermez.\n\n💼 Gerçek iş hayatında\nSertifikayı küçümsemeden kapsamını öğren; değişiklik kayıtları ve bağımsız testlerle kendi sonucunu kur.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Bağımsız kanıt"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 1,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-002",
+      "number": 2,
+      "domain": 1,
+      "kind": "multi_select",
+      "topic": "Denetim yetkisi",
+      "prompt": "Yetkiyi kullanırken hangi iki yaklaşım doğru?",
+      "context": "Domain 1 · Görev 2/20\n\nKıyı Bankası log erişimini reddediyor. Denetim yönergesi sana yetki veriyor; ancak sadece denetim amacıyla gerekli veriye erişebilirsin.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Tam müşteri verisini kişisel e-posta hesabına istemek",
+          "feedback": "Amaçla orantısız toplama ve güvensiz aktarım yaratır."
+        },
+        {
+          "id": "k2",
+          "text": "Gereken alanları ve güvenli aktarım yöntemini tanımlamak",
+          "feedback": "Veri erişimini denetim amacıyla sınırlar."
+        },
+        {
+          "id": "k1",
+          "text": "Yönergedeki erişim yetkisini ilgili yöneticiyle netleştirmek",
+          "feedback": "Görevin yetki dayanağını görünür kılar."
+        },
+        {
+          "id": "k4",
+          "text": "Sisteme bir çalışan parolasıyla gizlice erişmek",
+          "feedback": "Yetki kişisel hesap kullanımını ve iz bırakmayı gerektirir."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "explanation": "🧠 Neden doğru?\nYönerge erişimin dayanağıdır; veri minimizasyonu ve güvenli işleme bu yetkinin sınırlarıdır. Erişim anlaşmazlığı çözülemezse kapsam kısıtını yöneticine bildir.\n\n💼 Gerçek iş hayatında\nPBC talebine veri alanlarını, dönemi, saklama süresini ve aktarım kanalını yaz.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Denetim yetkisi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 2,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-003",
+      "number": 3,
+      "domain": 1,
+      "kind": "sentence_order",
+      "topic": "Riske dayalı plan",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 1 · Görev 3/20\n\nÖdeme denetiminin amacı bellidir: yetkisiz işlemleri önleyen kontrolleri değerlendirmek. Planı henüz onaylamadın. Önce iş akışını anlaman gerekiyor.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Ödeme akışını ve sistem bağımlılıklarını öğren",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k4",
+          "text": "Planı yetkili denetim yöneticisine onaylat",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k2",
+          "text": "Akıştaki önemli riskleri değerlendir",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k3",
+          "text": "Risklere göre kapsamı ve testleri belirle",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nTestler, tanımlanan riskin kontrolünü ölçmelidir. Akışı bilmeden kapsamı çizmek kritik bağımlılıkları dışarıda bırakabilir. Onay, bu hazırlığın ardından gelir.\n\n💼 Gerçek iş hayatında\nPlanına sadece sistem adlarını değil, hangi risk hakkında hangi kanıtla sonuç vereceğini yaz.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Riske dayalı plan"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 3,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-004",
+      "number": 4,
+      "domain": 1,
+      "kind": "drag_select",
+      "topic": "Risk önceliği",
+      "prompt": "Önce hangi alanı incelersin?",
+      "context": "Domain 1 · Görev 4/20\n\nİki günlük ek test süren var. Dört alanın etkisi ve mevcut güvencesi masada. En önemli açık riski seç.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Arşiv taraması; erişim kapalı, geçen hafta test edildi",
+          "feedback": "Riskin güncel kontrol kanıtı bulunuyor."
+        },
+        {
+          "id": "k1",
+          "text": "Ödeme yetki kontrolü; yeni sürüm çıktı, test kanıtı yok",
+          "feedback": "Müşteri parası etkilenebilir ve yeni sürüm için güvence eksiktir."
+        },
+        {
+          "id": "k2",
+          "text": "Ödeme yetki kontrolü; geçen yıl temiz sonuç, bu yıl yeni test yok",
+          "feedback": "Geçen yılki güvence yeni sürümdeki riski tek başına azaltmaz."
+        },
+        {
+          "id": "k4",
+          "text": "Eğitim portalı; gecikme oldu, manuel süreç çalışıyor",
+          "feedback": "İş etkisi sınırlı ve alternatif süreç mevcut."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nÖncelik, yalnızca eksik belge sayısıyla belirlenmez. İş etkisi, değişim ve kanıt eksikliği birlikte ödeme kontrolünü öne çıkarır.\n\n💼 Gerçek iş hayatında\nKaynak kısıtında neden bazı alanları önce test ettiğini çalışma kâğıdında açıkla.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Risk önceliği"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 4,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-005",
+      "number": 5,
+      "domain": 1,
+      "kind": "fill_blank",
+      "topic": "Kontrol testi",
+      "prompt": "Bu ikinci çalışma hangi testtir? “___ testi” olarak yaz.",
+      "context": "Domain 1 · Görev 5/20\n\nBir ödeme kaydını kaynağına kadar izledin. Şimdi farklı bir testte, 40 ödeme için gerekli çift onayın gerçekten uygulanıp uygulanmadığını inceliyorsun.",
+      "options": [],
+      "answer": [
+        "kontrol",
+        "kontrol testi",
+        "uygunluk",
+        "uygunluk testi"
+      ],
+      "explanation": "🧠 Neden doğru?\nKontrol testi, tanımlı kontrolün işletilip işletilmediğini değerlendirir. İşlem tutarının gerçekliğini doğrulamak ise başka bir test amacıdır. Aynı veri farklı amaçlarla incelenebilir.\n\n💼 Gerçek iş hayatında\nÖrneklem dosyasında test amacını yaz; doğruladığın şeyi olduğundan geniş sunma.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Kontrol testi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 5,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-006",
+      "number": 6,
+      "domain": 1,
+      "kind": "scenario",
+      "topic": "Çıkar çatışması",
+      "prompt": "İlk yapman gereken nedir?",
+      "context": "Domain 1 · Görev 6/20\n\nSelin (Denetim Yöneticin) seni Atlas Belediyesinin satın alma denetimine atıyor. Geçen ay bu sürecin erişim kontrolünü danışman olarak sen tasarladın. Ekip takvimi çok sıkışık.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Kontrolü iyi bildiğin için testleri tek başına üstlenmek",
+          "feedback": "Teknik bilgi, kendi çalışmanı değerlendirme riskini ortadan kaldırmaz."
+        },
+        {
+          "id": "k1",
+          "text": "Önceki görevini bildirip bağımsız değerlendirme istemek",
+          "feedback": "Kendi tasarımını değerlendirme tehdidini atama öncesinde görünür kılar."
+        },
+        {
+          "id": "k3",
+          "text": "Sadece olumlu sonuçları başka denetçiye kontrol ettirmek",
+          "feedback": "Seçici ikinci inceleme, kapsamlı bağımsızlık önlemi değildir."
+        },
+        {
+          "id": "k4",
+          "text": "Çatışmayı rapor bittikten sonra ek notla açıklamak",
+          "feedback": "Tehdidin etkisi çalışma yapılmadan ele alınmalıdır."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nBağımsızlık yalnızca dürüst olmak değildir; kendi kararlarını değerlendirme tehdidini de yönetmektir. Atama, gözetim veya bağımsız inceleme önlemini denetim yönetimi belirler.\n\n💼 Gerçek iş hayatında\nUzmanlığını paylaşabilirsin; fakat bağımsız güvence sorumluluğunu tek başına üstlenme.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Çıkar çatışması"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 6,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-007",
+      "number": 7,
+      "domain": 1,
+      "kind": "choice",
+      "topic": "Kanıt güvenilirliği",
+      "prompt": "Sonuç vermeden önce en uygun adım nedir?",
+      "context": "Domain 1 · Görev 7/20\n\nAtlas Belediyesinde kullanıcı yetkileri için üç farklı dosya geldi. IT Müdürü imzalı bir liste gönderdi; sistem çıktısı da var, fakat hangi tarihte alındığı bilinmiyor.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Çıktının kaynağını, dönemini ve tamlığını doğrulamak",
+          "feedback": "Doğru evren ve dönem bilinmeden listeden güvenilir sonuç çıkarılamaz."
+        },
+        {
+          "id": "k4",
+          "text": "İki dosyada ortak olan kullanıcıları test etmek",
+          "feedback": "Ortak kayıtlarla sınırlanmak dışarıda kalanları sistematik olarak atlar."
+        },
+        {
+          "id": "k3",
+          "text": "En uzun dosyayı seçip daha büyük örneklem almak",
+          "feedback": "Daha büyük örneklem hatalı evreni düzeltmez."
+        },
+        {
+          "id": "k2",
+          "text": "İmzalı listeyi yeterli sayıp sistem çıktısını bırakmak",
+          "feedback": "İmza sorumluluk gösterir; sistemdeki tüm yetkilerin listelendiğini kanıtlamaz."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nKanıtın kalitesi; kaynağına, ilgili döneme ve tamlığına bağlıdır. Önce bu özellikleri doğrula, sonra örneklem ve test sonucunu değerlendir.\n\n💼 Gerçek iş hayatında\nDosyanın sorgusunu, alınma zamanını ve kaynak sistem toplamını kayıt altına al.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Kanıt güvenilirliği"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 7,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-008",
+      "number": 8,
+      "domain": 1,
+      "kind": "sentence_order",
+      "topic": "Örneklem hazırlığı",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 1 · Görev 8/20\n\nBelediyede yıl boyunca 1.240 satın alma değişikliği var. Amacın normal değişikliklerde bağımsız onayın uygulanmasını test etmek. Acil değişiklikler ayrı test edilecek.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Filtrelenen listenin tamlığını kaynakla doğrula",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k1",
+          "text": "Evrenin dönemini ve normal değişiklik ölçütünü tanımla",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k3",
+          "text": "Amaç ve riske uygun örneklem yöntemini seç",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k4",
+          "text": "Seçilen kayıtlarda bağımsız onayı test et",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nÖrneklemi güvenilir kılan ilk şey büyük olması değil, doğru evrenden seçilmesidir. Acil ve normal akışlar ayrıldığı için seçim ölçütü baştan sabit olmalıdır.\n\n💼 Gerçek iş hayatında\nEvren, hariç tutmalar ve seçim yöntemi başka bir denetçinin aynı çalışmayı izlemesini sağlamalı.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Örneklem hazırlığı"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 8,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-009",
+      "number": 9,
+      "domain": 1,
+      "kind": "drag_select",
+      "topic": "Analitik istisna",
+      "prompt": "Hangi kayıt doğrudan bu ölçüte uyuyor?",
+      "context": "Domain 1 · Görev 9/20\n\nSatın alma sorgunda dört sonuç var. Ölçüt: Bir kişi hem tedarikçi hesabını değiştirmiş hem aynı hesaba ödemeyi onaylamışsa incele.\n\nKurgusal kanıt:\nİşlem | Hesap değişikliği | Ödeme onayı\nT101 | U17 | U17\nT102 | U18 | U19\nT103 | yok | U20\nT104 | U21 | henüz yok",
+      "options": [
+        {
+          "id": "k1",
+          "text": "U17: hesabı değiştiren U17, ödeme onaylayan U17",
+          "feedback": "Aynı kimlik iki çelişen işlemi gerçekleştirmiştir."
+        },
+        {
+          "id": "k3",
+          "text": "U20: yalnız ödeme onayı var, hesap değişikliği yok",
+          "feedback": "Çift görev göstergesi bulunmuyor."
+        },
+        {
+          "id": "k2",
+          "text": "U18: hesabı değiştiren U18, ödeme onaylayan U19",
+          "feedback": "İki farklı kimlik var; tanımlı ölçüt karşılanmıyor."
+        },
+        {
+          "id": "k4",
+          "text": "U21: hesap değişti, ödeme henüz yapılmadı",
+          "feedback": "Hesap değişikliği tek başına tanımlı istisna değildir."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nAnalitik istisna, inceleme için bir sinyaldir; otomatik olarak sahtekârlık kanıtı değildir. U17 için rol, zaman ve gerekçe kanıtlarını derinleştir.\n\n💼 Gerçek iş hayatında\nÖnce ölçütü tutarlı uygula; sonra istisnanın neyi kanıtlayıp neyi kanıtlamadığını ayır.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Analitik istisna"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 9,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-010",
+      "number": 10,
+      "domain": 1,
+      "kind": "scenario",
+      "topic": "İstisna değerlendirme",
+      "prompt": "En uygun kararın nedir?",
+      "context": "Domain 1 · Görev 10/20\n\nU17 hesabı ortak kullanılan bir servis hesabı olabilir. Dört işlemde aynı kimlik görünüyor. Zeynep (Finans Müdürü), “Kesin usulsüzlük yazabilirsiniz” diyor.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "İşlem sahipliğini araştırıp kontrol zayıflığını kanıtla ayırmak",
+          "feedback": "Ortak hesap, kimliği belirsiz kılar; sahtekârlık iddiası için ek kanıt gerekir."
+        },
+        {
+          "id": "k4",
+          "text": "Yöneticinin yazılı beyanını tek başına esas almak",
+          "feedback": "Beyan bağımsız işlem kanıtının yerini tutmaz."
+        },
+        {
+          "id": "k3",
+          "text": "Servis hesabı ihtimali nedeniyle istisnaları kapatmak",
+          "feedback": "Belirsizlik, izlenebilirlik riskini ortadan kaldırmaz."
+        },
+        {
+          "id": "k2",
+          "text": "Dört kaydı doğrudan sahtekârlık olarak raporlamak",
+          "feedback": "İstisna sayısı niyeti ve gerçek işlem sahibini kanıtlamaz."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nDenetçi olguyu, çıkarımı ve doğrulanmamış iddiayı ayırır. Aynı kimlik çakışması somut bir bulgudur; kişinin niyeti henüz bilinmiyor.\n\n💼 Gerçek iş hayatında\nGerekirse uygun soruşturma kanalına yönlendir; kendi kanıtının sınırını raporda koru.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "İstisna değerlendirme"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 10,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-011",
+      "number": 11,
+      "domain": 1,
+      "kind": "choice",
+      "topic": "Denetim riski",
+      "prompt": "Örneklemde sıfır istisna görülmesi, bütün evrende hata olmadığını kanıtlar. Doğru mu, yanlış mı?",
+      "context": "Domain 1 · Görev 11/20\n\nÖrnekleminde onay eksikliği görmedin. Deniz (Kıdemli Denetçi), “Sıfır istisna, sıfır risk demektir” diye not düşüyor.",
+      "options": [
+        {
+          "id": "dogru",
+          "text": "Doğru",
+          "feedback": "Bu yorum kontrolün kapsamını yanlış değerlendiriyor. Örneklem dışında hata kalabilir; sonuç makul güvence sağlar."
+        },
+        {
+          "id": "yanlis",
+          "text": "Yanlış",
+          "feedback": "Örneklem dışında hata kalabilir; sonuç makul güvence sağlar."
+        }
+      ],
+      "answer": [
+        "yanlis"
+      ],
+      "explanation": "🧠 Neden doğru?\nSıfır istisna olumlu bir test sonucudur; mutlak güvence değildir. Kullanılan yöntem, örnek büyüklüğü ve kontrol koşulları sonuç üzerinde etkilidir.\n\n💼 Gerçek iş hayatında\n“Test edilen örneklerde istisna görülmedi” ifadesi, “hiç hata yok” ifadesinden daha doğru bir sınır çizer.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Denetim riski"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 11,
+      "card_pages": [],
+      "presentation": "true_false"
+    },
+    {
+      "external_id": "cisa-auditor-v1-012",
+      "number": 12,
+      "domain": 1,
+      "kind": "multi_select",
+      "topic": "Çalışma kâğıdı",
+      "prompt": "Doğru olan iki eşleştirmeyi seç.",
+      "context": "Domain 1 · Görev 12/20\n\nMavi Hastanede rapor incelemesine geçtin. Bağımsız ikinci denetçi, erişim testini tekrar izleyebilmek istiyor.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Genel izlenim → kontrolün tüm dönem etkinlik kanıtı",
+          "feedback": "İzlenim tüm dönem etkinlik kanıtı değildir."
+        },
+        {
+          "id": "k2",
+          "text": "Kanıt ve sonuç bağı → değerlendirmeyi yeniden inceleme",
+          "feedback": "Bulguyu dayanakla ilişkilendirir."
+        },
+        {
+          "id": "k1",
+          "text": "Evren ve seçim kaydı → test kapsamını yeniden izleme",
+          "feedback": "Çalışmanın seçim dayanağını gösterir."
+        },
+        {
+          "id": "k4",
+          "text": "Yönetici imzası → tüm kaynak verilerin tamlık garantisi",
+          "feedback": "İmza veri evreninin teknik tamlığını garanti etmez."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "explanation": "🧠 Neden doğru?\nÇalışma kâğıdı, neyi neden test ettiğini ve hangi kanıtla hangi sonuca ulaştığını göstermelidir. Gereksiz kişisel veri eklemek kalite değildir.\n\n💼 Gerçek iş hayatında\nDosyayı senden sonra devralan kişi, sözlü açıklamana ihtiyaç duymadan temel değerlendirmeyi izleyebilmeli.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Çalışma kâğıdı"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 12,
+      "card_pages": [],
+      "presentation": "pair_matching"
+    },
+    {
+      "external_id": "cisa-auditor-v1-013",
+      "number": 13,
+      "domain": 1,
+      "kind": "sentence_order",
+      "topic": "Çelişkili kanıt",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 1 · Görev 13/20\n\nHastanede yönetici “hesap aynı gün kapandı” diyor. HR listesi ayrılış tarihini, erişim kaydı ise ertesi gün oturum açıldığını gösteriyor. Zaman dilimleri henüz doğrulanmadı.\n\nKurgusal kanıt:\nHR: H074 ayrılış 12.10.2026 18.00, saat dilimi belirtilmemiş.\nIAM: H074 giriş 13.10.2026 00.20, UTC.\nYönetici beyanı: “Aynı gün kapandı.”",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Çelişkiyi sorumlu yöneticiyle kanıt üzerinden görüş",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k2",
+          "text": "Ayrılış ve erişim kayıtlarını aynı zaman çizelgesinde karşılaştır",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k1",
+          "text": "Kaynakların kimlik ve zaman dilimlerini doğrula",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k4",
+          "text": "Doğrulanan durumu ve kalan belirsizliği belgele",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nÖnce farklı saat ve kimlik gösterimlerinin aynı olayı temsil ettiğini doğrula. Ardından görüşme, gözlenen çelişkinin nedenini anlamaya hizmet eder.\n\n💼 Gerçek iş hayatında\nUyuşmazlığı kişisel tartışmaya çevirmeden aynı zaman çizelgesi üzerinden konuş.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Çelişkili kanıt"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 13,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-014",
+      "number": 14,
+      "domain": 1,
+      "kind": "drag_select",
+      "topic": "Önemlilik",
+      "prompt": "Hangisi önce sunulmalı?",
+      "context": "Domain 1 · Görev 14/20\n\nHastanenin kapanış toplantısına tek önemli bulgu taşıyacaksın. İş etkisini esas al.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "İç toplantı takviminde üç davet onaysız değişmiş",
+          "feedback": "Etkisi klinik karar bütünlüğüyle aynı düzeyde değildir."
+        },
+        {
+          "id": "k2",
+          "text": "İlaç doz uygulamasında yalnız onaylı kullanıcı listesi var",
+          "feedback": "Liste, kayıt değiştirme yetkisinin gerekliliğini veya etkinliğini tek başına kanıtlamaz."
+        },
+        {
+          "id": "k1",
+          "text": "İlaç doz uygulamasında yetkisiz kayıt değişikliği mümkün",
+          "feedback": "Hasta güvenliği ve veri bütünlüğü üzerinde doğrudan önemli etki vardır."
+        },
+        {
+          "id": "k4",
+          "text": "Yazıcı listesindeki bir cihazın seri numarası eksik",
+          "feedback": "Envanter hatası önemlidir ancak mevcut olayda daha düşük önceliklidir."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nÖnemlilik belge sayısı veya bulgu adedi değildir. Az sayıda kayıt bile hasta güvenliğini etkiliyorsa ciddi olabilir.\n\n💼 Gerçek iş hayatında\nTeknik açığı hangi iş sonucuna yol açabileceğiyle anlat; gerçekleşmiş zarar varmış gibi yazma.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Önemlilik"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 14,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-015",
+      "number": 15,
+      "domain": 1,
+      "kind": "fill_blank",
+      "topic": "Bulgu ölçütü",
+      "prompt": "Onaylı kural bulgunun hangi öğesidir?",
+      "context": "Domain 1 · Görev 15/20\n\nHastanenin onaylı kuralı: ayrılan çalışanların erişimi en geç aynı gün kapatılır. Gözlenen kayıt: ayrılıştan iki gün sonra aktif hesap. Bulgu yazarken onaylı kuralı ayrı başlıkta veriyorsun.",
+      "options": [],
+      "answer": [
+        "ölçüt",
+        "kriter"
+      ],
+      "explanation": "🧠 Neden doğru?\nÖlçüt, olması gereken durumu tanımlar. Gözlenen durum farklıdır; kök neden ise bu farkın neden oluştuğunu açıklamak için ayrıca araştırılır.\n\n💼 Gerçek iş hayatında\nKuralı ve gözlemi birbirine karıştırmazsan yönetim tartışması somut bir fark üzerinden yürür.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Bulgu ölçütü"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 15,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-016",
+      "number": 16,
+      "domain": 1,
+      "kind": "scenario",
+      "topic": "Kapsam kısıtı",
+      "prompt": "En uygun yaklaşım hangisi?",
+      "context": "Domain 1 · Görev 16/20\n\nPera Ticarette ödeme logları iki kez reddedildi. Yönetim yalnız ekran görüntüsü veriyor. Bu görüntüler dönemin tamamını kapsamıyor. Rapor teslimi yarın.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Loglar verilene kadar rapor takvimini tek başına ertelemek",
+          "feedback": "Takvim ve kapsam etkisi yetkili denetim yönetimiyle kararlaştırılmalıdır."
+        },
+        {
+          "id": "k3",
+          "text": "Yönetimden güvence mektubu alıp log testini kaldırmak",
+          "feedback": "Beyan, bağımsız dönem kanıtındaki önemli eksikliğin yerine geçmez."
+        },
+        {
+          "id": "k1",
+          "text": "Alternatif kanıtı değerlendirip kalan kısıtı eskale etmek",
+          "feedback": "Önce mümkün güvenceyi araştırır, çözülemeyen sınırlamayı görünür kılar."
+        },
+        {
+          "id": "k2",
+          "text": "Ekran görüntülerini kabul edip sadece o gün için sonuç vermek",
+          "feedback": "Dar kapsam açıklanabilir; ancak planlanan önemli dönem için çözülemeyen kısıt ayrıca eskale edilmelidir."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nKanıt erişiminin engellenmesi sonuç kapsamını etkiler. Alternatif prosedürler yeterli olmazsa bu kısıt rapor ve uygun eskalasyon kanalında açıkça ele alınır.\n\n💼 Gerçek iş hayatında\nTaleplerin tarihini, verilen kanıtı ve hangi sonucun desteklenemediğini belgeleyerek yöneticine git.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Kapsam kısıtı"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 16,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-017",
+      "number": 17,
+      "domain": 1,
+      "kind": "choice",
+      "topic": "Uzman kullanımı",
+      "prompt": "Uzmanın sonucuna dayanırken önce neyi değerlendirirsin?",
+      "context": "Domain 1 · Görev 17/20\n\nPera Ticaretin ödeme algoritmasını teknik uzman inceleyecek. Uzman yönetime bağlı çalışıyor ve daha önce algoritmayı geliştirmiş.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Yönetimin uzman seçimini onaylamasını yeterli saymak",
+          "feedback": "Yönetim onayı denetçinin güvenilirlik değerlendirmesinin yerine geçmez."
+        },
+        {
+          "id": "k1",
+          "text": "Yetkinliğini, tarafsızlığını ve inceleme kapsamını",
+          "feedback": "Uzman kullanımı için güvenilirlik ve amaca uygunluk birlikte değerlendirilir."
+        },
+        {
+          "id": "k2",
+          "text": "Uzmanın önceki projedeki teslim başarısına güvenmek",
+          "feedback": "Geçmiş teslim teknik yetkinliğe bilgi verebilir; bu işteki tarafsızlık ve kapsamı karşılamaz."
+        },
+        {
+          "id": "k3",
+          "text": "İkinci bir uzmanın aynı sonuca varmasını yeterli saymak",
+          "feedback": "Sonuç uyumu, iki çalışmanın da uygun yöntem ve kapsamda olduğunu kanıtlamaz."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nUzmanın bilgisi değerlidir; ancak kendi geliştirdiği sistemi incelemesi tarafsızlık tehdidi yaratır. Kapsam ve çalışma kalitesi de denetim amacına uygun olmalıdır.\n\n💼 Gerçek iş hayatında\nUzman çalışmasına güvenme gerekçeni belgeleyip gerekiyorsa bağımsız doğrulama iste.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Uzman kullanımı"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 17,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-018",
+      "number": 18,
+      "domain": 1,
+      "kind": "sentence_order",
+      "topic": "Bulgu kapanışı",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 1 · Görev 18/20\n\nPera Ticaret yetki sorununu çözdüğünü söylüyor. Kanıt henüz incelenmedi. Kontrol günlük çalışıyor ve bir haftalık yeni kayıt mevcut.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Aksiyonun kontrol zayıflığını nasıl giderdiğini incele",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k4",
+          "text": "Kanıt yeterliyse bulguyu gerekçeyle kapat",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k2",
+          "text": "Güncel kayıtlarda yeni kontrolün çalışmasını test et",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k3",
+          "text": "Kalan riski ve test sonucunu değerlendir",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nAksiyon tamamlandı beyanı kapanış değildir. Önce çözümün tasarımını, ardından gerçek işletimini doğrula; kapanışı bu değerlendirme destekler.\n\n💼 Gerçek iş hayatında\nTicket durumunu değil, riski azaltan kontrolün çalıştığını doğrula.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Bulgu kapanışı"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 18,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-019",
+      "number": 19,
+      "domain": 1,
+      "kind": "drag_select",
+      "topic": "Kalite incelemesi",
+      "prompt": "Hangisi yeniden yazılmalı?",
+      "context": "Domain 1 · Görev 19/20\n\nSelin (Denetim Yöneticin) dört rapor notundan birini geri gönderiyor. Notlarda kanıt ve sonuç arasında uyum arıyor.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Üç örnekte onay yok; tüm departman sürekli usulsüz çalışıyor",
+          "feedback": "Üç örnek tüm departmanın sürekli davranışını ve niyetini kanıtlamaz."
+        },
+        {
+          "id": "k3",
+          "text": "Liste tamlığı doğrulanamadı; güvence kapsamı sınırlı",
+          "feedback": "Kanıt kısıtını açıkça belirtir."
+        },
+        {
+          "id": "k2",
+          "text": "Üç örnekte onay yok; kontrol tasarımı bu nedenle kesin hatalı",
+          "feedback": "İşletim istisnası tasarımın hatalı olduğunu tek başına kanıtlamaz."
+        },
+        {
+          "id": "k4",
+          "text": "Yeniden test uygun; incelenen dönem için bulgu kapandı",
+          "feedback": "Kapanışı dönem ve yeniden testle sınırlar."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nKalite incelemesi, raporun kanıtın taşıyamayacağı iddialar kurmasını önler. Özellikle genelleme, niyet ve kesin nedensellik ifadeleri daha güçlü dayanak ister.\n\n💼 Gerçek iş hayatında\nKullandığın her önemli sıfat için “hangi kanıt bunu destekliyor?” diye sor.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Kalite incelemesi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 19,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-020",
+      "number": 20,
+      "domain": 1,
+      "kind": "scenario",
+      "topic": "Yönetimle iletişim",
+      "prompt": "Toplantıyı en uygun nasıl kapatırsın?",
+      "context": "Domain 1 · Görev 20/20\n\nDomain 1 kapanışı. Zeynep (Finans Müdürü), kanıtlanan onay sorununu kabul ediyor ama aksiyon sahibini belirlemek istemiyor: “Ekip çözer.”",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Önce tüm ekibin anlaşmasını bekleyip raporu durdurmak",
+          "feedback": "Görüş birliği için görüşülebilir; önemli bulgunun raporlanması sınırsız bekletilemez."
+        },
+        {
+          "id": "k3",
+          "text": "Kontrol tasarımını denetim adına uygulamaya geçirmek",
+          "feedback": "Denetçi yönetimin işletim ve kontrol sahipliğini üstlenmemelidir."
+        },
+        {
+          "id": "k1",
+          "text": "Yetkili aksiyon sahibi ve tarihi netleştirip kaydetmek",
+          "feedback": "Takip edilebilir aksiyonun sorumluluğu ve süresi açık olmalıdır."
+        },
+        {
+          "id": "k2",
+          "text": "Yönetim risk kabul edince takip ihtiyacını bitirmek",
+          "feedback": "Risk kabulünde de yetki, süre ve izleme gereksinimi değerlendirilir."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nDenetçi sorunu ve takibi netleştirir; kontrolü işletme sorumluluğu yönetimdedir. Yönetimin yanıtı anlaşmazlık varsa onunla birlikte doğru biçimde kaydedilir.\n\n💼 Gerçek iş hayatında\nKapanış toplantısından “kim, neyi, ne zamana kadar yapacak ve nasıl doğrulanacak?” bilgisiyle çık.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Yönetimle iletişim"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 20,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-021",
+      "number": 21,
+      "domain": 2,
+      "kind": "choice",
+      "topic": "Stratejik uyum",
+      "prompt": "Denetçinin önce araması gereken kanıt nedir?",
+      "context": "Domain 2 · Görev 1/20\n\nLale Teknolojinin yönetim kurulu müşteri kaybını azaltmak istiyor. IT bütçesinin çoğu, müşterinin sorununa dokunmayan bir altyapı yenilemesine gidiyor. Ece (CFO), “Teknik ekip en yeni ürünü seçti” diyor.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Ürünün piyasa sıralaması ve satıcının ödülleri",
+          "feedback": "Ürünün itibarı işletmenin önceliğiyle uyumu kanıtlamaz."
+        },
+        {
+          "id": "k3",
+          "text": "Sunucu markaları ve kabin yerleşiminin ayrıntıları",
+          "feedback": "Teknik ayrıntılar yatırımın stratejik gerekçesinden sonra gelir."
+        },
+        {
+          "id": "k1",
+          "text": "Yatırımın iş hedefi ve beklenen faydayla bağlantısı",
+          "feedback": "Teknik yatırımın gerekçesi iş değerine dayanmalıdır."
+        },
+        {
+          "id": "k4",
+          "text": "Geçen yılın bütçesinin aynı oranda artırılması",
+          "feedback": "Bütçe sürekliliği iş ihtiyacının devam ettiğini göstermez."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nIT stratejisi işletmenin hedeflerini desteklemelidir. Önce hedef, yatırım ve ölçülebilir fayda arasındaki bağı değerlendir; teknoloji tercihini bu bağlamda incele.\n\n💼 Gerçek iş hayatında\n“Yeni ürün ne yapıyor?” kadar “hangi iş sonucunu değiştirecek?” sorusunu sor.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Stratejik uyum"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 21,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-022",
+      "number": 22,
+      "domain": 2,
+      "kind": "multi_select",
+      "topic": "Yönetişim ve yönetim",
+      "prompt": "Yönetişim düzeyinde kalması gereken iki karar hangisi?",
+      "context": "Domain 2 · Görev 2/20\n\nLale Teknolojide görevler karışmış. Yönetim kurulu günlük yama takvimini onaylıyor; IT ekibi ise kurumun kabul edeceği kayıp sınırını tek başına belirliyor.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "İş hedefleriyle uyumlu IT yönünü belirlemek",
+          "feedback": "Kurumun yönünü belirleme yönetişim sorumluluğudur."
+        },
+        {
+          "id": "k3",
+          "text": "Haftalık yama kurulum sırasını işletmek",
+          "feedback": "Günlük uygulama ve işletim yönetim faaliyetidir."
+        },
+        {
+          "id": "k2",
+          "text": "Kurumun risk iştahını değerlendirip sınırları onaylamak",
+          "feedback": "Kabul edilecek riskin çerçevesi uygun üst düzeyde belirlenir."
+        },
+        {
+          "id": "k4",
+          "text": "Servis masasındaki ticketları personellere dağıtmak",
+          "feedback": "Operasyonel görev dağıtımı yönetişim kararı değildir."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "explanation": "🧠 Neden doğru?\nYönetişim ihtiyaçları değerlendirir, yön verir ve sonuçları izler. Yönetim, bu yön doğrultusunda planlar ve işleri yürütür. İki düzey birbirine bilgi vermeli, birbirinin günlük görevini üstlenmemelidir.\n\n💼 Gerçek iş hayatında\nKurulun gündemini iş değeri ve riskle; IT yönetiminin gündemini uygulama ve hizmetle ilişkilendir.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Yönetişim ve yönetim"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 22,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-023",
+      "number": 23,
+      "domain": 2,
+      "kind": "sentence_order",
+      "topic": "Politika uygulaması",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 2 · Görev 3/20\n\nKent Belediyesi taşınabilir cihaz politikasını yeniliyor. Riskler belirlenmiş; taslak hazır. Henüz onay veya çalışan bildirimi yapılmadı.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Taslağı yetkili yönetimin onayına sun",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k3",
+          "text": "Uygulama sorumlularına prosedür ve eğitim ver",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k2",
+          "text": "Onaylı kuralı ilgili çalışanlara duyur",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k4",
+          "text": "Uygulama sonuçlarını ve istisnaları izle",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nBir taslak uygulama yetkisi sağlamaz. Onaylanan kuralın duyurulması ve nasıl uygulanacağının açıklanması gerekir; ardından gerçek uygulama izlenir.\n\n💼 Gerçek iş hayatında\nİmzalı PDF bulmakla yetinme; çalışanların ne yapacağını bildiğini ve kuralın işletildiğini kontrol et.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Politika uygulaması"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 23,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-024",
+      "number": 24,
+      "domain": 2,
+      "kind": "drag_select",
+      "topic": "Yönetişim riski",
+      "prompt": "Önce hangisini gündeme taşırsın?",
+      "context": "Domain 2 · Görev 4/20\n\nBelediyenin dijital hizmet programında dört açık var. Sonuçlara yönelik hesap verebilirliği en çok zayıflatanı seç.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Kritik hizmetin risk sahibi ve karar yetkisi belirsiz",
+          "feedback": "Risk kararı ve aksiyonu için hesap verebilir kişi bulunmuyor."
+        },
+        {
+          "id": "k3",
+          "text": "Teknik ekip aylık raporu bir gün geç gönderiyor",
+          "feedback": "Gecikme izlenmelidir; sorumluluk yokluğu daha yapısal sorundur."
+        },
+        {
+          "id": "k2",
+          "text": "Kritik risk komitede görüşülüyor ama karar kaydı eksik",
+          "feedback": "Önemli bir kanıt açığıdır; vakadaki sahipsiz risk daha temel sorumluluk sorunudur."
+        },
+        {
+          "id": "k4",
+          "text": "Komite toplantısında sunum süresi kısa tutuluyor",
+          "feedback": "Süre tek başına yönetişim etkinliğini belirlemez."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nYönetişimde asıl açık, risk ve karar için hesap verebilirliğin olmamasıdır. Rapor biçimi ve toplantı düzeni bunun yerini tutmaz.\n\n💼 Gerçek iş hayatında\nRisk kaydına karar yetkisi olan bir iş sahibi bağlanmasını iste.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Yönetişim riski"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 24,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-025",
+      "number": 25,
+      "domain": 2,
+      "kind": "fill_blank",
+      "topic": "Risk sahipliği",
+      "prompt": "Bu yönetici risk kaydında hangi rolü üstlenir?",
+      "context": "Domain 2 · Görev 5/20\n\nBelediyenin vatandaş portalında veri sızıntısı riski var. IT ekipleri kontrolü işletiyor; hizmetin iş sonuçları ve kalan risk kararı ise yetkili hizmet yöneticisine ait.",
+      "options": [],
+      "answer": [
+        "risk sahibi",
+        "riskin sahibi"
+      ],
+      "explanation": "🧠 Neden doğru?\nRisk sahibi riskin iş etkisini değerlendirir ve yetkisi içindeki risk kararından sorumludur. Kontrolü işleten kişiyle aynı olmak zorunda değildir.\n\n💼 Gerçek iş hayatında\nKayıtta kontrol sahibi, aksiyon sahibi ve risk sahibini ayrı ve anlaşılır göster.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Risk sahipliği"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 25,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-026",
+      "number": 26,
+      "domain": 2,
+      "kind": "scenario",
+      "topic": "Risk kabulü",
+      "prompt": "En uygun denetim yaklaşımı nedir?",
+      "context": "Domain 2 · Görev 6/20\n\nEce (CFO), belediye portalındaki açığı “bütçe yok” diyerek bir yıl ertelemek istiyor. Risk iştahı bu düzeyde veri kaybına izin vermiyor.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "CFO imzası varsa riski otomatik kapatmak",
+          "feedback": "Bir imza yetki sınırını ve kabul edilebilirliği tek başına sağlamaz."
+        },
+        {
+          "id": "k3",
+          "text": "Açığı bizzat kapatıp risk sahibinin rolünü üstlenmek",
+          "feedback": "Denetçi operasyonel kontrol sorumluluğunu almamalıdır."
+        },
+        {
+          "id": "k1",
+          "text": "Yetki ve iştah sınırını doğrulayıp kararı eskale etmek",
+          "feedback": "Yetkisiz veya iştah dışı kabul uygun karar merciine taşınmalıdır."
+        },
+        {
+          "id": "k4",
+          "text": "Bütçe sorunu olduğu için risk kaydını kaldırmak",
+          "feedback": "Maliyet gerekçesi riskin varlığını ortadan kaldırmaz."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nRisk kabulü bilinçli, yetkili ve sınırları belli bir karardır. Kabul edilen risk de izlenir. İştah dışındaki karar, uygun yönetim düzeyine taşınmalıdır.\n\n💼 Gerçek iş hayatında\nKalan risk, karar sahibi, süre ve izleme koşullarını görünür tut.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Risk kabulü"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 26,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-027",
+      "number": 27,
+      "domain": 2,
+      "kind": "choice",
+      "topic": "Kurumsal mimari",
+      "prompt": "Mimari incelemede en uygun odak hangisi?",
+      "context": "Domain 2 · Görev 7/20\n\nUfuk Sağlıkta aynı hasta için dört sistem farklı kimlik numaraları tutuyor. Yeni uygulama projesi beşinci bağımsız listeyi kuracak.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Ortak veri ve entegrasyon gereksinimlerinin uyumu",
+          "feedback": "Yeni çözümün kurumsal veri ve iş akışlarıyla uyumunu değerlendirir."
+        },
+        {
+          "id": "k4",
+          "text": "Başarılı pilot sonuçlarıyla mimari incelemeyi kapatmak",
+          "feedback": "Dar pilot, kurumsal veri ve bağımlılıkların tamamını kapsamayabilir."
+        },
+        {
+          "id": "k3",
+          "text": "Her sistemin yerel performans testini yeterli saymak",
+          "feedback": "Bileşen performansı sistemler arası veri tutarlılığını kanıtlamaz."
+        },
+        {
+          "id": "k2",
+          "text": "Yeni uygulamanın kendi veri sözlüğünü ayrıntılı incelemek",
+          "feedback": "Yararlıdır ancak ortak kimlik ve entegrasyon uyumunu tek başına çözmez."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nKurumsal mimari, uygulama seçimini veri, süreç ve teknoloji bağımlılıklarıyla birlikte ele alır. Yeni bir ada yaratmak veri tutarsızlığını büyütebilir.\n\n💼 Gerçek iş hayatında\nSadece proje teslimini değil, çözümün kurumun bütünüyle nasıl çalışacağını sorgula.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Kurumsal mimari"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 27,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-028",
+      "number": 28,
+      "domain": 2,
+      "kind": "sentence_order",
+      "topic": "Risk yönetimi",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 2 · Görev 8/20\n\nUfuk Sağlığın uzaktan muayene hizmeti için ilk risk değerlendirmesi yapılacak. Kapsam belirlendi; varlık envanteri henüz yok.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Hizmeti destekleyen varlıkları ve sahiplerini belirle",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k4",
+          "text": "Uygun risk yanıtını yetkili sahiplerle kararlaştır",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k3",
+          "text": "Olasılık ve iş etkisini birlikte değerlendir",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k2",
+          "text": "Tehditleri ve ilgili kontrol açıklarını incele",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nRisk değerlendirmesi varlığı ve iş bağlamını bilerek başlar. Yanıt seçimi ise olasılık, etki ve mevcut kontroller anlaşıldıktan sonra yapılır.\n\n💼 Gerçek iş hayatında\nÖnce araç satın alıp sonra gerekçe arama; hangi riske cevap verdiğini baştan tanımla.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Risk yönetimi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 28,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-029",
+      "number": 29,
+      "domain": 2,
+      "kind": "drag_select",
+      "topic": "Tedarikçi yönetişimi",
+      "prompt": "Hangi sözleşme önce incelenmeli?",
+      "context": "Domain 2 · Görev 9/20\n\nHastanenin dış hizmet sözleşmelerini inceliyorsun. En büyük hesap verebilirlik boşluğunu seç.\n\nKurgusal kanıt:\nHasta verisi hizmeti: olay bildirimi sahibi yok; alt sağlayıcı sorumluluğu belirsiz.\nDiğer üç sözleşmede hizmet sahibi ve bildirim sorumlusu kayıtlı.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Eğitim hizmetinde aylık toplantı tutanağı geç geldi",
+          "feedback": "Tek bir gecikme daha dar bir süreç sorunudur."
+        },
+        {
+          "id": "k1",
+          "text": "Hasta verisi hizmetinde kurum ve satıcı sorumlulukları belirsiz",
+          "feedback": "Hassas ve kritik hizmette kontrol sahipliği belirsiz kalır."
+        },
+        {
+          "id": "k2",
+          "text": "Yemekhane yazılımında yenileme tarihi yaklaşıyor",
+          "feedback": "Verilen bilgi sorumluluk açığını göstermiyor."
+        },
+        {
+          "id": "k4",
+          "text": "Ziyaretçi uygulamasında iletişim kişisi güncellendi",
+          "feedback": "Sorumlu kişinin güncellenmesi tek başına olumsuz bulgu değildir."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nDış kaynak kullanımı kurumun gözetim sorumluluğunu bitirmez. Özellikle veri, kesinti ve olay yönetiminde kimin ne yapacağı sözleşmede ve uygulamada belirli olmalıdır.\n\n💼 Gerçek iş hayatında\nSatıcının sorumlulukları kadar kurumun yapması gerekenleri de kontrol et.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Tedarikçi yönetişimi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 29,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-030",
+      "number": 30,
+      "domain": 2,
+      "kind": "scenario",
+      "topic": "Üçüncü taraf güvence",
+      "prompt": "En uygun karar nedir?",
+      "context": "Domain 2 · Görev 10/20\n\nBulut sağlayıcısı bir güvence raporu gönderdi. Rapor dönemi altı ay önce bitiyor, hasta verisi hizmeti kapsam dışı; kurumun uygulaması gereken kontroller ek bölümde.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Sağlayıcı tanınmış olduğu için raporu yeterli saymak",
+          "feedback": "İtibar kapsam dışındaki hizmete güvence sağlamaz."
+        },
+        {
+          "id": "k4",
+          "text": "Rapor bulunduğu için tüm satıcı testlerini kaldırmak",
+          "feedback": "Raporun gerçek kapsamı görülmeden testlerden vazgeçilemez."
+        },
+        {
+          "id": "k1",
+          "text": "Kapsam boşluğunu ve kurum kontrollerini ayrıca değerlendirmek",
+          "feedback": "Rapora güvenmek için dönem, hizmet kapsamı ve kurum yükümlülükleri uyumlu olmalıdır."
+        },
+        {
+          "id": "k3",
+          "text": "Ek bölümdeki kontrolleri yalnız satıcıya havale etmek",
+          "feedback": "Kurumun uygulaması gereken kontroller kurumda doğrulanmalıdır."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nBir raporun varlığı tüm hizmetleri kapsadığı anlamına gelmez. Dönem aralığı, hariç tutulan hizmetler ve kullanıcı kurum kontrolleri ayrı değerlendirilir.\n\n💼 Gerçek iş hayatında\nGüvenceyi rapor başlığından değil, kendi hizmetinle eşleştirdiğin kapsamdan çıkar.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Üçüncü taraf güvence"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 30,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-031",
+      "number": 31,
+      "domain": 2,
+      "kind": "choice",
+      "topic": "Performans ölçümü",
+      "prompt": "Kapatılan ticket sayısının artması, hizmet kalitesinin arttığını tek başına kanıtlar. Doğru mu, yanlış mı?",
+      "context": "Domain 2 · Görev 11/20\n\nDuru E-ticarette IT raporu yalnız kapatılan ticket sayısını gösteriyor. Ekip sayıyı artırmak için aynı sorunu küçük ticketlara ayırıyor. Müşteri bekleme süresi uzamış.",
+      "options": [
+        {
+          "id": "dogru",
+          "text": "Doğru",
+          "feedback": "Bu yorum kontrolün kapsamını yanlış değerlendiriyor. Çözüm süresi, tekrar ve iş etkisi de ölçülmelidir."
+        },
+        {
+          "id": "yanlis",
+          "text": "Yanlış",
+          "feedback": "Çözüm süresi, tekrar ve iş etkisi de ölçülmelidir."
+        }
+      ],
+      "answer": [
+        "yanlis"
+      ],
+      "explanation": "🧠 Neden doğru?\nBir gösterge davranışı etkiler. Yalnız hacim ölçmek verim izlenimi yaratabilir; kalite, süre ve iş etkisiyle birlikte okumak gerekir.\n\n💼 Gerçek iş hayatında\nGöstergeyi iyileştiren davranışın hizmeti de iyileştirip iyileştirmediğini sorgula.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Performans ölçümü"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 31,
+      "card_pages": [],
+      "presentation": "true_false"
+    },
+    {
+      "external_id": "cisa-auditor-v1-032",
+      "number": 32,
+      "domain": 2,
+      "kind": "multi_select",
+      "topic": "Veri yönetişimi",
+      "prompt": "Doğru olan iki eşleştirmeyi seç.",
+      "context": "Domain 2 · Görev 12/20\n\nDuru E-ticarette müşteri verisinin sahibi ve saklama kararı belirsiz. Kurum iki işlevi eşleştirmek istiyor.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Denetçi → tüm müşterilerin saklama süresini tek başına belirleme",
+          "feedback": "Denetim kontrolü değerlendirir; iş ve hukuk kararının sahibi olmaz."
+        },
+        {
+          "id": "k4",
+          "text": "Satıcı satış ekibi → kurumun veri sınıfını tek başına değiştirme",
+          "feedback": "Satıcı kurumun veri sahipliğini devralmaz."
+        },
+        {
+          "id": "k2",
+          "text": "Teknik veri sorumlusu → onaylı saklama ve erişim kurallarını işletme",
+          "feedback": "Teknik uygulama onaylı kurallara göre yürütülür."
+        },
+        {
+          "id": "k1",
+          "text": "İş veri sahibi → verinin iş amacı ve sınıflandırma kararı",
+          "feedback": "İş bağlamını ve kullanım ihtiyacını veri sahibi belirler."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "explanation": "🧠 Neden doğru?\nSahiplik, veriyle ilgili iş kararlarını kimin verdiğini netleştirir. Teknik sorumlu bu kararları uygular; denetçi ise karar ve uygulamanın uygunluğunu inceler.\n\n💼 Gerçek iş hayatında\nVeri için “herkes sorumlu” ifadesi yerine karar ve uygulama sahiplerini isimlendirilmiş rollerle göster.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Veri yönetişimi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 32,
+      "card_pages": [],
+      "presentation": "pair_matching"
+    },
+    {
+      "external_id": "cisa-auditor-v1-033",
+      "number": 33,
+      "domain": 2,
+      "kind": "sentence_order",
+      "topic": "Tedarikçi seçimi",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 2 · Görev 13/20\n\nDuru E-ticaret yeni çağrı merkezi hizmeti alacak. Sözleşme henüz imzalanmadı. Dört hazırlık işi sırasını bekliyor.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Sorumluluk, hizmet düzeyi ve çıkış şartlarını kararlaştır",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k1",
+          "text": "İş gereksinimlerini ve veri risklerini tanımla",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k2",
+          "text": "Adayların yeterliliğini ve kontrollerini değerlendir",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k4",
+          "text": "Yetkili onayla sözleşmeyi imzala",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nİhtiyacı ve riski bilmeden teklifleri karşılaştırmak fiyatı tek ölçüt haline getirir. Kritik yükümlülükler imzadan önce kararlaştırılmalıdır.\n\n💼 Gerçek iş hayatında\nSözleşme incelemesine çıkış, veri iadesi ve kontrol doğrulama hakkını dahil et.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Tedarikçi seçimi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 33,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-034",
+      "number": 34,
+      "domain": 2,
+      "kind": "drag_select",
+      "topic": "Görevler ayrılığı",
+      "prompt": "En önemli çatışmayı seç.",
+      "context": "Domain 2 · Görev 14/20\n\nLale Teknolojide ekip küçülmüş. Dört görev birleşiminden hangisi üzerinde telafi kontrolü önceliklidir?",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Aynı kişi tedarikçiyi açıyor, ödeme bağımsız onaylanıyor",
+          "feedback": "Kayıt oluşturma riski sürse de tanımlanan bağımsız ödeme onayı çatışmayı azaltır."
+        },
+        {
+          "id": "k3",
+          "text": "Aynı kişi eğitim takvimini yazıyor ve salon ayırıyor",
+          "feedback": "Verilen işlerde önemli mali işlem yetkisi çakışması yoktur."
+        },
+        {
+          "id": "k1",
+          "text": "Aynı kişi satıcıyı açıyor ve satıcı ödemesini onaylıyor",
+          "feedback": "Kayıt oluşturma ve ödeme yetkisi birleşince uygunsuz işlem gizlenebilir."
+        },
+        {
+          "id": "k4",
+          "text": "Aynı kişi envanteri okuyor ve eksik cihazı bildiriyor",
+          "feedback": "Okuma ve bildirim yetkileri işlem onayıyla aynı değildir."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nGörevler ayrılığı, bir kişinin uygunsuz işlemi başlatıp onaylayarak gizleme imkanını azaltır. Küçük ekiplerde bağımsız ve kanıtlanabilir inceleme gibi telafi kontrolleri gerekebilir.\n\n💼 Gerçek iş hayatında\nİdeal organizasyonu istemekle yetinme; işleyen bağımsız incelemenin kapsamını ve sıklığını test et.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Görevler ayrılığı"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 34,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-035",
+      "number": 35,
+      "domain": 2,
+      "kind": "fill_blank",
+      "topic": "Kalan risk",
+      "prompt": "Kontrollerden sonra devam eden riskin adı nedir?",
+      "context": "Domain 2 · Görev 15/20\n\nLale Teknoloji güçlü erişim kontrolleri kurdu. Yine de ayrıcalıklı hesabın kötüye kullanılma olasılığı tamamen sıfır olmadı.",
+      "options": [],
+      "answer": [
+        "kalan risk",
+        "artık risk",
+        "residual risk"
+      ],
+      "explanation": "🧠 Neden doğru?\nKontroller olasılığı veya etkiyi düşürebilir; genellikle riski tamamen yok etmez. Karar, bu kalan riskin iştah ve yetki sınırlarına uygun olup olmadığıyla ilgilidir.\n\n💼 Gerçek iş hayatında\nKontrol kuruldu diye risk kaydını silme; kalan düzeyi ve izleme koşulunu güncelle.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Kalan risk"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 35,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-036",
+      "number": 36,
+      "domain": 2,
+      "kind": "scenario",
+      "topic": "Bulutta sorumluluk",
+      "prompt": "En uygun yanıt hangisi?",
+      "context": "Domain 2 · Görev 16/20\n\nKüresel lojistik şirketi Kuzey Rota buluta geçti. Arda (Bulut Yöneticisi), “Sunucuyu onlar yönetiyor, bütün güvenlik de onların işi” diyor. Kurumun hesap ve veri ayarları hâlâ kendi elinde.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Kurum ayarlarını test edip sözleşme paylaşımını atlamak",
+          "feedback": "Teknik test gerekli fakat sağlayıcı/kurum görev sınırı da belirlenmelidir."
+        },
+        {
+          "id": "k4",
+          "text": "Yalnız bulut kontrol listesindeki varsayılanları test etmek",
+          "feedback": "Hizmet modeli ve gerçek sorumluluklar anlaşılmadan liste eksik veya ilgisiz kalabilir."
+        },
+        {
+          "id": "k2",
+          "text": "Sağlayıcının güvence raporuyla kurum ayarlarını uygun saymak",
+          "feedback": "Sağlayıcı güvencesi kurumun işlettiği hesap ve veri ayarlarını kapsamayabilir."
+        },
+        {
+          "id": "k1",
+          "text": "Hizmet modeline göre ortak sorumlulukları doğrulamak",
+          "feedback": "Sağlayıcı ve kurum yükümlülükleri model ve sözleşmeye göre farklılaşır."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nBulut sorumluluğu ortadan kaldırmaz, paylaşımını değiştirir. İnceleme, kullanılan modelde kurumun hangi kontrolleri işlettiğini açıkça belirlemelidir.\n\n💼 Gerçek iş hayatında\nSözleşme ve mimari üzerinden sorumluluk matrisi çıkar; sahipsiz kalan kontrolü ara.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Bulutta sorumluluk"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 36,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-037",
+      "number": 37,
+      "domain": 2,
+      "kind": "choice",
+      "topic": "Mahremiyet programı",
+      "prompt": "Önce hangi değerlendirme gerekir?",
+      "context": "Domain 2 · Görev 17/20\n\nKuzey Rota sürücü konumlarını “ileride işe yarar” diye süresiz saklıyor. İş amacı ve saklama gereksinimi belgelenmemiş. Henüz hangi ülkelerin kuralları geçerli olduğu da belirlenmedi.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Önce bütün veriyi şifreleyip saklama konusunu kapatmak",
+          "feedback": "Şifreleme amaç, gereklilik ve saklama yükümlülüklerini tek başına karşılamaz."
+        },
+        {
+          "id": "k1",
+          "text": "İş amacı, gerekli veri ve geçerli yükümlülükler",
+          "feedback": "Toplama ve saklamanın gerekçesini uygun iş ve hukuk bağlamında kurar."
+        },
+        {
+          "id": "k4",
+          "text": "Silme süresini yalnız depolama bütçesine göre belirlemek",
+          "feedback": "Maliyet, iş ve hukuk gereksinimlerini tek başına belirlemez."
+        },
+        {
+          "id": "k3",
+          "text": "Bir ülkenin kurallarını tüm sürücülere otomatik uygulamak",
+          "feedback": "Geçerli yükümlülükler hizmetin gerçek kapsamıyla doğrulanmalıdır."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nMahremiyet programı verinin neden toplandığını, ne kadar gerekli olduğunu ve hangi şartlarla işlendiğini belirler. Doğrulanmamış hukuk iddiası yerine uygulanabilir yükümlülükler yetkin kişilerle teyit edilir.\n\n💼 Gerçek iş hayatında\n“Belki lazım olur” gerekçesini ölçülebilir iş ihtiyacına ve onaylı saklama kararına dönüştür.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Mahremiyet programı"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 37,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-038",
+      "number": 38,
+      "domain": 2,
+      "kind": "sentence_order",
+      "topic": "Fayda izleme",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 2 · Görev 18/20\n\nKuzey Rotanın optimizasyon projesi bitti. Fayda ölçütü: teslimat gecikmesini azaltmak. Başlangıç verisi mevcut, canlı sistem üç aydır çalışıyor.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Canlı dönem gecikme verisinin kalitesini doğrula",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k4",
+          "text": "Fayda sahibinin düzeltme ve izleme kararını kaydet",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k2",
+          "text": "Sonucu başlangıç değeri ve hedefle karşılaştır",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k3",
+          "text": "Sapmaların iş ve uygulama nedenlerini incele",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nFayda izlemesi proje tesliminin ardından iş sonucunu ölçer. Karşılaştırma için güvenilir veri ve ortak tanım gerekir; sapma tek başına yazılım hatası demek değildir.\n\n💼 Gerçek iş hayatında\nTeknoloji teslim edildiği için faydanın gerçekleştiğini varsayma.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Fayda izleme"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 38,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-039",
+      "number": 39,
+      "domain": 2,
+      "kind": "drag_select",
+      "topic": "Olgunluk değerlendirme",
+      "prompt": "Hangi kanıt daha güçlüdür?",
+      "context": "Domain 2 · Görev 19/20\n\nKuzey Rotanın süreçleri yazılı ama çoğu ekip uygulamıyor. Yönetim yüksek olgunluk puanı istiyor.\n\nKurgusal kanıt:\nProsedür kapsamı: 6 ekip.\nSon 3 ay uygulama kayıtları: yalnız 2 ekip.\nYönetim sunumu: bütün ekiplerde tam uygulama.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Süreç sahibinin bütün ekipler için imzalı beyanı",
+          "feedback": "Beyan bağımsız işletim ve izleme kayıtlarının yerine geçmez."
+        },
+        {
+          "id": "k1",
+          "text": "Farklı ekiplerde süreç uygulaması ve izleme kayıtları",
+          "feedback": "Sürecin kuruma yayıldığını ve yönetildiğini gösterir."
+        },
+        {
+          "id": "k4",
+          "text": "Bir ekipte yapılan başarılı tek pilot çalışması",
+          "feedback": "Dar pilot kurum geneline tutarlı uygulama güvencesi vermez."
+        },
+        {
+          "id": "k2",
+          "text": "Onaylı prosedürlerin ve eğitim katılımının tamamı",
+          "feedback": "Tasarım ve iletişimi destekler; farklı ekiplerde gerçek uygulamayı tek başına kanıtlamaz."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nOlgunluk değerlendirmesi yalnız doküman sayısı değildir. Uygulama tutarlılığı, ölçüm ve iyileştirme kanıtı gerektirir.\n\n💼 Gerçek iş hayatında\nPuanlama ölçütünü baştan belirle; yönetimin istediği puana göre kanıt seçme.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Olgunluk değerlendirme"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 39,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-040",
+      "number": 40,
+      "domain": 2,
+      "kind": "scenario",
+      "topic": "Kurula risk anlatımı",
+      "prompt": "Sunumu nasıl kurarsın?",
+      "context": "Domain 2 · Görev 20/20\n\nDomain 2 sonu. Kurulun beş dakikası var. Kritik hizmetin risk sahibi hâlâ belirsiz ve bulut sorumlulukları sözleşmeyle uyuşmuyor.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Önce bütün teknik bulguları tek bir puanda toplamak",
+          "feedback": "Tek puan hangi yönetişim kararının gerektiğini gizleyebilir."
+        },
+        {
+          "id": "k1",
+          "text": "İş etkisini, karar ihtiyacını ve sorumluluk açığını anlatmak",
+          "feedback": "Kurulun yön ve hesap verebilirlik kararı vermesine yardımcı olur."
+        },
+        {
+          "id": "k4",
+          "text": "Sözleşme tarafları anlaşana kadar bulguyu raporlamamak",
+          "feedback": "Sorumluluk açığının sürmesi rapordan çıkarılmasını haklı kılmaz."
+        },
+        {
+          "id": "k3",
+          "text": "Teknik düzeltme planını denetim adına kurula onaylatmak",
+          "feedback": "Denetçi yönetimin operasyonel plan sahipliğini üstlenmemelidir."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nÜst yönetim sunumu riskin iş anlamını ve hangi karara ihtiyaç duyulduğunu açıklar. Kanıtlı teknik ayrıntılar, bu kararı desteklemek için kullanılır.\n\n💼 Gerçek iş hayatında\nYönetimden somut sahiplik ve düzeltme kararı iste; operasyon talimatını kurul sunumuna doldurma.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Kurula risk anlatımı"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 40,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-041",
+      "number": 41,
+      "domain": 3,
+      "kind": "choice",
+      "topic": "İş gerekçesi",
+      "prompt": "İlk hangi eksikliği sorgularsın?",
+      "context": "Domain 3 · Görev 1/20\n\nMarmara Sigorta hasar uygulamasını yenileyecek. Bora (Proje Sponsoru), “Rakibimiz aldı, biz de almalıyız” diyor. Süreç sorunları ve beklenen fayda henüz tanımlı değil.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Ölçülebilir iş ihtiyacı ve yatırım gerekçesini",
+          "feedback": "Proje kararı doğrulanabilir iş ihtiyacı ve fayda üzerine kurulmalıdır."
+        },
+        {
+          "id": "k3",
+          "text": "Sunumda yeterli sayıda teknik terim olmasını",
+          "feedback": "Teknik dil yatırım değerine kanıt değildir."
+        },
+        {
+          "id": "k2",
+          "text": "Yeni ürünün arayüz renginin kurumla uyumunu",
+          "feedback": "Görsel uyum projenin neden gerekli olduğunu açıklamaz."
+        },
+        {
+          "id": "k4",
+          "text": "Rakibin kullandığı lisans paketinin aynısını",
+          "feedback": "Rakibin ihtiyacı kurumun ihtiyacıyla aynı olmayabilir."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nİş gerekçesi neden yatırım yapıldığını, alternatifleri, maliyeti, riski ve beklenen faydayı görünür kılar. Rekabet gözlemi tek başına gerekçe değildir.\n\n💼 Gerçek iş hayatında\nProje başlamadan başarı ölçütü ve fayda sahibi belirlenirse canlı sonrası değerlendirme mümkün olur.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "İş gerekçesi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 41,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-042",
+      "number": 42,
+      "domain": 3,
+      "kind": "multi_select",
+      "topic": "Gereksinim kalitesi",
+      "prompt": "Hangi iki ekleme gereksinimi test edilebilir yapar?",
+      "context": "Domain 3 · Görev 2/20\n\nSigortada ödeme üst sınırı ve onay ihtiyacı konuşuldu; gereksinim belgesinde yalnız “güvenli ödeme” yazıyor.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Testçinin uygun gördüğü davranışın yeterli sayılması",
+          "feedback": "Önceden tanımlı gereksinimin yerini öznel karar alır."
+        },
+        {
+          "id": "k3",
+          "text": "Uygulamanın genel olarak yenilikçi görünmesi",
+          "feedback": "Belirsiz sıfat ölçülebilir kabul ölçütü değildir."
+        },
+        {
+          "id": "k2",
+          "text": "Onaylayan kişinin işlem sahibiyle farklı olması",
+          "feedback": "Görev ayrımının sınanabilir ölçütünü verir."
+        },
+        {
+          "id": "k1",
+          "text": "Üst sınır aşıldığında ikinci onayın zorunlu olması",
+          "feedback": "Belirli koşul ve beklenen davranış tanımlar."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "explanation": "🧠 Neden doğru?\nGereksinim, koşulu ve beklenen davranışı açıkça tanımlar. Böylece test sonucu iş ihtiyacına bağlanır; “güvenli” gibi genel ifadeler farklı kişilerce farklı yorumlanmaz.\n\n💼 Gerçek iş hayatında\nİzlenebilirlik tablosunda her kritik gereksinimi bir kabul testiyle eşleştir.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Gereksinim kalitesi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 42,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-043",
+      "number": 43,
+      "domain": 3,
+      "kind": "sentence_order",
+      "topic": "Gereksinim değişikliği",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 3 · Görev 3/20\n\nSigorta projesinde geliştirme sürüyor. Sponsor, ödeme limitinin iki katına çıkarılmasını istedi. Henüz değişiklik onaylanmadı.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Yeni davranışı uygulayıp güncel testleri çalıştır",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k1",
+          "text": "Değişikliğin kapsam, maliyet ve kontrol etkisini değerlendir",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k2",
+          "text": "Yetkili karar merciinden değişiklik onayı al",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k3",
+          "text": "Onaylanan gereksinimi ve testleri güncelle",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nYeni talep, risk ve proje etkisi görülmeden uygulanmamalıdır. Onay sonrası gereksinim ve testler birlikte güncellenir; eski testlerin geçmesi yeni limitin güvenliğini göstermez.\n\n💼 Gerçek iş hayatında\nKüçük görünen iş değişikliğinin kontrol sınırını değiştirip değiştirmediğini kontrol et.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Gereksinim değişikliği"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 43,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-044",
+      "number": 44,
+      "domain": 3,
+      "kind": "drag_select",
+      "topic": "Uygulama kontrolü",
+      "prompt": "Hangi kontrol bu amaca en doğrudan hizmet eder?",
+      "context": "Domain 3 · Görev 4/20\n\nHasar modülünde dört kontrol öneriliyor. Amacın hatalı girişin işleme girmesini önlemek.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Ödeme tutarı için iş kuralına uygun aralık doğrulaması",
+          "feedback": "Geçersiz girişin kabulünü işlem başında engeller."
+        },
+        {
+          "id": "k3",
+          "text": "Kritik girişleri günlük bağımsız gözden geçirmek",
+          "feedback": "Sonradan inceleme giriş anındaki aralık kontrolünün yerine geçmez."
+        },
+        {
+          "id": "k2",
+          "text": "Ay sonu ödeme toplamını bağımsız mutabık kılmak",
+          "feedback": "Tespit edici kontrol yararlıdır ancak hatalı girişi başta önleme amacını karşılamaz."
+        },
+        {
+          "id": "k4",
+          "text": "Kullanıcıları veri giriş kuralı hakkında eğitmek",
+          "feedback": "Eğitim faydalıdır ancak teknik doğrulamayla aynı korumayı sağlamaz."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nGiriş kontrolü yanlış veriyi işlenmeden yakalar. Kontrolün yeri ve amacı önemlidir; arşiv veya performans önlemi aynı riski karşılamaz.\n\n💼 Gerçek iş hayatında\nKontrol tasarımını “hangi hatayı, hangi aşamada yakalar?” sorusuyla değerlendir.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Uygulama kontrolü"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 44,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-045",
+      "number": 45,
+      "domain": 3,
+      "kind": "fill_blank",
+      "topic": "Test izlenebilirliği",
+      "prompt": "Gereksinimleri testlerle bağlayan tabloya “___ matrisi” denir.",
+      "context": "Domain 3 · Görev 5/20\n\nHasar ekibi 80 testin geçtiğini söylüyor. Ancak kritik onay gereksiniminin hangi testle doğrulandığı bulunamıyor.",
+      "options": [],
+      "answer": [
+        "izlenebilirlik",
+        "gereksinim izlenebilirlik",
+        "gereksinim izlenebilirliği"
+      ],
+      "explanation": "🧠 Neden doğru?\nİzlenebilirlik, test sayısından farklıdır. Hangi iş ihtiyacının hangi test ve sonuçla doğrulandığını gösterir; kapsanmayan kritik gereksinimleri görünür kılar.\n\n💼 Gerçek iş hayatında\nYüksek test sayısı yerine kritik gereksinimlerin kapsamını ve test kanıtını incele.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Test izlenebilirliği"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 45,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-046",
+      "number": 46,
+      "domain": 3,
+      "kind": "scenario",
+      "topic": "Çevik geliştirme",
+      "prompt": "En uygun yaklaşım hangisi?",
+      "context": "Domain 3 · Görev 6/20\n\nAda Yazılım iki haftalık sprintlerle çalışıyor. Elif (Ürün Sahibi), “Çevik projede kontrol belgesi olmaz” diyor. Backlog var; kabul ölçütleri ve güvenlik testleri yok.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Çevik yöntem nedeniyle güvenlik testini kaldırmak",
+          "feedback": "Yöntem değişikliği kontrol gereksinimini ortadan kaldırmaz."
+        },
+        {
+          "id": "k1",
+          "text": "Kontrol ve kabul kanıtını çevik iş akışında aramak",
+          "feedback": "Kontrol ihtiyacı sürer; kanıtın biçimi backlog ve otomasyon olabilir."
+        },
+        {
+          "id": "k4",
+          "text": "Ürün sahibinin sözlü kabulünü tüm testlere eşit saymak",
+          "feedback": "Beyan kritik gereksinim testinin kanıtı değildir."
+        },
+        {
+          "id": "k3",
+          "text": "Her sprint için zorunlu yüz sayfalık rapor istemek",
+          "feedback": "Kanıtın gereksiz biçimini dayatmak kontrol etkinliğini artırmaz."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nÇevik yaklaşım, kısa ve izlenebilir kanıtlarla da kontrol sağlayabilir. Kabul ölçütleri, görev ayrımı ve otomatik test sonuçları yöntemle uyumlu biçimde uygulanır.\n\n💼 Gerçek iş hayatında\nEkibe kullanılan araç içindeki kanıtı sor; kontrol amacından vazgeçmeden belge yükünü orantılı tut.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Çevik geliştirme"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 46,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-047",
+      "number": 47,
+      "domain": 3,
+      "kind": "choice",
+      "topic": "Kullanıcı kabul testi",
+      "prompt": "Hangi kanıt eksik?",
+      "context": "Domain 3 · Görev 7/20\n\nAda Yazılımda geliştiriciler bütün teknik testleri geçti. Satış ekibi henüz iade sürecini denemedi. Yarın canlıya çıkılacak.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Geliştiricilerin olumlu entegrasyon test raporu",
+          "feedback": "Teknik entegrasyon testi iş kullanıcılarının iade kabulü değildir."
+        },
+        {
+          "id": "k1",
+          "text": "İş kullanıcılarının gerçek süreçle kabul testi",
+          "feedback": "Teknik çalışma, iş ihtiyacının karşılandığını tek başına göstermez."
+        },
+        {
+          "id": "k3",
+          "text": "Ürün sahibinin test yapılmadan imzalı kabul beyanı",
+          "feedback": "Kabul imzasının ilgili test sonucu ve gereksinimle desteklenmesi gerekir."
+        },
+        {
+          "id": "k4",
+          "text": "Önceki uygulamanın geçen yılki kabul testi",
+          "feedback": "Yeni uygulamanın gerçek iade davranışını kanıtlamaz."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nKullanıcı kabul testi gerçek iş akışını ve önceden belirlenen kabul ölçütlerini doğrular. Teknik testler önemlidir; iş süreciyle doğrulamanın yerini tutmaz.\n\n💼 Gerçek iş hayatında\nİş sahibinin hangi senaryoyu hangi sonuçla kabul ettiğini belgeleyen kanıt iste.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Kullanıcı kabul testi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 47,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-048",
+      "number": 48,
+      "domain": 3,
+      "kind": "sentence_order",
+      "topic": "Veri dönüşümü",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 3 · Görev 8/20\n\nAda Yazılımın eski müşteri verisi yeni şemaya taşınacak. Canlı taşıma henüz başlamadı. Eşleme kuralları da taslak.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Deneme dönüşümünü kontrollü ortamda çalıştır",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k3",
+          "text": "Kayıt, tutar ve kritik alanları kaynakla mutabık kıl",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k1",
+          "text": "Alan eşleme ve dönüşüm kurallarını onaylat",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k4",
+          "text": "Hataları giderip canlı geçiş için kabul al",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nTaşıma teknik bir kopyalama işlemi değildir. Alan anlamları, toplamlar ve kritik değerler doğrulanmalı; kabul bu doğrulamanın ardından verilmelidir.\n\n💼 Gerçek iş hayatında\nKayıt sayısı aynı olsa bile tutar, anahtar ve anlam eşlemesinde hata olabileceğini test et.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Veri dönüşümü"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 48,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-049",
+      "number": 49,
+      "domain": 3,
+      "kind": "drag_select",
+      "topic": "Dönüşüm kanıtı",
+      "prompt": "Hangi bulgu canlı geçişi en çok sorgulatır?",
+      "context": "Domain 3 · Görev 9/20\n\nDeneme taşımasında 12.000 kaynak kaydı ve 12.000 hedef kaydı var. Dört kontrol sonucu geldi.\n\nKurgusal kanıt:\nKaynak: 12.000 kayıt, 9.800.000 TL alacak.\nHedef: 12.000 kayıt, 9.000.000 TL alacak.\nKarşılaştırma aynı tarih, para birimi ve iş kapsamındadır.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Yeni ekran eski ekrandan daha hızlı açılmış",
+          "feedback": "Performans iyileşmesi veri bütünlüğü açığını göstermez."
+        },
+        {
+          "id": "k3",
+          "text": "Test dosyalarının adları yeni standarda çevrilmiş",
+          "feedback": "Ad değişimi içerik hatasını göstermez."
+        },
+        {
+          "id": "k2",
+          "text": "Hedef toplam eşit, fakat bir alan adı değişmiş",
+          "feedback": "Alan adı değişikliği onaylı dönüşüme uygun olabilir; doğrudan mali tutarsızlık değildir."
+        },
+        {
+          "id": "k1",
+          "text": "Hedef toplam alacak, kaynak toplamından 800 bin TL farklı",
+          "feedback": "Kayıt sayısı eşit olsa bile önemli mali veri tutarsızdır."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nKayıt sayısı, yalnız bir mutabakat ölçüsüdür. Mali toplamlar ve kritik alan doğruluğu da gerekir. Önemli tutar farkı araştırılıp çözülmeden kabul yeterli değildir.\n\n💼 Gerçek iş hayatında\nSayısal eşitliklerin neyi doğruladığını ayrı yaz; bir ölçümü bütün dönüşüm güvencesi gibi sunma.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Dönüşüm kanıtı"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 49,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-050",
+      "number": 50,
+      "domain": 3,
+      "kind": "scenario",
+      "topic": "Geri dönüş planı",
+      "prompt": "En uygun denetim önerin nedir?",
+      "context": "Domain 3 · Görev 10/20\n\nSatış uygulamasında testler geçti. Geçiş başarısız olursa eski sisteme dönüş adımları hiç denenmedi. Bora (Sponsor), “Gerekirse düşünürüz” diyor.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Eski sistemi geçiş başında hemen silmek",
+          "feedback": "Geri dönüş imkanını ortadan kaldırabilir."
+        },
+        {
+          "id": "k1",
+          "text": "Geri dönüş koşulları ve adımlarını geçiş öncesi doğrulamak",
+          "feedback": "Başarısızlık halinde kontrol edilebilir ve test edilmiş alternatif gerekir."
+        },
+        {
+          "id": "k3",
+          "text": "Testler geçtiği için dönüş ihtiyacını yok saymak",
+          "feedback": "Başarı testleri canlı geçişte arıza olmayacağını garanti etmez."
+        },
+        {
+          "id": "k4",
+          "text": "Dönüş sorumluluğunu yalnız çağrı merkezine vermek",
+          "feedback": "Teknik veri ve sistem adımları yetkin sahipler gerektirir."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nGeri dönüş planı hangi koşulda karar verileceğini, kimin yetkili olduğunu ve verinin nasıl korunacağını belirtir. Denenmemiş bir niyet plan sayılmaz.\n\n💼 Gerçek iş hayatında\nYeni sistemde yapılan işlemlerin eskiye dönüşte nasıl ele alınacağını da sorgula.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Geri dönüş planı"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 50,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-051",
+      "number": 51,
+      "domain": 3,
+      "kind": "choice",
+      "topic": "Test türleri",
+      "prompt": "Modülün birim testini geçmesi, banka arayüzü için entegrasyon testi ihtiyacını kaldırmaz. Doğru mu, yanlış mı?",
+      "context": "Domain 3 · Görev 11/20\n\nKent Belediyesinin tahsilat modülü tek başına doğru çalışıyor. Banka arayüzüne bağlandığında çift kayıt oluşuyor.",
+      "options": [
+        {
+          "id": "dogru",
+          "text": "Doğru",
+          "feedback": "Entegrasyon davranışı ayrı test edilmelidir."
+        },
+        {
+          "id": "yanlis",
+          "text": "Yanlış",
+          "feedback": "Bu yorum kontrolün kapsamını yanlış değerlendiriyor. Entegrasyon davranışı ayrı test edilmelidir."
+        }
+      ],
+      "answer": [
+        "dogru"
+      ],
+      "explanation": "🧠 Neden doğru?\nBirim testleri geçse bile arayüz ve entegrasyon hataları kalabilir. Testin seviyesi, hatanın oluştuğu sistem sınırına uygun seçilmelidir.\n\n💼 Gerçek iş hayatında\nAyrı ayrı başarılı modüllerin birlikte aynı işi doğru yaptığına dair kanıt ara.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Test türleri"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 51,
+      "card_pages": [],
+      "presentation": "true_false"
+    },
+    {
+      "external_id": "cisa-auditor-v1-052",
+      "number": 52,
+      "domain": 3,
+      "kind": "multi_select",
+      "topic": "Canlıya çıkış ölçütü",
+      "prompt": "Doğru olan iki eşleştirmeyi seç.",
+      "context": "Domain 3 · Görev 12/20\n\nBelediyenin tahsilat geçiş toplantısında dört kayıt inceleniyor. İki kayıt canlıya çıkış güvencesini doğrudan destekliyor.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Denenmiş dönüş planı → başarısızlıkta kontrollü kurtarma",
+          "feedback": "Geçiş başarısızlığı için alternatif sağlar."
+        },
+        {
+          "id": "k4",
+          "text": "Teslim takvimine uyum → tek başına tüm faydaların gerçekleşmesi",
+          "feedback": "Teslim ve gerçek fayda ayrı değerlendirilir."
+        },
+        {
+          "id": "k1",
+          "text": "Kritik test sonucu ve iş kabulü → hazırlık güvencesi",
+          "feedback": "Gereksinimin karşılandığını destekler."
+        },
+        {
+          "id": "k3",
+          "text": "Geliştirici birim testi → tek başına tüm iş süreçlerinin kabulü",
+          "feedback": "Birim testi iş kabulünün yerine geçmez."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "explanation": "🧠 Neden doğru?\nCanlıya çıkışta başarı koşulları ve başarısızlık planı birlikte değerlendirilir. Takvim baskısı, kabul kanıtı veya geri dönüş hazırlığının yerini tutmaz.\n\n💼 Gerçek iş hayatında\nDenetçi risk ve kanıtı sunar; yetkili yönetim belgeli geçiş kararını verir.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Canlıya çıkış ölçütü"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 52,
+      "card_pages": [],
+      "presentation": "pair_matching"
+    },
+    {
+      "external_id": "cisa-auditor-v1-053",
+      "number": 53,
+      "domain": 3,
+      "kind": "sentence_order",
+      "topic": "Sürüm yönetimi",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 3 · Görev 13/20\n\nTahsilat düzeltmesi hazır. Değişiklik onayı ve bağımsız test tamamlandı. Şimdi üretime taşınacak paketin izlenebilirliği gerekiyor.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Onaylı sürüm paketini kimliğiyle sabitle",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k4",
+          "text": "Yayın ve doğrulama kanıtını değişiklik kaydına bağla",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k3",
+          "text": "Üretimdeki sürümün onaylı paketle eşleştiğini doğrula",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k2",
+          "text": "Paketi yetkili yayın hesabıyla üretime aktar",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nÜretime giren kod, test edilen ve onaylanan kodla aynı olmalıdır. Paket kimliği ve yayın kanıtı bu bağı kurar.\n\n💼 Gerçek iş hayatında\n“Test edildi” ifadesini sürüm kimliği olmadan kabul etme.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Sürüm yönetimi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 53,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-054",
+      "number": 54,
+      "domain": 3,
+      "kind": "drag_select",
+      "topic": "DevOps kontrolü",
+      "prompt": "Hangi ayar en büyük riski yaratır?",
+      "context": "Domain 3 · Görev 14/20\n\nAda Yazılımın dört CI/CD hattı var. Amaç bağımsız onayı atlayarak üretime kod taşınmasını önlemek.\n\nKurgusal kanıt:\nHat A: geliştirici dal korumasını aşabilir.\nHat B: test çıktısı saklanır.\nHat C: yayın hesabı sınırlıdır.\nHat D: paket özeti kaydedilir.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Test sonuçları merkezi depoda saklanıyor",
+          "feedback": "Kanıt saklama tek başına açık değildir."
+        },
+        {
+          "id": "k3",
+          "text": "Üretim yayın hesabının yetkisi sınırlanmış",
+          "feedback": "Sınırlı yetki tanımlı amaçla uyumludur."
+        },
+        {
+          "id": "k4",
+          "text": "Sürüm paketinin bütünlük özeti kaydediliyor",
+          "feedback": "Paket izlenebilirliğini ve bütünlük doğrulamasını destekler."
+        },
+        {
+          "id": "k1",
+          "text": "Geliştirici korumalı dal kuralını tek başına aşabiliyor",
+          "feedback": "Bağımsız onay mekanizması aynı kişi tarafından devre dışı kalabilir."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nOtomatik hat, görevler ayrılığını kendiliğinden sağlamaz. Kuralları kimin değiştirebildiği ve korumayı kimin aşabildiği de kontrolün parçasıdır.\n\n💼 Gerçek iş hayatında\nNormal akışı test ederken yönetici istisnası ve bypass yetkisini ayrıca incele.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "DevOps kontrolü"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 54,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-055",
+      "number": 55,
+      "domain": 3,
+      "kind": "fill_blank",
+      "topic": "Geçiş yöntemi",
+      "prompt": "Bu geçiş yaklaşımı nedir?",
+      "context": "Domain 3 · Görev 15/20\n\nBelediye bir hafta boyunca eski ve yeni tahsilat sistemini birlikte çalıştırıp sonuçlarını karşılaştıracak.",
+      "options": [],
+      "answer": [
+        "paralel",
+        "paralel geçiş",
+        "paralel çalışma"
+      ],
+      "explanation": "🧠 Neden doğru?\nParalel geçiş, eski ve yeni sistemin birlikte çalışmasıyla sonuçları karşılaştırma imkanı verir. Daha fazla operasyon yükü getirir; çifte işleme riski ayrıca yönetilmelidir.\n\n💼 Gerçek iş hayatında\nYöntemin adını bilmekten öte, karşılaştırma ve işlem sahipliği kontrollerini sorgula.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Geçiş yöntemi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 55,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-056",
+      "number": 56,
+      "domain": 3,
+      "kind": "scenario",
+      "topic": "Denetçinin proje rolü",
+      "prompt": "En uygun yanıt hangisi?",
+      "context": "Domain 3 · Görev 16/20\n\nBora (Sponsor), Kent Belediyesinin geçiş onayına senin imzanı istiyor: “Denetim imzalarsa risk biter.” Sen hazırlık incelemesini yaptın ama proje kararı yetkin yok.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Onay vermeyi reddedip hazırlık görüşünü de saklamak",
+          "feedback": "Rol sınırı, ilgili risk görüşünü yönetimden saklamayı gerektirmez."
+        },
+        {
+          "id": "k1",
+          "text": "Risk görüşünü sunup kararın yetkili iş sahibinde kalmasını istemek",
+          "feedback": "Güvence rolünü ve yönetimin geçiş sorumluluğunu ayırır."
+        },
+        {
+          "id": "k3",
+          "text": "Riskleri listeleyip onay sorumluluğunu imzayla paylaşmak",
+          "feedback": "Güvence sonucu ile operasyonel kararın sahipliği ayrı tutulmalıdır."
+        },
+        {
+          "id": "k2",
+          "text": "Geliştiricilerin teknik hazır görüşüne dayanarak imzalamak",
+          "feedback": "Teknik görüş denetçiye iş geçişi karar yetkisi vermez."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nDenetçi proje hazırlığını değerlendirir ve riskleri bildirir. Yetkisiz geçiş onayı vermek, sonradan aynı kararı bağımsız değerlendirmeyi de zorlaştırır.\n\n💼 Gerçek iş hayatında\nİnceleme sonucuna kapsamını ve sınırlamalarını ekle; karar sorumluluğunu doğru rolde bırak.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Denetçinin proje rolü"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 56,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-057",
+      "number": 57,
+      "domain": 3,
+      "kind": "choice",
+      "topic": "Uygulama sonrası inceleme",
+      "prompt": "En uygun inceleme odağı nedir?",
+      "context": "Domain 3 · Görev 17/20\n\nMarmara Sigorta sistemi üç aydır canlıda. Zamanında teslim edildi; fakat hasar işlem süresi hedeflenen 2 günden 5 güne çıkmış.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Kullanıcı memnuniyet anketini tek başına esas almak",
+          "feedback": "Algı fayda bilgisi verir; gerçek işlem süresi ve kontrol sonuçları da doğrulanmalıdır."
+        },
+        {
+          "id": "k1",
+          "text": "Gerçek fayda, süreç etkisi ve kontrol sonuçları",
+          "feedback": "Canlı sonrası inceleme teslimi değil iş sonucunu da değerlendirir."
+        },
+        {
+          "id": "k2",
+          "text": "Teslim bütçesi ve takvimini tek inceleme odağı yapmak",
+          "feedback": "Teslim başarısı iş faydası ve kontrol etkisini kapsamaz."
+        },
+        {
+          "id": "k4",
+          "text": "Artan süreyi doğrudan yazılım performansına bağlamak",
+          "feedback": "Süreç, eğitim ve kullanım etkenleri araştırılmadan nedensellik kurulamaz."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nUygulama sonrası inceleme iş gerekçesindeki faydayı, maliyeti ve kontrol etkinliğini gerçek sonuçlarla karşılaştırır. Olumsuz sonuç için kök neden kanıta dayanmalıdır.\n\n💼 Gerçek iş hayatında\nİlk iş gerekçesini canlı veriye bağla; kullanıcı eğitimi ve süreç değişikliğini de incele.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Uygulama sonrası inceleme"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 57,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-058",
+      "number": 58,
+      "domain": 3,
+      "kind": "sentence_order",
+      "topic": "İzlenebilir hata düzeltme",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 3 · Görev 18/20\n\nSigortada iş kullanıcıları yanlış ücret hesaplandığını bildirdi. Hata henüz doğrulanmadı; doğrudan üretim düzeltmesi öneriliyor.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Kök neden ve etkilenen kayıt kapsamını belirle",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k4",
+          "text": "Kontrollü yayın sonrası sonuçları doğrula",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k3",
+          "text": "Düzeltmeyi test edip yetkili değişiklik onayı al",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k1",
+          "text": "Hatayı kontrollü ortamda yeniden üret",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nÖnce hata ve kapsam doğrulanır. Düzeltmenin mevcut sorunu giderirken başka süreçleri bozmadığı test edilir; yayın sonucu da kontrol edilir.\n\n💼 Gerçek iş hayatında\nAcil baskıda bile kanıtlı teşhis ve kontrollü değişiklik zincirini koru.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "İzlenebilir hata düzeltme"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 58,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-059",
+      "number": 59,
+      "domain": 3,
+      "kind": "drag_select",
+      "topic": "Proje risk önceliği",
+      "prompt": "Hangisi önce ele alınmalı?",
+      "context": "Domain 3 · Görev 19/20\n\nSigorta projesinin kapanışında dört açık var. Müşteri ödemelerini doğru işletmek öncelik.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Test belgelerinde bir imza eksik, hesaplama doğru",
+          "feedback": "Kanıt eksikliği önemlidir; sürmekte olan kapsamı bilinmeyen mali hata daha önceliklidir."
+        },
+        {
+          "id": "k3",
+          "text": "Arşiv klasörünün adı yeni standarda uymuyor",
+          "feedback": "Adlandırma sorunu hesaplama riskini açıklamaz."
+        },
+        {
+          "id": "k1",
+          "text": "Ücret hesaplama farkı sürüyor, etkilenen kayıt kapsamı bilinmiyor",
+          "feedback": "Devam eden mali hata ve bilinmeyen kapsam önemli iş riski yaratır."
+        },
+        {
+          "id": "k4",
+          "text": "Kapanış toplantısı bir gün ertelenmiş",
+          "feedback": "Takvim kayması tek başına kritik kontrol arızası değildir."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nProje kapanışı iş riskini yok etmez. Devam eden hesaplama hatası için kapsam, düzeltme ve geçici kontrol belirlenmelidir.\n\n💼 Gerçek iş hayatında\nİdari teslim işlerini tamamlamak, açık iş hatasını kapatmak anlamına gelmesin.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Proje risk önceliği"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 59,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-060",
+      "number": 60,
+      "domain": 3,
+      "kind": "scenario",
+      "topic": "Proje sonucu iletişimi",
+      "prompt": "Raporda en uygun yaklaşım nedir?",
+      "context": "Domain 3 · Görev 20/20\n\nDomain 3 kapanışı. Bora (Sponsor), “Gecikmeyi yazmayın; projenin imajı bozulur” diyor. Veriler doğrulandı ama teknik kök neden henüz net değil.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Sponsorun açıklamasını kök neden olarak kesin aktarmak",
+          "feedback": "Yönetim açıklaması bağımsız neden kanıtıyla desteklenmelidir."
+        },
+        {
+          "id": "k1",
+          "text": "Doğrulanan etkiyi ve kök neden belirsizliğini birlikte yazmak",
+          "feedback": "Hem kanıtlı sonucu hem kanıtın sınırını doğru sunar."
+        },
+        {
+          "id": "k4",
+          "text": "Yalnız teslim başarısını yazıp iş etkisini eke taşımak",
+          "feedback": "Önemli iş etkisinin karar vericiden gizlenmesi güvenceyi zayıflatır."
+        },
+        {
+          "id": "k2",
+          "text": "Teknik neden netleşene kadar gecikme bulgusunu ertelemek",
+          "feedback": "Doğrulanan önemli iş etkisi kök neden tamamlanmadan da raporlanabilir."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nDürüst raporlama hem gerçek etkiyi gösterir hem bilmediğini belirtir. Yönetim görüşü kaydedilebilir; ancak kanıtlı bulgu baskıyla çıkarılmaz.\n\n💼 Gerçek iş hayatında\n“Ne oldu?” ile “neden oldu?” sorularını ayrı cevapla; belirsizliği saklamak yerine araştırma aksiyonu tanımla.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Proje sonucu iletişimi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 60,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-061",
+      "number": 61,
+      "domain": 4,
+      "kind": "choice",
+      "topic": "Varlık envanteri",
+      "prompt": "İlk neyi doğrularsın?",
+      "context": "Domain 4 · Görev 1/20\n\nAras Veri Merkezinde bakım sözleşmesi biten bir sunucu bulundu. Canlı müşteri hizmetine bağlı mı bilinmiyor. Cem (Operasyon Müdürü) cihazı hemen kapatmak istiyor.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Sahibi bilinmediği için cihazı doğrudan hurdaya ayırmak",
+          "feedback": "Bilinmeyen bağımlılığı kesmek hizmet kaybına yol açabilir."
+        },
+        {
+          "id": "k3",
+          "text": "Eski satın alma fiyatını tek karar ölçütü yapmak",
+          "feedback": "Satın alma fiyatı bugünkü kritikliği göstermez."
+        },
+        {
+          "id": "k2",
+          "text": "Cihazın rengini ve raf etiketinin tasarımını",
+          "feedback": "Görsel bilgi hizmet etkisini açıklamaz."
+        },
+        {
+          "id": "k1",
+          "text": "Cihazın sahibi, iş hizmeti ve teknik bağımlılıkları",
+          "feedback": "Etki ve uygun aksiyon için varlığın kullanım bağlamı bilinmelidir."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nEnvanter bir seri numarası listesi değildir. Sahiplik, kullanım ve bağımlılık bilgisi bakım, değişiklik ve süreklilik kararlarını destekler.\n\n💼 Gerçek iş hayatında\nSahipsiz kaydı önce iş bağlamına bağla; belirsizliği operasyonel risk olarak görünür tut.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Varlık envanteri"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 61,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-062",
+      "number": 62,
+      "domain": 4,
+      "kind": "multi_select",
+      "topic": "Toplu işlem kontrolü",
+      "prompt": "Hangi iki kontrol uygun?",
+      "context": "Domain 4 · Görev 2/20\n\nDuru E-ticaret gece sipariş aktarımı yapıyor. Kaynakta 3.000 işlem var; hedefte 2.980. Hata kuyruğunda 20 kayıt bekliyor.\n\nKurgusal kanıt:\nAktarım J061: kaynak=3.000, hedef=2.980, hata=20.\nHataların sahip ve yeniden işleme kaydı henüz yok.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Hata kayıtlarına sahip ve yeniden işleme takibi atamak",
+          "feedback": "Eksiklerin çözülmesini ve kaybolmamasını sağlar."
+        },
+        {
+          "id": "k4",
+          "text": "İşlemi takip etmeksizin tekrar çalıştırıp çoğaltmak",
+          "feedback": "Kontrolsüz tekrar çift kayıt yaratabilir."
+        },
+        {
+          "id": "k3",
+          "text": "Hedefteki 2.980 kaydı tüm aktarım başarılı saymak",
+          "feedback": "20 istisna tamamlanmadan bütün aktarım başarıyla sonuçlanmış değildir."
+        },
+        {
+          "id": "k1",
+          "text": "Kaynak, hedef ve hata kayıtlarını toplamla mutabık kılmak",
+          "feedback": "Tüm kayıtların hangi durumda olduğunu izler."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "explanation": "🧠 Neden doğru?\nAktarım kontrolü yalnız başarılı kayıtları saymaz; hataları da izler. Yeniden işleme çift kayda yol açmayacak şekilde tasarlanmalıdır.\n\n💼 Gerçek iş hayatında\n3.000 = 2.980 + 20 eşitliği tamlığı açıklar; 20 kaydın iş sonucu hâlâ ayrıca çözülmelidir.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Toplu işlem kontrolü"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 62,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-063",
+      "number": 63,
+      "domain": 4,
+      "kind": "sentence_order",
+      "topic": "Olay yönetimi",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 4 · Görev 3/20\n\nÖdeme API’si durmuş. İnsan güvenliği etkisi yok; ekip kesintiyi doğruladı. Kurumun onaylı olay akışı bu dört adımı gerektiriyor.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Sonucu doğrula ve kullanıcı iletişimini tamamla",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k1",
+          "text": "Olayı kaydet ve iş etkisine göre önceliklendir",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k3",
+          "text": "Onaylı çözümle hizmeti geri getir",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k2",
+          "text": "Yetkili müdahale ekibini devreye al",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nOlay yönetiminin önceliği hizmeti kontrollü biçimde geri getirmektir. Kalıcı kök neden incelemesi gerekirse problem yönetimine taşınır.\n\n💼 Gerçek iş hayatında\nHizmet döndü diye olay kaydını kanıtsız kapatma; iş sahibinin hizmet doğrulamasını al.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Olay yönetimi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 63,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-064",
+      "number": 64,
+      "domain": 4,
+      "kind": "drag_select",
+      "topic": "Problem yönetimi",
+      "prompt": "Problem incelemesine hangi kayıt öncelikli? ",
+      "context": "Domain 4 · Görev 4/20\n\nKesinti sonrasında üç olay kapanmış. Dördüncü kayıt aynı hatayla bu ay beşinci kez oluşmuş.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Planlı bakım bildirimi zamanında gönderilmiş",
+          "feedback": "Bu kayıt bir arıza göstergesi değildir."
+        },
+        {
+          "id": "k4",
+          "text": "Yeni çalışan için cihaz talebi açılmış",
+          "feedback": "Hizmet talebi tekrarlayan arızayla aynı değildir."
+        },
+        {
+          "id": "k1",
+          "text": "Aynı veritabanı kilidi beş kez hizmet kesmiş",
+          "feedback": "Tekrarlama altta yatan çözülmemiş neden göstergesidir."
+        },
+        {
+          "id": "k2",
+          "text": "Tek seferlik kullanıcı parolası unutulmuş",
+          "feedback": "Verilen koşul tekrarlayan sistem nedeni göstermiyor."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nOlay çözümü hizmeti döndürür; problem yönetimi tekrarlamanın nedenini ve kalıcı önlemi araştırır. İki süreç bağlantılı ama farklı amaçlıdır.\n\n💼 Gerçek iş hayatında\nTekrarlanan ticketların ortak nedenini analiz et; sadece kapanma hızını ölçme.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Problem yönetimi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 64,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-065",
+      "number": 65,
+      "domain": 4,
+      "kind": "fill_blank",
+      "topic": "RPO hesaplama",
+      "prompt": "Kabul edilebilir veri kaybı hedefinin kısaltması nedir?",
+      "context": "Domain 4 · Görev 5/20\n\nAras Veri Merkezi tatbikatında işin kabul ettiği veri kaybı 15 dakika. Kesinti 10.00, kullanılabilir son veri 09.35. Gerçek veri kaybı penceresi hedefi aşmış.",
+      "options": [],
+      "answer": [
+        "RPO"
+      ],
+      "explanation": "🧠 Neden doğru?\nRPO kabul edilebilir veri kaybı zamanını ifade eder. Bu vakada 25 dakikalık kayıp penceresi 15 dakikalık hedefi aşar. RTO ise hizmetin geri dönüş süresiyle ilgilidir.\n\n💼 Gerçek iş hayatında\nHedef ile ölçülen sonucu ayrı sütunlara yaz; iki zaman kavramını karıştırma.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "RPO hesaplama"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 65,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-066",
+      "number": 66,
+      "domain": 4,
+      "kind": "scenario",
+      "topic": "Yama yönetimi",
+      "prompt": "En uygun yaklaşım hangisi?",
+      "context": "Domain 4 · Görev 6/20\n\nAras Veri Merkezinde internete açık sunucuda önemli açık var. Yama uygulamanın çalışmasını etkileyebilir. Cem (Operasyon Müdürü), “Her yamayı altı ay bekletiyoruz” diyor.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Riske göre test, geçici önlem ve yayın planı belirlemek",
+          "feedback": "Maruziyet ve uyumluluk riski birlikte değerlendirilir."
+        },
+        {
+          "id": "k4",
+          "text": "Açık bilgisini kayıt dışı bırakıp ticketı kapatmak",
+          "feedback": "Risk izlenebilirliğini kaybettirir; çözüm sağlamaz."
+        },
+        {
+          "id": "k3",
+          "text": "Test olmadan bütün sunuculara aynı anda kurmak",
+          "feedback": "İş sürekliliği ve uyumluluk riski kontrolsüz büyüyebilir."
+        },
+        {
+          "id": "k2",
+          "text": "Önem derecesine bakmadan altı ay ertelemek",
+          "feedback": "Sabit bekleme yüksek riskli maruziyeti sürdürür."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nYama yönetimi hem güvenlik açığını hem hizmet etkisini dikkate alır. Test, kademeli yayın ve uygulanamayan sürede risk azaltımı uygun koşullarla belirlenir.\n\n💼 Gerçek iş hayatında\nTakvim kuralını riskin yerine koyma; istisna sahibini, süresini ve geçici kontrolünü kaydet.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Yama yönetimi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 66,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-067",
+      "number": 67,
+      "domain": 4,
+      "kind": "choice",
+      "topic": "Kapasite yönetimi",
+      "prompt": "Hangi değerlendirme daha uygun?",
+      "context": "Domain 4 · Görev 7/20\n\nDuru E-ticarette CPU ortalaması düşük. Kampanya günleri ödeme yanıtları zaman aşımına uğruyor; veritabanı bağlantıları sınırına geliyor.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Yoğun saatlerde yalnız CPU tepe değerini ölçmek",
+          "feedback": "Gerekli olabilir; mevcut veritabanı bağlantı darboğazını tek başına kapsamaz."
+        },
+        {
+          "id": "k1",
+          "text": "Yoğun saatlerde uçtan uca hizmet kapasitesini incelemek",
+          "feedback": "Ortalama CPU tek darboğazı veya yoğun zaman etkisini açıklamaz."
+        },
+        {
+          "id": "k3",
+          "text": "Veritabanına kapasite ekleyip test yapmadan kapatmak",
+          "feedback": "Değişiklik öncesi teşhis ve sonrası hizmet doğrulaması gerekir."
+        },
+        {
+          "id": "k4",
+          "text": "Geçen kampanyanın ortalama kapasitesini kullanmak",
+          "feedback": "Talep ve altyapı değişimi güncel uçtan uca ölçüm gerektirir."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nKapasite yönetimi bileşenleri ve iş talebini birlikte değerlendirir. Yoğun saat, gecikme, kuyruk ve bağlantı sınırları ortalama kaynak kullanımından farklı bilgi sağlar.\n\n💼 Gerçek iş hayatında\nMüşterinin tamamlayabildiği işlem sayısını teknik ölçümlerle birlikte oku.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Kapasite yönetimi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 67,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-068",
+      "number": 68,
+      "domain": 4,
+      "kind": "sentence_order",
+      "topic": "İş etki analizi",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 4 · Görev 8/20\n\nUfuk Sağlık süreklilik planını yeniliyor. Önce iş süreçlerinin tolere edebileceği kesintiyi belirlemek gerekiyor; teknik çözüm seçilmedi.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Hedeflere uygun kurtarma seçeneklerini değerlendir",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k3",
+          "text": "Gerekli kurtarma hedeflerini ve bağımlılıkları onaylat",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k1",
+          "text": "Kritik klinik süreçleri iş sahipleriyle belirle",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k2",
+          "text": "Kesinti süresine göre hasta ve operasyon etkisini değerlendir",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nİş etki analizi teknik seçenekten önce ihtiyacı belirler. Bütçe ve çözüm kararı işin onayladığı süre ve bağımlılıklara dayanmalıdır.\n\n💼 Gerçek iş hayatında\nHazır satın alınmış kurtarma hizmetinin süresini doğrudan iş hedefi diye yazma.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "İş etki analizi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 68,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-069",
+      "number": 69,
+      "domain": 4,
+      "kind": "drag_select",
+      "topic": "Süreklilik bağımlılığı",
+      "prompt": "Hangi eksik bu belirtiyle en doğrudan ilgili?",
+      "context": "Domain 4 · Görev 9/20\n\nHastanenin klinik uygulaması yedek merkezde açılıyor. Kullanıcılar giriş yapamıyor. Dört bağımlılıktan biri yedek planda yok.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Yemekhane raporları ertesi güne bırakılmış",
+          "feedback": "Verilen klinik erişim arızasının doğrudan nedeni değildir."
+        },
+        {
+          "id": "k1",
+          "text": "Kimlik doğrulama hizmeti yedek merkezde çalışmıyor",
+          "feedback": "Uygulama açık olsa bile kullanıcı girişi sağlanamaz."
+        },
+        {
+          "id": "k2",
+          "text": "Klinik rapor sunucusunda bazı raporlar yavaş açılıyor",
+          "feedback": "İş etkisi olabilir; bütün kullanıcıların giriş yapamamasını doğrudan açıklamaz."
+        },
+        {
+          "id": "k3",
+          "text": "Eski toplantı arşivi yeniden indekslenmemiş",
+          "feedback": "Uygulamaya kimlik doğrulamayı destekleyen bir bağımlılık değildir."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nKurtarma yalnız ana uygulamayı açmak değildir. Kimlik, ağ, DNS, veri ve dış hizmet gibi bağımlılıklar birlikte çalışmalıdır.\n\n💼 Gerçek iş hayatında\nUçtan uca gerçek kullanıcı işlemi olmadan uygulamayı kurtarılmış sayma.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Süreklilik bağımlılığı"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 69,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-070",
+      "number": 70,
+      "domain": 4,
+      "kind": "scenario",
+      "topic": "Yedek ve geri yükleme",
+      "prompt": "En uygun sonuç hangisi?",
+      "context": "Domain 4 · Görev 10/20\n\nHastanede yedek işleri yeşil görünüyor. Tatbikatta dosya açılmadı; şifre çözme anahtarı bulunamadı. Cem (Operasyon Müdürü), “Yedek başarılı, testin önemi yok” diyor.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Anahtar bulunamadığı için bütün kanıtı silmek",
+          "feedback": "Başarısızlık kanıtını korumak ve çözümlemek gerekir."
+        },
+        {
+          "id": "k2",
+          "text": "Yeşil işler nedeniyle sürekliliği yeterli saymak",
+          "feedback": "Kullanılamayan yedek işin kurtarmasını sağlamaz."
+        },
+        {
+          "id": "k1",
+          "text": "Geri yükleme yeteneğinin kanıtlanmadığını raporlamak",
+          "feedback": "Başarılı yazma kaydı kullanılabilir geri yükleme sonucuna eşit değildir."
+        },
+        {
+          "id": "k3",
+          "text": "Yedekleme hiç çalışmadı diye kesin yazmak",
+          "feedback": "Yazma işlemiyle geri yükleme başarısızlığı farklı olgulardır."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nYedek kontrolü, verinin geri okunabilirliğini ve gerekli anahtarları da kapsar. Bu vaka yedek işinin çalışmadığını değil, kurtarmanın doğrulanmadığını gösterir.\n\n💼 Gerçek iş hayatında\nAnahtar erişimi ve geri yükleme adımlarını düzeltip tekrar test kanıtı al.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Yedek ve geri yükleme"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 70,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-071",
+      "number": 71,
+      "domain": 4,
+      "kind": "choice",
+      "topic": "RTO ölçümü",
+      "prompt": "Klinik hizmetin üç saatte geri dönmesi, iki saatlik RTO hedefini aşar. Doğru mu, yanlış mı?",
+      "context": "Domain 4 · Görev 11/20\n\nHastanenin kabul edilen RTO’su 2 saat. Kesinti 08.00’de başladı; sunucu 09.00’da açıldı, klinik hizmet 11.00’de kullanılabilir oldu.\n\nKurgusal kanıt:\nİş hedefi RTO: 2 saat.\n08.00 hizmet kesildi → 09.00 sunucu açıldı → 11.00 klinik işlem doğrulandı.",
+      "options": [
+        {
+          "id": "dogru",
+          "text": "Doğru",
+          "feedback": "RTO, tanımlı kullanılabilir hizmetin dönüşüyle ölçülür."
+        },
+        {
+          "id": "yanlis",
+          "text": "Yanlış",
+          "feedback": "Bu yorum kontrolün kapsamını yanlış değerlendiriyor. RTO, tanımlı kullanılabilir hizmetin dönüşüyle ölçülür."
+        }
+      ],
+      "answer": [
+        "dogru"
+      ],
+      "explanation": "🧠 Neden doğru?\nHedefin tanımına göre gerçek hizmet geri dönüşü esas alınır. Sunucu bir saatte açılmış olsa da klinik süreç üç saat sonra çalışmıştır.\n\n💼 Gerçek iş hayatında\nTatbikat raporunda bileşen açılışı ve iş hizmeti doğrulama saatini ayrı tut.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "RTO ölçümü"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 71,
+      "card_pages": [],
+      "presentation": "true_false"
+    },
+    {
+      "external_id": "cisa-auditor-v1-072",
+      "number": 72,
+      "domain": 4,
+      "kind": "multi_select",
+      "topic": "SLA ölçütleri",
+      "prompt": "Doğru olan iki eşleştirmeyi seç.",
+      "context": "Domain 4 · Görev 12/20\n\nKuzey Rota dış taşıma API’si için SLA hazırlıyor. İş gereksinimi gece gönderilerin 06.00’ya kadar işlenmesi.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Genel memnuniyet sıfatı → ölçülebilir sözleşme hedefi",
+          "feedback": "Belirsiz sıfat hesaplanabilir bir ölçüt değildir."
+        },
+        {
+          "id": "k3",
+          "text": "Sunucu markası → gönderilerin doğruluğu güvencesi",
+          "feedback": "Marka işlem doğruluğu kanıtı değildir."
+        },
+        {
+          "id": "k1",
+          "text": "İşlenen gönderi oranı → zamanlı iş sonucu ölçümü",
+          "feedback": "Belirlenen iş son tarihini ölçer."
+        },
+        {
+          "id": "k2",
+          "text": "Hata çözüm süresi → istisna yönetimi ölçümü",
+          "feedback": "Sorunların geri dönüş hızını ölçer."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "explanation": "🧠 Neden doğru?\nSLA ölçütü iş ihtiyacına, veri kaynağına ve ölçüm yöntemine bağlanmalıdır. Satıcının teknik itibarı hizmet taahhüdünün yerine geçmez.\n\n💼 Gerçek iş hayatında\nÖlçütün nasıl hesaplanacağını ve kim tarafından doğrulanacağını sözleşmede netleştir.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "SLA ölçütleri"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 72,
+      "card_pages": [],
+      "presentation": "pair_matching"
+    },
+    {
+      "external_id": "cisa-auditor-v1-073",
+      "number": 73,
+      "domain": 4,
+      "kind": "sentence_order",
+      "topic": "DR tatbikatı",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 4 · Görev 13/20\n\nKuzey Rota yedek merkeze geçiş tatbikatı yapacak. Taslak senaryo hazır ama onay ve başarı ölçütleri yok.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Gerekli ekip ve bağımlılıklarla tatbikatı yürüt",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k3",
+          "text": "Süre, veri bütünlüğü ve iş işlemlerini ölç",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k4",
+          "text": "Sapmaları aksiyonlara bağlayıp tekrar test planla",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k1",
+          "text": "Kapsam, güvenlik sınırları ve başarı ölçütlerini onaylat",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nTatbikatın anlamı ölçülebilir hedefle oluşur. Güvenlik sınırları iş kesintisi yaratmayı kontrol eder; sonuçlar yalnız “test yapıldı” olarak kapatılmaz.\n\n💼 Gerçek iş hayatında\nTest başında neyin başarı sayılacağını yaz; sonuç sonrası hedefi değiştirerek başarılı gösterme.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "DR tatbikatı"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 73,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-074",
+      "number": 74,
+      "domain": 4,
+      "kind": "drag_select",
+      "topic": "Bağımsız yedek",
+      "prompt": "Hangi yedek düzeni bu tehdide daha dayanıklı?",
+      "context": "Domain 4 · Görev 14/20\n\nKuzey Rotanın fidye yazılımı senaryosunda üretim yöneticisi hesabı ele geçirilmiş varsayılıyor.\n\nKurgusal kanıt:\nKopya A: ayrı yetki, değiştirilemez dönem, restore testli.\nKopya B/C: üretim hesabıyla silinebilir.\nD: RAID; bağımsız yedek yok.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Yalnız RAID kullanıp bağımsız kopyayı kaldırma",
+          "feedback": "Disk dayanıklılığı kötü niyetli değişiklik veya silmeyi çözmez."
+        },
+        {
+          "id": "k2",
+          "text": "Üretim hesabıyla silinebilen aynı depoda kopya",
+          "feedback": "Aynı ele geçirilmiş yetki her iki kopyayı etkileyebilir."
+        },
+        {
+          "id": "k3",
+          "text": "Aynı açık ağ klasörüne daha sık dosya kopyalama",
+          "feedback": "Sıklık erişim ve silinme riskini tek başına azaltmaz."
+        },
+        {
+          "id": "k1",
+          "text": "Ayrı yetkili, değiştirilemez yedek kopyası ve geri yükleme testi",
+          "feedback": "Üretim hesabının yedekleri bozmasını sınırlar ve kullanılabilirliği doğrular."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nKopya sayısı kadar bağımsızlık ve erişim önemlidir. RAID hizmet dayanıklılığı sağlayabilir; veri silinmesine karşı bağımsız yedek değildir.\n\n💼 Gerçek iş hayatında\nTehdit senaryosunda saldırganın hangi kopyaya hangi hesapla ulaşabileceğini test et.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Bağımsız yedek"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 74,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-075",
+      "number": 75,
+      "domain": 4,
+      "kind": "fill_blank",
+      "topic": "Kesinti hedefi",
+      "prompt": "Hizmetin geri gelme süresi hedefinin kısaltması nedir?",
+      "context": "Domain 4 · Görev 15/20\n\nKuzey Rotanın iş sahibi, sipariş hizmetinin en geç dört saatte geri gelmesini kabul ediyor. Veri kaybı için ayrı bir hedef var.",
+      "options": [],
+      "answer": [
+        "RTO"
+      ],
+      "explanation": "🧠 Neden doğru?\nRTO hizmeti geri döndürme hedefidir. Veri kaybı toleransı RPO’dur; birinin karşılanması diğerinin karşılandığını göstermez.\n\n💼 Gerçek iş hayatında\nHem süreyi hem veri kaybını bağımsız ölç; tek bir “DR başarılı” kutusuna indirgeme.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Kesinti hedefi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 75,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-076",
+      "number": 76,
+      "domain": 4,
+      "kind": "scenario",
+      "topic": "Acil değişiklik",
+      "prompt": "Denetçinin uygun yaklaşımı hangisi?",
+      "context": "Domain 4 · Görev 16/20\n\nAras Veri Merkezinde kesintiyi gidermek için acil ayar değişti. Yetkili acil onay kaydı var; test ve sonraki inceleme normalden kısaltılmış.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Acil yetki, kayıt ve sonradan inceleme kanıtını test etmek",
+          "feedback": "Acil akışta farklı kontrol olabilir; tamamen kontrolsüz olması gerekmez."
+        },
+        {
+          "id": "k3",
+          "text": "Yalnız hizmet geri dönüş süresine bakıp uygun saymak",
+          "feedback": "Hız başarı göstergesi olabilir; kontrol ve kayıt ihtiyacı devam eder."
+        },
+        {
+          "id": "k2",
+          "text": "Sonradan yönetici imzasını tek başına yeterli saymak",
+          "feedback": "İmza işlem kapsamı, acil yetki ve doğrulama kanıtlarının yerini tutmaz."
+        },
+        {
+          "id": "k4",
+          "text": "Normal akış onayı yok diye otomatik bulgu yazmak",
+          "feedback": "Onaylı acil sürecin yetki ve kanıtları kendi koşullarıyla değerlendirilmelidir."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nAcil değişiklik normal akışla aynı olmayabilir. Ancak yetki, gerekçe, kayıt ve sonraki doğrulama süreçte tanımlı ve uygulanmış olmalıdır.\n\n💼 Gerçek iş hayatında\nKontrolü işlemin gerçek aciliyeti ve kurumun acil akışı üzerinden değerlendir.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Acil değişiklik"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 76,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-077",
+      "number": 77,
+      "domain": 4,
+      "kind": "choice",
+      "topic": "Veritabanı tutarlılığı",
+      "prompt": "Hangi çalışma uygundur?",
+      "context": "Domain 4 · Görev 17/20\n\nDuru E-ticarette sipariş toplamı ile ödeme toplamı farklı. DBA, “Veritabanı çalışıyor, kontrol tamam” diyor.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Yalnız kayıt sayısını karşılaştırıp uygun saymak",
+          "feedback": "Aynı sayıda kaydın tutar ve durumu farklı olabilir."
+        },
+        {
+          "id": "k1",
+          "text": "İş kuralına göre veri bütünlüğü ve mutabakat testleri",
+          "feedback": "Hizmetin açık olması iş verisinin doğru olduğunu kanıtlamaz."
+        },
+        {
+          "id": "k3",
+          "text": "DBA beyanı ve son yedek sonucuyla farkı kapatmak",
+          "feedback": "Beyan ve yedek bilgisi iş kuralı mutabakatını sağlamaz."
+        },
+        {
+          "id": "k2",
+          "text": "Teknik hata loglarını tek bütünlük göstergesi saymak",
+          "feedback": "Sistem hata üretmeden de iş toplamları tutarsız olabilir."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nKullanılabilirlik ile bütünlük farklı kontrol amaçlarıdır. Sipariş ve ödeme farkı, geçerli iş kuralları ve işlem durumlarıyla açıklanmalıdır.\n\n💼 Gerçek iş hayatında\nBekleyen, iptal edilen ve iade edilen kayıtları uygun mutabakat kapsamına dahil et.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Veritabanı tutarlılığı"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 77,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-078",
+      "number": 78,
+      "domain": 4,
+      "kind": "sentence_order",
+      "topic": "Tekrarlanan restore testi",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 4 · Görev 18/20\n\nHastanedeki anahtar sorunu çözüldü. Önceki başarısız tatbikatın bulgusu açık. Henüz yeni test yapılmadı.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Ölçülen sonuçları RTO ve RPO hedefleriyle karşılaştır",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k2",
+          "text": "Kritik klinik işlemler ve veri bütünlüğünü doğrula",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k4",
+          "text": "Yeterli kanıtla bulgu durumunu güncelle",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k1",
+          "text": "Yeni anahtarla kontrollü geri yükleme yap",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nBir çözümün kurulduğunu görmek yeterli değildir. Yeniden test kullanılabilir hizmeti, veri doğruluğunu ve hedef süreleri birlikte doğrulamalıdır.\n\n💼 Gerçek iş hayatında\nÖnceki testin başarısız koşulunu yeni testte tekrar kapsadığından emin ol.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Tekrarlanan restore testi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 78,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-079",
+      "number": 79,
+      "domain": 4,
+      "kind": "drag_select",
+      "topic": "İş sürekliliği önceliği",
+      "prompt": "İlk hangisi ele alınmalı?",
+      "context": "Domain 4 · Görev 19/20\n\nHastanenin tatbikatında aynı anda dört olay bildirildi. İnsan güvenliği öncelikli.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Arşiv aktarımının tamamlanması uzadı",
+          "feedback": "Bu gecikme mevcut insan güvenliği riskini öncelik dışı yapmaz."
+        },
+        {
+          "id": "k2",
+          "text": "Rapor sunucusunun geri dönüşü gecikti",
+          "feedback": "Hizmet kaybı önemlidir; mevcut fiziksel tehlikeden önce gelmez."
+        },
+        {
+          "id": "k1",
+          "text": "Elektrik panosunda duman ve personel tehlikesi",
+          "feedback": "İnsan güvenliği teknoloji kurtarmasından önce gelir."
+        },
+        {
+          "id": "k3",
+          "text": "Eğitim portalında tema yüklenemedi",
+          "feedback": "Verilen koşulda düşük iş etkili bir hizmet sorunudur."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nSüreklilik planı insanları korumayı ihmal edemez. Fiziksel tehlikede güvenli tahliye ve yetkili acil müdahale, sistem geri dönüşünün önüne geçer.\n\n💼 Gerçek iş hayatında\nDenetim tatbikatında güvenlik sınırlarını gerçek bir tehlike oluşursa uygulanacak şekilde belirle.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "İş sürekliliği önceliği"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 79,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-080",
+      "number": 80,
+      "domain": 4,
+      "kind": "scenario",
+      "topic": "Dayanıklılık raporu",
+      "prompt": "En uygun rapor nedir?",
+      "context": "Domain 4 · Görev 20/20\n\nDomain 4 sonu. Sunucular kurtarıldı fakat klinik giriş gecikmesi RTO’yu aştı. Yönetim rapora “Tüm hedefler sağlandı” yazılmasını istiyor.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Yeni RTO kabulüyle eski tatbikatı da başarılı saymak",
+          "feedback": "Yeni hedef ayrı iş kararıdır; eski test kendi hedefiyle değerlendirilir."
+        },
+        {
+          "id": "k3",
+          "text": "Hedef sapmasını yalnız teknik ekibe bildirip kurula taşımamak",
+          "feedback": "Önemli iş riski uygun karar düzeyinden gizlenmemelidir."
+        },
+        {
+          "id": "k1",
+          "text": "Başarılı adımları ve hedef sapmasını ayrı göstermek",
+          "feedback": "Gerçek kazanımı ve kalan iş riskini birlikte açıklar."
+        },
+        {
+          "id": "k4",
+          "text": "Sunucu açılışını tek başarı ölçütü olarak sunmak",
+          "feedback": "Önceden belirlenmiş klinik hizmet hedefini karşılamaz."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nDayanıklılık raporu bileşen başarısını iş hedefi başarısından ayırır. Sapma için sahip, aksiyon ve yeniden test planı gerekir.\n\n💼 Gerçek iş hayatında\nHedef değişikliği gerekirse iş sahibi ayrı kararla onaylar; geçmiş test sonucu yine kendi hedefiyle raporlanır.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Dayanıklılık raporu"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 80,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-081",
+      "number": 81,
+      "domain": 5,
+      "kind": "choice",
+      "topic": "Bilgi sınıflandırma",
+      "prompt": "En uygun yaklaşım hangisi?",
+      "context": "Domain 5 · Görev 1/20\n\nKıyı Bankasında müşteri hesap dökümü herkese açık dosya alanına konmuş. Ayşe (Veri Sahibi), “Teknik ekip sınıfını seçer” diyor.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Denetim adına tüm veri sınıflarını tek başına değiştirmek",
+          "feedback": "Denetçi yönetimin veri sahipliği rolünü üstlenmez."
+        },
+        {
+          "id": "k2",
+          "text": "Dosyanın boyutuna göre gizlilik sınıfı atamak",
+          "feedback": "Dosya büyüklüğü veri hassasiyetini göstermez."
+        },
+        {
+          "id": "k3",
+          "text": "Depolama ucuzsa veriyi açık alanda tutmak",
+          "feedback": "Maliyet erişimin uygunluğunu belirlemez."
+        },
+        {
+          "id": "k1",
+          "text": "İş veri sahibinin sınıflandırma kararını netleştirmek",
+          "feedback": "İş bağlamına ve gereksinime göre sınıfı yetkili veri sahibi belirler."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nSınıflandırma verinin hassasiyeti ve iş önemine göre koruma ihtiyacını belirler. Teknik ekip uygulamayı yönetebilir; iş kararının sahibi ayrı olmalıdır.\n\n💼 Gerçek iş hayatında\nHassas veriyi, sahip ve erişim kuralıyla eşleştir; tanımsız sınıfı sessizce varsayma.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Bilgi sınıflandırma"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 81,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-082",
+      "number": 82,
+      "domain": 5,
+      "kind": "multi_select",
+      "topic": "Erişim eşleştirme",
+      "prompt": "Doğru iki eşleştirmeyi seç.",
+      "context": "Domain 5 · Görev 2/20\n\nBankada erişim incelemesi yapıyorsun. Kimlik doğrulama ve yetkilendirme sık karıştırılıyor.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Yetkilendirme → kullanıcının yapabileceği işlemi belirleme",
+          "feedback": "Doğrulanmış kimliğin izin kapsamını belirler."
+        },
+        {
+          "id": "k1",
+          "text": "Kimlik doğrulama → kullanıcının kimliğini sınama",
+          "feedback": "Kimliğin iddiasını doğrular."
+        },
+        {
+          "id": "k3",
+          "text": "Şifreleme → kullanıcının tüm iş rollerini onaylama",
+          "feedback": "Şifreleme rol ve işlem yetkisi kararı değildir."
+        },
+        {
+          "id": "k4",
+          "text": "Yedekleme → kullanıcının kimliğini doğrulama",
+          "feedback": "Yedekleme kimlik doğrulama işlevi görmez."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "explanation": "🧠 Neden doğru?\nBaşarılı giriş, her işleme yetki anlamına gelmez. Kimlik doğrulama ve izin denetimi ayrı katmanlardır; her biri kendi riski için test edilir.\n\n💼 Gerçek iş hayatında\nMFA var diye geniş yetkileri uygun sayma; rol ve işlem sınırlarını ayrıca incele.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Erişim eşleştirme"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 82,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-083",
+      "number": 83,
+      "domain": 5,
+      "kind": "sentence_order",
+      "topic": "Ayrılan çalışan erişimi",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 5 · Görev 3/20\n\nBankada HR 18.00’de ayrılış kaydını tamamladı. Onaylı süreç aynı gün kapatma gerektiriyor. Güvenlik ekibinin uygulama akışını sırala.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Kapanış zamanını ve sistem sonuçlarını doğrula",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k3",
+          "text": "Yetkili süreçle hesapları ve oturumları kapat",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k2",
+          "text": "İlgili hesap ve aktif oturumları belirle",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k1",
+          "text": "HR ayrılış bildirimi ve çalışan kimliğini doğrula",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nKapanacak kimlik ve sistem kapsamı doğrulanmadan işlem yapmak yanlış hesabı etkileyebilir. Sadece dizin hesabı değil ilgili oturum ve uygulamalar da kapsamda olmalıdır.\n\n💼 Gerçek iş hayatında\nHR kaydıyla teknik kapanış kanıtını aynı çalışan ve zaman çizelgesinde eşleştir.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Ayrılan çalışan erişimi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 83,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-084",
+      "number": 84,
+      "domain": 5,
+      "kind": "drag_select",
+      "topic": "Ayrıcalıklı erişim",
+      "prompt": "Hangisi öncelikli?",
+      "context": "Domain 5 · Görev 4/20\n\nDört erişim kaydı var. Amacın en önemli ayrıcalık ve izlenebilirlik açığını bulmak.\n\nKurgusal kanıt:\nPAM-01: ortak admin, geniş yetki, kişi izi yok.\nREAD-02: bireysel okuma, onaylı.\nTEST-03: süre sonunda kapalı.\nROLE-04: iş matrisiyle uyumlu.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Yeni çalışan hesabı; rol matrisiyle uyumlu",
+          "feedback": "Verilen koşulda tanımlı iş ihtiyacına uygun erişim var."
+        },
+        {
+          "id": "k2",
+          "text": "Bireysel okuma hesabı; iş sahibi onayı var",
+          "feedback": "Verilen kayıt sınırlı yetki ve onay içeriyor."
+        },
+        {
+          "id": "k1",
+          "text": "Ortak yönetici hesabı; kim kullandı bilinmiyor, geniş yetki var",
+          "feedback": "Yüksek yetki ve kişi izlenebilirliği eksikliği birlikte risk oluşturur."
+        },
+        {
+          "id": "k3",
+          "text": "Geçici test hesabı; süre sonunda kapanmış",
+          "feedback": "Süreli erişim kapanışı uygulanmış görünüyor."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nAyrıcalıklı hesapta hem yetkinin sınırı hem işlemin kime ait olduğu önemlidir. Ortak kimlik sorumluluğu ve olay incelemesini zayıflatır.\n\n💼 Gerçek iş hayatında\nBireysel erişim, onay, süre ve kayıt kontrollerini beraber değerlendir.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Ayrıcalıklı erişim"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 84,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-085",
+      "number": 85,
+      "domain": 5,
+      "kind": "fill_blank",
+      "topic": "En az ayrıcalık",
+      "prompt": "Yalnız gerekli yetkinin verilmesi hangi ilkedir?",
+      "context": "Domain 5 · Görev 5/20\n\nBir çağrı merkezi çalışanı yalnız kendi müşterilerinin kayıtlarını okumalı. Tüm kayıtları dışarı aktarma yetkisi görev için gerekmiyor.",
+      "options": [],
+      "answer": [
+        "en az ayrıcalık",
+        "minimum yetki",
+        "en az yetki",
+        "least privilege"
+      ],
+      "explanation": "🧠 Neden doğru?\nEn az ayrıcalık, işi yapmak için gereken izinlerle erişimi sınırlar. Kullanıcıya güvenmek gereksiz dışa aktarma yetkisini uygun hale getirmez.\n\n💼 Gerçek iş hayatında\nRol matrisiyle gerçek yetkileri karşılaştır; sadece hesap sahibinin aktif olduğunu kontrol etme.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "En az ayrıcalık"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 85,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-086",
+      "number": 86,
+      "domain": 5,
+      "kind": "scenario",
+      "topic": "Ağ segmentasyonu",
+      "prompt": "En uygun öneri hangisi?",
+      "context": "Domain 5 · Görev 6/20\n\nUfuk Sağlığın ziyaretçi Wi-Fi ağı klinik veri sunucusuna erişebiliyor. Deniz (CISO), “Wi-Fi parolası güçlü” diyor.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Yalnız saldırı alarmı ekleyip açık yolu yeterli saymak",
+          "feedback": "İzleme faydalı olabilir; gereksiz erişimin engellenmesinin yerine geçmez."
+        },
+        {
+          "id": "k1",
+          "text": "Ziyaretçi ağının klinik ağa erişimini gereksinimle sınırlamak",
+          "feedback": "Güçlü parola ağlar arası gereksiz erişimi engellemez."
+        },
+        {
+          "id": "k4",
+          "text": "Klinik sunucu erişim loglarıyla ağı güvenli saymak",
+          "feedback": "Log varlığı erişim yetkilerinin uygunluğunu kanıtlamaz."
+        },
+        {
+          "id": "k2",
+          "text": "Önce ziyaretçi parolasını değiştirip incelemeyi kapatmak",
+          "feedback": "Kimlik bilgisi değişimi klinik ağa izinli yolu sınırlandırmaz."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nAğ segmentasyonu gereksiz erişim yollarını azaltır. Yetkili ziyaretçi bağlantısı bile klinik sisteme erişim hakkı yaratmaz.\n\n💼 Gerçek iş hayatında\nKuralı belgede görmekle yetinme; izin verilen ve reddedilen yolları kontrollü test et.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "beginner",
+      "goals": [
+        "Ağ segmentasyonu"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 86,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-087",
+      "number": 87,
+      "domain": 5,
+      "kind": "choice",
+      "topic": "Kriptografik anahtar",
+      "prompt": "En önemli kontrol odağı nedir?",
+      "context": "Domain 5 · Görev 7/20\n\nHastanenin arşivi şifreli. Anahtar aynı sunucuda herkesin okuyabildiği dosyada duruyor.",
+      "options": [
+        {
+          "id": "k4",
+          "text": "Yalnız arşiv dosyasının erişimini sınırlamak",
+          "feedback": "Veri erişimi azaltılmalıdır; ama anahtara erişim ve yaşam döngüsü de kontrol edilmelidir."
+        },
+        {
+          "id": "k2",
+          "text": "Daha güçlü algoritma seçip aynı anahtar dosyasını tutmak",
+          "feedback": "Anahtar açık erişimde kalırsa algoritma değişimi asıl açığı çözmez."
+        },
+        {
+          "id": "k3",
+          "text": "Anahtar dosyasını yeniden adlandırıp gizli saymak",
+          "feedback": "Ad değişimi erişim yetkisini sınırlandırmaz."
+        },
+        {
+          "id": "k1",
+          "text": "Anahtar erişimini ve yaşam döngüsünü korumak",
+          "feedback": "Anahtar ele geçirilirse şifrelemenin gizlilik faydası zayıflar."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nŞifreleme doğru algoritmadan ibaret değildir. Anahtar oluşturma, erişim, saklama, değişim ve kurtarma süreci kontrolün parçasıdır.\n\n💼 Gerçek iş hayatında\n“Şifreli” kutusunu işaretlemeden anahtarı kimlerin elde edebildiğini ve işlemlerin izini incele.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Kriptografik anahtar"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 87,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-088",
+      "number": 88,
+      "domain": 5,
+      "kind": "sentence_order",
+      "topic": "Sertifika yönetimi",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 5 · Görev 8/20\n\nDuru E-ticaretin üretim sertifikası ay sonunda bitecek. Yeni sertifika henüz talep edilmedi. Onaylı değişiklik sürecini izle.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Onaylı değişiklikle kurup istemci bağlantısını test et",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k4",
+          "text": "Bitiş izleme ve kanıt kayıtlarını güncelle",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k1",
+          "text": "Sertifika envanteri, sahibi ve hizmet kapsamını doğrula",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k2",
+          "text": "Yetkili süreçle yeni sertifikayı edin ve doğrula",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nSertifika yenileme, yalnız bir dosya almak değildir. Doğru hizmet kimliği, güven zinciri ve gerçek bağlantı testleri gerekir.\n\n💼 Gerçek iş hayatında\nYenilemenin otomatik olması sahibin ve başarısızlık bildiriminin gereksiz olduğu anlamına gelmez.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Sertifika yönetimi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 88,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-089",
+      "number": 89,
+      "domain": 5,
+      "kind": "drag_select",
+      "topic": "Güvenlik izleme",
+      "prompt": "Hangisi önce araştırılmalı?",
+      "context": "Domain 5 · Görev 9/20\n\nDuru E-ticaretin SOC panelinde dört gösterge var. İzleme güvencesini en çok sorgulatanı seç.\n\nKurgusal kanıt:\nÖdeme sunucusu son log: 02.17.\nİnceleme saati: 08.17.\nDiğer üç göstergede kaynak verisi mevcut.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Düşük riskli kaynakta azalan alarm sayısı var",
+          "feedback": "Araştırılabilir; kritik kaynağın tamamen kaybolması daha doğrudan izleme boşluğudur."
+        },
+        {
+          "id": "k4",
+          "text": "Panelde renk paleti yeni standarda geçirilmiş",
+          "feedback": "Görsel değişim veri gelmemesi kadar önemli değildir."
+        },
+        {
+          "id": "k3",
+          "text": "Bir düşük riskli alarm triage sonucu kapatılmış",
+          "feedback": "İncelenmiş kapatma tek başına izleme arızası değildir."
+        },
+        {
+          "id": "k1",
+          "text": "Ödeme sunucusundan altı saattir güvenlik logu gelmiyor",
+          "feedback": "Kritik sistem için gözlem boşluğu oluşmuştur."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nSıfır alarm her zaman güvenlik demek değildir; hiç veri gelmiyor da olabilir. Log kaynağı, iletim ve toplama sağlık kontrolleri ayrıca izlenmelidir.\n\n💼 Gerçek iş hayatında\nTehdit aramadan önce sistemi görebildiğinden emin ol.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Güvenlik izleme"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 89,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-090",
+      "number": 90,
+      "domain": 5,
+      "kind": "scenario",
+      "topic": "Farkındalık ölçümü",
+      "prompt": "En uygun değerlendirme nedir?",
+      "context": "Domain 5 · Görev 10/20\n\nDuru E-ticarette çalışanların tamamı eğitimi açmış. Oltalama tatbikatında bildirim oranı düşük; kimlik bilgisi paylaşımı sürüyor.",
+      "options": [
+        {
+          "id": "k2",
+          "text": "Yalnız bir sonraki eğitim katılım hedefini artırmak",
+          "feedback": "Katılım zaten tam; davranış sorununu ölçüp hedeflemek gerekir."
+        },
+        {
+          "id": "k3",
+          "text": "Başarısız çalışanlara aynı içeriği tekrar zorunlu açtırmak",
+          "feedback": "Tekrar eğitim yararlı olabilir; kök davranış ve bildirim engelleri anlaşılmadan tek çözüm sayılamaz."
+        },
+        {
+          "id": "k4",
+          "text": "Oltalama tıklama oranını tek başarı ölçütü yapmak",
+          "feedback": "Bildirim ve kimlik bilgisi paylaşımı gibi farklı davranışlar da değerlendirilmelidir."
+        },
+        {
+          "id": "k1",
+          "text": "Katılım ile davranış etkisini ayrı değerlendirmek",
+          "feedback": "Eğitim açma kaydı öğrenilen davranışı kanıtlamaz."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nFarkındalık programının amacı güvenli davranış ve zamanında bildirimdir. Katılım gerekli bir faaliyet ölçüsü olabilir; etkiyi ayrıca sınamak gerekir.\n\n💼 Gerçek iş hayatında\nHata örüntülerini hedefli eğitim ve bildirim kolaylığına dönüştür; kişileri damgalama.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Farkındalık ölçümü"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 90,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-091",
+      "number": 91,
+      "domain": 5,
+      "kind": "choice",
+      "topic": "Bulut veri erişimi",
+      "prompt": "Şifreleme bulunsa da gereksiz açık erişimin uygunluğu ayrıca değerlendirilmelidir. Doğru mu, yanlış mı?",
+      "context": "Domain 5 · Görev 11/20\n\nKuzey Rotanın bulut deposu internete açık. Deniz (CISO), “Dosyalar şifreli olduğu için sorun yok” diyor. Erişim iş ihtiyacı yok.",
+      "options": [
+        {
+          "id": "dogru",
+          "text": "Doğru",
+          "feedback": "Erişim sınırı ve anahtar yönetimi ayrıca değerlendirilmelidir."
+        },
+        {
+          "id": "yanlis",
+          "text": "Yanlış",
+          "feedback": "Bu yorum kontrolün kapsamını yanlış değerlendiriyor. Erişim sınırı ve anahtar yönetimi ayrıca değerlendirilmelidir."
+        }
+      ],
+      "answer": [
+        "dogru"
+      ],
+      "explanation": "🧠 Neden doğru?\nKatmanlı güvenlikte şifreleme, erişim sınırı ve anahtar yönetimi birbirini tamamlar. Hatalı yapılandırma yine bilgi maruziyeti ve kötü kullanım riski yaratır.\n\n💼 Gerçek iş hayatında\nDepoyu farklı erişim rolleri ve dış bağlantı koşullarıyla, yetkili test kapsamında doğrula.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Bulut veri erişimi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 91,
+      "card_pages": [],
+      "presentation": "true_false"
+    },
+    {
+      "external_id": "cisa-auditor-v1-092",
+      "number": 92,
+      "domain": 5,
+      "kind": "multi_select",
+      "topic": "Güvenlik olayı kanıtı",
+      "prompt": "Doğru olan iki eşleştirmeyi seç.",
+      "context": "Domain 5 · Görev 12/20\n\nKuzey Rotada şüpheli veri aktarımı var. Deniz (CISO) olay ekibini kurdu. Denetim, kanıtın korunmasını değerlendirecek.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Teslim zinciri → kanıtın el değiştirme izlenebilirliği",
+          "feedback": "Kaynak ve işleme sorumluluğunu izler."
+        },
+        {
+          "id": "k3",
+          "text": "Dosya silme → kanıtın bütünlüğünü koruma",
+          "feedback": "Silme inceleme dayanağını kaybettirebilir."
+        },
+        {
+          "id": "k4",
+          "text": "Geniş veri paylaşımı → kanıt gizliliğini artırma",
+          "feedback": "Gereksiz dağıtım gizliliği zayıflatır."
+        },
+        {
+          "id": "k2",
+          "text": "Bütünlük doğrulaması → kopyanın değişimini saptama",
+          "feedback": "Asıl kanıtla uyumu kontrol eder."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2"
+      ],
+      "explanation": "🧠 Neden doğru?\nOlay incelemesinde hız kadar kanıt bütünlüğü ve yetki önemlidir. Kaynak, zaman, yöntem ve teslim kaydı bulguların güvenilirliğini destekler.\n\n💼 Gerçek iş hayatında\nDenetçi uygun olay ekibinin rolünü üstlenmeden kanıt koruma kontrolünü ve rapor dayanağını değerlendirir.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Güvenlik olayı kanıtı"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 92,
+      "card_pages": [],
+      "presentation": "pair_matching"
+    },
+    {
+      "external_id": "cisa-auditor-v1-093",
+      "number": 93,
+      "domain": 5,
+      "kind": "sentence_order",
+      "topic": "Güvenlik müdahalesi",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 5 · Görev 13/20\n\nKuzey Rotada yetkisiz yönetici oturumu doğrulandı. İnsan güvenliği etkisi yok. Yetkili ekip onaylı playbook ile ilerleyecek; kanıt koruma her adımda sürüyor.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Olay kapsamını ve yetkili müdahale kararını netleştir",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k3",
+          "text": "Kök nedeni giderip temiz ortamı geri getir",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k2",
+          "text": "Etkilenen erişimi kontrollü biçimde sınırla",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k4",
+          "text": "Kurtarmayı doğrula ve alınan dersleri kaydet",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nOlayın kapsamına uygun sınırlama yapılır; kök neden giderilmeden yalnız hizmeti açmak yeniden olay riskini bırakır. Kanıt koruma ve iletişim bu adımlarla birlikte yürür.\n\n💼 Gerçek iş hayatında\nSıra, bu tanımlı playbook içindir; gerçek olayda güvenlik ve delil koşulları eşzamanlı karar gerektirebilir.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Güvenlik müdahalesi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 93,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-094",
+      "number": 94,
+      "domain": 5,
+      "kind": "drag_select",
+      "topic": "Güvenlik testi yetkisi",
+      "prompt": "Hangi öneri önce düzeltilmeli?",
+      "context": "Domain 5 · Görev 14/20\n\nKuzey Rota dört test önerisini değerlendiriyor. Üretim kesintisi yaratmadan yetkili güvenlik incelemesi hedefleniyor.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Test zamanını iş sahibiyle önceden kararlaştırmak",
+          "feedback": "İş etkisini kontrol etme amacına uygundur."
+        },
+        {
+          "id": "k2",
+          "text": "Üretim sahibinin sözlü onayıyla sınırsız test yapmak",
+          "feedback": "Onay, kapsam ve durdurma sınırlarıyla açık biçimde belgelenmelidir."
+        },
+        {
+          "id": "k1",
+          "text": "Kapsam ve izin olmadan üretimde sömürü testi başlatmak",
+          "feedback": "İş etkisi, yetki ve güvenlik sınırları tanımlanmamıştır."
+        },
+        {
+          "id": "k4",
+          "text": "Kritik bulguları güvenli kanaldan bildirmek",
+          "feedback": "Bulguların erişimini kontrol etmeye hizmet eder."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nGüvenlik testi iyi niyetle bile zarar verebilir. Yetki, kapsam, zaman, veri işleme ve durdurma koşulları baştan tanımlanmalıdır.\n\n💼 Gerçek iş hayatında\nDenetim yetkisini sınırsız saldırı izni gibi yorumlama.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Güvenlik testi yetkisi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 94,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-095",
+      "number": 95,
+      "domain": 5,
+      "kind": "fill_blank",
+      "topic": "Veri sızıntısını önleme",
+      "prompt": "Bu kontrol ailesinin yaygın kısaltması nedir?",
+      "context": "Domain 5 · Görev 15/20\n\nBankanın müşteri listesinin dış e-postaya gönderimini sınıflandırma kurallarıyla saptayan ve gerektiğinde engelleyen kontrolü inceliyorsun.",
+      "options": [],
+      "answer": [
+        "DLP"
+      ],
+      "explanation": "🧠 Neden doğru?\nDLP, belirlenmiş veri ve kullanım kurallarıyla sızıntı riskini azaltır. Kapsam, yanlış alarm ve gerçek engelleme sonucu test edilmeden aracın varlığı yeterli değildir.\n\n💼 Gerçek iş hayatında\nKuralın hangi veriyi hangi kanalda koruduğunu kanıtla; tüm kanalları kapsadığı varsayımından kaçın.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Veri sızıntısını önleme"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 95,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-096",
+      "number": 96,
+      "domain": 5,
+      "kind": "scenario",
+      "topic": "Mobil cihaz güvenliği",
+      "prompt": "En uygun sonuç hangisi?",
+      "context": "Domain 5 · Görev 16/20\n\nUfuk Sağlıkta kayıp tabletin içinde hasta kayıtları var. Uzaktan silme ayarı etkin; cihaz günlerdir ağa bağlanmamış.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Cihaz şifreli olduğu için olay takibini kapatmak",
+          "feedback": "Şifreleme güçlü koruma sağlayabilir; olay ve erişim koşulları yine doğrulanmalıdır."
+        },
+        {
+          "id": "k4",
+          "text": "Kanıt beklemeden gerçekleşmiş sızıntı olarak raporlamak",
+          "feedback": "Potansiyel maruziyet ve gerçekleşmiş sızıntı ayrı değerlendirilir."
+        },
+        {
+          "id": "k2",
+          "text": "MDM panelindeki silme talebini tamamlanmış silme saymak",
+          "feedback": "Talep ile cihazın uygulama sonucu farklı olabilir."
+        },
+        {
+          "id": "k1",
+          "text": "Silmenin gerçekleşmesini doğrulayıp kalan maruziyeti değerlendirmek",
+          "feedback": "Silme ayarı ile fiilen tamamlanan silme farklıdır."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nUzaktan silme uygulanabilirliğe bağlıdır. Cihaz şifrelemesi, oturum kilidi ve veri miktarı da kalan riski etkiler. Olası maruziyet gerçekleşmiş sızıntıyla aynı değildir.\n\n💼 Gerçek iş hayatında\nOlay kaydında komut, uygulama sonucu ve belirsizliği ayrı göster.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Mobil cihaz güvenliği"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 96,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-097",
+      "number": 97,
+      "domain": 5,
+      "kind": "choice",
+      "topic": "Fiziksel güvenlik",
+      "prompt": "En uygun değerlendirme nedir?",
+      "context": "Domain 5 · Görev 17/20\n\nAras Veri Merkezinde kart okuyucu kayıtları tam. Kamera örneklerinde çalışanla birlikte kartsız kişi geçiyor. Güvenlik sorumlusu “Kayıtlarda yabancı yok” diyor.\n\nKurgusal kanıt:\nKart kaydı: P031, 14.06.\nKamera gözlemi: P031 ile birlikte kart basmayan ikinci kişi.\nZiyaretçi kaydında eşleşen refakat bilgisi bulunamadı.",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Refakat prosedürünü okuyup kamera istisnasını kapatmak",
+          "feedback": "Doküman kontrolün bu olayda uygulanmış olduğunu göstermez."
+        },
+        {
+          "id": "k4",
+          "text": "Giriş sahibinin açıklamasını tek olay kanıtı saymak",
+          "feedback": "Beyan, kamera ve ziyaretçi kayıtlarıyla birlikte doğrulanmalıdır."
+        },
+        {
+          "id": "k2",
+          "text": "Kart sisteminin günlük testini fiziksel güvenceye yeterli saymak",
+          "feedback": "Okuyucunun çalışması kartsız takip girişini engellediğini kanıtlamaz."
+        },
+        {
+          "id": "k1",
+          "text": "Kartsız takip girişini ve kapı kontrolünün etkinliğini incelemek",
+          "feedback": "Kart kaydı tek başına gerçek geçen tüm kişileri göstermeyebilir."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nFiziksel kontrolün amacı gerçek erişimi sınırlandırmaktır. Cihaz kaydıyla gözlemi karşılaştırmak takip girişleri gibi kontrolün atlanabildiği yolları gösterir.\n\n💼 Gerçek iş hayatında\nGiriş politikası, ziyaretçi eşliği ve uygulama kanıtını birlikte test et.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Fiziksel güvenlik"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 97,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-098",
+      "number": 98,
+      "domain": 5,
+      "kind": "sentence_order",
+      "topic": "Güvenlik bulgusu takibi",
+      "prompt": "İşlem kartlarını bu vaka için doğru sıraya koy.",
+      "context": "Domain 5 · Görev 18/20\n\nZiyaretçi Wi-Fi ile klinik ağ arasına yeni kural kondu. Yönetim bulgunun kapandığını söylüyor; denetim henüz kontrolü sınamadı.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Onaylı ağ gereksinimi ve yeni kuralı karşılaştır",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k4",
+          "text": "Test kanıtıyla kalan risk ve kapanış kararını kaydet",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k2",
+          "text": "Yetkili kapsamda yasak erişim yolunu yeniden test et",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        },
+        {
+          "id": "k3",
+          "text": "Gerekli klinik bağlantıların çalıştığını doğrula",
+          "feedback": "Bu adımın yeri önceki adımın çıktısına bağlıdır."
+        }
+      ],
+      "answer": [
+        "k1",
+        "k2",
+        "k3",
+        "k4"
+      ],
+      "explanation": "🧠 Neden doğru?\nÇözüm hem istenmeyen erişimi engellemeli hem gerekli hizmeti korumalıdır. Kural ekran görüntüsü tek başına etkinlik ve yan etki testinin yerine geçmez.\n\n💼 Gerçek iş hayatında\nKontrol değiştiğinde olumlu ve olumsuz erişim testlerini birlikte düşün.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Güvenlik bulgusu takibi"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 98,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-099",
+      "number": 99,
+      "domain": 5,
+      "kind": "drag_select",
+      "topic": "Bütünleşik risk kararı",
+      "prompt": "En acil riski seç.",
+      "context": "Domain 5 · Görev 19/20\n\nFinal toplantısı için üç kurumdan dört bulgu geldi. Hangisi hemen yetkili güvenlik ve iş sahibine taşınmalı?",
+      "options": [
+        {
+          "id": "k3",
+          "text": "Veri merkezinde bir envanter etiketi silik",
+          "feedback": "Etiket sorunu aktif veri aktarımı kadar acil değildir."
+        },
+        {
+          "id": "k1",
+          "text": "Bankada aktif saldırı ve doğrulanmış yetkisiz müşteri aktarımı",
+          "feedback": "Devam eden ve doğrulanan veri kaybı için hızlı yetkili müdahale gerekir."
+        },
+        {
+          "id": "k4",
+          "text": "Sigortada kapanış toplantısının daveti gecikmiş",
+          "feedback": "İdari gecikme mevcut kritik olayla aynı etkiye sahip değildir."
+        },
+        {
+          "id": "k2",
+          "text": "Hastanede başarısız restore testi, geçici klinik akış çalışıyor",
+          "feedback": "Önemli açık risktir; doğrulanmış devam eden veri aktarımı daha acil olay yanıtı gerektirir."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nAktif ve doğrulanmış olay, rutin rapor döngüsünü beklemeyebilir. Denetim bulguyu uygun kanaldan hızla bildirir; yetkili müdahale ekibi olayı yönetir.\n\n💼 Gerçek iş hayatında\nAciliyeti kanıt, süreklilik ve iş etkisiyle gerekçelendir; kendi yetkin dışında müdahale başlatma.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Bütünleşik risk kararı"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 99,
+      "card_pages": []
+    },
+    {
+      "external_id": "cisa-auditor-v1-100",
+      "number": 100,
+      "domain": 5,
+      "kind": "scenario",
+      "topic": "Mesleki değerlendirme",
+      "prompt": "En uygun kapanış yaklaşımı nedir?",
+      "context": "Domain 5 · Görev 20/20\n\n100. kararın. Ayşe (Komite Başkanı), “Bir hastanede RTO aşıldı, bankada yetkisiz aktarım var. Bizi rahatlatacak tek cümle söyle” diyor. Kontrollerin bazıları çalışıyor; iki risk için aksiyon ve doğrulama sürüyor.",
+      "options": [
+        {
+          "id": "k1",
+          "text": "Kanıtlı durumu, açık riskleri ve gereken kararları net sunmak",
+          "feedback": "Bağımsız güvence, hem başarıyı hem açık riski ve karar ihtiyacını dürüstçe anlatır."
+        },
+        {
+          "id": "k4",
+          "text": "Risk kabulünü komitenin susmasını yeterli sayarak kaydetmek",
+          "feedback": "Kabul kararı yetkili, açık ve belgeli olmalıdır."
+        },
+        {
+          "id": "k3",
+          "text": "İki önemli bulgudan bütün kurum için olumsuz sonuç çıkarmak",
+          "feedback": "Sonuç kapsamı test edilen süreç ve kanıt sınırlarıyla uyumlu kalmalıdır."
+        },
+        {
+          "id": "k2",
+          "text": "Önce olumlu kontrolleri sunup açık risk kararını sonraya bırakmak",
+          "feedback": "Önemli açık risk aynı karar bağlamında görünür olmalıdır."
+        }
+      ],
+      "answer": [
+        "k1"
+      ],
+      "explanation": "🧠 Neden doğru?\nİyi denetçi belirsizliği saklamaz; kanıtı ve iş etkisini anlaşılır karar bilgisine dönüştürür. İşin özü bütün cevapları ezberlemek değil, kanıtın sınırını bilerek doğru soruyu sormaktır.\n\n💼 Gerçek iş hayatında\nBu vakalarda en çok hangi işi sevdin: analiz, teknik kontrol, risk tartışması veya iletişim? Sonuçların mesleğe uygunluk hükmü değildir; ilgi ve gelişim alanlarını keşfetmek için başlangıçtır.",
+      "hint": "Kararını bu vakadaki iş etkisi ve eldeki kanıtla karşılaştır.",
+      "difficulty": "advanced",
+      "goals": [
+        "Mesleki değerlendirme"
+      ],
+      "base_xp": 10,
+      "premium": false,
+      "published": true,
+      "order": 100,
+      "card_pages": []
+    }
+  ]
+}

@@ -1000,6 +1000,16 @@ class Session extends StatefulWidget {
 }
 
 class _SessionState extends State<Session> {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.path['direct_start'] == true) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) start();
+      });
+    }
+  }
+
   Map<String, dynamic>? session;
   Map<String, dynamic>? feedback;
   final input = TextEditingController();
@@ -1236,7 +1246,10 @@ class _SessionState extends State<Session> {
           physics: draggingCard ? const NeverScrollableScrollPhysics() : null,
           padding: const EdgeInsets.all(24),
           children: [
-            if (session == null) ...[
+            if (session == null && widget.path['direct_start'] == true) ...[
+              if (busy || error == null) const Center(child: CircularProgressIndicator()),
+              if (error != null) ErrorState(message: error!, retry: start),
+            ] else if (session == null) ...[
               const Icon(
                 Icons.bolt_rounded,
                 size: 64,
@@ -1276,6 +1289,13 @@ class _SessionState extends State<Session> {
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 32),
+              if (session!['evaluation'] != null) ...[
+                Text(session!['evaluation']['text'] ?? '', style: const TextStyle(height: 1.5)),
+                const SizedBox(height: 24),
+                if (session!['evaluation']['complete'] != true)
+                  PrimaryButton(label: 'Sonraki Domain', busy: busy, onPressed: start),
+                const SizedBox(height: 16),
+              ],
               PrimaryButton(
                 label: 'Ana Sayfa',
                 onPressed: () => Navigator.pop(context),

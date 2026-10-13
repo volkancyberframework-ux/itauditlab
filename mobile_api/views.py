@@ -217,6 +217,9 @@ def accessible_questions(path, user):
 
 
 def session_size(path):
+    from .cisa_simulator import is_cisa
+    if is_cisa(path):
+        return 20
     return 10 if path.preferences.get("demo_all_types") is True else 8
 
 
@@ -240,6 +243,7 @@ def path_data(path, user):
         "difficulty": path.difficulty,
         "minutes": path.minutes,
         "session_size": session_size(path),
+        "direct_start": (path.preferences or {}).get("direct_start") is True,
         "premium": False,
         "information_count": cards,
         "question_count": total,
@@ -298,6 +302,7 @@ def render_text(text, user, path):
 
 
 def question_data(q, session, request):
+    from .cisa_simulator import is_cisa
     audio = []
     if q.intro:
         audio.append(request.build_absolute_uri(f"/api/mobile/v1/audio/{q.intro_id}/"))
@@ -317,7 +322,7 @@ def question_data(q, session, request):
         "kind": q.kind,
         "prompt": render_text(q.prompt, request.user, session.path),
         "context": render_text(q.context, request.user, session.path),
-        "options": options(q)[0],
+        "options": [{"id": o["id"], "text": o["text"]} for o in options(q)[0]] if is_cisa(session.path) else options(q)[0],
         "image": (
             request.build_absolute_uri(f"/api/mobile/v1/questions/{q.pk}/image/")
             if q.image
@@ -330,6 +335,7 @@ def question_data(q, session, request):
 
 
 def session_data(session, request):
+    from .cisa_simulator import is_cisa, evaluation
     answered = set(session.attempts.values_list("question_id", flat=True))
     remaining = [pk for pk in session.questions if pk not in answered]
     q = (
@@ -357,6 +363,7 @@ def session_data(session, request):
         "pending_reviews": session.attempts.filter(voicesubmission__isnull=False, voicesubmission__review_status="pending").count(),
         "xp_earned": session.attempts.aggregate(total=Sum("xp_change"))["total"] or 0,
         "path": path_data(session.path, request.user),
+        "evaluation": evaluation(session) if is_cisa(session.path) and not remaining else None,
     }
 
 
@@ -391,9 +398,18 @@ class Sessions(MobileView):
         if not p:
             raise ValidationError("Öğrenme yolu bulunamadı.")
         qs = accessible_questions(p, request.user)
+        from .cisa_simulator import is_cisa
+        if is_cisa(p):
+            active = LearningSession.objects.filter(user=request.user,path=p,is_archived=False,completed_at=None).order_by('-created_at').first()
+            if active:
+                return Response(session_data(active,request),status=201)
         progress = UserPathProgress.objects.filter(user=request.user, path=p).first()
         if progress:
             qs = qs.exclude(pk__in=progress.completed.values("pk"))
+        if is_cisa(p):
+            first = qs.first()
+            if first:
+                qs = qs.filter(module_id=first.module_id)
         ids, question_count = [], 0
         for question in qs.only("pk", "kind").iterator():
             if question.kind != "info":
@@ -418,7 +434,13 @@ class SessionDetail(MobileView):
 
 
 class Answer(MobileView):
+    def feedback(self,q,session,submitted,correct,request):
+        from .cisa_simulator import is_cisa, explanation
+        value = explanation(q,submitted,correct) if is_cisa(session.path) else q.explanation
+        return render_text(value,request.user,session.path)
+
     def post(self, request, pk):
+        from .cisa_simulator import is_cisa
         with transaction.atomic():
             # Lock user as well as session: XP remains consistent across simultaneous sessions.
             get_user_model().objects.select_for_update().get(pk=request.user.pk)
@@ -441,7 +463,7 @@ class Answer(MobileView):
                     {
                         "correct": previous.is_correct,
                         "xp_change": previous.xp_change,
-                        "explanation": q.explanation,
+                        "explanation": self.feedback(q,s,previous.answer,previous.is_correct,request),
                         "hint": q.hint,
                         "session": session_data(s, request),
                     }
@@ -488,7 +510,7 @@ class Answer(MobileView):
             delta = (
                 (0 if already_rewarded else q.base_xp)
                 if correct
-                else -min(5, xp(request.user))
+                else (0 if is_cisa(s.path) else -min(5, xp(request.user)))
             )
             a = QuestionAttempt.objects.create(
                 session=s,
@@ -508,7 +530,8 @@ class Answer(MobileView):
             progress, _ = UserPathProgress.objects.get_or_create(
                 user=request.user, path=s.path
             )
-            if correct:
+            from .cisa_simulator import is_cisa
+            if correct or is_cisa(s.path):
                 progress.completed.add(q)
             progress.save()
             if s.attempts.count() == len(s.questions):
@@ -518,7 +541,7 @@ class Answer(MobileView):
                 {
                     "correct": correct,
                     "xp_change": delta,
-                    "explanation": render_text(q.explanation, request.user, s.path),
+                    "explanation": self.feedback(q,s,answer,correct,request),
                     "hint": q.hint,
                     "session": session_data(s, request),
                 }
