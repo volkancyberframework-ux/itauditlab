@@ -7,10 +7,15 @@ const appleMonthlyProduct = 'grcustasi_premium_monthly';
 
 /// Keeps purchase updates alive when the customer closes the membership screen.
 class AppleStore extends ChangeNotifier {
-  AppleStore(this.api, {InAppPurchase? store})
-    : store = store ?? InAppPurchase.instance;
+  AppleStore(
+    this.api, {
+    InAppPurchase? store,
+    this.productRetryDelay = const Duration(seconds: 2),
+  }) : store = store ?? InAppPurchase.instance;
   final Api api;
   final InAppPurchase store;
+  final Duration productRetryDelay;
+  String? productLoadDiagnostic;
   StreamSubscription<List<PurchaseDetails>>? subscription;
   final Map<String, PurchaseDetails> pendingVerification = {};
   ProductDetails? product;
@@ -43,19 +48,45 @@ class AppleStore extends ChangeNotifier {
     error = null;
     notifyListeners();
     try {
-      if (!await store.isAvailable().timeout(const Duration(seconds: 15))) {
-        throw StateError('unavailable');
+      // Catalog lookup must not be gated by canMakePayments: that API checks
+      // purchase restrictions, not whether Apple can return product metadata.
+      // An empty StoreKit response can be transient while the storefront starts.
+      // Keep StoreKit 2 throughout: the server verifies its signed transactions.
+      for (var attempt = 1; attempt <= 3; attempt++) {
+        try {
+          final result = await store
+              .queryProductDetails({appleMonthlyProduct})
+              .timeout(const Duration(seconds: 20));
+          final matches = result.productDetails.where(
+            (item) => item.id == appleMonthlyProduct,
+          );
+          if (matches.isNotEmpty) {
+            product = matches.first;
+            productLoadDiagnostic = null;
+            return;
+          }
+          productLoadDiagnostic = result.error == null
+              ? 'product_not_found'
+              : 'store_error:${result.error!.code}';
+        } on TimeoutException {
+          productLoadDiagnostic = 'store_timeout';
+        } catch (_) {
+          productLoadDiagnostic = 'store_request_failed';
+        }
+        // Only product ID, attempt and error category; no account or receipts.
+        debugPrint(
+          'Apple product $appleMonthlyProduct: '
+          '$productLoadDiagnostic (attempt $attempt/3)',
+        );
+        if (attempt < 3) await Future<void>.delayed(productRetryDelay);
       }
-      final result = await store
-          .queryProductDetails({appleMonthlyProduct})
-          .timeout(const Duration(seconds: 20));
-      if (result.error != null || result.productDetails.isEmpty) {
-        throw StateError('missing product');
-      }
-      product = result.productDetails.single;
+      error = productLoadDiagnostic == 'product_not_found'
+          ? 'Apple şu anda bu aboneliği sunamıyor. Biraz sonra yeniden deneyebilirsin. (Ürün: A01)'
+          : 'Apple üyelik bilgisine ulaşılamadı. Biraz sonra yeniden deneyebilirsin. (Bağlantı: A02)';
     } catch (_) {
+      productLoadDiagnostic = 'store_request_failed';
       error =
-          'Apple üyelik bilgisi alınamadı. Bağlantını kontrol edip yeniden deneyebilirsin.';
+          'Apple üyelik bilgisine ulaşılamadı. Yeniden deneyebilirsin. (A02)';
     } finally {
       loading = false;
       notifyListeners();

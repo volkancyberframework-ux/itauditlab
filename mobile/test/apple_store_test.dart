@@ -10,6 +10,14 @@ import 'package:grc_ustasi/apple_store.dart';
 class FakeStore extends Fake implements InAppPurchase {
   final events = StreamController<List<PurchaseDetails>>.broadcast();
   int completed = 0;
+  int queries = 0;
+  List<ProductDetailsResponse> responses = [];
+  @override
+  Future<ProductDetailsResponse> queryProductDetails(Set<String> ids) async {
+    expect(ids, {appleMonthlyProduct});
+    return responses[queries++];
+  }
+
   PurchaseParam? parameter;
   @override
   Stream<List<PurchaseDetails>> get purchaseStream => events.stream;
@@ -25,7 +33,98 @@ class FakeStore extends Fake implements InAppPurchase {
   }
 }
 
+ProductDetails monthly() => ProductDetails(
+  id: appleMonthlyProduct,
+  title: 'Premium',
+  description: 'One month',
+  price: '₺2.099',
+  rawPrice: 2099,
+  currencyCode: 'TRY',
+);
+
 void main() {
+  test('empty storefront response retries and uses Apple price', () async {
+    final native = FakeStore()
+      ..responses = [
+        ProductDetailsResponse(
+          productDetails: [],
+          notFoundIDs: [appleMonthlyProduct],
+        ),
+        ProductDetailsResponse(productDetails: [monthly()], notFoundIDs: []),
+      ];
+    final store = AppleStore(
+      Api(),
+      store: native,
+      productRetryDelay: Duration.zero,
+    );
+    await store.load();
+    expect(native.queries, 2);
+    expect(store.product!.price, '₺2.099');
+    expect(store.error, isNull);
+    expect(store.loading, false);
+    store.dispose();
+    await native.events.close();
+  });
+  test(
+    'persistent missing product stops after three requests and allows retry',
+    () async {
+      final missing = ProductDetailsResponse(
+        productDetails: [],
+        notFoundIDs: [appleMonthlyProduct],
+      );
+      final native = FakeStore()
+        ..responses = [
+          missing,
+          missing,
+          missing,
+          ProductDetailsResponse(productDetails: [monthly()], notFoundIDs: []),
+        ];
+      final store = AppleStore(
+        Api(),
+        store: native,
+        productRetryDelay: Duration.zero,
+      );
+      await store.load();
+      expect(native.queries, 3);
+      expect(store.product, isNull);
+      expect(store.error, contains('A01'));
+      expect(store.productLoadDiagnostic, 'product_not_found');
+      expect(store.loading, false);
+      await store.load();
+      expect(store.product, isNotNull);
+      expect(store.error, isNull);
+      expect(store.productLoadDiagnostic, isNull);
+      store.dispose();
+      await native.events.close();
+    },
+  );
+  test(
+    'store errors have a distinct diagnostic from missing configuration',
+    () async {
+      final failed = ProductDetailsResponse(
+        productDetails: [],
+        notFoundIDs: [],
+        error: IAPError(
+          source: 'app_store',
+          code: 'network',
+          message: 'Offline',
+        ),
+      );
+      final native = FakeStore()..responses = [failed, failed, failed];
+      final store = AppleStore(
+        Api(),
+        store: native,
+        productRetryDelay: Duration.zero,
+      );
+      await store.load();
+      expect(store.error, contains('A02'));
+      expect(store.productLoadDiagnostic, 'store_error:network');
+      expect(store.loading, false);
+      store.dispose();
+      await native.events.close();
+    },
+  );
+
   test(
     'server failure never acknowledges; retry accepts without repurchase',
     () async {
