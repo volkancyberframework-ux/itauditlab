@@ -14,7 +14,7 @@ from .models import (ProgramEnrollment, ProgramRelease, Enrollment, CustomUser,
 STATUS_LABELS = {'on_track': 'Takviminde', 'behind': 'Geride', 'critical': 'Kritik', 'unknown': 'Bilinmiyor'}
 
 def settings_data(config):
-    return {k: v for k, v in model_to_dict(config).items() if k != 'id'}
+    return {**{k: v for k, v in model_to_dict(config).items() if k != 'id'}, 'completion_basis': 'student_enrollment_or_access'}
 
 
 def audit(actor, action, before=None, after=None, student=None, intervention=None, reason=''):
@@ -73,7 +73,7 @@ def aggregate_programs(programs, config):
         'available': sum(x['available'] for x in values), 'upcoming': sum(x['state'] == 'upcoming' for x in values),
         'unknown': unknown, 'overdue': len(overdue), 'average_delay': average,
         'completion': round(100 * sum(x['state'] == 'completed' for x in values) / len(values), 1) if values else None,
-        'status': status, 'status_label': STATUS_LABELS[status]}
+        'status': status, 'status_label': ('Program tamamlandı' if values and all(x['state'] == 'completed' for x in values) else STATUS_LABELS[status]), 'is_complete': bool(values) and all(x['state'] == 'completed' for x in values)}
 
 
 def current_students(config=None, now=None):
@@ -85,7 +85,8 @@ def current_students(config=None, now=None):
         'releases', 'monitoring_overrides', 'monitoring_pauses').order_by('user_id', 'pk'))
     user_ids = {e.user_id for e in enrollments}
     evidence = {(x.user_id, x.course_id): x for x in LessonEvidence.objects.filter(user_id__in=user_ids)}
-    videos = {(x.user_id, x.course_id): x.enrolled_at for x in Enrollment.objects.filter(user_id__in=user_ids)}
+    enrolled = {(x.user_id, x.course_id): x for x in Enrollment.objects.filter(user_id__in=user_ids)}
+    videos = {key: x.enrolled_at for key, x in enrolled.items()}
     test_access = set(CustomUser.allowed_tests.through.objects.filter(customuser_id__in=user_ids).values_list('customuser_id', 'course_id'))
     access_dates = {}
     for r in ProgramRelease.objects.filter(enrollment__user_id__in=user_ids, access_granted_at__isnull=False).select_related('enrollment', 'step'):
@@ -119,11 +120,16 @@ def current_students(config=None, now=None):
             scheduled = timezone.make_aware(datetime.combine(e.start_date + timedelta(days=step.day_offset), time.min), tz)
             actual_permission = key in test_access if step.course.is_test else key in videos
             access = (ov.access_granted_at if ov and ov.access_granted_at else None) or (release.access_granted_at if release else None)
-            access = access or access_dates.get(key) or videos.get(key) or (ev.first_accessed_at if ev else None)
+            access = access or access_dates.get(key) or ((videos.get(key)) if key in enrolled and enrolled[key].is_automatic else None)
+            own_enrollment = enrolled.get(key)
+            if own_enrollment and not own_enrollment.is_automatic:
+                access = min(access, own_enrollment.enrolled_at) if access else own_enrollment.enrolled_at
+            access = access or (scheduled if actual_permission else None)
             available = actual_permission and (access is None or access <= now)
             exempt = bool(ov and ov.exempt)
             required = ov.required if ov else True
-            completed_at = ev.completed_at if ev and ev.completion_known else None
+            own_enrollment = enrolled.get(key)
+            completed_at = own_enrollment.enrolled_at if own_enrollment and not own_enrollment.is_automatic else (ev.first_accessed_at if ev else None)
             if exempt or not required:
                 state = 'exempt'
             elif completed_at and completed_at <= now:
@@ -132,14 +138,12 @@ def current_students(config=None, now=None):
                 state = 'upcoming' if scheduled > now else 'unknown'
             elif access and access > now:
                 state = 'upcoming'
-            elif ev and ev.completion_known:
-                state = ('accessed' if ev.first_accessed_at else 'incomplete') if access else 'unknown'
             else:
-                state = 'unknown'
+                state = 'not_enrolled'
             lessons.append({'step_id': step.pk, 'course_id': step.course_id, 'title': str(step.course),
                 'scheduled_at': scheduled.isoformat(), 'access_at': access.isoformat() if access else None,
                 'completed_at': completed_at.isoformat() if completed_at else None,
-                'accessed': bool(ev and ev.first_accessed_at), 'completion_known': bool(ev and ev.completion_known),
+                'accessed': bool(completed_at), 'completion_known': True,
                 'state': state, 'available': available, 'required': required, 'exempt': exempt,
                 'deadline': None, 'overdue': False, 'late_completed': False, 'delay_days': 0})
         required_lessons = [x for x in lessons if x['required'] and not x['exempt']]
@@ -150,7 +154,7 @@ def current_students(config=None, now=None):
                 deadline = _deadline(access, timedelta(days=config.days), pauses, now)
             elif pos + 1 < len(required_lessons):
                 nxt = required_lessons[pos + 1]
-                # Never treat a planned release as actual access evidence.
+                # Existing permission without a release timestamp uses the program schedule.
                 if nxt['access_at']:
                     deadline = datetime.fromisoformat(nxt['access_at'])
                     if access:
@@ -160,7 +164,7 @@ def current_students(config=None, now=None):
             if deadline:
                 lesson['deadline'] = deadline.isoformat()
                 lesson['late_completed'] = bool(lesson['completed_at'] and datetime.fromisoformat(lesson['completed_at']) > deadline)
-                lesson['overdue'] = bool(active and lesson['available'] and lesson['state'] in ('accessed', 'incomplete') and now > deadline)
+                lesson['overdue'] = bool(active and lesson['available'] and lesson['state'] == 'not_enrolled' and now > deadline)
                 if lesson['overdue']:
                     lesson['delay_days'] = round((now - deadline).total_seconds() / 86400, 2)
         summary = aggregate_programs([{'lessons': lessons}], config)
@@ -248,33 +252,25 @@ def capture_snapshot(actor=None, correction_reason=''):
 
 
 def email_template(row):
-    breakdown = '\n'.join(f"- {p['name']}: {p['completed']}/{p['total']} ders (%{p['completion'] or 0}); tamamlanma bilgisi bilinmeyen: {p['unknown']}" for p in row['programs'])
+    breakdown = '\n'.join(f"- {p['name']}: {p['total']} dersin {p['available']} tanesi erişime açıldı; {p['completed']} derse kayıt oldunuz (%{p['completion'] or 0}); {p['overdue']} derse zamanında kayıt olmadınız." for p in row['programs'])
     body = f"""Merhaba {row['name']},
 
-Bildiğiniz üzere GRC Ustası olarak interaktif ve takvime bağlı bir eğitim programı yürütüyoruz.
+GRC Ustası'nda kayıtlı olduğunuz {', '.join(p['name'] for p in row['programs'])} programlarındaki ilerlemenizi değerlendirdik.
 
-Şu anda kayıtlı olduğunuz {', '.join(p['name'] for p in row['programs'])} kapsamında toplam {row['available']} farklı ders erişiminize açılmış durumda.
+Bu programlarda toplam {row['total']} farklı ders bulunuyor. Şu ana kadar {row['available']} ders erişiminize açıldı. Açılan derslerden {row['overdue']} tanesine eğitim takviminde belirtilen süre içinde kayıt olmadığınızı görüyoruz. Bu derslerde ortalama gecikmeniz {row['average_delay']} gün.
 
-Bunlardan {row['overdue']} tanesinde eğitim takviminin gerisinde olduğunuzu görüyoruz. Gecikmiş derslerinizde ortalama {row['average_delay']} günlük bir gecikme bulunmaktadır.
-
-Programlarınızdaki mevcut tamamlanma durumunuz:
+Program bazında durumunuz:
 {breakdown}
 
-Önümüzde ise henüz erişime açılmamış {row['upcoming']} farklı ders daha bulunuyor.
+Bir derse kayıt olmanız veya derse erişmeniz, bu takipte o dersin tamamlanması olarak kabul edilir. Tamamladığınız programlar bu uyarıya dahil edilmemiştir.
 
-Tamamlanma veya erişim bilgisi doğrulanamayan {row['unknown']} ders gecikmiş kabul edilmemiştir. Rakamlar doğrulanmış kayıtlarla sınırlıdır.
+Gecikmelerin birikmesi, programdan alacağınız verimi ve sonraki çalışmalarınızı etkileyebilir. Amacımız gecikmenin nedenini anlamak ve birlikte uygulanabilir bir yol bulmak.
 
-Mevcut gecikmelerin birikmesi, programdan alacağınız verimi ve ilerleyen eğitim sürecinizi olumsuz etkileyebilir.
+Bu e-postaya iki gün içerisinde dönüş yapmanızı ve kısa bir birebir görüşme planlamamızı rica ediyorum.
 
-Amacımız sizi programdan uzaklaştırmak değil, gecikmenin nedenini anlamak ve birlikte bir çözüm bulmak.
+Belirtilen süre içerisinde dönüş alınmaması ve ilerleme sağlanmaması durumunda üyeliğinizin geçici olarak dondurulması değerlendirilebilir. Programın devamındaki 6 aylık iş bulma desteğinin planlanan takvimde yürütülebilmesi için bu mesajı son uyarı olarak dikkate almanızı rica ediyorum.
 
-Bu nedenle bu e-postaya iki gün içerisinde dönüş yapmanızı ve kısa bir birebir görüşme planlamamızı rica ediyoruz.
-
-Belirtilen süre içerisinde dönüş alınmaması ve ilerleme sağlanmaması durumunda üyeliğinizin geçici olarak dondurulması değerlendirilebilir.
-
-Ayrıca programın devamında sunulan 6 aylık iş bulma desteğinin planlanan takvimde yürütülebilmesi açısından bu mesajı son uyarı olarak değerlendirmenizi rica ediyoruz.
-
-Birlikte uygun bir yol bulabileceğimize inanıyorum.
+Sorularınız için benimle iletişimde kalın. Birlikte uygun bir yol bulabiliriz.
 
 Saygılarımla,
 Volkan Güler
@@ -290,13 +286,17 @@ def mailto(recipient, subject, body):
 def create_draft(student, actor, confirm_duplicate=False):
     # Lock the shared student row to serialize duplicate drafts from concurrent tabs.
     CustomUser.objects.select_for_update().get(pk=student.pk)
-    if StudentIntervention.objects.filter(student=student).exclude(status='resolved').exists() and not confirm_duplicate:
-        raise ValueError('Çözülmemiş bir müdahale var. Yeniden taslak oluşturmayı ayrıca onaylayın.')
     config = configuration()
     row = next((r for r in current_students(config) if r['id'] == student.pk), None)
     if row is None or not any(p['active'] for p in row['programs']):
         raise ValueError('Öğrencinin aktif program kaydı bulunmuyor.')
     row = filter_students([row], config)[0]
+    row['programs'] = [p for p in row['programs'] if p['completed'] < p['total']]
+    row.update(aggregate_programs(row['programs'], config))
+    if not row['programs'] or not row['overdue']:
+        raise ValueError('Öğrencinin gecikmiş kaydı yok; uyarı e-postası gerekmiyor.')
+    if StudentIntervention.objects.filter(student=student).exclude(status='resolved').exists() and not confirm_duplicate:
+        raise ValueError('Çözülmemiş bir müdahale var. Yeniden taslak oluşturmayı ayrıca onaylayın.')
     subject, body = email_template(row)
     obj = StudentIntervention.objects.create(student=student, created_by=actor,
         enrollment_ids=[p['enrollment_id'] for p in row['programs']], subject=subject, body=body,

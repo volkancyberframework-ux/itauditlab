@@ -7,7 +7,7 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.utils import timezone
 from .models import (CustomUser, Course, LearningProgram, LearningProgramStep,
-    ProgramEnrollment, ProgramRelease, LessonEvidence,
+    ProgramEnrollment, ProgramRelease, LessonEvidence, Enrollment,
     EnrollmentMonitoringPolicy, MonitoringPause, MonitoringLessonOverride,
     StudentIntervention, MonitoringAudit, DailyMonitoringSnapshot)
 from .student_monitoring import current_students, configuration, capture_snapshot, create_draft, mailto
@@ -46,12 +46,12 @@ class MonitoringTests(TestCase):
         config.mode, config.last_lesson_days = 'next', 2
         self.assertEqual(self.row(config=config)['overdue'], 3)
 
-    def test_missing_completion_is_unknown_not_assumed_incomplete(self):
+    def test_access_grant_without_student_enrollment_is_incomplete(self):
         LessonEvidence.objects.filter(user=self.user).update(completion_known=False, completed_at=None)
         row = self.row()
-        self.assertEqual(row['overdue'], 0)
-        self.assertEqual(row['unknown'], 3)
-        self.assertEqual(row['status'], 'unknown')
+        self.assertEqual(row['overdue'], 2)
+        self.assertEqual(row['unknown'], 0)
+        self.assertEqual(row['completed'], 0)
         self.assertIsNone(row['last_activity'])
 
     def test_future_releases_and_missing_access_never_overdue(self):
@@ -63,7 +63,8 @@ class MonitoringTests(TestCase):
         self.assertEqual(self.row()['overdue'], 0)
 
     def test_late_completion_not_currently_overdue(self):
-        LessonEvidence.objects.filter(user=self.user, course=self.courses[0]).update(completed_at=self.now-timedelta(days=1))
+        item = Enrollment.objects.create(user=self.user, course=self.courses[0])
+        Enrollment.objects.filter(pk=item.pk).update(enrolled_at=self.now-timedelta(days=1))
         row = self.row()
         self.assertEqual(row['overdue'], 1)
         self.assertTrue(row['programs'][0]['lessons'][0]['late_completed'])
@@ -105,26 +106,27 @@ class MonitoringTests(TestCase):
         self.assertFalse(lessons[0]['overdue'])
         self.assertEqual(datetime.fromisoformat(lessons[0]['deadline']), self.now)
 
-    def test_manual_test_access_without_timestamp_has_unknown_deadline(self):
+    def test_legacy_access_uses_program_schedule(self):
         ProgramRelease.objects.filter(enrollment=self.enrollment).delete()
         config = configuration()
         config.mode='days'
-        self.assertEqual(self.row(config=config)['overdue'], 0)
-        self.assertIsNone(self.row(config=config)['programs'][0]['lessons'][0]['access_at'])
+        self.assertEqual(self.row(config=config)['overdue'], 3)
+        self.assertIsNotNone(self.row(config=config)['programs'][0]['lessons'][0]['access_at'])
 
     def test_manual_access_override_uses_evidence_not_planned_date(self):
         ProgramRelease.objects.filter(enrollment=self.enrollment).delete()
         MonitoringLessonOverride.objects.create(enrollment=self.enrollment, step=self.steps[0], access_granted_at=self.now-timedelta(days=5), reason='Erişim logu')
         config=configuration()
         config.mode='days'
-        self.assertEqual(self.row(config=config)['overdue'], 1)
+        self.assertEqual(self.row(config=config)['overdue'], 3)
 
     def test_snapshots_are_idempotent_and_settings_do_not_rewrite_history(self):
         with patch('core.student_monitoring.timezone.now', return_value=self.now):
             first, created = capture_snapshot()
             self.assertTrue(created)
             before = first.students
-            LessonEvidence.objects.filter(user=self.user).update(completed_at=self.now)
+            Enrollment.objects.bulk_create([Enrollment(user=self.user, course=c) for c in self.courses])
+            Enrollment.objects.filter(user=self.user).update(enrolled_at=self.now)
             second, created = capture_snapshot()
             self.assertFalse(created)
             self.assertEqual(second.students, before)
@@ -193,7 +195,7 @@ class MonitoringTests(TestCase):
         self.assertTrue(StudentIntervention.objects.filter(pk=obj.pk).exists())
         self.assertTrue(MonitoringAudit.objects.filter(action='completion_evidence').exists())
 
-    def test_authorized_course_visit_records_access_not_completion(self):
+    def test_authorized_course_visit_counts_as_completion(self):
         self.client.force_login(self.user)
         ev=LessonEvidence.objects.get(user=self.user,course=self.courses[0])
         ev.completion_known=False
@@ -203,6 +205,7 @@ class MonitoringTests(TestCase):
         self.assertIsNotNone(ev.first_accessed_at)
         self.assertFalse(ev.completion_known)
         self.assertIsNone(ev.completed_at)
+        self.assertEqual(next(r for r in current_students() if r['id'] == self.user.pk)['completed'], 1)
 
     def test_turkish_dashboard_student_preview_and_invalid_settings(self):
         self.client.force_login(self.admin)
@@ -262,3 +265,37 @@ class MonitoringTests(TestCase):
         obj.save()
         create_draft(self.user,self.admin,confirm_duplicate=True)
         self.assertEqual(self.row()['warning_status'],'awaiting')
+
+    def test_automatic_enrollment_is_not_student_completion(self):
+        course = self.courses[0]
+        course.course_type = 'video'
+        course.save()
+        item = Enrollment.objects.create(user=self.user, course=course, is_automatic=True)
+        self.assertEqual(self.row()['completed'], 0)
+        self.client.force_login(self.user)
+        self.assertEqual(self.client.get(reverse('course_single', args=[course.pk])).status_code, 200)
+        item.refresh_from_db()
+        self.assertFalse(item.is_automatic)
+        self.assertEqual(next(r for r in current_students() if r['id'] == self.user.pk)['completed'], 1)
+
+    def test_completed_program_has_no_warning_even_with_previous_draft(self):
+        create_draft(self.user, self.admin)
+        for course in self.courses:
+            Enrollment.objects.create(user=self.user, course=course)
+        row = next(r for r in current_students() if r['id'] == self.user.pk)
+        self.assertTrue(row['is_complete'])
+        self.assertEqual(row['overdue'], 0)
+        with self.assertRaisesMessage(ValueError, 'uyarı e-postası gerekmiyor'):
+            create_draft(self.user, self.admin)
+
+    def test_email_omits_completed_program(self):
+        p = LearningProgram.objects.create(name='Tamamlanan Bootcamp', slug='finished')
+        course = Course.objects.create(turkish_name='Tamamlanan ders', duration=timedelta(hours=1), difficulty='Beginner', course_type='test')
+        LearningProgramStep.objects.create(program=p, course=course, day_offset=0)
+        ProgramEnrollment.objects.create(user=self.user, program=p, start_date=self.enrollment.start_date)
+        Enrollment.objects.create(user=self.user, course=course)
+        obj = create_draft(self.user, self.admin)
+        self.assertNotIn('Tamamlanan Bootcamp', obj.body)
+        self.assertIn('Program A', obj.body)
+        self.assertIn('toplam 3 farklı ders', obj.body)
+        self.assertIn('2 tanesine', obj.body)

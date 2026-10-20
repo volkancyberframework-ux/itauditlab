@@ -149,7 +149,7 @@ def run_daily_programs(run_date=None):
                     enrollment.user.allowed_tests.add(step.course)
                 else:
                     Enrollment.objects.get_or_create(
-                        user=enrollment.user, course=step.course
+                        user=enrollment.user, course=step.course, defaults={"is_automatic": True}
                     )
                 release.access_granted_at = timezone.now()
                 release.status = ProgramRelease.Status.PENDING

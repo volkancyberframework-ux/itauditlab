@@ -270,7 +270,7 @@ def course_single(request, pk):
             enrollment.orientation_seen = True
             enrollment.save(update_fields=["orientation_seen"])
 
-    # An authorized visit is access evidence, never proof of completion.
+    # An authorized student visit counts as access/completion under CORE monitoring.
     from .models import LessonEvidence
     from django.db.models.functions import Coalesce as EvidenceCoalesce
     from django.db.models import Value
@@ -280,6 +280,13 @@ def course_single(request, pk):
         first_accessed_at=EvidenceCoalesce("first_accessed_at", Value(accessed_at)),
         last_accessed_at=accessed_at,
     )
+
+    if not request.user.is_staff and not request.user.is_superuser:
+        student_enrollment, _ = Enrollment.objects.get_or_create(user=request.user, course=course)
+        if student_enrollment.is_automatic:
+            student_enrollment.is_automatic = False
+            student_enrollment.enrolled_at = accessed_at
+            student_enrollment.save(update_fields=["is_automatic", "enrolled_at"])
 
     # ---- normal view rendering below (unchanged) ----
     sections_qs = course.sections.annotate(
@@ -491,7 +498,11 @@ def dashboard_student(request):
             messages.error(request, "Enroll olamadınız. Uygun Katıl seviyesine yükseltin.")
             return redirect('/dashboard-student/#allCourses')
 
-        Enrollment.objects.get_or_create(user=user, course=course)
+        item, _ = Enrollment.objects.get_or_create(user=user, course=course)
+        if item.is_automatic:
+            item.is_automatic = False
+            item.enrolled_at = timezone.now()
+            item.save(update_fields=["is_automatic", "enrolled_at"])
         return redirect('/dashboard-student/#currentlyLearning')
 
     # Görünecek kurslar (dil + dashboard_activated)
@@ -510,7 +521,7 @@ def dashboard_student(request):
 
     # Enroll olan kurs ID'leri
     enrolled_course_ids = list(
-        Enrollment.objects.filter(user=user).values_list('course_id', flat=True)
+        Enrollment.objects.filter(user=user, is_automatic=False).values_list('course_id', flat=True)
     )
 
     # Enrolled sekmesi (görünürlük filtresi + ID sıralı)

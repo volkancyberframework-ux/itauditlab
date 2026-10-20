@@ -320,6 +320,7 @@ class Enrollment(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     enrolled_at = models.DateTimeField(auto_now_add=True)
     orientation_seen = models.BooleanField(default=False)
+    is_automatic = models.BooleanField(default=False, help_text="Program otomasyonunun açtığı erişim; öğrencinin kendi kaydı değildir.")
 
     class Meta:
         unique_together = ('user', 'course')

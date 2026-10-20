@@ -14,20 +14,17 @@ son ders eşiği ve kritik sayısı / ortalama gecikme sınırı panelden deği�
 Ayar değişiklikleri eski günlük özetleri değiştirmez. Tarihler yapılandırılmış
 IANA yönetim saat diliminde gösterilir; veritabanı zamanları UTC'dir.
 
-Mevcut CORE ders testleri tarayıcıda cevapları kontrol eder; sunucuda güvenilir
-bir tamamlanma kaydı yoktur. Bu nedenle eski ziyaretler tamamlanmış sayılmaz.
-Yetkili ders açılışları artık ayrı erişim kanıtı kaydeder. Yönetici öğrenci
-ayrıntısında, doğrulama kanıtı ve zamanı ile tamamlandı / tamamlanmadığı doğrulandı /
-bilinmiyor durumunu kaydeder. Tamamlanma veya erişim zamanı bilinmeyen dersler
-gecikmiş varsayılmaz. Tamamlanma yüzdesi doğrulanmış tamamlanmaların zorunlu derslere
-oranıdır; bilinmeyenler ayrıca görünür. Kaynak verisi eksikse gerçek ilerlemenin
-bu yüzden tam olarak belirlenemediği açıkça gösterilir.
+Öğrencinin kendi Enroll kaydı veya yetkili ders ziyareti bu takipte tamamlandı sayılır.
+Yönetici tarafından ayrıca tamamlanma kanıtı girilmesi gerekmez. Otomasyonun video
+izni için oluşturduğu kayıt `is_automatic=True` ile ayrılır; tek başına tamamlanma
+sayılmaz. Öğrenci Enroll yaptığında veya dersi açtığında kendi kaydına dönüşür.
+Test erişim izni de tek başına tamamlanma değildir.
 
-Program takvimi yaklaşan dersleri belirler. Gecikme hesabı planlanan tarihten
-ziyade gerçek `ProgramRelease.access_granted_at`, video kayıt zamanı veya yetkili
-ilk erişim kanıtını kullanır. Testlere eski manuel M2M erişimlerinde zaman bilgisi
-yoktur; yönetici mevcut erişimin doğrulanmış zamanını gerekçeyle kaydedebilir.
-Bu işlem hiçbir kullanıcıya yeni ders erişimi vermez.
+Gecikme, açılan ancak öğrencinin kaydolmadığı derslerden hesaplanır. Öncelik gerçek
+erişim açılış zamanıdır. Eski manuel izinlerde zaman kaydı yoksa program takvimi
+kullanılır. Tamamlanan programlar e-posta kapsamından çıkar; gecikme yoksa taslak
+oluşturulmaz. Panelde öğrenci, program, kayıt olunan dersler, gecikme ve e-posta
+aksiyonu görünür. Ayarlar ve geçmiş kapalı ayrıntı bölümlerindedir.
 
 İzleme duraklamaları ve muafiyetler yalnızca izleme kapsamını / gecikme süresini
 etkiler. Mevcut program erişim otomasyonu ve üyelik erişimi değiştirilmez. Gerçek
@@ -38,7 +35,7 @@ sayılır; programların kendi istatistikleri ayrı tutulur.
 
 ## E-posta
 
-Öğrenci satırındaki **E-posta oluştur** gerçek verilerle taslak oluşturur. Çözülmemiş
+Öğrenci satırındaki **E-posta hazırla** gerçek verilerle taslak oluşturur. Çözülmemiş
 müdahale varsa yeni taslak için açık onay gerekir. Önizleme ekranında metin düzenlenir.
 **Kaydet ve e-posta uygulamasını aç**, taslağın düzenlenmiş halini kaydeder ve
 URL-encoded `mailto:` ile varsayılan uygulamayı açmayı ister. Harici uygulamanın açılması
@@ -79,7 +76,10 @@ ve işlem kayıtları Django admin üzerinden düzenlenemez / silinemez.
 
 Aynı Render web servisi, PostgreSQL ve günlük cron korunur. `0028` yalnızca yeni CORE
 tabloları / indeksler ekler; mevcut öğrenci, program, erişim ve ders verilerini
-silmez veya dönüştürmez. Web pre-deploy komutuna bugünün gerçek özetini kaydetme
+silmez. `0029`, otomatik video izinlerini ayıran alanı ekler. Eski açılmamış video
+kayıtları, otomasyonun erişim açılışıyla beş saniye içinde eşleşiyorsa otomatik
+olarak işaretlenir. Daha önce açılmış dersler tamamlandı kabul edilir; eski kesin
+ziyaret zamanı bulunmadığında mevcut kayıt zamanı kullanılır. Web pre-deploy komutuna bugünün gerçek özetini kaydetme
 adımı eklenmiştir. Render ayarları blueprint dışında tutuluyorsa mevcut migrate
 adımından sonra aynı komut Shell üzerinden de güvenle çalıştırılabilir.
 

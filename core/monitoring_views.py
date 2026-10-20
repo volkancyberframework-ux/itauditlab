@@ -140,7 +140,8 @@ def draft(request, student_id):
     try:
         obj = create_draft(student, request.user, request.POST.get('confirm_duplicate') == 'on')
     except ValueError as exc:
-        return HttpResponseBadRequest(str(exc))
+        messages.info(request, str(exc))
+        return redirect('admin:core_monitoring_student', student_id=student_id)
     return redirect('admin:core_monitoring_intervention', intervention_id=obj.pk)
 
 
