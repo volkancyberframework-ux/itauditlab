@@ -69,7 +69,7 @@ def dashboard(request):
     data = form.cleaned_data if valid else {}
     program_id = data['program'].pk if data.get('program') else ''
     filters = dict(program_id=program_id, enrollment_status=data.get('enrollment_status', 'active'), warning_status=data.get('warning_status', ''), search=data.get('search', ''))
-    rows = filter_students(current_students(config), config, **filters)
+    rows = filter_students([r for r in current_students(config) if r.get('console_pending', True)], config, **filters)
     totals = metrics(rows)
     key = data.get('sort') or '-overdue'
     known_rows = [r for r in rows if r[key.lstrip('-')] is not None]
@@ -305,6 +305,7 @@ def enrollment_policy(request, enrollment_id):
 @require_POST
 @authorized(True)
 def bulk_drafts(request):
-    prepared, created, reused, skipped = prepare_all_drafts(request.user)
+    prepared, created, reused, skipped = prepare_all_drafts(request.user, dispatch=request.POST.get('dispatch') == '1')
     return render(request, 'admin/monitoring/bulk_drafts.html', context(request,
-        prepared=prepared, created_count=created, reused_count=reused, skipped_count=skipped))
+        prepared=prepared, created_count=created, reused_count=reused, skipped_count=skipped,
+        dispatch=request.POST.get('dispatch') == '1', mail_queue=[{'id': item.pk, 'url': mailto(item.student.email, item.subject, item.body)} for item in prepared] if request.POST.get('dispatch') == '1' else []))

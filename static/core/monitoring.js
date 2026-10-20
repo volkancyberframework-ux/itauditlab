@@ -2,6 +2,35 @@
   'use strict';
   const link = document.getElementById('monitor-mailto');
   if (link) window.location.href = link.href;
+  const queueData = document.getElementById('monitor-mail-queue');
+  if (queueData) {
+    const queue = JSON.parse(queueData.textContent);
+    const status = document.getElementById('monitor-queue-status');
+    const resume = document.getElementById('monitor-queue-resume');
+    const key = 'monitor-mail-queue-' + queue.map(item => item.id).join('-');
+    let index = 0, running = false, timer = null;
+    try { index = Math.min(queue.length, Number(sessionStorage.getItem(key)) || 0); } catch (_) { /* Storage may be disabled. */ }
+    const next = () => {
+      if (index >= queue.length) {
+        running = false;
+        status.textContent = queue.length + ' e-posta için açma isteği tamamlandı. Gönderimleri e-posta uygulamanızdan tamamlayın.';
+        resume.hidden = true;
+        return;
+      }
+      running = true;
+      const item = queue[index++];
+      try { sessionStorage.setItem(key, String(index)); } catch (_) { /* Keep opening without storage. */ }
+      status.textContent = index + ' / ' + queue.length + ' e-posta için açma isteği iletildi.';
+      window.location.href = item.url;
+      timer = window.setTimeout(next, 3000);
+    };
+    resume.addEventListener('click', () => {
+      if (running) {
+        window.clearTimeout(timer); running = false; resume.textContent = 'Kalanları açmaya devam et';
+      } else { resume.textContent = 'Sırayı duraklat'; next(); }
+    });
+    next();
+  }
   const data = document.getElementById('monitor-history');
   const root = document.getElementById('monitor-charts');
   if (!data || !root) return;

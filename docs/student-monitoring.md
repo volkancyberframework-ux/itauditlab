@@ -35,11 +35,18 @@ sayılır; programların kendi istatistikleri ayrı tutulur.
 
 ## E-posta
 
-Panelin üstündeki **Tüm e-postaları hazırla** düğmesi gecikmesi olan tüm aktif
-öğrenciler için kişisel taslakları tek işlemde hazırlar ve sonuç listesini açar.
-Sayfalama ve panel filtreleri bu toplu işlemi daraltmaz. Mevcut gönderilmemiş
-taslaklar düzenlemeleri korunarak listelenir; tekrar basılması kopya oluşturmaz.
-Gönderilmiş ve devam eden uyarılar atlanır. Toplu hazırlama e-posta göndermez.
+Panelin üstündeki **Tüm e-postaları aç ve gönderildi işaretle** düğmesi gecikmesi
+olan öğrencilerin taslaklarını hazırlar, gönderildi olarak işaretler ve varsayılan
+e-posta uygulamasına üç saniye arayla `mailto:` açma isteği iletir. Bu işaret yönetici
+isteğidir; gerçek gönderim ve teslimat doğrulanmaz. Gönderim e-posta uygulamasında
+tamamlanır. Tarayıcı engellerse sonuç listesindeki bağlantılar kullanılabilir.
+Sıra duraklatılıp devam ettirilebilir. Sayfa yenilenirse aynı sekmede tamamlanan
+açma istekleri tekrar edilmez. Panelin sayfa ve filtreleri toplu işlemi daraltmaz.
+
+Gönderildi işaretlenen öğrenciler ana konsoldan çıkarılır, geçmişleri korunur.
+Son uyarının kapsamadığı başka bir ders gecikirse öğrenci yeniden listelenir.
+Yeni öğrenciler de güncel program verilerinden otomatik listelenir. Tekrar basılması
+aynı gecikmeler için yeni e-posta oluşturmaz. E-posta adresi olmayanlar atlanır.
 Selamlama ad/soyad alanından gelir; isim yoksa yalnızca “Merhaba,” yazılır.
 Eski taslakların e-posta adresi içeren selamlamaları toplu hazırlamada düzeltilir.
 

@@ -95,7 +95,7 @@ def current_students(config=None, now=None):
     visits = {v['user_id']: max(filter(None, [v['latest'], v['seen']])) for v in
         PageVisit.objects.filter(user_id__in=user_ids).values('user_id').annotate(latest=Max('created_at'), seen=Max('last_seen'))}
     interventions = defaultdict(list)
-    for w in StudentIntervention.objects.filter(student_id__in=user_ids).only('id', 'student_id', 'status', 'created_at', 'marked_sent_at').order_by('-created_at', '-pk'):
+    for w in StudentIntervention.objects.filter(student_id__in=user_ids).only('id', 'student_id', 'status', 'created_at', 'marked_sent_at', 'progress_snapshot').order_by('-created_at', '-pk'):
         interventions[w.student_id].append(w)
     activities = defaultdict(list)
     for (uid, _), ev in evidence.items():
@@ -187,6 +187,8 @@ def current_students(config=None, now=None):
             latest_unresolved = next((w for w in history if w.status in ('sent', 'awaiting', 'responded', 'meeting')), history[0])
             row['warning_status'], row['warning_status_label'] = latest_unresolved.status, latest_unresolved.get_status_display()
         row['open_intervention'] = any(w.status != 'resolved' for w in history)
+        latest_sent = max(sent, key=lambda w: (w.marked_sent_at, w.pk)) if sent else None
+        row['console_pending'] = needs_followup(row, latest_sent)
     return list(rows.values())
 
 
@@ -249,6 +251,19 @@ def capture_snapshot(actor=None, correction_reason=''):
         return previous, True
     obj, created = DailyMonitoringSnapshot.objects.get_or_create(reporting_date=day, defaults=payload)
     return obj, created
+
+
+def overdue_course_ids(row):
+    return {lesson['course_id'] for program in row.get('programs', []) if program.get('active', True)
+            for lesson in program.get('lessons', []) if lesson.get('overdue')}
+
+
+def needs_followup(row, latest_sent):
+    if latest_sent is None:
+        return True
+    snapshot = latest_sent.progress_snapshot
+    notified = snapshot.get('marked_sent', snapshot)
+    return bool(overdue_course_ids(row) - overdue_course_ids(notified))
 
 
 def greeting_name(student):
@@ -320,7 +335,7 @@ def _create_draft_from_row(student, actor, row, config, confirm_duplicate=False)
 
 
 @transaction.atomic
-def prepare_all_drafts(actor):
+def prepare_all_drafts(actor, dispatch=False):
     # Lock in a stable order, matching the single-student flow; calculate progress once.
     students = {s.pk: s for s in CustomUser.objects.select_for_update().filter(
         pk__in=ProgramEnrollment.objects.values('user_id')).order_by('pk')}
@@ -331,25 +346,43 @@ def prepare_all_drafts(actor):
         existing[item.student_id].append(item)
     prepared, created, reused, skipped = [], 0, 0, 0
     for row in rows:
-        if not row['overdue']:
+        if not row['overdue'] or (dispatch and not row['console_pending']):
             continue
         student = students[row['id']]
+        if dispatch and not student.email:
+            skipped += 1
+            continue
         pending = existing[student.pk]
         if pending:
             item = next((item for item in pending if item.status in ('draft', 'opened') and not item.marked_sent_at), None)
             if item is None:
-                skipped += 1
-                continue
+                if dispatch and row['console_pending']:
+                    item = _create_draft_from_row(student, actor, row, config, confirm_duplicate=True)
+                    created += 1
+                else:
+                    skipped += 1
+                    continue
             first_line, separator, rest = item.body.partition('\n')
             if first_line.startswith('Merhaba ') and ('@' in first_line or first_line == f'Merhaba {student.username},'):
                 before = {'body': item.body}
                 item.body = greeting(student) + separator + rest
                 item.save(update_fields=['body'])
                 audit(actor, 'draft_greeting_updated', before, {'body': item.body}, student=student, intervention=item)
-            reused += 1
+            if item in pending:
+                reused += 1
         else:
             item = _create_draft_from_row(student, actor, row, config)
             created += 1
+        if dispatch:
+            before = {'status': item.status, 'marked_sent_at': None}
+            item.progress_snapshot['marked_sent'] = row
+            item.monitoring_settings['marked_sent'] = settings_data(config)
+            item.status = 'sent'
+            item.marked_sent_at = timezone.now()
+            item.marked_sent_by = actor
+            item.save(update_fields=['progress_snapshot', 'monitoring_settings', 'status', 'marked_sent_at', 'marked_sent_by'])
+            audit(actor, 'intervention_sent', before, {'status': 'sent', 'marked_sent_at': item.marked_sent_at.isoformat(), 'source': 'bulk_mail_app'}, student=student, intervention=item,
+                  reason='Yönetici tek tuşla e-posta uygulamasında açmayı ve gönderildi işaretlemeyi istedi; teslimat doğrulanmadı.')
         prepared.append(item)
     audit(actor, 'bulk_drafts_prepared', after={'created': created, 'reused': reused, 'skipped': skipped})
     return prepared, created, reused, skipped
