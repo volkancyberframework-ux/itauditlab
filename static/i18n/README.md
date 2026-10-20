@@ -9,3 +9,8 @@ After changing public copy, run `python3 scripts/build_site_translations.py`. Th
 Deploy with the project's usual `collectstatic` step. Catalog URLs use Django's static manifest so updated translations receive new URLs. No database migration is required. The admin dashboard, traffic dashboard, APIs and application hosts are outside this middleware's scope.
 
 Backend regression tests: `python manage.py test landing.test_language`. Browser checks cover all seven languages, restoring Turkish, saved preferences, dynamic quiz text, RTL, desktop and narrow mobile layouts.
+
+
+Navigation measures the actual translated links after a language change, font load or resize. It first removes duplicate header calls to action when needed, then switches to the existing expandable menu if the links still do not fit. Mobile menu links and partner buttons wrap without truncating their labels.
+
+Responsive verification: the home, corporate, Travel Bootcamp, sign-in and privacy pages were checked in all eight languages at widths 320, 360, 390, 600, 768, 1024, 1120, 1121, 1280, 1440, 1512 and 1920 pixels (480 layouts). Checks include document width, both viewport edges and header control overlap. Both expandable navigation and language menus were also checked at 320 × 568 in every language. Public production HTML with local updated assets was used for the pre-deployment browser checks.
