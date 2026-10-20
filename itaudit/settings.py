@@ -112,6 +112,7 @@ MIDDLEWARE = [
 
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'landing.language.PublicLanguageMiddleware',
     'landing.middleware.LandingLegalMiddleware',
     'landing.middleware.LandingTrafficMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
