@@ -572,3 +572,9 @@ def enrollment_telegram_notification(sender, instance, created, **kwargs):
         )
     except Exception as e:
         print("Telegram enrollment notification error:", e)
+
+# Keep CORE's monitoring domain together while registering models in this app.
+from .monitoring_models import (  # noqa: E402,F401
+    MonitoringSettings, LessonEvidence, EnrollmentMonitoringPolicy, MonitoringPause,
+    MonitoringLessonOverride, StudentIntervention, MonitoringAudit, DailyMonitoringSnapshot,
+)

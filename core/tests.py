@@ -294,10 +294,11 @@ class StudentCourseInterfaceTests(TestCase):
             availability=availability, local_date=timezone.localdate() + timedelta(days=2),
             start_at_utc=start_at, end_at_utc=start_at + timedelta(minutes=90),
         )
-        response = self.client.post(
-            reverse("student_meeting_book", args=[item.pk]),
-            data=json.dumps({"slot_id": slot.pk}), content_type="application/json",
-        )
+        with self.captureOnCommitCallbacks(execute=True):
+            response = self.client.post(
+                reverse("student_meeting_book", args=[item.pk]),
+                data=json.dumps({"slot_id": slot.pk}), content_type="application/json",
+            )
         self.assertEqual(response.status_code, 200)
         self.assertTrue(StudentMeetingBooking.objects.filter(user=self.user, request=item).exists())
         slot.refresh_from_db()

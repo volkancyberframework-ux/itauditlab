@@ -787,3 +787,5 @@ GRC Ustası
             form = QuickStudentCreateForm()
 
         return render(request, "admin/quick_create_student.html", {"form": form})
+
+from . import monitoring_admin  # noqa: E402,F401

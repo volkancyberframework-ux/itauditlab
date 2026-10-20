@@ -270,6 +270,17 @@ def course_single(request, pk):
             enrollment.orientation_seen = True
             enrollment.save(update_fields=["orientation_seen"])
 
+    # An authorized visit is access evidence, never proof of completion.
+    from .models import LessonEvidence
+    from django.db.models.functions import Coalesce as EvidenceCoalesce
+    from django.db.models import Value
+    accessed_at = timezone.now()
+    evidence, _ = LessonEvidence.objects.get_or_create(user=request.user, course=course)
+    LessonEvidence.objects.filter(pk=evidence.pk).update(
+        first_accessed_at=EvidenceCoalesce("first_accessed_at", Value(accessed_at)),
+        last_accessed_at=accessed_at,
+    )
+
     # ---- normal view rendering below (unchanged) ----
     sections_qs = course.sections.annotate(
         sort_key=Coalesce('order', 'id', output_field=IntegerField())

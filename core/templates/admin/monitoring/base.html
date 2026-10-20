@@ -1,0 +1,4 @@
+{% extends 'admin/base_site.html' %}{% load static %}
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static 'core/monitoring.css' %}">{% endblock %}
+{% block extrahead %}{{ block.super }}<script defer src="{% static 'core/monitoring.js' %}"></script>{% endblock %}
+{% block breadcrumbs %}<div class="breadcrumbs"><a href="{% url 'admin:index' %}">CORE Yönetimi</a> › <a href="{% url 'admin:core_student_monitoring' %}">Öğrenci İlerlemesi ve Müdahale</a></div>{% endblock %}

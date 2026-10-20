@@ -61,5 +61,9 @@ class Command(BaseCommand):
         except Exception as exc:
             # Eğitim erişim otomasyonunu Telegram'daki geçici bir sorun yüzünden durdurma.
             self.stderr.write(self.style.WARNING(f'Görüşme özeti gönderilemedi: {exc}'))
+        # Persist monitoring independently of normal course-release email delivery.
+        from core.student_monitoring import capture_snapshot
+        snapshot, created = capture_snapshot()
+        self.stdout.write(f"Öğrenci izleme özeti: {snapshot.reporting_date} ({'kaydedildi' if created else 'zaten kayıtlı'}).")
         if stats["failed"]:
             raise RuntimeError(f"{stats['failed']} öğrenci için mail gönderilemedi")
