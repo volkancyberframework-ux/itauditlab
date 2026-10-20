@@ -1,0 +1,6 @@
+{% extends 'admin/monitoring/base.html' %}{% block content %}<div class="monitor">
+<h2>E-postalar hazır</h2>
+<p>{{ created_count }} yeni taslak hazırlandı. {{ reused_count }} mevcut taslak listeye alındı. {{ skipped_count }} öğrenci için devam eden bir uyarı bulunduğundan yeni taslak oluşturulmadı.</p>
+<p>Tamamlanan programlar ve gecikmesi olmayan öğrenciler kapsam dışında tutuldu. E-postaları aşağıdan açıp düzenleyebilir ve gönderebilirsiniz.</p>
+<div class="monitor-table"><table><thead><tr><th>Öğrenci</th><th>E-posta</th><th>İşlem</th></tr></thead><tbody>{% for item in prepared %}<tr><td>{{ item.student.get_full_name|default:'İsim kaydı yok' }}</td><td>{{ item.student.email }}</td><td><a class="button" href="{% url 'admin:core_monitoring_intervention' item.pk %}">E-postayı aç</a></td></tr>{% empty %}<tr><td colspan="3">Hazırlanacak e-posta bulunmuyor.</td></tr>{% endfor %}</tbody></table></div>
+<p><a href="{% url 'admin:core_student_monitoring' %}">Panele dön</a></p></div>{% endblock %}

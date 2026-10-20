@@ -15,7 +15,7 @@ from .models import (CustomUser, LearningProgram, LearningProgramStep, ProgramEn
     MonitoringSettings, LessonEvidence, EnrollmentMonitoringPolicy, MonitoringPause,
     MonitoringLessonOverride, StudentIntervention, DailyMonitoringSnapshot, MonitoringAudit)
 from .student_monitoring import (configuration, current_students, filter_students, metrics,
-    settings_data, audit, capture_snapshot, create_draft, mailto)
+    settings_data, audit, capture_snapshot, create_draft, prepare_all_drafts, mailto)
 
 
 def authorized(write=False):
@@ -300,3 +300,11 @@ def enrollment_policy(request, enrollment_id):
         return HttpResponseBadRequest('Geçersiz işlem.')
     audit(request.user, 'enrollment_monitoring_'+action, before, after, student=enrollment.user, reason=reason)
     return redirect('admin:core_monitoring_student', student_id=enrollment.user_id)
+
+
+@require_POST
+@authorized(True)
+def bulk_drafts(request):
+    prepared, created, reused, skipped = prepare_all_drafts(request.user)
+    return render(request, 'admin/monitoring/bulk_drafts.html', context(request,
+        prepared=prepared, created_count=created, reused_count=reused, skipped_count=skipped))

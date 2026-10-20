@@ -171,7 +171,7 @@ def current_students(config=None, now=None):
         program = {'enrollment_id': e.pk, 'program_id': e.program_id, 'name': e.program.name,
             'active': active, 'enrollment_status': enrollment_status, 'lessons': lessons, **summary}
         row = rows.setdefault(e.user_id, {'id': e.user_id, 'name': e.user.get_full_name() or e.user.username,
-            'email': e.user.email, 'programs': [], 'last_activity': None, 'last_warning': None,
+            'email': e.user.email, 'greeting': greeting(e.user), 'programs': [], 'last_activity': None, 'last_warning': None,
             'warning_status': '', 'warning_status_label': 'Uyarı yok', 'open_intervention': False})
         row['programs'].append(program)
         activity = [x for x in [visits.get(e.user_id), e.user.last_login] if x]
@@ -251,9 +251,19 @@ def capture_snapshot(actor=None, correction_reason=''):
     return obj, created
 
 
+def greeting_name(student):
+    # Never address a student by their email, even if it was copied into a name field.
+    return ' '.join(part for part in student.get_full_name().split() if '@' not in part)
+
+
+def greeting(student):
+    name = greeting_name(student)
+    return f"Merhaba {name}," if name else 'Merhaba,'
+
+
 def email_template(row):
     breakdown = '\n'.join(f"- {p['name']}: {p['total']} dersin {p['available']} tanesi erişime açıldı; {p['completed']} derse kayıt oldunuz (%{p['completion'] or 0}); {p['overdue']} derse zamanında kayıt olmadınız." for p in row['programs'])
-    body = f"""Merhaba {row['name']},
+    body = f"""{row['greeting']}
 
 GRC Ustası'nda kayıtlı olduğunuz {', '.join(p['name'] for p in row['programs'])} programlarındaki ilerlemenizi değerlendirdik.
 
@@ -288,6 +298,10 @@ def create_draft(student, actor, confirm_duplicate=False):
     CustomUser.objects.select_for_update().get(pk=student.pk)
     config = configuration()
     row = next((r for r in current_students(config) if r['id'] == student.pk), None)
+    return _create_draft_from_row(student, actor, row, config, confirm_duplicate)
+
+
+def _create_draft_from_row(student, actor, row, config, confirm_duplicate=False):
     if row is None or not any(p['active'] for p in row['programs']):
         raise ValueError('Öğrencinin aktif program kaydı bulunmuyor.')
     row = filter_students([row], config)[0]
@@ -303,3 +317,39 @@ def create_draft(student, actor, confirm_duplicate=False):
         progress_snapshot=row, monitoring_settings=settings_data(config))
     audit(actor, 'draft_created', after={'subject': subject, 'body': body}, student=student, intervention=obj)
     return obj
+
+
+@transaction.atomic
+def prepare_all_drafts(actor):
+    # Lock in a stable order, matching the single-student flow; calculate progress once.
+    students = {s.pk: s for s in CustomUser.objects.select_for_update().filter(
+        pk__in=ProgramEnrollment.objects.values('user_id')).order_by('pk')}
+    config = configuration()
+    rows = current_students(config)
+    existing = defaultdict(list)
+    for item in StudentIntervention.objects.filter(student_id__in=students).exclude(status='resolved').order_by('-created_at', '-pk'):
+        existing[item.student_id].append(item)
+    prepared, created, reused, skipped = [], 0, 0, 0
+    for row in rows:
+        if not row['overdue']:
+            continue
+        student = students[row['id']]
+        pending = existing[student.pk]
+        if pending:
+            item = next((item for item in pending if item.status in ('draft', 'opened') and not item.marked_sent_at), None)
+            if item is None:
+                skipped += 1
+                continue
+            first_line, separator, rest = item.body.partition('\n')
+            if first_line.startswith('Merhaba ') and ('@' in first_line or first_line == f'Merhaba {student.username},'):
+                before = {'body': item.body}
+                item.body = greeting(student) + separator + rest
+                item.save(update_fields=['body'])
+                audit(actor, 'draft_greeting_updated', before, {'body': item.body}, student=student, intervention=item)
+            reused += 1
+        else:
+            item = _create_draft_from_row(student, actor, row, config)
+            created += 1
+        prepared.append(item)
+    audit(actor, 'bulk_drafts_prepared', after={'created': created, 'reused': reused, 'skipped': skipped})
+    return prepared, created, reused, skipped

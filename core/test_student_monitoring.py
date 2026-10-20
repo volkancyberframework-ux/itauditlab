@@ -299,3 +299,70 @@ class MonitoringTests(TestCase):
         self.assertIn('Program A', obj.body)
         self.assertIn('toplam 3 farklı ders', obj.body)
         self.assertIn('2 tanesine', obj.body)
+
+    def test_bulk_button_prepares_once_and_reuses_edited_draft(self):
+        self.client.force_login(self.admin)
+        url = reverse('admin:core_monitoring_bulk_drafts')
+        self.assertEqual(self.client.get(url).status_code, 405)
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['created_count'], 1)
+        item = StudentIntervention.objects.get(student=self.user)
+        self.assertTrue(item.body.startswith('Merhaba Öğrenci Yılmaz,'))
+        item.body += '\nYönetici tarafından eklenen not.'
+        item.save()
+        response = self.client.post(url)
+        self.assertEqual(response.context['created_count'], 0)
+        self.assertEqual(response.context['reused_count'], 1)
+        self.assertEqual(StudentIntervention.objects.count(), 1)
+        item.refresh_from_db()
+        self.assertTrue(item.body.endswith('Yönetici tarafından eklenen not.'))
+        self.assertEqual(item.status, 'draft')
+        self.assertIsNone(item.marked_sent_at)
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_bulk_skips_completed_and_already_sent_students(self):
+        self.client.force_login(self.admin)
+        item = create_draft(self.user, self.admin)
+        item.status, item.marked_sent_at = 'sent', timezone.now()
+        item.save()
+        url = reverse('admin:core_monitoring_bulk_drafts')
+        response = self.client.post(url)
+        self.assertEqual(response.context['skipped_count'], 1)
+        self.assertEqual(len(response.context['prepared']), 0)
+        for course in self.courses:
+            Enrollment.objects.create(user=self.user, course=course)
+        response = self.client.post(url)
+        self.assertEqual(response.context['created_count'], 0)
+        self.assertEqual(response.context['skipped_count'], 0)
+        self.assertEqual(StudentIntervention.objects.count(), 1)
+
+    def test_bulk_fixes_legacy_email_greeting_without_overwriting_body(self):
+        item = create_draft(self.user, self.admin)
+        item.body = f'Merhaba {self.user.email},\nÖzel düzenlenmiş metin.'
+        item.save()
+        self.client.force_login(self.admin)
+        self.client.post(reverse('admin:core_monitoring_bulk_drafts'))
+        item.refresh_from_db()
+        self.assertEqual(item.body, 'Merhaba Öğrenci Yılmaz,\nÖzel düzenlenmiş metin.')
+        self.assertTrue(MonitoringAudit.objects.filter(action='draft_greeting_updated').exists())
+
+    def test_missing_name_never_uses_email_as_greeting(self):
+        self.user.first_name, self.user.last_name = self.user.email, ''
+        self.user.save()
+        item = create_draft(self.user, self.admin)
+        self.assertTrue(item.body.startswith('Merhaba,\n'))
+        self.assertNotIn(self.user.email, item.body.split('\n')[0])
+
+    def test_bulk_requires_write_permission_and_csrf(self):
+        url = reverse('admin:core_monitoring_bulk_drafts')
+        self.client.force_login(self.user)
+        self.assertIn(self.client.post(url).status_code, [302, 403])
+        staff = CustomUser.objects.create_user(username='bulk-viewer', is_staff=True)
+        staff.user_permissions.add(Permission.objects.get(codename='view_monitoringsettings'))
+        self.client.force_login(staff)
+        self.assertEqual(self.client.post(url).status_code, 403)
+        secure = Client(enforce_csrf_checks=True)
+        secure.force_login(self.admin)
+        self.assertEqual(secure.post(url).status_code, 403)
+        self.assertEqual(StudentIntervention.objects.count(), 0)

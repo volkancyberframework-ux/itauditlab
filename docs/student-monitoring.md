@@ -35,6 +35,14 @@ sayılır; programların kendi istatistikleri ayrı tutulur.
 
 ## E-posta
 
+Panelin üstündeki **Tüm e-postaları hazırla** düğmesi gecikmesi olan tüm aktif
+öğrenciler için kişisel taslakları tek işlemde hazırlar ve sonuç listesini açar.
+Sayfalama ve panel filtreleri bu toplu işlemi daraltmaz. Mevcut gönderilmemiş
+taslaklar düzenlemeleri korunarak listelenir; tekrar basılması kopya oluşturmaz.
+Gönderilmiş ve devam eden uyarılar atlanır. Toplu hazırlama e-posta göndermez.
+Selamlama ad/soyad alanından gelir; isim yoksa yalnızca “Merhaba,” yazılır.
+Eski taslakların e-posta adresi içeren selamlamaları toplu hazırlamada düzeltilir.
+
 Öğrenci satırındaki **E-posta hazırla** gerçek verilerle taslak oluşturur. Çözülmemiş
 müdahale varsa yeni taslak için açık onay gerekir. Önizleme ekranında metin düzenlenir.
 **Kaydet ve e-posta uygulamasını aç**, taslağın düzenlenmiş halini kaydeder ve

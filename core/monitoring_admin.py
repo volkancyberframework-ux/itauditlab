@@ -19,6 +19,7 @@ class MonitoringDashboardAdmin(admin.ModelAdmin):
     def get_urls(self):
         routes = [
             ('panel/', views.dashboard, 'core_student_monitoring'),
+            ('prepare-all/', views.bulk_drafts, 'core_monitoring_bulk_drafts'),
             ('settings/', views.save_settings, 'core_monitoring_settings'),
             ('refresh/', views.refresh, 'core_monitoring_refresh'),
             ('student/<int:student_id>/', views.student_detail, 'core_monitoring_student'),
