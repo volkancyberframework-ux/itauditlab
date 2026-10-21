@@ -61,7 +61,7 @@ async function select(language,persist=true){
   if(!languages.has(language))language='tr';const request=++sequence,status=switcher.querySelector('[role=status]');status.textContent='';switcher.setAttribute('aria-busy','true');
   try{
     let next={};if(language!=='tr'){if(!cache.has(language)){const response=await fetch(urls[language],{credentials:'same-origin'});if(!response.ok)throw Error('catalog');cache.set(language,await response.json())}next=cache.get(language)}
-    if(request!==sequence)return;observer.disconnect();catalog=next;patterns=compilePatterns(next);apply(document);root.lang=language;root.dir=language==='ar'?'rtl':'ltr';scheduleLayout();
+    if(request!==sequence)return;observer.disconnect();catalog=next;patterns=compilePatterns(next);apply(document);root.lang=language;root.dir=language==='ar'?'rtl':'ltr';document.querySelectorAll('form[action*="checkout"]').forEach(form=>{let input=form.querySelector('input[name="language"]');if(!input){input=document.createElement('input');input.type='hidden';input.name='language';form.append(input)}input.value=language});scheduleLayout();
     switcher.querySelector('[data-language-code]').textContent=language==='zh-CN'?'ZH':language.toUpperCase();switcher.querySelectorAll('[data-language]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.language===language)));observe();
     if(persist){try{localStorage.setItem('grc-language',language)}catch{}const url=new URL(location.href);if(language==='tr')url.searchParams.delete('lang');else url.searchParams.set('lang',language);try{history.replaceState(null,'',url)}catch{}}
     switcher.open=false;

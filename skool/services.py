@@ -102,8 +102,10 @@ def generate_slots(availability, local_date):
     with transaction.atomic():
         locked = TravelAvailability.objects.select_for_update().get(pk=availability.pk)
         existing = list(locked.slots.filter(local_date=local_date).order_by("start_at_utc"))
-        if existing:
-            return existing
+        occupied = list(MeetingSlot.objects.filter(local_date=local_date).exclude(availability=locked)) + existing
+        valid = [slot for slot in existing if slot_is_current(slot)]
+        if len(valid) >= 3:
+            return valid[:3]
         config = SkoolSettings.load()
         duration = config.meeting_duration_minutes
         start_min = locked.local_available_start.hour * 60 + locked.local_available_start.minute
@@ -111,13 +113,17 @@ def generate_slots(availability, local_date):
         starts = list(range(start_min, end_min - duration + 1, 15))
         chosen = None
         for gap in range(config.minimum_gap_minutes, -1, -5):
-            viable = [combo for combo in itertools.combinations(starts, config.daily_slot_count)
-                      if all(b >= a + duration + gap for a, b in zip(combo, combo[1:]))]
+            viable = [combo for combo in itertools.combinations(starts, 3 - len(valid))
+                      if all(b >= a + duration + gap for a, b in zip(combo, combo[1:]))
+                      and all(not (datetime.combine(local_date, time(m // 60, m % 60), tzinfo=ZoneInfo(locked.timezone)) < old.end_at_utc
+                                   and datetime.combine(local_date, time(m // 60, m % 60), tzinfo=ZoneInfo(locked.timezone)) + timedelta(minutes=duration) > old.start_at_utc)
+                              for m in combo for old in occupied)]
             if viable:
                 chosen = secrets.choice(viable)
                 break
         if not chosen:
-            raise ValueError("Uygunluk aralığından gerekli slotlar üretilemiyor.")
+            # Closed slots and real reservations take precedence over filling a quota.
+            return valid
         zone = ZoneInfo(locked.timezone)
         slots = []
         for minute in chosen:
@@ -127,50 +133,97 @@ def generate_slots(availability, local_date):
                 availability=locked, local_date=local_date, start_at_utc=utc_start,
                 end_at_utc=utc_start + timedelta(minutes=duration),
             ))
-        return slots
+        return valid + slots
 
 
-def ensure_upcoming_slots(days=60):
-    today = timezone.localdate()
-    availabilities = TravelAvailability.objects.filter(enabled=True, end_date__gte=today)
-    if not availabilities.exists():
-        latest = TravelAvailability.objects.filter(enabled=True).order_by("-end_date").first()
-        if latest:
-            latest = TravelAvailability.objects.create(
-                location_name=latest.location_name,
-                timezone=latest.timezone,
-                start_date=today + timedelta(days=1),
-                end_date=today + timedelta(days=days),
-                local_available_start=latest.local_available_start,
-                local_available_end=latest.local_available_end,
-                enabled=True,
+ISTANBUL = ZoneInfo("Europe/Istanbul")
+BOOKING_HORIZON_DAYS = 60
+
+
+def slot_is_current(slot):
+    """Validate cached slots against today's schedule, never mutate reservations."""
+    a = slot.availability
+    start = slot.start_at_utc.astimezone(ZoneInfo(a.timezone))
+    end = slot.end_at_utc.astimezone(ZoneInfo(a.timezone))
+    return (a.enabled and a.start_date <= start.date() <= a.end_date
+            and slot.local_date == start.date() == end.date()
+            and a.local_available_start <= start.time().replace(tzinfo=None)
+            and end.time().replace(tzinfo=None) <= a.local_available_end)
+
+
+def ensure_upcoming_slots(days=BOOKING_HORIZON_DAYS):
+    today = timezone.localdate(timezone=ISTANBUL)
+    horizon = today + timedelta(days=days)
+    # Continue the last host schedule within the existing rolling 60-day horizon.
+    # Historical travel rows and their reservations remain intact.
+    with transaction.atomic():
+        latest = TravelAvailability.objects.select_for_update().filter(enabled=True).order_by("-end_date", "-pk").first()
+        if latest and latest.end_date < horizon:
+            continuation = TravelAvailability.objects.create(
+                location_name=latest.location_name, timezone=latest.timezone,
+                start_date=max(today + timedelta(days=1), latest.end_date + timedelta(days=1)),
+                end_date=horizon, local_available_start=latest.local_available_start,
+                local_available_end=latest.local_available_end, enabled=True,
             )
-            availabilities = TravelAvailability.objects.filter(pk=latest.pk)
-    for availability in availabilities:
-        start = max(today + timedelta(days=1), availability.start_date)
-        end = min(today + timedelta(days=days), availability.end_date)
-        current = start
-        while current <= end:
-            generate_slots(availability, current)
-            current += timedelta(days=1)
+            for exception in latest.exceptions.filter(end_date__gte=continuation.start_date):
+                AvailabilityException.objects.create(availability=continuation,
+                    start_date=exception.start_date, end_date=exception.end_date, reason=exception.reason)
+    availabilities = list(TravelAvailability.objects.filter(enabled=True, end_date__gte=today).order_by("-start_date", "-pk"))
+    for offset in range(1, days + 1):
+        day = today + timedelta(days=offset)
+        active = next((a for a in availabilities if a.start_date <= day <= a.end_date), None)
+        if active:
+            generate_slots(active, day)
+
+
+def published_slots(first_date=None):
+    """One authoritative schedule per date; no stale travel slots or duplicate days."""
+    today = timezone.localdate(timezone=ISTANBUL)
+    first_date = max(first_date or today, today + timedelta(days=1))
+    schedules = list(TravelAvailability.objects.filter(enabled=True).order_by("-start_date", "-pk"))
+    exceptions = list(AvailabilityException.objects.all())
+    counts = {}
+    occupied = list(MeetingSlot.objects.filter(status="booked", start_at_utc__gt=timezone.now()))
+    result = []
+    for slot in MeetingSlot.objects.filter(start_at_utc__gt=timezone.now(),
+            local_date__gte=first_date, local_date__lte=today + timedelta(days=BOOKING_HORIZON_DAYS)
+            ).select_related("availability").order_by("start_at_utc"):
+        day = slot.start_at_utc.astimezone(ISTANBUL).date()
+        active = next((a for a in schedules if a.start_date <= slot.local_date <= a.end_date), None)
+        if day < first_date or not active or active.pk != slot.availability_id or not slot_is_current(slot):
+            continue
+        if any(e.start_date <= slot.local_date <= e.end_date and
+               e.availability_id in (None, slot.availability_id) for e in exceptions):
+            continue
+        if slot.status == "available" and any(other.pk != slot.pk and other.start_at_utc < slot.end_at_utc
+                and other.end_at_utc > slot.start_at_utc for other in occupied):
+            continue
+        if counts.get(day, 0) >= 3:
+            continue
+        counts[day] = counts.get(day, 0) + 1
+        result.append(slot)
+    return result
+
+
+def validate_bookable_slot(slot):
+    if slot.status != "available" or not any(s.pk == slot.pk for s in published_slots()):
+        raise ValueError("Bu görüşme saati artık müsait değil.")
 
 
 def reserve_slot(user, slot_id):
     finalize_expired_bookings(user)
-    tomorrow = timezone.localdate(timezone=ZoneInfo("Europe/Istanbul")) + timedelta(days=1)
     with transaction.atomic():
         if MeetingBooking.objects.select_for_update().filter(user=user, status="active").exists():
             raise ValueError("Zaten aktif bir görüşmeniz var.")
         slot = MeetingSlot.objects.select_for_update().select_related("availability").get(pk=slot_id)
-        if slot.status != "available" or slot.local_date < tomorrow:
-            raise ValueError("Bu görüşme saati artık müsait değil.")
-        display_zone = ZoneInfo(SkoolSettings.load().display_timezone)
+        display_zone = ZoneInfo("Europe/Istanbul")
         earliest_repeat_date = earliest_repeat_booking_date(user, display_zone)
         slot_display_date = slot.start_at_utc.astimezone(display_zone).date()
         if earliest_repeat_date and slot_display_date < earliest_repeat_date:
             raise ValueError(
                 "İkinci ve sonraki görüşmeler, önceki görüşmeden en erken 14 gün sonrasına planlanabilir."
             )
+        validate_bookable_slot(slot)
         if AvailabilityException.objects.filter(
             Q(availability=slot.availability) | Q(availability__isnull=True),
             start_date__lte=slot.local_date, end_date__gte=slot.local_date,
@@ -192,8 +245,7 @@ def reschedule_booking(user, new_slot_id):
         if booking.slot.start_at_utc <= timezone.now() + timedelta(hours=24):
             raise ValueError("Görüşmenize 24 saatten az kaldığı için sistem üzerinden değişiklik yapılamıyor.")
         new_slot = MeetingSlot.objects.select_for_update().get(pk=new_slot_id)
-        if new_slot.status != "available":
-            raise ValueError("Yeni görüşme saati artık müsait değil.")
+        validate_bookable_slot(new_slot)
         old_slot = MeetingSlot.objects.select_for_update().get(pk=booking.slot_id)
         new_slot.status = "booked"
         new_slot.save(update_fields=("status",))

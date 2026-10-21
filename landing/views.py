@@ -7,13 +7,15 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 import logging
+import json
+from pathlib import Path
 from datetime import timedelta
 import requests
 from .forms import CorporateInquiryForm, LeadForm, PartnerApplicationForm, WaitingListForm
 from .models import AssessmentSession, Certificate, JobMarketCount, NewsletterSubscriber, SiteSetting
 from .traffic import period_page_views, period_unique_visitors, traffic_stats
 from .curriculum import CURRICULUM, CURRICULUM_STATS
-from .bootcamp_catalog import BOOTCAMPS, BOOTCAMPS_BY_KEY, STUDENT_PACKAGE
+from .bootcamp_catalog import BOOTCAMPS, BOOTCAMPS_BY_KEY, OT_BOOTCAMP
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +41,7 @@ def home(request):
     return render(request, 'landing/index.html', {
         'site': site, 'payment_url': payment_url, 'jobs': JobMarketCount.objects.all(),
         'curriculum': CURRICULUM, 'curriculum_stats': CURRICULUM_STATS,
-        'bootcamps': BOOTCAMPS, 'student_package': STUDENT_PACKAGE,
+        'bootcamps': BOOTCAMPS, 'ot_bootcamp': OT_BOOTCAMP,
         'open_assessment': request.path.rstrip('/').endswith('kariyer-pusulasi'),
     })
 
@@ -91,6 +93,10 @@ def traffic_dashboard(request):
     })
 
 
+def ot_bootcamp(request):
+    return render(request, 'landing/ot_bootcamp.html', {'product': OT_BOOTCAMP})
+
+
 @require_POST
 def create_checkout(request):
     product_key = request.POST.get('product', '').strip().lower()
@@ -104,10 +110,20 @@ def create_checkout(request):
     }
     if not django_settings.STRIPE_SECRET_KEY:
         return JsonResponse({'ok': False, 'message': 'Stripe ödeme ayarı eksik.'}, status=503)
+    language = request.POST.get('language', 'tr')
+    product_title, product_description = product['title'], product['description']
+    if product['key'] == 'ot_security' and language in ('en', 'fr', 'es', 'ja', 'zh-CN', 'vi', 'ar'):
+        catalog = json.loads((Path(__file__).resolve().parent.parent / 'static/i18n' / f'{language}.json').read_text())
+        product_title = catalog.get(product_title, product_title)
+        product_description = catalog.get(product_description, product_description)
     import stripe
     stripe.api_key = django_settings.STRIPE_SECRET_KEY
+    options = {}
+    if product['key'] == 'ot_security':
+        options['locale'] = {'zh-CN': 'zh', 'ar': 'en'}.get(language, language if language in ('tr', 'en', 'fr', 'es', 'ja', 'vi') else 'auto')
     try:
         session = stripe.checkout.Session.create(
+            **options,
             mode='payment',
             allow_promotion_codes=True,
             billing_address_collection='required',
@@ -116,8 +132,8 @@ def create_checkout(request):
                     'currency': 'try',
                     'unit_amount': product['price'] * 100,
                     'product_data': {
-                        'name': product['title'],
-                        'description': product['description'][:400],
+                        'name': product_title,
+                        'description': product_description[:400],
                     },
                 },
                 'quantity': 1,

@@ -467,6 +467,9 @@ class BookingTests(TestCase):
         with self.assertRaisesMessage(ValueError, "en erken 14 gün"):
             reserve_slot(self.user, too_early_slot.pk)
 
+        # The selectable slot must also belong to the active travel date range.
+        self.availability.end_date = max(self.availability.end_date, earliest_date)
+        self.availability.save(update_fields=("end_date",))
         allowed_start = datetime.combine(earliest_date, time(10), tzinfo=display_zone).astimezone(ZoneInfo("UTC"))
         allowed_slot = MeetingSlot.objects.create(
             availability=self.availability,

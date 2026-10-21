@@ -376,19 +376,16 @@ def student_meeting_slots(request, request_id):
     get_object_or_404(
         MentorshipRequest, pk=request_id, user=request.user, request_type="meeting"
     )
-    from skool.models import MeetingSlot
-    from skool.services import ensure_upcoming_slots
+    from skool.services import ensure_upcoming_slots, published_slots
+    from zoneinfo import ZoneInfo
     ensure_upcoming_slots()
-    tomorrow = timezone.localdate() + timedelta(days=1)
-    slots = MeetingSlot.objects.filter(
-        local_date__gte=tomorrow, status="available"
-    ).order_by("start_at_utc")[:180]
+    slots = [slot for slot in published_slots() if slot.status == "available"]
     return JsonResponse({"slots": [
         {
             "id": slot.pk,
-            "date": slot.local_date.isoformat(),
-            "start": timezone.localtime(slot.start_at_utc).strftime("%H:%M"),
-            "end": timezone.localtime(slot.end_at_utc).strftime("%H:%M"),
+            "date": timezone.localtime(slot.start_at_utc, ZoneInfo("Europe/Istanbul")).date().isoformat(),
+            "start": timezone.localtime(slot.start_at_utc, ZoneInfo("Europe/Istanbul")).strftime("%H:%M"),
+            "end": timezone.localtime(slot.end_at_utc, ZoneInfo("Europe/Istanbul")).strftime("%H:%M"),
         }
         for slot in slots
     ]})
@@ -419,8 +416,8 @@ def student_meeting_book(request, request_id):
             ).exists():
                 raise ValueError("Zaten aktif bir görüşmeniz var.")
             slot = MeetingSlot.objects.select_for_update().select_related("availability").get(pk=slot_id)
-            if slot.status != "available" or slot.local_date < timezone.localdate() + timedelta(days=1):
-                raise ValueError("Bu görüşme saati artık müsait değil.")
+            from skool.services import validate_bookable_slot
+            validate_bookable_slot(slot)
             booking = StudentMeetingBooking.objects.create(
                 user=request.user, request=item, slot=slot,
                 meeting_url=SkoolSettings.load().meet_url,

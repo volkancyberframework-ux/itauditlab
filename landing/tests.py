@@ -122,16 +122,31 @@ class LandingTests(TestCase):
         self.assertEqual(payload['line_items'][0]['price_data']['unit_amount'], 8_999_900)
 
     @override_settings(STRIPE_SECRET_KEY='sk_test_placeholder')
-    def test_student_package_checkout_uses_13999_try(self):
+    def test_retired_student_package_cannot_start_checkout(self):
         with patch('stripe.checkout.Session.create') as create_session:
-            create_session.return_value.url = 'https://checkout.stripe.com/student'
-            response = self.client.post(reverse('landing:checkout'), {'product': 'grc_student', 'price': '1'})
+            response = self.client.post(reverse('landing:checkout'), {'product': 'grc_student'})
+        self.assertEqual(response.status_code, 400)
+        create_session.assert_not_called()
+
+    @override_settings(STRIPE_SECRET_KEY='sk_test_placeholder')
+    def test_ot_checkout_uses_server_price_and_product(self):
+        with patch('stripe.checkout.Session.create') as create_session:
+            create_session.return_value.url = 'https://checkout.stripe.com/ot'
+            response = self.client.post(reverse('landing:checkout'), {'product': 'ot_security', 'price': '1'})
         self.assertEqual(response.status_code, 302)
         payload = create_session.call_args.kwargs
-        self.assertNotIn('payment_method_types', payload)
-        self.assertEqual(payload['metadata']['product'], 'grc_student')
-        self.assertEqual(payload['line_items'][0]['price_data']['unit_amount'], 1_399_900)
+        self.assertEqual(payload['metadata']['product'], 'ot_security')
+        self.assertEqual(payload['line_items'][0]['price_data']['unit_amount'], 11_999_900)
         self.assertEqual(payload['line_items'][0]['price_data']['currency'], 'try')
+        self.assertIn('OT Güvenliği', payload['line_items'][0]['price_data']['product_data']['name'])
+
+    def test_ot_pages_replace_retired_offer(self):
+        for url in ('/', reverse('landing:ot_bootcamp')):
+            response = self.client.get(url)
+            self.assertContains(response, '119.999 TL')
+            self.assertNotContains(response, '13.999')
+            self.assertNotContains(response, 'grc_student')
+        self.assertContains(self.client.get('/'), 'id="ot-bootcamp-modal"')
 
     def test_checkout_rejects_unknown_bootcamp(self):
         response = self.client.post(reverse('landing:checkout'), {'product': 'unknown'})
@@ -437,3 +452,36 @@ class CorporateLandingTests(TestCase):
         response = self.client.get('/')
         self.assertContains(response, 'GRC Ustası Partneri Ol')
         self.assertContains(response, f'{reverse("landing:corporate")}#partner')
+
+class OTTranslationTests(TestCase):
+    def test_new_copy_has_catalog_entries_in_every_language(self):
+        import json
+        from pathlib import Path
+        from scripts.build_site_translations import CopyParser
+        from .bootcamp_catalog import OT_BOOTCAMP
+        root=Path(__file__).resolve().parent.parent
+        parser=CopyParser()
+        for name in ('_ot_card.html','_ot_popup.html','ot_bootcamp.html'):
+            parser.feed((root/'landing/templates/landing'/name).read_text())
+        sources=parser.copy | {OT_BOOTCAMP['title'],OT_BOOTCAMP['description'],OT_BOOTCAMP['price_display']}
+        for language in ('en','fr','es','ja','zh-CN','vi','ar'):
+            catalog=json.loads((root/'static/i18n'/f'{language}.json').read_text())
+            self.assertFalse(sources-set(catalog), (language,sources-set(catalog)))
+            self.assertIn('OT', catalog['OT GÜVENLİĞİ BOOTCAMP'])
+            self.assertIn('TRY', catalog['119.999 TL'])
+
+    @override_settings(STRIPE_SECRET_KEY='sk_test_placeholder')
+    def test_payment_product_is_localized_without_changing_amount(self):
+        import json
+        from pathlib import Path
+        from .bootcamp_catalog import OT_BOOTCAMP
+        for language in ('en','fr','es','ja','zh-CN','vi','ar'):
+            with patch('stripe.checkout.Session.create') as create:
+                create.return_value.url='https://checkout.stripe.com/ot-test'
+                response=self.client.post(reverse('landing:checkout'),{'product':'ot_security','language':language,'price':'1','currency':'usd'})
+            self.assertEqual(response.status_code,302)
+            price=create.call_args.kwargs['line_items'][0]['price_data']
+            self.assertEqual(price['unit_amount'],11999900)
+            self.assertEqual(price['currency'],'try')
+            catalog=json.loads((Path(__file__).resolve().parent.parent/'static/i18n'/f'{language}.json').read_text())
+            self.assertEqual(price['product_data']['name'],catalog[OT_BOOTCAMP['title']])

@@ -7,6 +7,7 @@ from mobile_api import web_billing, store_pages
 
 app_name = 'landing'
 urlpatterns = [
+    path('ot-guvenligi-bootcamp/', views.ot_bootcamp, name='ot_bootcamp'),
     path('yasal/<slug:slug>/', legal.document, name='legal'),
     path('api/cerez-tercihi/', legal.cookie_consent, name='cookie_consent'),
     path('mobil-bekleme-listesi/', mobile_waitlist.page, name='mobile_waitlist'),

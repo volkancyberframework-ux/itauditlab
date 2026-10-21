@@ -411,13 +411,13 @@ def slots(request):
         return JsonResponse({"ok": False, "error": "Önce ses kaydını tamamlayın."}, status=403)
     finalize_expired_bookings(user)
     ensure_upcoming_slots()
-    display_zone = ZoneInfo(SkoolSettings.load().display_timezone)
+    display_zone = ZoneInfo("Europe/Istanbul")
     tomorrow = timezone.localdate(timezone=display_zone) + timedelta(days=1)
     earliest_date = earliest_repeat_booking_date(user, display_zone)
     first_selectable_date = max(tomorrow, earliest_date) if earliest_date else tomorrow
     result = []
-    queryset = MeetingSlot.objects.filter(local_date__gte=tomorrow).select_related("availability").order_by("start_at_utc")
-    for slot in queryset[:360]:
+    from .services import published_slots
+    for slot in published_slots(first_selectable_date):
         start, end = slot.start_at_utc.astimezone(display_zone), slot.end_at_utc.astimezone(display_zone)
         if start.date() < first_selectable_date:
             continue
