@@ -7,3 +7,5 @@
 .hero-store-badges .grc-store-badges{justify-content:center;gap:16px;margin:0;padding:14px 20px;border:1px solid var(--line);border-radius:16px;background:var(--panel);box-shadow:0 12px 30px #0002}
 .hero-store-badges .grc-store-badges img{width:150px;height:48px}
 @media(max-width:600px){.hero-side .badges{align-self:center;margin:0 auto}.hero-store-badges{margin-top:18px}.hero-store-badges .grc-store-badges{gap:12px;padding:12px 14px}.hero-store-badges .grc-store-badges img{width:138px;height:44px}}
+html[data-theme="light"] .grc-mobile-promo{background:radial-gradient(ellipse at top right,#d4ece8,transparent 65%),#f7fbff;color:#17334a;border-color:#9cbac5}
+html[data-theme="light"] .grc-mobile-promo h2{color:#102f40}html[data-theme="light"] .grc-mobile-promo p{color:#405c6d}html[data-theme="light"] .grc-mobile-eyebrow{color:#805700}

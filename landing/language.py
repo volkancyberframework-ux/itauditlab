@@ -1,6 +1,8 @@
 """Add the shared language UI only to public HTML; APIs/admin remain untouched."""
 import json
 
+from .bootcamp_catalog import public_program_prices
+
 from django.utils.html import format_html
 from django.template.loader import render_to_string
 from django.templatetags.static import static
@@ -27,9 +29,9 @@ class PublicLanguageMiddleware:
                     for language in ('en', 'fr', 'es', 'ja', 'zh-CN', 'vi', 'ar')}
         assets = format_html(
             '<link rel="stylesheet" href="{}">'
-            '<script defer src="{}" data-catalogs="{}"></script>',
+            '<script defer src="{}" data-catalogs="{}" data-prices="{}"></script>',
             static('css/site-language.css'), static('js/site-language.js'),
-            json.dumps(catalogs),
+            json.dumps(catalogs), json.dumps(public_program_prices()),
         )
         # Appended after existing deferred scripts so their initial copy is included.
         content = content.replace('</head>', assets + '</head>', 1)

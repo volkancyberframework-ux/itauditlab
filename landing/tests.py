@@ -471,7 +471,7 @@ class OTTranslationTests(TestCase):
             self.assertIn('TRY', catalog['119.999 TL'])
 
     @override_settings(STRIPE_SECRET_KEY='sk_test_placeholder')
-    def test_payment_product_is_localized_without_changing_amount(self):
+    def test_payment_product_is_localized_with_language_price(self):
         import json
         from pathlib import Path
         from .bootcamp_catalog import OT_BOOTCAMP
@@ -481,7 +481,7 @@ class OTTranslationTests(TestCase):
                 response=self.client.post(reverse('landing:checkout'),{'product':'ot_security','language':language,'price':'1','currency':'usd'})
             self.assertEqual(response.status_code,302)
             price=create.call_args.kwargs['line_items'][0]['price_data']
-            self.assertEqual(price['unit_amount'],11999900)
-            self.assertEqual(price['currency'],'try')
+            self.assertEqual(price['unit_amount'],249900 if language in ('fr','es') else 259900)
+            self.assertEqual(price['currency'],'eur' if language in ('fr','es') else 'usd')
             catalog=json.loads((Path(__file__).resolve().parent.parent/'static/i18n'/f'{language}.json').read_text())
             self.assertEqual(price['product_data']['name'],catalog[OT_BOOTCAMP['title']])

@@ -1,10 +1,5 @@
 (()=>{'use strict';
 const $=(s,c=document)=>c.querySelector(s),$$=(s,c=document)=>[...c.querySelectorAll(s)];
-const root=document.documentElement,themeButton=$('.theme-toggle');
-const savedTheme=localStorage.getItem('grc-theme');
-const setTheme=theme=>{root.dataset.theme=theme;root.style.colorScheme=theme;themeButton?.setAttribute('aria-pressed',String(theme==='light'));themeButton?.setAttribute('aria-label',theme==='light'?'Koyu temaya geç':'Açık temaya geç');const icon=$('span',themeButton);if(icon)icon.textContent=theme==='light'?'☾':'☀'};
-setTheme(savedTheme==='light'?'light':'dark');
-themeButton?.addEventListener('click',()=>{const next=root.dataset.theme==='light'?'dark':'light';localStorage.setItem('grc-theme',next);setTheme(next)});
 const nav=$('.nav'),menu=$('.menu');menu?.addEventListener('click',()=>{const open=nav.classList.toggle('open');menu.setAttribute('aria-expanded',open)});$$('nav a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu?.setAttribute('aria-expanded','false')}));
 const observer='IntersectionObserver'in window?new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.1}):null;$$('.reveal').forEach(el=>observer?observer.observe(el):el.classList.add('visible'));
 const modal=$('#quiz-modal'),quiz=$('.quiz'),form=$('#quiz-form');

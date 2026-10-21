@@ -50,3 +50,28 @@ OT_BOOTCAMP = {
     "price": 119_999, "price_display": "119.999 TL",
 }
 BOOTCAMPS_BY_KEY[OT_BOOTCAMP["key"]] = OT_BOOTCAMP
+
+
+GRC_PROGRAM = {
+    "key": "grc_ustasi_80_saat", "title": "80 Saatlik GRC Ustası Yoğun Eğitim Programı",
+    "description": "6 ay eğitim ve uygulama, 6 ay kariyer desteği, ömür boyu içerik erişimi.",
+    "price": 89_999, "price_display": "89.999 TL",
+}
+BOOTCAMPS_BY_KEY[GRC_PROGRAM["key"]] = GRC_PROGRAM
+PUBLIC_LANGUAGES = ('tr', 'en', 'fr', 'es', 'ja', 'zh-CN', 'vi', 'ar')
+
+
+def program_quote(product_key, language='tr'):
+    """Fixed language-based prices, independent of client amounts and FX rates."""
+    product = BOOTCAMPS_BY_KEY[product_key]
+    if language not in PUBLIC_LANGUAGES:
+        language = 'tr'
+    currency = 'try' if language == 'tr' else 'eur' if language in ('fr', 'es') else 'usd'
+    ot = product_key == 'ot_security'
+    amount = product['price'] if currency == 'try' else (2499 if ot else 1899) if currency == 'eur' else (2599 if ot else 1999)
+    return {'amount': amount, 'currency': currency}
+
+
+def public_program_prices():
+    return {key: {language: program_quote(key, language) for language in PUBLIC_LANGUAGES}
+            for key in BOOTCAMPS_BY_KEY}

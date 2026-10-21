@@ -1,6 +1,8 @@
 /* Local catalogs: user data is never sent to a translation service. */
 (()=>{'use strict';
 const script=document.currentScript,urls=JSON.parse(script.dataset.catalogs),root=document.documentElement;
+const prices=JSON.parse(script.dataset.prices||'{}');
+const money=(quote,language)=>language==='tr'?new Intl.NumberFormat('tr-TR').format(quote.amount)+' TL':new Intl.NumberFormat(language,{style:'currency',currency:quote.currency.toUpperCase(),currencyDisplay:'code',maximumFractionDigits:0}).format(quote.amount);
 const languages=new Set(['tr','en','fr','es','ja','zh-CN','vi','ar']);
 const normalize=value=>value.replace(/\s+/g,' ').trim();
 const originals=new WeakMap(),attributes=new WeakMap(),cache=new Map();
@@ -61,7 +63,7 @@ async function select(language,persist=true){
   if(!languages.has(language))language='tr';const request=++sequence,status=switcher.querySelector('[role=status]');status.textContent='';switcher.setAttribute('aria-busy','true');
   try{
     let next={};if(language!=='tr'){if(!cache.has(language)){const response=await fetch(urls[language],{credentials:'same-origin'});if(!response.ok)throw Error('catalog');cache.set(language,await response.json())}next=cache.get(language)}
-    if(request!==sequence)return;observer.disconnect();catalog=next;patterns=compilePatterns(next);apply(document);root.lang=language;root.dir=language==='ar'?'rtl':'ltr';document.querySelectorAll('form[action*="checkout"]').forEach(form=>{let input=form.querySelector('input[name="language"]');if(!input){input=document.createElement('input');input.type='hidden';input.name='language';form.append(input)}input.value=language});scheduleLayout();
+    if(request!==sequence)return;observer.disconnect();catalog=next;patterns=compilePatterns(next);apply(document);root.lang=language;root.dir=language==='ar'?'rtl':'ltr';document.querySelectorAll('[data-program-price]').forEach(element=>{const quote=prices[element.dataset.programPrice]?.[language];if(quote){element.textContent=money(quote,language);element.dataset.amount=quote.amount;element.dataset.currency=quote.currency}});document.querySelectorAll('form[data-program-checkout]').forEach(form=>{let input=form.querySelector('input[name="language"]');if(!input){input=document.createElement('input');input.type='hidden';input.name='language';form.append(input)}input.value=language});document.querySelectorAll('meta[name="description"],meta[property="og:description"]').forEach(meta=>{const quote=prices.ot_security?.[language];if(!quote||!document.querySelector('.ot-page'))return;const formatted=money(quote,language);meta.content=meta.content.replace(/119[.,]999[^.。]*/,formatted);const record=attributes.get(meta)?.content;if(record)record.output=meta.content});scheduleLayout();
     switcher.querySelector('[data-language-code]').textContent=language==='zh-CN'?'ZH':language.toUpperCase();switcher.querySelectorAll('[data-language]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.language===language)));observe();
     if(persist){try{localStorage.setItem('grc-language',language)}catch{}const url=new URL(location.href);if(language==='tr')url.searchParams.delete('lang');else url.searchParams.set('lang',language);try{history.replaceState(null,'',url)}catch{}}
     switcher.open=false;

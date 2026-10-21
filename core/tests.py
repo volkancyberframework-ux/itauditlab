@@ -1,4 +1,4 @@
-from datetime import date, time, timedelta
+from datetime import date, datetime, time, timedelta
 from importlib import import_module
 import json
 from types import SimpleNamespace
@@ -289,7 +289,8 @@ class StudentCourseInterfaceTests(TestCase):
             end_date=timezone.localdate() + timedelta(days=3),
             local_available_start=time(9), local_available_end=time(18),
         )
-        start_at = timezone.now() + timedelta(days=2)
+        # Keep the fixture inside host availability regardless of the test run time.
+        start_at = timezone.make_aware(datetime.combine(timezone.localdate() + timedelta(days=2), time(12)))
         slot = MeetingSlot.objects.create(
             availability=availability, local_date=timezone.localdate() + timedelta(days=2),
             start_at_utc=start_at, end_at_utc=start_at + timedelta(minutes=90),

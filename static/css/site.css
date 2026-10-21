@@ -509,3 +509,10 @@ html[data-theme="light"] .parallel-experience article>strong{color:#36566e}
 .hero-promise{display:inline-block;max-width:680px;margin:0 0 14px;padding:9px 13px;border-left:3px solid var(--gold);border-radius:0 9px 9px 0;background:#e8bd5b10;color:#f1d38d;font-size:14px;font-weight:800}
 html[data-theme="light"] .hero-promise{background:#fff5d8;color:#755718}
 @media(max-width:600px){.hero-promise{font-size:13px;line-height:1.45}.hero .lead{line-height:1.55}}
+/* Complete light-theme contrast for shared copy and controls. */
+html[data-theme="light"] .source-links a,html[data-theme="light"] .parallel-heading>span,html[data-theme="light"] .parallel-experience article>span,html[data-theme="light"] .compass-action .profile-picks button>b{color:#075f9f}
+html[data-theme="light"] .path-proof>span,html[data-theme="light"] .instructor-summary>b,html[data-theme="light"] .module-content h4,html[data-theme="light"] .case-note,html[data-theme="light"] .payment-readiness small{color:#405c70}
+html[data-theme="light"] .payment-readiness>b{color:#17334a}
+html[data-theme="light"] .flow-line article i{background:#e5f0f7;color:#17334a}
+html[data-theme="light"] .certificate-draft>small{color:#655b48}
+html[data-theme="light"] .theme-toggle:hover{background:#e6f0f7;color:#17334a}
