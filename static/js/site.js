@@ -23,6 +23,7 @@ const auditMapRoot=$('[data-audit-map]');
 if(auditMapRoot){
   const auditLocations=[
     {id:'los-angeles',name:'Los Angeles',flag:'🇺🇸',x:185,y:160,detail:'2. Seviye Kontrol',labelX:9,labelY:-8},
+    {id:'santiago',name:'Santiago',flag:'🇨🇱',x:304,y:343,detail:'Şili • Birebir denetim • Sigorta şirketi',labelX:9,labelY:-8},
     {id:'new-york',name:'New York',flag:'🇺🇸',x:294,y:137,detail:'Freelance ve yerinde bankacılık denetimi',labelX:9,labelY:-8},
     {id:'rotterdam',name:'Rotterdam',flag:'🇳🇱',x:510,y:96,detail:'Denetim',labelX:-10,labelY:-10,anchor:'end'},
     {id:'brussels',name:'Brüksel',flag:'🇧🇪',x:514,y:111,detail:'Credendo ve KBC • Freelance ve yerinde bankacılık denetimi',labelX:-10,labelY:17,anchor:'end'},
