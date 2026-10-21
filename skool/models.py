@@ -263,3 +263,41 @@ class NotificationLog(models.Model):
     notification_type = models.CharField(max_length=40)
     sent_at = models.DateTimeField(auto_now_add=True)
     detail = models.JSONField(default=dict, blank=True)
+
+
+class SkoolGuestAccount(models.Model):
+    """Email/password access to one community profile; no staff/course privileges."""
+    user = models.OneToOneField(SkoolUser, on_delete=models.CASCADE, related_name="guest_account")
+    email = models.EmailField("E-posta", unique=True)
+    password = models.CharField(max_length=128, editable=False)
+    must_change_password = models.BooleanField("İlk girişte şifre değişikliği", default=True)
+    is_active = models.BooleanField("Aktif", default=True)
+    failed_attempts = models.PositiveSmallIntegerField(default=0, editable=False)
+    locked_until = models.DateTimeField(null=True, blank=True, editable=False)
+    password_changed_at = models.DateTimeField(null=True, blank=True, editable=False)
+    last_login_at = models.DateTimeField(null=True, blank=True, editable=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Topluluk misafir hesabı"
+        verbose_name_plural = "Topluluk misafir hesapları"
+        constraints = [models.UniqueConstraint(models.functions.Lower("email"), name="unique_skool_guest_email_ci")]
+
+    def save(self, *args, **kwargs):
+        self.email = self.email.strip().lower()
+        super().save(*args, **kwargs)
+
+    def set_password(self, raw_password):
+        from django.contrib.auth.hashers import make_password
+        self.password = make_password(raw_password)
+
+    def check_password(self, raw_password):
+        from django.contrib.auth.hashers import check_password
+        return check_password(raw_password, self.password)
+
+    def session_hash(self):
+        from django.utils.crypto import salted_hmac
+        return salted_hmac("skool.guest.session", self.password, algorithm="sha256").hexdigest()
+
+    def __str__(self):
+        return self.email

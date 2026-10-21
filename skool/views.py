@@ -17,6 +17,7 @@ from django.views.decorators.clickjacking import xframe_options_sameorigin
 from django.views.decorators.http import require_GET, require_POST
 
 from .decorators import skool_user_required
+from .guest_auth import pending_guest, session_user, clear_guest_session
 from .models import (
     CareerTestAnswer, MeetingBooking, MeetingSlot, OnboardingEvent, SkoolInvitation,
     SkoolLab, SkoolLabProgress, SkoolSettings, SkoolUser, TravelAvailability, normalize_name,
@@ -88,8 +89,9 @@ def _json_body(request):
 
 
 def onboarding(request):
-    current_id = request.session.get("skool_user_id")
-    current_user = SkoolUser.objects.filter(pk=current_id).first() if current_id else None
+    if pending_guest(request):
+        return redirect("skool:guest_password_change")
+    current_user = session_user(request)
     if current_user:
         if current_user.invitation.status == "revoked":
             request.session.flush()
@@ -125,13 +127,13 @@ def onboarding(request):
             request.session["skool_claim_attempts"] = attempts + 1
             supplied = normalize_name(request.POST.get("full_name", ""))
             invitation = SkoolInvitation.objects.filter(
-                token_hash=request.session.get("skool_invite_hash", ""), status__in=("invited", "claimed")
+                token_hash=request.session.get("skool_invite_hash", ""), status__in=("invited", "claimed"), user__guest_account__isnull=True
             ).first()
             # A previously opened invite link may remain in the browser session.
             # It must not shadow a later, valid name-only login.
             if not invitation or invitation.normalized_name != supplied:
                 invitation = SkoolInvitation.objects.filter(
-                    normalized_name=supplied, status__in=("invited", "claimed")
+                    normalized_name=supplied, status__in=("invited", "claimed"), user__guest_account__isnull=True
                 ).order_by("-created_at").first()
             if invitation and hmac.compare_digest(invitation.normalized_name.encode("utf-8"), supplied.encode("utf-8")):
                 if invitation.status == "claimed" and hasattr(invitation, "user"):
@@ -169,8 +171,7 @@ def onboarding(request):
 
 
 def skool_logout(request):
-    request.session.pop("skool_user_id", None)
-    request.session.pop("skool_invite_hash", None)
+    clear_guest_session(request)
     return redirect("skool:onboarding")
 
 
@@ -178,15 +179,16 @@ def labs(request):
     from .lab_catalog import ensure_lab_records, lab_is_unlocked
 
     ensure_lab_records()
-    user_id = request.session.get("skool_user_id")
-    user = SkoolUser.objects.filter(pk=user_id, invitation__status="claimed").first()
+    if pending_guest(request):
+        return redirect("skool:guest_password_change")
+    user = session_user(request)
     if user and not user.withdrawal_notice_accepted_at:
         return redirect("skool:onboarding")
     error = ""
     if not user and request.method == "POST":
         entered_name = " ".join(request.POST.get("full_name", "").strip().split())
         supplied = normalize_name(entered_name)
-        invitation = SkoolInvitation.objects.filter(normalized_name=supplied, status__in=("invited", "claimed")).order_by("-created_at").first()
+        invitation = SkoolInvitation.objects.filter(normalized_name=supplied, status__in=("invited", "claimed"), user__guest_account__isnull=True).order_by("-created_at").first()
         if invitation:
             if invitation.status == "invited":
                 invitation.status = "claimed"

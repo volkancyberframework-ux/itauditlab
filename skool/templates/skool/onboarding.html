@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/skool.css' %}">
   <link rel="stylesheet" href="{% static 'css/skool-consent.css' %}">
+  <link rel="stylesheet" href="{% static 'css/skool-guest.css' %}">
 </head>
 <body class="skool-login">
   <main class="gate">
@@ -48,6 +49,7 @@
           {% if error %}<div class="error" role="alert">{{ error }}<small>Davetiniz olduğunu düşünüyorsanız Volkan'a Skool üzerinden ulaşabilirsiniz.</small></div>{% endif %}
           <button type="submit">Devam Et <span>→</span></button>
         </form>
+        <div class="guest-entry"><span>Özel olarak e-posta ile davet edildiyseniz</span><a class="guest-entry-button" href="{% url 'skool:guest_login' %}">Misafir Girişi <span aria-hidden="true">→</span></a></div>
         <small class="privacy">Davet bağlantınız kişiye özeldir. Aynı bağlantı ve adınızla daha sonra kaldığınız yerden devam edebilirsiniz.</small>
       {% endif %}
     </section>

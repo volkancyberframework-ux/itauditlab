@@ -1,0 +1,12 @@
+{% load static %}<!doctype html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>{% if password_change %}İlk Giriş · Şifreni Değiştir{% else %}Misafir Girişi{% endif %} | GRC Ustası</title><link rel="icon" href="{% static 'img/favicon.ico' %}"><link rel="stylesheet" href="{% static 'css/skool.css' %}"><link rel="stylesheet" href="{% static 'css/skool-guest.css' %}"></head>
+<body class="skool-login"><main class="gate"><a class="brand" href="/"><img src="{% static 'img/grc-ustasi-logo.png' %}" alt="GRC Ustası"><span><b>GRC <em>Ustası</em></b><small>SKOOL TOPLULUĞU</small></span></a><section class="gate-card">
+<span class="kicker">{% if password_change %}İLK GİRİŞ · SON BİR ADIM{% else %}ÖZEL DAVETLİLER İÇİN{% endif %}</span>
+{% if password_change %}<h1>Yeni şifrenizi<br><em>belirleyin.</em></h1><p>İlk giriş şifrenizi yalnızca sizin bildiğiniz yeni bir şifreyle değiştirin. Ardından topluluk yolculuğuna devam edeceksiniz.</p>{% else %}<h1>Misafir<br><em>Girişi</em></h1><p>Davet edildiğiniz e-posta adresi ve size verilen ilk giriş şifresiyle giriş yapın. İlk girişinizde yeni şifrenizi belirleyeceksiniz.</p>{% endif %}
+<form method="post" class="guest-auth-form">{% csrf_token %}
+{% if form.non_field_errors %}<div class="error" role="alert">{{ form.non_field_errors }}</div>{% endif %}
+{% for field in form %}<div class="guest-field"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% if field.errors %}<div class="error" role="alert">{{ field.errors }}</div>{% endif %}</div>{% endfor %}
+{% if password_change %}<small class="guest-password-hint">En az 8 karakter kullanın. İlk giriş şifrenizden farklı, kolay tahmin edilmeyen bir şifre seçin.</small>{% endif %}
+<button type="submit">{% if password_change %}Şifremi Değiştir ve Devam Et{% else %}Giriş Yap{% endif %} <span aria-hidden="true">→</span></button></form>
+{% if password_change %}<a class="guest-back" href="{% url 'skool:logout' %}">Çıkış yap</a>{% else %}<a class="guest-back" href="{% url 'skool:onboarding' %}">← Topluluk girişine dön</a><small class="privacy">Bu giriş yalnızca e-posta ile davet edilmiş misafirler içindir. Mevcut Skool davetinizle ad soyad üzerinden giriş yapmaya devam edebilirsiniz.</small>{% endif %}
+</section></main></body></html>

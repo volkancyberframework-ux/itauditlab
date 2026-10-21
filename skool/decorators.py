@@ -2,21 +2,14 @@ from functools import wraps
 
 from django.shortcuts import redirect
 
-from .models import SkoolUser
+from .guest_auth import session_user
 
 
 def skool_user_required(view):
     @wraps(view)
     def wrapped(request, *args, **kwargs):
-        user_id = request.session.get("skool_user_id")
-        try:
-            request.skool_user = SkoolUser.objects.select_related("invitation").get(pk=user_id)
-            if request.skool_user.invitation.status == "revoked":
-                request.session.flush()
-                return redirect("skool:onboarding")
-            if not request.skool_user.withdrawal_notice_accepted_at:
-                return redirect("skool:onboarding")
-        except (SkoolUser.DoesNotExist, TypeError, ValueError):
+        request.skool_user = session_user(request)
+        if not request.skool_user or not request.skool_user.withdrawal_notice_accepted_at:
             return redirect("skool:onboarding")
         return view(request, *args, **kwargs)
     return wrapped

@@ -10,7 +10,7 @@ from django.urls import reverse
 from .models import (
     AvailabilityException, BookingHistory, CareerTestAnswer, MeetingBooking, MeetingSlot,
     NotificationLog, OnboardingEvent, SkoolInvitation, SkoolSettings, SkoolUser,
-    TravelAvailability, SkoolLab, SkoolLabProgress,
+    TravelAvailability, SkoolLab, SkoolLabProgress, SkoolGuestAccount,
 )
 
 
@@ -204,6 +204,21 @@ class NotificationLogAdmin(admin.ModelAdmin):
 class SkoolSettingsAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         return not SkoolSettings.objects.exists()
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(SkoolGuestAccount)
+class SkoolGuestAccountAdmin(admin.ModelAdmin):
+    list_display = ("email", "user", "is_active", "must_change_password", "last_login_at")
+    list_filter = ("is_active", "must_change_password")
+    search_fields = ("email", "user__full_name")
+    readonly_fields = ("email", "user", "must_change_password", "failed_attempts", "locked_until", "password_changed_at", "last_login_at", "created_at")
+    fields = readonly_fields + ("is_active",)
+
+    def has_add_permission(self, request):
+        return False
 
     def has_delete_permission(self, request, obj=None):
         return False

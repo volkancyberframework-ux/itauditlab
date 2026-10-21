@@ -1,10 +1,12 @@
 from django.urls import path
 
-from . import views
+from . import views, guest_views
 
 app_name = "skool"
 
 urlpatterns = [
+    path("skooltoplulugu/misafir/", guest_views.guest_login, name="guest_login"),
+    path("skooltoplulugu/misafir/sifre/", guest_views.guest_password_change, name="guest_password_change"),
     path("skooltoplulugu", views.onboarding, name="onboarding"),
     path("skooltoplulugu/", views.onboarding),
     path("skooltoplulugu/yolculuk/", views.journey, name="journey"),
