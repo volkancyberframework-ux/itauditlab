@@ -15,7 +15,8 @@
     "12 Aylık Birebir Eğitim": "12 Months of One-to-One Training",
     "OT GÜVENLİĞİ BOOTCAMP": "OT SECURITY BOOTCAMP",
     "Güvenli ödeme · Stripe": "Secure payment · Stripe",
-    "OT duyurusunu görüntüle": "View the OT announcement"
+    "OT duyurusunu görüntüle": "View the OT announcement",
+    "Bir soğutma sisteminin sıcaklık ayarına yetkisiz müdahale edilmesi, milyonlarca liralık gıda kaybına neden olabilir.": "Unauthorized changes to a refrigeration system’s temperature settings could cause food losses worth millions of Turkish lira."
   },
   "fr": {
     "Neden": "Pourquoi GRC",
@@ -34,7 +35,8 @@
     "OT GÜVENLİĞİ BOOTCAMP": "BOOTCAMP DE CYBERSÉCURITÉ OT",
     "Güvenli ödeme · Stripe": "Paiement sécurisé · Stripe",
     "OT duyurusunu görüntüle": "Voir l’annonce OT",
-    "Yeni OT Güvenliği Bootcamp programımızda bunları uygulamalı olarak öğreniyoruz.": "Apprenez à les comprendre et à les protéger grâce aux exercices pratiques de notre nouveau bootcamp de cybersécurité OT."
+    "Yeni OT Güvenliği Bootcamp programımızda bunları uygulamalı olarak öğreniyoruz.": "Apprenez à les comprendre et à les protéger grâce aux exercices pratiques de notre nouveau bootcamp de cybersécurité OT.",
+    "Bir soğutma sisteminin sıcaklık ayarına yetkisiz müdahale edilmesi, milyonlarca liralık gıda kaybına neden olabilir.": "Une modification non autorisée de la température d’un système de réfrigération pourrait entraîner des pertes alimentaires d’une valeur de plusieurs millions de livres turques."
   },
   "es": {
     "Neden": "Por qué GRC",
@@ -53,7 +55,8 @@
     "OT GÜVENLİĞİ BOOTCAMP": "BOOTCAMP DE SEGURIDAD OT",
     "Güvenli ödeme · Stripe": "Pago seguro · Stripe",
     "OT duyurusunu görüntüle": "Ver el anuncio de OT",
-    "Yeni OT Güvenliği Bootcamp programımızda bunları uygulamalı olarak öğreniyoruz.": "Aprende a comprender y proteger estos sistemas con la formación práctica de nuestro nuevo bootcamp de seguridad OT."
+    "Yeni OT Güvenliği Bootcamp programımızda bunları uygulamalı olarak öğreniyoruz.": "Aprende a comprender y proteger estos sistemas con la formación práctica de nuestro nuevo bootcamp de seguridad OT.",
+    "Bir soğutma sisteminin sıcaklık ayarına yetkisiz müdahale edilmesi, milyonlarca liralık gıda kaybına neden olabilir.": "La manipulación no autorizada de la temperatura de un sistema de refrigeración podría causar pérdidas de alimentos valoradas en millones de liras turcas."
   },
   "ja": {
     "Neden": "GRCを学ぶ理由",
@@ -71,7 +74,8 @@
     "12 Aylık Birebir Eğitim": "12か月のマンツーマン指導",
     "OT GÜVENLİĞİ BOOTCAMP": "OTセキュリティ・ブートキャンプ",
     "Güvenli ödeme · Stripe": "安全な決済 · Stripe",
-    "OT duyurusunu görüntüle": "OTプログラムのお知らせを見る"
+    "OT duyurusunu görüntüle": "OTプログラムのお知らせを見る",
+    "Bir soğutma sisteminin sıcaklık ayarına yetkisiz müdahale edilmesi, milyonlarca liralık gıda kaybına neden olabilir.": "冷却システムの温度設定が不正に変更されると、数百万トルコリラ相当の食品が失われるおそれがあります。"
   },
   "zh-CN": {
     "Neden": "为何学习GRC",
@@ -89,7 +93,8 @@
     "12 Aylık Birebir Eğitim": "12个月一对一培训",
     "OT GÜVENLİĞİ BOOTCAMP": "OT安全训练营",
     "Güvenli ödeme · Stripe": "安全支付 · Stripe",
-    "OT duyurusunu görüntüle": "查看OT课程公告"
+    "OT duyurusunu görüntüle": "查看OT课程公告",
+    "Bir soğutma sisteminin sıcaklık ayarına yetkisiz müdahale edilmesi, milyonlarca liralık gıda kaybına neden olabilir.": "未经授权更改制冷系统的温度设置，可能造成价值数百万土耳其里拉的食品损失。"
   },
   "vi": {
     "Neden": "Vì sao chọn GRC",
@@ -109,7 +114,8 @@
     "OT GÜVENLİĞİ BOOTCAMP": "BOOTCAMP AN NINH OT",
     "Güvenli ödeme · Stripe": "Thanh toán an toàn · Stripe",
     "OT duyurusunu görüntüle": "Xem thông báo chương trình OT",
-    "Yeni OT Güvenliği Bootcamp programımızda bunları uygulamalı olarak öğreniyoruz.": "Tìm hiểu và thực hành bảo vệ các hệ thống này trong chương trình Bootcamp An ninh OT mới của chúng tôi."
+    "Yeni OT Güvenliği Bootcamp programımızda bunları uygulamalı olarak öğreniyoruz.": "Tìm hiểu và thực hành bảo vệ các hệ thống này trong chương trình Bootcamp An ninh OT mới của chúng tôi.",
+    "Bir soğutma sisteminin sıcaklık ayarına yetkisiz müdahale edilmesi, milyonlarca liralık gıda kaybına neden olabilir.": "Việc thay đổi trái phép cài đặt nhiệt độ của hệ thống làm lạnh có thể gây thiệt hại thực phẩm trị giá hàng triệu lira Thổ Nhĩ Kỳ."
   },
   "ar": {
     "Neden": "لماذا GRC",
@@ -128,6 +134,7 @@
     "OT GÜVENLİĞİ BOOTCAMP": "المعسكر التدريبي للأمن السيبراني OT",
     "Güvenli ödeme · Stripe": "دفع آمن · Stripe",
     "OT duyurusunu görüntüle": "عرض إعلان برنامج OT",
-    "Yeni OT Güvenliği Bootcamp programımızda bunları uygulamalı olarak öğreniyoruz.": "نتعلّم هذه الجوانب عمليًا في معسكرنا التدريبي الجديد للأمن السيبراني للتقنيات التشغيلية (OT)."
+    "Yeni OT Güvenliği Bootcamp programımızda bunları uygulamalı olarak öğreniyoruz.": "نتعلّم هذه الجوانب عمليًا في معسكرنا التدريبي الجديد للأمن السيبراني للتقنيات التشغيلية (OT).",
+    "Bir soğutma sisteminin sıcaklık ayarına yetkisiz müdahale edilmesi, milyonlarca liralık gıda kaybına neden olabilir.": "قد يؤدي تغيير إعدادات درجة حرارة نظام التبريد دون تصريح إلى خسائر في الأغذية بقيمة ملايين الليرات التركية."
   }
 }
