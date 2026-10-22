@@ -1,0 +1,4 @@
+{% extends 'admin/change_list.html' %}{% load static %}
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static 'css/business-network.css' %}"><style>.business-network{padding-block:20px}.business-network .network-wrap{width:auto}.business-network h2{color:#edf7ff}.business-network .network-map path{stroke-width:.7}[data-toggle-city]{min-height:36px;padding:6px 12px;cursor:pointer}</style>{% endblock %}
+{% block extrahead %}{{ block.super }}<script defer src="{% static 'js/business-network.js' %}"></script>{% endblock %}
+{% block content %}{% csrf_token %}{% include 'landing/_business_network.html' %}{{ block.super }}{% endblock %}

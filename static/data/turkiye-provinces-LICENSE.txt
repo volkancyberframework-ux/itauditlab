@@ -1,0 +1,13 @@
+Türkiye province boundary database — Open Database License (ODbL) 1.0
+https://opendatacommons.org/licenses/odbl/1-0/
+© OpenStreetMap contributors — https://www.openstreetmap.org/copyright
+Geometry: cihadturhan/tr-geojson, derived from OpenStreetMap.
+Plate-code normalization: theaiagent/turkiye_iller_geojson
+Source: https://github.com/theaiagent/turkiye_iller_geojson
+Downloaded 2026-10-22; geometries retained without simplification or invented borders.
+This database is made available under the Open Database License. Any rights in
+individual contents are licensed under the Database Contents License:
+https://opendatacommons.org/licenses/dbcl/1-0/
+The database is supplied without warranty. It is a general visualization dataset,
+not a cadastral or legal boundary determination. The full GeoJSON is supplied
+alongside this notice under ODbL, including all 81 provinces and source metadata.

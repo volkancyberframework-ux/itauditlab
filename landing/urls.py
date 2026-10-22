@@ -1,4 +1,5 @@
 from django.urls import path
+from . import business_network
 from . import regulation_views
 from . import legal
 from . import views
@@ -8,6 +9,8 @@ from mobile_api import web_billing, store_pages
 
 app_name = 'landing'
 urlpatterns = [
+    path('api/business-network/cities/', business_network.cities, name='business_network_cities'),
+    path('api/business-network/stats/', business_network.stats, name='business_network_stats'),
     path('mevzuat/', regulation_views.page, name='regulations'),
     path('api/mevzuat/', regulation_views.fragment, name='regulation_fragment'),
     path('robots.txt', regulation_views.robots, name='robots'),

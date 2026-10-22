@@ -1,0 +1,13 @@
+{% load static %}
+<section class="section business-network notranslate" id="turkiye-is-agi" translate="no" data-business-network data-geometry="{% static 'data/turkiye-provinces.geojson' %}" data-cities-url="{% url 'landing:business_network_cities' %}"{% if network_admin %} data-network-admin data-update-url="{% url 'admin:core_businessnetworkcity_toggle' '00' %}"{% endif %}>
+ <div class="wrap network-wrap">
+  <div class="network-heading"><span class="eyebrow">GRC Ustası · NETWORK</span><h2 data-network-copy="heading">Türkiye Genelinde Canlı İş Ağımız</h2><p data-network-copy="intro">KOBİ’ler, fabrikalar, organize sanayi bölgeleri ve işletmeler için siber güvenlik, denetim, risk yönetimi ve sürekli kontrol hizmetlerimizle Türkiye genelinde büyüyoruz.</p></div>
+  <div class="network-stage"><svg class="network-map" viewBox="0 0 1000 460" role="group" aria-label="Türkiye’nin 81 ilini gösteren interaktif iş ağı haritası" data-network-svg></svg>
+   <div class="network-tooltip" data-network-tooltip role="dialog" aria-labelledby="network-city-name" hidden><button type="button" class="network-close" data-network-close aria-label="Kapat">×</button><b id="network-city-name" data-network-city></b><span data-network-status></span><p data-network-message></p><a href="mailto:volkan@grcustasi.com" data-network-email><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg><span dir="ltr">volkan@grcustasi.com</span></a></div>
+  </div>
+  <p class="network-hint" data-network-hint>İlleri incelemek için üzerine gelin veya dokunun.</p><p class="network-feedback" data-network-feedback role="status" aria-live="polite"></p>
+  <div class="network-stats"><div><strong><span data-network-count>{{ network_stats.active_count|default_if_none:"—" }}</span> <small>/ <span data-network-total>81</span></small></strong><span data-network-copy="count">Aktif İl</span></div><div><strong>81</strong><span data-network-copy="target">İl Hedefimiz</span></div><div><span class="network-growth-icon" aria-hidden="true">↗</span><span data-network-copy="growth">Türkiye Genelinde Büyüyen İş Ağı</span></div></div>
+  <p class="network-attribution"><span data-network-copy="source">Sınır verisi</span>: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a> · <a href="{% static 'data/turkiye-provinces.geojson' %}">GeoJSON</a> · <a href="{% static 'data/turkiye-provinces-LICENSE.txt' %}">ODbL 1.0</a></p>
+ </div>
+ {{ network_copy|json_script:"business-network-copy" }}
+</section>

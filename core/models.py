@@ -579,3 +579,26 @@ from .monitoring_models import (  # noqa: E402,F401
     MonitoringSettings, LessonEvidence, EnrollmentMonitoringPolicy, MonitoringPause,
     MonitoringLessonOverride, StudentIntervention, MonitoringAudit, DailyMonitoringSnapshot,
 )
+
+
+class BusinessNetworkCity(models.Model):
+    city_code = models.CharField('Plaka kodu', max_length=2, primary_key=True)
+    city_name = models.CharField('İl', max_length=40)
+    is_active = models.BooleanField('Aktif', default=False)
+    activated_at = models.DateTimeField('Aktifleştirme tarihi', null=True, blank=True)
+    updated_at = models.DateTimeField('Son güncelleme', auto_now=True)
+    updated_by = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Güncelleyen', null=True, blank=True, on_delete=models.SET_NULL)
+
+    class Meta:
+        ordering = ('city_code',)
+        verbose_name = 'Türkiye iş ağı ili'
+        verbose_name_plural = 'Türkiye İş Ağı Yönetimi'
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        from .business_network import PROVINCES
+        if PROVINCES.get(self.city_code) != self.city_name:
+            raise ValidationError('İl adı ve plaka kodu sabit referans verisiyle eşleşmelidir.')
+
+    def __str__(self):
+        return f'{self.city_code} — {self.city_name}'

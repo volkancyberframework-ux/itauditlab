@@ -12,6 +12,7 @@ from pathlib import Path
 from datetime import timedelta
 import requests
 from . import legal_registry
+from . import business_network
 from .forms import CorporateInquiryForm, LeadForm, PartnerApplicationForm, WaitingListForm
 from .models import AssessmentSession, Certificate, JobMarketCount, NewsletterSubscriber, SiteSetting
 from .traffic import period_page_views, period_unique_visitors, traffic_stats
@@ -43,7 +44,7 @@ def home(request):
         'site': site, 'payment_url': payment_url, 'jobs': JobMarketCount.objects.all(),
         'curriculum': CURRICULUM, 'curriculum_stats': CURRICULUM_STATS,
         'bootcamps': BOOTCAMPS, 'ot_bootcamp': OT_BOOTCAMP,
-        **legal_registry.context(request),
+        **legal_registry.context(request), **business_network.context(),
         'open_assessment': request.path.rstrip('/').endswith('kariyer-pusulasi'),
     })
 
