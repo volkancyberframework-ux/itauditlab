@@ -1,4 +1,5 @@
 from django.urls import path
+from . import regulation_views
 from . import legal
 from . import views
 from . import travel
@@ -7,6 +8,10 @@ from mobile_api import web_billing, store_pages
 
 app_name = 'landing'
 urlpatterns = [
+    path('mevzuat/', regulation_views.page, name='regulations'),
+    path('api/mevzuat/', regulation_views.fragment, name='regulation_fragment'),
+    path('robots.txt', regulation_views.robots, name='robots'),
+    path('sitemap.xml', regulation_views.sitemap, name='sitemap'),
     path('ot-guvenligi-bootcamp/', views.ot_bootcamp, name='ot_bootcamp'),
     path('yasal/<slug:slug>/', legal.document, name='legal'),
     path('api/cerez-tercihi/', legal.cookie_consent, name='cookie_consent'),

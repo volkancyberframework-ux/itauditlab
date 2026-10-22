@@ -52,10 +52,10 @@ def source_strings():
             value = match.group(2)
             if re.search('[çğıöşüÇĞİÖŞÜ]', value) and '<' not in value:
                 parser.add(value)
-    for name in ('views.py', 'legal.py', 'bootcamp_catalog.py', 'travel.py'):
+    for name in ('views.py', 'legal.py', 'bootcamp_catalog.py', 'travel.py', 'curriculum.py'):
         path = ROOT / 'landing' / name
         for node in ast.walk(ast.parse(path.read_text())):
-            if isinstance(node, ast.Constant) and isinstance(node.value, str) and re.search('[çğıöşüÇĞİÖŞÜ]', node.value) and '\n' not in node.value:
+            if isinstance(node, ast.Constant) and isinstance(node.value, str) and (name == 'curriculum.py' or re.search('[çğıöşüÇĞİÖŞÜ]', node.value)) and '\n' not in node.value:
                 parser.add(node.value)
     return sorted(parser.copy)
 

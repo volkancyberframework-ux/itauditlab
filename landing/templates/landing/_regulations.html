@@ -1,0 +1,20 @@
+<section class="section regulation-wave" id="neden" data-legal-section data-country="{{ legal_country }}" data-language="{{ legal_language }}" lang="{{ legal_language }}" dir="{{ legal_direction }}">
+ <div class="wrap">
+  <div class="regulation-intro"><div><span class="eyebrow" translate="no">{{ legal_country_name }} · {{ legal_ui.eyebrow }}</span><h2>Siber Güvenlik artık Patronların inisiyatifinde değil.<br><em translate="no">{{ legal_headline }}</em></h2></div><p translate="no">{{ legal_intro }}</p></div>
+  <div class="legal-country-bar" translate="no"><label class="legal-country-label">{{ legal_ui.country }}<select data-country-select aria-label="{{ legal_ui.country }}">{% for item in legal_countries %}<option value="{{ item.code }}"{% if item.code == legal_country %} selected{% endif %}>{{ item.name }}</option>{% endfor %}</select></label><small class="legal-country-hint">{{ legal_ui.country_hint }}</small></div>
+  <div class="regulation-grid" translate="no">{% for item in legal_records %}
+   <article class="regulation-card" data-regulation="{{ item.id }}" data-status="{{ item.status }}">
+    <span>{{ legal_country_name }} · {{ item.regulatory_authority }}</span><h3>{{ item.short_name }}</h3>{% if item.category == 'guidance' %}<small>{{ legal_ui.standards }}</small>{% endif %}
+    <span class="legal-status legal-status-{{ item.status }}">{{ item.status_label }}{% if item.effective_date %} · {{ item.effective_date }}{% endif %}</span>
+    <p>{{ item.description }}</p><h4>{{ legal_ui.impact }}</h4><p>{{ item.business_impact }}</p>
+    {% if legal_detailed %}<details class="legal-details"><summary>{{ legal_ui.scope }} / {{ legal_ui.audit }}</summary><p>{{ item.official_name }}</p><p>{{ item.applicability_notes }}</p><ul>{% for control in item.audit_requirements %}<li>{{ control }}</li>{% endfor %}</ul>{% if item.effective_date %}<p>{{ legal_ui.effective }}: {{ item.effective_date }}</p>{% endif %}</details>{% else %}<p class="legal-scope">{{ item.applicability_notes }}</p>{% endif %}
+    <div class="source-links"><a href="{{ item.official_source_url }}" target="_blank" rel="noopener noreferrer">{{ legal_ui.source }} ↗</a></div><small class="legal-verified">{{ legal_ui.verified }}: <time datetime="{{ item.last_verified_at }}">{{ item.last_verified_at }}</time></small>
+   </article>{% empty %}<p>{{ legal_ui.empty }}</p>{% endfor %}</div>
+  <aside class="legal-standards" translate="no"><h3>{{ legal_ui.standards }}</h3><p>{{ legal_ui.standards_note }}</p></aside>
+  {% if legal_show_outcome %}{% include "landing/_regulation_outcome.html" %}{% endif %}
+  <p class="regulation-note" translate="no">{{ legal_ui.disclaimer }}</p><p class="legal-provider-note" translate="no">{{ legal_ui.provider_note }}</p>
+  {% if not legal_detailed %}<a class="btn" translate="no" data-legal-link href="/mevzuat/?lang={{ legal_language }}&amp;country={{ legal_country }}">{{ legal_ui.explore }} →</a>{% endif %}
+ </div>
+</section>
+
+<script type="application/ld+json" data-legal-schema>{{ legal_schema|safe }}</script>

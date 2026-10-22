@@ -1,0 +1,1191 @@
+[
+  {
+    "id": "tr-7545",
+    "country_code": "TR",
+    "jurisdiction": "TR",
+    "official_name": "7545 sayılı Siber Güvenlik Kanunu",
+    "short_name": "7545 • Siber Güvenlik Kanunu",
+    "category": "law",
+    "regulatory_authority": "Siber Güvenlik Başkanlığı",
+    "official_source_url": "https://siberguvenlik.gov.tr/sss",
+    "effective_date": "2025-03-19",
+    "publication_date": "2025-03-19",
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "tr": {
+        "description": "Siber güvenlik görevleri, sorumlulukları ve Başkanlığın denetim yetkisini düzenler.",
+        "business_impact": "Kapsam içindeki faaliyetler için risk, kontrol ve denetim kanıtları hazırlanmalıdır.",
+        "applicability_notes": "Madde 8 denetim yetkisini düzenler. Kuruma özgü yükümlülükler ve ikincil düzenlemeler ayrıca incelenmelidir; her işletmeye aynı denetim sıklığı atfedilmez.",
+        "audit_requirements": [
+          "Kapsam ve yükümlülük envanteri",
+          "Risk değerlendirmesi, kontrol testi ve kanıt",
+          "Olay müdahale, bildirim ve tedarikçi süreçleri"
+        ]
+      }
+    }
+  },
+  {
+    "id": "tr-kvkk",
+    "country_code": "TR",
+    "jurisdiction": "TR",
+    "official_name": "6698 sayılı Kişisel Verilerin Korunması Kanunu",
+    "short_name": "6698 • KVKK",
+    "category": "law",
+    "regulatory_authority": "Kişisel Verileri Koruma Kurumu",
+    "official_source_url": "https://www.kvkk.gov.tr/Icerik/7834/6698-Sayili-Kisisel-Verilerin-Korunmasi-Kanununda-Yapilan-Degisiklikler-Hakkinda-Kamuoyu-Duyurusu",
+    "effective_date": "2016-04-07",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "tr": {
+        "description": "Kişisel veri işleme, veri güvenliği ve ilgili kişi haklarını düzenler.",
+        "business_impact": "Hukuki sebepler, aydınlatma, güvenlik tedbirleri ve yurt dışı aktarımları belgelendirilmelidir.",
+        "applicability_notes": "2024 değişiklikleri özellikle özel nitelikli veri ve yurt dışı aktarım rejimini etkiler. Yürürlük geçişleri ve Kurul kararları somut işlem için kontrol edilmelidir.",
+        "audit_requirements": [
+          "Kapsam ve yükümlülük envanteri",
+          "Risk değerlendirmesi, kontrol testi ve kanıt",
+          "Olay müdahale, bildirim ve tedarikçi süreçleri"
+        ]
+      }
+    }
+  },
+  {
+    "id": "tr-big",
+    "country_code": "TR",
+    "jurisdiction": "TR",
+    "official_name": "2019/12 sayılı Bilgi ve İletişim Güvenliği Tedbirleri Genelgesi ve Rehberi",
+    "short_name": "BİG • Genelge ve Rehber",
+    "category": "law",
+    "regulatory_authority": "Siber Güvenlik Başkanlığı",
+    "official_source_url": "https://siberguvenlik.gov.tr/sss",
+    "effective_date": "2019-07-06",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "tr": {
+        "description": "Kamu kurumları ve kritik altyapı işletmeleri için bilgi ve iletişim güvenliği tedbirleri getirir.",
+        "business_impact": "Kapsamdaki kuruluşlar rehber uyumunu ve en az yıllık denetim süreçlerini planlamalıdır.",
+        "applicability_notes": "Bütün özel şirketler için genel bir yıllık denetim zorunluluğu değildir. Başkanlığın açıklamasına göre rehberlerin kurum adı ve logosu yenilenmiş, içerik ve denetim usulü değişmemiştir.",
+        "audit_requirements": [
+          "Kapsam ve yükümlülük envanteri",
+          "Risk değerlendirmesi, kontrol testi ve kanıt",
+          "Olay müdahale, bildirim ve tedarikçi süreçleri"
+        ]
+      }
+    }
+  },
+  {
+    "id": "us-sec",
+    "country_code": "US",
+    "jurisdiction": "US",
+    "official_name": "Cybersecurity Risk Management, Strategy, Governance, and Incident Disclosure — Release 33-11216",
+    "short_name": "SEC • Cybersecurity disclosures",
+    "category": "law",
+    "regulatory_authority": "U.S. Securities and Exchange Commission",
+    "official_source_url": "https://www.sec.gov/files/rules/final/2023/33-11216.pdf",
+    "effective_date": "2023-09-05",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "en": {
+        "description": "Reporting companies must disclose material cyber incidents and describe cyber risk management and governance.",
+        "business_impact": "Connect materiality assessment, escalation and investor disclosure with board oversight.",
+        "applicability_notes": "For domestic issuers, Form 8-K Item 1.05 generally runs four business days from determining materiality, not discovery. Foreign private issuers and permitted delays have distinct rules; compliance dates were phased.",
+        "audit_requirements": [
+          "Applicability and obligation register",
+          "Risk assessment, control testing and evidence",
+          "Incident response, reporting and supplier processes"
+        ]
+      }
+    }
+  },
+  {
+    "id": "us-circia",
+    "country_code": "US",
+    "jurisdiction": "US",
+    "official_name": "Cyber Incident Reporting for Critical Infrastructure Act of 2022 — implementing reporting rule",
+    "short_name": "CIRCIA • Reporting rulemaking",
+    "category": "law",
+    "regulatory_authority": "CISA / DHS",
+    "official_source_url": "https://www.reginfo.gov/public/do/eoDetails?rrid=1550967",
+    "effective_date": null,
+    "publication_date": null,
+    "status": "draft",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "en": {
+        "description": "The statute directs CISA to establish reporting requirements for covered critical infrastructure entities.",
+        "business_impact": "Prepare incident identification and reporting workflows; monitor the final rule and its effective date.",
+        "applicability_notes": "The final rule was under regulatory review from 1 October 2026 at verification. Proposed reporting duties must not be presented as an operative blanket obligation.",
+        "audit_requirements": [
+          "Applicability and obligation register",
+          "Risk assessment, control testing and evidence",
+          "Incident response, reporting and supplier processes"
+        ]
+      }
+    }
+  },
+  {
+    "id": "us-nist",
+    "country_code": "US",
+    "jurisdiction": "US",
+    "official_name": "The NIST Cybersecurity Framework 2.0",
+    "short_name": "NIST CSF 2.0",
+    "category": "guidance",
+    "regulatory_authority": "National Institute of Standards and Technology",
+    "official_source_url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=957258",
+    "effective_date": "2024-02-26",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "en": {
+        "description": "A risk management framework organized around Govern, Identify, Protect, Detect, Respond and Recover.",
+        "business_impact": "Use profiles and outcomes to prioritize improvements and communicate risk.",
+        "applicability_notes": "A framework, not a generally applicable national law. Adoption can be voluntary or required by a separate policy, contract or sector rule.",
+        "audit_requirements": [
+          "Applicability and obligation register",
+          "Risk assessment, control testing and evidence",
+          "Incident response, reporting and supplier processes"
+        ]
+      }
+    }
+  },
+  {
+    "id": "gb-privacy",
+    "country_code": "GB",
+    "jurisdiction": "GB",
+    "official_name": "UK General Data Protection Regulation and Data Protection Act 2018, as amended",
+    "short_name": "UK GDPR • DPA 2018",
+    "category": "law",
+    "regulatory_authority": "Information Commissioner’s Office",
+    "official_source_url": "https://www.gov.uk/guidance/data-use-and-access-act-2025-data-protection-and-privacy-changes",
+    "effective_date": "2018-05-25",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "en": {
+        "description": "The UK data protection framework governs personal data processing, security and individual rights.",
+        "business_impact": "Maintain lawful bases, accountability records, rights handling and breach assessment.",
+        "applicability_notes": "The Data (Use and Access) Act 2025 amends rather than replaces UK GDPR and DPA 2018. Most Part 5 data protection changes commenced on 5 February 2026; commencement remains provision-specific.",
+        "audit_requirements": [
+          "Applicability and obligation register",
+          "Risk assessment, control testing and evidence",
+          "Incident response, reporting and supplier processes"
+        ]
+      }
+    }
+  },
+  {
+    "id": "gb-nis",
+    "country_code": "GB",
+    "jurisdiction": "GB",
+    "official_name": "The Network and Information Systems Regulations 2018, SI 2018/506",
+    "short_name": "NIS Regulations 2018",
+    "category": "law",
+    "regulatory_authority": "Relevant UK competent authorities / ICO",
+    "official_source_url": "https://www.legislation.gov.uk/uksi/2018/506/contents",
+    "effective_date": "2018-05-10",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "en": {
+        "description": "Security and incident reporting duties apply to covered essential services and relevant digital service providers.",
+        "business_impact": "Determine the correct sector regulator and maintain proportionate security and incident reporting arrangements.",
+        "applicability_notes": "Coverage and notification criteria depend on service and designation. The EU NIS2 Directive does not automatically apply as UK domestic law.",
+        "audit_requirements": [
+          "Applicability and obligation register",
+          "Risk assessment, control testing and evidence",
+          "Incident response, reporting and supplier processes"
+        ]
+      }
+    }
+  },
+  {
+    "id": "eu-gdpr",
+    "country_code": "EU",
+    "jurisdiction": "EU",
+    "official_name": "Regulation (EU) 2016/679 — General Data Protection Regulation",
+    "short_name": "GDPR",
+    "category": "law",
+    "regulatory_authority": "National supervisory authorities / EDPB",
+    "official_source_url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+    "effective_date": "2018-05-25",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "en": {
+        "description": "Personal data processing is subject to lawfulness, accountability, security and data subject rights.",
+        "business_impact": "Document processing, assess risks and manage processors and international transfers.",
+        "applicability_notes": "Territorial scope follows Article 3, not the visitor’s language. Breach notification depends on risk and the relevant controller or processor role.",
+        "audit_requirements": [
+          "Applicability and obligation register",
+          "Risk assessment, control testing and evidence",
+          "Incident response, reporting and supplier processes"
+        ]
+      }
+    }
+  },
+  {
+    "id": "eu-nis2",
+    "country_code": "EU",
+    "jurisdiction": "EU",
+    "official_name": "Directive (EU) 2022/2555 — NIS2",
+    "short_name": "NIS2 Directive",
+    "category": "law",
+    "regulatory_authority": "Member State competent authorities",
+    "official_source_url": "https://digital-strategy.ec.europa.eu/en/policies/nis2-directive",
+    "effective_date": "2023-01-16",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "en": {
+        "description": "The Directive sets cybersecurity risk management, governance and incident reporting requirements for covered sectors.",
+        "business_impact": "Map services, size thresholds and national transposition before assigning obligations.",
+        "applicability_notes": "National transposition and competent authorities differ. The January 2026 targeted amendments are proposals, not automatically effective amendments.",
+        "audit_requirements": [
+          "Applicability and obligation register",
+          "Risk assessment, control testing and evidence",
+          "Incident response, reporting and supplier processes"
+        ]
+      }
+    }
+  },
+  {
+    "id": "eu-dora",
+    "country_code": "EU",
+    "jurisdiction": "EU",
+    "official_name": "Regulation (EU) 2022/2554 — Digital Operational Resilience Act",
+    "short_name": "DORA",
+    "category": "law",
+    "regulatory_authority": "European Supervisory Authorities / national competent authorities",
+    "official_source_url": "https://finance.ec.europa.eu/regulation-and-supervision/financial-services-legislation/implementing-and-delegated-acts/digital-operational-resilience-regulation_en",
+    "effective_date": "2025-01-17",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "en": {
+        "description": "DORA governs digital operational resilience for financial entities within its scope.",
+        "business_impact": "Manage ICT risk, incidents, resilience testing and ICT third-party dependencies.",
+        "applicability_notes": "Application date shown. Entity exemptions, proportionality and technical standards matter; DORA is sector-specific in relation to overlapping NIS2 requirements.",
+        "audit_requirements": [
+          "Applicability and obligation register",
+          "Risk assessment, control testing and evidence",
+          "Incident response, reporting and supplier processes"
+        ]
+      }
+    }
+  },
+  {
+    "id": "eu-ai",
+    "country_code": "EU",
+    "jurisdiction": "EU",
+    "official_name": "Regulation (EU) 2024/1689 — Artificial Intelligence Act",
+    "short_name": "EU AI Act",
+    "category": "law",
+    "regulatory_authority": "European AI Office / national competent authorities",
+    "official_source_url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+    "effective_date": "2024-08-01",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "en": {
+        "description": "A risk-based framework with obligations varying by AI use, system category and operator role.",
+        "business_impact": "Identify provider or deployer roles and the applicable implementation phase.",
+        "applicability_notes": "Entry into force is not the application date for every obligation. Phased dates and any enacted amendments must be checked for each provision; no single fine or deadline applies to all AI systems.",
+        "audit_requirements": [
+          "Applicability and obligation register",
+          "Risk assessment, control testing and evidence",
+          "Incident response, reporting and supplier processes"
+        ]
+      }
+    }
+  },
+  {
+    "id": "fr-rgpd",
+    "country_code": "FR",
+    "jurisdiction": "FR",
+    "official_name": "Règlement (UE) 2016/679 et loi n° 78-17 du 6 janvier 1978 modifiée",
+    "short_name": "RGPD • Informatique et Libertés",
+    "category": "law",
+    "regulatory_authority": "CNIL",
+    "official_source_url": "https://www.cnil.fr/fr/le-cadre-national/la-loi-informatique-et-libertes",
+    "effective_date": "2018-05-25",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "fr": {
+        "description": "Le RGPD et la loi Informatique et Libertés encadrent le traitement et la sécurité des données personnelles.",
+        "business_impact": "Documenter la licéité, les droits, la sécurité, les sous-traitants et les transferts.",
+        "applicability_notes": "La date indiquée est celle de l’application du RGPD. Le périmètre, les exceptions et les règles sectorielles doivent être appréciés pour chaque traitement.",
+        "audit_requirements": [
+          "Registre du périmètre et des obligations",
+          "Évaluation des risques, tests des contrôles et preuves",
+          "Réponse aux incidents, notifications et fournisseurs"
+        ]
+      }
+    }
+  },
+  {
+    "id": "fr-nis2",
+    "country_code": "FR",
+    "jurisdiction": "FR",
+    "official_name": "Directive (UE) 2022/2555 — transposition française",
+    "short_name": "NIS 2 • Transposition en cours",
+    "category": "law",
+    "regulatory_authority": "ANSSI",
+    "official_source_url": "https://messervices.cyber.gouv.fr/nis2",
+    "effective_date": null,
+    "publication_date": null,
+    "status": "draft",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "fr": {
+        "description": "La source officielle indique que la transposition française est en cours.",
+        "business_impact": "Préparer la gouvernance et les contrôles sans présenter un projet national comme une loi applicable.",
+        "applicability_notes": "Le ReCyF publié par l’ANSSI contient des mesures recommandées. La directive européenne, les dispositifs nationaux existants et le projet de transposition ont des statuts distincts.",
+        "audit_requirements": [
+          "Registre du périmètre et des obligations",
+          "Évaluation des risques, tests des contrôles et preuves",
+          "Réponse aux incidents, notifications et fournisseurs"
+        ]
+      }
+    }
+  },
+  {
+    "id": "fr-lpm",
+    "country_code": "FR",
+    "jurisdiction": "FR",
+    "official_name": "Code de la défense — sécurité des systèmes d’information des opérateurs d’importance vitale",
+    "short_name": "LPM • OIV",
+    "category": "law",
+    "regulatory_authority": "ANSSI",
+    "official_source_url": "https://cyber.gouv.fr/reglementation/cybersecurite-systemes-dinformation/directives-nis-nis2-et-dispositif-saiv/",
+    "effective_date": null,
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "fr": {
+        "description": "Le dispositif issu de la programmation militaire encadre la sécurité des systèmes d’information d’importance vitale.",
+        "business_impact": "Identifier une éventuelle désignation et les règles de sécurité sectorielles applicables.",
+        "applicability_notes": "Le régime vise les opérateurs et systèmes désignés; il ne constitue pas une obligation identique pour toutes les entreprises.",
+        "audit_requirements": [
+          "Registre du périmètre et des obligations",
+          "Évaluation des risques, tests des contrôles et preuves",
+          "Réponse aux incidents, notifications et fournisseurs"
+        ]
+      }
+    }
+  },
+  {
+    "id": "be-rgpd",
+    "country_code": "BE",
+    "jurisdiction": "BE",
+    "official_name": "Règlement (UE) 2016/679 — Règlement général sur la protection des données",
+    "short_name": "RGPD",
+    "category": "law",
+    "regulatory_authority": "Autorité de protection des données",
+    "official_source_url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj",
+    "effective_date": "2018-05-25",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "fr": {
+        "description": "Le RGPD encadre les traitements de données personnelles relevant de son champ d’application.",
+        "business_impact": "Conserver les preuves de conformité, gérer les droits et évaluer les violations.",
+        "applicability_notes": "Les dispositions belges complémentaires et les règles sectorielles restent à examiner; la langue française ne détermine pas le droit applicable.",
+        "audit_requirements": [
+          "Registre du périmètre et des obligations",
+          "Évaluation des risques, tests des contrôles et preuves",
+          "Réponse aux incidents, notifications et fournisseurs"
+        ]
+      }
+    }
+  },
+  {
+    "id": "be-nis2",
+    "country_code": "BE",
+    "jurisdiction": "BE",
+    "official_name": "Loi du 26 avril 2024 établissant un cadre pour la cybersécurité des réseaux et des systèmes d’information d’intérêt général pour la sécurité publique",
+    "short_name": "Loi NIS2 belge",
+    "category": "law",
+    "regulatory_authority": "Centre pour la Cybersécurité Belgique — CCB",
+    "official_source_url": "https://atwork.safeonweb.be/fr/nis2",
+    "effective_date": "2024-10-18",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "fr": {
+        "description": "La loi belge transpose NIS2 et encadre la gestion des risques, les incidents et la supervision.",
+        "business_impact": "Vérifier le périmètre, l’enregistrement et les exigences de contrôle ou d’évaluation de conformité.",
+        "applicability_notes": "Les obligations et délais dépendent de la catégorie de l’entité. L’arrêté royal du 9 juin 2024 précise la mise en œuvre; certains jalons sont progressifs.",
+        "audit_requirements": [
+          "Registre du périmètre et des obligations",
+          "Évaluation des risques, tests des contrôles et preuves",
+          "Réponse aux incidents, notifications et fournisseurs"
+        ]
+      }
+    }
+  },
+  {
+    "id": "es-rgpd",
+    "country_code": "ES",
+    "jurisdiction": "ES",
+    "official_name": "Reglamento (UE) 2016/679 y Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales",
+    "short_name": "RGPD • LOPDGDD",
+    "category": "law",
+    "regulatory_authority": "Agencia Española de Protección de Datos — AEPD",
+    "official_source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673",
+    "effective_date": "2018-12-07",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "es": {
+        "description": "La LOPDGDD complementa el RGPD y regula garantías de protección de datos y derechos digitales.",
+        "business_impact": "Documentar bases jurídicas, seguridad, derechos y relaciones con encargados.",
+        "applicability_notes": "La fecha corresponde a la entrada en vigor de la LOPDGDD; el RGPD se aplica desde el 25 de mayo de 2018. Deben revisarse las excepciones y las autoridades competentes.",
+        "audit_requirements": [
+          "Registro del ámbito y de las obligaciones",
+          "Evaluación de riesgos, pruebas de controles y evidencias",
+          "Respuesta a incidentes, notificaciones y proveedores"
+        ]
+      }
+    }
+  },
+  {
+    "id": "es-ens",
+    "country_code": "ES",
+    "jurisdiction": "ES",
+    "official_name": "Real Decreto 311/2022, de 3 de mayo, por el que se regula el Esquema Nacional de Seguridad",
+    "short_name": "ENS • Real Decreto 311/2022",
+    "category": "law",
+    "regulatory_authority": "Centro Criptológico Nacional / autoridades competentes",
+    "official_source_url": "https://www.boe.es/buscar/act.php?id=BOE-A-2022-7191",
+    "effective_date": "2022-05-05",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "es": {
+        "description": "El ENS establece principios, requisitos y medidas de seguridad para sistemas incluidos en su ámbito.",
+        "business_impact": "Categorizar sistemas, aplicar medidas y planificar la evaluación de conformidad correspondiente.",
+        "applicability_notes": "Se aplica al sector público y a los proveedores incluidos en el artículo 2; no impone la misma certificación a cualquier empresa privada.",
+        "audit_requirements": [
+          "Registro del ámbito y de las obligaciones",
+          "Evaluación de riesgos, pruebas de controles y evidencias",
+          "Respuesta a incidentes, notificaciones y proveedores"
+        ]
+      }
+    }
+  },
+  {
+    "id": "es-nis2",
+    "country_code": "ES",
+    "jurisdiction": "ES",
+    "official_name": "Directiva (UE) 2022/2555 — transposición en España",
+    "short_name": "NIS2 • Seguimiento de transposición",
+    "category": "law",
+    "regulatory_authority": "Autoridades nacionales competentes",
+    "official_source_url": "https://digital-strategy.ec.europa.eu/en/policies/nis2-directive-spain",
+    "effective_date": null,
+    "publication_date": null,
+    "status": "draft",
+    "last_verified_at": "2026-10-22",
+    "review_state": "needs_review",
+    "published": false,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "es": {
+        "description": "La transposición nacional debe comprobarse separadamente de la vigencia de la directiva europea.",
+        "business_impact": "Revisar la actividad, el tamaño y el texto nacional publicado antes de asignar obligaciones.",
+        "applicability_notes": "La fuente consultada no permite confirmar aquí un texto nacional consolidado y vigente. Registro pendiente de revisión; no se publica como obligación nacional.",
+        "audit_requirements": [
+          "Registro del ámbito y de las obligaciones",
+          "Evaluación de riesgos, pruebas de controles y evidencias",
+          "Respuesta a incidentes, notificaciones y proveedores"
+        ]
+      }
+    }
+  },
+  {
+    "id": "cl-cyber",
+    "country_code": "CL",
+    "jurisdiction": "CL",
+    "official_name": "Ley N° 21.663 — Ley Marco de Ciberseguridad",
+    "short_name": "Ley 21.663 • Ciberseguridad",
+    "category": "law",
+    "regulatory_authority": "Agencia Nacional de Ciberseguridad — ANCI",
+    "official_source_url": "https://www.bcn.cl/leychile/navegar?idNorma=1202434",
+    "effective_date": "2025-01-01",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "es": {
+        "description": "Establece un marco de ciberseguridad para instituciones que prestan servicios esenciales y operadores de importancia vital.",
+        "business_impact": "Determinar la clasificación, gestionar riesgos y preparar respuesta, reportes y evidencia de cumplimiento.",
+        "applicability_notes": "Vigencia por etapas: reglas generales desde el 1 de enero de 2025; artículos 5, 8, 9 y Título VII desde el 1 de marzo de 2025 (DFL 1, artículo 2). Las obligaciones dependen de la clasificación y de las instrucciones de ANCI; no se presume la designación como operador de importancia vital.",
+        "audit_requirements": [
+          "Registro del ámbito y de las obligaciones",
+          "Evaluación de riesgos, pruebas de controles y evidencias",
+          "Respuesta a incidentes, notificaciones y proveedores"
+        ]
+      }
+    }
+  },
+  {
+    "id": "cl-privacy-current",
+    "country_code": "CL",
+    "jurisdiction": "CL",
+    "official_name": "Ley N° 19.628 sobre protección de la vida privada",
+    "short_name": "Ley 19.628 • Régimen vigente",
+    "category": "law",
+    "regulatory_authority": "Autoridades competentes de Chile",
+    "official_source_url": "https://www.bcn.cl/leychile/Navegar?idNorma=141599&idVersion=2023-05-09",
+    "effective_date": null,
+    "publication_date": "1999-08-28",
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "es": {
+        "description": "Regula el tratamiento de datos personales en el régimen anterior a la reforma de la Ley 21.719.",
+        "business_impact": "Mantener controles y procedimientos de tratamiento conforme al régimen actualmente aplicable.",
+        "applicability_notes": "La fuente consolidada distingue el texto vigente hasta el 30 de noviembre de 2026 y las modificaciones diferidas del 1 de diciembre de 2026.",
+        "audit_requirements": [
+          "Registro del ámbito y de las obligaciones",
+          "Evaluación de riesgos, pruebas de controles y evidencias",
+          "Respuesta a incidentes, notificaciones y proveedores"
+        ]
+      }
+    }
+  },
+  {
+    "id": "cl-privacy-new",
+    "country_code": "CL",
+    "jurisdiction": "CL",
+    "official_name": "Ley N° 21.719 — Regula la protección y el tratamiento de los datos personales y crea la Agencia de Protección de Datos Personales",
+    "short_name": "Ley 21.719 • Nueva protección de datos",
+    "category": "law",
+    "regulatory_authority": "Agencia de Protección de Datos Personales — nuevo régimen",
+    "official_source_url": "https://www.bcn.cl/leychile/navegar?idNorma=1209272",
+    "effective_date": "2026-12-01",
+    "publication_date": "2024-12-13",
+    "status": "upcoming",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "es": {
+        "description": "Reforma el régimen de datos personales y crea una autoridad especializada.",
+        "business_impact": "Preparar la transición, la gobernanza y los mecanismos de ejercicio de derechos.",
+        "applicability_notes": "Al 22 de octubre de 2026 tiene vigencia diferida: 1 de diciembre de 2026. No se presenta como régimen ya aplicable.",
+        "audit_requirements": [
+          "Registro del ámbito y de las obligaciones",
+          "Evaluación de riesgos, pruebas de controles y evidencias",
+          "Respuesta a incidentes, notificaciones y proveedores"
+        ]
+      }
+    }
+  },
+  {
+    "id": "mx-private",
+    "country_code": "MX",
+    "jurisdiction": "MX",
+    "official_name": "Ley Federal de Protección de Datos Personales en Posesión de los Particulares — nueva ley de 2025",
+    "short_name": "LFPDPPP • Texto vigente",
+    "category": "law",
+    "regulatory_authority": "Secretaría Anticorrupción y Buen Gobierno",
+    "official_source_url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf",
+    "effective_date": "2025-03-21",
+    "publication_date": "2025-03-20",
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "es": {
+        "description": "La nueva ley regula el tratamiento de datos personales por particulares.",
+        "business_impact": "Actualizar avisos, medidas de seguridad, derechos ARCO y procedimientos de responsabilidad.",
+        "applicability_notes": "Sustituye la ley de 2010. La versión oficial consultada indica última reforma de 14 de noviembre de 2025; no debe atribuirse la supervisión actual al extinto INAI.",
+        "audit_requirements": [
+          "Registro del ámbito y de las obligaciones",
+          "Evaluación de riesgos, pruebas de controles y evidencias",
+          "Respuesta a incidentes, notificaciones y proveedores"
+        ]
+      }
+    }
+  },
+  {
+    "id": "mx-public",
+    "country_code": "MX",
+    "jurisdiction": "MX",
+    "official_name": "Ley General de Protección de Datos Personales en Posesión de Sujetos Obligados — 2025",
+    "short_name": "LGPDPPSO • Sector público",
+    "category": "law",
+    "regulatory_authority": "Autoridades garantes competentes según el sujeto obligado",
+    "official_source_url": "https://datos-personales.scjn.gob.mx/sites/default/files/normativa-materia/LGPDPPSO-DOF-20Mar2025.pdf",
+    "effective_date": "2025-03-21",
+    "publication_date": "2025-03-20",
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "es": {
+        "description": "Establece bases de protección de datos para los sujetos obligados del sector público.",
+        "business_impact": "Determinar la autoridad competente y mantener controles de seguridad y atención de derechos.",
+        "applicability_notes": "Es un régimen distinto al de particulares. Deben revisarse las disposiciones de armonización local y los transitorios aplicables.",
+        "audit_requirements": [
+          "Registro del ámbito y de las obligaciones",
+          "Evaluación de riesgos, pruebas de controles y evidencias",
+          "Respuesta a incidentes, notificaciones y proveedores"
+        ]
+      }
+    }
+  },
+  {
+    "id": "ar-privacy",
+    "country_code": "AR",
+    "jurisdiction": "AR",
+    "official_name": "Ley 25.326 de Protección de los Datos Personales",
+    "short_name": "Ley 25.326 • Datos personales",
+    "category": "law",
+    "regulatory_authority": "Agencia de Acceso a la Información Pública — AAIP",
+    "official_source_url": "https://www.argentina.gob.ar/normativa/nacional/ley-25326-64790/texto",
+    "effective_date": null,
+    "publication_date": "2000-11-02",
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "es": {
+        "description": "Protege los datos personales y regula su tratamiento en archivos, registros y bancos de datos.",
+        "business_impact": "Documentar finalidades, consentimiento cuando corresponda, seguridad y derechos de los titulares.",
+        "applicability_notes": "El alcance y las excepciones deben evaluarse junto con el Decreto 1558/2001 y las disposiciones de AAIP. Los proyectos de reforma no sustituyen por sí mismos la ley vigente.",
+        "audit_requirements": [
+          "Registro del ámbito y de las obligaciones",
+          "Evaluación de riesgos, pruebas de controles y evidencias",
+          "Respuesta a incidentes, notificaciones y proveedores"
+        ]
+      }
+    }
+  },
+  {
+    "id": "jp-basic",
+    "country_code": "JP",
+    "jurisdiction": "JP",
+    "official_name": "サイバーセキュリティ基本法（平成26年法律第104号）",
+    "short_name": "サイバーセキュリティ基本法",
+    "category": "law",
+    "regulatory_authority": "国家サイバー統括室・関係行政機関",
+    "official_source_url": "https://laws.e-gov.go.jp/law/426AC1000000104",
+    "effective_date": "2015-01-09",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "ja": {
+        "description": "国の基本方針、戦略と関係主体の責務を定める基本法です。",
+        "business_impact": "組織の役割と適用される個別法令を整理し、経営層の関与を明確にします。",
+        "applicability_notes": "基本法と業種別の具体的義務は区別が必要です。全企業に同一の監査や報告期限を課す法律として扱いません。",
+        "audit_requirements": [
+          "適用範囲と義務の整理",
+          "リスク評価、統制テストと証拠",
+          "インシデント対応、報告と委託先管理"
+        ]
+      }
+    }
+  },
+  {
+    "id": "jp-appi",
+    "country_code": "JP",
+    "jurisdiction": "JP",
+    "official_name": "個人情報の保護に関する法律（平成15年法律第57号）",
+    "short_name": "個人情報保護法 • APPI",
+    "category": "law",
+    "regulatory_authority": "個人情報保護委員会 — PPC",
+    "official_source_url": "https://www.ppc.go.jp/en/legal/",
+    "effective_date": null,
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "ja": {
+        "description": "個人情報の適正な取扱い、安全管理措置と本人の権利を定めます。",
+        "business_impact": "利用目的、委託先管理、第三者提供と漏えい時の対応を整理します。",
+        "applicability_notes": "日本語の現行法令が正文です。英訳は参照資料であり、改正の施行日、報告対象と例外は該当条文で確認する必要があります。",
+        "audit_requirements": [
+          "適用範囲と義務の整理",
+          "リスク評価、統制テストと証拠",
+          "インシデント対応、報告と委託先管理"
+        ]
+      }
+    }
+  },
+  {
+    "id": "jp-meti",
+    "country_code": "JP",
+    "jurisdiction": "JP",
+    "official_name": "サイバーセキュリティ経営ガイドライン Ver 3.0",
+    "short_name": "METI • 経営ガイドライン",
+    "category": "guidance",
+    "regulatory_authority": "経済産業省・IPA",
+    "official_source_url": "https://www.meti.go.jp/policy/netsecurity/mng_guide.html",
+    "effective_date": "2023-03-24",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "ja": {
+        "description": "経営者の関与を通じたサイバーセキュリティ対策を支援するガイドラインです。",
+        "business_impact": "責任体制、リスク管理とサプライチェーン対応の改善に活用します。",
+        "applicability_notes": "法令そのものではありません。契約や業種別規制による要求事項とは区別して利用します。",
+        "audit_requirements": [
+          "適用範囲と義務の整理",
+          "リスク評価、統制テストと証拠",
+          "インシデント対応、報告と委託先管理"
+        ]
+      }
+    }
+  },
+  {
+    "id": "cn-cyber",
+    "country_code": "CN",
+    "jurisdiction": "CN",
+    "official_name": "中华人民共和国网络安全法（2025年修正）",
+    "short_name": "网络安全法 • 2025年修正",
+    "category": "law",
+    "regulatory_authority": "国家网信部门及相关主管部门",
+    "official_source_url": "https://www.gjbmj.gov.cn/n1/2026/0421/c409088-40705863.html",
+    "effective_date": "2026-01-01",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "zh-CN": {
+        "description": "规范网络安全保障、网络运行和相关法律责任。",
+        "business_impact": "识别网络运营者义务，落实安全保护、事件响应和证据管理。",
+        "applicability_notes": "此处日期对应2025年修正决定的施行日期。适用义务取决于主体、业务和关键信息基础设施认定，不能将全部要求一概适用于所有企业。",
+        "audit_requirements": [
+          "适用范围和义务清单",
+          "风险评估、控制测试和证据",
+          "事件响应、报告和供应商管理"
+        ]
+      }
+    }
+  },
+  {
+    "id": "cn-data",
+    "country_code": "CN",
+    "jurisdiction": "CN",
+    "official_name": "中华人民共和国数据安全法",
+    "short_name": "数据安全法",
+    "category": "law",
+    "regulatory_authority": "有关行业主管部门、公安机关及国家网信部门",
+    "official_source_url": "https://www.miit.gov.cn/zwgk/zcwj/flfg/art/2022/art_284b390b84484f10b0e43eeafaad0f6d.html",
+    "effective_date": "2021-09-01",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "zh-CN": {
+        "description": "规定数据处理活动的安全管理、分类分级保护和相关责任。",
+        "business_impact": "建立数据分类、风险评估和安全管理制度，识别重要数据相关要求。",
+        "applicability_notes": "具体义务取决于数据类别、行业规则和处理活动，跨境提供数据应另行核实适用规定。",
+        "audit_requirements": [
+          "适用范围和义务清单",
+          "风险评估、控制测试和证据",
+          "事件响应、报告和供应商管理"
+        ]
+      }
+    }
+  },
+  {
+    "id": "cn-pipl",
+    "country_code": "CN",
+    "jurisdiction": "CN",
+    "official_name": "中华人民共和国个人信息保护法",
+    "short_name": "个人信息保护法 • PIPL",
+    "category": "law",
+    "regulatory_authority": "国家网信部门及相关主管部门",
+    "official_source_url": "https://fgk.chinatax.gov.cn/zcfgk/c100009/c5211776/content.html",
+    "effective_date": "2021-11-01",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "zh-CN": {
+        "description": "规范个人信息处理活动，保护个人信息权益。",
+        "business_impact": "记录处理依据、个人权利、安全措施和委托处理安排。",
+        "applicability_notes": "适用范围包括法定条件下的境外处理活动。跨境、敏感个人信息和影响评估要求应结合具体场景确认。",
+        "audit_requirements": [
+          "适用范围和义务清单",
+          "风险评估、控制测试和证据",
+          "事件响应、报告和供应商管理"
+        ]
+      }
+    }
+  },
+  {
+    "id": "cn-network-data",
+    "country_code": "CN",
+    "jurisdiction": "CN",
+    "official_name": "网络数据安全管理条例（国务院令第790号）",
+    "short_name": "网络数据安全管理条例",
+    "category": "law",
+    "regulatory_authority": "国家网信部门及相关主管部门",
+    "official_source_url": "https://app.www.gov.cn/govdata/gov/202409/30/520076/article.html",
+    "effective_date": "2025-01-01",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "zh-CN": {
+        "description": "细化网络数据处理、个人信息和重要数据保护要求。",
+        "business_impact": "将数据安全管理和网络安全等级保护要求纳入控制体系。",
+        "applicability_notes": "条例与网络安全法、数据安全法和个人信息保护法配套适用。MLPS 2.0的具体标准、定级和测评要求需按系统和行业确认，不能视为单独统一适用的法律。",
+        "audit_requirements": [
+          "适用范围和义务清单",
+          "风险评估、控制测试和证据",
+          "事件响应、报告和供应商管理"
+        ]
+      }
+    }
+  },
+  {
+    "id": "vn-cyber",
+    "country_code": "VN",
+    "jurisdiction": "VN",
+    "official_name": "Luật An ninh mạng số 116/2025/QH15",
+    "short_name": "Luật 116/2025/QH15 • An ninh mạng",
+    "category": "law",
+    "regulatory_authority": "Bộ Công an và cơ quan có thẩm quyền",
+    "official_source_url": "https://chinhphu.vn/?classid=1&docid=216499&orggroupid=1&pageid=27160",
+    "effective_date": "2026-07-01",
+    "publication_date": "2025-12-10",
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied. Amendment history: https://vbpl.moj.gov.vn/TW/Pages/vbpq-lichsu.aspx?ItemID=187039",
+    "translations": {
+      "vi": {
+        "description": "Quy định về an ninh mạng, bảo vệ an ninh mạng và trách nhiệm của cơ quan, tổ chức, cá nhân.",
+        "business_impact": "Rà soát phạm vi áp dụng, biện pháp bảo vệ và hồ sơ kiểm soát theo hoạt động thực tế.",
+        "applicability_notes": "Luật có hiệu lực từ ngày 1 tháng 7 năm 2026. Lịch sử chính thức ghi nhận sửa đổi bởi Luật 143/2025/QH15 từ ngày 1 tháng 3 năm 2026; phải áp dụng văn bản đã sửa đổi và các quy định chuyển tiếp, không chỉ bản ban hành ban đầu.",
+        "audit_requirements": [
+          "Danh mục phạm vi áp dụng và nghĩa vụ",
+          "Đánh giá rủi ro, kiểm thử kiểm soát và bằng chứng",
+          "Ứng phó sự cố, thông báo và quản lý nhà cung cấp"
+        ]
+      }
+    }
+  },
+  {
+    "id": "vn-privacy",
+    "country_code": "VN",
+    "jurisdiction": "VN",
+    "official_name": "Luật Bảo vệ dữ liệu cá nhân số 91/2025/QH15",
+    "short_name": "Luật 91/2025/QH15 • Dữ liệu cá nhân",
+    "category": "law",
+    "regulatory_authority": "Bộ Công an và cơ quan có thẩm quyền",
+    "official_source_url": "https://sav.gov.vn/vi/bai-viet/tai-lieu-gioi-thieu-luat-bao-ve-du-lieu-ca-nhan",
+    "effective_date": "2026-01-01",
+    "publication_date": "2025-06-26",
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "vi": {
+        "description": "Quy định về bảo vệ dữ liệu cá nhân, quyền của chủ thể dữ liệu và trách nhiệm xử lý.",
+        "business_impact": "Xác định căn cứ xử lý, quản lý quyền, bảo mật và hoạt động chuyển dữ liệu.",
+        "applicability_notes": "Đã có hiệu lực từ ngày 1 tháng 1 năm 2026. Nghĩa vụ và ngoại lệ phải được đánh giá theo vai trò và hoạt động xử lý; không áp dụng mặc định quy định của Thổ Nhĩ Kỳ.",
+        "audit_requirements": [
+          "Danh mục phạm vi áp dụng và nghĩa vụ",
+          "Đánh giá rủi ro, kiểm thử kiểm soát và bằng chứng",
+          "Ứng phó sự cố, thông báo và quản lý nhà cung cấp"
+        ]
+      }
+    }
+  },
+  {
+    "id": "vn-decree356",
+    "country_code": "VN",
+    "jurisdiction": "VN",
+    "official_name": "Nghị định số 356/2025/NĐ-CP",
+    "short_name": "Nghị định 356/2025/NĐ-CP",
+    "category": "law",
+    "regulatory_authority": "Chính phủ / Bộ Công an",
+    "official_source_url": "https://congbao.cdnchinhphu.vn/180507251028987904/2026/1/17/356signed-1768638052103952849513.pdf",
+    "effective_date": "2026-01-01",
+    "publication_date": "2025-12-31",
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "vi": {
+        "description": "Quy định chi tiết một số điều và biện pháp thi hành Luật Bảo vệ dữ liệu cá nhân.",
+        "business_impact": "Rà soát hồ sơ, biểu mẫu và quy trình đánh giá tác động phù hợp.",
+        "applicability_notes": "Phải đọc cùng Luật 91/2025/QH15 và điều khoản chuyển tiếp. Yêu cầu cụ thể phụ thuộc loại dữ liệu và hoạt động xử lý.",
+        "audit_requirements": [
+          "Danh mục phạm vi áp dụng và nghĩa vụ",
+          "Đánh giá rủi ro, kiểm thử kiểm soát và bằng chứng",
+          "Ứng phó sự cố, thông báo và quản lý nhà cung cấp"
+        ]
+      }
+    }
+  },
+  {
+    "id": "sa-ecc",
+    "country_code": "SA",
+    "jurisdiction": "SA",
+    "official_name": "الضوابط الأساسية للأمن السيبراني ECC–2:2024",
+    "short_name": "NCA • الضوابط الأساسية",
+    "category": "law",
+    "regulatory_authority": "الهيئة الوطنية للأمن السيبراني — NCA",
+    "official_source_url": "https://istitlaa.ncc.gov.sa/en/security/nca/ecc22024/Documents/ECC%202-2024%20EN%2019092024.pdf",
+    "effective_date": null,
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "ar": {
+        "description": "تحدد متطلبات أساسية للأمن السيبراني للجهات المشمولة بنطاق تطبيقها.",
+        "business_impact": "تحديد نطاق الجهة وتوثيق الحوكمة وإدارة المخاطر واختبار الضوابط.",
+        "applicability_notes": "هي ضوابط تنظيمية وطنية وليست معياراً دولياً اختيارياً. يحدد نطاق الوثيقة والقرارات ذات الصلة الجهات الملزمة؛ ولا يفترض تطبيقها بالتساوي على كل منشأة.",
+        "audit_requirements": [
+          "سجل نطاق التطبيق والالتزامات",
+          "تقييم المخاطر واختبار الضوابط والأدلة",
+          "الاستجابة للحوادث والإبلاغ وإدارة الموردين"
+        ]
+      }
+    }
+  },
+  {
+    "id": "sa-pdpl",
+    "country_code": "SA",
+    "jurisdiction": "SA",
+    "official_name": "نظام حماية البيانات الشخصية المعدل بالمرسوم الملكي رقم م/148",
+    "short_name": "نظام حماية البيانات الشخصية • PDPL",
+    "category": "law",
+    "regulatory_authority": "الهيئة السعودية للبيانات والذكاء الاصطناعي — سدايا",
+    "official_source_url": "https://misa.gov.sa/app/uploads/2025/08/PersonalDataProtectionLaw.pdf",
+    "effective_date": "2023-09-14",
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "ar": {
+        "description": "ينظم معالجة البيانات الشخصية وحقوق أصحاب البيانات والتزامات جهات التحكم.",
+        "business_impact": "توثيق أغراض المعالجة والأسس النظامية والحماية وإجراءات الحقوق ونقل البيانات.",
+        "applicability_notes": "انتهت مهلة توفيق الأوضاع في سبتمبر 2024. يجب مراجعة اللوائح التنفيذية ولائحة النقل المحدثة ونطاق التطبيق لكل حالة، دون افتراض مهلة إبلاغ موحدة لكل حادث.",
+        "audit_requirements": [
+          "سجل نطاق التطبيق والالتزامات",
+          "تقييم المخاطر واختبار الضوابط والأدلة",
+          "الاستجابة للحوادث والإبلاغ وإدارة الموردين"
+        ]
+      }
+    }
+  },
+  {
+    "id": "sa-cloud",
+    "country_code": "SA",
+    "jurisdiction": "SA",
+    "official_name": "ضوابط الأمن السيبراني للحوسبة السحابية CCC–2:2024",
+    "short_name": "NCA • ضوابط الحوسبة السحابية",
+    "category": "law",
+    "regulatory_authority": "الهيئة الوطنية للأمن السيبراني — NCA",
+    "official_source_url": "https://nca.gov.sa/en/regulatory-documents/controls-list/ccc/",
+    "effective_date": null,
+    "publication_date": null,
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "ar": {
+        "description": "توسع الضوابط الأساسية لتشمل مزودي الخدمات السحابية والمشتركين ضمن نطاق التطبيق.",
+        "business_impact": "توزيع المسؤوليات وتقييم المخاطر والعقود وضوابط البيانات والخدمات السحابية.",
+        "applicability_notes": "توضح النسخة المحدثة متطلبات توطين البيانات. تختلف متطلبات المزود والمشترك؛ ويجب الرجوع إلى نطاق الوثيقة وتصنيف البيانات والأنظمة ذات الصلة.",
+        "audit_requirements": [
+          "سجل نطاق التطبيق والالتزامات",
+          "تقييم المخاطر واختبار الضوابط والأدلة",
+          "الاستجابة للحوادث والإبلاغ وإدارة الموردين"
+        ]
+      }
+    }
+  },
+  {
+    "id": "cn-mlps",
+    "country_code": "CN",
+    "jurisdiction": "CN",
+    "official_name": "GB/T 22239-2019 信息安全技术 网络安全等级保护基本要求",
+    "short_name": "MLPS 2.0 • 等级保护技术基线",
+    "category": "guidance",
+    "regulatory_authority": "国家市场监督管理总局、国家标准化管理委员会 / 行业主管部门",
+    "official_source_url": "https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=BAFB47E8874764186BDB7865E8344DAF",
+    "effective_date": "2019-12-01",
+    "publication_date": "2019-05-10",
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "zh-CN": {
+        "description": "网络安全等级保护的推荐性国家技术标准，官方标准平台列为现行。",
+        "business_impact": "按系统定级和适用法规选择安全管理与技术控制，并保留测评证据。",
+        "applicability_notes": "GB/T标准与网络安全法规定的等级保护义务应区分。具体定级、备案、测评和行业要求取决于系统情况；本标准不是一部独立的法律。",
+        "audit_requirements": [
+          "适用范围和义务清单",
+          "风险评估、控制测试和证据",
+          "事件响应、报告和供应商管理"
+        ]
+      }
+    }
+  },
+  {
+    "id": "ar-aaip47",
+    "country_code": "AR",
+    "jurisdiction": "AR",
+    "official_name": "Resolución AAIP 47/2018 — Medidas de seguridad recomendadas para el tratamiento y conservación de los datos personales",
+    "short_name": "AAIP 47/2018 • Medidas recomendadas",
+    "category": "guidance",
+    "regulatory_authority": "Agencia de Acceso a la Información Pública — AAIP",
+    "official_source_url": "https://www.argentina.gob.ar/normativa/nacional/resoluci%C3%B3n-47-2018-312662/texto",
+    "effective_date": null,
+    "publication_date": "2018-07-25",
+    "status": "active",
+    "last_verified_at": "2026-10-22",
+    "review_state": "verified",
+    "published": true,
+    "source_notes": "Official source reviewed 2026-10-22. Summary is selective; source controls. No universal fine or reporting deadline is implied.",
+    "translations": {
+      "es": {
+        "description": "Aprueba medidas de seguridad recomendadas para datos personales en medios informatizados y no informatizados.",
+        "business_impact": "Utilizar las recomendaciones para estructurar controles de acceso, conservación, recuperación y gestión de incidentes.",
+        "applicability_notes": "Las recomendaciones se distinguen de la obligación legal de seguridad de la Ley 25.326. La adecuación de las medidas debe evaluarse según los datos, riesgos y disposiciones aplicables.",
+        "audit_requirements": [
+          "Registro del ámbito y de las obligaciones",
+          "Evaluación de riesgos, pruebas de controles y evidencias",
+          "Respuesta a incidentes, notificaciones y proveedores"
+        ]
+      }
+    }
+  }
+]

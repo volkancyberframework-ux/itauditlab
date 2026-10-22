@@ -315,3 +315,79 @@ class MobileWaitlist(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class LegalRegulation(models.Model):
+    """Only explicitly reviewed, complete records may be published."""
+    STATUS = [('active','Yürürlükte'),('upcoming','Yürürlük tarihi bekleniyor'),
+              ('draft','Taslak / kural yapım süreci'),('repealed','Yürürlükten kalktı')]
+    id = models.SlugField(primary_key=True, max_length=80)
+    country_code = models.CharField(max_length=2, db_index=True)
+    jurisdiction = models.CharField(max_length=120)
+    official_name = models.CharField(max_length=500)
+    short_name = models.CharField(max_length=120)
+    category = models.CharField(max_length=30, choices=[('law','Kanun / düzenleme'),('guidance','Rehber / standart')])
+    regulatory_authority = models.CharField(max_length=240)
+    publication_date = models.DateField(null=True, blank=True)
+    effective_date = models.DateField(null=True, blank=True)
+    status = models.CharField(max_length=12, choices=STATUS)
+    official_source_url = models.URLField(max_length=1000)
+    last_verified_at = models.DateField(null=True, blank=True)
+    # {language: {description,business_impact,applicability_notes,audit_requirements:[]}}
+    translations = models.JSONField(default=dict)
+    review_state = models.CharField(max_length=20, default='needs_review', choices=[('needs_review','İnceleme bekliyor'),('verified','Doğrulandı')])
+    published = models.BooleanField(default=False)
+    source_notes = models.TextField(blank=True)
+    source_hash = models.CharField(max_length=64, blank=True, editable=False)
+    checked_at = models.DateTimeField(null=True, blank=True, editable=False)
+    link_status = models.CharField(max_length=240, blank=True, editable=False)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('country_code','id')
+        verbose_name = 'Mevzuat kaydı'
+        verbose_name_plural = 'Ülke mevzuat kayıtları'
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        from urllib.parse import urlsplit
+        from .jurisdictions import COUNTRY_NAMES, LANGUAGE_COUNTRIES
+        if self.country_code not in COUNTRY_NAMES:
+            raise ValidationError({'country_code':'Desteklenen bir ülke seçin.'})
+        from .legal_sources import validate_source_url
+        validate_source_url(self.official_source_url)
+        if urlsplit(self.official_source_url).scheme != 'https':
+            raise ValidationError({'official_source_url':'HTTPS resmî kaynak gereklidir.'})
+        if self.published and (self.review_state != 'verified' or not self.last_verified_at or not self.translations):
+            raise ValidationError('Yayın için doğrulama tarihi, çeviri ve onay gereklidir.')
+        if self.published and self.status == 'active' and self.effective_date:
+            from django.utils import timezone
+            if self.effective_date > timezone.localdate():
+                raise ValidationError('Gelecekte yürürlüğe girecek kayıt aktif yayımlanamaz.')
+        if self.last_verified_at:
+            from django.utils import timezone
+            if self.last_verified_at > timezone.localdate():
+                raise ValidationError({'last_verified_at':'Gelecekte bir doğrulama tarihi kullanılamaz.'})
+        if not isinstance(self.translations,dict):
+            raise ValidationError({'translations':'Dil anahtarları içeren bir JSON nesnesi kullanın.'})
+        for language, copy in self.translations.items():
+            if language not in LANGUAGE_COUNTRIES or self.country_code not in LANGUAGE_COUNTRIES[language] or not isinstance(copy,dict):
+                raise ValidationError({'translations':'Ülke ile uyumlu dil ve metin nesnesi gereklidir.'})
+            if not isinstance(copy.get('audit_requirements'),list) or not all(isinstance(item,str) and item.strip() for item in copy.get('audit_requirements',[])):
+                raise ValidationError({'translations':'Denetim kontrolleri boş olmayan metinlerden oluşan bir liste olmalıdır.'})
+            if not all(copy.get(key) for key in ('description','business_impact','applicability_notes','audit_requirements')):
+                raise ValidationError(f'{language}: açıklama, etki, kapsam ve denetim kontrolleri zorunludur.')
+
+    def __str__(self):
+        return f'{self.country_code} — {self.short_name}'
+
+
+class LegalRevision(models.Model):
+    regulation = models.ForeignKey(LegalRegulation, on_delete=models.PROTECT, related_name='revisions')
+    created_at = models.DateTimeField(auto_now_add=True)
+    actor = models.CharField(max_length=150)
+    snapshot = models.JSONField()
+    class Meta:
+        ordering = ('-created_at',)
+        verbose_name = 'Mevzuat revizyonu'
+        verbose_name_plural = 'Mevzuat revizyon geçmişi'
