@@ -34,11 +34,14 @@ class BusinessNetworkTests(TestCase):
         city=BusinessNetworkCity.objects.get(pk='16')
         self.assertTrue(city.is_active);self.assertEqual(city.updated_by,self.admin);self.assertIsNotNone(city.activated_at)
         self.assertEqual(Client().get('/api/business-network/stats/').json()['active_count'],12)
+        from landing.business_network import context
+        self.assertEqual(context()['network_stats']['development_count'],69)
         stamp=city.updated_at
         self.client.patch(self.url,data=json.dumps({'is_active':True}),content_type='application/json')
         city.refresh_from_db();self.assertEqual(city.updated_at,stamp)
         self.client.patch(self.url,data=json.dumps({'is_active':False}),content_type='application/json')
         self.assertEqual(Client().get('/api/business-network/stats/').json()['active_count'],11)
+        self.assertEqual(context()['network_stats']['development_count'],70)
     def test_staff_without_specific_permission_cannot_change_state(self):
         user=get_user_model().objects.create_user(username='viewer',password='test',is_staff=True)
         self.client.force_login(user)

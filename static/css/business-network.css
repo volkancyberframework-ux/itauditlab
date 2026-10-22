@@ -21,3 +21,7 @@ html[data-theme="light"] .business-network .network-tooltip>[data-network-status
 html[data-theme="light"] .business-network .network-tooltip>p{color:#36576f}
 html[data-theme="light"] .business-network .network-close{color:#36576f}
 html[data-theme="light"] .business-network .network-tooltip a:focus-visible,html[data-theme="light"] .business-network .network-close:focus-visible{outline-color:#006797}
+
+/* Keep all three metrics aligned with readable labels in every language. */
+.business-network .network-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}.business-network .network-stats>div{justify-content:flex-start}.business-network .network-stats>div>span:last-child{line-height:1.6;max-width:32ch}.business-network .network-stats strong{white-space:nowrap}
+@media(max-width:600px){.business-network .network-stats{grid-template-columns:1fr;gap:22px}.business-network .network-stats>div:last-child{grid-column:auto;flex-direction:column;align-items:stretch}.business-network .network-stats>div+div{border-top:1px solid var(--network-border);padding-top:20px}}

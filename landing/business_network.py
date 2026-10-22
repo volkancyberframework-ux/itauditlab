@@ -11,8 +11,10 @@ logger=logging.getLogger(__name__)
 COPY=json.loads((Path(__file__).parent/'data/business_network_i18n.json').read_text())
 
 def context():
-    try:stats=public_snapshot()['stats']
-    except (DatabaseError,ValueError):stats={'active_count':None,'total_count':81}
+    try:
+        stats=public_snapshot()['stats']
+        stats['development_count']=stats['total_count']-stats['active_count']
+    except (DatabaseError,ValueError):stats={'active_count':None,'total_count':81,'development_count':None}
     return {'network_stats':stats,'network_copy':COPY}
 
 @never_cache
