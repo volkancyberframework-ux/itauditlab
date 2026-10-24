@@ -602,3 +602,24 @@ class BusinessNetworkCity(models.Model):
 
     def __str__(self):
         return f'{self.city_code} — {self.city_name}'
+
+
+class WeeklyTelegramSchedule(models.Model):
+    from django.core.validators import MaxLengthValidator
+
+    id = models.PositiveSmallIntegerField(primary_key=True, default=1, editable=False)
+    monday = models.TextField('Pazartesi', blank=True, validators=[MaxLengthValidator(3500)])
+    tuesday = models.TextField('Salı', blank=True, validators=[MaxLengthValidator(3500)])
+    wednesday = models.TextField('Çarşamba', blank=True, validators=[MaxLengthValidator(3500)])
+    thursday = models.TextField('Perşembe', blank=True, validators=[MaxLengthValidator(3500)])
+    friday = models.TextField('Cuma', blank=True, validators=[MaxLengthValidator(3500)])
+    saturday = models.TextField('Cumartesi', blank=True, validators=[MaxLengthValidator(3500)])
+    sunday = models.TextField('Pazar', blank=True, validators=[MaxLengthValidator(3500)])
+
+    class Meta:
+        verbose_name = 'Haftalık Telegram bildirimi'
+        verbose_name_plural = 'Haftalık Telegram bildirimleri'
+        constraints = [models.CheckConstraint(check=models.Q(id=1), name='weekly_telegram_singleton')]
+
+    def __str__(self):
+        return 'Haftalık Telegram bildirimleri'

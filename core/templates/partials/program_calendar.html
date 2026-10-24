@@ -1,0 +1,72 @@
+{% load i18n %}
+{% language "tr" %}
+{% if program_calendars %}
+<div class="program-calendar-banner mb-4">
+  <div>
+    <span class="program-calendar-eyebrow">🎯 KİŞİSEL EĞİTİM YOLCULUĞUN</span>
+    <h2 class="h3 mb-1">Bir sonraki adımın burada</h2>
+    <p class="mb-0">{{ program_calendars|length }} programın var. Açılan derslerini ve yaklaşan eğitimlerini keşfet.</p>
+  </div>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#programCalendarModal">🗓️ Programlarım ve Ders Takvimim</button>
+</div>
+<div class="modal fade" id="programCalendarModal" tabindex="-1" aria-labelledby="programCalendarTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content program-calendar-modal">
+      <div class="modal-header">
+        <div>
+          <h2 class="modal-title h3" id="programCalendarTitle">🗓️ Programlarım ve Ders Takvimim</h2>
+          <p class="mb-0 small text-muted">Sana özel planın, adım adım ✨</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+      </div>
+      <div class="modal-body">
+        {% for program in program_calendars %}
+        <section class="program-calendar-program mb-4" aria-labelledby="programHeading{{ forloop.counter }}">
+          <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
+            <h3 class="h4 mb-2" id="programHeading{{ forloop.counter }}">🎓 {{ program.name }}</h3>
+            <span class="badge {% if program.active %}bg-light-primary text-primary{% else %}bg-light text-dark{% endif %}">{% if program.active %}🟢 Aktif{% else %}⏸️ Duraklatıldı{% endif %}</span>
+          </div>
+          <p class="small text-muted mb-2">🚀 Başlangıç: {{ program.start_date|date:"d.m.Y" }} · {{ program.opened_count }} / {{ program.total }} ders açıldı</p>
+          <div class="progress mb-3" style="height: 6px" role="progressbar" aria-label="Açılan ders oranı" aria-valuenow="{{ program.percent }}" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar bg-success" style="width: {{ program.percent }}%"></div>
+          </div>
+          <ol class="list-unstyled mb-0">
+            {% for lesson in program.lessons %}
+            <li class="program-calendar-lesson {% if lesson.opened %}program-calendar-open{% endif %}">
+              <span class="program-calendar-number" aria-hidden="true">{{ forloop.counter }}</span>
+              <div class="flex-grow-1">
+                <div class="fw-bold">{{ lesson.title }}</div>
+                <div class="small text-muted mt-1">🗓️ {{ lesson.date|date:"d.m.Y · l" }}</div>
+                {% if lesson.opened_at %}<div class="small text-muted">Erişime açılma: {{ lesson.opened_at|date:"d.m.Y" }}</div>{% endif %}
+              </div>
+              <div class="program-calendar-state">
+                <span class="small fw-bold {% if lesson.opened %}text-success{% else %}text-muted{% endif %}">{{ lesson.status }}</span>
+                {% if lesson.opened %}<a class="btn btn-sm btn-outline-primary mt-2" href="{% url 'course_single' lesson.course_id %}">Derse git →</a>{% endif %}
+              </div>
+            </li>
+            {% empty %}
+            <li class="text-muted py-3">🌱 Ders takvimin hazırlanıyor. Dersler eklendiğinde burada görünecek.</li>
+            {% endfor %}
+          </ol>
+        </section>
+        {% endfor %}
+        <p class="small text-muted mb-0">💡 Tarihler kişisel başlangıç tarihine göre hesaplanır. “Açıldı” durumu ders erişimini gösterir. Takvim Türkiye saatine göredir.</p>
+      </div>
+      <div class="modal-footer"><button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Tamam, devam edelim ✨</button></div>
+    </div>
+  </div>
+</div>
+<style>
+.program-calendar-banner {display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px;border:1px solid #ddd6fe;border-radius:16px;background:linear-gradient(120deg,#f5f3ff,#eff6ff);color:#24304b}
+.program-calendar-banner .btn {flex-shrink:0;white-space:normal}
+.program-calendar-eyebrow {display:block;color:#6941c6;font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:8px}
+.program-calendar-modal {border-radius:18px;overflow:hidden}
+.program-calendar-program {border:1px solid #e5e7eb;border-radius:14px;padding:20px}
+.program-calendar-lesson {display:flex;align-items:center;gap:14px;padding:16px 0;border-top:1px solid #edf0f5}
+.program-calendar-number {display:flex;align-items:center;justify-content:center;flex-shrink:0;width:30px;height:30px;border-radius:50%;background:#f1f0ff;color:#6941c6;font-size:12px;font-weight:700}
+.program-calendar-open .program-calendar-number {background:#e7f7ee;color:#147d4c}
+.program-calendar-state {display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0}
+@media(max-width:575px) {.program-calendar-banner{align-items:stretch;flex-direction:column;padding:18px}.program-calendar-program{padding:14px}.program-calendar-lesson{flex-wrap:wrap;gap:10px}.program-calendar-state{align-items:flex-start;margin-left:40px}.program-calendar-lesson>.flex-grow-1{flex-basis:calc(100% - 40px)}}
+</style>
+{% endif %}
+{% endlanguage %}

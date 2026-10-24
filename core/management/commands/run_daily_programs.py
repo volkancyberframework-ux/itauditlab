@@ -8,6 +8,7 @@ from core.program_automation import (
 )
 from landing.traffic import send_daily_traffic_report
 from skool.digest import send_daily_meeting_digest
+from core.weekly_notifications import send_weekly_telegram_note
 
 
 class Command(BaseCommand):
@@ -61,6 +62,11 @@ class Command(BaseCommand):
         except Exception as exc:
             # Eğitim erişim otomasyonunu Telegram'daki geçici bir sorun yüzünden durdurma.
             self.stderr.write(self.style.WARNING(f'Görüşme özeti gönderilemedi: {exc}'))
+        try:
+            sent = send_weekly_telegram_note(run_date)
+            self.stdout.write('Haftalık Telegram notu gönderildi.' if sent else 'Haftalık Telegram notu boş veya zaten gönderilmiş.')
+        except Exception as exc:
+            self.stderr.write(self.style.WARNING(f'Haftalık Telegram notu gönderilemedi: {exc}'))
         # Persist monitoring independently of normal course-release email delivery.
         from core.student_monitoring import capture_snapshot
         snapshot, created = capture_snapshot()

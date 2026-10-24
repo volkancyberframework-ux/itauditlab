@@ -527,11 +527,14 @@ def dashboard_student(request):
     # İzinli enroll kontrolü için (template'te modal kararı)
     can_enroll_ids = [c.id for c in courses if user.can_enroll(c)]
 
+    from .program_dashboard import student_program_calendar
+
     return render(request, 'dashboard-student.html', {
         'courses': courses,
         'enrolled_courses': enrolled_courses,
         'enrolled_course_ids': enrolled_course_ids,
         'can_enroll_ids': can_enroll_ids,
+        'program_calendars': student_program_calendar(user),
     })
 
 import stripe

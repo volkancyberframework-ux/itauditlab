@@ -790,3 +790,4 @@ GRC Ustası
 
 from . import monitoring_admin  # noqa: E402,F401
 from . import business_network_admin  # noqa: E402,F401
+from . import weekly_notifications_admin  # noqa: E402,F401
