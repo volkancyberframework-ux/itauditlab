@@ -495,6 +495,10 @@ def telegram_webhook(request):
     if secret and not hmac.compare_digest(request.headers.get("X-Telegram-Bot-Api-Secret-Token", ""), secret):
         return JsonResponse({"ok": False}, status=403)
     payload = _json_body(request)
+    from .siberkobi_relay import forward
+    routed = forward(request, payload)
+    if routed is not None:
+        return routed
     message = payload.get("message", {})
     chat_id = str(message.get("chat", {}).get("id", ""))
     admin_chat = str(

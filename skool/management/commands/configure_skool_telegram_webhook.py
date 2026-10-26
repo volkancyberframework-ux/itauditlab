@@ -20,7 +20,7 @@ class Command(BaseCommand):
         webhook_url = f"{base}/api/skool/telegram/"
         response = requests.post(
             f"{endpoint}/setWebhook",
-            data={"url": webhook_url, "secret_token": secret, "allowed_updates": '["message"]'},
+            data={"url": webhook_url, "secret_token": secret, "allowed_updates": '["message","callback_query"]'},
             timeout=15,
         )
         response.raise_for_status()
