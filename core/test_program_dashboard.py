@@ -12,7 +12,7 @@ from .program_dashboard import student_program_calendar
 @override_settings(STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage')
 class ProgramDashboardTests(TestCase):
     def setUp(self):
-        self.user = get_user_model().objects.create_user(username='calendar', password='test')
+        self.user = get_user_model().objects.create_user(username='calendar', password='test', is_first_login=False)
         self.program = LearningProgram.objects.create(name='Denetçi Programı', slug='calendar')
         self.enrollment = ProgramEnrollment.objects.create(user=self.user, program=self.program, start_date=date(2026, 10, 20))
         self.steps = []

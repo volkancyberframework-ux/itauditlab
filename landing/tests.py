@@ -160,7 +160,7 @@ class LandingTests(TestCase):
 
     def test_authenticated_home_keeps_session_and_retains_login_label(self):
         user = get_user_model().objects.create_user(
-            username='student', email='student-login@example.com', password='secret123'
+            username='student', email='student-login@example.com', password='secret123', is_first_login=False
         )
         self.client.force_login(user)
         response = self.client.get('/')
@@ -176,7 +176,7 @@ class LandingTests(TestCase):
         self.assertNotContains(login_response, 'Siberkobi', html=False)
 
         user = get_user_model().objects.create_user(
-            username='brand-student', email='brand@example.com', password='secret123'
+            username='brand-student', email='brand@example.com', password='secret123', is_first_login=False
         )
         self.client.force_login(user)
         dashboard_response = self.client.get(reverse('dashboard_student'))
@@ -186,7 +186,7 @@ class LandingTests(TestCase):
 
     def test_authenticated_login_page_redirects_without_logging_user_out(self):
         user = get_user_model().objects.create_user(
-            username='returning', email='returning@example.com', password='secret123'
+            username='returning', email='returning@example.com', password='secret123', is_first_login=False
         )
         self.client.force_login(user)
         response = self.client.get(reverse('login'))
@@ -383,7 +383,7 @@ class TrafficTrackingTests(TestCase):
         response = self.client.get(reverse('landing:traffic_dashboard'), **self.browser_headers)
         self.assertEqual(response.status_code, 302)
         staff = get_user_model().objects.create_user(
-            username='traffic-admin', email='traffic@example.com', password='secret123', is_staff=True,
+            username='traffic-admin', email='traffic@example.com', password='secret123', is_staff=True, is_first_login=False,
         )
         self.client.force_login(staff)
         response = self.client.get(reverse('landing:traffic_dashboard'), **self.browser_headers)

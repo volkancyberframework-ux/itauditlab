@@ -6,7 +6,8 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import SetPasswordForm
 from django.db import models, transaction
 from django.db.models import Prefetch, IntegerField
 from django.db.models.functions import Coalesce
@@ -30,7 +31,7 @@ import logging
 import random
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.contrib.auth import get_user_model
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_http_methods
 import requests
 
 from .models import (
@@ -157,22 +158,37 @@ def custom_login_view(request):
 
     return render(request, "login.html")
 
-@csrf_exempt
+@never_cache
+@login_required
+@require_http_methods(["GET", "POST"])
 def force_password_change_popup(request):
-    if request.method == 'POST':
-        pw1 = request.POST.get('new_password')
-        pw2 = request.POST.get('confirm_password')
-        if pw1 != pw2:
-            return render(request, 'login.html', {
-                'error': "Passwords do not match",
-                'show_password_change_popup': True
-            })
-
-        user = request.user
-        user.password = make_password(pw1)
-        user.is_first_login = False
-        user.save()
+    if not request.user.is_first_login:
         return redirect('dashboard_student')
+
+    error = None
+    if request.method == 'POST':
+        form = SetPasswordForm(request.user, data={
+            'new_password1': request.POST.get('new_password', ''),
+            'new_password2': request.POST.get('confirm_password', ''),
+        })
+        if form.is_valid():
+            password = form.cleaned_data['new_password1']
+            if request.user.check_password(password):
+                error = 'Yeni şifreniz mevcut şifrenizden farklı olmalıdır.'
+            else:
+                with transaction.atomic():
+                    user = form.save(commit=False)
+                    user.is_first_login = False
+                    user.save(update_fields=['password', 'is_first_login'])
+                update_session_auth_hash(request, user)
+                return redirect('dashboard_student')
+        else:
+            error = ' '.join(str(message) for errors in form.errors.values() for message in errors)
+
+    return render(request, 'login.html', {
+        'show_password_change_popup': True,
+        'error': error,
+    })
 
 @login_required
 def unenroll_course(request):

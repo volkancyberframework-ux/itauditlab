@@ -106,3 +106,28 @@ class HiddenLoginAttemptTelegramMiddleware:
 
         except Exception as e:
             print("TELEGRAM EXCEPTION:", e)
+
+
+class FirstLoginPasswordMiddleware:
+    """Require the web password change before any authenticated site view."""
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        return self.get_response(request)
+
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        from django.shortcuts import redirect
+
+        match = request.resolver_match
+        if not request.user.is_authenticated or not request.user.is_first_login:
+            return None
+        # Admin and the JWT-based mobile application have separate auth flows.
+        if 'admin' in match.namespaces or request.path_info.startswith('/api/mobile/v1/'):
+            return None
+        if getattr(request, 'urlconf', None) == 'mobile_web.urls':
+            return None
+        if match.view_name in {'force_password_change_popup', 'logout'}:
+            return None
+        return redirect('force_password_change_popup')

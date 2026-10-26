@@ -100,6 +100,7 @@
                   <h5 class="modal-title" id="firstLoginModalLabel">Parolanızı Değiştirin</h5>
                 </div>
                 <div class="modal-body">
+                  {% if error %}<div class="alert alert-danger" role="alert">{{ error }}</div>{% endif %}
                   <div class="mb-3">
                     <label>Yeni Parola</label>
                     <input type="password" name="new_password" class="form-control" required>

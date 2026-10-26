@@ -206,7 +206,8 @@ class QuickStudentProgramEnrollmentTests(TestCase):
 class StudentCourseInterfaceTests(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
-            username="ogrenci@example.com", email="ogrenci@example.com", password="test"
+            username="ogrenci@example.com", email="ogrenci@example.com", password="test",
+            is_first_login=False,
         )
         self.course = Course.objects.create(
             turkish_name="Unix Denetimi",
@@ -268,7 +269,8 @@ class StudentCourseInterfaceTests(TestCase):
             user=self.user, course=self.course, request_type="meeting", reason="Özel görüşme gerekçesi",
         )
         other = get_user_model().objects.create_user(
-            username="other@example.com", email="other@example.com", password="test"
+            username="other@example.com", email="other@example.com", password="test",
+            is_first_login=False,
         )
         self.client.force_login(other)
         response = self.client.get(reverse("student_meeting_calendar", args=[item.pk]))
