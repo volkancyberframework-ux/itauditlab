@@ -78,10 +78,10 @@ class LegalRegistryTests(TestCase):
                     self.assertNotIn('KVKK',section)
         sitemap=self.client.get('/sitemap.xml')
         self.assertContains(sitemap,'country=CL')
-        self.assertEqual(sitemap.content.count(b'<url>'),56)
+        self.assertEqual(sitemap.content.count(b'<url>'),42)
 
-    def test_home_and_corporate_use_same_jurisdiction_and_keep_forms(self):
-        for path in ['/','/kurumsal/']:
+    def test_home_uses_jurisdiction_and_keeps_forms(self):
+        for path in ['/']:
             response=self.client.get(path,{'lang':'es','country':'MX'})
             self.assertContains(response,'data-country="MX"')
             self.assertContains(response,'LFPDPPP')

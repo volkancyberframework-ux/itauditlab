@@ -22,7 +22,7 @@ def page(request):
 @require_GET
 def sitemap(request):
     urls=[]
-    for path in ('/','/kurumsal/','/ot-guvenligi-bootcamp/','/mevzuat/'):
+    for path in ('/','/ot-guvenligi-bootcamp/','/mevzuat/'):
         for language,countries in LANGUAGE_COUNTRIES.items():
             for country in countries:
                 urls.append('<url><loc>'+escape(locale_url(path,language,country))+'</loc></url>')

@@ -409,15 +409,11 @@ class TrafficTrackingTests(TestCase):
 
 @override_settings(STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage')
 class CorporateLandingTests(TestCase):
-    def test_corporate_route_has_required_seo_and_sections(self):
-        response = self.client.get(reverse('landing:corporate'))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Checklist Değil.')
-        self.assertContains(response, 'ISO/IEC 27001 Uyum Hazırlığı')
-        self.assertContains(response, '7545 • Siber Güvenlik Kanunu')
-        self.assertContains(response, 'GRC USTASI PARTNER PROGRAMI', html=False)
-        self.assertContains(response, 'ProfessionalService')
-        self.assertNotContains(response, 'ISO 27001 sertifikası veriyoruz')
+    def test_corporate_route_is_unpublished(self):
+        for path in ('/kurumsal', '/kurumsal/', '/kurumsal/?lang=en&country=US'):
+            response = self.client.get(path)
+            self.assertEqual(response.status_code, 410)
+            self.assertNotContains(response, 'ProfessionalService', status_code=410)
 
     def test_main_root_remains_individual_landing(self):
         response = self.client.get('/')
@@ -449,10 +445,10 @@ class CorporateLandingTests(TestCase):
         self.assertTrue(PartnerApplication.objects.filter(name='Ali Partner').exists())
         notify.assert_called_once()
 
-    def test_main_landing_contains_partner_link(self):
+    def test_main_landing_has_no_unpublished_partner_link(self):
         response = self.client.get('/')
-        self.assertContains(response, 'GRC Ustası Partneri Ol')
-        self.assertContains(response, f'{reverse("landing:corporate")}#partner')
+        self.assertNotContains(response, 'GRC Ustası Partneri Ol')
+        self.assertNotContains(response, reverse("landing:corporate"))
 
 class OTTranslationTests(TestCase):
     def test_new_copy_has_catalog_entries_in_every_language(self):

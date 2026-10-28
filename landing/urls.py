@@ -35,6 +35,7 @@ urlpatterns = [
     path('travelbootcamp/webhook', travel.webhook, name='travel_webhook'),
     path('', views.home, name='home'),
     path('kariyer-pusulasi/', views.home, name='career_compass'),
+    path('kurumsal', views.corporate_home),
     path('kurumsal/', views.corporate_home, name='corporate'),
     path('api/kurumsal-talep/', views.submit_corporate_inquiry, name='corporate_inquiry'),
     path('api/partnerlik/', views.submit_partner_application, name='partner_application'),

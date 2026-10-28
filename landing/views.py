@@ -1,6 +1,6 @@
 from django.conf import settings as django_settings
 from django.db import IntegrityError
-from django.http import JsonResponse
+from django.http import HttpResponseGone, JsonResponse
 from django.shortcuts import redirect, render
 from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import reverse
@@ -50,7 +50,7 @@ def home(request):
 
 
 def corporate_home(request):
-    return render(request, 'landing/corporate.html', {'site': SiteSetting.load(), **legal_registry.context(request)})
+    return HttpResponseGone('Bu sayfa yayından kaldırılmıştır.', content_type='text/plain; charset=utf-8')
 
 
 def _save_form_and_notify(request, form_class, notification_title):
