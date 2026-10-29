@@ -479,3 +479,18 @@ class BootcampMobileGrantAdmin(admin.ModelAdmin):
         from .bootcamp_membership import send_receipt
         count = sum(send_receipt(pk) for pk in queryset.filter(fulfilled_at__isnull=False, receipt_sent_at=None).values_list('pk', flat=True))
         self.message_user(request, f'{count} erişim e-postası gönderildi.')
+
+
+from .models import MobileDailyKPI
+
+@admin.register(MobileDailyKPI)
+class MobileDailyKPIAdmin(admin.ModelAdmin):
+    list_display = ('report_date', 'created_at')
+    readonly_fields = ('report_date', 'payload', 'created_at')
+    date_hierarchy = 'report_date'
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False

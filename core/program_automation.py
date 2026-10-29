@@ -225,6 +225,8 @@ def format_daily_program_summary(stats, run_date):
         lines.extend(['', '⚠️ PDF KONTROLÜ DOĞRULANAMADI'])
         for item in unverified:
             lines.append(f"⚠️ Course ID: {item['course_id']} — {item['course']} — {item['reason']}")
+    if stats.get('mobile_kpi_report'):
+        lines.extend(['', stats['mobile_kpi_report']])
     if stats['details']:
         lines.extend(['', '📋 Açılan içerik detayları'])
         for item in stats['details']:

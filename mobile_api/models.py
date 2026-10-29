@@ -453,3 +453,15 @@ class BootcampMobileGrant(models.Model):
     receipt_error = models.CharField(max_length=255, blank=True)
     fulfilled_at = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class MobileDailyKPI(models.Model):
+    """One immutable measurement per morning; comparison facts survive reruns."""
+    report_date = models.DateField(unique=True)
+    payload = models.JSONField(default=dict)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-report_date']
+        verbose_name = 'Mobil günlük KPI raporu'
+        verbose_name_plural = 'Mobil günlük KPI raporları'
