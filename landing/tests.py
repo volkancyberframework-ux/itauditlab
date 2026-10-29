@@ -52,7 +52,7 @@ class LandingTests(TestCase):
         self.assertNotContains(response, 'Taksit')
         self.assertNotContains(response, '3 × 25.000 TL')
         self.assertNotContains(response, 'toplam 75.000 TL')
-        self.assertContains(response, '199 USD değerinde Skool topluluğu')
+        self.assertContains(response, 'Tek seferlik 249 USD değerinde Skool topluluğu')
         self.assertNotContains(response, '6 Ay Yakın Takip')
         self.assertContains(response, '12 Ay Birebir Çalışma')
         self.assertContains(response, 'Kendi denetim işini geliştir')
@@ -100,6 +100,7 @@ class LandingTests(TestCase):
     def test_checkout_creates_grc_ustasi_stripe_session(self):
         from unittest.mock import patch
         with patch('stripe.checkout.Session.create') as create_session:
+            create_session.return_value.id = 'cs_catalog_test'
             create_session.return_value.url = 'https://checkout.stripe.com/test-session'
             response = self.client.post(reverse('landing:checkout'))
         self.assertEqual(response.status_code, 302)
@@ -113,6 +114,7 @@ class LandingTests(TestCase):
     @override_settings(STRIPE_SECRET_KEY='sk_test_placeholder')
     def test_cisa_checkout_uses_catalog_product(self):
         with patch('stripe.checkout.Session.create') as create_session:
+            create_session.return_value.id = 'cs_catalog_test'
             create_session.return_value.url = 'https://checkout.stripe.com/cisa-session'
             response = self.client.post(reverse('landing:checkout'), {'product': 'cisa'})
         self.assertEqual(response.status_code, 302)
@@ -132,6 +134,7 @@ class LandingTests(TestCase):
     @override_settings(STRIPE_SECRET_KEY='sk_test_placeholder')
     def test_ot_checkout_uses_server_price_and_product(self):
         with patch('stripe.checkout.Session.create') as create_session:
+            create_session.return_value.id = 'cs_catalog_test'
             create_session.return_value.url = 'https://checkout.stripe.com/ot'
             response = self.client.post(reverse('landing:checkout'), {'product': 'ot_security', 'price': '1'})
         self.assertEqual(response.status_code, 302)
@@ -474,6 +477,7 @@ class OTTranslationTests(TestCase):
         from .bootcamp_catalog import OT_BOOTCAMP
         for language in ('en','fr','es','ja','zh-CN','vi','ar'):
             with patch('stripe.checkout.Session.create') as create:
+                create.return_value.id='cs_ot_translation_test'
                 create.return_value.url='https://checkout.stripe.com/ot-test'
                 response=self.client.post(reverse('landing:checkout'),{'product':'ot_security','language':language,'price':'1','currency':'usd'})
             self.assertEqual(response.status_code,302)

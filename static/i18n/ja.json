@@ -41,7 +41,6 @@
   "12 · Hikâye": "12・ストーリー",
   "132 kişilik topluluğa ücretsiz erişim ↗": "132 人のコミュニティへの無料アクセス ↗",
   "17 Ocak 2025'ten beri uygulanan DORA; finans kuruluşlarında bilgi ve iletişim teknolojileri risk yönetimini, olay raporlamayı, dayanıklılık testlerini ve kritik üçüncü taraf gözetimini bağlayıcı bir çerçeveye taşıyor.": "DORA は 2025 年 1 月 17 日から実装されました。金融機関では、情報通信テクノロジーにより、リスク管理、インシデント報告、耐久性テスト、および重要な第三者による監視が拘束力のあるフレームワークに組み込まれます。",
-  "199 USD değerinde Skool topluluğu": "199 ドル相当の Skool コミュニティ",
   "2 DAKİKALIK KARİYER PUSULASI": "2分間のキャリアコンパス",
   "2023–2025 • KÜRESEL DÜZENLEME DALGASI": "2023–2025 • 世界的な規制の波",
   "3 gün kuralı:": "3日ルール：",
@@ -1258,5 +1257,8 @@
   "Son kontrol:": "最終チェック:",
   "Mevzuat": "法制度",
   "Dil ve ülke tercihleri": "言語と国の設定",
-  "grc-language ve grc-country-* birinci taraf tercih çerezleri, seçilen dili ve hukuk alanını en fazla 1 yıl hatırlar. Aynı tercihler tarayıcı yerel depolamasında temizlenene kadar saklanabilir. Bu tercihler reklam veya ziyaretçi analitiği için kullanılmaz.": "grc-languageとgrc-country-*は、選択した言語と法域を最長1年間記憶するファーストパーティCookieです。同じ設定は、削除されるまでブラウザのローカルストレージにも保存される場合があります。広告や訪問者分析には使用しません。"
+  "grc-language ve grc-country-* birinci taraf tercih çerezleri, seçilen dili ve hukuk alanını en fazla 1 yıl hatırlar. Aynı tercihler tarayıcı yerel depolamasında temizlenene kadar saklanabilir. Bu tercihler reklam veya ziyaretçi analitiği için kullanılmaz.": "grc-languageとgrc-country-*は、選択した言語と法域を最長1年間記憶するファーストパーティCookieです。同じ設定は、削除されるまでブラウザのローカルストレージにも保存される場合があります。広告や訪問者分析には使用しません。",
+  "Tek seferlik 249 USD değerinde Skool topluluğu": "Skool コミュニティ（一括払い249 USD相当）",
+  "Ücretsiz ömür boyu GRC Ustası mobil uygulaması üyeliği": "GRC Ustası モバイルアプリの無料生涯フルメンバーシップ",
+  "Ücretsiz ömür boyu GRC Ustası mobil uygulaması üyeliği tüm katılımcılara dahildir.": "GRC Ustası モバイルアプリの無料生涯フルメンバーシップ."
 }

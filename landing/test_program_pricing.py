@@ -5,12 +5,14 @@ from django.urls import reverse
 from .bootcamp_catalog import PUBLIC_LANGUAGES, public_program_prices
 
 
+@override_settings(STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage')
 class ProgramPricingTests(TestCase):
     @override_settings(STRIPE_SECRET_KEY='sk_test_placeholder')
     def test_every_program_language_uses_fixed_currency_and_server_amount(self):
         for product in ('', 'grc_ustasi_80_saat', 'cisa', 'cism', 'ot_security'):
             for language in PUBLIC_LANGUAGES:
                 with self.subTest(product=product, language=language), patch('stripe.checkout.Session.create') as create:
+                    create.return_value.id='cs_pricing_'+str(product or 'grc')+'_'+language
                     create.return_value.url='https://checkout.stripe.com/pricing-test'
                     response=self.client.post(reverse('landing:checkout'),{'product':product,'language':language,'price':'1','currency':'jpy','unit_amount':'1'})
                     self.assertEqual(response.status_code,302)
@@ -23,6 +25,8 @@ class ProgramPricingTests(TestCase):
                     self.assertEqual(data['metadata']['price_amount'],str(amount))
                     self.assertEqual(data['metadata']['currency'],currency)
                     self.assertEqual(data['metadata']['product'],product or 'grc_ustasi_80_saat')
+                    self.assertEqual(data['metadata']['mobile_membership'],'lifetime')
+                    self.assertIn('bootcamp_checkout_id',data['metadata'])
                     self.assertEqual(data['locale'],{'zh-CN':'zh','ar':'en'}.get(language,language))
                     key=product or 'grc_ustasi_80_saat'
                     self.assertEqual(public_program_prices()[key][language],{'amount':amount,'currency':currency})
@@ -30,6 +34,7 @@ class ProgramPricingTests(TestCase):
     @override_settings(STRIPE_SECRET_KEY='sk_test_placeholder')
     def test_unknown_language_defaults_to_turkish_price(self):
         with patch('stripe.checkout.Session.create') as create:
+            create.return_value.id='cs_unknown_language'
             create.return_value.url='https://checkout.stripe.com/pricing-test'
             self.client.post(reverse('landing:checkout'),{'product':'ot_security','language':'../../usd'})
         self.assertEqual(create.call_args.kwargs['line_items'][0]['price_data']['unit_amount'],11999900)

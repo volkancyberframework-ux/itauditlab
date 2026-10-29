@@ -217,6 +217,9 @@ def accessible_questions(path, user):
 
 
 def session_size(path):
+    from .linux_auditor import is_linux
+    if is_linux(path):
+        return 16
     from .cisa_simulator import is_cisa
     if is_cisa(path):
         return 20
@@ -399,14 +402,15 @@ class Sessions(MobileView):
             raise ValidationError("Öğrenme yolu bulunamadı.")
         qs = accessible_questions(p, request.user)
         from .cisa_simulator import is_cisa
-        if is_cisa(p):
+        from .linux_auditor import is_linux
+        if is_cisa(p) or is_linux(p):
             active = LearningSession.objects.filter(user=request.user,path=p,is_archived=False,completed_at=None).order_by('-created_at').first()
             if active:
                 return Response(session_data(active,request),status=201)
         progress = UserPathProgress.objects.filter(user=request.user, path=p).first()
         if progress:
             qs = qs.exclude(pk__in=progress.completed.values("pk"))
-        if is_cisa(p):
+        if is_cisa(p) or is_linux(p):
             first = qs.first()
             if first:
                 qs = qs.filter(module_id=first.module_id)

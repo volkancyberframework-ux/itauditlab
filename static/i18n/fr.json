@@ -41,7 +41,6 @@
   "12 · Hikâye": "12 · Histoire",
   "132 kişilik topluluğa ücretsiz erişim ↗": "Accès gratuit à la communauté de 132 personnes ↗",
   "17 Ocak 2025'ten beri uygulanan DORA; finans kuruluşlarında bilgi ve iletişim teknolojileri risk yönetimini, olay raporlamayı, dayanıklılık testlerini ve kritik üçüncü taraf gözetimini bağlayıcı bir çerçeveye taşıyor.": "DORA est mis en œuvre depuis le 17 janvier 2025 ; Dans les institutions financières, les technologies de l’information et de la communication intègrent la gestion des risques, le signalement des incidents, les tests de durabilité et la surveillance critique par des tiers dans un cadre contraignant.",
-  "199 USD değerinde Skool topluluğu": "Communauté scolaire d'une valeur de 199 $",
   "2 DAKİKALIK KARİYER PUSULASI": "BOUSSOLE DE CARRIÈRE EN 2 MINUTES",
   "2023–2025 • KÜRESEL DÜZENLEME DALGASI": "2023-2025 • VAGUE DE RÉGLEMENTATION MONDIALE",
   "3 gün kuralı:": "Règle des 3 jours :",
@@ -1258,5 +1257,8 @@
   "Son kontrol:": "Dernière vérification :",
   "Mevzuat": "Cadre juridique",
   "Dil ve ülke tercihleri": "Préférences de langue et de pays",
-  "grc-language ve grc-country-* birinci taraf tercih çerezleri, seçilen dili ve hukuk alanını en fazla 1 yıl hatırlar. Aynı tercihler tarayıcı yerel depolamasında temizlenene kadar saklanabilir. Bu tercihler reklam veya ziyaretçi analitiği için kullanılmaz.": "grc-language et grc-country-* sont des cookies internes qui mémorisent la langue et la juridiction sélectionnées pendant un an au maximum. Ces préférences peuvent aussi rester dans le stockage local du navigateur jusqu’à leur suppression. Elles ne servent ni à la publicité ni à la mesure d’audience."
+  "grc-language ve grc-country-* birinci taraf tercih çerezleri, seçilen dili ve hukuk alanını en fazla 1 yıl hatırlar. Aynı tercihler tarayıcı yerel depolamasında temizlenene kadar saklanabilir. Bu tercihler reklam veya ziyaretçi analitiği için kullanılmaz.": "grc-language et grc-country-* sont des cookies internes qui mémorisent la langue et la juridiction sélectionnées pendant un an au maximum. Ces préférences peuvent aussi rester dans le stockage local du navigateur jusqu’à leur suppression. Elles ne servent ni à la publicité ni à la mesure d’audience.",
+  "Tek seferlik 249 USD değerinde Skool topluluğu": "Communauté Skool : 249 USD en paiement unique",
+  "Ücretsiz ömür boyu GRC Ustası mobil uygulaması üyeliği": "Adhésion complète gratuite à vie à l’application mobile GRC Ustası",
+  "Ücretsiz ömür boyu GRC Ustası mobil uygulaması üyeliği tüm katılımcılara dahildir.": "Adhésion complète gratuite à vie à l’application mobile GRC Ustası."
 }

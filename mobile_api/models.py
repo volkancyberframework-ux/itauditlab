@@ -438,3 +438,18 @@ class PersonalAppAddress(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=30, unique=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class BootcampMobileGrant(models.Model):
+    """Server-owned checkout snapshot and idempotent lifetime entitlement receipt."""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    product = models.CharField(max_length=80)
+    amount_minor = models.PositiveIntegerField()
+    currency = models.CharField(max_length=3)
+    checkout_session_id = models.CharField(max_length=255, unique=True, null=True, blank=True)
+    payment_intent_id = models.CharField(max_length=255, unique=True, null=True, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.PROTECT)
+    receipt_sent_at = models.DateTimeField(null=True, blank=True)
+    receipt_error = models.CharField(max_length=255, blank=True)
+    fulfilled_at = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)

@@ -11,6 +11,7 @@ class PrivateVoiceStorage(FileSystemStorage):
 
     # Immutable demo assets stay available across deployments without public media URLs.
     bundled = {
+        **{f"linux-auditor/screen_{n:03}.png": f"linux_auditor/screen_{n:03}.png" for n in range(1,81)},
         **{f"ad-auditor/screen_{n:03}.png": f"ad_auditor/screen_{n:03}.png" for n in range(1,76)},
         "demo/access-review.png": "access-review.png",
         "demo/mfa.m4a": "mfa.m4a",

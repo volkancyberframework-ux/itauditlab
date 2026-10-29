@@ -8,7 +8,7 @@
   <p class="bootcamp-subtitle">{{ product.subtitle }}</p>
   <p class="bootcamp-description">{{ product.description }}</p>
   {% if product.preparation %}<p class="bootcamp-preparation">{{ product.preparation }}</p>{% endif %}
-  <ul class="bootcamp-features">{% for feature in product.features %}<li>{{ feature }}</li>{% endfor %}</ul>
+  <ul class="bootcamp-features">{% for feature in product.features %}<li>{{ feature }}</li>{% endfor %}<li>Ücretsiz ömür boyu GRC Ustası mobil uygulaması üyeliği</li></ul>
   {% if product.case_disclaimer %}<p class="bootcamp-case-note"><span aria-hidden="true">i</span>{{ product.case_disclaimer }}</p>{% endif %}
   <div class="bootcamp-duration"><span>{{ product.duration }}</span><strong>{{ product.duration_detail }}</strong></div>
   <div class="bootcamp-purchase">

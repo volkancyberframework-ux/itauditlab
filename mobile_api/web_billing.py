@@ -143,6 +143,16 @@ def webhook(request):
         return JsonResponse({'received': True})
     session = event['data']['object']
     metadata = session.get('metadata') or {}
+    if metadata.get('bootcamp_checkout_id'):
+        live = settings.STRIPE_SECRET_KEY.startswith(('sk_live_', 'rk_live_'))
+        if bool(event.get('livemode')) != live:
+            return JsonResponse({'error': 'Wrong Stripe mode'}, status=400)
+        from .bootcamp_membership import fulfil
+        try:
+            fulfil(session)
+        except ValidationError:
+            return JsonResponse({'error': 'Bootcamp payment requires reconciliation'}, status=400)
+        return JsonResponse({'received': True})
     if metadata.get('product') != PRODUCT or session.get('payment_status') != 'paid':
         return JsonResponse({'received': True})
     live = settings.STRIPE_SECRET_KEY.startswith(('sk_live_', 'rk_live_'))

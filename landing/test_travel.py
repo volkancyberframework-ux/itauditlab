@@ -41,7 +41,7 @@ class TravelTests(TestCase):
     def test_page_has_six_sections_and_consistent_ctas(self):
         response = self.client.get(reverse('landing:travel_bootcamp'))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.content.decode().count('<section '), 6)
+        self.assertEqual(response.content.decode().count('<section '), 7)
         self.assertContains(response, 'Travel Bootcamp’e Katıl — $249', count=4)
         self.assertContains(response, 'Ömür boyu video erişimi')
         self.assertNotContains(response, 'sk_test_placeholder')
@@ -151,7 +151,7 @@ class TravelTests(TestCase):
                 self.deliver()
             with self.captureOnCommitCallbacks(execute=True):
                 self.deliver()
-        self.assertEqual(notify.call_count, 1)
+        self.assertEqual(sum('YENİ TRAVEL BOOTCAMP' in str(c.args[0]) for c in notify.call_args_list), 1)
 
     def test_telegram_failure_does_not_rollback_and_can_retry(self):
         with patch('skool.services.send_telegram', side_effect=RuntimeError('network unavailable')):
@@ -162,7 +162,7 @@ class TravelTests(TestCase):
         with patch('skool.services.send_telegram', return_value=True) as notify:
             notify_registration(record.pk)
             notify_registration(record.pk)
-        self.assertEqual(notify.call_count, 1)
+        self.assertEqual(sum('YENİ TRAVEL BOOTCAMP' in str(c.args[0]) for c in notify.call_args_list), 1)
         record.refresh_from_db()
         self.assertIsNotNone(record.telegram_sent_at)
         self.assertIn('YENİ TRAVEL BOOTCAMP KAYDI', notify.call_args.args[0])

@@ -622,8 +622,11 @@ def bootcamp_checkout(request, slug):
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
 
+    from mobile_api.bootcamp_membership import prepare, BENEFIT
+    entitlement=prepare('bootcamp:'+str(bootcamp.pk),int(bootcamp.price*100),bootcamp.currency.lower())
     session = stripe.checkout.Session.create(
         mode="payment",
+        metadata={"product":entitlement.product,"bootcamp_checkout_id":str(entitlement.pk),"mobile_membership":"lifetime"},
         customer_email=email or None,
         line_items=[
             {
@@ -631,7 +634,7 @@ def bootcamp_checkout(request, slug):
                     "currency": bootcamp.currency.lower(),
                     "product_data": {
                         "name": bootcamp.title,
-                        "description": bootcamp.description[:400],
+                        "description": (BENEFIT+" "+bootcamp.description)[:400],
                     },
                     "unit_amount": int(bootcamp.price * 100),
                 },
@@ -642,6 +645,8 @@ def bootcamp_checkout(request, slug):
         cancel_url=request.build_absolute_uri(reverse("bootcamps")),
     )
 
+    entitlement.checkout_session_id=session.id
+    entitlement.save(update_fields=["checkout_session_id"])
     return redirect(session.url)
 
 def bootcamp_payment_success(request):

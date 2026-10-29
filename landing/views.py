@@ -38,6 +38,17 @@ def _notify_telegram(message):
 
 
 def home(request):
+    # Reconcile return visits as well as signed webhooks; never trust query amounts.
+    checkout_id=request.GET.get('bootcamp_session','')
+    if checkout_id.startswith('cs_') and len(checkout_id)<=255 and django_settings.STRIPE_SECRET_KEY:
+        try:
+            import stripe
+            from mobile_api.bootcamp_membership import fulfil
+            session=stripe.checkout.Session.retrieve(checkout_id,api_key=django_settings.STRIPE_SECRET_KEY)
+            if session.get('payment_status')=='paid' and (session.get('metadata') or {}).get('bootcamp_checkout_id'):
+                fulfil(session)
+        except Exception:
+            logger.exception('Bootcamp üyeliği ödeme dönüşünde uzlaştırılamadı.')
     site = SiteSetting.load()
     payment_url = site.payment_url or getattr(django_settings, 'PAYMENT_URL', '')
     return render(request, 'landing/index.html', {
@@ -118,6 +129,12 @@ def create_checkout(request):
         catalog = json.loads((Path(__file__).resolve().parent.parent / 'static/i18n' / f'{language}.json').read_text())
         product_title = catalog.get(product_title, product_title)
         product_description = catalog.get(product_description, product_description)
+    from mobile_api.bootcamp_membership import prepare, BENEFIT
+    entitlement=prepare(product['key'],quote['amount']*100,quote['currency'])
+    benefit_copy=BENEFIT
+    if language!='tr':
+        benefit_copy=catalog.get('Ücretsiz ömür boyu GRC Ustası mobil uygulaması üyeliği',BENEFIT)
+    product_description=benefit_copy+' '+product_description
     import stripe
     stripe.api_key = django_settings.STRIPE_SECRET_KEY
     options = {}
@@ -139,10 +156,10 @@ def create_checkout(request):
                 },
                 'quantity': 1,
             }],
-            metadata={'product': product['key'], 'price_amount': str(quote['amount']),
+            metadata={'product': product['key'], 'bootcamp_checkout_id': str(entitlement.pk), 'mobile_membership': 'lifetime', 'price_amount': str(quote['amount']),
                       'currency': quote['currency'], 'language': language,
                       **({'price_try': str(quote['amount'])} if quote['currency'] == 'try' else {})},
-            success_url=request.build_absolute_uri(reverse('landing:home') + f'?payment=success&lang={language}#bootcamp'),
+            success_url=request.build_absolute_uri(reverse('landing:home') + f'?payment=success&lang={language}&bootcamp_session={{CHECKOUT_SESSION_ID}}#bootcamp'),
             cancel_url=request.build_absolute_uri(reverse('landing:home') + f'?payment=cancel&lang={language}#bootcamp'),
         )
     except Exception as exc:
@@ -152,6 +169,8 @@ def create_checkout(request):
         response['X-Payment-Code'] = str(getattr(exc, 'code', '') or '')[:80]
         response['X-Payment-Param'] = str(getattr(exc, 'param', '') or '')[:80]
         return response
+    entitlement.checkout_session_id=session.id
+    entitlement.save(update_fields=['checkout_session_id'])
     return redirect(session.url, permanent=False)
 
 

@@ -49,7 +49,7 @@ export class WebLearningWorkspace {
     if(q.context)this.main.append(element('p',q.context,'grc-web-context'));
     if(q.image){this.preview=element('section',undefined,'grc-preview');this.main.append(this.preview);this.loadImage(q,generation);}
     this.main.append(element('h2',q.prompt));
-    if(q.hint){const hint=element('details',undefined,'grc-web-hint');hint.append(element('summary','📘 AD İpucu'),element('p',q.hint));this.main.append(hint);}
+    if(q.hint){const hint=element('details',undefined,'grc-web-hint');hint.append(element('summary','📘 İpucu'),element('p',q.hint));this.main.append(hint);}
     if(q.audio?.length)this.audio(q.audio,generation);
     if(q.kind==='info'){const pages=q.card_pages?.length?q.card_pages:[{title:q.prompt,body:q.context}];for(const page of pages){this.main.append(element('h3',page.title),element('p',page.body,'grc-web-context'));if(page.reveal){const d=element('details');d.append(element('summary','Açıklamayı aç'),element('p',page.reveal));this.main.append(d);}}}
     else if(q.kind==='sentence_order')this.order(q);
@@ -64,7 +64,7 @@ export class WebLearningWorkspace {
     this.imageReady=false;if(this.submitButton)this.submitButton.disabled=true;
     this.preview.replaceChildren();const status=element('div','Görsel yükleniyor…','grc-image-status');status.setAttribute('role','status');this.preview.append(status);
     try{const url=await this.api.image(q.image);if(generation!==this.generation){URL.revokeObjectURL(url);return;}
-      const img=element('img');img.alt=q.synthetic_image?'Eğitim amaçlı sentetik AD ekranı':'Soru ekran görüntüsü';img.src=url;await img.decode();if(generation!==this.generation){URL.revokeObjectURL(url);return;}
+      const img=element('img');img.alt=q.synthetic_image?'Eğitim amaçlı sentetik sistem ekranı':'Soru ekran görüntüsü';img.src=url;await img.decode();if(generation!==this.generation){URL.revokeObjectURL(url);return;}
       this.urls.add(url);this.preview.replaceChildren();const open=element('button',undefined,'grc-image-open');open.type='button';open.setAttribute('aria-label','Ekran görüntüsünü büyüt');open.append(img);
       open.addEventListener('click',()=>this.viewer.open(url,img.alt).catch(()=>{this.viewer.close();this.error.textContent='Görsel açılamadı. Önizlemedeki yeniden denemeyi kullanabilirsin.';}));
       this.preview.append(open,element('p','🔍 Ekran görüntüsünü büyütmek için tıkla'));if(q.synthetic_image)this.preview.append(element('small','Eğitim amaçlı sentetik ekran · Kurgusal veri'));

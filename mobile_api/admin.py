@@ -456,3 +456,26 @@ class WorkshopVoiceAdmin(admin.ModelAdmin):
                 self.message_user(request, "Geri bildirim e-posta ile gönderildi.")
             except Exception:
                 self.message_user(request, "E-posta gönderilemedi. Yanıt kaydedildi; tekrar kaydederek deneyin.", level="error")
+
+
+from .models import BootcampMobileGrant
+
+@admin.register(BootcampMobileGrant)
+class BootcampMobileGrantAdmin(admin.ModelAdmin):
+    list_display = ('product', 'user', 'fulfilled_at', 'receipt_sent_at', 'receipt_error')
+    list_filter = ('product',)
+    search_fields = ('user__email', 'checkout_session_id', 'payment_intent_id')
+    readonly_fields = tuple(field.name for field in BootcampMobileGrant._meta.fields)
+    actions = ('retry_access_receipts',)
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    @admin.action(description='Gönderilemeyen mobil üyelik erişim e-postalarını yeniden dene')
+    def retry_access_receipts(self, request, queryset):
+        from .bootcamp_membership import send_receipt
+        count = sum(send_receipt(pk) for pk in queryset.filter(fulfilled_at__isnull=False, receipt_sent_at=None).values_list('pk', flat=True))
+        self.message_user(request, f'{count} erişim e-postası gönderildi.')

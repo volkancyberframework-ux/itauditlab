@@ -74,7 +74,7 @@ def checkout(request):
             billing_address_collection='required',
             line_items=[{'price_data': {
                 'currency': CURRENCY, 'unit_amount': AMOUNT,
-                'product_data': {'name': 'Travel Bootcamp', 'description': '7 günlük / 7+ saat eğitim, ömür boyu video erişimi ve 6 ay birebir WhatsApp desteği.'},
+                'product_data': {'name': 'Travel Bootcamp', 'description': 'Ücretsiz ömür boyu GRC Ustası mobil uygulaması üyeliği dahildir.', 'description': '7 günlük / 7+ saat eğitim, ömür boyu video erişimi, 6 ay birebir WhatsApp desteği ve ücretsiz ömür boyu GRC Ustası mobil uygulaması üyeliği.'},
             }, 'quantity': 1}],
             metadata={'product': PRODUCT},
             payment_intent_data={'metadata': {'product': PRODUCT}},
@@ -169,6 +169,8 @@ def webhook(request):
                     'amount_minor': session['amount_total'], 'currency': session['currency'], 'paid_at': paid_at,
                 },
             )
+        from mobile_api.bootcamp_membership import fulfil_travel
+        fulfil_travel(session)
         transaction.on_commit(lambda: notify_registration(registration.pk))
     return JsonResponse({'received': True})
 
