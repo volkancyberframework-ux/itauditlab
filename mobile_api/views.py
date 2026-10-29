@@ -217,6 +217,9 @@ def accessible_questions(path, user):
 
 
 def session_size(path):
+    from .network_auditor import is_network
+    if is_network(path):
+        return 11
     from .database_auditor import is_database
     if is_database(path):
         return 11
@@ -407,14 +410,15 @@ class Sessions(MobileView):
         from .cisa_simulator import is_cisa
         from .linux_auditor import is_linux
         from .database_auditor import is_database
-        if is_cisa(p) or is_linux(p) or is_database(p):
+        from .network_auditor import is_network
+        if is_cisa(p) or is_linux(p) or is_database(p) or is_network(p):
             active = LearningSession.objects.filter(user=request.user,path=p,is_archived=False,completed_at=None).order_by('-created_at').first()
             if active:
                 return Response(session_data(active,request),status=201)
         progress = UserPathProgress.objects.filter(user=request.user, path=p).first()
         if progress:
             qs = qs.exclude(pk__in=progress.completed.values("pk"))
-        if is_cisa(p) or is_linux(p) or is_database(p):
+        if is_cisa(p) or is_linux(p) or is_database(p) or is_network(p):
             first = qs.first()
             if first:
                 qs = qs.filter(module_id=first.module_id)

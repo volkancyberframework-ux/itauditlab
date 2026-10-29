@@ -1,0 +1,45 @@
+{
+  "title": "Ağ Denetimi",
+  "questions": 55,
+  "unique_images": 55,
+  "resolution": [
+    2560,
+    1440
+  ],
+  "chapters": {
+    "VLAN": 11,
+    "Firewall": 11,
+    "VPN": 11,
+    "Segmentasyon": 11,
+    "Loglar": 11
+  },
+  "django_tests_passed": 27,
+  "viewer_math_tests_passed": 2,
+  "browser_screens": {
+    "default": 55,
+    "390x844": 55
+  },
+  "browser_interactions": [
+    "wheel",
+    "double_click",
+    "drag",
+    "synthetic_two_pointer_pinch",
+    "fit",
+    "reset",
+    "escape",
+    "answer_preserved",
+    "close",
+    "load_failure_blocks_answer",
+    "retry"
+  ],
+  "existing_courses_preserved": [
+    "Linux",
+    "Veritabanı Denetimi",
+    "AD"
+  ],
+  "limits": [
+    "Synthetic evidence and local mock browser API; actual grading/progress independently checked through Django API",
+    "No production device/config changes or scans",
+    "No physical iOS/Android test"
+  ]
+}

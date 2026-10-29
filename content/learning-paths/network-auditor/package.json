@@ -1,0 +1,2661 @@
+{
+  "slug": "network-auditor-v1",
+  "title": "Ağ Denetimi",
+  "description": "55 özgün görselli ve uygulamalı ağ denetimi kararı • 5 bölüm\nFirewall, VPN, VLAN, segmentasyon ve ağ loglarını gerçekçi yapılandırma ve akış kanıtlarından öğren. Her yanıtta teknik gerekçe, risk, iş etkisi ve önerilen kontrol.",
+  "modules": [
+    "VLAN ve ağ kapsamı",
+    "Firewall politikaları",
+    "VPN ve uzak erişim",
+    "Segmentasyon ve trafik yolları",
+    "Ağ logları ve denetim sonucu"
+  ],
+  "areas": {
+    "VL": "VLAN ve ağ kapsamı",
+    "FW": "Firewall politikaları",
+    "VP": "VPN ve uzak erişim",
+    "SG": "Segmentasyon ve trafik yolları",
+    "LG": "Ağ logları ve denetim sonucu"
+  },
+  "questions": [
+    {
+      "external_id": "network-auditor-v1-001",
+      "number": 1,
+      "chapter": 1,
+      "area": "VL",
+      "topic": "Ağ denetimi evreni",
+      "kind": "image",
+      "prompt": "Kontrol testlerinden önce neyi netleştirmelisin?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-001 üzerinde çalışıyorsun. Alan: VLAN ve ağ kapsamı. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "CMDB'de yok diye cihazı kapatmalıyım"
+        },
+        {
+          "id": "c",
+          "text": "Dört cihaz listelendiği için evren tamdır"
+        },
+        {
+          "id": "a",
+          "text": "FW-BRANCH farkının sahibi, ortamı ve denetim kapsamını"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nFW-BRANCH farkının sahibi, ortamı ve denetim kapsamını\n\n🔧 Teknik gerekçe\nKontrol testinin evreni bağımsız kaynaklarla uzlaştırılmalıdır; şube ve sanal ağ cihazları da kapsama girebilir.\n\n⚠️ Risk\nKayıt dışı ağ cihazının kontrol dışında kalması.\n\n💼 İş etkisi\nŞube verisinin ve erişim yollarının korunmaması.\n\n🛡️ Önerilen kontrol\nFarkları iş sahibi, ağ yöneticisi ve ortam sınıfıyla doğrula; kapsam kararını kanıtla kaydet.\n\n❌ Diğer yanıtların değerlendirmesi\n• CMDB'de yok diye cihazı kapatmalıyım: Envanter farkı üretimde izinsiz değişiklik gerekçesi değildir.\n• Dört cihaz listelendiği için evren tamdır: Bağımsız kaynak farkı henüz açıklanmamıştır.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Ağ denetimi evreni",
+        "VLAN ve ağ kapsamı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 1,
+      "card_pages": [],
+      "image": "network-auditor/screen_001.png",
+      "evidence": {
+        "command": "CMDB ve ağ keşif uzlaştırması / NW-001",
+        "output": "CMDB: SW-CORE, SW-ACCESS, FW-EDGE, VPN-GW\nYönetim envanteri: SW-CORE, SW-ACCESS, FW-EDGE, VPN-GW, FW-BRANCH\nFW-BRANCH sahibi: boş"
+      },
+      "technical": "Kontrol testinin evreni bağımsız kaynaklarla uzlaştırılmalıdır; şube ve sanal ağ cihazları da kapsama girebilir.",
+      "risk": "Kayıt dışı ağ cihazının kontrol dışında kalması.",
+      "impact": "Şube verisinin ve erişim yollarının korunmaması.",
+      "control": "Farkları iş sahibi, ağ yöneticisi ve ortam sınıfıyla doğrula; kapsam kararını kanıtla kaydet."
+    },
+    {
+      "external_id": "network-auditor-v1-002",
+      "number": 2,
+      "chapter": 1,
+      "area": "VL",
+      "topic": "VLAN üyeliği",
+      "kind": "image",
+      "prompt": "Bu ekran hangi kontrol sorusuna cevap verir?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-002 üzerinde çalışıyorsun. Alan: VLAN ve ağ kapsamı. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Misafirlerin ödeme ağına erişemeyeceğine kesin kanıttır"
+        },
+        {
+          "id": "a",
+          "text": "Misafir portunun VLAN 20 üyeliğine; diğer VLAN'lara erişim ayrıca test edilmeli"
+        },
+        {
+          "id": "c",
+          "text": "active tüm portlarda MFA etkin demektir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nMisafir portunun VLAN 20 üyeliğine; diğer VLAN'lara erişim ayrıca test edilmeli\n\n🔧 Teknik gerekçe\nVLAN üyeliği L2 yayın alanını gösterir; VLAN'lar arası yönlendirme ve filtreler ayrı kontrollerdir.\n\n⚠️ Risk\nL2 ayrımının tam erişim izolasyonu sanılması.\n\n💼 İş etkisi\nÖdeme ağına açık başka yolların atlanması.\n\n🛡️ Önerilen kontrol\nPort üyeliğini cihaz envanteriyle, VLAN arası erişimi yönlendirme/ACL/firewall ve kontrollü testlerle doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• Misafirlerin ödeme ağına erişemeyeceğine kesin kanıttır: VLAN üyeliği L3 erişim politikasını göstermez.\n• active tüm portlarda MFA etkin demektir: VLAN durumu kimlik doğrulama kontrolü değildir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "VLAN üyeliği",
+        "VLAN ve ağ kapsamı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 2,
+      "card_pages": [],
+      "image": "network-auditor/screen_002.png",
+      "evidence": {
+        "command": "Cisco IOS XE 17.12 / show vlan brief (özet)",
+        "output": "VLAN Name       Status Ports\n10   CORP       active Gi1/0/1, Gi1/0/2\n20   GUEST      active Gi1/0/3\n30   PAYMENTS   active Gi1/0/4\nİhtiyaç: misafir cihaz Gi1/0/3 üzerinde"
+      },
+      "technical": "VLAN üyeliği L2 yayın alanını gösterir; VLAN'lar arası yönlendirme ve filtreler ayrı kontrollerdir.",
+      "risk": "L2 ayrımının tam erişim izolasyonu sanılması.",
+      "impact": "Ödeme ağına açık başka yolların atlanması.",
+      "control": "Port üyeliğini cihaz envanteriyle, VLAN arası erişimi yönlendirme/ACL/firewall ve kontrollü testlerle doğrula."
+    },
+    {
+      "external_id": "network-auditor-v1-003",
+      "number": 3,
+      "chapter": 1,
+      "area": "VL",
+      "topic": "Yanlış access VLAN",
+      "kind": "image",
+      "prompt": "Hangi sapma doğrudan desteklenir?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-003 üzerinde çalışıyorsun. Alan: VLAN ve ağ kapsamı. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Misafir portu ödeme VLAN'ına atanmış"
+        },
+        {
+          "id": "c",
+          "text": "Port kesin bir saldırgan tarafından kullanılmıştır"
+        },
+        {
+          "id": "b",
+          "text": "Description GUEST olduğu için port güvendedir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nMisafir portu ödeme VLAN'ına atanmış\n\n🔧 Teknik gerekçe\nAccess port VLAN ataması trafiğin L2 bağlamını belirler; port açıklaması yalnız idari etikettir.\n\n⚠️ Risk\nMisafir cihazın hassas yayın alanına alınması.\n\n💼 İş etkisi\nÖdeme sistemlerine gereksiz maruziyet ve yatay hareket yüzeyi.\n\n🛡️ Önerilen kontrol\nEtkin port/VLAN eşleşmesini onaylı matrisle düzeltme sürecine bağla; gerçek cihaz ve erişim testini tekrarla.\n\n❌ Diğer yanıtların değerlendirmesi\n• Description GUEST olduğu için port güvendedir: Açıklama etkin VLAN atamasını değiştirmez.\n• Port kesin bir saldırgan tarafından kullanılmıştır: Yapılandırma gerçekleşmiş kullanım kanıtı değildir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Yanlış access VLAN",
+        "VLAN ve ağ kapsamı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 3,
+      "card_pages": [],
+      "image": "network-auditor/screen_003.png",
+      "evidence": {
+        "command": "show running-config interface Gi1/0/8 (özet)",
+        "output": "interface Gi1/0/8\n description GUEST-RECEPTION\n switchport mode access\n switchport access vlan 30\nOnaylı misafir VLAN: 20; VLAN 30: PAYMENTS"
+      },
+      "technical": "Access port VLAN ataması trafiğin L2 bağlamını belirler; port açıklaması yalnız idari etikettir.",
+      "risk": "Misafir cihazın hassas yayın alanına alınması.",
+      "impact": "Ödeme sistemlerine gereksiz maruziyet ve yatay hareket yüzeyi.",
+      "control": "Etkin port/VLAN eşleşmesini onaylı matrisle düzeltme sürecine bağla; gerçek cihaz ve erişim testini tekrarla."
+    },
+    {
+      "external_id": "network-auditor-v1-004",
+      "number": 4,
+      "chapter": 1,
+      "area": "VL",
+      "topic": "Beklenmeyen trunk",
+      "kind": "image",
+      "prompt": "İlk uygun denetim adımı hangisi?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-004 üzerinde çalışıyorsun. Alan: VLAN ve ağ kapsamı. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Dynamic desirable portu kalıcı access yapar"
+        },
+        {
+          "id": "b",
+          "text": "Trunk görüldüğü için bütün VLAN'lar ele geçirilmiştir"
+        },
+        {
+          "id": "a",
+          "text": "Kullanıcı portunun neden trunk olduğunu, komşusunu ve taşıdığı VLAN'ları doğrulamak"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nKullanıcı portunun neden trunk olduğunu, komşusunu ve taşıdığı VLAN'ları doğrulamak\n\n🔧 Teknik gerekçe\nDTP modları ve operasyonel sonuç farklı alanlardır; kullanıcı portunda istenmeyen trunk kapsamı incelenmelidir.\n\n⚠️ Risk\nBir uç noktaya gereksiz VLAN taşıma imkânı.\n\n💼 İş etkisi\nAğ ayrımının zayıflaması.\n\n🛡️ Önerilen kontrol\nUç nokta portlarını onaylı sabit access profiline bağla; DTP, allowed VLAN ve komşu kanıtını birlikte incele.\n\n❌ Diğer yanıtların değerlendirmesi\n• Trunk görüldüğü için bütün VLAN'lar ele geçirilmiştir: İzinli VLAN'lar ve fiili trafik ayrıca incelenmelidir.\n• Dynamic desirable portu kalıcı access yapar: Bu mod trunk anlaşmasını etkin biçimde deneyebilir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Beklenmeyen trunk",
+        "VLAN ve ağ kapsamı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 4,
+      "card_pages": [],
+      "image": "network-auditor/screen_004.png",
+      "evidence": {
+        "command": "show interfaces Gi1/0/9 switchport (özet)",
+        "output": "Administrative Mode: dynamic desirable\nOperational Mode: trunk\nTrunking Native Mode VLAN: 1\nBağlı cihaz kaydı: tek kullanıcı masaüstü"
+      },
+      "technical": "DTP modları ve operasyonel sonuç farklı alanlardır; kullanıcı portunda istenmeyen trunk kapsamı incelenmelidir.",
+      "risk": "Bir uç noktaya gereksiz VLAN taşıma imkânı.",
+      "impact": "Ağ ayrımının zayıflaması.",
+      "control": "Uç nokta portlarını onaylı sabit access profiline bağla; DTP, allowed VLAN ve komşu kanıtını birlikte incele."
+    },
+    {
+      "external_id": "network-auditor-v1-005",
+      "number": 5,
+      "chapter": 1,
+      "area": "VL",
+      "topic": "Geniş allowed VLAN kapsamı",
+      "kind": "image",
+      "prompt": "Hangi gereksiz kapsam incelenmeli?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-005 üzerinde çalışıyorsun. Alan: VLAN ve ağ kapsamı. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Native 999 olduğu için allowed liste önemsizdir"
+        },
+        {
+          "id": "a",
+          "text": "30,40,99 VLAN'larının ihtiyaç dışı trunk üzerinden taşınması"
+        },
+        {
+          "id": "c",
+          "text": "Listelenen VLAN'ların hepsinde kesin aktif saldırı vardır"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\n30,40,99 VLAN'larının ihtiyaç dışı trunk üzerinden taşınması\n\n🔧 Teknik gerekçe\nTrunk birden çok VLAN taşıyabilir; allowed liste, gerekli bağlantı kapsamıyla eşleştirilir.\n\n⚠️ Risk\nİhtiyaç dışı ağların uzak bağlantıya uzanması.\n\n💼 İş etkisi\nHassas veya yönetim ağının saldırı yüzeyinin büyümesi.\n\n🛡️ Önerilen kontrol\nUçtan uca VLAN ihtiyacını doğrula; gereksiz VLAN'ları kontrollü daralt ve hizmet testini kaydet.\n\n❌ Diğer yanıtların değerlendirmesi\n• Native 999 olduğu için allowed liste önemsizdir: Native VLAN ile izin verilen VLAN kapsamı ayrı kontrollerdir.\n• Listelenen VLAN'ların hepsinde kesin aktif saldırı vardır: Taşıma izni gerçekleşmiş ihlal değildir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Geniş allowed VLAN kapsamı",
+        "VLAN ve ağ kapsamı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 5,
+      "card_pages": [],
+      "image": "network-auditor/screen_005.png",
+      "evidence": {
+        "command": "show interfaces trunk (özet)",
+        "output": "Port     Mode  Status    Native vlan\nGi1/0/48 on    trunking  999\nVlans allowed on trunk: 10,20,30,40,99\nİş ihtiyacı: bu bağlantıda yalnız 10,20"
+      },
+      "technical": "Trunk birden çok VLAN taşıyabilir; allowed liste, gerekli bağlantı kapsamıyla eşleştirilir.",
+      "risk": "İhtiyaç dışı ağların uzak bağlantıya uzanması.",
+      "impact": "Hassas veya yönetim ağının saldırı yüzeyinin büyümesi.",
+      "control": "Uçtan uca VLAN ihtiyacını doğrula; gereksiz VLAN'ları kontrollü daralt ve hizmet testini kaydet."
+    },
+    {
+      "external_id": "network-auditor-v1-006",
+      "number": 6,
+      "chapter": 1,
+      "area": "VL",
+      "topic": "Native VLAN uyuşmazlığı",
+      "kind": "image",
+      "prompt": "Doğru denetim yaklaşımı hangisi?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-006 üzerinde çalışıyorsun. Alan: VLAN ve ağ kapsamı. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Native VLAN her uçta farklı olmalıdır"
+        },
+        {
+          "id": "a",
+          "text": "İki uçtaki untagged trafik sınıflandırmasını ve onaylı native VLAN eşleşmesini test etmek"
+        },
+        {
+          "id": "c",
+          "text": "Uyuşmazlık bütün paketleri kesin şifreler"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nİki uçtaki untagged trafik sınıflandırmasını ve onaylı native VLAN eşleşmesini test etmek\n\n🔧 Teknik gerekçe\n802.1Q native VLAN davranışı untagged trafikle ilişkilidir; iki uçtaki eşleşme ve platform ayarları önemlidir.\n\n⚠️ Risk\nEtiketsiz trafiğin beklenmeyen VLAN'a alınması.\n\n💼 İş etkisi\nİzolasyon ve bağlantı kararlılığında sapma.\n\n🛡️ Önerilen kontrol\nİki uç konfigürasyonunu aynı bağlantı kimliğiyle uzlaştır; native/tagging politikasını ve kontrollü trafik sonucunu doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• Native VLAN her uçta farklı olmalıdır: Bu fark tutarsız sınıflandırma oluşturabilir.\n• Uyuşmazlık bütün paketleri kesin şifreler: VLAN sınıflandırması şifreleme kontrolü değildir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Native VLAN uyuşmazlığı",
+        "VLAN ve ağ kapsamı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 6,
+      "card_pages": [],
+      "image": "network-auditor/screen_006.png",
+      "evidence": {
+        "command": "İki uç trunk konfigürasyonu / NW-006",
+        "output": "SW-CORE Gi1/0/48: native vlan 999\nSW-ACCESS Gi1/0/48: native vlan 1\nBağlantı: trunk / trunk; untagged frame'ler kullanılıyor"
+      },
+      "technical": "802.1Q native VLAN davranışı untagged trafikle ilişkilidir; iki uçtaki eşleşme ve platform ayarları önemlidir.",
+      "risk": "Etiketsiz trafiğin beklenmeyen VLAN'a alınması.",
+      "impact": "İzolasyon ve bağlantı kararlılığında sapma.",
+      "control": "İki uç konfigürasyonunu aynı bağlantı kimliğiyle uzlaştır; native/tagging politikasını ve kontrollü trafik sonucunu doğrula."
+    },
+    {
+      "external_id": "network-auditor-v1-007",
+      "number": 7,
+      "chapter": 1,
+      "area": "VL",
+      "topic": "Kullanılmayan port",
+      "kind": "image",
+      "prompt": "Hangi eksik kontrol var?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-007 üzerinde çalışıyorsun. Alan: VLAN ve ağ kapsamı. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Bağlı cihaz olmaması portun idari olarak kapalı olduğu anlamına gelmiyor"
+        },
+        {
+          "id": "b",
+          "text": "notconnect fiziksel portu kalıcı kapatmıştır"
+        },
+        {
+          "id": "c",
+          "text": "VLAN 30 her zaman karantina VLAN'ıdır"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nBağlı cihaz olmaması portun idari olarak kapalı olduğu anlamına gelmiyor\n\n🔧 Teknik gerekçe\nOperasyonel link durumu ile administrative shutdown farklıdır; cihaz takılması erişimi yeniden açabilir.\n\n⚠️ Risk\nBoş fiziksel porttan hassas VLAN'a bağlantı.\n\n💼 İş etkisi\nYetkisiz cihaz erişimi.\n\n🛡️ Önerilen kontrol\nİdari kapatma, karantina ataması ve fiziksel port envanterini onaylı kriterle doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• notconnect fiziksel portu kalıcı kapatmıştır: Bağlantı durumu idari shutdown değildir.\n• VLAN 30 her zaman karantina VLAN'ıdır: Kanıtta VLAN 30 ödeme ağı olarak tanımlıdır.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Kullanılmayan port",
+        "VLAN ve ağ kapsamı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 7,
+      "card_pages": [],
+      "image": "network-auditor/screen_007.png",
+      "evidence": {
+        "command": "show interfaces status (özet)",
+        "output": "Port    Name       Status       Vlan\nGi1/0/7 SPARE      notconnect   30\nRunning config: shutdown yok\nPolitika: boş portlar kapalı ve karantina VLAN'ında"
+      },
+      "technical": "Operasyonel link durumu ile administrative shutdown farklıdır; cihaz takılması erişimi yeniden açabilir.",
+      "risk": "Boş fiziksel porttan hassas VLAN'a bağlantı.",
+      "impact": "Yetkisiz cihaz erişimi.",
+      "control": "İdari kapatma, karantina ataması ve fiziksel port envanterini onaylı kriterle doğrula."
+    },
+    {
+      "external_id": "network-auditor-v1-008",
+      "number": 8,
+      "chapter": 1,
+      "area": "VL",
+      "topic": "Yönetim VLAN'ı etiketi",
+      "kind": "image",
+      "prompt": "Hangi sonuç doğrudur?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-008 üzerinde çalışıyorsun. Alan: VLAN ve ağ kapsamı. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "VLAN adının MGMT olması erişimi zaten engeller"
+        },
+        {
+          "id": "c",
+          "text": "Route varsa SSH oturumu mutlaka başarılıdır"
+        },
+        {
+          "id": "a",
+          "text": "MGMT etiketi izolasyon sağlamıyor; kullanıcı ağından SSH izni kriter dışı"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nMGMT etiketi izolasyon sağlamıyor; kullanıcı ağından SSH izni kriter dışı\n\n🔧 Teknik gerekçe\nAyrı yönetim VLAN'ı filtre ve kimlik kontrolleriyle tamamlanır; yönlendirme ve servis izni birlikte değerlendirilir.\n\n⚠️ Risk\nKullanıcı ağından cihaz yönetim yüzeyine erişim.\n\n💼 İş etkisi\nCihaz kontrolünün ele geçirilme olasılığının artması.\n\n🛡️ Önerilen kontrol\nYönetimi onaylı jump host/kimliklerle sınırla; kullanıcı VLAN'ından negatif erişim ve yönetim loglarını test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• VLAN adının MGMT olması erişimi zaten engeller: Etiket politika uygulamaz.\n• Route varsa SSH oturumu mutlaka başarılıdır: İzin, kimlik doğrulama başarısı değildir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Yönetim VLAN'ı etiketi",
+        "VLAN ve ağ kapsamı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 8,
+      "card_pages": [],
+      "image": "network-auditor/screen_008.png",
+      "evidence": {
+        "command": "Ağ bağlantı matrisi / NW-008",
+        "output": "VLAN 99: MGMT\nKullanıcı VLAN 10 -> VLAN 99: route mevcut\nFW/ACL sonucu TCP 22: ALLOW\nOnaylı yönetim kaynağı: yalnız JUMP-01"
+      },
+      "technical": "Ayrı yönetim VLAN'ı filtre ve kimlik kontrolleriyle tamamlanır; yönlendirme ve servis izni birlikte değerlendirilir.",
+      "risk": "Kullanıcı ağından cihaz yönetim yüzeyine erişim.",
+      "impact": "Cihaz kontrolünün ele geçirilme olasılığının artması.",
+      "control": "Yönetimi onaylı jump host/kimliklerle sınırla; kullanıcı VLAN'ından negatif erişim ve yönetim loglarını test et."
+    },
+    {
+      "external_id": "network-auditor-v1-009",
+      "number": 9,
+      "chapter": 1,
+      "area": "VL",
+      "topic": "SVI ve ağ geçidi",
+      "kind": "image",
+      "prompt": "Bu kanıt hangi ek kontrolü gerektirir?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-009 üzerinde çalışıyorsun. Alan: VLAN ve ağ kapsamı. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "İki VLAN artık aynı L2 yayın alanıdır"
+        },
+        {
+          "id": "a",
+          "text": "VLAN'lar arası yönlendirme ve uygulanmış erişim filtrelerinin incelenmesini"
+        },
+        {
+          "id": "c",
+          "text": "up/up her iki VLAN'ın tam izole olduğunu kanıtlar"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nVLAN'lar arası yönlendirme ve uygulanmış erişim filtrelerinin incelenmesini\n\n🔧 Teknik gerekçe\nSVI L3 arayüzüdür; routing etkinliği ve ilgili ACL/firewall yolları segment sınırının parçasıdır.\n\n⚠️ Risk\nYönlendirilen VLAN'larda kontrolsüz çapraz erişim.\n\n💼 İş etkisi\nKullanıcı ve hassas sistemler arasında gereksiz bağlantı.\n\n🛡️ Önerilen kontrol\nSVI, route ve etkin filtre yönlerini topla; izin verilen ve reddedilen akışları matrisle test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• İki VLAN artık aynı L2 yayın alanıdır: L3 yönlendirme VLAN kimliklerini birleştirmez.\n• up/up her iki VLAN'ın tam izole olduğunu kanıtlar: Arayüz durumu erişim kısıtını göstermez.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "SVI ve ağ geçidi",
+        "VLAN ve ağ kapsamı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 9,
+      "card_pages": [],
+      "image": "network-auditor/screen_009.png",
+      "evidence": {
+        "command": "show ip interface brief (özet)",
+        "output": "Interface IP-Address    Status Protocol\nVlan10    10.10.10.1    up     up\nVlan20    10.10.20.1    up     up\nip routing: enabled"
+      },
+      "technical": "SVI L3 arayüzüdür; routing etkinliği ve ilgili ACL/firewall yolları segment sınırının parçasıdır.",
+      "risk": "Yönlendirilen VLAN'larda kontrolsüz çapraz erişim.",
+      "impact": "Kullanıcı ve hassas sistemler arasında gereksiz bağlantı.",
+      "control": "SVI, route ve etkin filtre yönlerini topla; izin verilen ve reddedilen akışları matrisle test et."
+    },
+    {
+      "external_id": "network-auditor-v1-010",
+      "number": 10,
+      "chapter": 1,
+      "area": "VL",
+      "topic": "Yanlış port kanıtı",
+      "kind": "image",
+      "prompt": "Denetçi bu ekranı hedef testin sonucu sayabilir mi?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-010 üzerinde çalışıyorsun. Alan: VLAN ve ağ kapsamı. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hayır; aynı port numarası ve VLAN farklı cihazdaki hedefi doğrulamaz"
+        },
+        {
+          "id": "c",
+          "text": "VLAN 20 olması tüm şubeleri kapsar"
+        },
+        {
+          "id": "b",
+          "text": "Evet; port numarası aynıysa cihaz önemli değildir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nHayır; aynı port numarası ve VLAN farklı cihazdaki hedefi doğrulamaz\n\n🔧 Teknik gerekçe\nKanıt hedef cihaz, port, zaman ve ortam kimliğiyle bağlanmalıdır.\n\n⚠️ Risk\nYanlış cihaz üzerinden uygunluk sonucu çıkarılması.\n\n💼 İş etkisi\nGerçek sapmanın fark edilmemesi.\n\n🛡️ Önerilen kontrol\nHedef cihaz seri/hostname ve arayüzünü envanterle eşleştir; doğru kaynaktan güncel kanıt al.\n\n❌ Diğer yanıtların değerlendirmesi\n• Evet; port numarası aynıysa cihaz önemli değildir: Arayüz kimliği cihazla birlikte anlamlıdır.\n• VLAN 20 olması tüm şubeleri kapsar: Tek port bütün ağ evrenini göstermez.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Yanlış port kanıtı",
+        "VLAN ve ağ kapsamı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 10,
+      "card_pages": [],
+      "image": "network-auditor/screen_010.png",
+      "evidence": {
+        "command": "Envanter ve switchport kanıtı / NW-010",
+        "output": "Ticket hedefi: SW-ACCESS Gi1/0/18\nEkran başlığı: SW-CORE Gi1/0/18\nİki portun VLAN ataması: 20"
+      },
+      "technical": "Kanıt hedef cihaz, port, zaman ve ortam kimliğiyle bağlanmalıdır.",
+      "risk": "Yanlış cihaz üzerinden uygunluk sonucu çıkarılması.",
+      "impact": "Gerçek sapmanın fark edilmemesi.",
+      "control": "Hedef cihaz seri/hostname ve arayüzünü envanterle eşleştir; doğru kaynaktan güncel kanıt al."
+    },
+    {
+      "external_id": "network-auditor-v1-011",
+      "number": 11,
+      "chapter": 1,
+      "area": "VL",
+      "topic": "VLAN temel kontrol özeti",
+      "kind": "image",
+      "prompt": "Kapanış için hangi kanıt eksik?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-011 üzerinde çalışıyorsun. Alan: VLAN ve ağ kapsamı. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Access modu bütün L3 trafiği otomatik engeller"
+        },
+        {
+          "id": "a",
+          "text": "Etkin yol ve filtreyle Guest -> Payments negatif erişim testi"
+        },
+        {
+          "id": "c",
+          "text": "Matris tek başına çalışma zamanı kanıtıdır"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nEtkin yol ve filtreyle Guest -> Payments negatif erişim testi\n\n🔧 Teknik gerekçe\nTasarım, yapılandırma ve kontrollü çalışma testi farklı kanıt türleridir.\n\n⚠️ Risk\nKâğıt üzerinde kalan segment ayrımı.\n\n💼 İş etkisi\nMisafir ağından hassas sisteme erişim ihtimali.\n\n🛡️ Önerilen kontrol\nYetkili güvenli testle hedef IP/protokol/port ve yönü doğrula; logla aynı test akışını ilişkilendir.\n\n❌ Diğer yanıtların değerlendirmesi\n• Access modu bütün L3 trafiği otomatik engeller: Access modu VLAN'lar arası filtre değildir.\n• Matris tek başına çalışma zamanı kanıtıdır: Tasarlanan politika uygulanmış sonucu kanıtlamaz.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "VLAN temel kontrol özeti",
+        "VLAN ve ağ kapsamı"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 11,
+      "card_pages": [],
+      "image": "network-auditor/screen_011.png",
+      "evidence": {
+        "command": "Denetim çalışma kâğıdı / NW-011",
+        "output": "Guest port: VLAN 20, access\nCore SVI: inter-VLAN routing enabled\nErişim matrisi: Guest -> Payments DENY\nÇapraz trafik testi: yapılmadı"
+      },
+      "technical": "Tasarım, yapılandırma ve kontrollü çalışma testi farklı kanıt türleridir.",
+      "risk": "Kâğıt üzerinde kalan segment ayrımı.",
+      "impact": "Misafir ağından hassas sisteme erişim ihtimali.",
+      "control": "Yetkili güvenli testle hedef IP/protokol/port ve yönü doğrula; logla aynı test akışını ilişkilendir."
+    },
+    {
+      "external_id": "network-auditor-v1-012",
+      "number": 12,
+      "chapter": 2,
+      "area": "FW",
+      "topic": "İlk eşleşen firewall kuralı",
+      "kind": "image",
+      "prompt": "Yeni test bağlantısı hangi kuralla eşleşir?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-012 üzerinde çalışıyorsun. Alan: Firewall politikaları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "10 numaralı geniş ALLOW; alttaki dar DENY etkisiz kalır"
+        },
+        {
+          "id": "c",
+          "text": "İki kural birleşip şifreleme yapar"
+        },
+        {
+          "id": "b",
+          "text": "20 çünkü en dar kural her zaman kazanır"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\n10 numaralı geniş ALLOW; alttaki dar DENY etkisiz kalır\n\n🔧 Teknik gerekçe\nSıralı firewall motorunda ilk eşleşme sonucu belirler; ürünün gerçek semantiği ayrıca doğrulanmalıdır.\n\n⚠️ Risk\nDar kısıtın üstteki geniş izinle gölgelenmesi.\n\n💼 İş etkisi\nHassas veritabanı portuna gereksiz erişim.\n\n🛡️ Önerilen kontrol\nKural sırasını, nesneleri ve yeni akış testini birlikte doğrula; geniş izni onaylı gereksinime göre daralt.\n\n❌ Diğer yanıtların değerlendirmesi\n• 20 çünkü en dar kural her zaman kazanır: Bu simülatörde sıralı ilk eşleşme açıkça belirtilmiştir.\n• İki kural birleşip şifreleme yapar: İzin kuralları şifreleme sağlamaz.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "İlk eşleşen firewall kuralı",
+        "Firewall politikaları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 12,
+      "card_pages": [],
+      "image": "network-auditor/screen_012.png",
+      "evidence": {
+        "command": "FW-EDGE politika simülatörü / NW-012",
+        "output": "Semantik: yukarıdan aşağı ilk eşleşme; aksi halde DENY\n10 Users -> Payments any ALLOW\n20 Users -> Payments tcp/5432 DENY\nTest: Users 10.10.10.8 -> Payments 10.10.30.9 tcp/5432"
+      },
+      "technical": "Sıralı firewall motorunda ilk eşleşme sonucu belirler; ürünün gerçek semantiği ayrıca doğrulanmalıdır.",
+      "risk": "Dar kısıtın üstteki geniş izinle gölgelenmesi.",
+      "impact": "Hassas veritabanı portuna gereksiz erişim.",
+      "control": "Kural sırasını, nesneleri ve yeni akış testini birlikte doğrula; geniş izni onaylı gereksinime göre daralt."
+    },
+    {
+      "external_id": "network-auditor-v1-013",
+      "number": 13,
+      "chapter": 2,
+      "area": "FW",
+      "topic": "Any-any kuralı",
+      "kind": "image",
+      "prompt": "Öncelikli kontrol eksikliği hangisi?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-013 üzerinde çalışıyorsun. Alan: Firewall politikaları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sahipsiz ve ihtiyaçla sınırlandırılmamış geniş erişim kuralı"
+        },
+        {
+          "id": "b",
+          "text": "any değeri bütün trafiğin saldırı olduğunu gösterir"
+        },
+        {
+          "id": "c",
+          "text": "Zone tanımı varsa servis kısıtı gerekmez"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nSahipsiz ve ihtiyaçla sınırlandırılmamış geniş erişim kuralı\n\n🔧 Teknik gerekçe\nKaynak, hedef ve servis kapsamı onaylı iş ihtiyacına bağlanmalıdır.\n\n⚠️ Risk\nKullanıcı ağından çok sayıda sunucu servisine erişim.\n\n💼 İş etkisi\nYatay hareket ve yetkisiz işlem yüzeyinin genişlemesi.\n\n🛡️ Önerilen kontrol\nKural sahibi, gerekçe, dar akış ve gözden geçirme tarihi belirle; güvenli değişiklikle izinleri sınırla.\n\n❌ Diğer yanıtların değerlendirmesi\n• any değeri bütün trafiğin saldırı olduğunu gösterir: İzin kapsamı gerçekleşmiş kötü niyet kanıtı değildir.\n• Zone tanımı varsa servis kısıtı gerekmez: Zone tek başına en az ayrıcalığı sağlamaz.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Any-any kuralı",
+        "Firewall politikaları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 13,
+      "card_pages": [],
+      "image": "network-auditor/screen_013.png",
+      "evidence": {
+        "command": "FW-EDGE politika export / NW-013",
+        "output": "Source zone: Users\nDestination zone: Server\nSource: any; Destination: any; Service: any\nAction: allow; Owner: boş; Review: yok"
+      },
+      "technical": "Kaynak, hedef ve servis kapsamı onaylı iş ihtiyacına bağlanmalıdır.",
+      "risk": "Kullanıcı ağından çok sayıda sunucu servisine erişim.",
+      "impact": "Yatay hareket ve yetkisiz işlem yüzeyinin genişlemesi.",
+      "control": "Kural sahibi, gerekçe, dar akış ve gözden geçirme tarihi belirle; güvenli değişiklikle izinleri sınırla."
+    },
+    {
+      "external_id": "network-auditor-v1-014",
+      "number": 14,
+      "chapter": 2,
+      "area": "FW",
+      "topic": "Örtük red ve log",
+      "kind": "image",
+      "prompt": "Bu kanıt neyi gösterir?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-014 üzerinde çalışıyorsun. Alan: Firewall politikaları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Erişim reddi var ama gerekli red görünürlüğü ayrıca sağlanmalı"
+        },
+        {
+          "id": "c",
+          "text": "Implicit DENY bütün olayları zaten saklar"
+        },
+        {
+          "id": "b",
+          "text": "Log kapalıysa bütün trafik otomatik izinlidir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nErişim reddi var ama gerekli red görünürlüğü ayrıca sağlanmalı\n\n🔧 Teknik gerekçe\nFiltre kararı ile olayın loglanması farklı işlevlerdir.\n\n⚠️ Risk\nReddedilen kritik denemelerin izlenememesi.\n\n💼 İş etkisi\nSaldırı veya yanlış yapılandırmaya geç müdahale.\n\n🛡️ Önerilen kontrol\nRiskli red kapsamını uygun hacim/retention ile kaydet; örnek reddin SIEM'e ulaştığını doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• Log kapalıysa bütün trafik otomatik izinlidir: Kayıt üretimi ile erişim kararı farklı kontrollerdir.\n• Implicit DENY bütün olayları zaten saklar: Kayıt davranışı ayara bağlıdır.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Örtük red ve log",
+        "Firewall politikaları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 14,
+      "card_pages": [],
+      "image": "network-auditor/screen_014.png",
+      "evidence": {
+        "command": "FW-EDGE etkin politika özeti / NW-014",
+        "output": "Semantik: ilk eşleşme; kalan trafik implicit DENY\n10 App -> DB tcp/5432 ALLOW log=on\nImplicit deny logging: off\nKriter: reddedilen kritik segment denemeleri izlenmeli"
+      },
+      "technical": "Filtre kararı ile olayın loglanması farklı işlevlerdir.",
+      "risk": "Reddedilen kritik denemelerin izlenememesi.",
+      "impact": "Saldırı veya yanlış yapılandırmaya geç müdahale.",
+      "control": "Riskli red kapsamını uygun hacim/retention ile kaydet; örnek reddin SIEM'e ulaştığını doğrula."
+    },
+    {
+      "external_id": "network-auditor-v1-015",
+      "number": 15,
+      "chapter": 2,
+      "area": "FW",
+      "topic": "NAT ile izin ayrımı",
+      "kind": "image",
+      "prompt": "Bu ekran için doğru yorum hangisi?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-015 üzerinde çalışıyorsun. Alan: Firewall politikaları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "203.0.113.10 gerçek müşteri IP'sidir"
+        },
+        {
+          "id": "a",
+          "text": "NAT eşlemesi var ama mevcut filtre bu yeni bağlantıyı reddediyor"
+        },
+        {
+          "id": "b",
+          "text": "NAT tanımı tek başına erişimi açar"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nNAT eşlemesi var ama mevcut filtre bu yeni bağlantıyı reddediyor\n\n🔧 Teknik gerekçe\nNAT adres/port dönüşümüdür; erişim sonucu ilgili güvenlik politikası ve ürünün işlem sırasıyla belirlenir.\n\n⚠️ Risk\nÇeviri kaydından yanlış maruziyet sonucu çıkarılması.\n\n💼 İş etkisi\nHatalı güvence veya gereksiz değişiklik.\n\n🛡️ Önerilen kontrol\nNAT, güvenlik kuralı ve kontrollü akış sonucunu aynı akış kimliğiyle ilişkilendir.\n\n❌ Diğer yanıtların değerlendirmesi\n• NAT tanımı tek başına erişimi açar: Adres çevirme ve güvenlik kararı ayrı aşamalardır.\n• 203.0.113.10 gerçek müşteri IP'sidir: Bu eğitimde dokümantasyon amaçlı adres kullanılır.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "NAT ile izin ayrımı",
+        "Firewall politikaları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 15,
+      "card_pages": [],
+      "image": "network-auditor/screen_015.png",
+      "evidence": {
+        "command": "FW-EDGE NAT ve güvenlik politika export / NW-015",
+        "output": "DNAT: 203.0.113.10:443 -> 10.10.40.10:443\nSecurity policy result for Internet -> target: DENY\nKontrollü yeni bağlantı: blocked"
+      },
+      "technical": "NAT adres/port dönüşümüdür; erişim sonucu ilgili güvenlik politikası ve ürünün işlem sırasıyla belirlenir.",
+      "risk": "Çeviri kaydından yanlış maruziyet sonucu çıkarılması.",
+      "impact": "Hatalı güvence veya gereksiz değişiklik.",
+      "control": "NAT, güvenlik kuralı ve kontrollü akış sonucunu aynı akış kimliğiyle ilişkilendir."
+    },
+    {
+      "external_id": "network-auditor-v1-016",
+      "number": 16,
+      "chapter": 2,
+      "area": "FW",
+      "topic": "Adres grubu genişlemesi",
+      "kind": "image",
+      "prompt": "Kural adına rağmen hangi sapma var?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-016 üzerinde çalışıyorsun. Alan: Firewall politikaları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Slash 32 bütün internete eşittir"
+        },
+        {
+          "id": "a",
+          "text": "Adres grubunun tüm IPv4 kaynaklarını kapsayan üyeliği"
+        },
+        {
+          "id": "b",
+          "text": "Grup adı approved ise bütün üyeler otomatik onaylıdır"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nAdres grubunun tüm IPv4 kaynaklarını kapsayan üyeliği\n\n🔧 Teknik gerekçe\nNesne grupları genişlemeleriyle incelenir; kural ekranındaki isim gerçek kaynak kapsamını gizleyebilir.\n\n⚠️ Risk\nYönetim servisine ihtiyaç dışı kaynak izni.\n\n💼 İş etkisi\nYetkili yönetim hesabına saldırı yüzeyinin büyümesi.\n\n🛡️ Önerilen kontrol\nGrup üyeliklerini ve değişiklik kayıtlarını onaylı listeyle uzlaştır; geniş üyeyi kontrollü kaldır ve negatif test yap.\n\n❌ Diğer yanıtların değerlendirmesi\n• Grup adı approved ise bütün üyeler otomatik onaylıdır: İsim içerik doğrulaması değildir.\n• Slash 32 bütün internete eşittir: IPv4 /32 tek adres kapsamıdır.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Adres grubu genişlemesi",
+        "Firewall politikaları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 16,
+      "card_pages": [],
+      "image": "network-auditor/screen_016.png",
+      "evidence": {
+        "command": "FW-EDGE nesne ve kural çözümlemesi / NW-016",
+        "output": "Rule 21: APPROVED-VENDORS -> JUMP-01 tcp/22 ALLOW\nAPPROVED-VENDORS members: 192.0.2.80/32, 0.0.0.0/0\nOnaylı tedarikçi: yalnız 192.0.2.80/32"
+      },
+      "technical": "Nesne grupları genişlemeleriyle incelenir; kural ekranındaki isim gerçek kaynak kapsamını gizleyebilir.",
+      "risk": "Yönetim servisine ihtiyaç dışı kaynak izni.",
+      "impact": "Yetkili yönetim hesabına saldırı yüzeyinin büyümesi.",
+      "control": "Grup üyeliklerini ve değişiklik kayıtlarını onaylı listeyle uzlaştır; geniş üyeyi kontrollü kaldır ve negatif test yap."
+    },
+    {
+      "external_id": "network-auditor-v1-017",
+      "number": 17,
+      "chapter": 2,
+      "area": "FW",
+      "topic": "Sıfır hit sayacının sınırı",
+      "kind": "image",
+      "prompt": "Kuralı hemen silmek doğru mu?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-017 üzerinde çalışıyorsun. Alan: Firewall politikaları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Evet; sıfır hit kuralın hiçbir zaman kullanılmadığını kanıtlar"
+        },
+        {
+          "id": "a",
+          "text": "Hayır; sayaç dönemi ve aylık iş ihtiyacıyla kullanım kanıtını uzlaştırmalıyım"
+        },
+        {
+          "id": "c",
+          "text": "Hayır; hiçbir kural asla gözden geçirilemez"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nHayır; sayaç dönemi ve aylık iş ihtiyacıyla kullanım kanıtını uzlaştırmalıyım\n\n🔧 Teknik gerekçe\nHit sayacı zaman kapsamlı bir gözlemdir; sıfırlama ve nadir iş akışları sonucu etkiler.\n\n⚠️ Risk\nGereken kuralın yanlışlıkla kaldırılması veya gereksiz kuralın kalması.\n\n💼 İş etkisi\nYedek veya periyodik iş kesintisi.\n\n🛡️ Önerilen kontrol\nUygun gözlem dönemi, iş sahibi ve geçmiş akış kanıtını birlikte kullan; kaldırmayı onaylı planla test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• Evet; sıfır hit kuralın hiçbir zaman kullanılmadığını kanıtlar: Sayaç yalnız reset sonrası dönemi kapsar.\n• Hayır; hiçbir kural asla gözden geçirilemez: Gözden geçirme gereklidir ama yeterli dönemle yapılır.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Sıfır hit sayacının sınırı",
+        "Firewall politikaları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 17,
+      "card_pages": [],
+      "image": "network-auditor/screen_017.png",
+      "evidence": {
+        "command": "FW-EDGE kural kullanım ekranı / NW-017",
+        "output": "Rule 35: App -> Backup tcp/443 ALLOW\nHits since reset: 0\nCounter reset: bugün 09:00\nPeriyodik iş: her ayın ilk günü"
+      },
+      "technical": "Hit sayacı zaman kapsamlı bir gözlemdir; sıfırlama ve nadir iş akışları sonucu etkiler.",
+      "risk": "Gereken kuralın yanlışlıkla kaldırılması veya gereksiz kuralın kalması.",
+      "impact": "Yedek veya periyodik iş kesintisi.",
+      "control": "Uygun gözlem dönemi, iş sahibi ve geçmiş akış kanıtını birlikte kullan; kaldırmayı onaylı planla test et."
+    },
+    {
+      "external_id": "network-auditor-v1-018",
+      "number": 18,
+      "chapter": 2,
+      "area": "FW",
+      "topic": "Süreli istisna",
+      "kind": "image",
+      "prompt": "Hangi kontrol sapması desteklenir?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-018 üzerinde çalışıyorsun. Alan: Firewall politikaları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Süresi geçmiş istisnanın etkin kalması"
+        },
+        {
+          "id": "c",
+          "text": "Onayın bir kez alınması ömür boyu yeterlidir"
+        },
+        {
+          "id": "b",
+          "text": "Kural etkin olduğu için kesin veri sızdı"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nSüresi geçmiş istisnanın etkin kalması\n\n🔧 Teknik gerekçe\nİstisna yaşam döngüsü bitiş, sahiplik ve yeniden onay gerektirir.\n\n⚠️ Risk\nTedarikçi erişiminin gereğinden uzun sürmesi.\n\n💼 İş etkisi\nVeritabanına gereksiz dış erişim.\n\n🛡️ Önerilen kontrol\nSüreli kural sonlandırması ve yeniden onay takibi uygula; aktif oturum ve sonraki yeni bağlantıları ayrıca doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• Kural etkin olduğu için kesin veri sızdı: İzin varlığı kullanım veya ifşa kanıtı değildir.\n• Onayın bir kez alınması ömür boyu yeterlidir: Kanıtta belirli bir bitiş tarihi vardır.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Süreli istisna",
+        "Firewall politikaları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 18,
+      "card_pages": [],
+      "image": "network-auditor/screen_018.png",
+      "evidence": {
+        "command": "FW-EDGE istisna kaydı / NW-018",
+        "output": "Rule 44: Vendor -> DB tcp/5432 ALLOW\nOnay: 2026-10-01 - 2026-10-15\nDenetim: 2026-10-29; rule enabled; expiry: none"
+      },
+      "technical": "İstisna yaşam döngüsü bitiş, sahiplik ve yeniden onay gerektirir.",
+      "risk": "Tedarikçi erişiminin gereğinden uzun sürmesi.",
+      "impact": "Veritabanına gereksiz dış erişim.",
+      "control": "Süreli kural sonlandırması ve yeniden onay takibi uygula; aktif oturum ve sonraki yeni bağlantıları ayrıca doğrula."
+    },
+    {
+      "external_id": "network-auditor-v1-019",
+      "number": 19,
+      "chapter": 2,
+      "area": "FW",
+      "topic": "IPv6 kapsamı",
+      "kind": "image",
+      "prompt": "İlk doğru denetim sonucu hangisi?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-019 üzerinde çalışıyorsun. Alan: Firewall politikaları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "IPv4 kısıtı IPv6 yolunu kapsamıyor; iki protokol ailesi test edilmeli"
+        },
+        {
+          "id": "c",
+          "text": "IPv6 etkin olması tek başına saldırıdır"
+        },
+        {
+          "id": "b",
+          "text": "IPv4 DENY bütün IPv6 trafiğini otomatik engeller"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nIPv4 kısıtı IPv6 yolunu kapsamıyor; iki protokol ailesi test edilmeli\n\n🔧 Teknik gerekçe\nÇift yığın ortamlarda erişim kriteri ilgili IPv4 ve IPv6 yollarıyla doğrulanır.\n\n⚠️ Risk\nAlternatif protokol üzerinden yönetim yüzeyine erişim.\n\n💼 İş etkisi\nSegment sınırının kısmen aşılması.\n\n🛡️ Önerilen kontrol\nNesne, kural ve test evrenini iki adres ailesiyle eşleştir; IPv6 negatif yönetim erişimini doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• IPv4 DENY bütün IPv6 trafiğini otomatik engeller: Adres aileleri için etkin politikalar farklı olabilir.\n• IPv6 etkin olması tek başına saldırıdır: Protokolün varlığı ihlal kanıtı değildir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "IPv6 kapsamı",
+        "Firewall politikaları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 19,
+      "card_pages": [],
+      "image": "network-auditor/screen_019.png",
+      "evidence": {
+        "command": "FW-EDGE çift yığın erişim incelemesi / NW-019",
+        "output": "IPv4: Users -> MGMT tcp/22 DENY\nIPv6: Users -> MGMT tcp/22 ALLOW\nKaynak ve hedefte IPv6 etkin\nKriter: yalnız jump host yönetebilir"
+      },
+      "technical": "Çift yığın ortamlarda erişim kriteri ilgili IPv4 ve IPv6 yollarıyla doğrulanır.",
+      "risk": "Alternatif protokol üzerinden yönetim yüzeyine erişim.",
+      "impact": "Segment sınırının kısmen aşılması.",
+      "control": "Nesne, kural ve test evrenini iki adres ailesiyle eşleştir; IPv6 negatif yönetim erişimini doğrula."
+    },
+    {
+      "external_id": "network-auditor-v1-020",
+      "number": 20,
+      "chapter": 2,
+      "area": "FW",
+      "topic": "Kontrol ve yönetim düzlemi",
+      "kind": "image",
+      "prompt": "Transit DENY yeterli mi?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-020 üzerinde çalışıyorsun. Alan: Firewall politikaları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "HTTPS varsa kimlik ve kaynak kısıtı gerekmez"
+        },
+        {
+          "id": "a",
+          "text": "Hayır; cihaza yönelen yerel yönetim erişimi ayrıca kısıtlanmalı"
+        },
+        {
+          "id": "b",
+          "text": "Evet; transit kurallar bütün yerel servisleri aynı biçimde kapsar"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nHayır; cihaza yönelen yerel yönetim erişimi ayrıca kısıtlanmalı\n\n🔧 Teknik gerekçe\nCihazın kendi yönetim servisleri ile içinden geçen trafik aynı politika alanında olmayabilir.\n\n⚠️ Risk\nFirewall yönetim yüzeyinin geniş kaynaktan erişilebilir olması.\n\n💼 İş etkisi\nAğ kontrol cihazının ele geçirilme riskinin artması.\n\n🛡️ Önerilen kontrol\nYerel yönetim servisi/kaynaklarını MGMT ve jump hostla sınırla; MFA, güncel yazılım ve yönetim loglarını doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• Evet; transit kurallar bütün yerel servisleri aynı biçimde kapsar: Ürünlerde yerel/control-plane politikası ayrı olabilir.\n• HTTPS varsa kimlik ve kaynak kısıtı gerekmez: Şifreleme yetkilendirme sınırı değildir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Kontrol ve yönetim düzlemi",
+        "Firewall politikaları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 20,
+      "card_pages": [],
+      "image": "network-auditor/screen_020.png",
+      "evidence": {
+        "command": "FW-EDGE yerel yönetim erişimi export / NW-020",
+        "output": "Transit policy: Internet -> Internal DENY\nAdmin HTTPS listener: WAN interface\nTrusted admin sources: any\nKriter: yönetim yalnız MGMT/JUMP üzerinden"
+      },
+      "technical": "Cihazın kendi yönetim servisleri ile içinden geçen trafik aynı politika alanında olmayabilir.",
+      "risk": "Firewall yönetim yüzeyinin geniş kaynaktan erişilebilir olması.",
+      "impact": "Ağ kontrol cihazının ele geçirilme riskinin artması.",
+      "control": "Yerel yönetim servisi/kaynaklarını MGMT ve jump hostla sınırla; MFA, güncel yazılım ve yönetim loglarını doğrula."
+    },
+    {
+      "external_id": "network-auditor-v1-021",
+      "number": 21,
+      "chapter": 2,
+      "area": "FW",
+      "topic": "HA yapılandırma eşleşmesi",
+      "kind": "image",
+      "prompt": "Hangi ek test öncelikli?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-021 üzerinde çalışıyorsun. Alan: Firewall politikaları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Revision farkı kesin saldırı kanıtıdır"
+        },
+        {
+          "id": "a",
+          "text": "Standby politika farkının ve kontrollü failover erişim sonucunun doğrulanması"
+        },
+        {
+          "id": "b",
+          "text": "Standby cihaz çalışmadığı için kuralları önemsizdir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nStandby politika farkının ve kontrollü failover erişim sonucunun doğrulanması\n\n🔧 Teknik gerekçe\nYüksek erişilebilirlik kontrolü yalnız cihaz sağlığı değil, güvenlik politika tutarlılığını da kapsar.\n\n⚠️ Risk\nFailover sonrası eski veya aşırı izinli politikanın uygulanması.\n\n💼 İş etkisi\nHizmet kaybı ya da erişim sınırında zayıflama.\n\n🛡️ Önerilen kontrol\nHA senkronizasyonunu ve revizyon farkını düzeltme sürecine bağla; kontrollü geçişte pozitif/negatif akışları yeniden test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• Standby cihaz çalışmadığı için kuralları önemsizdir: Failover sırasında aktif rol alabilir.\n• Revision farkı kesin saldırı kanıtıdır: Senkron hatası idari veya teknik nedenli olabilir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "HA yapılandırma eşleşmesi",
+        "Firewall politikaları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 21,
+      "card_pages": [],
+      "image": "network-auditor/screen_021.png",
+      "evidence": {
+        "command": "Firewall HA paneli / NW-021",
+        "output": "Active: FW-A policy revision 108\nStandby: FW-B policy revision 101\nConfig sync: failed\nKriter: failover sonrası aynı erişim politikası"
+      },
+      "technical": "Yüksek erişilebilirlik kontrolü yalnız cihaz sağlığı değil, güvenlik politika tutarlılığını da kapsar.",
+      "risk": "Failover sonrası eski veya aşırı izinli politikanın uygulanması.",
+      "impact": "Hizmet kaybı ya da erişim sınırında zayıflama.",
+      "control": "HA senkronizasyonunu ve revizyon farkını düzeltme sürecine bağla; kontrollü geçişte pozitif/negatif akışları yeniden test et."
+    },
+    {
+      "external_id": "network-auditor-v1-022",
+      "number": 22,
+      "chapter": 2,
+      "area": "FW",
+      "topic": "Stateful oturumun etkisi",
+      "kind": "image",
+      "prompt": "Eski oturum neden ayrı incelenmeli?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-022 üzerinde çalışıyorsun. Alan: Firewall politikaları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Established bağlantının zararlı olduğunu kanıtlar"
+        },
+        {
+          "id": "a",
+          "text": "Yeni bağlantının reddi mevcut oturumun sona erdiğini kanıtlamaz"
+        },
+        {
+          "id": "b",
+          "text": "DENY her üründe bütün eski oturumları anında siler"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nYeni bağlantının reddi mevcut oturumun sona erdiğini kanıtlamaz\n\n🔧 Teknik gerekçe\nStateful motorlarda politika değişikliğinin mevcut oturumlara etkisi yapılandırmaya bağlıdır; bu kanıtta koruma davranışı belirtilmiştir.\n\n⚠️ Risk\nKapatıldığı sanılan erişimin mevcut oturumda sürmesi.\n\n💼 İş etkisi\nİstisna süresi sonrası veri erişiminin devamı.\n\n🛡️ Önerilen kontrol\nYeni ve mevcut oturum sonuçlarını ayrı test et; gerekli sonlandırmayı yetkili değişiklik planına dahil et.\n\n❌ Diğer yanıtların değerlendirmesi\n• DENY her üründe bütün eski oturumları anında siler: Oturum yeniden değerlendirmesi ürün ve ayara bağlıdır.\n• Established bağlantının zararlı olduğunu kanıtlar: Oturum durumu niyeti göstermez.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Stateful oturumun etkisi",
+        "Firewall politikaları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 22,
+      "card_pages": [],
+      "image": "network-auditor/screen_022.png",
+      "evidence": {
+        "command": "FW-EDGE policy ve session paneli / NW-022",
+        "output": "Motor: stateful; mevcut oturumlar bu profilde korunuyor\nRule 50 önce ALLOW, 10:00'da DENY yapıldı\nSession 9081 start: 09:55; status: established\nTest edilen yeni session: 10:05 DENY"
+      },
+      "technical": "Stateful motorlarda politika değişikliğinin mevcut oturumlara etkisi yapılandırmaya bağlıdır; bu kanıtta koruma davranışı belirtilmiştir.",
+      "risk": "Kapatıldığı sanılan erişimin mevcut oturumda sürmesi.",
+      "impact": "İstisna süresi sonrası veri erişiminin devamı.",
+      "control": "Yeni ve mevcut oturum sonuçlarını ayrı test et; gerekli sonlandırmayı yetkili değişiklik planına dahil et."
+    },
+    {
+      "external_id": "network-auditor-v1-023",
+      "number": 23,
+      "chapter": 3,
+      "area": "VP",
+      "topic": "VPN hesabında MFA",
+      "kind": "image",
+      "prompt": "Hangi sapma desteklenir?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-023 üzerinde çalışıyorsun. Alan: VPN ve uzak erişim. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Password only mevcut parolanın kesin zayıf olduğunu gösterir"
+        },
+        {
+          "id": "b",
+          "text": "VPN şifrelemesi MFA yerine geçer"
+        },
+        {
+          "id": "a",
+          "text": "Uzak personel VPN grubunun MFA dışında kalması"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nUzak personel VPN grubunun MFA dışında kalması\n\n🔧 Teknik gerekçe\nMFA kimlik doğrulamayı, tünel şifrelemesi aktarımı korur; farklı riskleri hedefler.\n\n⚠️ Risk\nTek parola ele geçirilmesiyle uzak erişim.\n\n💼 İş etkisi\nİç ağa yetkisiz bağlantı ihtimali.\n\n🛡️ Önerilen kontrol\nİlgili kimlik gruplarını ve istisnaları MFA kriteriyle eşleştir; kontrollü başarılı/başarısız faktör testini kaydet.\n\n❌ Diğer yanıtların değerlendirmesi\n• VPN şifrelemesi MFA yerine geçer: Tünel şifrelemesi kullanıcı doğrulama faktörü değildir.\n• Password only mevcut parolanın kesin zayıf olduğunu gösterir: Faktör sayısı parola değerini açıklamaz.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "VPN hesabında MFA",
+        "VPN ve uzak erişim"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 23,
+      "card_pages": [],
+      "image": "network-auditor/screen_023.png",
+      "evidence": {
+        "command": "VPN-GW kimlik politikası / NW-023",
+        "output": "Grup: Remote-Staff\nAuthentication: password only\nMFA policy: excluded\nKriter: tüm uzak personel bağlantılarında MFA"
+      },
+      "technical": "MFA kimlik doğrulamayı, tünel şifrelemesi aktarımı korur; farklı riskleri hedefler.",
+      "risk": "Tek parola ele geçirilmesiyle uzak erişim.",
+      "impact": "İç ağa yetkisiz bağlantı ihtimali.",
+      "control": "İlgili kimlik gruplarını ve istisnaları MFA kriteriyle eşleştir; kontrollü başarılı/başarısız faktör testini kaydet."
+    },
+    {
+      "external_id": "network-auditor-v1-024",
+      "number": 24,
+      "chapter": 3,
+      "area": "VP",
+      "topic": "Paylaşılan VPN hesabı",
+      "kind": "image",
+      "prompt": "Hangi kontrol zayıflığı var?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-024 üzerinde çalışıyorsun. Alan: VPN ve uzak erişim. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "İşlemlerin kişiye bağlanabilirliği eksik"
+        },
+        {
+          "id": "b",
+          "text": "İki IP kesin veri sızıntısıdır"
+        },
+        {
+          "id": "c",
+          "text": "Aynı isim güvenli görev ayrılığı sağlar"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nİşlemlerin kişiye bağlanabilirliği eksik\n\n🔧 Teknik gerekçe\nVPN kimliği, cihaz, oturum ve gerçek kişi arasındaki ilişki denetlenebilir olmalıdır.\n\n⚠️ Risk\nYetkisiz işlemin sorumlusunun belirlenememesi.\n\n💼 İş etkisi\nOlay araştırması ve tedarikçi hesap verebilirliği kaybı.\n\n🛡️ Önerilen kontrol\nKişisel hesap, süreli grup ve cihaz/oturum korelasyonu uygula; paylaşılan kimlik istisnalarını ayrıca kontrol et.\n\n❌ Diğer yanıtların değerlendirmesi\n• İki IP kesin veri sızıntısıdır: Çoklu oturum ifşa kanıtı değildir.\n• Aynı isim güvenli görev ayrılığı sağlar: Paylaşılan kimlik kişisel sorumluluğu zayıflatabilir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Paylaşılan VPN hesabı",
+        "VPN ve uzak erişim"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 24,
+      "card_pages": [],
+      "image": "network-auditor/screen_024.png",
+      "evidence": {
+        "command": "VPN-GW oturum özeti / NW-024",
+        "output": "User: vendor_shared\nSession A: 192.0.2.81, device A\nSession B: 192.0.2.82, device B\nGerçek kişi eşlemesi: tutulmuyor"
+      },
+      "technical": "VPN kimliği, cihaz, oturum ve gerçek kişi arasındaki ilişki denetlenebilir olmalıdır.",
+      "risk": "Yetkisiz işlemin sorumlusunun belirlenememesi.",
+      "impact": "Olay araştırması ve tedarikçi hesap verebilirliği kaybı.",
+      "control": "Kişisel hesap, süreli grup ve cihaz/oturum korelasyonu uygula; paylaşılan kimlik istisnalarını ayrıca kontrol et."
+    },
+    {
+      "external_id": "network-auditor-v1-025",
+      "number": 25,
+      "chapter": 3,
+      "area": "VP",
+      "topic": "Ayrılan kişinin açık oturumu",
+      "kind": "image",
+      "prompt": "Denetçi neyi ayrıca doğrulamalı?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-025 üzerinde çalışıyorsun. Alan: VPN ve uzak erişim. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Açık oturum bütün logları silmiştir"
+        },
+        {
+          "id": "b",
+          "text": "IdP kapalıysa eski tünel kesin bitmiştir"
+        },
+        {
+          "id": "a",
+          "text": "Mevcut VPN oturumunun kapatılması ve sonraki bağlantıların reddi"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nMevcut VPN oturumunun kapatılması ve sonraki bağlantıların reddi\n\n🔧 Teknik gerekçe\nKimliği devre dışı bırakmakla var olan oturumu iptal etmek farklı kontrol adımları olabilir.\n\n⚠️ Risk\nAyrılış sonrası açık erişim kanalının sürmesi.\n\n💼 İş etkisi\nİç kaynaklara gereksiz erişim.\n\n🛡️ Önerilen kontrol\nHR/IdP/VPN kapanışını ortak süre kriteriyle uzlaştır; oturum iptalini ve yeniden giriş reddini test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• IdP kapalıysa eski tünel kesin bitmiştir: Oturum yaşam döngüsü yeniden doğrulama davranışına bağlıdır.\n• Açık oturum bütün logları silmiştir: Oturum durumu bu sonucu göstermez.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Ayrılan kişinin açık oturumu",
+        "VPN ve uzak erişim"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 25,
+      "card_pages": [],
+      "image": "network-auditor/screen_025.png",
+      "evidence": {
+        "command": "HR, IdP ve VPN session uzlaştırması / NW-025",
+        "output": "HR: ali ayrıldı 09:00\nIdP account disabled: 09:05\nVPN session 2201: ali, started 08:45, still active 10:00\nOturum iptali kanıtı: yok"
+      },
+      "technical": "Kimliği devre dışı bırakmakla var olan oturumu iptal etmek farklı kontrol adımları olabilir.",
+      "risk": "Ayrılış sonrası açık erişim kanalının sürmesi.",
+      "impact": "İç kaynaklara gereksiz erişim.",
+      "control": "HR/IdP/VPN kapanışını ortak süre kriteriyle uzlaştır; oturum iptalini ve yeniden giriş reddini test et."
+    },
+    {
+      "external_id": "network-auditor-v1-026",
+      "number": 26,
+      "chapter": 3,
+      "area": "VP",
+      "topic": "İstemcinin sunucu kimliğini doğrulaması",
+      "kind": "image",
+      "prompt": "Bu kimlik eşleşmesi için doğru test sonucu ne olmalı?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-026 üzerinde çalışıyorsun. Alan: VPN ve uzak erişim. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "İsim uyuşmazlığı otomatik disk şifrelemesi açar"
+        },
+        {
+          "id": "b",
+          "text": "CA güvenilir olduğu için her sertifika adı kabul edilmeli"
+        },
+        {
+          "id": "a",
+          "text": "Beklenen adla uyuşmayan sunucu sertifikası reddedilmeli"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nBeklenen adla uyuşmayan sunucu sertifikası reddedilmeli\n\n🔧 Teknik gerekçe\nOpenVPN verify-x509-name belirtilen sertifika kimliğini eşleştirmeyi hedefler; remote-cert-tls kullanım amacı kontrolünü tamamlar.\n\n⚠️ Risk\nYanlış VPN sunucusuna güvenilmesi.\n\n💼 İş etkisi\nTrafiğin veya kullanıcı doğrulama akışının yanlış hedefe gitmesi.\n\n🛡️ Önerilen kontrol\nCA güvenini ve beklenen sunucu kimliğini negatif sertifika testiyle doğrula; hatayı doğrulamayı kapatarak çözme.\n\n❌ Diğer yanıtların değerlendirmesi\n• CA güvenilir olduğu için her sertifika adı kabul edilmeli: Beklenen sunucu adı kısıtı ayrıca uygulanır.\n• İsim uyuşmazlığı otomatik disk şifrelemesi açar: Sertifika kimliği ile disk şifreleme farklıdır.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "İstemcinin sunucu kimliğini doğrulaması",
+        "VPN ve uzak erişim"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 26,
+      "card_pages": [],
+      "image": "network-auditor/screen_026.png",
+      "evidence": {
+        "command": "OpenVPN 2.6 istemci dosyası ve sertifika incelemesi / NW-026",
+        "output": "client\nremote vpn.example.test 1194\nca corp-ca.crt\nremote-cert-tls server\nverify-x509-name vpn-prod name\nSunulan sertifika CN: vpn-test"
+      },
+      "technical": "OpenVPN verify-x509-name belirtilen sertifika kimliğini eşleştirmeyi hedefler; remote-cert-tls kullanım amacı kontrolünü tamamlar.",
+      "risk": "Yanlış VPN sunucusuna güvenilmesi.",
+      "impact": "Trafiğin veya kullanıcı doğrulama akışının yanlış hedefe gitmesi.",
+      "control": "CA güvenini ve beklenen sunucu kimliğini negatif sertifika testiyle doğrula; hatayı doğrulamayı kapatarak çözme."
+    },
+    {
+      "external_id": "network-auditor-v1-027",
+      "number": 27,
+      "chapter": 3,
+      "area": "VP",
+      "topic": "İptal edilen istemci sertifikası",
+      "kind": "image",
+      "prompt": "İlk kontrol eksikliği hangisi?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-027 üzerinde çalışıyorsun. Alan: VPN ve uzak erişim. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "İptal bilgisinin VPN kabul kararına uygulanması gösterilemiyor"
+        },
+        {
+          "id": "b",
+          "text": "Sertifika imzalıysa iptal bilgisi gereksizdir"
+        },
+        {
+          "id": "c",
+          "text": "CRL yoksa bütün bağlantılar kesin kabul edilir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nİptal bilgisinin VPN kabul kararına uygulanması gösterilemiyor\n\n🔧 Teknik gerekçe\nSertifika zinciri doğrulaması iptal kontrolünün yerine geçmez; kullanılan revocation mekanizması doğrulanmalıdır.\n\n⚠️ Risk\nİptal edilmiş sertifikayla erişimin sürebilmesi.\n\n💼 İş etkisi\nTedarikçi veya kayıp cihaz erişiminin devamı.\n\n🛡️ Önerilen kontrol\nGüncel iptal kontrolünü tasarla; iptal edilmiş sertifika için kontrollü giriş reddini ve CRL yenilemeyi test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• Sertifika imzalıysa iptal bilgisi gereksizdir: İptal yaşam döngüsü geçerli imzadan farklıdır.\n• CRL yoksa bütün bağlantılar kesin kabul edilir: Diğer kimlik ve erişim kontrolleri ayrıca uygulanır.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "İptal edilen istemci sertifikası",
+        "VPN ve uzak erişim"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 27,
+      "card_pages": [],
+      "image": "network-auditor/screen_027.png",
+      "evidence": {
+        "command": "OpenVPN 2.6 sunucu konfigürasyonu / NW-027",
+        "output": "verify-client-cert require\n# crl-verify tanımı yok\nPKI listesi: vendor-03 sertifikası iptal edilmiş\nAlternatif OCSP/özel revocation kontrolü: yok"
+      },
+      "technical": "Sertifika zinciri doğrulaması iptal kontrolünün yerine geçmez; kullanılan revocation mekanizması doğrulanmalıdır.",
+      "risk": "İptal edilmiş sertifikayla erişimin sürebilmesi.",
+      "impact": "Tedarikçi veya kayıp cihaz erişiminin devamı.",
+      "control": "Güncel iptal kontrolünü tasarla; iptal edilmiş sertifika için kontrollü giriş reddini ve CRL yenilemeyi test et."
+    },
+    {
+      "external_id": "network-auditor-v1-028",
+      "number": 28,
+      "chapter": 3,
+      "area": "VP",
+      "topic": "Split tunnel yorumlama",
+      "kind": "image",
+      "prompt": "Doğru denetim yaklaşımı hangisi?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-028 üzerinde çalışıyorsun. Alan: VPN ve uzak erişim. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "VPN bağlıysa bütün internet trafiği tüneldedir"
+        },
+        {
+          "id": "b",
+          "text": "Split tunnel her koşulda kesin ihlaldir"
+        },
+        {
+          "id": "a",
+          "text": "Onaylı split tunnel tasarımını uç nokta ve alternatif trafik kontrolleriyle test etmek"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nOnaylı split tunnel tasarımını uç nokta ve alternatif trafik kontrolleriyle test etmek\n\n🔧 Teknik gerekçe\nSplit tunnel bazı trafiği VPN dışına yönlendirir; tek başına iyi/kötü sonucu yerine risk ve telafi kontrolleri değerlendirilir.\n\n⚠️ Risk\nVPN dışındaki trafiğin kontrol kapsamı dışında kalması.\n\n💼 İş etkisi\nUç noktadan veri ve ağ güvenliği maruziyeti.\n\n🛡️ Önerilen kontrol\nOnaylı rota, uç nokta, DNS ve egress kontrollerini doğrula; tünel içi/dışı akışları ayrı test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• Split tunnel her koşulda kesin ihlaldir: Uygunluk onaylı tasarım ve risk kriterine bağlıdır.\n• VPN bağlıysa bütün internet trafiği tüneldedir: Default route yerel internet olarak gösteriliyor.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Split tunnel yorumlama",
+        "VPN ve uzak erişim"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 28,
+      "card_pages": [],
+      "image": "network-auditor/screen_028.png",
+      "evidence": {
+        "command": "VPN-GW rota ve kontrol profili / NW-028",
+        "output": "Client route: 10.10.0.0/16 -> VPN\nDefault route: yerel internet\nProfile: split tunnel approved\nEndpoint EDR/DNS kontrol testi: yapılmadı"
+      },
+      "technical": "Split tunnel bazı trafiği VPN dışına yönlendirir; tek başına iyi/kötü sonucu yerine risk ve telafi kontrolleri değerlendirilir.",
+      "risk": "VPN dışındaki trafiğin kontrol kapsamı dışında kalması.",
+      "impact": "Uç noktadan veri ve ağ güvenliği maruziyeti.",
+      "control": "Onaylı rota, uç nokta, DNS ve egress kontrollerini doğrula; tünel içi/dışı akışları ayrı test et."
+    },
+    {
+      "external_id": "network-auditor-v1-029",
+      "number": 29,
+      "chapter": 3,
+      "area": "VP",
+      "topic": "VPN grubu ve erişim yetkisi",
+      "kind": "image",
+      "prompt": "MFA etkin olsa da hangi sapma var?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-029 üzerinde çalışıyorsun. Alan: VPN ve uzak erişim. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "MFA bütün kaynak yetkilerini otomatik sınırlar"
+        },
+        {
+          "id": "c",
+          "text": "VPN pool adresleri kullanıcıların kesin fiziksel konumudur"
+        },
+        {
+          "id": "a",
+          "text": "Tedarikçi grubunun hedef ve servis yetkisi ihtiyaçtan geniş"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nTedarikçi grubunun hedef ve servis yetkisi ihtiyaçtan geniş\n\n🔧 Teknik gerekçe\nBaşarılı güçlü doğrulama en az ayrıcalıklı ağ erişiminin yerine geçmez.\n\n⚠️ Risk\nTedarikçinin ihtiyaç dışı sistemlere ulaşabilmesi.\n\n💼 İş etkisi\nYatay hareket ve hassas sistem maruziyeti.\n\n🛡️ Önerilen kontrol\nVPN grubu/pool/kimlikten gerçek hedef-servis politikasına iz sür; yalnız onaylı jump akışını ve negatif testleri doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• MFA bütün kaynak yetkilerini otomatik sınırlar: Kimlik doğrulama ile yetkilendirme ayrı kontrollerdir.\n• VPN pool adresleri kullanıcıların kesin fiziksel konumudur: Tünel adresi coğrafi konum kanıtı değildir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "VPN grubu ve erişim yetkisi",
+        "VPN ve uzak erişim"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 29,
+      "card_pages": [],
+      "image": "network-auditor/screen_029.png",
+      "evidence": {
+        "command": "VPN-GW grup ve firewall matrisi / NW-029",
+        "output": "Group: Vendor-Support\nMFA: enabled\nVPN pool: 10.250.20.0/24\nEffective access: all internal networks, any service\nOnay: yalnız JUMP-01 tcp/3389"
+      },
+      "technical": "Başarılı güçlü doğrulama en az ayrıcalıklı ağ erişiminin yerine geçmez.",
+      "risk": "Tedarikçinin ihtiyaç dışı sistemlere ulaşabilmesi.",
+      "impact": "Yatay hareket ve hassas sistem maruziyeti.",
+      "control": "VPN grubu/pool/kimlikten gerçek hedef-servis politikasına iz sür; yalnız onaylı jump akışını ve negatif testleri doğrula."
+    },
+    {
+      "external_id": "network-auditor-v1-030",
+      "number": 30,
+      "chapter": 3,
+      "area": "VP",
+      "topic": "Tünel up ve uygulama erişimi",
+      "kind": "image",
+      "prompt": "Up tünel neyi tek başına kanıtlamaz?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-030 üzerinde çalışıyorsun. Alan: VPN ve uzak erişim. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Hiç şifreleme anlaşması kurulmadığını"
+        },
+        {
+          "id": "a",
+          "text": "Uygulamanın hedef ağa uçtan uca ulaşabildiğini"
+        },
+        {
+          "id": "c",
+          "text": "Bütün uzak kullanıcıların yetkili olduğunu"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nUygulamanın hedef ağa uçtan uca ulaşabildiğini\n\n🔧 Teknik gerekçe\nIKE/IPsec SA durumu, yönlendirme ve uygulama erişiminden ayrı bir kanıttır.\n\n⚠️ Risk\nTünel göstergesinden yanlış kullanılabilirlik güvencesi.\n\n💼 İş etkisi\nİş uygulamasında bağlantı kesintisi.\n\n🛡️ Önerilen kontrol\nRota, trafik seçicileri, filtreler ve kontrollü uygulama testini birlikte doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• Hiç şifreleme anlaşması kurulmadığını: SA durumu anlaşmanın kurulduğunu gösterir.\n• Bütün uzak kullanıcıların yetkili olduğunu: Tünel durumu kullanıcı yetkisini göstermez.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Tünel up ve uygulama erişimi",
+        "VPN ve uzak erişim"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 30,
+      "card_pages": [],
+      "image": "network-auditor/screen_030.png",
+      "evidence": {
+        "command": "Site-to-site VPN durum ve rota paneli / NW-030",
+        "output": "IKE SA: established\nIPsec SA: established\nRemote subnet: 10.60.0.0/24\nRoute to 10.60.0.0/24: missing\nUygulama bağlantı testi: timeout"
+      },
+      "technical": "IKE/IPsec SA durumu, yönlendirme ve uygulama erişiminden ayrı bir kanıttır.",
+      "risk": "Tünel göstergesinden yanlış kullanılabilirlik güvencesi.",
+      "impact": "İş uygulamasında bağlantı kesintisi.",
+      "control": "Rota, trafik seçicileri, filtreler ve kontrollü uygulama testini birlikte doğrula."
+    },
+    {
+      "external_id": "network-auditor-v1-031",
+      "number": 31,
+      "chapter": 3,
+      "area": "VP",
+      "topic": "IPsec trafik seçicisi",
+      "kind": "image",
+      "prompt": "Hangi kapsam eksikliği var?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-031 üzerinde çalışıyorsun. Alan: VPN ve uzak erişim. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Şifreli tünel olduğundan kapsam incelemesi gerekmez"
+        },
+        {
+          "id": "a",
+          "text": "Seçici ve filtre birleşimi iş ihtiyacından geniş ağlar taşıyor"
+        },
+        {
+          "id": "c",
+          "text": "Selector satırı tek başına gerçek veri aktarımını kanıtlar"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nSeçici ve filtre birleşimi iş ihtiyacından geniş ağlar taşıyor\n\n🔧 Teknik gerekçe\nIPsec trafik seçicileri ile tünel sonrası erişim filtreleri birlikte yorumlanır.\n\n⚠️ Risk\nİhtiyaç dışı ağlar arası erişim.\n\n💼 İş etkisi\nİki kurum/şube arasında artan maruziyet.\n\n🛡️ Önerilen kontrol\nOnaylı ağ ve servisleri dar filtrelerle eşleştir; etkili seçici/rota ve negatif erişim testlerini doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• Şifreli tünel olduğundan kapsam incelemesi gerekmez: Şifreleme gereksiz erişimi meşrulaştırmaz.\n• Selector satırı tek başına gerçek veri aktarımını kanıtlar: Yapılandırma kullanım kanıtı değildir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "IPsec trafik seçicisi",
+        "VPN ve uzak erişim"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 31,
+      "card_pages": [],
+      "image": "network-auditor/screen_031.png",
+      "evidence": {
+        "command": "Site-to-site politika export / NW-031",
+        "output": "Local selector: 10.10.0.0/16\nRemote selector: 10.60.0.0/16\nOnaylı ihtiyaç: 10.10.40.0/24 -> 10.60.5.0/24 tcp/443\nTunnel sonrası filtre: any ALLOW"
+      },
+      "technical": "IPsec trafik seçicileri ile tünel sonrası erişim filtreleri birlikte yorumlanır.",
+      "risk": "İhtiyaç dışı ağlar arası erişim.",
+      "impact": "İki kurum/şube arasında artan maruziyet.",
+      "control": "Onaylı ağ ve servisleri dar filtrelerle eşleştir; etkili seçici/rota ve negatif erişim testlerini doğrula."
+    },
+    {
+      "external_id": "network-auditor-v1-032",
+      "number": 32,
+      "chapter": 3,
+      "area": "VP",
+      "topic": "VPN kriptografi kriteri",
+      "kind": "image",
+      "prompt": "Hangi bulgu desteklenir?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-032 üzerinde çalışıyorsun. Alan: VPN ve uzak erişim. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Politika dosyasındaki güçlü öneri fiili SA'yı geçersiz kılar"
+        },
+        {
+          "id": "a",
+          "text": "Etkin müzakere onaylı kriptografi taban çizgisinden sapıyor"
+        },
+        {
+          "id": "b",
+          "text": "Bu ekran bütün trafiğin kesin çözüldüğünü kanıtlar"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nEtkin müzakere onaylı kriptografi taban çizgisinden sapıyor\n\n🔧 Teknik gerekçe\nÖnerilen algoritma listesi ile fiilen müzakere edilen SA farklı kanıtlardır; kriter onaylı taban çizgisidir.\n\n⚠️ Risk\nİstenmeyen eski kriptografik seçeneklerin kullanılması.\n\n💼 İş etkisi\nTrafik gizliliği ve uyum güvencesinin azalması.\n\n🛡️ Önerilen kontrol\nDestek/bağımlılık analiziyle onaylı algoritmalara geçiş planla; yeniden müzakere sonrası SA ve işlevi doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• Bu ekran bütün trafiğin kesin çözüldüğünü kanıtlar: Zayıf/sapmış seçim gerçekleşmiş çözme kanıtı değildir.\n• Politika dosyasındaki güçlü öneri fiili SA'yı geçersiz kılar: Etkin anlaşma ayrıca doğrulanmalıdır.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "VPN kriptografi kriteri",
+        "VPN ve uzak erişim"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 32,
+      "card_pages": [],
+      "image": "network-auditor/screen_032.png",
+      "evidence": {
+        "command": "VPN-GW etkin müzakere raporu / NW-032",
+        "output": "Approved baseline: IKEv2, AES-GCM, onaylı DH grubu\nObserved SA: IKEv1, 3DES, DH group 2\nİstisna kaydı: yok"
+      },
+      "technical": "Önerilen algoritma listesi ile fiilen müzakere edilen SA farklı kanıtlardır; kriter onaylı taban çizgisidir.",
+      "risk": "İstenmeyen eski kriptografik seçeneklerin kullanılması.",
+      "impact": "Trafik gizliliği ve uyum güvencesinin azalması.",
+      "control": "Destek/bağımlılık analiziyle onaylı algoritmalara geçiş planla; yeniden müzakere sonrası SA ve işlevi doğrula."
+    },
+    {
+      "external_id": "network-auditor-v1-033",
+      "number": 33,
+      "chapter": 3,
+      "area": "VP",
+      "topic": "Boşta oturum zaman aşımı",
+      "kind": "image",
+      "prompt": "Hangi ayar kriteri karşılamıyor?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-033 üzerinde çalışıyorsun. Alan: VPN ve uzak erişim. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Üç saat idle kesin kötü niyetli kullanım demektir"
+        },
+        {
+          "id": "b",
+          "text": "24 saat maksimum süre 15 dakika boşta kontrolüyle aynıdır"
+        },
+        {
+          "id": "a",
+          "text": "Boşta oturum zaman aşımının kapalı olması"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nBoşta oturum zaman aşımının kapalı olması\n\n🔧 Teknik gerekçe\nIdle timeout ve mutlak session lifetime ayrı kontrollerdir; uygulanan oturumda davranış test edilmelidir.\n\n⚠️ Risk\nGözetimsiz idari VPN oturumunun açık kalması.\n\n💼 İş etkisi\nKaybolan veya açık bırakılan cihazdan iç ağ erişimi.\n\n🛡️ Önerilen kontrol\nOnaylı boşta sınırı ve yeniden doğrulamayı uygulat; gerçek hareketsizlik ve aktif kullanım senaryolarını test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• 24 saat maksimum süre 15 dakika boşta kontrolüyle aynıdır: Mutlak süre ile hareketsizlik süresi farklıdır.\n• Üç saat idle kesin kötü niyetli kullanım demektir: Durum niyet göstermez.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Boşta oturum zaman aşımı",
+        "VPN ve uzak erişim"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 33,
+      "card_pages": [],
+      "image": "network-auditor/screen_033.png",
+      "evidence": {
+        "command": "VPN-GW oturum politikası / NW-033",
+        "output": "Group: Remote-Admins\nIdle timeout: disabled\nMaximum session lifetime: 24h\nKriter: 15 dakika boşta süre sınırı\nSession idle: 3h, active"
+      },
+      "technical": "Idle timeout ve mutlak session lifetime ayrı kontrollerdir; uygulanan oturumda davranış test edilmelidir.",
+      "risk": "Gözetimsiz idari VPN oturumunun açık kalması.",
+      "impact": "Kaybolan veya açık bırakılan cihazdan iç ağ erişimi.",
+      "control": "Onaylı boşta sınırı ve yeniden doğrulamayı uygulat; gerçek hareketsizlik ve aktif kullanım senaryolarını test et."
+    },
+    {
+      "external_id": "network-auditor-v1-034",
+      "number": 34,
+      "chapter": 4,
+      "area": "SG",
+      "topic": "Uygulama ile veri katmanı ayrımı",
+      "kind": "image",
+      "prompt": "Hangi akış kriter dışı?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-034 üzerinde çalışıyorsun. Alan: Segmentasyon ve trafik yolları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "DMZ adı DB'ye erişimi otomatik engeller"
+        },
+        {
+          "id": "b",
+          "text": "App -> DB 5432 her koşulda yasaktır"
+        },
+        {
+          "id": "a",
+          "text": "Web DMZ'nin doğrudan DB'ye geniş erişimi"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nWeb DMZ'nin doğrudan DB'ye geniş erişimi\n\n🔧 Teknik gerekçe\nKatmanlı segmentasyon hedef/servis/kimlik bazlı izin matrisiyle uygulanır.\n\n⚠️ Risk\nWeb katmanı ele geçirilince veri katmanına doğrudan erişim.\n\n💼 İş etkisi\nHassas verinin ifşası veya değiştirilmesi.\n\n🛡️ Önerilen kontrol\nWeb-DB doğrudan erişimini kontrollü kapat; gerekli App-DB yolunu ve katmanlar arası negatif testleri doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• App -> DB 5432 her koşulda yasaktır: Kriter uygulama katmanı erişimine izin veriyor.\n• DMZ adı DB'ye erişimi otomatik engeller: Etiket etkin akış kararını değiştirmez.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Uygulama ile veri katmanı ayrımı",
+        "Segmentasyon ve trafik yolları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 34,
+      "card_pages": [],
+      "image": "network-auditor/screen_034.png",
+      "evidence": {
+        "command": "Etkin segment akış matrisi / NW-034",
+        "output": "Web DMZ -> App tcp/443 ALLOW\nApp -> DB tcp/5432 ALLOW\nWeb DMZ -> DB any ALLOW\nKriter: DB erişimi yalnız App katmanından"
+      },
+      "technical": "Katmanlı segmentasyon hedef/servis/kimlik bazlı izin matrisiyle uygulanır.",
+      "risk": "Web katmanı ele geçirilince veri katmanına doğrudan erişim.",
+      "impact": "Hassas verinin ifşası veya değiştirilmesi.",
+      "control": "Web-DB doğrudan erişimini kontrollü kapat; gerekli App-DB yolunu ve katmanlar arası negatif testleri doğrula."
+    },
+    {
+      "external_id": "network-auditor-v1-035",
+      "number": 35,
+      "chapter": 4,
+      "area": "SG",
+      "topic": "Aynı VLAN'da doğu-batı trafik",
+      "kind": "image",
+      "prompt": "Perimetre firewall neden tek başına yeterli kanıt değil?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-035 üzerinde çalışıyorsun. Alan: Segmentasyon ve trafik yolları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Firewall logunda yoksa trafik gerçekleşemez"
+        },
+        {
+          "id": "a",
+          "text": "Aynı L2 alandaki trafik perimetre firewall'dan geçmeyebilir"
+        },
+        {
+          "id": "b",
+          "text": "Her Ethernet paketi mutlaka internet firewall'ına gider"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nAynı L2 alandaki trafik perimetre firewall'dan geçmeyebilir\n\n🔧 Teknik gerekçe\nDoğu-batı akışlar aynı segmentte yerel iletilebilir; kontrol noktası gerçek trafik yoluna yerleştirilir.\n\n⚠️ Risk\nYerel yatay erişimin kontrol dışı kalması.\n\n💼 İş etkisi\nAynı segmentteki hassas sistemlerin yaygın etkilenmesi.\n\n🛡️ Önerilen kontrol\nHost firewall, mikrosegmentasyon veya uygun L2 kontrollerini ihtiyaca göre doğrula; gerçek yolu güvenli testle göster.\n\n❌ Diğer yanıtların değerlendirmesi\n• Her Ethernet paketi mutlaka internet firewall'ına gider: Yerel L2 yol farklı olabilir.\n• Firewall logunda yoksa trafik gerçekleşemez: Gözlem noktasının kapsamı sınırlıdır.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Aynı VLAN'da doğu-batı trafik",
+        "Segmentasyon ve trafik yolları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 35,
+      "card_pages": [],
+      "image": "network-auditor/screen_035.png",
+      "evidence": {
+        "command": "Topoloji ve akış incelemesi / NW-035",
+        "output": "Host A 10.10.30.11/24 -> Host B 10.10.30.12/24\nAynı switch ve VLAN 30\nNorth-south firewall: trafik gözlemi yok\nHost firewall / PVLAN: uygulanmıyor"
+      },
+      "technical": "Doğu-batı akışlar aynı segmentte yerel iletilebilir; kontrol noktası gerçek trafik yoluna yerleştirilir.",
+      "risk": "Yerel yatay erişimin kontrol dışı kalması.",
+      "impact": "Aynı segmentteki hassas sistemlerin yaygın etkilenmesi.",
+      "control": "Host firewall, mikrosegmentasyon veya uygun L2 kontrollerini ihtiyaca göre doğrula; gerçek yolu güvenli testle göster."
+    },
+    {
+      "external_id": "network-auditor-v1-036",
+      "number": 36,
+      "chapter": 4,
+      "area": "SG",
+      "topic": "Yanlış ACL yönü",
+      "kind": "image",
+      "prompt": "Ad doğru olsa da hangi hata incelenmeli?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-036 üzerinde çalışıyorsun. Alan: Segmentasyon ve trafik yolları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "ACL'nin amaçlanan giriş yönü yerine çıkış yönüne bağlanması"
+        },
+        {
+          "id": "b",
+          "text": "ACL adı IN ile bitiyorsa yönü otomatik in olur"
+        },
+        {
+          "id": "c",
+          "text": "Out bütün iki yönlü trafiği aynı biçimde inceler"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nACL'nin amaçlanan giriş yönü yerine çıkış yönüne bağlanması\n\n🔧 Teknik gerekçe\nACL içeriği yanında bağlı arayüz ve in/out yönü denetim hedefiyle eşleştirilir.\n\n⚠️ Risk\nMisafir çıkış trafiğinin amaçlanan noktada filtrelenmemesi.\n\n💼 İş etkisi\nHassas segmente beklenmeyen erişim.\n\n🛡️ Önerilen kontrol\nKaynak-hedef yolunu çıkar; doğru attachment ve yönü değişiklik süreciyle doğrula, sayaç/log ve negatif testle destekle.\n\n❌ Diğer yanıtların değerlendirmesi\n• ACL adı IN ile bitiyorsa yönü otomatik in olur: İsim etkin attachment yönünü değiştirmez.\n• Out bütün iki yönlü trafiği aynı biçimde inceler: Arayüz yönü yönlendirilmiş akış kapsamını belirler.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Yanlış ACL yönü",
+        "Segmentasyon ve trafik yolları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 36,
+      "card_pages": [],
+      "image": "network-auditor/screen_036.png",
+      "evidence": {
+        "command": "Cisco IOS XE SVI konfigürasyonu (özet) / NW-036",
+        "output": "interface Vlan20\n ip access-group GUEST-IN out\nAmaç: VLAN20'den router'a giren misafir trafiğini filtrelemek\nGUEST-IN içeriği: Payments hedefini deny"
+      },
+      "technical": "ACL içeriği yanında bağlı arayüz ve in/out yönü denetim hedefiyle eşleştirilir.",
+      "risk": "Misafir çıkış trafiğinin amaçlanan noktada filtrelenmemesi.",
+      "impact": "Hassas segmente beklenmeyen erişim.",
+      "control": "Kaynak-hedef yolunu çıkar; doğru attachment ve yönü değişiklik süreciyle doğrula, sayaç/log ve negatif testle destekle."
+    },
+    {
+      "external_id": "network-auditor-v1-037",
+      "number": 37,
+      "chapter": 4,
+      "area": "SG",
+      "topic": "Daha özel rota",
+      "kind": "image",
+      "prompt": "Hangi yol ayrıca incelenmeli?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-037 üzerinde çalışıyorsun. Alan: Segmentasyon ve trafik yolları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Her zaman ilk yazılan /16 rota seçilir"
+        },
+        {
+          "id": "a",
+          "text": "Daha özel /24 rotanın firewall yolunu baypas etmesi"
+        },
+        {
+          "id": "c",
+          "text": "/24 gösterilmesi tek başına saldırı kanıtıdır"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nDaha özel /24 rotanın firewall yolunu baypas etmesi\n\n🔧 Teknik gerekçe\nYönlendirme hedef için en uygun prefix ve diğer protokol kurallarıyla belirlenir; bu örnekte daha özel rota gösterilmiştir.\n\n⚠️ Risk\nGüvenlik kontrol noktasının alternatif yolla aşılması.\n\n💼 İş etkisi\nSegment filtresi ve loglarının etkisiz kalması.\n\n🛡️ Önerilen kontrol\nEtkin FIB/yol ve route değişikliklerini doğrula; gerekli güvenlik yolunu kontrollü trafikle test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• Her zaman ilk yazılan /16 rota seçilir: Normal IP yönlendirmede en uzun prefix eşleşmesi önemlidir.\n• /24 gösterilmesi tek başına saldırı kanıtıdır: Rota sapması gerçekleşmiş saldırı değildir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Daha özel rota",
+        "Segmentasyon ve trafik yolları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 37,
+      "card_pages": [],
+      "image": "network-auditor/screen_037.png",
+      "evidence": {
+        "command": "Route tablosu ve topoloji / NW-037",
+        "output": "10.10.0.0/16 -> security firewall\n10.10.30.0/24 -> direct core link\nTest hedefi: 10.10.30.9\nKriter: Payments erişimi firewall üzerinden"
+      },
+      "technical": "Yönlendirme hedef için en uygun prefix ve diğer protokol kurallarıyla belirlenir; bu örnekte daha özel rota gösterilmiştir.",
+      "risk": "Güvenlik kontrol noktasının alternatif yolla aşılması.",
+      "impact": "Segment filtresi ve loglarının etkisiz kalması.",
+      "control": "Etkin FIB/yol ve route değişikliklerini doğrula; gerekli güvenlik yolunu kontrollü trafikle test et."
+    },
+    {
+      "external_id": "network-auditor-v1-038",
+      "number": 38,
+      "chapter": 4,
+      "area": "SG",
+      "topic": "AWS security group izin birleşimi",
+      "kind": "image",
+      "prompt": "SG-A'nın dar izni yeterli mi?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-038 üzerinde çalışıyorsun. Alan: Segmentasyon ve trafik yolları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hayır; bağlı grupların izin birleşimi geniş SSH izni içeriyor"
+        },
+        {
+          "id": "b",
+          "text": "SG-A SG-B için otomatik deny oluşturur"
+        },
+        {
+          "id": "c",
+          "text": "Bu ekran instance'ın internete kesin ulaşılabilir olduğunu kanıtlar"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nHayır; bağlı grupların izin birleşimi geniş SSH izni içeriyor\n\n🔧 Teknik gerekçe\nAynı ENI'ye bağlı security group izinleri birlikte değerlendirilir; tek dar grup diğer geniş izni daraltmaz.\n\n⚠️ Risk\nGereksiz geniş kaynak kapsamı.\n\n💼 İş etkisi\nYönetim servisine maruziyet.\n\n🛡️ Önerilen kontrol\nBütün bağlı grupları ve ağ yolunu uzlaştır; geniş izni kontrollü daralt ve negatif SSH testini doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• SG-A SG-B için otomatik deny oluşturur: Security group kuralları izin temellidir ve birleşir.\n• Bu ekran instance'ın internete kesin ulaşılabilir olduğunu kanıtlar: Public IP, route, NACL ve diğer katmanlar ayrıca gerekir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "AWS security group izin birleşimi",
+        "Segmentasyon ve trafik yolları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 38,
+      "card_pages": [],
+      "image": "network-auditor/screen_038.png",
+      "evidence": {
+        "command": "AWS EC2 bağlı security group özeti / NW-038",
+        "output": "ENI: eni-training01\nSG-A inbound: tcp/22 from 192.0.2.10/32\nSG-B inbound: tcp/22 from 0.0.0.0/0\nKriter: SSH yalnız onaylı jump host"
+      },
+      "technical": "Aynı ENI'ye bağlı security group izinleri birlikte değerlendirilir; tek dar grup diğer geniş izni daraltmaz.",
+      "risk": "Gereksiz geniş kaynak kapsamı.",
+      "impact": "Yönetim servisine maruziyet.",
+      "control": "Bütün bağlı grupları ve ağ yolunu uzlaştır; geniş izni kontrollü daralt ve negatif SSH testini doğrula."
+    },
+    {
+      "external_id": "network-auditor-v1-039",
+      "number": 39,
+      "chapter": 4,
+      "area": "SG",
+      "topic": "AWS NACL ilk eşleşme",
+      "kind": "image",
+      "prompt": "Bu NACL'nin inbound kararı ne olur?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-039 üzerinde çalışıyorsun. Alan: Segmentasyon ve trafik yolları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "100 numaralı kuralla ALLOW; sonraki deny eşleşmeye ulaşmaz"
+        },
+        {
+          "id": "b",
+          "text": "110 çünkü daha dar prefix mutlaka önceliklidir"
+        },
+        {
+          "id": "c",
+          "text": "Security group da kesin allow olur"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\n100 numaralı kuralla ALLOW; sonraki deny eşleşmeye ulaşmaz\n\n🔧 Teknik gerekçe\nAWS NACL sıralı kuralları düşük numaradan değerlendirir; ilk eşleşmede karar verilir.\n\n⚠️ Risk\nAmaçlanan kaynak reddinin gölgelenmesi.\n\n💼 İş etkisi\nKriter dışı kaynağa subnet düzeyinde izin.\n\n🛡️ Önerilen kontrol\nSıra ve kapsamı gerçek akışla test et; deny/allow düzenini onaylı matrisle düzelt.\n\n❌ Diğer yanıtların değerlendirmesi\n• 110 çünkü daha dar prefix mutlaka önceliklidir: NACL düşük kural numarasından ilk eşleşmeyi uygular.\n• Security group da kesin allow olur: NACL kararı diğer kontrol katmanlarını göstermez.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "AWS NACL ilk eşleşme",
+        "Segmentasyon ve trafik yolları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 39,
+      "card_pages": [],
+      "image": "network-auditor/screen_039.png",
+      "evidence": {
+        "command": "AWS subnet inbound NACL / NW-039",
+        "output": "100 ALLOW tcp/443 source 0.0.0.0/0\n110 DENY tcp/443 source 192.0.2.55/32\n* DENY ALL\nTest kaynak: 192.0.2.55; hedef port: 443"
+      },
+      "technical": "AWS NACL sıralı kuralları düşük numaradan değerlendirir; ilk eşleşmede karar verilir.",
+      "risk": "Amaçlanan kaynak reddinin gölgelenmesi.",
+      "impact": "Kriter dışı kaynağa subnet düzeyinde izin.",
+      "control": "Sıra ve kapsamı gerçek akışla test et; deny/allow düzenini onaylı matrisle düzelt."
+    },
+    {
+      "external_id": "network-auditor-v1-040",
+      "number": 40,
+      "chapter": 4,
+      "area": "SG",
+      "topic": "Stateless dönüş yolu",
+      "kind": "image",
+      "prompt": "Hangi eksik kapsam araştırılmalı?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-040 üzerinde çalışıyorsun. Alan: Segmentasyon ve trafik yolları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Stateless NACL'de dönüşün istemci ephemeral portuna uygun izni"
+        },
+        {
+          "id": "c",
+          "text": "Server response her zaman hedef port 443 kullanır"
+        },
+        {
+          "id": "b",
+          "text": "Stateful security group davranışı NACL'ye otomatik uygulanır"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nStateless NACL'de dönüşün istemci ephemeral portuna uygun izni\n\n🔧 Teknik gerekçe\nAWS NACL stateless olduğu için izinli isteğin dönüşü de uygun yön/protokol/port kuralına ihtiyaç duyar.\n\n⚠️ Risk\nMeşru dönüş trafiğinin kesilmesi.\n\n💼 İş etkisi\nUygulama erişim kesintisi.\n\n🛡️ Önerilen kontrol\nUygulama/istemci port kapsamını ve iki yönü uygun en az izinle test et; gelişigüzel any-any açma.\n\n❌ Diğer yanıtların değerlendirmesi\n• Stateful security group davranışı NACL'ye otomatik uygulanır: NACL ve security group farklı durum takibi yapar.\n• Server response her zaman hedef port 443 kullanır: Bu akışta dönüş hedefi istemcinin 51514 portudur.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Stateless dönüş yolu",
+        "Segmentasyon ve trafik yolları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 40,
+      "card_pages": [],
+      "image": "network-auditor/screen_040.png",
+      "evidence": {
+        "command": "AWS NACL ve kontrollü TCP testi / NW-040",
+        "output": "Client 192.0.2.10:51514 -> server:443\nInbound NACL: tcp/443 ALLOW\nOutbound NACL: yalnız tcp/443 ALLOW; sonra DENY\nServer response hedef portu: 51514\nSonuç: handshake tamamlanmadı"
+      },
+      "technical": "AWS NACL stateless olduğu için izinli isteğin dönüşü de uygun yön/protokol/port kuralına ihtiyaç duyar.",
+      "risk": "Meşru dönüş trafiğinin kesilmesi.",
+      "impact": "Uygulama erişim kesintisi.",
+      "control": "Uygulama/istemci port kapsamını ve iki yönü uygun en az izinle test et; gelişigüzel any-any açma."
+    },
+    {
+      "external_id": "network-auditor-v1-041",
+      "number": 41,
+      "chapter": 4,
+      "area": "SG",
+      "topic": "Negatif test kapsamı",
+      "kind": "image",
+      "prompt": "Rapor tam izolasyonu kanıtlar mı?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-041 üzerinde çalışıyorsun. Alan: Segmentasyon ve trafik yolları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "TCP testleri mutlaka saldırı sayılır"
+        },
+        {
+          "id": "a",
+          "text": "Hayır; kriterdeki hedef/protokol/portlar ayrıca test edilmeli"
+        },
+        {
+          "id": "b",
+          "text": "Ping başarısızsa tüm TCP portları kapalıdır"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nHayır; kriterdeki hedef/protokol/portlar ayrıca test edilmeli\n\n🔧 Teknik gerekçe\nErişim politikası akış boyutlarında test edilir; bir protokolün reddi diğerlerini kanıtlamaz.\n\n⚠️ Risk\nEksik örneklemeden tam izolasyon sonucu çıkarılması.\n\n💼 İş etkisi\nAçık hassas servislerin gözden kaçması.\n\n🛡️ Önerilen kontrol\nYetkili, zarar vermeyen pozitif/negatif test matrisini hedef/port/yön ve adres ailesiyle tamamla.\n\n❌ Diğer yanıtların değerlendirmesi\n• Ping başarısızsa tüm TCP portları kapalıdır: ICMP sonucu TCP erişimini belirlemez.\n• TCP testleri mutlaka saldırı sayılır: Yetkili ve kontrollü denetim testi ayrı değerlendirilir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Negatif test kapsamı",
+        "Segmentasyon ve trafik yolları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 41,
+      "card_pages": [],
+      "image": "network-auditor/screen_041.png",
+      "evidence": {
+        "command": "Segmentasyon test raporu / NW-041",
+        "output": "Kaynak: Guest VLAN20\nHedef: Payments 10.10.30.9\nTest: ICMP echo blocked\nİş kriteri: tcp/443, tcp/5432, tcp/22 de engellenmeli\nDiğer protokol testleri: yok"
+      },
+      "technical": "Erişim politikası akış boyutlarında test edilir; bir protokolün reddi diğerlerini kanıtlamaz.",
+      "risk": "Eksik örneklemeden tam izolasyon sonucu çıkarılması.",
+      "impact": "Açık hassas servislerin gözden kaçması.",
+      "control": "Yetkili, zarar vermeyen pozitif/negatif test matrisini hedef/port/yön ve adres ailesiyle tamamla."
+    },
+    {
+      "external_id": "network-auditor-v1-042",
+      "number": 42,
+      "chapter": 4,
+      "area": "SG",
+      "topic": "Çift bağlı yönetim sunucusu",
+      "kind": "image",
+      "prompt": "Hangi alternatif yol incelenmeli?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-042 üzerinde çalışıyorsun. Alan: Segmentasyon ve trafik yolları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "İki NIC olması her zaman ihlaldir"
+        },
+        {
+          "id": "a",
+          "text": "Çift bağlı sunucunun ağlar arasında yönlendirme imkânı"
+        },
+        {
+          "id": "c",
+          "text": "Firewall cihazı var olduğundan bu yol önemsizdir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nÇift bağlı sunucunun ağlar arasında yönlendirme imkânı\n\n🔧 Teknik gerekçe\nÇift bağlı sistem, forwarding ve yerel izinlerle segmentler arası geçit oluşturabilir.\n\n⚠️ Risk\nOnaylı ağ güvenlik yolunun dışında erişim.\n\n💼 İş etkisi\nYönetim ağına gereksiz çapraz erişim.\n\n🛡️ Önerilen kontrol\nArayüz, route ve forwarding politikasını doğrula; gerekçesiz yönlendirmeyi kontrollü sınırla ve negatif test uygula.\n\n❌ Diğer yanıtların değerlendirmesi\n• İki NIC olması her zaman ihlaldir: Bağlılık amacı ve forwarding kontrolleri birlikte önemlidir.\n• Firewall cihazı var olduğundan bu yol önemsizdir: Alternatif yol kontrol noktasını aşabilir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Çift bağlı yönetim sunucusu",
+        "Segmentasyon ve trafik yolları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 42,
+      "card_pages": [],
+      "image": "network-auditor/screen_042.png",
+      "evidence": {
+        "command": "Sunucu arayüz ve forwarding incelemesi / NW-042",
+        "output": "JUMP-01 NIC-A: MGMT VLAN99\nJUMP-01 NIC-B: Users VLAN10\nIP forwarding: enabled\nLocal forwarding firewall: allow\nKriter: Users -> MGMT yalnız onaylı bastion akışı"
+      },
+      "technical": "Çift bağlı sistem, forwarding ve yerel izinlerle segmentler arası geçit oluşturabilir.",
+      "risk": "Onaylı ağ güvenlik yolunun dışında erişim.",
+      "impact": "Yönetim ağına gereksiz çapraz erişim.",
+      "control": "Arayüz, route ve forwarding politikasını doğrula; gerekçesiz yönlendirmeyi kontrollü sınırla ve negatif test uygula."
+    },
+    {
+      "external_id": "network-auditor-v1-043",
+      "number": 43,
+      "chapter": 4,
+      "area": "SG",
+      "topic": "DNS egress kapsamı",
+      "kind": "image",
+      "prompt": "Doğru yaklaşım hangisi?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-043 üzerinde çalışıyorsun. Alan: Segmentasyon ve trafik yolları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "DNS çıkışını onaylı çözücü ve ilgili şifreli DNS/egress politikasıyla birlikte değerlendirmek"
+        },
+        {
+          "id": "b",
+          "text": "UDP/53 kısıtlanırsa her türlü DNS kesin engellenir"
+        },
+        {
+          "id": "c",
+          "text": "443 izni bütün trafiğin kötü niyetli olduğunu kanıtlar"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nDNS çıkışını onaylı çözücü ve ilgili şifreli DNS/egress politikasıyla birlikte değerlendirmek\n\n🔧 Teknik gerekçe\nDNS kontrolü onaylı resolver, protokol ve uygulama/egress görünürlüğüyle tasarlanır.\n\n⚠️ Risk\nİzinsiz DNS yolları ve politika dışı iletişim.\n\n💼 İş etkisi\nİzleme kaybı ve veri çıkış yüzeyinin artması.\n\n🛡️ Önerilen kontrol\nİş ihtiyacına göre resolver/egress kapsamını doğrula; şifreli DNS ve uç nokta davranışını da test matrisine al.\n\n❌ Diğer yanıtların değerlendirmesi\n• UDP/53 kısıtlanırsa her türlü DNS kesin engellenir: DNS TCP ve HTTPS gibi başka taşımalarda da bulunabilir.\n• 443 izni bütün trafiğin kötü niyetli olduğunu kanıtlar: Port tek başına içerik ve niyet kanıtı değildir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "DNS egress kapsamı",
+        "Segmentasyon ve trafik yolları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 43,
+      "card_pages": [],
+      "image": "network-auditor/screen_043.png",
+      "evidence": {
+        "command": "Çıkış akış matrisi / NW-043",
+        "output": "Onaylı DNS resolver: 10.10.99.53\nClients -> any UDP/53 ALLOW\nClients -> any TCP/443 ALLOW\nDNS-over-HTTPS kontrolü: kapsam incelemesi yok"
+      },
+      "technical": "DNS kontrolü onaylı resolver, protokol ve uygulama/egress görünürlüğüyle tasarlanır.",
+      "risk": "İzinsiz DNS yolları ve politika dışı iletişim.",
+      "impact": "İzleme kaybı ve veri çıkış yüzeyinin artması.",
+      "control": "İş ihtiyacına göre resolver/egress kapsamını doğrula; şifreli DNS ve uç nokta davranışını da test matrisine al."
+    },
+    {
+      "external_id": "network-auditor-v1-044",
+      "number": 44,
+      "chapter": 4,
+      "area": "SG",
+      "topic": "Segmentasyonda değişiklik onayı",
+      "kind": "image",
+      "prompt": "Hangi bulgu desteklenir?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-044 üzerinde çalışıyorsun. Alan: Segmentasyon ve trafik yolları. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "İki dakika kesin veri kaybı kanıtıdır"
+        },
+        {
+          "id": "a",
+          "text": "Normal değişiklik onayı uygulamadan iki dakika sonra verilmiş"
+        },
+        {
+          "id": "b",
+          "text": "Onay uygulamadan önce alınmıştır"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nNormal değişiklik onayı uygulamadan iki dakika sonra verilmiş\n\n🔧 Teknik gerekçe\nKriter ve zaman damgaları aynı referansla karşılaştırılır; normal/acil prosedür ayrımı önemlidir.\n\n⚠️ Risk\nOnaysız erişim değişikliğinin uygulanması.\n\n💼 İş etkisi\nKontrolsüz maruziyet veya hizmet etkisi.\n\n🛡️ Önerilen kontrol\nÖn onay kapısını, acil istisna sürecini ve uygulanmış revizyonu ticket/log korelasyonuyla doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• Onay uygulamadan önce alınmıştır: Zaman sırası tersini gösteriyor.\n• İki dakika kesin veri kaybı kanıtıdır: Süre sapması gerçekleşmiş veri kaybını kanıtlamaz.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Segmentasyonda değişiklik onayı",
+        "Segmentasyon ve trafik yolları"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 44,
+      "card_pages": [],
+      "image": "network-auditor/screen_044.png",
+      "evidence": {
+        "command": "Network change ticket NW-044",
+        "output": "Kural açılışı: 2026-10-28 02:16 UTC\nNormal change onayı: 2026-10-28 02:18 UTC\nAcil değişiklik kaydı: yok\nKriter: normal değişiklikte ön onay"
+      },
+      "technical": "Kriter ve zaman damgaları aynı referansla karşılaştırılır; normal/acil prosedür ayrımı önemlidir.",
+      "risk": "Onaysız erişim değişikliğinin uygulanması.",
+      "impact": "Kontrolsüz maruziyet veya hizmet etkisi.",
+      "control": "Ön onay kapısını, acil istisna sürecini ve uygulanmış revizyonu ticket/log korelasyonuyla doğrula."
+    },
+    {
+      "external_id": "network-auditor-v1-045",
+      "number": 45,
+      "chapter": 5,
+      "area": "LG",
+      "topic": "ALLOW logunun sınırı",
+      "kind": "image",
+      "prompt": "Bu log neyi tek başına kanıtlamaz?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-045 üzerinde çalışıyorsun. Alan: Ağ logları ve denetim sonucu. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Firewall'ın ilgili akışa allow kararı verdiğini"
+        },
+        {
+          "id": "c",
+          "text": "Hedef portun 5432 olarak kaydedildiğini"
+        },
+        {
+          "id": "a",
+          "text": "Veritabanında başarılı kimlik doğrulama veya veri okuma gerçekleştiğini"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nVeritabanında başarılı kimlik doğrulama veya veri okuma gerçekleştiğini\n\n🔧 Teknik gerekçe\nAğ filtre kararı ile TCP/uygulama başarısı ve kullanıcı işlemi farklı kanıtlardır.\n\n⚠️ Risk\nAğ izninin gerçekleşmiş veri ifşası diye raporlanması.\n\n💼 İş etkisi\nYanlış olay kapsamı ve hatalı önceliklendirme.\n\n🛡️ Önerilen kontrol\nAkış/oturum kimliğiyle ağ, hedef servis ve kimlik kayıtlarını korele et; kanıtın sınırını belirt.\n\n❌ Diğer yanıtların değerlendirmesi\n• Firewall'ın ilgili akışa allow kararı verdiğini: Action alanı bu kararı gösterir.\n• Hedef portun 5432 olarak kaydedildiğini: Port alanı açıkça listelenmiştir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "ALLOW logunun sınırı",
+        "Ağ logları ve denetim sonucu"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 45,
+      "card_pages": [],
+      "image": "network-auditor/screen_045.png",
+      "evidence": {
+        "command": "FW-EDGE trafik logu / NW-045",
+        "output": "UTC 10:00:01 src=10.10.10.8 dst=10.10.30.9\nproto=tcp dport=5432 action=allow rule=10\nsent_bytes=180 recv_bytes=0\nUygulama oturum sonucu: bilinmiyor"
+      },
+      "technical": "Ağ filtre kararı ile TCP/uygulama başarısı ve kullanıcı işlemi farklı kanıtlardır.",
+      "risk": "Ağ izninin gerçekleşmiş veri ifşası diye raporlanması.",
+      "impact": "Yanlış olay kapsamı ve hatalı önceliklendirme.",
+      "control": "Akış/oturum kimliğiyle ağ, hedef servis ve kimlik kayıtlarını korele et; kanıtın sınırını belirt."
+    },
+    {
+      "external_id": "network-auditor-v1-046",
+      "number": 46,
+      "chapter": 5,
+      "area": "LG",
+      "topic": "Reddedilen tarama sinyali",
+      "kind": "image",
+      "prompt": "Doğru sınıflandırma hangisi?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-046 üzerinde çalışıyorsun. Alan: Ağ logları ve denetim sonucu. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Red varsa olay incelemesi hiçbir zaman gerekmez"
+        },
+        {
+          "id": "b",
+          "text": "200 red sunucuların ele geçirildiğini kanıtlar"
+        },
+        {
+          "id": "a",
+          "text": "Tarama benzeri başarısız denemeler; kaynak, hacim ve başarılı akışlarla araştırılmalı"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nTarama benzeri başarısız denemeler; kaynak, hacim ve başarılı akışlarla araştırılmalı\n\n🔧 Teknik gerekçe\nBir örüntü tespit sinyalidir; sonuç ve niyet ek bağlamla belirlenir.\n\n⚠️ Risk\nSaldırı hazırlığının veya yanlış tarama işinin fark edilmemesi.\n\n💼 İş etkisi\nGeç müdahale veya gereksiz alarm yükü.\n\n🛡️ Önerilen kontrol\nOnaylı tarayıcı takvimini, kaynağı ve kabul edilen akışları uzlaştır; alarm/müdahale kaydını test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• 200 red sunucuların ele geçirildiğini kanıtlar: Reddedilen deneme başarı kanıtı değildir.\n• Red varsa olay incelemesi hiçbir zaman gerekmez: Anomali ve müdahale ihtiyacı yine değerlendirilebilir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "Reddedilen tarama sinyali",
+        "Ağ logları ve denetim sonucu"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 46,
+      "card_pages": [],
+      "image": "network-auditor/screen_046.png",
+      "evidence": {
+        "command": "FW-EDGE özet trafik ekranı / NW-046",
+        "output": "Kaynak 192.0.2.55 -> 20 farklı hedef/port\nSüre: 60 saniye\nAction: deny, 200 kayıt\nBaşarılı akış korelasyonu: yapılmadı"
+      },
+      "technical": "Bir örüntü tespit sinyalidir; sonuç ve niyet ek bağlamla belirlenir.",
+      "risk": "Saldırı hazırlığının veya yanlış tarama işinin fark edilmemesi.",
+      "impact": "Geç müdahale veya gereksiz alarm yükü.",
+      "control": "Onaylı tarayıcı takvimini, kaynağı ve kabul edilen akışları uzlaştır; alarm/müdahale kaydını test et."
+    },
+    {
+      "external_id": "network-auditor-v1-047",
+      "number": 47,
+      "chapter": 5,
+      "area": "LG",
+      "topic": "NAT oturum korelasyonu",
+      "kind": "image",
+      "prompt": "Dış logdaki IP'den kişiye nasıl iz sürülür?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-047 üzerinde çalışıyorsun. Alan: Ağ logları ve denetim sonucu. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Zaman, çevrilen kaynak portu, oturum ve iç kimlik kayıtlarıyla korelasyon kurulur"
+        },
+        {
+          "id": "b",
+          "text": "Ortak IP tek bir kişiyi kesin tanımlar"
+        },
+        {
+          "id": "c",
+          "text": "Destination 443 kullanıcının gerçek adıdır"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nZaman, çevrilen kaynak portu, oturum ve iç kimlik kayıtlarıyla korelasyon kurulur\n\n🔧 Teknik gerekçe\nNAT/PAT birden çok akışı ortak IP ve farklı portlarla temsil edebilir; doğru zaman ve eşleme gerekir.\n\n⚠️ Risk\nYanlış kullanıcı atfı.\n\n💼 İş etkisi\nHatalı soruşturma ve hesap verebilirlik kaybı.\n\n🛡️ Önerilen kontrol\nNAT/session, DHCP/cihaz ve oturum kimliğini ortak zaman referansıyla ilişkilendir; saklama kapsamını doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• Ortak IP tek bir kişiyi kesin tanımlar: Birden çok kullanıcı aynı çıkış IP'sini paylaşabilir.\n• Destination 443 kullanıcının gerçek adıdır: Port kimlik alanı değildir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "NAT oturum korelasyonu",
+        "Ağ logları ve denetim sonucu"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 47,
+      "card_pages": [],
+      "image": "network-auditor/screen_047.png",
+      "evidence": {
+        "command": "FW-EDGE NAT logu / NW-047",
+        "output": "UTC 10:10:00 session=4451\nOriginal src=10.10.10.18:51001\nTranslated src=203.0.113.20:62015\nDestination=198.51.100.40:443\nOrtak çıkış IP'si kullanıcılarca paylaşılıyor"
+      },
+      "technical": "NAT/PAT birden çok akışı ortak IP ve farklı portlarla temsil edebilir; doğru zaman ve eşleme gerekir.",
+      "risk": "Yanlış kullanıcı atfı.",
+      "impact": "Hatalı soruşturma ve hesap verebilirlik kaybı.",
+      "control": "NAT/session, DHCP/cihaz ve oturum kimliğini ortak zaman referansıyla ilişkilendir; saklama kapsamını doğrula."
+    },
+    {
+      "external_id": "network-auditor-v1-048",
+      "number": 48,
+      "chapter": 5,
+      "area": "LG",
+      "topic": "SIEM teslimat boşluğu",
+      "kind": "image",
+      "prompt": "En belirgin eksik kontrol hangisi?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-048 üzerinde çalışıyorsun. Alan: Ağ logları ve denetim sonucu. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "SIEM'de sıfır olay ağda hiç trafik yok demektir"
+        },
+        {
+          "id": "c",
+          "text": "Forwarder kuruluysa kontrol geçmiştir"
+        },
+        {
+          "id": "a",
+          "text": "Yerel log üretimi var ama merkezi teslimat zinciri başarısız"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nYerel log üretimi var ama merkezi teslimat zinciri başarısız\n\n🔧 Teknik gerekçe\nLog üretimi, aktarım, ayrıştırma ve merkezi erişilebilirlik ayrı adımlardır.\n\n⚠️ Risk\nKritik ağ olaylarının merkezi görünürlük dışında kalması.\n\n💼 İş etkisi\nİhlale geç müdahale ve kanıt kaybı.\n\n🛡️ Önerilen kontrol\nKuyruk/bağlantı sorununu ve alarmını incele; kontrollü olayın SIEM'de zamanında görüldüğünü doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• SIEM'de sıfır olay ağda hiç trafik yok demektir: Yerel olay sayısı teslimat sorunu olduğunu gösteriyor.\n• Forwarder kuruluysa kontrol geçmiştir: Kurulum başarılı teslimat kanıtı değildir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "SIEM teslimat boşluğu",
+        "Ağ logları ve denetim sonucu"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 48,
+      "card_pages": [],
+      "image": "network-auditor/screen_048.png",
+      "evidence": {
+        "command": "Log forwarding paneli / NW-048",
+        "output": "FW-EDGE local events/min: 850\nSIEM events/min: 0\nForwarder queue: increasing\nReceiver connection: failed 35 min\nKriter: kritik cihaz logları merkezi izlenmeli"
+      },
+      "technical": "Log üretimi, aktarım, ayrıştırma ve merkezi erişilebilirlik ayrı adımlardır.",
+      "risk": "Kritik ağ olaylarının merkezi görünürlük dışında kalması.",
+      "impact": "İhlale geç müdahale ve kanıt kaybı.",
+      "control": "Kuyruk/bağlantı sorununu ve alarmını incele; kontrollü olayın SIEM'de zamanında görüldüğünü doğrula."
+    },
+    {
+      "external_id": "network-auditor-v1-049",
+      "number": 49,
+      "chapter": 5,
+      "area": "LG",
+      "topic": "Zaman dilimi ve saat sapması",
+      "kind": "image",
+      "prompt": "Bu iki kayıt için doğru yaklaşım hangisi?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-049 üzerinde çalışıyorsun. Alan: Ağ logları ve denetim sonucu. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Üç saat fark kesin geç müdahaledir"
+        },
+        {
+          "id": "a",
+          "text": "Aynı an olabilir; ofsetleri normalize edip saat senkronunu ayrıca doğrulamak"
+        },
+        {
+          "id": "c",
+          "text": "Zaman dilimi ayarı NTP doğruluğunu kanıtlar"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nAynı an olabilir; ofsetleri normalize edip saat senkronunu ayrıca doğrulamak\n\n🔧 Teknik gerekçe\nOlay korelasyonunda zaman dilimi normalizasyonu ve gerçek saat sapması ayrı değerlendirilir.\n\n⚠️ Risk\nYanlış zaman sırasından hatalı sonuç.\n\n💼 İş etkisi\nYanlış kişi/olay eşlemesi veya gerçek gecikmenin atlanması.\n\n🛡️ Önerilen kontrol\nUTC/ofsetleri koru; zaman kaynağı ve ölçülen sapmayı ortak korelasyon kriteriyle doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• Üç saat fark kesin geç müdahaledir: Gösterimler aynı zamana karşılık gelebilir.\n• Zaman dilimi ayarı NTP doğruluğunu kanıtlar: Ofset ile saat sapması farklı kavramlardır.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "Zaman dilimi ve saat sapması",
+        "Ağ logları ve denetim sonucu"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 49,
+      "card_pages": [],
+      "image": "network-auditor/screen_049.png",
+      "evidence": {
+        "command": "VPN ve firewall olay eşlemesi / NW-049",
+        "output": "VPN: 2026-10-29 13:00:00 +03 session=7001\nFirewall: 2026-10-29 10:00:00 UTC session=7001\nNTP offset ölçümü: ayrıca alınmadı"
+      },
+      "technical": "Olay korelasyonunda zaman dilimi normalizasyonu ve gerçek saat sapması ayrı değerlendirilir.",
+      "risk": "Yanlış zaman sırasından hatalı sonuç.",
+      "impact": "Yanlış kişi/olay eşlemesi veya gerçek gecikmenin atlanması.",
+      "control": "UTC/ofsetleri koru; zaman kaynağı ve ölçülen sapmayı ortak korelasyon kriteriyle doğrula."
+    },
+    {
+      "external_id": "network-auditor-v1-050",
+      "number": 50,
+      "chapter": 5,
+      "area": "LG",
+      "topic": "AWS Flow Logs veri boşluğu",
+      "kind": "image",
+      "prompt": "SKIPDATA satırı nasıl ele alınmalı?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-050 üzerinde çalışıyorsun. Alan: Ağ logları ve denetim sonucu. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Eksik kayıt kapsamı araştırılmalı; trafik yok diye yorumlanmamalı"
+        },
+        {
+          "id": "b",
+          "text": "SKIPDATA aralıkta kesin hiçbir trafik yok demektir"
+        },
+        {
+          "id": "c",
+          "text": "ACCEPT uygulamada başarılı girişin kesin kanıtıdır"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nEksik kayıt kapsamı araştırılmalı; trafik yok diye yorumlanmamalı\n\n🔧 Teknik gerekçe\nFlow Logs toplama/gönderim ve kayıt durumuyla yorumlanır; SKIPDATA tamlık sınırı yaratır.\n\n⚠️ Risk\nEksik gözlemden tam trafik evreni çıkarılması.\n\n💼 İş etkisi\nOlay kapsamının veya maruziyetin eksik belirlenmesi.\n\n🛡️ Önerilen kontrol\nToplama durumunu ve alternatif log kaynaklarını uzlaştır; kapsam sınırını rapora ekle ve veri boşluğu alarmını test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• SKIPDATA aralıkta kesin hiçbir trafik yok demektir: Bu durum kayıtların atlandığını gösterebilir.\n• ACCEPT uygulamada başarılı girişin kesin kanıtıdır: Akış kabulü uygulama işlemi değildir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "AWS Flow Logs veri boşluğu",
+        "Ağ logları ve denetim sonucu"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 50,
+      "card_pages": [],
+      "image": "network-auditor/screen_050.png",
+      "evidence": {
+        "command": "AWS VPC Flow Logs custom fields / NW-050",
+        "output": "interface-id srcaddr dstaddr dstport action log-status\neni-training01 10.10.10.8 10.10.30.9 443 ACCEPT OK\neni-training01 - - - - SKIPDATA\nSon aralık için eksiksiz trafik raporu istendi"
+      },
+      "technical": "Flow Logs toplama/gönderim ve kayıt durumuyla yorumlanır; SKIPDATA tamlık sınırı yaratır.",
+      "risk": "Eksik gözlemden tam trafik evreni çıkarılması.",
+      "impact": "Olay kapsamının veya maruziyetin eksik belirlenmesi.",
+      "control": "Toplama durumunu ve alternatif log kaynaklarını uzlaştır; kapsam sınırını rapora ekle ve veri boşluğu alarmını test et."
+    },
+    {
+      "external_id": "network-auditor-v1-051",
+      "number": 51,
+      "chapter": 5,
+      "area": "LG",
+      "topic": "VPN olayında MFA korelasyonu",
+      "kind": "image",
+      "prompt": "Bu iki log yeterli MFA kanıtı mı?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-051 üzerinde çalışıyorsun. Alan: Ağ logları ve denetim sonucu. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Bir MFA success tüm sonraki bağlantıları kapsar"
+        },
+        {
+          "id": "b",
+          "text": "Aynı kullanıcı adı her zaman aynı isteği kanıtlar"
+        },
+        {
+          "id": "a",
+          "text": "Hayır; kabul edilen VPN oturumuyla aynı doğrulama isteği ilişkilendirilmeli"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nHayır; kabul edilen VPN oturumuyla aynı doğrulama isteği ilişkilendirilmeli\n\n🔧 Teknik gerekçe\nKullanıcı ve yakın zaman yardımcıdır; sağlam atıf için request/session ve uygulanan politika bağlamı gerekir.\n\n⚠️ Risk\nMFA uygulanmayan oturumun uygulanmış sayılması.\n\n💼 İş etkisi\nUzak erişimde yanlış güvence.\n\n🛡️ Önerilen kontrol\nİstek/oturum kimliklerini ve politika sonucunu uçtan uca korele et; MFA reddi ve başarılı giriş testini birlikte yap.\n\n❌ Diğer yanıtların değerlendirmesi\n• Aynı kullanıcı adı her zaman aynı isteği kanıtlar: Eşzamanlı istekler ve başka servisler olabilir.\n• Bir MFA success tüm sonraki bağlantıları kapsar: Doğrulama oturum ve politika bağlamına bağlıdır.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "VPN olayında MFA korelasyonu",
+        "Ağ logları ve denetim sonucu"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 51,
+      "card_pages": [],
+      "image": "network-auditor/screen_051.png",
+      "evidence": {
+        "command": "VPN-GW ve IdP log özeti / NW-051",
+        "output": "VPN: user=derya session=801 accepted 10:20 UTC\nIdP: user=derya MFA success 10:19 UTC request=A12\nVPN->IdP request/session eşlemesi: kaydedilmiyor\nBaşka eşzamanlı istekler: var"
+      },
+      "technical": "Kullanıcı ve yakın zaman yardımcıdır; sağlam atıf için request/session ve uygulanan politika bağlamı gerekir.",
+      "risk": "MFA uygulanmayan oturumun uygulanmış sayılması.",
+      "impact": "Uzak erişimde yanlış güvence.",
+      "control": "İstek/oturum kimliklerini ve politika sonucunu uçtan uca korele et; MFA reddi ve başarılı giriş testini birlikte yap."
+    },
+    {
+      "external_id": "network-auditor-v1-052",
+      "number": 52,
+      "chapter": 5,
+      "area": "LG",
+      "topic": "İzleme alarmı ve müdahale",
+      "kind": "image",
+      "prompt": "Hangi kontrol eksikliği desteklenir?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-052 üzerinde çalışıyorsun. Alan: Ağ logları ve denetim sonucu. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Accepted flow kesin tüm ödeme verisinin sızmasıdır"
+        },
+        {
+          "id": "a",
+          "text": "Alarm oluşmuş ama sorumlu atama ve süresinde triage kanıtı yok"
+        },
+        {
+          "id": "b",
+          "text": "Alarm varlığı tüm olay müdahalesini tamamlar"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nAlarm oluşmuş ama sorumlu atama ve süresinde triage kanıtı yok\n\n🔧 Teknik gerekçe\nİzleme etkinliği alarmın teslim, sahiplik, inceleme ve sonuçlandırma zinciriyle ölçülür.\n\n⚠️ Risk\nYüksek riskli erişime geç müdahale.\n\n💼 İş etkisi\nOlası olayın büyümesi ve hizmet/veri etkisinin artması.\n\n🛡️ Önerilen kontrol\nSorumlu, yedek ve eskalasyon tanımla; teslim/triage sürelerini olay kayıtlarıyla test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• Alarm varlığı tüm olay müdahalesini tamamlar: Tespit ile müdahale ayrı kontrol adımlarıdır.\n• Accepted flow kesin tüm ödeme verisinin sızmasıdır: Ağ kabulü veri ifşası miktarını kanıtlamaz.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "İzleme alarmı ve müdahale",
+        "Ağ logları ve denetim sonucu"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 52,
+      "card_pages": [],
+      "image": "network-auditor/screen_052.png",
+      "evidence": {
+        "command": "Network SIEM vaka özeti / NW-052",
+        "output": "Kural: Guest -> Payments accepted flow\nAlarm: 09:10 UTC\nAssigned owner: boş\nİlk müdahale: yok\nKriter: yüksek öncelikli olayda 30 dk triage; saat 11:00 UTC"
+      },
+      "technical": "İzleme etkinliği alarmın teslim, sahiplik, inceleme ve sonuçlandırma zinciriyle ölçülür.",
+      "risk": "Yüksek riskli erişime geç müdahale.",
+      "impact": "Olası olayın büyümesi ve hizmet/veri etkisinin artması.",
+      "control": "Sorumlu, yedek ve eskalasyon tanımla; teslim/triage sürelerini olay kayıtlarıyla test et."
+    },
+    {
+      "external_id": "network-auditor-v1-053",
+      "number": 53,
+      "chapter": 5,
+      "area": "LG",
+      "topic": "Saklama ve log bütünlüğü",
+      "kind": "image",
+      "prompt": "Öncelikli kontrol değerlendirmesi hangisi?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-053 üzerinde çalışıyorsun. Alan: Ağ logları ve denetim sonucu. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Saklama süresi ve tek kimlikle silme yetkisi birlikte kriter dışı"
+        },
+        {
+          "id": "b",
+          "text": "Yedi gün log olması kesin manipülasyon kanıtıdır"
+        },
+        {
+          "id": "c",
+          "text": "90 gün ayarı yazmak tek başına bütünlüğü sağlar"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nSaklama süresi ve tek kimlikle silme yetkisi birlikte kriter dışı\n\n🔧 Teknik gerekçe\nSaklama süresi, erişilebilir tarihçe ve yetki ayrılığı birlikte doğrulanır.\n\n⚠️ Risk\nOlay geçmişinin erken veya tek kimlikle kaybı.\n\n💼 İş etkisi\nAraştırma ve hesap verebilirlik için kanıt bulunamaması.\n\n🛡️ Önerilen kontrol\nGerekli saklama, bağımsız koruma ve sınırlı silme yetkisi uygula; geçmiş olay erişimi ve yetki testini kaydet.\n\n❌ Diğer yanıtların değerlendirmesi\n• Yedi gün log olması kesin manipülasyon kanıtıdır: Kontrol zayıflığı gerçekleşmiş silme olayı değildir.\n• 90 gün ayarı yazmak tek başına bütünlüğü sağlar: Erişim, fiili kayıt ve silme koruması ayrıca gerekir.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "Saklama ve log bütünlüğü",
+        "Ağ logları ve denetim sonucu"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 53,
+      "card_pages": [],
+      "image": "network-auditor/screen_053.png",
+      "evidence": {
+        "command": "Ağ log deposu erişim/saklama incelemesi / NW-053",
+        "output": "Kriter: 90 gün erişilebilir kayıt; ayrı silme yetkisi\nFiili saklama: 7 gün\nFW servis hesabı: tüm arşivleri silebilir\nBağımsız korumalı kopya: yok"
+      },
+      "technical": "Saklama süresi, erişilebilir tarihçe ve yetki ayrılığı birlikte doğrulanır.",
+      "risk": "Olay geçmişinin erken veya tek kimlikle kaybı.",
+      "impact": "Araştırma ve hesap verebilirlik için kanıt bulunamaması.",
+      "control": "Gerekli saklama, bağımsız koruma ve sınırlı silme yetkisi uygula; geçmiş olay erişimi ve yetki testini kaydet."
+    },
+    {
+      "external_id": "network-auditor-v1-054",
+      "number": 54,
+      "chapter": 5,
+      "area": "LG",
+      "topic": "Bulgu kapanışında eski ekran",
+      "kind": "image",
+      "prompt": "Bulguyu ne zaman kapatırsın?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-054 üzerinde çalışıyorsun. Alan: Ağ logları ve denetim sonucu. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Ticket kapandıysa teknik yeniden test gerekmez"
+        },
+        {
+          "id": "a",
+          "text": "Güncel hedef politika, değişiklik ve negatif test kanıtı uzlaştırılınca"
+        },
+        {
+          "id": "c",
+          "text": "Eski görüntünün tarihini raporda değiştirmek yeterlidir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nGüncel hedef politika, değişiklik ve negatif test kanıtı uzlaştırılınca\n\n🔧 Teknik gerekçe\nKapanış kanıtı güncel, hedefe ait ve kriteri doğrudan test eden nitelikte olmalıdır.\n\n⚠️ Risk\nAçık maruziyetin kapatılmış sayılması.\n\n💼 İş etkisi\nSüren yönetim erişimi ve yanlış güvence.\n\n🛡️ Önerilen kontrol\nEtkin revizyon, nesne üyelikleri, mevcut/yeni oturum ve kontrollü red testini sorumlu/son tarihle doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• Ticket kapandıysa teknik yeniden test gerekmez: Beyan kontrolün düzeldiğini kanıtlamaz.\n• Eski görüntünün tarihini raporda değiştirmek yeterlidir: Kanıtın kaynağı ve zamanı korunmalıdır.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "Bulgu kapanışında eski ekran",
+        "Ağ logları ve denetim sonucu"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 54,
+      "card_pages": [],
+      "image": "network-auditor/screen_054.png",
+      "evidence": {
+        "command": "Denetim bulgusu NW-054",
+        "output": "Bulgu: Users -> MGMT SSH geniş izin\nTicket: 2026-10-29 kapatıldı\nEk konfigürasyon ekranı: 2026-09-01\nGüncel etkin politika / negatif test: yok"
+      },
+      "technical": "Kapanış kanıtı güncel, hedefe ait ve kriteri doğrudan test eden nitelikte olmalıdır.",
+      "risk": "Açık maruziyetin kapatılmış sayılması.",
+      "impact": "Süren yönetim erişimi ve yanlış güvence.",
+      "control": "Etkin revizyon, nesne üyelikleri, mevcut/yeni oturum ve kontrollü red testini sorumlu/son tarihle doğrula."
+    },
+    {
+      "external_id": "network-auditor-v1-055",
+      "number": 55,
+      "chapter": 5,
+      "area": "LG",
+      "topic": "Final ağ denetimi kararı",
+      "kind": "image",
+      "prompt": "İlk doğru denetim yaklaşımı hangisi?",
+      "context": "NovaTek ağ denetiminde Selin (Denetim Yöneticin) ve Eren (Ağ Sorumlusu) ile kanıt NW-055 üzerinde çalışıyorsun. Alan: Ağ logları ve denetim sonucu. Görseldeki yapılandırma, trafik yolu veya logu inceleyerek karar ver. Kurgusal eğitim ortamıdır; üretim ağına bağlanman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "A kuralını onaysız silip denetimi bitiririm"
+        },
+        {
+          "id": "c",
+          "text": "VPN MFA açık olduğu için tüm ağı uygun sayarım"
+        },
+        {
+          "id": "a",
+          "text": "A sapmasını öncelikli sorumluya bağlar, C görünürlük boşluğunu ele alır ve B'nin eksik testini tamamlarım"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nA sapmasını öncelikli sorumluya bağlar, C görünürlük boşluğunu ele alır ve B'nin eksik testini tamamlarım\n\n🔧 Teknik gerekçe\nDoğrulanmış sapma, eksik kanıt ve gerçekleşmiş olay ayrılır; öncelik etki ve maruziyete bağlanır.\n\n⚠️ Risk\nGereksiz segment erişimi ve eksik merkezi görünürlük.\n\n💼 İş etkisi\nVeri gizliliği, bütünlüğü ve hizmet sürekliliğinin etkilenmesi.\n\n🛡️ Önerilen kontrol\nKriter/koşul/risk/iş etkisi/sorumlu/tarih içeren bulgu aç; onaylı düzeltme ve ölçülebilir yeniden test planını izle.\n\n❌ Diğer yanıtların değerlendirmesi\n• A kuralını onaysız silip denetimi bitiririm: Üretim düzeltmesi yetkilendirme ve bağımlılık testi gerektirir.\n• VPN MFA açık olduğu için tüm ağı uygun sayarım: Tek kontrol diğer akış ve izleme sonuçlarını kapsamaz.",
+      "hint": "Kaynak, hedef, yön, protokol/port ve zaman kapsamını ayır. İzin, fiili bağlantı ve uygulama sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "Final ağ denetimi kararı",
+        "Ağ logları ve denetim sonucu"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 55,
+      "card_pages": [],
+      "image": "network-auditor/screen_055.png",
+      "evidence": {
+        "command": "NovaTek sonuç panosu / NW-055",
+        "output": "A: Guest -> Payments tcp/5432 ALLOW; kriter DENY\nB: VPN MFA enabled; oturum korelasyonu test edilmedi\nC: SIEM log teslimatı 35 dk kesik\nÜretimde doğrudan değişiklik yetkin yok"
+      },
+      "technical": "Doğrulanmış sapma, eksik kanıt ve gerçekleşmiş olay ayrılır; öncelik etki ve maruziyete bağlanır.",
+      "risk": "Gereksiz segment erişimi ve eksik merkezi görünürlük.",
+      "impact": "Veri gizliliği, bütünlüğü ve hizmet sürekliliğinin etkilenmesi.",
+      "control": "Kriter/koşul/risk/iş etkisi/sorumlu/tarih içeren bulgu aç; onaylı düzeltme ve ölçülebilir yeniden test planını izle."
+    }
+  ]
+}

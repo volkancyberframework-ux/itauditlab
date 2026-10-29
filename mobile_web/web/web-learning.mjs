@@ -65,7 +65,7 @@ export class WebLearningWorkspace {
     this.imageReady=false;if(this.submitButton)this.submitButton.disabled=true;
     this.preview.replaceChildren();const status=element('div','Görsel yükleniyor…','grc-image-status');status.setAttribute('role','status');this.preview.append(status);
     try{const url=await this.api.image(q.image);if(generation!==this.generation){URL.revokeObjectURL(url);return;}
-      const img=element('img');img.alt=q.synthetic_image?'Eğitim amaçlı sentetik sistem ekranı':'Soru ekran görüntüsü';img.src=url;await img.decode();if(generation!==this.generation){URL.revokeObjectURL(url);return;}
+      const img=element('img');img.alt=q.image_alt||(q.synthetic_image?'Eğitim amaçlı sentetik sistem ekranı':'Soru ekran görüntüsü');img.src=url;await img.decode();if(generation!==this.generation){URL.revokeObjectURL(url);return;}
       this.urls.add(url);this.preview.replaceChildren();const open=element('button',undefined,'grc-image-open');open.type='button';open.setAttribute('aria-label','Ekran görüntüsünü büyüt');open.append(img);
       open.addEventListener('click',()=>this.viewer.open(url,img.alt).catch(()=>{this.viewer.close();this.error.textContent='Görsel açılamadı. Önizlemedeki yeniden denemeyi kullanabilirsin.';}));
       this.preview.append(open,element('p','🔍 Ekran görüntüsünü büyütmek için tıkla'));if(q.synthetic_image)this.preview.append(element('small','Eğitim amaçlı sentetik ekran · Kurgusal veri'));
