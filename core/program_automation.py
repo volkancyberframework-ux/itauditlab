@@ -201,7 +201,7 @@ def run_daily_programs(run_date=None):
     return stats
 
 
-def format_daily_program_summary(stats, run_date):
+def format_daily_program_summary(stats, run_date, *, include_student_details=True):
     missing = stats.get('pdf_missing', [])
     unverified = stats.get('pdf_unverified', [])
     status = ('🚨 Kontrol gerekli' if missing else '⚠️ Kısmi hata' if stats['failed'] or unverified else '✅ Başarılı')
@@ -227,11 +227,11 @@ def format_daily_program_summary(stats, run_date):
             lines.append(f"⚠️ Course ID: {item['course_id']} — {item['course']} — {item['reason']}")
     if stats.get('mobile_kpi_report'):
         lines.extend(['', stats['mobile_kpi_report']])
-    if stats['details']:
+    if stats['details'] and include_student_details:
         lines.extend(['', '📋 Açılan içerik detayları'])
         for item in stats['details']:
             mail_icon = '✅' if item['mail'] == 'gönderildi' else '❌'
             lines.extend(['', f"👤 {item['email']}", f"📚 {item['course']}", f"{mail_icon} Mail: {item['mail']}"])
-    else:
+    elif not stats['details']:
         lines.extend(['', 'Bugün açılacak yeni içerik bulunmuyor.'])
     return '\n'.join(lines)

@@ -28,3 +28,6 @@ pypdf==6.19.0
 djangorestframework==3.16.1
 djangorestframework-simplejwt==5.5.1
 app-store-server-library==3.1.2
+
+# Ephemeral daily Telegram KPI charts.
+matplotlib==3.10.7

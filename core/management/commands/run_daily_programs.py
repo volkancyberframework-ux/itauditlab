@@ -18,6 +18,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         run_date = timezone.localdate()
         stats = run_daily_programs(run_date)
+        mobile_report = None
         try:
             from mobile_api.daily_kpis import capture_report, format_report
             mobile_report, _ = capture_report(run_date)
@@ -27,13 +28,20 @@ class Command(BaseCommand):
             stats['mobile_kpi_report'] = '⚠️ Mobil KPI raporu hazırlanamadı; rapor kontrol edilmeli.'
             self.stderr.write(self.style.WARNING(f'Mobil KPI raporu hazırlanamadı: {type(exc).__name__}'))
         summary = format_daily_program_summary(stats, run_date)
+        telegram_summary = format_daily_program_summary(stats, run_date, include_student_details=False)
         self.stdout.write(summary)
         # Each delivery is independent: a temporary SMTP or Telegram failure
         # must not prevent traffic and meeting reports from being attempted.
         try:
-            notify_telegram(summary)
+            notify_telegram(telegram_summary)
         except Exception as exc:
             self.stderr.write(self.style.WARNING(f'Program Telegram özeti gönderilemedi: {exc}'))
+        if mobile_report is not None:
+            try:
+                from mobile_api.kpi_chart import send_mobile_kpi_chart
+                send_mobile_kpi_chart(run_date)
+            except Exception as exc:
+                self.stderr.write(self.style.WARNING(f'Mobil KPI grafiği gönderilemedi: {type(exc).__name__}'))
         try:
             send_daily_report_email(summary, run_date)
         except Exception as exc:

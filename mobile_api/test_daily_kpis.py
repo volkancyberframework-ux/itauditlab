@@ -164,13 +164,13 @@ class MobileDailyKPITests(TestCase):
         self.assertEqual(delta(79.2,76.1),'↑3,1')
         self.assertNotIn('0/0',format_report(data))
 
-    def test_existing_daily_telegram_contains_kpis_after_pdf_before_student_details(self):
+    def test_telegram_summary_omits_details_while_email_retains_them(self):
         stats={'students':1,'courses':1,'emails':1,'failed':0,'pdf_checked':1,
                'pdf_missing':[{'course_id':742,'course':'Ders','reason':'Ek yok'}],
                'details':[{'email':'student@example.test','course':'Ders','mail':'gönderildi'}]}
         with patch('core.management.commands.run_daily_programs.run_daily_programs',return_value=stats), \
              patch('core.management.commands.run_daily_programs.notify_telegram') as notify, \
-             patch('core.management.commands.run_daily_programs.send_daily_report_email'), \
+             patch('core.management.commands.run_daily_programs.send_daily_report_email') as email, \
              patch('core.management.commands.run_daily_programs.send_daily_traffic_report'), \
              patch('core.management.commands.run_daily_programs.send_daily_meeting_digest'), \
              patch('core.management.commands.run_daily_programs.send_weekly_telegram_note'), \
@@ -178,7 +178,10 @@ class MobileDailyKPITests(TestCase):
             call_command('run_daily_programs',stdout=StringIO())
         notify.assert_called_once();text=notify.call_args.args[0]
         self.assertLess(text.index('PDF EKSİĞİ'),text.index('MOBİL — GÜNLÜK KPI'))
-        self.assertLess(text.index('MOBİL — GÜNLÜK KPI'),text.index('Açılan içerik detayları'))
+        self.assertNotIn('Açılan içerik detayları',text)
+        self.assertNotIn('student@example.test',text)
+        self.assertIn('Açılan içerik detayları',email.call_args.args[0])
+        self.assertIn('student@example.test',email.call_args.args[0])
 
     def test_kpi_failure_does_not_block_existing_report(self):
         stats={'students':0,'courses':0,'emails':0,'failed':0,'details':[]}
