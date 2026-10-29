@@ -133,6 +133,7 @@ def run_daily_programs(run_date=None):
         "failed": 0,
         "details": [],
     }
+    newly_opened_course_ids = set()
     enrollments = ProgramEnrollment.objects.filter(
         is_active=True, program__is_active=True, start_date__lte=run_date
     ).select_related("user", "program")
@@ -154,8 +155,10 @@ def run_daily_programs(run_date=None):
                 release.access_granted_at = timezone.now()
                 release.status = ProgramRelease.Status.PENDING
                 release.save(update_fields=("access_granted_at", "status"))
+                newly_opened_course_ids.add(step.course_id)
                 stats["courses"] += 1
                 stats["details"].append({
+                    "course_id": step.course_id,
                     "email": enrollment.user.email,
                     "course": step.email_title or str(step.course),
                     "mail": "bekliyor",
@@ -193,4 +196,40 @@ def run_daily_programs(run_date=None):
                 if detail["email"] == enrollment.user.email and detail["mail"] == "bekliyor":
                     detail["mail"] = f"hata: {str(exc)[:160]}"
 
+    from .course_pdf_checks import check_released_course_pdfs
+    stats.update(check_released_course_pdfs(run_date, newly_opened_course_ids))
     return stats
+
+
+def format_daily_program_summary(stats, run_date):
+    missing = stats.get('pdf_missing', [])
+    unverified = stats.get('pdf_unverified', [])
+    status = ('🚨 Kontrol gerekli' if missing else '⚠️ Kısmi hata' if stats['failed'] or unverified else '✅ Başarılı')
+    lines = [
+        f"{status} — Günlük GRC Ustası programı",
+        f"📅 {run_date:%d.%m.%Y}",
+        f"👥 İşlenen öğrenci: {stats['students']}",
+        f"📚 Açılan içerik: {stats['courses']}",
+        f"✉️ Gönderilen mail: {stats['emails']}",
+        f"❌ Hata: {stats['failed']}",
+    ]
+    if stats.get('pdf_checked'):
+        lines.append(f"📎 Bugün açılan derslerde PDF kontrolü: {stats['pdf_checked']} ders")
+        if not missing and not unverified:
+            lines.append('✅ Açılan derslerin PDF ekleri kontrol edildi.')
+    if missing:
+        lines.extend(['', '🚨 PDF EKSİĞİ — Bugün açılan dersler'])
+        for item in missing:
+            lines.append(f"🚨 Course ID: {item['course_id']} — {item['course']} — Bu derste PDF yok. {item['reason']}")
+    if unverified:
+        lines.extend(['', '⚠️ PDF KONTROLÜ DOĞRULANAMADI'])
+        for item in unverified:
+            lines.append(f"⚠️ Course ID: {item['course_id']} — {item['course']} — {item['reason']}")
+    if stats['details']:
+        lines.extend(['', '📋 Açılan içerik detayları'])
+        for item in stats['details']:
+            mail_icon = '✅' if item['mail'] == 'gönderildi' else '❌'
+            lines.extend(['', f"👤 {item['email']}", f"📚 {item['course']}", f"{mail_icon} Mail: {item['mail']}"])
+    else:
+        lines.extend(['', 'Bugün açılacak yeni içerik bulunmuyor.'])
+    return '\n'.join(lines)
