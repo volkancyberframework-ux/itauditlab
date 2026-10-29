@@ -38,6 +38,7 @@ export class WebLearningWorkspace {
   }
   render(){
     const generation=++this.generation;this.base();this.error=element('p','', 'grc-web-error');this.error.setAttribute('role','alert');
+    if(this.state.path.show_path_percentage)this.main.append(element('p',`Modül ilerlemesi: %${this.state.path.progress} · ${this.state.path.completed}/${this.state.path.question_count} soru`,'grc-web-meta'));
     if(this.state.complete){this.main.append(element('h2','Bölüm tamamlandı 🎉'),element('p',`${this.state.correct}/${this.state.question_total} doğru · ${this.state.xp_earned} XP`));
       if(this.state.evaluation)this.main.append(element('p',this.state.evaluation.text,'grc-web-explanation'));
       if(!this.state.path.is_complete){const next=element('button','Sonraki bölüm','grc-web-primary');next.addEventListener('click',async()=>{next.disabled=true;try{this.state=await this.api.request('/web-api/sessions/',{path_id:this.state.path.id});this.render();}catch(e){this.error.textContent=e.message;next.disabled=false;}});this.main.append(next);}

@@ -1,0 +1,2715 @@
+{
+  "slug": "database-auditor-v1",
+  "title": "Veritabanı Denetimi",
+  "description": "55 özgün görselli ve uygulamalı denetim kararı • 5 bölüm\nPostgreSQL, MySQL, Microsoft SQL Server ve Oracle. Erişim, ayrıcalık, şifreleme, bütünlük, log, yedek, yama ve izleme kontrollerini gerçekçi kanıtlardan öğren. Her yanıtta teknik gerekçe, risk, iş etkisi ve önerilen kontrol.",
+  "modules": [
+    "Kapsam ve Erişim Yönetimi",
+    "Ayrıcalıklar ve Güvenlik Yapılandırması",
+    "Şifreleme ve Veri Bütünlüğü",
+    "Loglama ve Kontrol İzleme",
+    "Yedekleme, Yamalar ve Denetim Sonucu"
+  ],
+  "engines": {
+    "PG": "PostgreSQL 16",
+    "MY": "MySQL 8.0",
+    "MS": "Microsoft SQL Server 2022",
+    "OR": "Oracle Database 19c"
+  },
+  "questions": [
+    {
+      "external_id": "database-auditor-v1-001",
+      "number": 1,
+      "chapter": 1,
+      "engine": "PG",
+      "topic": "Doğru sunucu ve veritabanı",
+      "kind": "image",
+      "prompt": "Denetimin hedefi payments_prod / 192.0.2.21 ise bu görselle ilk ne yaparsın?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-001 üzerinde çalışıyorsun. Platform: PostgreSQL 16. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Bütün PostgreSQL sunucuları test edildi derim"
+        },
+        {
+          "id": "c",
+          "text": "audit_ro adına bakarak bütün yetkilerini güvenli sayarım"
+        },
+        {
+          "id": "a",
+          "text": "Kanıtın hedef ortam ve salt okunur denetçi kimliğiyle alındığını kapsamla eşleştiririm"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nKanıtın hedef ortam ve salt okunur denetçi kimliğiyle alındığını kapsamla eşleştiririm\n\n🔧 Teknik gerekçe\ncurrent_database ve current_user bağlantı bağlamını gösterir; rol adı salt okunur yetki garantisi değildir.\n\n⚠️ Risk\nYanlış ortamın kanıtı veya aşırı yetkili denetçi hesabı.\n\n💼 İş etkisi\nHatalı güvence ve üretim verisinde gereksiz değişiklik riski.\n\n🛡️ Önerilen kontrol\nSunucu/envanter kimliğini, zamanı ve etkin rol izinlerini doğrula; denetçi rolünü gerekli okuma yetkileriyle sınırla.\n\n❌ Diğer yanıtların değerlendirmesi\n• Bütün PostgreSQL sunucuları test edildi derim: Tek bağlantı bütün sunucu evrenini göstermez.\n• audit_ro adına bakarak bütün yetkilerini güvenli sayarım: Kullanıcı adı gerçek yetki kapsamını kanıtlamaz.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Doğru sunucu ve veritabanı",
+        "PostgreSQL 16"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 1,
+      "card_pages": [],
+      "image": "database-auditor/screen_001.png",
+      "evidence": {
+        "command": "SELECT current_database(), inet_server_addr(), current_user;",
+        "output": "current_database  inet_server_addr  current_user\npayments_prod     192.0.2.21        audit_ro",
+        "engine": "PostgreSQL 16"
+      },
+      "technical": "current_database ve current_user bağlantı bağlamını gösterir; rol adı salt okunur yetki garantisi değildir.",
+      "risk": "Yanlış ortamın kanıtı veya aşırı yetkili denetçi hesabı.",
+      "impact": "Hatalı güvence ve üretim verisinde gereksiz değişiklik riski.",
+      "control": "Sunucu/envanter kimliğini, zamanı ve etkin rol izinlerini doğrula; denetçi rolünü gerekli okuma yetkileriyle sınırla."
+    },
+    {
+      "external_id": "database-auditor-v1-002",
+      "number": 2,
+      "chapter": 1,
+      "engine": "MY",
+      "topic": "Hesap adı ve kaynak adresi",
+      "kind": "image",
+      "prompt": "Aynı kullanıcı adına ait iki satırı nasıl değerlendirirsin?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-002 üzerinde çalışıyorsun. Platform: MySQL 8.0. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Yüzde işareti internetten erişimin kesin kanıtıdır"
+        },
+        {
+          "id": "a",
+          "text": "Bunları farklı host eşleşmelerine sahip iki hesap olarak inceleyip uzak erişim gereksinimini doğrularım"
+        },
+        {
+          "id": "b",
+          "text": "Bunlar tek hesabın yinelenmiş görünümüdür"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nBunları farklı host eşleşmelerine sahip iki hesap olarak inceleyip uzak erişim gereksinimini doğrularım\n\n🔧 Teknik gerekçe\nMySQL user@host hesabında % geniş kaynak eşleşmesidir; localhost hesabıyla aynı erişim kaydı değildir.\n\n⚠️ Risk\nGereksiz geniş kaynaklardan hesap eşleşmesi.\n\n💼 İş etkisi\nHassas raporlama hesabının saldırı yüzeyinin büyümesi.\n\n🛡️ Önerilen kontrol\nHost kapsamını onaylı uygulama kaynaklarıyla sınırla; etkin ağ ve kimlik doğrulama kontrollerini birlikte test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• Bunlar tek hesabın yinelenmiş görünümüdür: MySQL hesap kimliği kullanıcı ve host bileşimidir.\n• Yüzde işareti internetten erişimin kesin kanıtıdır: Dinleyici ve ağ kuralları ayrıca doğrulanmalıdır.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Hesap adı ve kaynak adresi",
+        "MySQL 8.0"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 2,
+      "card_pages": [],
+      "image": "database-auditor/screen_002.png",
+      "evidence": {
+        "command": "SELECT User, Host, account_locked FROM mysql.user WHERE User='report';",
+        "output": "User    Host          account_locked\nreport  localhost     N\nreport  %             N",
+        "engine": "MySQL 8.0"
+      },
+      "technical": "MySQL user@host hesabında % geniş kaynak eşleşmesidir; localhost hesabıyla aynı erişim kaydı değildir.",
+      "risk": "Gereksiz geniş kaynaklardan hesap eşleşmesi.",
+      "impact": "Hassas raporlama hesabının saldırı yüzeyinin büyümesi.",
+      "control": "Host kapsamını onaylı uygulama kaynaklarıyla sınırla; etkin ağ ve kimlik doğrulama kontrollerini birlikte test et."
+    },
+    {
+      "external_id": "database-auditor-v1-003",
+      "number": 3,
+      "chapter": 1,
+      "engine": "MS",
+      "topic": "Devre dışı bırakılmamış login",
+      "kind": "image",
+      "prompt": "Denetçi bu kanıta dayanarak neyi araştırmalı?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-003 üzerinde çalışıyorsun. Platform: Microsoft SQL Server 2022. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ayrılmış çalışana ait SQL logininin devre dışı olmamasını ve kapatma sürecini"
+        },
+        {
+          "id": "b",
+          "text": "Hesap kesin veri sızdırmıştır"
+        },
+        {
+          "id": "c",
+          "text": "is_disabled=0 hesabın kapalı olduğunu gösterir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nAyrılmış çalışana ait SQL logininin devre dışı olmamasını ve kapatma sürecini\n\n🔧 Teknik gerekçe\nis_disabled=0 loginin disable edilmediğini gösterir; bağlantı yetkileri ve ağ kapsamı ayrıca değerlendirilir.\n\n⚠️ Risk\nZamanında kaldırılmayan eski çalışan erişimi.\n\n💼 İş etkisi\nYetkisiz işlem ve hesap verebilirlik kaybı.\n\n🛡️ Önerilen kontrol\nHR ayrılışlarını login ve kullanıcı evreniyle uzlaştır; hesap/oturum kapatma kanıtı ve süre kriterini test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• Hesap kesin veri sızdırmıştır: Etkin login kaydı gerçekleşmiş işlem kanıtı değildir.\n• is_disabled=0 hesabın kapalı olduğunu gösterir: Sıfır disabled bayrağının açık olmadığını belirtir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Devre dışı bırakılmamış login",
+        "Microsoft SQL Server 2022"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 3,
+      "card_pages": [],
+      "image": "database-auditor/screen_003.png",
+      "evidence": {
+        "command": "SELECT name, is_disabled, type_desc FROM sys.server_principals WHERE name='eski_ali';",
+        "output": "name      is_disabled type_desc\neski_ali  0           SQL_LOGIN\nHR ayrılış: 2026-10-01; denetim: 2026-10-29",
+        "engine": "Microsoft SQL Server 2022"
+      },
+      "technical": "is_disabled=0 loginin disable edilmediğini gösterir; bağlantı yetkileri ve ağ kapsamı ayrıca değerlendirilir.",
+      "risk": "Zamanında kaldırılmayan eski çalışan erişimi.",
+      "impact": "Yetkisiz işlem ve hesap verebilirlik kaybı.",
+      "control": "HR ayrılışlarını login ve kullanıcı evreniyle uzlaştır; hesap/oturum kapatma kanıtı ve süre kriterini test et."
+    },
+    {
+      "external_id": "database-auditor-v1-004",
+      "number": 4,
+      "chapter": 1,
+      "engine": "OR",
+      "topic": "Kilitli hesabın anlamı",
+      "kind": "image",
+      "prompt": "Bu ekran için doğru denetim yorumu hangisi?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-004 üzerinde çalışıyorsun. Platform: Oracle Database 19c. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "LOCKED geçmişte hiçbir erişim olmadığını kanıtlar"
+        },
+        {
+          "id": "a",
+          "text": "Hesap kilitli; nesneler, verilmiş yetkiler ve önceden açılmış oturumlar ayrıca incelenmeli"
+        },
+        {
+          "id": "b",
+          "text": "Kilit bütün şema nesnelerini silmiştir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nHesap kilitli; nesneler, verilmiş yetkiler ve önceden açılmış oturumlar ayrıca incelenmeli\n\n🔧 Teknik gerekçe\nACCOUNT_STATUS hesabın mevcut durumudur; kilit, mevcut oturumların veya nesne erişimlerinin bütünüyle kaldırılması değildir.\n\n⚠️ Risk\nKapatılmış hesapla ilişkili yetki ve oturumların gözden kaçması.\n\n💼 İş etkisi\nEksik erişim sonlandırma güvencesi.\n\n🛡️ Önerilen kontrol\nHesap durumu yanında oturumları, bağımlılıkları ve şema nesnelerine diğer hesapların erişimini doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• Kilit bütün şema nesnelerini silmiştir: Hesap kilidi nesne silme işlemi değildir.\n• LOCKED geçmişte hiçbir erişim olmadığını kanıtlar: Mevcut durum tarihsel faaliyetleri açıklamaz.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Kilitli hesabın anlamı",
+        "Oracle Database 19c"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 4,
+      "card_pages": [],
+      "image": "database-auditor/screen_004.png",
+      "evidence": {
+        "command": "SELECT username, account_status, authentication_type FROM dba_users WHERE username='LEGACY_APP';",
+        "output": "USERNAME    ACCOUNT_STATUS AUTHENTICATION_TYPE\nLEGACY_APP  LOCKED         PASSWORD",
+        "engine": "Oracle Database 19c"
+      },
+      "technical": "ACCOUNT_STATUS hesabın mevcut durumudur; kilit, mevcut oturumların veya nesne erişimlerinin bütünüyle kaldırılması değildir.",
+      "risk": "Kapatılmış hesapla ilişkili yetki ve oturumların gözden kaçması.",
+      "impact": "Eksik erişim sonlandırma güvencesi.",
+      "control": "Hesap durumu yanında oturumları, bağımlılıkları ve şema nesnelerine diğer hesapların erişimini doğrula."
+    },
+    {
+      "external_id": "database-auditor-v1-005",
+      "number": 5,
+      "chapter": 1,
+      "engine": "PG",
+      "topic": "Login rolü ve grup rolü",
+      "kind": "image",
+      "prompt": "Hangi rol doğrudan bağlantı kimliği olarak kullanılabilir?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-005 üzerinde çalışıyorsun. Platform: PostgreSQL 16. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "İki rol de mutlaka süper kullanıcıdır"
+        },
+        {
+          "id": "a",
+          "text": "ayse; finance_read bir NOLOGIN rolüdür"
+        },
+        {
+          "id": "b",
+          "text": "finance_read çünkü adında read var"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nayse; finance_read bir NOLOGIN rolüdür\n\n🔧 Teknik gerekçe\nLOGIN rolü bağlantı başlatabilir; NOLOGIN rolü izin gruplamak için kullanılabilir. Üyelik ve nesne yetkileri ayrı incelenir.\n\n⚠️ Risk\nKullanıcı evreni ile yetki gruplarının karıştırılması.\n\n💼 İş etkisi\nAyrılan personel veya yetki sahiplerinin yanlış sayılması.\n\n🛡️ Önerilen kontrol\nLogin rollerini kişi/servis kayıtlarıyla, grup rollerini onaylı yetki matrisiyle ayrı uzlaştır.\n\n❌ Diğer yanıtların değerlendirmesi\n• finance_read çünkü adında read var: Rol adı bağlantı yetkisi tanımlamaz.\n• İki rol de mutlaka süper kullanıcıdır: rolcanlogin yönetici yetkisi değildir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Login rolü ve grup rolü",
+        "PostgreSQL 16"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 5,
+      "card_pages": [],
+      "image": "database-auditor/screen_005.png",
+      "evidence": {
+        "command": "SELECT rolname, rolcanlogin FROM pg_roles WHERE rolname IN ('finance_read','ayse');",
+        "output": "rolname       rolcanlogin\nfinance_read  f\nayse          t",
+        "engine": "PostgreSQL 16"
+      },
+      "technical": "LOGIN rolü bağlantı başlatabilir; NOLOGIN rolü izin gruplamak için kullanılabilir. Üyelik ve nesne yetkileri ayrı incelenir.",
+      "risk": "Kullanıcı evreni ile yetki gruplarının karıştırılması.",
+      "impact": "Ayrılan personel veya yetki sahiplerinin yanlış sayılması.",
+      "control": "Login rollerini kişi/servis kayıtlarıyla, grup rollerini onaylı yetki matrisiyle ayrı uzlaştır."
+    },
+    {
+      "external_id": "database-auditor-v1-006",
+      "number": 6,
+      "chapter": 1,
+      "engine": "MY",
+      "topic": "Kilitli servis hesabı ve uygulama etkisi",
+      "kind": "image",
+      "prompt": "Denetçi nasıl ilerlemeli?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-006 üzerinde çalışıyorsun. Platform: MySQL 8.0. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Kilidi denetçi doğrudan kaldırmalı"
+        },
+        {
+          "id": "a",
+          "text": "Kilit zamanı, yeni bağlantı hataları ve onaylı değişikliği ilişkilendirip iş etkisini doğrulamalı"
+        },
+        {
+          "id": "b",
+          "text": "Hesap kilitli olduğu için tüm eski oturumlar kesin kapandı"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nKilit zamanı, yeni bağlantı hataları ve onaylı değişikliği ilişkilendirip iş etkisini doğrulamalı\n\n🔧 Teknik gerekçe\nACCOUNT LOCK yeni kimlik doğrulamayı engeller; mevcut bağlantıların durumunu ayrıca incelemek gerekir.\n\n⚠️ Risk\nKoordinasyonsuz servis hesabı değişikliği.\n\n💼 İş etkisi\nÖdeme veya sipariş hizmetinde bağlantı kesintisi.\n\n🛡️ Önerilen kontrol\nHesap değişikliğini uygulama sahibiyle planla; mevcut oturumları ve yeni bağlantı testini değişiklik kaydına bağla.\n\n❌ Diğer yanıtların değerlendirmesi\n• Hesap kilitli olduğu için tüm eski oturumlar kesin kapandı: Yeni giriş engeli mevcut bağlantıların kapanmasını kanıtlamaz.\n• Kilidi denetçi doğrudan kaldırmalı: Üretim değişikliği yetkili süreçle yapılmalıdır.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Kilitli servis hesabı ve uygulama etkisi",
+        "MySQL 8.0"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 6,
+      "card_pages": [],
+      "image": "database-auditor/screen_006.png",
+      "evidence": {
+        "command": "SELECT User, Host, account_locked FROM mysql.user WHERE User='appsvc';",
+        "output": "User    Host         account_locked\nappsvc  192.0.2.40   Y\nUygulama ticket: yeni bağlantılar 10:05 sonrası başarısız",
+        "engine": "MySQL 8.0"
+      },
+      "technical": "ACCOUNT LOCK yeni kimlik doğrulamayı engeller; mevcut bağlantıların durumunu ayrıca incelemek gerekir.",
+      "risk": "Koordinasyonsuz servis hesabı değişikliği.",
+      "impact": "Ödeme veya sipariş hizmetinde bağlantı kesintisi.",
+      "control": "Hesap değişikliğini uygulama sahibiyle planla; mevcut oturumları ve yeni bağlantı testini değişiklik kaydına bağla."
+    },
+    {
+      "external_id": "database-auditor-v1-007",
+      "number": 7,
+      "chapter": 1,
+      "engine": "MS",
+      "topic": "Login ile veritabanı kullanıcısı",
+      "kind": "image",
+      "prompt": "Bu tek ekranla sunucudaki bütün loginleri kapsadın mı?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-007 üzerinde çalışıyorsun. Platform: Microsoft SQL Server 2022. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "SQL_USER otomatik sysadmin demektir"
+        },
+        {
+          "id": "a",
+          "text": "Hayır; veritabanı kullanıcısı ve sunucu login evreni ayrı incelenir"
+        },
+        {
+          "id": "b",
+          "text": "Evet; bir database bütün instance loginlerini gösterir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nHayır; veritabanı kullanıcısı ve sunucu login evreni ayrı incelenir\n\n🔧 Teknik gerekçe\nLogin instance erişimini, database user veritabanı bağlamını temsil eder; contained kullanıcılar ayrıca değerlendirilir.\n\n⚠️ Risk\nKimlik kapsamının eksik çıkarılması.\n\n💼 İş etkisi\nYetkisiz veya sahipsiz erişimin atlanması.\n\n🛡️ Önerilen kontrol\nsys.server_principals ile ilgili database principal ve rol üyeliklerini uygun kimlik eşlemesiyle uzlaştır.\n\n❌ Diğer yanıtların değerlendirmesi\n• Evet; bir database bütün instance loginlerini gösterir: Database principal listesi server principal listesi değildir.\n• SQL_USER otomatik sysadmin demektir: Principal türü yönetici yetkisi değildir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Login ile veritabanı kullanıcısı",
+        "Microsoft SQL Server 2022"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 7,
+      "card_pages": [],
+      "image": "database-auditor/screen_007.png",
+      "evidence": {
+        "command": "SELECT name, type_desc, authentication_type_desc FROM sys.database_principals WHERE name='app_user';",
+        "output": "DB: payments\nname      type_desc authentication_type_desc\napp_user  SQL_USER  INSTANCE",
+        "engine": "Microsoft SQL Server 2022"
+      },
+      "technical": "Login instance erişimini, database user veritabanı bağlamını temsil eder; contained kullanıcılar ayrıca değerlendirilir.",
+      "risk": "Kimlik kapsamının eksik çıkarılması.",
+      "impact": "Yetkisiz veya sahipsiz erişimin atlanması.",
+      "control": "sys.server_principals ile ilgili database principal ve rol üyeliklerini uygun kimlik eşlemesiyle uzlaştır."
+    },
+    {
+      "external_id": "database-auditor-v1-008",
+      "number": 8,
+      "chapter": 1,
+      "engine": "OR",
+      "topic": "Varsayılan profil değerlendirmesi",
+      "kind": "image",
+      "prompt": "İlk doğru yaklaşım hangisi?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-008 üzerinde çalışıyorsun. Platform: Oracle Database 19c. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "DEFAULT sınırsız SYSDBA yetkisi verir"
+        },
+        {
+          "id": "a",
+          "text": "DEFAULT profilinin etkin limitlerini ve servis hesabı için onayını incelemek"
+        },
+        {
+          "id": "b",
+          "text": "DEFAULT adı tek başına zafiyettir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nDEFAULT profilinin etkin limitlerini ve servis hesabı için onayını incelemek\n\n🔧 Teknik gerekçe\nProfil parola ve kaynak limitlerini tanımlar; adından gerçek limit veya uygunluk çıkarılmaz.\n\n⚠️ Risk\nGereksinime uymayan parola veya kaynak politikası.\n\n💼 İş etkisi\nServis erişiminde gereksiz zayıflık ya da kullanılabilirlik sorunu.\n\n🛡️ Önerilen kontrol\nDBA_PROFILES değerlerini ve parola ile doğrulanan hesabın gereksinimini onaylı kriterle karşılaştır.\n\n❌ Diğer yanıtların değerlendirmesi\n• DEFAULT adı tek başına zafiyettir: Profil adı limitlerin ne olduğunu göstermez.\n• DEFAULT sınırsız SYSDBA yetkisi verir: Parola profili ile yönetici yetkisi ayrı kavramlardır.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Varsayılan profil değerlendirmesi",
+        "Oracle Database 19c"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 8,
+      "card_pages": [],
+      "image": "database-auditor/screen_008.png",
+      "evidence": {
+        "command": "SELECT username, profile FROM dba_users WHERE username='APP_PAY';",
+        "output": "USERNAME PROFILE\nAPP_PAY  DEFAULT\nPolitika: servis hesabı profili ayrıca onaylanmalı",
+        "engine": "Oracle Database 19c"
+      },
+      "technical": "Profil parola ve kaynak limitlerini tanımlar; adından gerçek limit veya uygunluk çıkarılmaz.",
+      "risk": "Gereksinime uymayan parola veya kaynak politikası.",
+      "impact": "Servis erişiminde gereksiz zayıflık ya da kullanılabilirlik sorunu.",
+      "control": "DBA_PROFILES değerlerini ve parola ile doğrulanan hesabın gereksinimini onaylı kriterle karşılaştır."
+    },
+    {
+      "external_id": "database-auditor-v1-009",
+      "number": 9,
+      "chapter": 1,
+      "engine": "PG",
+      "topic": "Parola son kullanma kapsamı",
+      "kind": "image",
+      "prompt": "29 Ekim'de yalnız bu tarihe bakarak erişim bitti diyebilir misin?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-009 üzerinde çalışıyorsun. Platform: PostgreSQL 16. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Sertifika her kullanıcıya süper kullanıcı verir"
+        },
+        {
+          "id": "b",
+          "text": "Evet; tarih bütün doğrulama yöntemlerini kapatır"
+        },
+        {
+          "id": "a",
+          "text": "Hayır; VALID UNTIL parola doğrulaması içindir, sertifika ile giriş ayrıca test edilmeli"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nHayır; VALID UNTIL parola doğrulaması içindir, sertifika ile giriş ayrıca test edilmeli\n\n🔧 Teknik gerekçe\nrolvaliduntil parolanın geçerliliğini sınırlar; cert gibi parola dışı yöntemler için genel hesap kapatma mekanizması değildir.\n\n⚠️ Risk\nTedarikçi erişiminin beklenenden uzun sürmesi.\n\n💼 İş etkisi\nSözleşme sonrasında gereksiz veri erişimi.\n\n🛡️ Önerilen kontrol\nRol LOGIN durumunu, HBA kurallarını ve sertifika yaşam döngüsünü erişim bitiş kriteriyle birlikte doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• Evet; tarih bütün doğrulama yöntemlerini kapatır: Parola geçerliliği genel hesap bitişi değildir.\n• Sertifika her kullanıcıya süper kullanıcı verir: Doğrulama yöntemi nesne yetkisi vermez.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Parola son kullanma kapsamı",
+        "PostgreSQL 16"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 9,
+      "card_pages": [],
+      "image": "database-auditor/screen_009.png",
+      "evidence": {
+        "command": "SELECT rolname, rolvaliduntil FROM pg_roles WHERE rolname='vendor_ro';",
+        "output": "rolname    rolvaliduntil\nvendor_ro  2026-10-20 00:00:00+00\npg_hba.conf: hostssl payments vendor_ro 192.0.2.80/32 cert",
+        "engine": "PostgreSQL 16"
+      },
+      "technical": "rolvaliduntil parolanın geçerliliğini sınırlar; cert gibi parola dışı yöntemler için genel hesap kapatma mekanizması değildir.",
+      "risk": "Tedarikçi erişiminin beklenenden uzun sürmesi.",
+      "impact": "Sözleşme sonrasında gereksiz veri erişimi.",
+      "control": "Rol LOGIN durumunu, HBA kurallarını ve sertifika yaşam döngüsünü erişim bitiş kriteriyle birlikte doğrula."
+    },
+    {
+      "external_id": "database-auditor-v1-010",
+      "number": 10,
+      "chapter": 1,
+      "engine": "MY",
+      "topic": "Etkin roller",
+      "kind": "image",
+      "prompt": "İzin verilmiş rol ile etkin rolü nasıl ayırırsın?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-010 üzerinde çalışıyorsun. Platform: MySQL 8.0. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "GRANT görülmesi rolün her oturumda etkin olduğunu kanıtlar"
+        },
+        {
+          "id": "a",
+          "text": "Rol atanmış ama bu oturumda etkin değil; varsayılan ve SET ROLE davranışını ayrıca incelerim"
+        },
+        {
+          "id": "b",
+          "text": "NONE kullanıcının hiçbir yetkisi olmadığını kanıtlar"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nRol atanmış ama bu oturumda etkin değil; varsayılan ve SET ROLE davranışını ayrıca incelerim\n\n🔧 Teknik gerekçe\nMySQL rol ataması rolün otomatik etkin olması anlamına gelmez; varsayılan roller ve mevcut oturum ayrı kanıtlardır.\n\n⚠️ Risk\nYanlış etkin yetki değerlendirmesi.\n\n💼 İş etkisi\nİzin fazlalığının veya işlev kaybının yanlış raporlanması.\n\n🛡️ Önerilen kontrol\nSHOW GRANTS, varsayılan roller ve kontrollü oturumdaki CURRENT_ROLE çıktısını birlikte incele.\n\n❌ Diğer yanıtların değerlendirmesi\n• NONE kullanıcının hiçbir yetkisi olmadığını kanıtlar: Doğrudan grantler veya diğer kapsamlar olabilir.\n• GRANT görülmesi rolün her oturumda etkin olduğunu kanıtlar: Atama ile etkinleştirme farklıdır.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Etkin roller",
+        "MySQL 8.0"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 10,
+      "card_pages": [],
+      "image": "database-auditor/screen_010.png",
+      "evidence": {
+        "command": "SELECT CURRENT_ROLE(); SHOW GRANTS FOR 'analyst'@'192.0.2.50';",
+        "output": "CURRENT_ROLE(): NONE\nGRANT 'report_reader'@'%' TO 'analyst'@'192.0.2.50'",
+        "engine": "MySQL 8.0"
+      },
+      "technical": "MySQL rol ataması rolün otomatik etkin olması anlamına gelmez; varsayılan roller ve mevcut oturum ayrı kanıtlardır.",
+      "risk": "Yanlış etkin yetki değerlendirmesi.",
+      "impact": "İzin fazlalığının veya işlev kaybının yanlış raporlanması.",
+      "control": "SHOW GRANTS, varsayılan roller ve kontrollü oturumdaki CURRENT_ROLE çıktısını birlikte incele."
+    },
+    {
+      "external_id": "database-auditor-v1-011",
+      "number": 11,
+      "chapter": 1,
+      "engine": "OR",
+      "topic": "Denetim evreninin tamlığı",
+      "kind": "image",
+      "prompt": "Kontrol testlerinden önce neyi netleştirmelisin?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-011 üzerinde çalışıyorsun. Platform: Oracle Database 19c. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Dört farklı ürün görülmesi tamlık kanıtıdır"
+        },
+        {
+          "id": "a",
+          "text": "ORA-ARCHIVE farkının sahibi, ortamı ve denetim kapsamını"
+        },
+        {
+          "id": "b",
+          "text": "CMDB'de yok diye sunucuyu silmeliyim"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nORA-ARCHIVE farkının sahibi, ortamı ve denetim kapsamını\n\n🔧 Teknik gerekçe\nKontrol testi sonuçları ancak doğrulanmış kapsam üzerinden yorumlanır; arşiv ve ikincil ortamlar da hassas veri taşıyabilir.\n\n⚠️ Risk\nKayıt dışı veritabanının denetim dışında kalması.\n\n💼 İş etkisi\nKorunmayan arşiv verisi ve eksik güvence.\n\n🛡️ Önerilen kontrol\nBağımsız envanter kaynaklarını uzlaştır; farkı iş sahibi ve veri sınıflandırmasıyla karara bağla.\n\n❌ Diğer yanıtların değerlendirmesi\n• CMDB'de yok diye sunucuyu silmeliyim: Envanter farkı izinsiz silme gerekçesi değildir.\n• Dört farklı ürün görülmesi tamlık kanıtıdır: Ürün çeşitliliği evrenin eksiksizliğini göstermez.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Denetim evreninin tamlığı",
+        "Oracle Database 19c"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 11,
+      "card_pages": [],
+      "image": "database-auditor/screen_011.png",
+      "evidence": {
+        "command": "Çalışma kâğıdı DB-011 / envanter uzlaştırması",
+        "output": "CMDB: ORA-PAY, PG-CRM, MYSQL-WEB, SQL-ERP\nBağlantı envanteri: ORA-PAY, PG-CRM, MYSQL-WEB, SQL-ERP, ORA-ARCHIVE",
+        "engine": "Oracle Database 19c"
+      },
+      "technical": "Kontrol testi sonuçları ancak doğrulanmış kapsam üzerinden yorumlanır; arşiv ve ikincil ortamlar da hassas veri taşıyabilir.",
+      "risk": "Kayıt dışı veritabanının denetim dışında kalması.",
+      "impact": "Korunmayan arşiv verisi ve eksik güvence.",
+      "control": "Bağımsız envanter kaynaklarını uzlaştır; farkı iş sahibi ve veri sınıflandırmasıyla karara bağla."
+    },
+    {
+      "external_id": "database-auditor-v1-012",
+      "number": 12,
+      "chapter": 2,
+      "engine": "PG",
+      "topic": "Gereksiz süper kullanıcı",
+      "kind": "image",
+      "prompt": "En önemli kontrol eksikliği hangisi?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-012 üzerinde çalışıyorsun. Platform: PostgreSQL 16. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Salt raporlama hesabında süper kullanıcı yetkisinin bulunması"
+        },
+        {
+          "id": "c",
+          "text": "Süper kullanıcı sadece SELECT yapabilir"
+        },
+        {
+          "id": "b",
+          "text": "LOGIN olması tek başına zafiyettir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nSalt raporlama hesabında süper kullanıcı yetkisinin bulunması\n\n🔧 Teknik gerekçe\nPostgreSQL superuser çoğu veritabanı izin kontrolünü aşabilir; okuma amaçlı uygulama rolünden çok geniştir.\n\n⚠️ Risk\nHesap ele geçirilirse küme çapında ayrıcalıklı işlem.\n\n💼 İş etkisi\nVeri kaybı, ifşa ve hizmet kesintisi.\n\n🛡️ Önerilen kontrol\nOnaylı nesne/şema okuma rolüne geç; dolaylı üyelikleri ve uygulama işlevini kontrollü olarak yeniden test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• LOGIN olması tek başına zafiyettir: Uygulama bağlantısı için LOGIN gerekebilir.\n• Süper kullanıcı sadece SELECT yapabilir: Superuser normal ayrıcalık sınırlarını aşar.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Gereksiz süper kullanıcı",
+        "PostgreSQL 16"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 12,
+      "card_pages": [],
+      "image": "database-auditor/screen_012.png",
+      "evidence": {
+        "command": "SELECT rolname, rolsuper, rolcanlogin FROM pg_roles WHERE rolname='report_app';",
+        "output": "rolname     rolsuper rolcanlogin\nreport_app  t        t\nİş ihtiyacı: yalnız sales raporu okuma",
+        "engine": "PostgreSQL 16"
+      },
+      "technical": "PostgreSQL superuser çoğu veritabanı izin kontrolünü aşabilir; okuma amaçlı uygulama rolünden çok geniştir.",
+      "risk": "Hesap ele geçirilirse küme çapında ayrıcalıklı işlem.",
+      "impact": "Veri kaybı, ifşa ve hizmet kesintisi.",
+      "control": "Onaylı nesne/şema okuma rolüne geç; dolaylı üyelikleri ve uygulama işlevini kontrollü olarak yeniden test et."
+    },
+    {
+      "external_id": "database-auditor-v1-013",
+      "number": 13,
+      "chapter": 2,
+      "engine": "MS",
+      "topic": "Sysadmin ve DENY",
+      "kind": "image",
+      "prompt": "DENY bu login için maaş verisini güvence altına alır mı?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-013 üzerinde çalışıyorsun. Platform: Microsoft SQL Server 2022. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hayır; sysadmin için olağan DENY ile beklenen kısıt sağlanmaz"
+        },
+        {
+          "id": "c",
+          "text": "DENY veritabanını şifreler"
+        },
+        {
+          "id": "b",
+          "text": "Evet; DENY her durumda sysadmini de engeller"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nHayır; sysadmin için olağan DENY ile beklenen kısıt sağlanmaz\n\n🔧 Teknik gerekçe\nsysadmin üyeliği loginin SQL Server içinde tam yönetici yetkisi taşımasına yol açar; nesne düzeyi DENY güvenilir sınır değildir.\n\n⚠️ Risk\nRapor hesabının hassas veriyi okuyabilmesi.\n\n💼 İş etkisi\nMaaş gizliliğinin ihlali ve yetkisiz yönetim işlemleri.\n\n🛡️ Önerilen kontrol\nSysadmin üyeliğini kaldırma planını bağımlılık testiyle uygulat; gerçek login bağlamında minimum izinleri yeniden test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• Evet; DENY her durumda sysadmini de engeller: Sysadmin olağan izin denetiminden farklı davranır.\n• DENY veritabanını şifreler: İzin reddi şifreleme kontrolü değildir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Sysadmin ve DENY",
+        "Microsoft SQL Server 2022"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 13,
+      "card_pages": [],
+      "image": "database-auditor/screen_013.png",
+      "evidence": {
+        "command": "SELECT IS_SRVROLEMEMBER('sysadmin','report_login');",
+        "output": "result: 1\nDB payments: DENY SELECT ON dbo.Payroll TO report_user\nreport_login -> report_user",
+        "engine": "Microsoft SQL Server 2022"
+      },
+      "technical": "sysadmin üyeliği loginin SQL Server içinde tam yönetici yetkisi taşımasına yol açar; nesne düzeyi DENY güvenilir sınır değildir.",
+      "risk": "Rapor hesabının hassas veriyi okuyabilmesi.",
+      "impact": "Maaş gizliliğinin ihlali ve yetkisiz yönetim işlemleri.",
+      "control": "Sysadmin üyeliğini kaldırma planını bağımlılık testiyle uygulat; gerçek login bağlamında minimum izinleri yeniden test et."
+    },
+    {
+      "external_id": "database-auditor-v1-014",
+      "number": 14,
+      "chapter": 2,
+      "engine": "OR",
+      "topic": "DBA ile SYSDBA ayrımı",
+      "kind": "image",
+      "prompt": "Görselden hangi bulgu çıkarılır?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-014 üzerinde çalışıyorsun. Platform: Oracle Database 19c. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "DBA rolü otomatik olarak SYSDBA ile aynıdır"
+        },
+        {
+          "id": "c",
+          "text": "DBA rolü yalnız kendi tablo satırlarını okur"
+        },
+        {
+          "id": "a",
+          "text": "Uygulama hesabına iş ihtiyacına göre aşırı geniş DBA rolü verilmiş"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nUygulama hesabına iş ihtiyacına göre aşırı geniş DBA rolü verilmiş\n\n🔧 Teknik gerekçe\nDBA rolü geniş ayrıcalıklar barındırır; rol içeriği ve ek grantler incelenmelidir. SYSDBA ayrı bir idari yetkidir.\n\n⚠️ Risk\nUygulama hesabından gereksiz veritabanı yönetimi.\n\n💼 İş etkisi\nÇok sayıda şemada değişiklik ve hizmet etkisi.\n\n🛡️ Önerilen kontrol\nİşlev bazlı özel rol tasarla; doğrudan ve rol yoluyla gelen yetkileri birlikte temizle ve test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• DBA rolü otomatik olarak SYSDBA ile aynıdır: DBA rolü ile yönetici bağlantı ayrıcalığı aynı şey değildir.\n• DBA rolü yalnız kendi tablo satırlarını okur: Rol geniş yönetim ayrıcalıkları içerebilir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "DBA ile SYSDBA ayrımı",
+        "Oracle Database 19c"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 14,
+      "card_pages": [],
+      "image": "database-auditor/screen_014.png",
+      "evidence": {
+        "command": "SELECT grantee, granted_role FROM dba_role_privs WHERE grantee='APP_PAY';",
+        "output": "GRANTEE GRANTED_ROLE\nAPP_PAY DBA\nİş ihtiyacı: yalnız APP_PAY şeması DML",
+        "engine": "Oracle Database 19c"
+      },
+      "technical": "DBA rolü geniş ayrıcalıklar barındırır; rol içeriği ve ek grantler incelenmelidir. SYSDBA ayrı bir idari yetkidir.",
+      "risk": "Uygulama hesabından gereksiz veritabanı yönetimi.",
+      "impact": "Çok sayıda şemada değişiklik ve hizmet etkisi.",
+      "control": "İşlev bazlı özel rol tasarla; doğrudan ve rol yoluyla gelen yetkileri birlikte temizle ve test et."
+    },
+    {
+      "external_id": "database-auditor-v1-015",
+      "number": 15,
+      "chapter": 2,
+      "engine": "MY",
+      "topic": "GRANT OPTION",
+      "kind": "image",
+      "prompt": "Hangi gereksiz yetki araştırılmalı?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-015 üzerinde çalışıyorsun. Platform: MySQL 8.0. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "GRANT OPTION yalnız parola değiştirir"
+        },
+        {
+          "id": "a",
+          "text": "ETL hesabının kendi yetkilerini başkalarına devredebilmesi"
+        },
+        {
+          "id": "b",
+          "text": "INSERT hiçbir ETL işinde gerekmez"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nETL hesabının kendi yetkilerini başkalarına devredebilmesi\n\n🔧 Teknik gerekçe\nWITH GRANT OPTION belirtilen kapsamdaki izinleri devretmeye izin verir; izin kullanma ile izin dağıtma ayrı görevlerdir.\n\n⚠️ Risk\nKontrolsüz yetki yayılması.\n\n💼 İş etkisi\nİzin matrisinin bozulması ve uygunsuz veri erişimi.\n\n🛡️ Önerilen kontrol\nYetki devrini onaylı yöneticilerle sınırla; mevcut devirleri ve ETL minimum yetkilerini uzlaştır.\n\n❌ Diğer yanıtların değerlendirmesi\n• INSERT hiçbir ETL işinde gerekmez: İş ihtiyacı yazmayı kapsıyor.\n• GRANT OPTION yalnız parola değiştirir: İzin devriyle ilgili bir yetkidir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "GRANT OPTION",
+        "MySQL 8.0"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 15,
+      "card_pages": [],
+      "image": "database-auditor/screen_015.png",
+      "evidence": {
+        "command": "SHOW GRANTS FOR 'etl'@'192.0.2.40';",
+        "output": "GRANT SELECT, INSERT ON sales.* TO 'etl'@'192.0.2.40' WITH GRANT OPTION\nİş ihtiyacı: ETL okuma/yazma; yetki devri yok",
+        "engine": "MySQL 8.0"
+      },
+      "technical": "WITH GRANT OPTION belirtilen kapsamdaki izinleri devretmeye izin verir; izin kullanma ile izin dağıtma ayrı görevlerdir.",
+      "risk": "Kontrolsüz yetki yayılması.",
+      "impact": "İzin matrisinin bozulması ve uygunsuz veri erişimi.",
+      "control": "Yetki devrini onaylı yöneticilerle sınırla; mevcut devirleri ve ETL minimum yetkilerini uzlaştır."
+    },
+    {
+      "external_id": "database-auditor-v1-016",
+      "number": 16,
+      "chapter": 2,
+      "engine": "PG",
+      "topic": "Geniş trust kuralı",
+      "kind": "image",
+      "prompt": "İkinci dar kural ilk satırın etkisini giderir mi?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-016 üzerinde çalışıyorsun. Platform: PostgreSQL 16. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "trust yalnız TLS sertifikası kabul eder"
+        },
+        {
+          "id": "b",
+          "text": "Evet; son satır her zaman kazanır"
+        },
+        {
+          "id": "a",
+          "text": "Hayır; ilk eşleşen trust kuralı bu IPv4 bağlantılarında önce uygulanır"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nHayır; ilk eşleşen trust kuralı bu IPv4 bağlantılarında önce uygulanır\n\n🔧 Teknik gerekçe\nHBA ilk eşleşme mantığı kullanır; başarısızlıkta sonraki kurala düşmez. trust erişebilen istemcinin rol iddiasına güvenir.\n\n⚠️ Risk\nParolasız kimlik iddiasıyla bağlantı ve geniş kaynak kapsamı.\n\n💼 İş etkisi\nVeri ifşası veya yetkili rol üzerinden değişiklik.\n\n🛡️ Önerilen kontrol\nKural sırasını, rol LOGIN kapsamını ve ağ erişimini doğrula; uygun doğrulamayı dar kaynak/TLS kurallarıyla uygulat.\n\n❌ Diğer yanıtların değerlendirmesi\n• Evet; son satır her zaman kazanır: HBA ilk eşleşen kaydı kullanır.\n• trust yalnız TLS sertifikası kabul eder: trust parola doğrulaması yapmaz.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Geniş trust kuralı",
+        "PostgreSQL 16"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 16,
+      "card_pages": [],
+      "image": "database-auditor/screen_016.png",
+      "evidence": {
+        "command": "pg_hba.conf etkin kural sırası",
+        "output": "host  all  all  0.0.0.0/0  trust\nhostssl payments app_pay 192.0.2.40/32 scram-sha-256",
+        "engine": "PostgreSQL 16"
+      },
+      "technical": "HBA ilk eşleşme mantığı kullanır; başarısızlıkta sonraki kurala düşmez. trust erişebilen istemcinin rol iddiasına güvenir.",
+      "risk": "Parolasız kimlik iddiasıyla bağlantı ve geniş kaynak kapsamı.",
+      "impact": "Veri ifşası veya yetkili rol üzerinden değişiklik.",
+      "control": "Kural sırasını, rol LOGIN kapsamını ve ağ erişimini doğrula; uygun doğrulamayı dar kaynak/TLS kurallarıyla uygulat."
+    },
+    {
+      "external_id": "database-auditor-v1-017",
+      "number": 17,
+      "chapter": 2,
+      "engine": "MS",
+      "topic": "Güvenlik politikası denetimi",
+      "kind": "image",
+      "prompt": "Hangi sapma doğrudan desteklenir?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-017 üzerinde çalışıyorsun. Platform: Microsoft SQL Server 2022. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "SQL logininde politika kontrolü kapalı"
+        },
+        {
+          "id": "c",
+          "text": "Windows hesaplarının tüm politikaları kapalı"
+        },
+        {
+          "id": "b",
+          "text": "Mevcut parolanın kesin 123456 olduğu"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nSQL logininde politika kontrolü kapalı\n\n🔧 Teknik gerekçe\nis_policy_checked SQL logininin Windows parola politikasına bağlanmasını gösterir; parola karmaşıklığının gerçek değerini ifşa etmez.\n\n⚠️ Risk\nZayıf parola gereksinimlerinin uygulanmaması.\n\n💼 İş etkisi\nTedarikçi kimliğinin ele geçirilme olasılığının artması.\n\n🛡️ Önerilen kontrol\nKimlik tipine uygun politikayı, kasa/rotasyon ve süreli tedarikçi erişimini onaylı kriterle test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• Mevcut parolanın kesin 123456 olduğu: Bayrak mevcut parola değerini açıklamaz.\n• Windows hesaplarının tüm politikaları kapalı: sys.sql_logins bu SQL loginini gösterir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Güvenlik politikası denetimi",
+        "Microsoft SQL Server 2022"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 17,
+      "card_pages": [],
+      "image": "database-auditor/screen_017.png",
+      "evidence": {
+        "command": "SELECT name,is_policy_checked,is_expiration_checked FROM sys.sql_logins WHERE name='vendor_login';",
+        "output": "name          is_policy_checked is_expiration_checked\nvendor_login  0                 0\nKriter: tedarikçi SQL logininde parola politikası etkin",
+        "engine": "Microsoft SQL Server 2022"
+      },
+      "technical": "is_policy_checked SQL logininin Windows parola politikasına bağlanmasını gösterir; parola karmaşıklığının gerçek değerini ifşa etmez.",
+      "risk": "Zayıf parola gereksinimlerinin uygulanmaması.",
+      "impact": "Tedarikçi kimliğinin ele geçirilme olasılığının artması.",
+      "control": "Kimlik tipine uygun politikayı, kasa/rotasyon ve süreli tedarikçi erişimini onaylı kriterle test et."
+    },
+    {
+      "external_id": "database-auditor-v1-018",
+      "number": 18,
+      "chapter": 2,
+      "engine": "OR",
+      "topic": "Parola dosyasında idari yetki",
+      "kind": "image",
+      "prompt": "Hangi kayıt en az ayrıcalık incelemesi gerektirir?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-018 üzerinde çalışıyorsun. Platform: Oracle Database 19c. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "SYS adının büyük harfle yazılması"
+        },
+        {
+          "id": "a",
+          "text": "APP_BATCH hesabının SYSDBA yetkisi"
+        },
+        {
+          "id": "c",
+          "text": "SYSOPER FALSE olması hiç ayrıcalık olmadığını gösterir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nAPP_BATCH hesabının SYSDBA yetkisi\n\n🔧 Teknik gerekçe\nParola dosyası yönetici bağlantı yetkilerini gösterir; normal uygulama DML ihtiyacı SYSDBA gerektirmez.\n\n⚠️ Risk\nUygulama kimliğiyle en yüksek yönetim erişimi.\n\n💼 İş etkisi\nVeritabanının tamamında veri ve kullanılabilirlik kaybı.\n\n🛡️ Önerilen kontrol\nSYSDBA sahiplerini kişisel idari kimliklerle sınırla; acil hesapları kasa, onay ve bağımsız izlemede tut.\n\n❌ Diğer yanıtların değerlendirmesi\n• SYS adının büyük harfle yazılması: Büyük harf yetki sapması değildir.\n• SYSOPER FALSE olması hiç ayrıcalık olmadığını gösterir: SYSDBA TRUE çok yüksek idari ayrıcalıktır.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Parola dosyasında idari yetki",
+        "Oracle Database 19c"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 18,
+      "card_pages": [],
+      "image": "database-auditor/screen_018.png",
+      "evidence": {
+        "command": "SELECT username,sysdba,sysoper FROM v$pwfile_users;",
+        "output": "USERNAME  SYSDBA SYSOPER\nSYS       TRUE   TRUE\nAPP_BATCH TRUE   FALSE",
+        "engine": "Oracle Database 19c"
+      },
+      "technical": "Parola dosyası yönetici bağlantı yetkilerini gösterir; normal uygulama DML ihtiyacı SYSDBA gerektirmez.",
+      "risk": "Uygulama kimliğiyle en yüksek yönetim erişimi.",
+      "impact": "Veritabanının tamamında veri ve kullanılabilirlik kaybı.",
+      "control": "SYSDBA sahiplerini kişisel idari kimliklerle sınırla; acil hesapları kasa, onay ve bağımsız izlemede tut."
+    },
+    {
+      "external_id": "database-auditor-v1-019",
+      "number": 19,
+      "chapter": 2,
+      "engine": "MY",
+      "topic": "Dosya sistemi erişimi",
+      "kind": "image",
+      "prompt": "Bu kontrol nasıl değerlendirilir?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-019 üzerinde çalışıyorsun. Platform: MySQL 8.0. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "secure_file_priv FILE yetkisini iptal eder"
+        },
+        {
+          "id": "c",
+          "text": "FILE bütün işletim sistemi dosyalarına kesin sınırsız erişim sağlar"
+        },
+        {
+          "id": "a",
+          "text": "FILE ihtiyacı sorgulanmalı; dizin kısıtı gereksiz ayrıcalığı tek başına meşrulaştırmaz"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nFILE ihtiyacı sorgulanmalı; dizin kısıtı gereksiz ayrıcalığı tek başına meşrulaştırmaz\n\n🔧 Teknik gerekçe\nFILE sunucu tarafı dosya işlemlerine izin verebilir; güvenli dizin ve OS izinleri etkiyi sınırlar.\n\n⚠️ Risk\nRapor hesabının gereksiz dosya okuma/yazma kabiliyeti.\n\n💼 İş etkisi\nVeri çıkışı veya servis dosyalarıyla ilgili ek saldırı yüzeyi.\n\n🛡️ Önerilen kontrol\nİş gereksinimi yoksa FILE kaldırılmalı; kontrollü dizin, sahiplik ve dosya işlemi kayıtları doğrulanmalı.\n\n❌ Diğer yanıtların değerlendirmesi\n• secure_file_priv FILE yetkisini iptal eder: Değişken yetkiyi kaldırmaz; dosya işlemi kapsamını etkiler.\n• FILE bütün işletim sistemi dosyalarına kesin sınırsız erişim sağlar: OS izinleri ve secure_file_priv gibi sınırlamalar vardır.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Dosya sistemi erişimi",
+        "MySQL 8.0"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 19,
+      "card_pages": [],
+      "image": "database-auditor/screen_019.png",
+      "evidence": {
+        "command": "SHOW GRANTS FOR 'report'@'192.0.2.50';",
+        "output": "GRANT FILE ON *.* TO 'report'@'192.0.2.50'\nSHOW VARIABLES LIKE 'secure_file_priv';\nsecure_file_priv  /var/lib/mysql-files/",
+        "engine": "MySQL 8.0"
+      },
+      "technical": "FILE sunucu tarafı dosya işlemlerine izin verebilir; güvenli dizin ve OS izinleri etkiyi sınırlar.",
+      "risk": "Rapor hesabının gereksiz dosya okuma/yazma kabiliyeti.",
+      "impact": "Veri çıkışı veya servis dosyalarıyla ilgili ek saldırı yüzeyi.",
+      "control": "İş gereksinimi yoksa FILE kaldırılmalı; kontrollü dizin, sahiplik ve dosya işlemi kayıtları doğrulanmalı."
+    },
+    {
+      "external_id": "database-auditor-v1-020",
+      "number": 20,
+      "chapter": 2,
+      "engine": "PG",
+      "topic": "Şema sahipliği",
+      "kind": "image",
+      "prompt": "Hangi gizli yetki alanı incelenmeli?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-020 üzerinde çalışıyorsun. Platform: PostgreSQL 16. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Salt okuma hesabının şema sahipliği ve sahiplikten gelen yetkileri"
+        },
+        {
+          "id": "c",
+          "text": "Şema sahibi olmak tüm kümede superuser yapar"
+        },
+        {
+          "id": "b",
+          "text": "İsminde readonly olduğu için uygundur"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nSalt okuma hesabının şema sahipliği ve sahiplikten gelen yetkileri\n\n🔧 Teknik gerekçe\nNesne/şema sahipliği sahiplik kaynaklı yönetim hakları verir; yalnız GRANT SELECT listesiyle yetki incelemesi tamamlanmaz.\n\n⚠️ Risk\nBeklenenden geniş nesne yönetimi.\n\n💼 İş etkisi\nŞema yapısında onaysız değişiklik ve uygulama etkisi.\n\n🛡️ Önerilen kontrol\nŞema ve nesne sahiplerini ayrı yönetim rolleriyle düzenle; üyelik ve SET ROLE yollarını da test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• İsminde readonly olduğu için uygundur: Ad izin veya sahiplik sınırı değildir.\n• Şema sahibi olmak tüm kümede superuser yapar: Sahiplik kapsamı ile küme süper kullanıcılığı farklıdır.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Şema sahipliği",
+        "PostgreSQL 16"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 20,
+      "card_pages": [],
+      "image": "database-auditor/screen_020.png",
+      "evidence": {
+        "command": "SELECT nspname,pg_get_userbyid(nspowner) AS owner FROM pg_namespace WHERE nspname='finance';",
+        "output": "nspname owner\nfinance readonly_app\nYetki matrisi: readonly_app yalnız SELECT",
+        "engine": "PostgreSQL 16"
+      },
+      "technical": "Nesne/şema sahipliği sahiplik kaynaklı yönetim hakları verir; yalnız GRANT SELECT listesiyle yetki incelemesi tamamlanmaz.",
+      "risk": "Beklenenden geniş nesne yönetimi.",
+      "impact": "Şema yapısında onaysız değişiklik ve uygulama etkisi.",
+      "control": "Şema ve nesne sahiplerini ayrı yönetim rolleriyle düzenle; üyelik ve SET ROLE yollarını da test et."
+    },
+    {
+      "external_id": "database-auditor-v1-021",
+      "number": 21,
+      "chapter": 2,
+      "engine": "MS",
+      "topic": "Genişletilmiş komut yüzeyi",
+      "kind": "image",
+      "prompt": "İlk denetim yaklaşımı hangisi?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-021 üzerinde çalışıyorsun. Platform: Microsoft SQL Server 2022. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Komutu üretimde rastgele çalıştırmak"
+        },
+        {
+          "id": "a",
+          "text": "Etkinliğin gerekçesini, çağırabilen kimlikleri ve işletim sistemi bağlamını incelemek"
+        },
+        {
+          "id": "c",
+          "text": "Bayrak 1 kesin sunucu ele geçirilmesi demektir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nEtkinliğin gerekçesini, çağırabilen kimlikleri ve işletim sistemi bağlamını incelemek\n\n🔧 Teknik gerekçe\nxp_cmdshell işletim sistemi komutu çalıştırma yüzeyi açar; yetki ve proxy/servis kimliği etkiyi belirler.\n\n⚠️ Risk\nGereksiz işletim sistemi komutu çalıştırma kabiliyeti.\n\n💼 İş etkisi\nVeritabanı dışına uzanan dosya ve hizmet etkisi.\n\n🛡️ Önerilen kontrol\nİhtiyaç yoksa onaylı süreçte kapat; gerekiyorsa çağrı yetkisini ve OS kimliğini sınırla, faaliyetleri izle.\n\n❌ Diğer yanıtların değerlendirmesi\n• Komutu üretimde rastgele çalıştırmak: Denetim yetkisiz işletim sistemi işlemi gerektirmez.\n• Bayrak 1 kesin sunucu ele geçirilmesi demektir: Etkin özellik olay yaşandığını kanıtlamaz.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Genişletilmiş komut yüzeyi",
+        "Microsoft SQL Server 2022"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 21,
+      "card_pages": [],
+      "image": "database-auditor/screen_021.png",
+      "evidence": {
+        "command": "SELECT name,value_in_use FROM sys.configurations WHERE name='xp_cmdshell';",
+        "output": "name        value_in_use\nxp_cmdshell 1\nKriter: iş gereksinimi yoksa kapalı olmalı",
+        "engine": "Microsoft SQL Server 2022"
+      },
+      "technical": "xp_cmdshell işletim sistemi komutu çalıştırma yüzeyi açar; yetki ve proxy/servis kimliği etkiyi belirler.",
+      "risk": "Gereksiz işletim sistemi komutu çalıştırma kabiliyeti.",
+      "impact": "Veritabanı dışına uzanan dosya ve hizmet etkisi.",
+      "control": "İhtiyaç yoksa onaylı süreçte kapat; gerekiyorsa çağrı yetkisini ve OS kimliğini sınırla, faaliyetleri izle."
+    },
+    {
+      "external_id": "database-auditor-v1-022",
+      "number": 22,
+      "chapter": 2,
+      "engine": "OR",
+      "topic": "Parola denemesi limiti",
+      "kind": "image",
+      "prompt": "Bu ekran için doğru kontrol değerlendirmesi hangisi?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-022 üzerinde çalışıyorsun. Platform: Oracle Database 19c. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Üretimde limiti hemen 1 yapmalıyım"
+        },
+        {
+          "id": "b",
+          "text": "UNLIMITED bütün bağlantıların parola istemediğini gösterir"
+        },
+        {
+          "id": "a",
+          "text": "Profilde başarısız parola denemesi limiti yok; kriter ve uygulama kilitlenme etkisi birlikte incelenmeli"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nProfilde başarısız parola denemesi limiti yok; kriter ve uygulama kilitlenme etkisi birlikte incelenmeli\n\n🔧 Teknik gerekçe\nFAILED_LOGIN_ATTEMPTS parola doğrulamasındaki başarısız denemelere ilişkin profil limitidir; UNLIMITED bu limiti koymaz.\n\n⚠️ Risk\nSınırsız parola denemelerinin veya plansız kilitlemenin etkisi.\n\n💼 İş etkisi\nHesap ele geçirme olasılığının artması ya da uygulama kesintisi.\n\n🛡️ Önerilen kontrol\nOnaylı eşik ve kilit açma sürecini servis sahibiyle belirle; bağlantı havuzu ve izleme etkisini kontrollü test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• UNLIMITED bütün bağlantıların parola istemediğini gösterir: Deneme limiti parola doğrulamasını kapatmaz.\n• Üretimde limiti hemen 1 yapmalıyım: Plansız kısıtlama servis hesabını kilitleyebilir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "beginner",
+      "goals": [
+        "Parola denemesi limiti",
+        "Oracle Database 19c"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 22,
+      "card_pages": [],
+      "image": "database-auditor/screen_022.png",
+      "evidence": {
+        "command": "SELECT profile,resource_name,limit FROM dba_profiles WHERE profile='APP_PROFILE' AND resource_name='FAILED_LOGIN_ATTEMPTS';",
+        "output": "PROFILE     RESOURCE_NAME         LIMIT\nAPP_PROFILE FAILED_LOGIN_ATTEMPTS UNLIMITED\nAPP_PAY: PASSWORD hesabı; profil APP_PROFILE\nKriter: başarısız deneme limiti ve servis etki analizi",
+        "engine": "Oracle Database 19c"
+      },
+      "technical": "FAILED_LOGIN_ATTEMPTS parola doğrulamasındaki başarısız denemelere ilişkin profil limitidir; UNLIMITED bu limiti koymaz.",
+      "risk": "Sınırsız parola denemelerinin veya plansız kilitlemenin etkisi.",
+      "impact": "Hesap ele geçirme olasılığının artması ya da uygulama kesintisi.",
+      "control": "Onaylı eşik ve kilit açma sürecini servis sahibiyle belirle; bağlantı havuzu ve izleme etkisini kontrollü test et."
+    },
+    {
+      "external_id": "database-auditor-v1-023",
+      "number": 23,
+      "chapter": 3,
+      "engine": "PG",
+      "topic": "Aktarım şifrelemesi",
+      "kind": "image",
+      "prompt": "Bu çıktı neyi kanıtlar?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-023 üzerinde çalışıyorsun. Platform: PostgreSQL 16. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yalnız bu oturumun TLS kullandığını"
+        },
+        {
+          "id": "c",
+          "text": "Bütün istemcilerin sertifika kimliğini doğruladığını"
+        },
+        {
+          "id": "b",
+          "text": "Diskteki tüm verinin şifreli olduğunu"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nYalnız bu oturumun TLS kullandığını\n\n🔧 Teknik gerekçe\npg_stat_ssl bağlantı düzeyinde TLS bilgisidir; genel zorunluluk ve istemci verify-full davranışı ayrı test edilir.\n\n⚠️ Risk\nTek oturumdan tüm bağlantılara yanlış güvence çıkarılması.\n\n💼 İş etkisi\nKorunmayan başka bağlantıların gözden kaçması.\n\n🛡️ Önerilen kontrol\nÖrnek bağlantı yanında HBA kurallarını ve istemci sertifika/hostname doğrulamasını kapsam bazında test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• Diskteki tüm verinin şifreli olduğunu: TLS aktarımı korur; disk şifrelemesi ayrı kontroldür.\n• Bütün istemcilerin sertifika kimliğini doğruladığını: Sunucu TLS görünümü istemci doğrulama ayarını göstermez.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Aktarım şifrelemesi",
+        "PostgreSQL 16"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 23,
+      "card_pages": [],
+      "image": "database-auditor/screen_023.png",
+      "evidence": {
+        "command": "SELECT pid,ssl,version,cipher FROM pg_stat_ssl WHERE pid=pg_backend_pid();",
+        "output": "pid   ssl version cipher\n4112  t   TLSv1.3 TLS_AES_256_GCM_SHA384",
+        "engine": "PostgreSQL 16"
+      },
+      "technical": "pg_stat_ssl bağlantı düzeyinde TLS bilgisidir; genel zorunluluk ve istemci verify-full davranışı ayrı test edilir.",
+      "risk": "Tek oturumdan tüm bağlantılara yanlış güvence çıkarılması.",
+      "impact": "Korunmayan başka bağlantıların gözden kaçması.",
+      "control": "Örnek bağlantı yanında HBA kurallarını ve istemci sertifika/hostname doğrulamasını kapsam bazında test et."
+    },
+    {
+      "external_id": "database-auditor-v1-024",
+      "number": 24,
+      "chapter": 3,
+      "engine": "MY",
+      "topic": "TLS zorunluluğu",
+      "kind": "image",
+      "prompt": "Kurum tüm uygulama TCP bağlantılarında TLS istiyorsa ne eksik?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-024 üzerinde çalışıyorsun. Platform: MySQL 8.0. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "OFF veritabanının disk şifrelemesini kapatır"
+        },
+        {
+          "id": "b",
+          "text": "Bütün oturumlar kesin şifresizdir"
+        },
+        {
+          "id": "a",
+          "text": "Bu ayarlar uygulama hesabı için güvenli aktarımı zorunlu kılmıyor"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nBu ayarlar uygulama hesabı için güvenli aktarımı zorunlu kılmıyor\n\n🔧 Teknik gerekçe\nrequire_secure_transport OFF ve boş ssl_type TLS kullanımını zorunlu kılmaz; oturumların fiili TLS durumu ayrıca ölçülür.\n\n⚠️ Risk\nŞifresiz bağlantı kurulabilmesi.\n\n💼 İş etkisi\nAğ yolunda hassas verinin korunmaması.\n\n🛡️ Önerilen kontrol\nUyumlu istemcilerle güvenli aktarımı zorunlu kıl; TLS ve sertifika doğrulama davranışını bağlantı bazında test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• Bütün oturumlar kesin şifresizdir: İstemci isteyerek TLS kullanabilir; zorunluluk ile fiili durum farklıdır.\n• OFF veritabanının disk şifrelemesini kapatır: Aktarım değişkeni disk şifrelemesi değildir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "TLS zorunluluğu",
+        "MySQL 8.0"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 24,
+      "card_pages": [],
+      "image": "database-auditor/screen_024.png",
+      "evidence": {
+        "command": "SHOW VARIABLES LIKE 'require_secure_transport'; SELECT User,Host,ssl_type FROM mysql.user WHERE User='app';",
+        "output": "require_secure_transport OFF\nUser Host        ssl_type\napp  192.0.2.40  [empty]",
+        "engine": "MySQL 8.0"
+      },
+      "technical": "require_secure_transport OFF ve boş ssl_type TLS kullanımını zorunlu kılmaz; oturumların fiili TLS durumu ayrıca ölçülür.",
+      "risk": "Şifresiz bağlantı kurulabilmesi.",
+      "impact": "Ağ yolunda hassas verinin korunmaması.",
+      "control": "Uyumlu istemcilerle güvenli aktarımı zorunlu kıl; TLS ve sertifika doğrulama davranışını bağlantı bazında test et."
+    },
+    {
+      "external_id": "database-auditor-v1-025",
+      "number": 25,
+      "chapter": 3,
+      "engine": "MS",
+      "topic": "TDE ile TLS ayrımı",
+      "kind": "image",
+      "prompt": "Bu kanıttan hangi sonuç çıkar?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-025 üzerinde çalışıyorsun. Platform: Microsoft SQL Server 2022. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "payments için TDE şifreli durum var; ağ şifrelemesi ayrıca test edilmeli"
+        },
+        {
+          "id": "c",
+          "text": "Yetkili SELECT sorguları veriyi okuyamaz"
+        },
+        {
+          "id": "b",
+          "text": "Bütün ağ bağlantıları TLS kullanır"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\npayments için TDE şifreli durum var; ağ şifrelemesi ayrıca test edilmeli\n\n🔧 Teknik gerekçe\nTDE veri ve log dosyalarını dururken korur; encryption_state=3 şifreli durumu belirtir. İzinli sorgu ve aktarım ayrı kontrol alanlarıdır.\n\n⚠️ Risk\nŞifrelemenin kapsamının fazla yorumlanması.\n\n💼 İş etkisi\nAğ erişimi veya fazla yetkilerin gözden kaçması.\n\n🛡️ Önerilen kontrol\nTDE yanında bağlantı TLS, rol izinleri ve anahtar kurtarma kontrollerini ayrı doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• Bütün ağ bağlantıları TLS kullanır: TDE iletişim kanalını şifrelemez.\n• Yetkili SELECT sorguları veriyi okuyamaz: TDE yetkili sorgulara şeffaftır.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "TDE ile TLS ayrımı",
+        "Microsoft SQL Server 2022"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 25,
+      "card_pages": [],
+      "image": "database-auditor/screen_025.png",
+      "evidence": {
+        "command": "SELECT DB_NAME(database_id) AS db_name,encryption_state FROM sys.dm_database_encryption_keys;",
+        "output": "db_name  encryption_state\npayments 3",
+        "engine": "Microsoft SQL Server 2022"
+      },
+      "technical": "TDE veri ve log dosyalarını dururken korur; encryption_state=3 şifreli durumu belirtir. İzinli sorgu ve aktarım ayrı kontrol alanlarıdır.",
+      "risk": "Şifrelemenin kapsamının fazla yorumlanması.",
+      "impact": "Ağ erişimi veya fazla yetkilerin gözden kaçması.",
+      "control": "TDE yanında bağlantı TLS, rol izinleri ve anahtar kurtarma kontrollerini ayrı doğrula."
+    },
+    {
+      "external_id": "database-auditor-v1-026",
+      "number": 26,
+      "chapter": 3,
+      "engine": "OR",
+      "topic": "Şifreli tablespace kapsamı",
+      "kind": "image",
+      "prompt": "Hangi kapsam eksikliği araştırılır?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-026 üzerinde çalışıyorsun. Platform: Oracle Database 19c. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "NO bütün verilerin internete açık olduğunu kanıtlar"
+        },
+        {
+          "id": "b",
+          "text": "PAY_DATA şifreliyse tüm database şifrelidir"
+        },
+        {
+          "id": "a",
+          "text": "Arşiv tablespace'inin şifreleme kriterini karşılayıp karşılamadığı"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nArşiv tablespace'inin şifreleme kriterini karşılayıp karşılamadığı\n\n🔧 Teknik gerekçe\nDBA_TABLESPACES encrypted alanı tablespace şifrelemesini gösterir; başka veri koruma katmanları ayrıca değerlendirilebilir.\n\n⚠️ Risk\nGizli arşiv verisinin dururken yeterince korunmaması.\n\n💼 İş etkisi\nDepolama veya yedek medyasından veri ifşası.\n\n🛡️ Önerilen kontrol\nVeri envanterini tablespace ve diğer depolama katmanlarıyla eşleştir; arşiv için onaylı şifreleme ve anahtar kontrolünü test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• PAY_DATA şifreliyse tüm database şifrelidir: Şifreleme kapsamı her tablespace için ayrıca görülmelidir.\n• NO bütün verilerin internete açık olduğunu kanıtlar: Disk şifrelemesi ile ağ erişimi ayrı kontrollerdir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Şifreli tablespace kapsamı",
+        "Oracle Database 19c"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 26,
+      "card_pages": [],
+      "image": "database-auditor/screen_026.png",
+      "evidence": {
+        "command": "SELECT tablespace_name,encrypted FROM dba_tablespaces WHERE tablespace_name IN ('PAY_DATA','PAY_ARCH');",
+        "output": "TABLESPACE_NAME ENCRYPTED\nPAY_DATA        YES\nPAY_ARCH        NO\nVeri sınıfı: ikisinde de gizli ödeme verisi",
+        "engine": "Oracle Database 19c"
+      },
+      "technical": "DBA_TABLESPACES encrypted alanı tablespace şifrelemesini gösterir; başka veri koruma katmanları ayrıca değerlendirilebilir.",
+      "risk": "Gizli arşiv verisinin dururken yeterince korunmaması.",
+      "impact": "Depolama veya yedek medyasından veri ifşası.",
+      "control": "Veri envanterini tablespace ve diğer depolama katmanlarıyla eşleştir; arşiv için onaylı şifreleme ve anahtar kontrolünü test et."
+    },
+    {
+      "external_id": "database-auditor-v1-027",
+      "number": 27,
+      "chapter": 3,
+      "engine": "MY",
+      "topic": "InnoDB tablo şifrelemesi",
+      "kind": "image",
+      "prompt": "Nasıl bir denetim sonucu yazılır?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-027 üzerinde çalışıyorsun. Platform: MySQL 8.0. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "events tablespace'i için şifreleme kapsamı ve alternatif disk koruması doğrulanmalı"
+        },
+        {
+          "id": "b",
+          "text": "cards Y olduğu için tüm MySQL verisi şifrelidir"
+        },
+        {
+          "id": "c",
+          "text": "ENCRYPTION=N sorguların sonuçlarını değiştirmiştir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nevents tablespace'i için şifreleme kapsamı ve alternatif disk koruması doğrulanmalı\n\n🔧 Teknik gerekçe\nInnoDB tablespace şifrelemesi nesne kapsamındadır; redo/undo, binlog ve depolama şifrelemesi ayrıca kontrol edilir.\n\n⚠️ Risk\nKısmi şifrelemenin tüm veri kapsamı sanılması.\n\n💼 İş etkisi\nGizli olay kayıtlarının medyada korunmasız kalması.\n\n🛡️ Önerilen kontrol\nTablo/veri sınıfı envanterini tablespace ve anahtar yönetimi kapsamıyla uzlaştır; alternatif korumayı kanıtla doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• cards Y olduğu için tüm MySQL verisi şifrelidir: Yalnız listelenen tablespace şifrelemesini gösterir.\n• ENCRYPTION=N sorguların sonuçlarını değiştirmiştir: Şifreleme bayrağı veri doğruluğu kanıtı değildir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "InnoDB tablo şifrelemesi",
+        "MySQL 8.0"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 27,
+      "card_pages": [],
+      "image": "database-auditor/screen_027.png",
+      "evidence": {
+        "command": "SELECT NAME,ENCRYPTION FROM information_schema.INNODB_TABLESPACES WHERE NAME IN ('pay/cards','pay/events');",
+        "output": "NAME        ENCRYPTION\npay/cards   Y\npay/events  N\nKriter: iki tablo da gizli sınıfta",
+        "engine": "MySQL 8.0"
+      },
+      "technical": "InnoDB tablespace şifrelemesi nesne kapsamındadır; redo/undo, binlog ve depolama şifrelemesi ayrıca kontrol edilir.",
+      "risk": "Kısmi şifrelemenin tüm veri kapsamı sanılması.",
+      "impact": "Gizli olay kayıtlarının medyada korunmasız kalması.",
+      "control": "Tablo/veri sınıfı envanterini tablespace ve anahtar yönetimi kapsamıyla uzlaştır; alternatif korumayı kanıtla doğrula."
+    },
+    {
+      "external_id": "database-auditor-v1-028",
+      "number": 28,
+      "chapter": 3,
+      "engine": "MS",
+      "topic": "Anahtar kurtarma kanıtı",
+      "kind": "image",
+      "prompt": "Öncelikli eksik kontrol hangisi?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-028 üzerinde çalışıyorsun. Platform: Microsoft SQL Server 2022. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "TDE koruyucu sertifika/özel anahtar yedeği ve temiz ortam geri dönüş testi"
+        },
+        {
+          "id": "c",
+          "text": "Anahtarı genel dosya paylaşımına kopyalamak"
+        },
+        {
+          "id": "b",
+          "text": "TDE'nin açık olması tek başına geri dönüş garantisidir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nTDE koruyucu sertifika/özel anahtar yedeği ve temiz ortam geri dönüş testi\n\n🔧 Teknik gerekçe\nTDE verisinin başka instance üzerinde açılması uygun koruyucu anahtar/sertifika gerektirir; erişilebilirlik kontrollü yedekle kanıtlanır.\n\n⚠️ Risk\nVeri yedeği olsa da şifreli verinin kurtarılamaması.\n\n💼 İş etkisi\nUzayan kesinti ve kalıcı veri erişim kaybı.\n\n🛡️ Önerilen kontrol\nKoruyucu sertifika/özel anahtarı güvenli ayrı yedekle; yetkili temiz ortamda geri dönüş ve erişim testini kaydet.\n\n❌ Diğer yanıtların değerlendirmesi\n• TDE'nin açık olması tek başına geri dönüş garantisidir: Veri yedeği tek başına koruyucu anahtarı sağlamaz.\n• Anahtarı genel dosya paylaşımına kopyalamak: Gizli anahtarın erişimini genişletmek güvenli kontrol değildir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Anahtar kurtarma kanıtı",
+        "Microsoft SQL Server 2022"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 28,
+      "card_pages": [],
+      "image": "database-auditor/screen_028.png",
+      "evidence": {
+        "command": "TDE kurtarma çalışma kâğıdı / SQL-ERP",
+        "output": "TDE payments: Encrypted\nDEK protector: certificate pay_tde_cert\nCertificate + private key offline backup: yok\nRestore rehearsal on clean instance: yok",
+        "engine": "Microsoft SQL Server 2022"
+      },
+      "technical": "TDE verisinin başka instance üzerinde açılması uygun koruyucu anahtar/sertifika gerektirir; erişilebilirlik kontrollü yedekle kanıtlanır.",
+      "risk": "Veri yedeği olsa da şifreli verinin kurtarılamaması.",
+      "impact": "Uzayan kesinti ve kalıcı veri erişim kaybı.",
+      "control": "Koruyucu sertifika/özel anahtarı güvenli ayrı yedekle; yetkili temiz ortamda geri dönüş ve erişim testini kaydet."
+    },
+    {
+      "external_id": "database-auditor-v1-029",
+      "number": 29,
+      "chapter": 3,
+      "engine": "PG",
+      "topic": "Satır düzeyi güvenlik sınırı",
+      "kind": "image",
+      "prompt": "Hangi tasarım riski araştırılır?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-029 üzerinde çalışıyorsun. Platform: PostgreSQL 16. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "RLS bütün rollere her koşulda zorunludur"
+        },
+        {
+          "id": "c",
+          "text": "rolbypassrls t yalnız bağlantı TLS ayarıdır"
+        },
+        {
+          "id": "a",
+          "text": "Uygulama rolünün RLS kontrollerini aşabilmesi"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nUygulama rolünün RLS kontrollerini aşabilmesi\n\n🔧 Teknik gerekçe\nBYPASSRLS rolü satır güvenliği politikalarını aşabilir; superuser ve nesne sahipliği davranışları da ayrı değerlendirilir.\n\n⚠️ Risk\nKiracılar arası veri erişimi.\n\n💼 İş etkisi\nMüşteri gizliliği ve sözleşmesel güven kaybı.\n\n🛡️ Önerilen kontrol\nUygulama kimliğinden aşma yetkisini çıkar; gerçek rol ve kiracı bağlamlarında pozitif/negatif RLS testleri uygula.\n\n❌ Diğer yanıtların değerlendirmesi\n• RLS bütün rollere her koşulda zorunludur: BYPASSRLS özel bir aşma ayrıcalığıdır.\n• rolbypassrls t yalnız bağlantı TLS ayarıdır: Bu bayrak satır güvenliğine ilişkindir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Satır düzeyi güvenlik sınırı",
+        "PostgreSQL 16"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 29,
+      "card_pages": [],
+      "image": "database-auditor/screen_029.png",
+      "evidence": {
+        "command": "SELECT rolname,rolbypassrls FROM pg_roles WHERE rolname='tenant_app';",
+        "output": "rolname    rolbypassrls\ntenant_app t\nTasarım: kiracı ayrımı RLS ile; uygulama bu rolle bağlanıyor",
+        "engine": "PostgreSQL 16"
+      },
+      "technical": "BYPASSRLS rolü satır güvenliği politikalarını aşabilir; superuser ve nesne sahipliği davranışları da ayrı değerlendirilir.",
+      "risk": "Kiracılar arası veri erişimi.",
+      "impact": "Müşteri gizliliği ve sözleşmesel güven kaybı.",
+      "control": "Uygulama kimliğinden aşma yetkisini çıkar; gerçek rol ve kiracı bağlamlarında pozitif/negatif RLS testleri uygula."
+    },
+    {
+      "external_id": "database-auditor-v1-030",
+      "number": 30,
+      "chapter": 3,
+      "engine": "OR",
+      "topic": "Test verisinin maskelenmesi",
+      "kind": "image",
+      "prompt": "Doğru kontrol eksikliği hangisi?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-030 üzerinde çalışıyorsun. Platform: Oracle Database 19c. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "UAT olduğu için veri sınıfı otomatik düşer"
+        },
+        {
+          "id": "a",
+          "text": "Gizli üretim verisinin onaylı maskeleme olmadan geniş UAT kitlesine taşınması"
+        },
+        {
+          "id": "c",
+          "text": "Şifreli disk tek başına maskeleme ihtiyacını bitirir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nGizli üretim verisinin onaylı maskeleme olmadan geniş UAT kitlesine taşınması\n\n🔧 Teknik gerekçe\nMaskeleme/tokenizasyon test ihtiyacını korurken gerçek kişilere ait değerlerin gereksiz kullanımını sınırlar; şifreleme farklı tehdidi hedefler.\n\n⚠️ Risk\nÜretim kişisel verisinin düşük kontrollü ortamda ifşası.\n\n💼 İş etkisi\nMüşteri güveni ve mevzuat uyumu etkisi.\n\n🛡️ Önerilen kontrol\nOnaylı veri minimizasyonu ve tutarlı maskeleme uygula; UAT erişimini ve kopya yaşam döngüsünü denetle.\n\n❌ Diğer yanıtların değerlendirmesi\n• UAT olduğu için veri sınıfı otomatik düşer: Ortam adı kişisel verinin hassasiyetini kaldırmaz.\n• Şifreli disk tek başına maskeleme ihtiyacını bitirir: Yetkili UAT kullanıcıları veriyi yine okuyabilir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Test verisinin maskelenmesi",
+        "Oracle Database 19c"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 30,
+      "card_pages": [],
+      "image": "database-auditor/screen_030.png",
+      "evidence": {
+        "command": "Veri aktarım kontrol kaydı / ORA-UAT",
+        "output": "Kaynak: ORA-PAY production\nHedef: ORA-UAT\nDışa aktarılan alanlar: full_name, national_id, iban\nMaskeleme işi: çalıştırılmadı; UAT kullanıcıları: 38",
+        "engine": "Oracle Database 19c"
+      },
+      "technical": "Maskeleme/tokenizasyon test ihtiyacını korurken gerçek kişilere ait değerlerin gereksiz kullanımını sınırlar; şifreleme farklı tehdidi hedefler.",
+      "risk": "Üretim kişisel verisinin düşük kontrollü ortamda ifşası.",
+      "impact": "Müşteri güveni ve mevzuat uyumu etkisi.",
+      "control": "Onaylı veri minimizasyonu ve tutarlı maskeleme uygula; UAT erişimini ve kopya yaşam döngüsünü denetle."
+    },
+    {
+      "external_id": "database-auditor-v1-031",
+      "number": 31,
+      "chapter": 3,
+      "engine": "MS",
+      "topic": "Güvenilmeyen foreign key",
+      "kind": "image",
+      "prompt": "Bu kanıt nasıl yorumlanır?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-031 üzerinde çalışıyorsun. Platform: Microsoft SQL Server 2022. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Foreign key şifreleme anahtarıdır"
+        },
+        {
+          "id": "a",
+          "text": "Kısıt etkin olsa da mevcut verinin doğrulandığına güvenilmiyor; bütünlük testi gerekir"
+        },
+        {
+          "id": "b",
+          "text": "Etkin olduğu için bütün eski satırlar doğrulanmıştır"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nKısıt etkin olsa da mevcut verinin doğrulandığına güvenilmiyor; bütünlük testi gerekir\n\n🔧 Teknik gerekçe\nEtkin fakat untrusted foreign key yeni işlemleri denetleyebilir; eski verinin tamamının doğrulandığını kanıtlamaz.\n\n⚠️ Risk\nEski yetim kayıtların fark edilmeden kalması.\n\n💼 İş etkisi\nYanlış müşteri-sipariş eşleşmesi ve raporlama hataları.\n\n🛡️ Önerilen kontrol\nYetim kayıtları salt okunur sorguyla test et; düzeltme sonrası onaylı CHECK doğrulaması ve tekrar test iste.\n\n❌ Diğer yanıtların değerlendirmesi\n• Etkin olduğu için bütün eski satırlar doğrulanmıştır: is_not_trusted=1 bu çıkarımı desteklemez.\n• Foreign key şifreleme anahtarıdır: Referans bütünlüğü ile şifreleme farklıdır.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Güvenilmeyen foreign key",
+        "Microsoft SQL Server 2022"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 31,
+      "card_pages": [],
+      "image": "database-auditor/screen_031.png",
+      "evidence": {
+        "command": "SELECT name,is_disabled,is_not_trusted FROM sys.foreign_keys WHERE name='FK_Order_Customer';",
+        "output": "name               is_disabled is_not_trusted\nFK_Order_Customer  0           1",
+        "engine": "Microsoft SQL Server 2022"
+      },
+      "technical": "Etkin fakat untrusted foreign key yeni işlemleri denetleyebilir; eski verinin tamamının doğrulandığını kanıtlamaz.",
+      "risk": "Eski yetim kayıtların fark edilmeden kalması.",
+      "impact": "Yanlış müşteri-sipariş eşleşmesi ve raporlama hataları.",
+      "control": "Yetim kayıtları salt okunur sorguyla test et; düzeltme sonrası onaylı CHECK doğrulaması ve tekrar test iste."
+    },
+    {
+      "external_id": "database-auditor-v1-032",
+      "number": 32,
+      "chapter": 3,
+      "engine": "MY",
+      "topic": "Uygulama envanteriyle bütünlük uzlaştırması",
+      "kind": "image",
+      "prompt": "Denetçi neyi raporlar?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-032 üzerinde çalışıyorsun. Platform: MySQL 8.0. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "27 kayıtta ilişki sapması; kök neden ve düzeltme kapsamı araştırılmalı"
+        },
+        {
+          "id": "b",
+          "text": "27 müşterinin kesin dolandırıcı olduğu"
+        },
+        {
+          "id": "c",
+          "text": "COUNT sonucu yedekleme başarısını gösterir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\n27 kayıtta ilişki sapması; kök neden ve düzeltme kapsamı araştırılmalı\n\n🔧 Teknik gerekçe\nLEFT JOIN eşleşmeyen kayıtları bulur; filtre, NULL anlamı ve iş kriteri sonuç yorumunu belirler.\n\n⚠️ Risk\nReferans bütünlüğünün bozulması.\n\n💼 İş etkisi\nFaturalama, müşteri raporu veya tahsilat hatası.\n\n🛡️ Önerilen kontrol\nKayıtların iş anlamını doğrula; uygun foreign key ve yükleme kontrollerini kontrollü düzeltmeyle yeniden test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• 27 müşterinin kesin dolandırıcı olduğu: Sorgu niyet veya suç kanıtlamaz.\n• COUNT sonucu yedekleme başarısını gösterir: Bu sorgu referans eşleşmesini test eder.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Uygulama envanteriyle bütünlük uzlaştırması",
+        "MySQL 8.0"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 32,
+      "card_pages": [],
+      "image": "database-auditor/screen_032.png",
+      "evidence": {
+        "command": "SELECT COUNT(*) AS orphan_orders FROM orders o LEFT JOIN customers c ON o.customer_id=c.id WHERE c.id IS NULL;",
+        "output": "orphan_orders\n27\nKriter: her sipariş geçerli müşteriyle ilişkili olmalı",
+        "engine": "MySQL 8.0"
+      },
+      "technical": "LEFT JOIN eşleşmeyen kayıtları bulur; filtre, NULL anlamı ve iş kriteri sonuç yorumunu belirler.",
+      "risk": "Referans bütünlüğünün bozulması.",
+      "impact": "Faturalama, müşteri raporu veya tahsilat hatası.",
+      "control": "Kayıtların iş anlamını doğrula; uygun foreign key ve yükleme kontrollerini kontrollü düzeltmeyle yeniden test et."
+    },
+    {
+      "external_id": "database-auditor-v1-033",
+      "number": 33,
+      "chapter": 3,
+      "engine": "OR",
+      "topic": "Devre dışı kısıt",
+      "kind": "image",
+      "prompt": "Görselde hangi kontrol boşluğu var?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-033 üzerinde çalışıyorsun. Platform: Oracle Database 19c. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Bütün veritabanı kapalı"
+        },
+        {
+          "id": "c",
+          "text": "NOT VALIDATED satırların mutlaka hatalı olduğunu kanıtlar"
+        },
+        {
+          "id": "a",
+          "text": "İlgili foreign key uygulanmıyor ve mevcut veri doğrulanmamış"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nİlgili foreign key uygulanmıyor ve mevcut veri doğrulanmamış\n\n🔧 Teknik gerekçe\nConstraint STATUS ve VALIDATED farklı eksenlerdir; bu kayıt hem uygulamanın hem eski veri doğrulamasının eksik olduğunu gösterir.\n\n⚠️ Risk\nİlişkisiz kayıtların kabul edilmesi veya birikmesi.\n\n💼 İş etkisi\nHesap hareketi raporlarının güvenilirliğinin azalması.\n\n🛡️ Önerilen kontrol\nKapsamlı veri testi ve onaylı etkinleştirme/doğrulama planı oluştur; performans ve iş etkisini birlikte değerlendir.\n\n❌ Diğer yanıtların değerlendirmesi\n• Bütün veritabanı kapalı: DISABLED kısıt durumudur; database durumu değildir.\n• NOT VALIDATED satırların mutlaka hatalı olduğunu kanıtlar: Eksik doğrulama gerçekleşmiş veri hatasıyla aynı değildir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Devre dışı kısıt",
+        "Oracle Database 19c"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 33,
+      "card_pages": [],
+      "image": "database-auditor/screen_033.png",
+      "evidence": {
+        "command": "SELECT constraint_name,status,validated FROM dba_constraints WHERE owner='PAY' AND constraint_name='FK_TXN_ACCOUNT';",
+        "output": "CONSTRAINT_NAME STATUS   VALIDATED\nFK_TXN_ACCOUNT  DISABLED NOT VALIDATED",
+        "engine": "Oracle Database 19c"
+      },
+      "technical": "Constraint STATUS ve VALIDATED farklı eksenlerdir; bu kayıt hem uygulamanın hem eski veri doğrulamasının eksik olduğunu gösterir.",
+      "risk": "İlişkisiz kayıtların kabul edilmesi veya birikmesi.",
+      "impact": "Hesap hareketi raporlarının güvenilirliğinin azalması.",
+      "control": "Kapsamlı veri testi ve onaylı etkinleştirme/doğrulama planı oluştur; performans ve iş etkisini birlikte değerlendir."
+    },
+    {
+      "external_id": "database-auditor-v1-034",
+      "number": 34,
+      "chapter": 4,
+      "engine": "PG",
+      "topic": "DDL loglama kapsamı",
+      "kind": "image",
+      "prompt": "Bu ayarlar kriteri tek başına karşılar mı?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-034 üzerinde çalışıyorsun. Platform: PostgreSQL 16. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Evet; ddl bütün SQL ifadelerini kaydeder"
+        },
+        {
+          "id": "c",
+          "text": "logging_collector=on tüm logları değiştirilemez yapar"
+        },
+        {
+          "id": "a",
+          "text": "Hayır; ddl INSERT/UPDATE/DELETE işlemlerinin tam denetim kapsamı değildir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nHayır; ddl INSERT/UPDATE/DELETE işlemlerinin tam denetim kapsamı değildir\n\n🔧 Teknik gerekçe\nlog_statement=ddl şema tanımı gibi komutları hedefler; veri değişiklikleri için uygun ek log/denetim yaklaşımı gerekir.\n\n⚠️ Risk\nKritik veri değişikliklerinin izinin eksik kalması.\n\n💼 İş etkisi\nYetkisiz ödeme değişikliğinin araştırılamaması.\n\n🛡️ Önerilen kontrol\nGerekli olay/nesne kapsamını seç; hassas veri sızdırmadan denetim kaydını, kullanıcı atfını ve örnek olay üretimini test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• Evet; ddl bütün SQL ifadelerini kaydeder: DDL ile veri değişikliği ifadeleri farklıdır.\n• logging_collector=on tüm logları değiştirilemez yapar: Toplama işlemi bütünlük koruması sağlamaz.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "DDL loglama kapsamı",
+        "PostgreSQL 16"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 34,
+      "card_pages": [],
+      "image": "database-auditor/screen_034.png",
+      "evidence": {
+        "command": "SHOW log_statement; SHOW logging_collector;",
+        "output": "log_statement  ddl\nlogging_collector on\nKriter: kritik ödeme tablosu DML işlemleri izlenmeli",
+        "engine": "PostgreSQL 16"
+      },
+      "technical": "log_statement=ddl şema tanımı gibi komutları hedefler; veri değişiklikleri için uygun ek log/denetim yaklaşımı gerekir.",
+      "risk": "Kritik veri değişikliklerinin izinin eksik kalması.",
+      "impact": "Yetkisiz ödeme değişikliğinin araştırılamaması.",
+      "control": "Gerekli olay/nesne kapsamını seç; hassas veri sızdırmadan denetim kaydını, kullanıcı atfını ve örnek olay üretimini test et."
+    },
+    {
+      "external_id": "database-auditor-v1-035",
+      "number": 35,
+      "chapter": 4,
+      "engine": "MY",
+      "topic": "Binary log ile audit farkı",
+      "kind": "image",
+      "prompt": "Bu ekran yeterli erişim denetim kanıtı mı?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-035 üzerinde çalışıyorsun. Platform: MySQL 8.0. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hayır; binlog normal SELECT okumalarını tam audit izi olarak tutmaz"
+        },
+        {
+          "id": "b",
+          "text": "Evet; ROW bütün kullanıcı okumalarını kaydeder"
+        },
+        {
+          "id": "c",
+          "text": "log_bin=ON logların sonsuza dek saklandığını kanıtlar"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nHayır; binlog normal SELECT okumalarını tam audit izi olarak tutmaz\n\n🔧 Teknik gerekçe\nBinary log değişiklik/replikasyon ve kurtarma içindir; kapsamlı okuma erişim denetimiyle aynı işlevi görmez.\n\n⚠️ Risk\nHassas veri okumalarının görünmez kalması.\n\n💼 İş etkisi\nİfşa şüphesinde kapsam ve kullanıcı belirleyememe.\n\n🛡️ Önerilen kontrol\nÜrün/edisyona uygun audit veya kontrollü erişim izleme tasarla; hedef SELECT olayını uçtan uca doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• Evet; ROW bütün kullanıcı okumalarını kaydeder: Satır değişiklik replikasyon kaydı okuma audit izi değildir.\n• log_bin=ON logların sonsuza dek saklandığını kanıtlar: Saklama süresi ayrı yapılandırılır.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Binary log ile audit farkı",
+        "MySQL 8.0"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 35,
+      "card_pages": [],
+      "image": "database-auditor/screen_035.png",
+      "evidence": {
+        "command": "SHOW VARIABLES LIKE 'log_bin'; SHOW VARIABLES LIKE 'binlog_format';",
+        "output": "log_bin ON\nbinlog_format ROW\nGereksinim: kim hangi hassas veriyi okudu?",
+        "engine": "MySQL 8.0"
+      },
+      "technical": "Binary log değişiklik/replikasyon ve kurtarma içindir; kapsamlı okuma erişim denetimiyle aynı işlevi görmez.",
+      "risk": "Hassas veri okumalarının görünmez kalması.",
+      "impact": "İfşa şüphesinde kapsam ve kullanıcı belirleyememe.",
+      "control": "Ürün/edisyona uygun audit veya kontrollü erişim izleme tasarla; hedef SELECT olayını uçtan uca doğrula."
+    },
+    {
+      "external_id": "database-auditor-v1-036",
+      "number": 36,
+      "chapter": 4,
+      "engine": "MS",
+      "topic": "Audit nesnesi kapalı",
+      "kind": "image",
+      "prompt": "Dashboard kararında hangi hata var?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-036 üzerinde çalışıyorsun. Platform: Microsoft SQL Server 2022. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Audit nesnesinin varlığı etkin kayıt üretimini kanıtlamıyor"
+        },
+        {
+          "id": "b",
+          "text": "Audit adı Security olunca otomatik etkinleşir"
+        },
+        {
+          "id": "c",
+          "text": "is_state_enabled=0 bütün log dosyalarının silindiğini gösterir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nAudit nesnesinin varlığı etkin kayıt üretimini kanıtlamıyor\n\n🔧 Teknik gerekçe\nSQL Server Audit için nesne, etkinlik durumu, audit specification ve hedefe başarılı yazım birlikte incelenir.\n\n⚠️ Risk\nGüvenlik olaylarının kaydedilmemesi.\n\n💼 İş etkisi\nİhlal araştırmasında kanıt kaybı.\n\n🛡️ Önerilen kontrol\nAudit ve specification kapsamını etkinleştir; örnek olayın hedefte ve merkezi izlemede görüldüğünü test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• Audit adı Security olunca otomatik etkinleşir: İsim durumu değiştirmez.\n• is_state_enabled=0 bütün log dosyalarının silindiğini gösterir: Etkinlik bayrağı geçmiş dosya varlığını açıklamaz.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Audit nesnesi kapalı",
+        "Microsoft SQL Server 2022"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 36,
+      "card_pages": [],
+      "image": "database-auditor/screen_036.png",
+      "evidence": {
+        "command": "SELECT name,is_state_enabled FROM sys.server_audits WHERE name='SecurityAudit';",
+        "output": "name          is_state_enabled\nSecurityAudit 0\nDashboard: Audit nesnesi mevcut -> uyumlu",
+        "engine": "Microsoft SQL Server 2022"
+      },
+      "technical": "SQL Server Audit için nesne, etkinlik durumu, audit specification ve hedefe başarılı yazım birlikte incelenir.",
+      "risk": "Güvenlik olaylarının kaydedilmemesi.",
+      "impact": "İhlal araştırmasında kanıt kaybı.",
+      "control": "Audit ve specification kapsamını etkinleştir; örnek olayın hedefte ve merkezi izlemede görüldüğünü test et."
+    },
+    {
+      "external_id": "database-auditor-v1-037",
+      "number": 37,
+      "chapter": 4,
+      "engine": "OR",
+      "topic": "Unified policy oluşturulmuş ama etkin değil",
+      "kind": "image",
+      "prompt": "Denetçi hangi farkı vurgular?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-037 üzerinde çalışıyorsun. Platform: Oracle Database 19c. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Policy tanımı var; etkinleştirme görünümünde yok, ilgili oturum/kapsamda kayıt üretimi test edilmeli"
+        },
+        {
+          "id": "c",
+          "text": "Sıfır satır geçmişte hiçbir audit kaydı olmadığını kanıtlar"
+        },
+        {
+          "id": "b",
+          "text": "Policy tanımı bütün kullanıcıları otomatik denetler"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nPolicy tanımı var; etkinleştirme görünümünde yok, ilgili oturum/kapsamda kayıt üretimi test edilmeli\n\n🔧 Teknik gerekçe\nUnified audit policy tanımı ile etkinleştirilmesi ayrı durumlardır; oturum ve kullanıcı kapsamı da önemlidir.\n\n⚠️ Risk\nAyrıcalık değişikliklerinin denetim dışı kalması.\n\n💼 İş etkisi\nOnaysız erişim artışının tespit edilememesi.\n\n🛡️ Önerilen kontrol\nPolicy etkinlik/kullanıcı kapsamını doğrula; yetkili test olayının UNIFIED_AUDIT_TRAIL içinde oluştuğunu göster.\n\n❌ Diğer yanıtların değerlendirmesi\n• Policy tanımı bütün kullanıcıları otomatik denetler: Oluşturma ile etkinleştirme farklı adımlardır.\n• Sıfır satır geçmişte hiçbir audit kaydı olmadığını kanıtlar: Etkin politika listesi tarihsel olay evreni değildir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Unified policy oluşturulmuş ama etkin değil",
+        "Oracle Database 19c"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 37,
+      "card_pages": [],
+      "image": "database-auditor/screen_037.png",
+      "evidence": {
+        "command": "SELECT policy_name,enabled_option FROM audit_unified_enabled_policies WHERE policy_name='PAY_PRIV_CHANGES';",
+        "output": "no rows selected\nAUDIT_UNIFIED_POLICIES: PAY_PRIV_CHANGES tanımı mevcut",
+        "engine": "Oracle Database 19c"
+      },
+      "technical": "Unified audit policy tanımı ile etkinleştirilmesi ayrı durumlardır; oturum ve kullanıcı kapsamı da önemlidir.",
+      "risk": "Ayrıcalık değişikliklerinin denetim dışı kalması.",
+      "impact": "Onaysız erişim artışının tespit edilememesi.",
+      "control": "Policy etkinlik/kullanıcı kapsamını doğrula; yetkili test olayının UNIFIED_AUDIT_TRAIL içinde oluştuğunu göster."
+    },
+    {
+      "external_id": "database-auditor-v1-038",
+      "number": 38,
+      "chapter": 4,
+      "engine": "PG",
+      "topic": "Başarısız kimlik doğrulama",
+      "kind": "image",
+      "prompt": "Bu log için ölçülü sonuç hangisi?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-038 üzerinde çalışıyorsun. Platform: PostgreSQL 16. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Başarısız doğrulama denemeleri var; kaynak, hacim ve başarılı bağlantılarla ilişkilendirilmeli"
+        },
+        {
+          "id": "b",
+          "text": "Veritabanı kesin ele geçirilmiştir"
+        },
+        {
+          "id": "c",
+          "text": "İki deneme kesin uygulama arızasıdır"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nBaşarısız doğrulama denemeleri var; kaynak, hacim ve başarılı bağlantılarla ilişkilendirilmeli\n\n🔧 Teknik gerekçe\nFATAL kimlik doğrulama hatası bağlantının reddedildiğini gösterebilir; istemci, zaman ve olay hacmiyle değerlendirilir.\n\n⚠️ Risk\nSaldırı sinyalinin veya uygulama parola sorununun gözden kaçması.\n\n💼 İş etkisi\nHesap saldırısına geç müdahale ya da servis erişim sorunu.\n\n🛡️ Önerilen kontrol\nKaynak ve başarılı/başarısız olayları korele et; eşik alarmı ve müdahale kaydını örnekle.\n\n❌ Diğer yanıtların değerlendirmesi\n• Veritabanı kesin ele geçirilmiştir: Başarısız doğrulama başarı kanıtı değildir.\n• İki deneme kesin uygulama arızasıdır: Kök neden ek bağlam olmadan belirlenemez.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Başarısız kimlik doğrulama",
+        "PostgreSQL 16"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 38,
+      "card_pages": [],
+      "image": "database-auditor/screen_038.png",
+      "evidence": {
+        "command": "PostgreSQL log / PG-CRM / UTC",
+        "output": "2026-10-29 09:02:01 FATAL: password authentication failed for user \"vendor_ro\"\n2026-10-29 09:02:04 FATAL: password authentication failed for user \"vendor_ro\"",
+        "engine": "PostgreSQL 16"
+      },
+      "technical": "FATAL kimlik doğrulama hatası bağlantının reddedildiğini gösterebilir; istemci, zaman ve olay hacmiyle değerlendirilir.",
+      "risk": "Saldırı sinyalinin veya uygulama parola sorununun gözden kaçması.",
+      "impact": "Hesap saldırısına geç müdahale ya da servis erişim sorunu.",
+      "control": "Kaynak ve başarılı/başarısız olayları korele et; eşik alarmı ve müdahale kaydını örnekle."
+    },
+    {
+      "external_id": "database-auditor-v1-039",
+      "number": 39,
+      "chapter": 4,
+      "engine": "MS",
+      "topic": "Aktarım şifrelemesini oturumda test etme",
+      "kind": "image",
+      "prompt": "Bu oturum için doğru yorum hangisi?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-039 üzerinde çalışıyorsun. Platform: Microsoft SQL Server 2022. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "SQL auth_scheme TDE'nin kapalı olduğunu kanıtlar"
+        },
+        {
+          "id": "b",
+          "text": "TRUE bütün istemcilerin güvenilir sertifika doğruladığını kanıtlar"
+        },
+        {
+          "id": "a",
+          "text": "Bağlantı şifreli; sertifika/hostname doğrulamasını istemci ayarından ayrıca test ederim"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nBağlantı şifreli; sertifika/hostname doğrulamasını istemci ayarından ayrıca test ederim\n\n🔧 Teknik gerekçe\nencrypt_option taşıma şifrelemesini gösterir; sunucu kimliğinin doğru doğrulanması ayrı bir istemci kontrolüdür.\n\n⚠️ Risk\nYanlış sunucuya güvenme riskinin atlanması.\n\n💼 İş etkisi\nŞifreli olsa bile doğrulanmayan sunucuya hassas veri iletimi.\n\n🛡️ Önerilen kontrol\nGüvenilir sertifika zinciri ve hostname eşleşmesini uygulama bağlantı ayarlarıyla, negatif test dahil doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• TRUE bütün istemcilerin güvenilir sertifika doğruladığını kanıtlar: Sunucu bayrağı istemcinin TrustServerCertificate ayarını göstermez.\n• SQL auth_scheme TDE'nin kapalı olduğunu kanıtlar: Doğrulama yöntemi disk şifreleme durumu değildir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Aktarım şifrelemesini oturumda test etme",
+        "Microsoft SQL Server 2022"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 39,
+      "card_pages": [],
+      "image": "database-auditor/screen_039.png",
+      "evidence": {
+        "command": "SELECT session_id,encrypt_option,auth_scheme FROM sys.dm_exec_connections WHERE session_id=@@SPID;",
+        "output": "session_id encrypt_option auth_scheme\n62         TRUE           SQL",
+        "engine": "Microsoft SQL Server 2022"
+      },
+      "technical": "encrypt_option taşıma şifrelemesini gösterir; sunucu kimliğinin doğru doğrulanması ayrı bir istemci kontrolüdür.",
+      "risk": "Yanlış sunucuya güvenme riskinin atlanması.",
+      "impact": "Şifreli olsa bile doğrulanmayan sunucuya hassas veri iletimi.",
+      "control": "Güvenilir sertifika zinciri ve hostname eşleşmesini uygulama bağlantı ayarlarıyla, negatif test dahil doğrula."
+    },
+    {
+      "external_id": "database-auditor-v1-040",
+      "number": 40,
+      "chapter": 4,
+      "engine": "MY",
+      "topic": "İzleme eşiği ama bildirim yok",
+      "kind": "image",
+      "prompt": "En belirgin kontrol eksikliği hangisi?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-040 üzerinde çalışıyorsun. Platform: MySQL 8.0. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "94% kesin veri bozulmasıdır"
+        },
+        {
+          "id": "c",
+          "text": "Eşik tanımı tek başına etkin izleme kanıtıdır"
+        },
+        {
+          "id": "a",
+          "text": "Alarm oluşmasına rağmen bir sorumluya teslim edilecek bildirim kanalı yok"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nAlarm oluşmasına rağmen bir sorumluya teslim edilecek bildirim kanalı yok\n\n🔧 Teknik gerekçe\nMonitoring kuralı, teslimat, sorumlu ve müdahale zinciriyle etkilidir; firing durumunun tek başına operasyonel faydası sınırlıdır.\n\n⚠️ Risk\nKapasite tükenmesine geç müdahale.\n\n💼 İş etkisi\nYazma işlemlerinin durması ve uygulama kesintisi.\n\n🛡️ Önerilen kontrol\nSorumlu/eskalasyon kanalını yapılandır; alarmın teslim ve müdahale süresini kontrollü testle kanıtla.\n\n❌ Diğer yanıtların değerlendirmesi\n• 94% kesin veri bozulmasıdır: Doluluk riski olay gerçekleştiğini kanıtlamaz.\n• Eşik tanımı tek başına etkin izleme kanıtıdır: Bildirim ve müdahale kontrolün parçasıdır.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "İzleme eşiği ama bildirim yok",
+        "MySQL 8.0"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 40,
+      "card_pages": [],
+      "image": "database-auditor/screen_040.png",
+      "evidence": {
+        "command": "İzleme paneli / MYSQL-WEB / DB-040",
+        "output": "Disk /mysql-data: 94%\nAlarm eşiği: 90%\nRule: firing\nReceiver: none\nSon teslim edilen bildirim: yok",
+        "engine": "MySQL 8.0"
+      },
+      "technical": "Monitoring kuralı, teslimat, sorumlu ve müdahale zinciriyle etkilidir; firing durumunun tek başına operasyonel faydası sınırlıdır.",
+      "risk": "Kapasite tükenmesine geç müdahale.",
+      "impact": "Yazma işlemlerinin durması ve uygulama kesintisi.",
+      "control": "Sorumlu/eskalasyon kanalını yapılandır; alarmın teslim ve müdahale süresini kontrollü testle kanıtla."
+    },
+    {
+      "external_id": "database-auditor-v1-041",
+      "number": 41,
+      "chapter": 4,
+      "engine": "OR",
+      "topic": "Zaman ve olay korelasyonu",
+      "kind": "image",
+      "prompt": "Bu kayıtları nasıl karşılaştırırsın?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-041 üzerinde çalışıyorsun. Platform: Oracle Database 19c. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "DBTIMEZONE gerçek saatin senkron olduğunu kanıtlar"
+        },
+        {
+          "id": "b",
+          "text": "Üç saat fark doğrudan geç onay kanıtıdır"
+        },
+        {
+          "id": "a",
+          "text": "Saat dilimlerini normalize edip aynı an olup olmadığını doğrularım"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nSaat dilimlerini normalize edip aynı an olup olmadığını doğrularım\n\n🔧 Teknik gerekçe\nSaat dilimi ile saat senkronizasyonu farklı kontrollerdir; audit ve ticket zamanları ortak referansa çevrilmelidir.\n\n⚠️ Risk\nYanlış zaman sırasından hatalı bulgu üretilmesi.\n\n💼 İş etkisi\nGereksiz suçlama veya gerçek kontrol sapmasının atlanması.\n\n🛡️ Önerilen kontrol\nUTC alanlarını ve ofsetleri kullan; saat kaynağı/sapmasını bağımsız doğrula ve sorgu zaman aralığını kaydet.\n\n❌ Diğer yanıtların değerlendirmesi\n• Üç saat fark doğrudan geç onay kanıtıdır: Gösterimler aynı ana karşılık gelebilir.\n• DBTIMEZONE gerçek saatin senkron olduğunu kanıtlar: Zaman dilimi NTP doğruluğu değildir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Zaman ve olay korelasyonu",
+        "Oracle Database 19c"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 41,
+      "card_pages": [],
+      "image": "database-auditor/screen_041.png",
+      "evidence": {
+        "command": "SELECT dbtimezone,sessiontimezone FROM dual;",
+        "output": "DBTIMEZONE +00:00\nSESSIONTIMEZONE +03:00\nAudit EVENT_TIMESTAMP_UTC: 2026-10-29 08:00\nTicket zamanı: 2026-10-29 11:00 +03",
+        "engine": "Oracle Database 19c"
+      },
+      "technical": "Saat dilimi ile saat senkronizasyonu farklı kontrollerdir; audit ve ticket zamanları ortak referansa çevrilmelidir.",
+      "risk": "Yanlış zaman sırasından hatalı bulgu üretilmesi.",
+      "impact": "Gereksiz suçlama veya gerçek kontrol sapmasının atlanması.",
+      "control": "UTC alanlarını ve ofsetleri kullan; saat kaynağı/sapmasını bağımsız doğrula ve sorgu zaman aralığını kaydet."
+    },
+    {
+      "external_id": "database-auditor-v1-042",
+      "number": 42,
+      "chapter": 4,
+      "engine": "MS",
+      "topic": "Log hedefinde başarısızlık",
+      "kind": "image",
+      "prompt": "Audit etkin bayrağı açık olsa da hangi test gerekir?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-042 üzerinde çalışıyorsun. Platform: Microsoft SQL Server 2022. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Etkin bayrak varsa hata önemsizdir"
+        },
+        {
+          "id": "c",
+          "text": "Bu durum logların saldırgan tarafından silindiğini kanıtlar"
+        },
+        {
+          "id": "a",
+          "text": "Hedef yazım hatasının nedenini ve gerçek olayların saklanıp saklanmadığını doğrulamak"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nHedef yazım hatasının nedenini ve gerçek olayların saklanıp saklanmadığını doğrulamak\n\n🔧 Teknik gerekçe\nAudit tanımının açık olması çalışma zamanı hedefinin başarılı olduğunu göstermez; runtime durum ve dosya kanıtı gerekir.\n\n⚠️ Risk\nAudit kayıtlarının üretilmemesi veya hedefe ulaşmaması.\n\n💼 İş etkisi\nDenetim izi kaybı ve soruşturma zorluğu.\n\n🛡️ Önerilen kontrol\nHedef yol/izin/kapasiteyi düzeltme kaydıyla doğrula; örnek olayı audit dosyasında ve izleme zincirinde yeniden test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• Etkin bayrak varsa hata önemsizdir: Çalışma zamanı hedef hatası kayıt akışını bozabilir.\n• Bu durum logların saldırgan tarafından silindiğini kanıtlar: Kök neden disk, izin veya yol sorunu da olabilir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Log hedefinde başarısızlık",
+        "Microsoft SQL Server 2022"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 42,
+      "card_pages": [],
+      "image": "database-auditor/screen_042.png",
+      "evidence": {
+        "command": "SELECT name,status_desc FROM sys.dm_server_audit_status;",
+        "output": "name          status_desc\nSecurityAudit TARGET_CREATION_FAILED\nDosya hedefi: X:\\audit\\",
+        "engine": "Microsoft SQL Server 2022"
+      },
+      "technical": "Audit tanımının açık olması çalışma zamanı hedefinin başarılı olduğunu göstermez; runtime durum ve dosya kanıtı gerekir.",
+      "risk": "Audit kayıtlarının üretilmemesi veya hedefe ulaşmaması.",
+      "impact": "Denetim izi kaybı ve soruşturma zorluğu.",
+      "control": "Hedef yol/izin/kapasiteyi düzeltme kaydıyla doğrula; örnek olayı audit dosyasında ve izleme zincirinde yeniden test et."
+    },
+    {
+      "external_id": "database-auditor-v1-043",
+      "number": 43,
+      "chapter": 4,
+      "engine": "PG",
+      "topic": "Log saklama ve merkezi kopya",
+      "kind": "image",
+      "prompt": "Hangi sapma desteklenir?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-043 üzerinde çalışıyorsun. Platform: PostgreSQL 16. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Merkezi ajan kurulmuşsa teslimat sorunu yoktur"
+        },
+        {
+          "id": "a",
+          "text": "Kayıtların saklama ve merkezi teslimat zinciri 90 günlük kriteri sağlamıyor"
+        },
+        {
+          "id": "b",
+          "text": "Yedi gün log olması bütün sistemin güvensizliğini kanıtlar"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nKayıtların saklama ve merkezi teslimat zinciri 90 günlük kriteri sağlamıyor\n\n🔧 Teknik gerekçe\nSaklama süresi fiili erişilebilir kayıt ve teslimatla test edilir; dosya ayarı veya ajan varlığı yeterli değildir.\n\n⚠️ Risk\nOlay geçmişinin erken kaybı.\n\n💼 İş etkisi\nGeç fark edilen olaylarda kapsam belirleyememe.\n\n🛡️ Önerilen kontrol\nYerel/merkezi saklamayı kriterle hizala; teslimat gecikmesini alarmla ve geçmiş kayıt erişim testiyle izle.\n\n❌ Diğer yanıtların değerlendirmesi\n• Yedi gün log olması bütün sistemin güvensizliğini kanıtlar: Bulgu ilgili saklama ve teslimat kapsamıyla sınırlıdır.\n• Merkezi ajan kurulmuşsa teslimat sorunu yoktur: Kurulum, başarılı teslimat kanıtı değildir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Log saklama ve merkezi kopya",
+        "PostgreSQL 16"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 43,
+      "card_pages": [],
+      "image": "database-auditor/screen_043.png",
+      "evidence": {
+        "command": "Log saklama çalışma kâğıdı / PG-CRM",
+        "output": "Kriter: en az 90 gün\nYerel erişilebilir kayıt: 7 gün\nMerkezi teslimat: 21 gündür kesik\nAlternatif arşiv: yok",
+        "engine": "PostgreSQL 16"
+      },
+      "technical": "Saklama süresi fiili erişilebilir kayıt ve teslimatla test edilir; dosya ayarı veya ajan varlığı yeterli değildir.",
+      "risk": "Olay geçmişinin erken kaybı.",
+      "impact": "Geç fark edilen olaylarda kapsam belirleyememe.",
+      "control": "Yerel/merkezi saklamayı kriterle hizala; teslimat gecikmesini alarmla ve geçmiş kayıt erişim testiyle izle."
+    },
+    {
+      "external_id": "database-auditor-v1-044",
+      "number": 44,
+      "chapter": 4,
+      "engine": "MY",
+      "topic": "Uzun transaction izleme",
+      "kind": "image",
+      "prompt": "İlk doğru denetim adımı hangisi?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-044 üzerinde çalışıyorsun. Platform: MySQL 8.0. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "RUNNING her zaman veri bozulmasıdır"
+        },
+        {
+          "id": "c",
+          "text": "Oturumu onaysız sonlandırmak"
+        },
+        {
+          "id": "a",
+          "text": "Dört saatlik transactionın iş gerekçesi, kilit/undo etkisi ve alarm ihtiyacını doğrulamak"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nDört saatlik transactionın iş gerekçesi, kilit/undo etkisi ve alarm ihtiyacını doğrulamak\n\n🔧 Teknik gerekçe\nUzun açık transaction kilit ve undo kaynak tüketimiyle ilişkili olabilir; tek satır gerçek blokaj olduğunu kanıtlamaz.\n\n⚠️ Risk\nUzun transactionın kaynak ve beklemeler üzerindeki etkisinin izlenmemesi.\n\n💼 İş etkisi\nİşlem gecikmesi ve hizmet kapasitesinin azalması.\n\n🛡️ Önerilen kontrol\nİş kritikliğine uygun süre eşikleri, sorumlu ve eskalasyon belirle; gerçek bekleme ve kontrollü müdahale kayıtlarını test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• RUNNING her zaman veri bozulmasıdır: Transaction durumu veri hatasını kanıtlamaz.\n• Oturumu onaysız sonlandırmak: Üretim sonlandırması iş etkisi ve yetkilendirme gerektirir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Uzun transaction izleme",
+        "MySQL 8.0"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 44,
+      "card_pages": [],
+      "image": "database-auditor/screen_044.png",
+      "evidence": {
+        "command": "SELECT trx_mysql_thread_id,trx_started,trx_state FROM information_schema.innodb_trx;",
+        "output": "trx_mysql_thread_id trx_started         trx_state\n417                 2026-10-29 08:00:00 RUNNING\nÖlçüm zamanı: 2026-10-29 12:00:00 UTC; oturum saat dilimi UTC\nİzleme: uzun transaction alarmı tanımsız",
+        "engine": "MySQL 8.0"
+      },
+      "technical": "Uzun açık transaction kilit ve undo kaynak tüketimiyle ilişkili olabilir; tek satır gerçek blokaj olduğunu kanıtlamaz.",
+      "risk": "Uzun transactionın kaynak ve beklemeler üzerindeki etkisinin izlenmemesi.",
+      "impact": "İşlem gecikmesi ve hizmet kapasitesinin azalması.",
+      "control": "İş kritikliğine uygun süre eşikleri, sorumlu ve eskalasyon belirle; gerçek bekleme ve kontrollü müdahale kayıtlarını test et."
+    },
+    {
+      "external_id": "database-auditor-v1-045",
+      "number": 45,
+      "chapter": 5,
+      "engine": "PG",
+      "topic": "PITR zinciri ve RPO",
+      "kind": "image",
+      "prompt": "Doğru denetim yaklaşımı hangisi?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-045 üzerinde çalışıyorsun. Platform: PostgreSQL 16. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "archive_mode on olduğu için RPO kesin karşılanır"
+        },
+        {
+          "id": "c",
+          "text": "failed_count tek başına kalıcı veri kaybını kesin kanıtlar"
+        },
+        {
+          "id": "a",
+          "text": "Base backup yanında kesintisiz WAL zincirini ve hedef zamana dönüşü test etmek"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nBase backup yanında kesintisiz WAL zincirini ve hedef zamana dönüşü test etmek\n\n🔧 Teknik gerekçe\nPostgreSQL PITR için uygun base backup ve gerekli WAL kayıtları gerekir; arşivleme niyeti ile kurtarılabilir zincir farklıdır.\n\n⚠️ Risk\nSon işlemlere hedef sürede dönememe.\n\n💼 İş etkisi\nÖdeme verisi kaybı ve uzayan kesinti.\n\n🛡️ Önerilen kontrol\nWAL sürekliliği ve teslimat gecikmesini izle; yalıtılmış ortamda hedef zamana dönüş ve RPO ölçümünü doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• archive_mode on olduğu için RPO kesin karşılanır: Etkin ayar başarılı arşiv zincirini kanıtlamaz.\n• failed_count tek başına kalıcı veri kaybını kesin kanıtlar: Başarısızlık sonrası tekrar ve diğer kopyalar ayrıca incelenir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "PITR zinciri ve RPO",
+        "PostgreSQL 16"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 45,
+      "card_pages": [],
+      "image": "database-auditor/screen_045.png",
+      "evidence": {
+        "command": "SHOW archive_mode; SELECT failed_count,last_failed_wal FROM pg_stat_archiver;",
+        "output": "archive_mode on\nfailed_count 12\nlast_failed_wal 00000001000000000000007A\nSon base backup: dün 00:00 UTC\nGereksinim: RPO 15 dakika; WAL arşivinde doğrulanmış boşluk: 2 saat",
+        "engine": "PostgreSQL 16"
+      },
+      "technical": "PostgreSQL PITR için uygun base backup ve gerekli WAL kayıtları gerekir; arşivleme niyeti ile kurtarılabilir zincir farklıdır.",
+      "risk": "Son işlemlere hedef sürede dönememe.",
+      "impact": "Ödeme verisi kaybı ve uzayan kesinti.",
+      "control": "WAL sürekliliği ve teslimat gecikmesini izle; yalıtılmış ortamda hedef zamana dönüş ve RPO ölçümünü doğrula."
+    },
+    {
+      "external_id": "database-auditor-v1-046",
+      "number": 46,
+      "chapter": 5,
+      "engine": "MY",
+      "topic": "Tam yedek ve binary log zinciri",
+      "kind": "image",
+      "prompt": "Bu zincirle hedef zamana dönüşe güvenilebilir mi?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-046 üzerinde çalışıyorsun. Platform: MySQL 8.0. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hayır; aradaki eksik değişiklik zinciri giderilip gerçek restore testi yapılmalı"
+        },
+        {
+          "id": "b",
+          "text": "Evet; en son log dosyası her geçmiş işlemi içerir"
+        },
+        {
+          "id": "c",
+          "text": "Full backup varsa sonraki değişiklik kayıtları gereksizdir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nHayır; aradaki eksik değişiklik zinciri giderilip gerçek restore testi yapılmalı\n\n🔧 Teknik gerekçe\nPITR başlangıç yedeğiyle uyumlu ve kesintisiz değişiklik kayıtları gerektirir; dosya adları tek başına tamlık kanıtı değildir.\n\n⚠️ Risk\nHedef zamana kadar işlemlerin yeniden uygulanamaması.\n\n💼 İş etkisi\nSipariş ve ödeme bilgilerinde geri dönüş boşluğu.\n\n🛡️ Önerilen kontrol\nYedek koordinatını/GTID kapsamını ve binlog sürekliliğini doğrula; hedef zamana restore testinde kayıt bütünlüğünü ölç.\n\n❌ Diğer yanıtların değerlendirmesi\n• Evet; en son log dosyası her geçmiş işlemi içerir: Her binlog dosyası tam tarihçe değildir.\n• Full backup varsa sonraki değişiklik kayıtları gereksizdir: Hedef zamana dönüş full backup sonrası değişikliklere ihtiyaç duyar.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "Tam yedek ve binary log zinciri",
+        "MySQL 8.0"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 46,
+      "card_pages": [],
+      "image": "database-auditor/screen_046.png",
+      "evidence": {
+        "command": "Yedek envanteri / MYSQL-WEB",
+        "output": "Full backup: 2026-10-28 00:00 UTC\nRestore hedefi: 2026-10-29 10:00 UTC\nMevcut binlog: 28 Ekim 00:00-06:00; 29 Ekim 00:00-10:00\nEksik aralık: 28 Ekim 06:00-24:00",
+        "engine": "MySQL 8.0"
+      },
+      "technical": "PITR başlangıç yedeğiyle uyumlu ve kesintisiz değişiklik kayıtları gerektirir; dosya adları tek başına tamlık kanıtı değildir.",
+      "risk": "Hedef zamana kadar işlemlerin yeniden uygulanamaması.",
+      "impact": "Sipariş ve ödeme bilgilerinde geri dönüş boşluğu.",
+      "control": "Yedek koordinatını/GTID kapsamını ve binlog sürekliliğini doğrula; hedef zamana restore testinde kayıt bütünlüğünü ölç."
+    },
+    {
+      "external_id": "database-auditor-v1-047",
+      "number": 47,
+      "chapter": 5,
+      "engine": "MS",
+      "topic": "Recovery modeli ve log yedekleri",
+      "kind": "image",
+      "prompt": "FULL recovery ayarı kriter için yeterli mi?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-047 üzerinde çalışıyorsun. Platform: Microsoft SQL Server 2022. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Evet; FULL otomatik 15 dakikada log yedeği alır"
+        },
+        {
+          "id": "a",
+          "text": "Hayır; çalışan log yedekleme zinciri ve geri dönüş testi gerekir"
+        },
+        {
+          "id": "c",
+          "text": "FULL bütün verilerin doğruluğunu garanti eder"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nHayır; çalışan log yedekleme zinciri ve geri dönüş testi gerekir\n\n🔧 Teknik gerekçe\nFULL recovery log yedekleriyle noktasal kurtarmayı destekler; düzenli başarılı log yedeği ve uygun zincir ayrıca gerekir.\n\n⚠️ Risk\nBeyan edilen RPO'nun karşılanmaması.\n\n💼 İş etkisi\nOlayda günlerce işlem kaybı ihtimali.\n\n🛡️ Önerilen kontrol\nLog yedek işi, başarısı, zinciri ve temiz ortam PITR testini RPO/RTO hedefiyle doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• Evet; FULL otomatik 15 dakikada log yedeği alır: Recovery modeli zamanlanmış yedek işi değildir.\n• FULL bütün verilerin doğruluğunu garanti eder: Kurtarma modeli iş verisi bütünlüğünü kanıtlamaz.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "Recovery modeli ve log yedekleri",
+        "Microsoft SQL Server 2022"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 47,
+      "card_pages": [],
+      "image": "database-auditor/screen_047.png",
+      "evidence": {
+        "command": "SELECT name,recovery_model_desc FROM sys.databases WHERE name='payments';",
+        "output": "name     recovery_model_desc\npayments FULL\nBackup history: günlük full; son log backup 2026-10-20\nKriter: RPO 15 dakika; denetim 2026-10-29",
+        "engine": "Microsoft SQL Server 2022"
+      },
+      "technical": "FULL recovery log yedekleriyle noktasal kurtarmayı destekler; düzenli başarılı log yedeği ve uygun zincir ayrıca gerekir.",
+      "risk": "Beyan edilen RPO'nun karşılanmaması.",
+      "impact": "Olayda günlerce işlem kaybı ihtimali.",
+      "control": "Log yedek işi, başarısı, zinciri ve temiz ortam PITR testini RPO/RTO hedefiyle doğrula."
+    },
+    {
+      "external_id": "database-auditor-v1-048",
+      "number": 48,
+      "chapter": 5,
+      "engine": "OR",
+      "topic": "RMAN iş başarısı ve kurtarma testi",
+      "kind": "image",
+      "prompt": "Hangi eksik kanıt istenmeli?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-048 üzerinde çalışıyorsun. Platform: Oracle Database 19c. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "COMPLETED tüm RTO hedeflerini kanıtlar"
+        },
+        {
+          "id": "c",
+          "text": "RESTORE VALIDATE tek başına iş uygulamasının açıldığını kanıtlar"
+        },
+        {
+          "id": "a",
+          "text": "Yalıtılmış ortamda restore/recover ve işlevsel veri doğrulaması"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nYalıtılmış ortamda restore/recover ve işlevsel veri doğrulaması\n\n🔧 Teknik gerekçe\nRMAN doğrulamaları yararlıdır; tam geri dönüş, recovery, açılış ve uygulama veri kontrolünü ayrıca kanıtlamak gerekir.\n\n⚠️ Risk\nKullanılamayan yedeğin geç fark edilmesi.\n\n💼 İş etkisi\nUzun kesinti veya erişilemeyen finansal kayıtlar.\n\n🛡️ Önerilen kontrol\nYetkili yalıtılmış ortamda geri dönüş ve uygulama kontrolü yap; süreyi ve kaybedilen veri aralığını hedeflerle karşılaştır.\n\n❌ Diğer yanıtların değerlendirmesi\n• COMPLETED tüm RTO hedeflerini kanıtlar: Yedek iş başarısı ölçülmüş kurtarma süresi değildir.\n• RESTORE VALIDATE tek başına iş uygulamasının açıldığını kanıtlar: Doğrulama gerçek işlevsel geri dönüşle aynı değildir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "RMAN iş başarısı ve kurtarma testi",
+        "Oracle Database 19c"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 48,
+      "card_pages": [],
+      "image": "database-auditor/screen_048.png",
+      "evidence": {
+        "command": "RMAN job report / ORA-PAY",
+        "output": "Last BACKUP DATABASE PLUS ARCHIVELOG: COMPLETED\nLast RESTORE VALIDATE: none\nLast isolated restore + recover + open: none\nKriter: üç ayda bir geri dönüş testi",
+        "engine": "Oracle Database 19c"
+      },
+      "technical": "RMAN doğrulamaları yararlıdır; tam geri dönüş, recovery, açılış ve uygulama veri kontrolünü ayrıca kanıtlamak gerekir.",
+      "risk": "Kullanılamayan yedeğin geç fark edilmesi.",
+      "impact": "Uzun kesinti veya erişilemeyen finansal kayıtlar.",
+      "control": "Yetkili yalıtılmış ortamda geri dönüş ve uygulama kontrolü yap; süreyi ve kaybedilen veri aralığını hedeflerle karşılaştır."
+    },
+    {
+      "external_id": "database-auditor-v1-049",
+      "number": 49,
+      "chapter": 5,
+      "engine": "MS",
+      "topic": "Backup VERIFYONLY sınırı",
+      "kind": "image",
+      "prompt": "Bu ekran hangi sonuca yeter?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-049 üzerinde çalışıyorsun. Platform: Microsoft SQL Server 2022. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Uygulama kesin 5 dakikada açılır"
+        },
+        {
+          "id": "a",
+          "text": "Yedek seti için VERIFYONLY kontrolü geçti; tam restore ve işlev kanıtı eksik"
+        },
+        {
+          "id": "c",
+          "text": "Bütün veriler iş açısından mutlak doğrudur"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nYedek seti için VERIFYONLY kontrolü geçti; tam restore ve işlev kanıtı eksik\n\n🔧 Teknik gerekçe\nVERIFYONLY yararlı yedek okunabilirlik/tamlık kontrolleri yapar; gerçek restore veya mantıksal iş kontrolünün yerine geçmez.\n\n⚠️ Risk\nSınırlı testin tam kurtarma güvencesi sayılması.\n\n💼 İş etkisi\nKrizde beklenmeyen bağımlılık veya veri hataları.\n\n🛡️ Önerilen kontrol\nYedek doğrulamasını gerçek restore, DBCC/uygun bütünlük ve uygulama testleriyle tamamla; RTO ölç.\n\n❌ Diğer yanıtların değerlendirmesi\n• Uygulama kesin 5 dakikada açılır: VERIFYONLY kurtarma süresi ölçmez.\n• Bütün veriler iş açısından mutlak doğrudur: Yedek doğrulaması iş kurallarını test etmez.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "Backup VERIFYONLY sınırı",
+        "Microsoft SQL Server 2022"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 49,
+      "card_pages": [],
+      "image": "database-auditor/screen_049.png",
+      "evidence": {
+        "command": "RESTORE VERIFYONLY FROM DISK='D:\\backup\\payments.bak';",
+        "output": "The backup set on file 1 is valid.\nGerçek restore tatbikatı: yapılmadı\nUygulama kontrolü: yapılmadı",
+        "engine": "Microsoft SQL Server 2022"
+      },
+      "technical": "VERIFYONLY yararlı yedek okunabilirlik/tamlık kontrolleri yapar; gerçek restore veya mantıksal iş kontrolünün yerine geçmez.",
+      "risk": "Sınırlı testin tam kurtarma güvencesi sayılması.",
+      "impact": "Krizde beklenmeyen bağımlılık veya veri hataları.",
+      "control": "Yedek doğrulamasını gerçek restore, DBCC/uygun bütünlük ve uygulama testleriyle tamamla; RTO ölç."
+    },
+    {
+      "external_id": "database-auditor-v1-050",
+      "number": 50,
+      "chapter": 5,
+      "engine": "PG",
+      "topic": "Yama uyumunda kapsam",
+      "kind": "image",
+      "prompt": "Denetçi hangi ek kanıtı istemeli?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-050 üzerinde çalışıyorsun. Platform: PostgreSQL 16. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "16.x görüldüğü için bütün düzeltmeler uygulanmıştır"
+        },
+        {
+          "id": "c",
+          "text": "Sadece en büyük sürüm numarası güvenliği kanıtlar"
+        },
+        {
+          "id": "a",
+          "text": "Tam build/paket kaynağı ve ilgili üretici/dağıtım düzeltme eşlemesini"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nTam build/paket kaynağı ve ilgili üretici/dağıtım düzeltme eşlemesini\n\n🔧 Teknik gerekçe\nYama denetimi tam sürüm/build, dağıtım kaynağı ve ilgili güvenlik düzeltmesi eşlemesi gerektirir; örnek x değeri gerçek build değildir.\n\n⚠️ Risk\nGiderilmemiş güvenlik açığının yanlışlıkla kapatılması.\n\n💼 İş etkisi\nVeri ve hizmetin bilinen zayıflığa açık kalması.\n\n🛡️ Önerilen kontrol\nGeçerli üretici duyurusu ve paket/backport kanıtını kullan; bakım kaydı ve çalışan sürümü yeniden doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• 16.x görüldüğü için bütün düzeltmeler uygulanmıştır: Ana sürüm ailesi yama seviyesini kanıtlamaz.\n• Sadece en büyük sürüm numarası güvenliği kanıtlar: Backport ve ürün desteği dikkate alınmalıdır.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "Yama uyumunda kapsam",
+        "PostgreSQL 16"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 50,
+      "card_pages": [],
+      "image": "database-auditor/screen_050.png",
+      "evidence": {
+        "command": "Yama kontrol kaydı / PG-CRM",
+        "output": "Sürüm kanıtı: PostgreSQL 16.x\nOnaylı güvenlik bülteni: kurum kaydı SEC-2026-14\nKayıt: dağıtım backport durumu incelenmedi\nPaket kaynağı ve tam build: yok",
+        "engine": "PostgreSQL 16"
+      },
+      "technical": "Yama denetimi tam sürüm/build, dağıtım kaynağı ve ilgili güvenlik düzeltmesi eşlemesi gerektirir; örnek x değeri gerçek build değildir.",
+      "risk": "Giderilmemiş güvenlik açığının yanlışlıkla kapatılması.",
+      "impact": "Veri ve hizmetin bilinen zayıflığa açık kalması.",
+      "control": "Geçerli üretici duyurusu ve paket/backport kanıtını kullan; bakım kaydı ve çalışan sürümü yeniden doğrula."
+    },
+    {
+      "external_id": "database-auditor-v1-051",
+      "number": 51,
+      "chapter": 5,
+      "engine": "OR",
+      "topic": "SQL patch uygulama sonucu",
+      "kind": "image",
+      "prompt": "Doğru yaklaşım hangisi?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-051 üzerinde çalışıyorsun. Platform: Oracle Database 19c. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Son satır APPLY olduğu için başarı kesindir"
+        },
+        {
+          "id": "a",
+          "text": "Hatalı SQL patch adımını ve binary/SQL patch envanteri tutarlılığını incelemek"
+        },
+        {
+          "id": "c",
+          "text": "WITH ERRORS bütün database verisini bozmuştur"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nHatalı SQL patch adımını ve binary/SQL patch envanteri tutarlılığını incelemek\n\n🔧 Teknik gerekçe\nDBA_REGISTRY_SQLPATCH SQL patch uygulama kaydıdır; OPatch binary envanteri ve CDB/PDB kapsamıyla uzlaştırılmalıdır.\n\n⚠️ Risk\nEksik veya tutarsız yama uygulaması.\n\n💼 İş etkisi\nBilinen zayıflıkların sürmesi veya işlev sorunları.\n\n🛡️ Önerilen kontrol\nUygulama loglarını yetkili DBA ile incele; gerekli konteynerlerde başarılı SQL/binary yama uyumunu ve işlev testini doğrula.\n\n❌ Diğer yanıtların değerlendirmesi\n• Son satır APPLY olduğu için başarı kesindir: ACTION ile STATUS ayrı alanlardır.\n• WITH ERRORS bütün database verisini bozmuştur: Hata durumu gerçekleşmiş veri bozulmasını kanıtlamaz.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "SQL patch uygulama sonucu",
+        "Oracle Database 19c"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 51,
+      "card_pages": [],
+      "image": "database-auditor/screen_051.png",
+      "evidence": {
+        "command": "SELECT patch_id,action,status FROM dba_registry_sqlpatch ORDER BY action_time;",
+        "output": "PATCH_ID ACTION STATUS\n12345001 APPLY  SUCCESS\n12345002 APPLY  WITH ERRORS\nPatch numaraları sentetik; kapsam: ORA-PAY / ilgili PDB",
+        "engine": "Oracle Database 19c"
+      },
+      "technical": "DBA_REGISTRY_SQLPATCH SQL patch uygulama kaydıdır; OPatch binary envanteri ve CDB/PDB kapsamıyla uzlaştırılmalıdır.",
+      "risk": "Eksik veya tutarsız yama uygulaması.",
+      "impact": "Bilinen zayıflıkların sürmesi veya işlev sorunları.",
+      "control": "Uygulama loglarını yetkili DBA ile incele; gerekli konteynerlerde başarılı SQL/binary yama uyumunu ve işlev testini doğrula."
+    },
+    {
+      "external_id": "database-auditor-v1-052",
+      "number": 52,
+      "chapter": 5,
+      "engine": "MY",
+      "topic": "Replika ile yedek ayrımı",
+      "kind": "image",
+      "prompt": "Hangi değerlendirme doğrudur?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-052 üzerinde çalışıyorsun. Platform: MySQL 8.0. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Sıfır gecikme bütün yanlış silmeleri geri alır"
+        },
+        {
+          "id": "a",
+          "text": "Sağlıklı replika bağımsız geri dönüş yedeğinin yerini tutmaz"
+        },
+        {
+          "id": "c",
+          "text": "Replika hiçbir kullanılabilirlik faydası sağlamaz"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nSağlıklı replika bağımsız geri dönüş yedeğinin yerini tutmaz\n\n🔧 Teknik gerekçe\nReplikasyon erişilebilirliğe yardımcı olur; istenmeyen değişiklik ve fidye etkisi de replike olabilir. Ayrı geri dönüş noktaları gerekir.\n\n⚠️ Risk\nBirincil ve replikanın aynı mantıksal hatayı taşıması.\n\n💼 İş etkisi\nYedeksiz veri kaybı ve uzun hizmet kesintisi.\n\n🛡️ Önerilen kontrol\nUygun izole/değiştirilemez yedekler ve saklama noktaları kur; silme senaryosunda kontrollü geri dönüşü test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• Sıfır gecikme bütün yanlış silmeleri geri alır: Hata da hızlı biçimde replike olabilir.\n• Replika hiçbir kullanılabilirlik faydası sağlamaz: Replika faydalıdır ama farklı riski hedefler.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "Replika ile yedek ayrımı",
+        "MySQL 8.0"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 52,
+      "card_pages": [],
+      "image": "database-auditor/screen_052.png",
+      "evidence": {
+        "command": "Topoloji ve kontrol paneli / MYSQL-WEB",
+        "output": "Primary -> Replica: healthy\nReplica delay: 0 s\nİzole/immutable backup: yok\nKazara DELETE replike ediliyor: evet",
+        "engine": "MySQL 8.0"
+      },
+      "technical": "Replikasyon erişilebilirliğe yardımcı olur; istenmeyen değişiklik ve fidye etkisi de replike olabilir. Ayrı geri dönüş noktaları gerekir.",
+      "risk": "Birincil ve replikanın aynı mantıksal hatayı taşıması.",
+      "impact": "Yedeksiz veri kaybı ve uzun hizmet kesintisi.",
+      "control": "Uygun izole/değiştirilemez yedekler ve saklama noktaları kur; silme senaryosunda kontrollü geri dönüşü test et."
+    },
+    {
+      "external_id": "database-auditor-v1-053",
+      "number": 53,
+      "chapter": 5,
+      "engine": "MS",
+      "topic": "Yedek deposu görev ayrılığı",
+      "kind": "image",
+      "prompt": "Öncelikli risk hangisi?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-053 üzerinde çalışıyorsun. Platform: Microsoft SQL Server 2022. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Veritabanı servis kimliğinin tüm kurtarma kopyalarını silebilmesi"
+        },
+        {
+          "id": "b",
+          "text": "Create yetkisi hiçbir yedek işinde gerekmez"
+        },
+        {
+          "id": "c",
+          "text": "ACL'de read olması tüm verilerin sızdığına kanıttır"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nVeritabanı servis kimliğinin tüm kurtarma kopyalarını silebilmesi\n\n🔧 Teknik gerekçe\nYedek erişimi, silme yetkisi, saklama kilidi ve ayrı kimlikler kurtarma dayanıklılığını belirler.\n\n⚠️ Risk\nTek kimlik ele geçirilmesinde asıl veri ve yedeklerin birlikte kaybı.\n\n💼 İş etkisi\nKurtarılamayan kesinti ve kalıcı kayıt kaybı.\n\n🛡️ Önerilen kontrol\nÜretim ve kurtarma yönetimini ayır; silme/retention yetkisini sınırla ve bağımsız kopyadan dönüşü test et.\n\n❌ Diğer yanıtların değerlendirmesi\n• Create yetkisi hiçbir yedek işinde gerekmez: Yedek üretmek için kontrollü yazma gerekebilir.\n• ACL'de read olması tüm verilerin sızdığına kanıttır: Yetki ile gerçekleşmiş olay farklıdır.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "Yedek deposu görev ayrılığı",
+        "Microsoft SQL Server 2022"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 53,
+      "card_pages": [],
+      "image": "database-auditor/screen_053.png",
+      "evidence": {
+        "command": "Yedek deposu erişim incelemesi / SQL-ERP",
+        "output": "SQL servis hesabı: svc_sql\nRepo ACL: svc_sql -> create, read, delete all backups\nImmutable retention: disabled\nBağımsız kurtarma kopyası: yok",
+        "engine": "Microsoft SQL Server 2022"
+      },
+      "technical": "Yedek erişimi, silme yetkisi, saklama kilidi ve ayrı kimlikler kurtarma dayanıklılığını belirler.",
+      "risk": "Tek kimlik ele geçirilmesinde asıl veri ve yedeklerin birlikte kaybı.",
+      "impact": "Kurtarılamayan kesinti ve kalıcı kayıt kaybı.",
+      "control": "Üretim ve kurtarma yönetimini ayır; silme/retention yetkisini sınırla ve bağımsız kopyadan dönüşü test et."
+    },
+    {
+      "external_id": "database-auditor-v1-054",
+      "number": 54,
+      "chapter": 5,
+      "engine": "OR",
+      "topic": "Bulgu kapatma ve güncel kanıt",
+      "kind": "image",
+      "prompt": "Bulguyu nasıl kapatırsın?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-054 üzerinde çalışıyorsun. Platform: Oracle Database 19c. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Ticket kapandıysa teknik kanıt gerekmez"
+        },
+        {
+          "id": "a",
+          "text": "Güncel idari yetki ve uygulama bağımlılığı yeniden testini değişiklik kaydıyla doğrulayınca"
+        },
+        {
+          "id": "c",
+          "text": "Eski ekranı yeni tarihli rapora koymak yeterli"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nGüncel idari yetki ve uygulama bağımlılığı yeniden testini değişiklik kaydıyla doğrulayınca\n\n🔧 Teknik gerekçe\nKapatma kanıtı güncel, ilgili hedefe ait ve kriteri doğrudan test eden nitelikte olmalıdır; işlev etkisi de doğrulanır.\n\n⚠️ Risk\nDüzelmemiş yüksek ayrıcalığın kapatılmış sayılması.\n\n💼 İş etkisi\nSüren yönetici erişimi ve yanlış güvence.\n\n🛡️ Önerilen kontrol\nGüncel V$PWFILE_USERS, ilgili roller ve uygulama testini yetkili DBA'dan al; kriter ve kayıtla uzlaştır.\n\n❌ Diğer yanıtların değerlendirmesi\n• Ticket kapandıysa teknik kanıt gerekmez: Beyan kontrolün düzeldiğini kanıtlamaz.\n• Eski ekranı yeni tarihli rapora koymak yeterli: Kanıtın tarihi ve kaynağı korunmalıdır.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "Bulgu kapatma ve güncel kanıt",
+        "Oracle Database 19c"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 54,
+      "card_pages": [],
+      "image": "database-auditor/screen_054.png",
+      "evidence": {
+        "command": "Denetim çalışma kâğıdı DB-054",
+        "output": "Bulgu: APP_BATCH SYSDBA\nTicket: yetki kaldırıldı, 2026-10-29\nEk: V$PWFILE_USERS ekranı, 2026-09-01\nGüncel yeniden test: yok",
+        "engine": "Oracle Database 19c"
+      },
+      "technical": "Kapatma kanıtı güncel, ilgili hedefe ait ve kriteri doğrudan test eden nitelikte olmalıdır; işlev etkisi de doğrulanır.",
+      "risk": "Düzelmemiş yüksek ayrıcalığın kapatılmış sayılması.",
+      "impact": "Süren yönetici erişimi ve yanlış güvence.",
+      "control": "Güncel V$PWFILE_USERS, ilgili roller ve uygulama testini yetkili DBA'dan al; kriter ve kayıtla uzlaştır."
+    },
+    {
+      "external_id": "database-auditor-v1-055",
+      "number": 55,
+      "chapter": 5,
+      "engine": "PG",
+      "topic": "Final risk önceliklendirmesi",
+      "kind": "image",
+      "prompt": "Denetçi ilk olarak hangi yaklaşımı seçmeli?",
+      "context": "NovaTek veritabanı denetimindesin. Selin (Denetim Yöneticin) ve Derya (DBA) ile kanıt DB-055 üzerinde çalışıyorsun. Platform: PostgreSQL 16. Görseli incele, kanıtın kapsamına göre karar ver. Ekran kurgusal eğitim kanıtıdır; üretimde sorgu çalıştırman gerekmez.",
+      "options": [
+        {
+          "id": "b",
+          "text": "B sayesinde bütün sistemlerin güvenli olduğunu ilan eder"
+        },
+        {
+          "id": "a",
+          "text": "A için yüksek ayrıcalığı doğrulayıp sorumluya öncelikli düzeltme planı açar; B ve C için eksik testleri sürdürür"
+        },
+        {
+          "id": "c",
+          "text": "A hesabını onaysız silip denetimi bitirir"
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "✅ Doğru yanıt\nA için yüksek ayrıcalığı doğrulayıp sorumluya öncelikli düzeltme planı açar; B ve C için eksik testleri sürdürür\n\n🔧 Teknik gerekçe\nÖncelik kanıtlanmış kontrol sapması, etki ve maruziyetle belirlenir; eksik kanıt ile gerçekleşmiş ihlal aynı değildir.\n\n⚠️ Risk\nGereksiz yüksek ayrıcalık ve kanıtlanmamış kurtarma dayanıklılığı.\n\n💼 İş etkisi\nVeri gizliliği, bütünlüğü ve hizmet sürekliliğinin birlikte etkilenmesi.\n\n🛡️ Önerilen kontrol\nBulguya kriter/koşul/risk/sorumlu/tarih ekle; onaylı minimum yetki planı ve ölçülebilir yeniden testle takip et.\n\n❌ Diğer yanıtların değerlendirmesi\n• B sayesinde bütün sistemlerin güvenli olduğunu ilan eder: Tek bağlantı tüm kapsamı kanıtlamaz.\n• A hesabını onaysız silip denetimi bitirir: Düzeltme üretim yetkilendirmesi ve bağımlılık testi gerektirir.",
+      "hint": "Önce ekranın hangi sistem/nesne/oturumu kapsadığını ve onaylı kriteri ayır; ayar, gerçek kullanım ve kontrol sonucu aynı kanıt değildir.",
+      "difficulty": "advanced",
+      "goals": [
+        "Final risk önceliklendirmesi",
+        "PostgreSQL 16"
+      ],
+      "base_xp": 10,
+      "published": true,
+      "premium": true,
+      "order": 55,
+      "card_pages": [],
+      "image": "database-auditor/screen_055.png",
+      "evidence": {
+        "command": "Sonuç panosu / NovaTek / DB-055",
+        "output": "A: report_app SUPERUSER; yalnız rapor okuma ihtiyacı\nB: örnek oturum TLSv1.3; diğerleri test edilmedi\nC: başarılı base backup; restore tatbikatı yok\nKısıt: üretimde doğrudan değişiklik yetkin yok",
+        "engine": "PostgreSQL 16"
+      },
+      "technical": "Öncelik kanıtlanmış kontrol sapması, etki ve maruziyetle belirlenir; eksik kanıt ile gerçekleşmiş ihlal aynı değildir.",
+      "risk": "Gereksiz yüksek ayrıcalık ve kanıtlanmamış kurtarma dayanıklılığı.",
+      "impact": "Veri gizliliği, bütünlüğü ve hizmet sürekliliğinin birlikte etkilenmesi.",
+      "control": "Bulguya kriter/koşul/risk/sorumlu/tarih ekle; onaylı minimum yetki planı ve ölçülebilir yeniden testle takip et."
+    }
+  ]
+}

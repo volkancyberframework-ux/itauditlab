@@ -1,0 +1,58 @@
+{
+  "questions": 55,
+  "images": 55,
+  "resolution": [
+    2560,
+    1440
+  ],
+  "chapters": [
+    11,
+    11,
+    11,
+    11,
+    11
+  ],
+  "platforms": {
+    "PostgreSQL 16": 14,
+    "MySQL 8.0": 13,
+    "SQL Server 2022": 14,
+    "Oracle Database 19c": 14
+  },
+  "django_tests": {
+    "passed": 20,
+    "suites": [
+      "mobile_api.test_database_auditor",
+      "mobile_api.test_linux_auditor",
+      "mobile_web.test_ad_web"
+    ]
+  },
+  "viewer_math_tests": 2,
+  "browser_frontend_screens": {
+    "default_viewport": 55,
+    "390x844": 55
+  },
+  "browser_interactions": [
+    "wheel",
+    "double_click",
+    "drag",
+    "synthetic_two_pointer_pinch",
+    "fit",
+    "reset",
+    "escape",
+    "answer_preserved",
+    "close",
+    "load_failure_blocks_answer",
+    "retry"
+  ],
+  "preserved": [
+    "Linux content and images",
+    "existing Linux user progress",
+    "existing web CSS",
+    "native Flutter files"
+  ],
+  "limits": [
+    "QA uses synthetic evidence; SQL not executed against four DB engines",
+    "Physical iOS/Android touch not tested",
+    "Browser fixture uses mock API; grading and progress independently checked through Django API tests"
+  ]
+}
