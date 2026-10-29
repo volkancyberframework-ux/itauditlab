@@ -129,7 +129,7 @@ class Control(models.Model):
         constraints=[models.UniqueConstraint(fields=['audit','code'],name='unique_audit_control_code'),models.UniqueConstraint(fields=['audit','source'],name='unique_audit_catalog_control')]
 class ResponseRevision(models.Model):
     control=models.ForeignKey(Control,on_delete=models.PROTECT,related_name='revisions')
-    actor=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.PROTECT)
+    actor=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL,null=True,blank=True)
     status=models.CharField(max_length=20,choices=STATUSES)
     explanation=models.TextField()
     declaration=models.BooleanField(default=True)
@@ -168,7 +168,7 @@ class Finding(models.Model):
 
 class FindingUpdate(models.Model):
     finding=models.ForeignKey(Finding,on_delete=models.PROTECT,related_name='updates')
-    actor=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.PROTECT)
+    actor=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL,null=True,blank=True)
     role=models.CharField(max_length=20)
     action=models.CharField(max_length=30,choices=[('remediate','Giderim bildirimi'),('dispute','İtiraz'),('close','Kapanış onayı'),('reopen','Tekrar açıldı'),('reject','İtiraz/giderim reddi'),('acknowledge','Bulgu kabul edildi'),('plan','Risk giderilecek'),('request_risk','Risk kabulü talebi'),('accept_risk','Yönetici risk kabul onayı'),('set_due','Son tarih değişti')])
     explanation=models.TextField()
@@ -177,7 +177,7 @@ class FindingUpdate(models.Model):
 
 class Suggestion(models.Model):
     audit=models.ForeignKey(Audit,on_delete=models.PROTECT,related_name='suggestions')
-    author=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.PROTECT)
+    author=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL,null=True,blank=True)
     title=models.CharField(max_length=180)
     framework=models.CharField(max_length=80)
     description=models.TextField()
@@ -190,7 +190,7 @@ class Suggestion(models.Model):
 
 class Activity(models.Model):
     audit=models.ForeignKey(Audit,on_delete=models.PROTECT)
-    actor=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.PROTECT,null=True)
+    actor=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL,null=True,blank=True)
     role=models.CharField(max_length=20)
     action=models.CharField(max_length=80)
     metadata=models.JSONField(default=dict)
@@ -205,7 +205,7 @@ class Notification(models.Model):
 
 class ControlEmail(models.Model):
     control=models.ForeignKey(Control,on_delete=models.PROTECT)
-    recipient=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.PROTECT)
+    recipient=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL,null=True,blank=True)
     email=models.EmailField()
     subject=models.CharField(max_length=250)
     body=models.TextField()
@@ -227,7 +227,7 @@ class CardAccess(models.Model):
 
 class CardDraft(models.Model):
     control=models.OneToOneField(Control,on_delete=models.CASCADE,related_name='card_draft')
-    actor=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.PROTECT)
+    actor=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL,null=True,blank=True)
     status=models.CharField(max_length=20,choices=STATUSES[:-1])
     explanation=models.TextField(blank=True)
     updated_at=models.DateTimeField(auto_now=True)

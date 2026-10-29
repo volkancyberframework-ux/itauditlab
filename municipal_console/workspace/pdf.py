@@ -42,7 +42,7 @@ def render_findings(audit,findings):
         if updates:
             for update_index,update in enumerate(reversed(updates)):
                 prefix=[para('İtiraz ve giderim geçmişi',ParagraphStyle('bold2',parent=body,fontName='GRC-Bold'))] if update_index==0 else []
-                story.append(KeepTogether(prefix+[para(f'{timezone.localtime(update.created_at):%d.%m.%Y %H:%M} | {update.get_action_display()} | {update.actor.get_full_name() or update.actor.email}',small),para(update.explanation)]))
+                story.append(KeepTogether(prefix+[para(f'{timezone.localtime(update.created_at):%d.%m.%Y %H:%M} | {update.get_action_display()} | {user_label(update.actor)}',small),para(update.explanation)]))
         story.append(Spacer(1,18))
     def footer(canvas,document):
         canvas.saveState();canvas.setStrokeColor(colors.HexColor('#dae3ea'));canvas.line(42,38,A4[0]-42,38);canvas.setFont('GRC',8);canvas.setFillColor(colors.HexColor('#60788c'));canvas.drawString(42,24,audit.organization.name+' | Kuruma özel denetim raporu');canvas.drawRightString(A4[0]-42,24,f'Sayfa {document.page}');canvas.restoreState()
@@ -81,7 +81,7 @@ def render_controls(audit,rows,role):
             response=row.get('response')
             story.append(KeepTogether([para(it_label(audit)+' yanıtı',bold),para(row['status_label'])]))
             if response:
-                story.extend([para(response.explanation),para(f"{response.actor.get_full_name() or response.actor.email} | {timezone.localtime(response.created_at):%d.%m.%Y %H:%M}",small)])
+                story.extend([para(response.explanation),para(f"{user_label(response.actor)} | {timezone.localtime(response.created_at):%d.%m.%Y %H:%M}",small)])
             if role in ('admin','auditor','executive'):
                 ev=row.get('evaluation')
                 story.append(KeepTogether([para('Denetçi görüşü',bold),para(ev['label'] if ev else 'Değerlendirilmedi')]))
@@ -95,3 +95,7 @@ def render_controls(audit,rows,role):
         canvas.saveState();canvas.setStrokeColor(colors.HexColor('#dae3ea'));canvas.line(42,38,A4[0]-42,38);canvas.setFont('GRC',8);canvas.setFillColor(colors.HexColor('#60788c'));canvas.drawString(42,24,audit.organization.name+' | Denetim kontrolleri');canvas.drawRightString(A4[0]-42,24,f'Sayfa {document.page}');canvas.restoreState()
     doc.build(story,onFirstPage=footer,onLaterPages=footer)
     return out.getvalue()
+
+
+def user_label(user):
+    return (user.get_full_name() or user.email) if user else "Silinmiş kullanıcı"

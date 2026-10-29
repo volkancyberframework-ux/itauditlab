@@ -95,7 +95,7 @@ def deliver_email(pk):
     with transaction.atomic():
         item=ControlEmail.objects.select_for_update().select_related('control__audit','recipient').get(pk=pk)
         if item.delivered_at:return
-        if not item.recipient.is_active or not Membership.objects.filter(user=item.recipient,audit=item.control.audit,role='it').exists():return
+        if not item.recipient_id or not item.recipient.is_active or not Membership.objects.filter(user=item.recipient,audit=item.control.audit,role='it').exists():return
         if settings.EMAIL_BACKEND.endswith('smtp.EmailBackend') and not settings.EMAIL_HOST:return
         item.attempts+=1
         try:
