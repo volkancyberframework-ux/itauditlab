@@ -1,0 +1,4058 @@
+{
+  "slug": "cism-manager-v1",
+  "title": "CISM · Güvenlik Yöneticisi Simülasyonu",
+  "description": "100 özgün vaka; CISA simülasyonundaki aynı altı soru türü ve dağılımı. Dört CISM alanında 25’er uygulama. Dengeli eğitim setidir; resmi sınav sorusu veya resmi sınav ağırlıklarının kopyası değildir. Yalnızca ücretli mobil üyeler.",
+  "modules": [
+    "Domain 1: Bilgi güvenliği yönetişimi",
+    "Domain 2: Bilgi güvenliği risk yönetimi",
+    "Domain 3: Bilgi güvenliği programı",
+    "Domain 4: Olay yönetimi"
+  ],
+  "questions": [
+    {
+      "external_id": "cism-manager-v1-001",
+      "number": 1,
+      "domain": 1,
+      "kind": "choice",
+      "topic": "İş stratejisi",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 1/100\n\nBir lojistik şirketi aynı gün teslimata geçiyor. Güvenlik planı yalnızca yeni antivirüs alımından oluşuyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Geçen yılın kontrol listesini değiştirmeden uygulamak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Güvenlik stratejisi işin değer ve risk hedeflerine hizmet eder."
+        },
+        {
+          "id": "a",
+          "text": "Teslimat hedefleri ve kritik bağımlılıklarla güvenlik stratejisini eşleştirmek",
+          "feedback": "Güvenlik stratejisi işin değer ve risk hedeflerine hizmet eder."
+        },
+        {
+          "id": "b",
+          "text": "Ürün alımını stratejinin tamamı saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Güvenlik stratejisi işin değer ve risk hedeflerine hizmet eder."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nGüvenlik stratejisi işin değer ve risk hedeflerine hizmet eder.\n\n💼 Gerçek iş hayatında\nİş hedefleriyle eşleşen risk ve sonuç ölçütlerini doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "İş stratejisi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 1,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-002",
+      "number": 2,
+      "domain": 1,
+      "kind": "scenario",
+      "topic": "Risk iştahı",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 2/100\n\nKurul hizmet kesintisi toleransını tanımlamadı. Her departman farklı risk kabul eşiği kullanıyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "b",
+          "text": "CISO'nun tüm iş risklerini tek başına kabul etmesi",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. İştah yönetimin yönlendirmesidir; kontrol ekibinin tek taraflı tercihi değildir."
+        },
+        {
+          "id": "c",
+          "text": "Her departmanın en yüksek toleransını kurum standardı yapmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. İştah yönetimin yönlendirmesidir; kontrol ekibinin tek taraflı tercihi değildir."
+        },
+        {
+          "id": "a",
+          "text": "Yönetimle ortak risk iştahı ve karar yetkilerini belirlemek",
+          "feedback": "İştah yönetimin yönlendirmesidir; kontrol ekibinin tek taraflı tercihi değildir."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nİştah yönetimin yönlendirmesidir; kontrol ekibinin tek taraflı tercihi değildir.\n\n💼 Gerçek iş hayatında\nKurul onayı ve iş birimi eşik tutarlılığını incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Risk iştahı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 2,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-003",
+      "number": 3,
+      "domain": 1,
+      "kind": "sentence_order",
+      "topic": "Politika hiyerarşisi",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 3/100\n\nErişim politikası kimlik doğrulamayı zorunlu tutuyor. Ekipler uygulama adımlarını politika metnine sabitlemek istiyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s2",
+          "text": "Sahipleri ve uygun onayları atamak",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. Politika yön verir; standart ve prosedürler uygulanışını detaylandırır."
+        },
+        {
+          "id": "s1",
+          "text": "Politika, standart ve prosedür hiyerarşisini tasarlamak",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. Politika yön verir; standart ve prosedürler uygulanışını detaylandırır."
+        },
+        {
+          "id": "s3",
+          "text": "Belgeleri yayımlayıp sürüm ve uygulamayı izlemek",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. Politika yön verir; standart ve prosedürler uygulanışını detaylandırır."
+        },
+        {
+          "id": "s0",
+          "text": "Belge amaçlarını ve bağlayıcı gereksinimleri belirlemek",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. Politika yön verir; standart ve prosedürler uygulanışını detaylandırır."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nPolitika yön verir; standart ve prosedürler uygulanışını detaylandırır.\n\n💼 Gerçek iş hayatında\nBelge sahipliği ve onay hiyerarşisini kontrol etmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Politika hiyerarşisi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 3,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-004",
+      "number": 4,
+      "domain": 1,
+      "kind": "drag_select",
+      "topic": "Yönetim kurulu raporu",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 4/100\n\nKurul yalnızca engellenen paket sayısını görüyor. Kritik iş riskleri ve bekleyen kararlar sunulmuyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "İş etkisi kalan risk ve karar seçeneklerini raporlamak",
+          "feedback": "Kurulun ihtiyacı operasyon hacmi değil risk ve kaynak kararıdır."
+        },
+        {
+          "id": "b",
+          "text": "Kurula ham logların tamamını göndermek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Kurulun ihtiyacı operasyon hacmi değil risk ve kaynak kararıdır."
+        },
+        {
+          "id": "c",
+          "text": "Sadece satın alınan güvenlik aracı sayısını artırmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Kurulun ihtiyacı operasyon hacmi değil risk ve kaynak kararıdır."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nKurulun ihtiyacı operasyon hacmi değil risk ve kaynak kararıdır.\n\n💼 Gerçek iş hayatında\nRaporlanan ölçütleri iş risklerine bağlamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Yönetim kurulu raporu"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 4,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-005",
+      "number": 5,
+      "domain": 1,
+      "kind": "multi_select",
+      "topic": "Güvenlik komitesi",
+      "prompt": "Bu vakada uygun olan iki tamamlayıcı adımı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 5/100\n\nSatış ve operasyon güvenlik öncelikleri konusunda anlaşamıyor. Konular CISO e-postalarında bekliyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yetki ve eskalasyon kuralları olan çapraz işlevli yönetişim kurmak",
+          "feedback": "Paydaş temsili ve karar yetkisi çatışan hedefleri yönetilebilir kılar."
+        },
+        {
+          "id": "c",
+          "text": "Uyuşmazlığı gizleyerek projeyi başlatmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Paydaş temsili ve karar yetkisi çatışan hedefleri yönetilebilir kılar."
+        },
+        {
+          "id": "d",
+          "text": "Komite sorumlulukları ve karar kayıtlarını doğrulamak",
+          "feedback": "Bu doğrulama kararın uygulanması ve etkinliği için gerekli kanıtı sağlar."
+        },
+        {
+          "id": "b",
+          "text": "Tüm kararları teknik ekibe devretmek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Paydaş temsili ve karar yetkisi çatışan hedefleri yönetilebilir kılar."
+        }
+      ],
+      "answer": [
+        "a",
+        "d"
+      ],
+      "explanation": "🧠 Neden doğru?\nPaydaş temsili ve karar yetkisi çatışan hedefleri yönetilebilir kılar.\n\n💼 Gerçek iş hayatında\nKomite sorumlulukları ve karar kayıtlarını doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Güvenlik komitesi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 5,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-006",
+      "number": 6,
+      "domain": 1,
+      "kind": "choice",
+      "topic": "Bilgi sahibi",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 6/100\n\nMüşteri veri kümesinin teknik sorumlusu belli ancak sınıflandırma ve erişim kararı için iş sahibi yok. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Her geliştiriciyi bağımsız veri sahibi saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Teknik işletim ile iş verisinin karar sorumluluğu farklıdır."
+        },
+        {
+          "id": "a",
+          "text": "İş sahibini ve karar sorumluluklarını atamak",
+          "feedback": "Teknik işletim ile iş verisinin karar sorumluluğu farklıdır."
+        },
+        {
+          "id": "b",
+          "text": "Sınıflandırmayı depolama sağlayıcısına bırakmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Teknik işletim ile iş verisinin karar sorumluluğu farklıdır."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nTeknik işletim ile iş verisinin karar sorumluluğu farklıdır.\n\n💼 Gerçek iş hayatında\nRACI ve veri sahipliği kayıtlarını eşleştirmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Bilgi sahibi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 6,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-007",
+      "number": 7,
+      "domain": 1,
+      "kind": "scenario",
+      "topic": "Güvenlik iş gerekçesi",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 7/100\n\nCISO bütçe için yalnızca ürün fiyatını ve özellik listesini sunuyor; kayıp senaryoları yok. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yatırımı risk azaltımı maliyet ve iş faydasıyla gerekçelendirmek",
+          "feedback": "Yatırım kararı alternatifleri ve iş sonuçlarını görünür kılmalıdır."
+        },
+        {
+          "id": "c",
+          "text": "Araç sayısını tek yatırım getirisi ölçütü yapmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Yatırım kararı alternatifleri ve iş sonuçlarını görünür kılmalıdır."
+        },
+        {
+          "id": "b",
+          "text": "En pahalı ürünü en iyi güvence saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Yatırım kararı alternatifleri ve iş sonuçlarını görünür kılmalıdır."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nYatırım kararı alternatifleri ve iş sonuçlarını görünür kılmalıdır.\n\n💼 Gerçek iş hayatında\nMaliyet varsayımları ve risk azaltım beklentilerini sınamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Güvenlik iş gerekçesi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 7,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-008",
+      "number": 8,
+      "domain": 1,
+      "kind": "sentence_order",
+      "topic": "Kültür ve davranış",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 8/100\n\nÇalışanlar hata bildirirlerse cezalandırıldıkları için şüpheli e-postaları saklıyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Yönetimle cezalandırıcı teşvikleri ve örnek davranışı ele almak",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. Davranış kültür ve teşviklerle şekillenir; katılım oranı yeterli değildir."
+        },
+        {
+          "id": "s2",
+          "text": "Güvenli bildirim kanalını ve geri bildirim sürecini uygulamak",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. Davranış kültür ve teşviklerle şekillenir; katılım oranı yeterli değildir."
+        },
+        {
+          "id": "s0",
+          "text": "Çalışanların bildirim yapmasını engelleyen nedenleri araştırmak",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. Davranış kültür ve teşviklerle şekillenir; katılım oranı yeterli değildir."
+        },
+        {
+          "id": "s3",
+          "text": "Bildirim kalitesi ve gecikme değişimini ölçmek",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. Davranış kültür ve teşviklerle şekillenir; katılım oranı yeterli değildir."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nDavranış kültür ve teşviklerle şekillenir; katılım oranı yeterli değildir.\n\n💼 Gerçek iş hayatında\nBildirim gecikmesi ve geri bildirim deneyimini ölçmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Kültür ve davranış"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 8,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-009",
+      "number": 9,
+      "domain": 1,
+      "kind": "drag_select",
+      "topic": "Sözleşme yükümlülüğü",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 9/100\n\nYeni müşteri sözleşmesi olay bildirimi şartı getiriyor. Operasyon planında bu yükümlülük yok. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yükümlülüğü sorumlu ekip ve olay iletişim sürecine dahil etmek",
+          "feedback": "Bağlayıcı gereksinim operasyonel kontrol ve sahiplikle uygulanır."
+        },
+        {
+          "id": "b",
+          "text": "Sözleşmeyi yalnızca satış arşivinde tutmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Bağlayıcı gereksinim operasyonel kontrol ve sahiplikle uygulanır."
+        },
+        {
+          "id": "c",
+          "text": "Tüm müşterilere aynı varsayılan süreyi uygulamak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Bağlayıcı gereksinim operasyonel kontrol ve sahiplikle uygulanır."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nBağlayıcı gereksinim operasyonel kontrol ve sahiplikle uygulanır.\n\n💼 Gerçek iş hayatında\nHukuk doğrulaması ve süreç eşleşmesini incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Sözleşme yükümlülüğü"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 9,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-010",
+      "number": 10,
+      "domain": 1,
+      "kind": "fill_blank",
+      "topic": "Birleşme yönetişimi",
+      "prompt": "Bu karar hangi temel kavramı uygular? Beklenen kavramın Türkçe adını yaz: “Entegrasyon öncesi risk ve kontrol durumunu değerlendirmek”.",
+      "context": "CISM yönetici simülasyonu · Vaka 10/100\n\nSatın alınan şirketin kimlik ve veri süreçleri bilinmeden sistemleri birleştirme kararı veriliyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [],
+      "answer": [
+        "durum tespiti"
+      ],
+      "explanation": "🧠 Neden doğru?\nBirleşme yeni güven sınırları ve yükümlülükler yaratır.\n\n💼 Gerçek iş hayatında\nKritik varlıklar ve entegrasyon karar yetkilerini doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Birleşme yönetişimi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 10,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-011",
+      "number": 11,
+      "domain": 1,
+      "kind": "choice",
+      "topic": "Güvenlik yetkisi",
+      "prompt": "“Karar ve eskalasyon yetkilerini yönetimce onaylatmak” yaklaşımı bu vaka için uygundur. Doğru mu, yanlış mı?",
+      "context": "CISM yönetici simülasyonu · Vaka 11/100\n\nCISO kritik istisnaları bildiriyor fakat hangi seviyede kimin karar vereceği tanımlı değil. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "dogru",
+          "text": "Doğru",
+          "feedback": "Hesap verebilirlik karar yetkisiyle birlikte tanımlanmalıdır."
+        },
+        {
+          "id": "yanlis",
+          "text": "Yanlış",
+          "feedback": "Hesap verebilirlik karar yetkisiyle birlikte tanımlanmalıdır."
+        }
+      ],
+      "answer": [
+        "dogru"
+      ],
+      "explanation": "🧠 Neden doğru?\nHesap verebilirlik karar yetkisiyle birlikte tanımlanmalıdır.\n\n💼 Gerçek iş hayatında\nYetki matrisini gerçek istisna kararlarıyla test etmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Güvenlik yetkisi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 11,
+      "card_pages": [],
+      "presentation": "true_false"
+    },
+    {
+      "external_id": "cism-manager-v1-012",
+      "number": 12,
+      "domain": 1,
+      "kind": "scenario",
+      "topic": "Kaynak önceliği",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 12/100\n\nİki proje aynı ekibi istiyor: kritik ödeme hizmeti koruması ve düşük riskli görsel portal yenilemesi. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "İş riski ve stratejik katkıyla kaynak önceliğini belirlemek",
+          "feedback": "Kısıtlı kaynak risk ve değer hedeflerine göre tahsis edilir."
+        },
+        {
+          "id": "b",
+          "text": "İlk talep eden ekibe bütün kaynağı vermek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Kısıtlı kaynak risk ve değer hedeflerine göre tahsis edilir."
+        },
+        {
+          "id": "c",
+          "text": "Proje bütçesi yüksek olanı otomatik seçmek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Kısıtlı kaynak risk ve değer hedeflerine göre tahsis edilir."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nKısıtlı kaynak risk ve değer hedeflerine göre tahsis edilir.\n\n💼 Gerçek iş hayatında\nRisk karşılaştırması ve onaylı portföy kararını doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Kaynak önceliği"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 12,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-013",
+      "number": 13,
+      "domain": 1,
+      "kind": "sentence_order",
+      "topic": "Çerçeve seçimi",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 13/100\n\nYönetim her güvenlik standardındaki bütün kontrolleri aynı anda zorunlu yapmak istiyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s2",
+          "text": "Seçilen kontrolleri gerekçeleriyle uyarlayıp onaylatmak",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. Çerçeveler amaç ve bağlama göre uyarlanır; liste büyüklüğü etkinlik değildir."
+        },
+        {
+          "id": "s0",
+          "text": "İş hedefleri ve yükümlülükleri belirlemek",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. Çerçeveler amaç ve bağlama göre uyarlanır; liste büyüklüğü etkinlik değildir."
+        },
+        {
+          "id": "s1",
+          "text": "Çerçeveleri kapsam ve risk ihtiyaçlarıyla karşılaştırmak",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. Çerçeveler amaç ve bağlama göre uyarlanır; liste büyüklüğü etkinlik değildir."
+        },
+        {
+          "id": "s3",
+          "text": "Uygulama ve kontrol etkinliğini gözden geçirmek",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. Çerçeveler amaç ve bağlama göre uyarlanır; liste büyüklüğü etkinlik değildir."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nÇerçeveler amaç ve bağlama göre uyarlanır; liste büyüklüğü etkinlik değildir.\n\n💼 Gerçek iş hayatında\nKapsam gerekçesi ve risk-kontrol eşleşmesini doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Çerçeve seçimi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 13,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-014",
+      "number": 14,
+      "domain": 1,
+      "kind": "drag_select",
+      "topic": "Metrik sahipliği",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 14/100\n\nYönetim panosunda yüzde 98 uyum var ama payda ve veri sahibi açıklanmıyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Yüzde yüksek olduğu için sonucu kabul etmek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Tanımsız payda ve kaynaktan güvenilir yönetim kararı çıkmaz."
+        },
+        {
+          "id": "c",
+          "text": "Sadece grafik rengini değiştirmek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Tanımsız payda ve kaynaktan güvenilir yönetim kararı çıkmaz."
+        },
+        {
+          "id": "a",
+          "text": "Ölçüt tanımı veri kalitesi ve sorumluluğu belirlemek",
+          "feedback": "Tanımsız payda ve kaynaktan güvenilir yönetim kararı çıkmaz."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nTanımsız payda ve kaynaktan güvenilir yönetim kararı çıkmaz.\n\n💼 Gerçek iş hayatında\nHesaplama yöntemini örnek verilerle yeniden üretmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Metrik sahipliği"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 14,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-015",
+      "number": 15,
+      "domain": 1,
+      "kind": "multi_select",
+      "topic": "İstisna yönetişimi",
+      "prompt": "Bu vaka için doğru olan iki amaç–uygulama eşleştirmesini seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 15/100\n\nKritik sistem istisnaları süresiz ve sözlü onaylarla yürütülüyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Etkin risk yönetimi → Sözlü kararı sürekli kontrol muafiyeti saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. İstisna gerekçe sahiplik telafi kontrolü ve gözden geçirme ister."
+        },
+        {
+          "id": "d",
+          "text": "Doğrulama kanıtı → Vade ve yeniden onay kayıtlarını incelemek",
+          "feedback": "Bu doğrulama kararın uygulanması ve etkinliği için gerekli kanıtı sağlar."
+        },
+        {
+          "id": "a",
+          "text": "Uygun karar → Süreli risk değerlendirmeli yetkili istisna süreci kurmak",
+          "feedback": "İstisna gerekçe sahiplik telafi kontrolü ve gözden geçirme ister."
+        },
+        {
+          "id": "c",
+          "text": "Etkin risk yönetimi → İstisnaları hiçbir iş gerekçesine bakmadan yasaklamak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. İstisna gerekçe sahiplik telafi kontrolü ve gözden geçirme ister."
+        }
+      ],
+      "answer": [
+        "a",
+        "d"
+      ],
+      "explanation": "🧠 Neden doğru?\nİstisna gerekçe sahiplik telafi kontrolü ve gözden geçirme ister.\n\n💼 Gerçek iş hayatında\nVade ve yeniden onay kayıtlarını incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "İstisna yönetişimi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 15,
+      "card_pages": [],
+      "presentation": "pair_matching"
+    },
+    {
+      "external_id": "cism-manager-v1-016",
+      "number": 16,
+      "domain": 1,
+      "kind": "choice",
+      "topic": "Güvence bağımsızlığı",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 16/100\n\nGüvenlik operasyon ekibi kendi performansını tek başına denetleyip kurula tam güvence sunuyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Operasyon değerlendirmesiyle bağımsız güvenceyi ayırmak",
+          "feedback": "Öz değerlendirme yararlıdır fakat bağımsız güvenceyle aynı değildir."
+        },
+        {
+          "id": "b",
+          "text": "Aynı ekibin ikinci hesabını bağımsız denetçi saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Öz değerlendirme yararlıdır fakat bağımsız güvenceyle aynı değildir."
+        },
+        {
+          "id": "c",
+          "text": "Daha fazla öz değerlendirme formuyla bağımsızlığı sağlamak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Öz değerlendirme yararlıdır fakat bağımsız güvenceyle aynı değildir."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nÖz değerlendirme yararlıdır fakat bağımsız güvenceyle aynı değildir.\n\n💼 Gerçek iş hayatında\nÜç hat rol ayrımını ve raporlama bağlantılarını incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Güvence bağımsızlığı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 16,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-017",
+      "number": 17,
+      "domain": 1,
+      "kind": "scenario",
+      "topic": "İş sürekliliği sahipliği",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 17/100\n\nBT yedekleme süresini belirleyip iş birimlerine onay için sunmuyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "c",
+          "text": "En kısa teknik süreyi bütün hizmetlere uygulamak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. İş etkisi kurtarma hedeflerinin temelidir."
+        },
+        {
+          "id": "a",
+          "text": "Kritik iş süreçleri için kabul edilebilir kayıp ve süreyi iş sahipleriyle belirlemek",
+          "feedback": "İş etkisi kurtarma hedeflerinin temelidir."
+        },
+        {
+          "id": "b",
+          "text": "Yedek aracının varsayılan ayarlarını iş toleransı saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. İş etkisi kurtarma hedeflerinin temelidir."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nİş etkisi kurtarma hedeflerinin temelidir.\n\n💼 Gerçek iş hayatında\nBIA onayı ve hizmet hedeflerinin izlenebilirliğini kontrol etmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "İş sürekliliği sahipliği"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 17,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-018",
+      "number": 18,
+      "domain": 1,
+      "kind": "sentence_order",
+      "topic": "Mimari yönetişim",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 18/100\n\nYeni çok kiracılı ürün kritik müşteri verilerini mevcut güven sınırlarını değiştirmeden ortaklaştırıyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s2",
+          "text": "Mimari güvenlik gereksinimlerini onaylayıp tasarıma katmak",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. Mimari kararlar güvenlik gereksinimlerini erken aşamada yönlendirmelidir."
+        },
+        {
+          "id": "s3",
+          "text": "İzolasyon ve veri erişimini uygulamada doğrulamak",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. Mimari kararlar güvenlik gereksinimlerini erken aşamada yönlendirmelidir."
+        },
+        {
+          "id": "s1",
+          "text": "Kiracı izolasyonu için tehdit ve riskleri değerlendirmek",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. Mimari kararlar güvenlik gereksinimlerini erken aşamada yönlendirmelidir."
+        },
+        {
+          "id": "s0",
+          "text": "Yeni veri akışlarını ve güven sınırlarını belirlemek",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. Mimari kararlar güvenlik gereksinimlerini erken aşamada yönlendirmelidir."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nMimari kararlar güvenlik gereksinimlerini erken aşamada yönlendirmelidir.\n\n💼 Gerçek iş hayatında\nVeri akışları ve kiracı izolasyonu gereksinimlerini doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Mimari yönetişim"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 18,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-019",
+      "number": 19,
+      "domain": 1,
+      "kind": "drag_select",
+      "topic": "Gizlilik paydaşları",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 19/100\n\nYeni analiz projesi kişisel veriyi yeni amaçla kullanıyor; hukuk ve veri sahipleri sürece dahil değil. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Güvenlik ekibinin tek başına yasal uygunluk kararı vermesi",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Güvenlik önlemi veri kullanım yetkisinin yerine geçmez."
+        },
+        {
+          "id": "c",
+          "text": "Şifrelemeyi her türlü veri işleme için tek izin saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Güvenlik önlemi veri kullanım yetkisinin yerine geçmez."
+        },
+        {
+          "id": "a",
+          "text": "Veri amacı ve yükümlülükleri ilgili paydaşlarla değerlendirmek",
+          "feedback": "Güvenlik önlemi veri kullanım yetkisinin yerine geçmez."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nGüvenlik önlemi veri kullanım yetkisinin yerine geçmez.\n\n💼 Gerçek iş hayatında\nAmaç ve yetki değerlendirmesinin karar kayıtlarını incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Gizlilik paydaşları"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 19,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-020",
+      "number": 20,
+      "domain": 1,
+      "kind": "fill_blank",
+      "topic": "Program sponsorluğu",
+      "prompt": "Bu karar hangi temel kavramı uygular? Beklenen kavramın Türkçe adını yaz: “Üst yönetim sponsorluğu ve iş birimi taahhüdü sağlamak”.",
+      "context": "CISM yönetici simülasyonu · Vaka 20/100\n\nGüvenlik stratejisi yazıldı fakat iş birimleri sorumluluk ve kaynak tahsisini benimsemiyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [],
+      "answer": [
+        "sponsorluk"
+      ],
+      "explanation": "🧠 Neden doğru?\nStratejinin yürütülmesi liderlik kaynak ve sahiplik gerektirir.\n\n💼 Gerçek iş hayatında\nOnaylı sorumluluk ve bütçe kararlarını doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Program sponsorluğu"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 20,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-021",
+      "number": 21,
+      "domain": 1,
+      "kind": "choice",
+      "topic": "Strateji gözden geçirme",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 21/100\n\nŞirket buluta taşındı ama güvenlik stratejisi hâlâ yalnızca veri merkezi fiziksel erişimine odaklı. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "İş ve teknoloji değişimine göre stratejiyi gözden geçirmek",
+          "feedback": "Strateji yeni iş bağımlılıklarıyla güncel kalmalıdır."
+        },
+        {
+          "id": "c",
+          "text": "Bulut sağlayıcısının stratejiyi otomatik üstlendiğini varsaymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Strateji yeni iş bağımlılıklarıyla güncel kalmalıdır."
+        },
+        {
+          "id": "b",
+          "text": "Eski stratejiyi imza tarihi yeni diye korumak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Strateji yeni iş bağımlılıklarıyla güncel kalmalıdır."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nStrateji yeni iş bağımlılıklarıyla güncel kalmalıdır.\n\n💼 Gerçek iş hayatında\nDeğişim tetikleyicileri ve güncel risk girdilerini incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Strateji gözden geçirme"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 21,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-022",
+      "number": 22,
+      "domain": 1,
+      "kind": "scenario",
+      "topic": "Teşvik çatışması",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 22/100\n\nProje yöneticileri yalnızca teslim tarihiyle ödüllendiriliyor; güvenlik kabul ölçütleri sürekli erteleniyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Güvenliği her projede son güne bırakmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Ölçütler davranışı etkiler; yönetişim iş teşviklerini de ele alır."
+        },
+        {
+          "id": "a",
+          "text": "Güvenlik sorumluluğunu proje başarı ölçütleriyle uyumlamak",
+          "feedback": "Ölçütler davranışı etkiler; yönetişim iş teşviklerini de ele alır."
+        },
+        {
+          "id": "c",
+          "text": "Kontrol eksiklerini yalnızca analist performansına bağlamak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Ölçütler davranışı etkiler; yönetişim iş teşviklerini de ele alır."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nÖlçütler davranışı etkiler; yönetişim iş teşviklerini de ele alır.\n\n💼 Gerçek iş hayatında\nProje kapıları ve kabul kriterlerinin uygulanmasını test etmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Teşvik çatışması"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 22,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-023",
+      "number": 23,
+      "domain": 1,
+      "kind": "sentence_order",
+      "topic": "Risk sahipliği ayrımı",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 23/100\n\nGüvenlik ekibi risk raporu hazırlıyor; yönetim bunu riskin de güvenlik ekibine devri sayıyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Güvenlik ekibinin analiz ve önerisini hazırlamak",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. Uzman ekip tavsiye verir; yetkili iş sahibi risk kararını taşır."
+        },
+        {
+          "id": "s2",
+          "text": "Yetkili iş sahibinin tedavi veya kabul kararını kaydetmek",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. Uzman ekip tavsiye verir; yetkili iş sahibi risk kararını taşır."
+        },
+        {
+          "id": "s0",
+          "text": "Riskin etkilediği iş sürecini ve karar yetkisini belirlemek",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. Uzman ekip tavsiye verir; yetkili iş sahibi risk kararını taşır."
+        },
+        {
+          "id": "s3",
+          "text": "Kalan risk ve aksiyon durumunu izlemek",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. Uzman ekip tavsiye verir; yetkili iş sahibi risk kararını taşır."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nUzman ekip tavsiye verir; yetkili iş sahibi risk kararını taşır.\n\n💼 Gerçek iş hayatında\nKabul kararındaki yetki ve iş sorumluluğunu doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Risk sahipliği ayrımı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 23,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-024",
+      "number": 24,
+      "domain": 1,
+      "kind": "drag_select",
+      "topic": "Yetki devrinin sınırı",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 24/100\n\nBölge müdürü belirlenmiş limiti aşan veri ifşa riskini kendi başına kabul ediyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Yetki sınırını aşan kararı uygun yönetim düzeyine eskale etmek",
+          "feedback": "Devir sınırlıdır; kurum risk toleransı ve yetki sınırları geçerlidir."
+        },
+        {
+          "id": "b",
+          "text": "Yerel imzayı her büyüklükte risk için yeterli saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Devir sınırlıdır; kurum risk toleransı ve yetki sınırları geçerlidir."
+        },
+        {
+          "id": "c",
+          "text": "Kararı denetçinin iş adına imzalaması",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Devir sınırlıdır; kurum risk toleransı ve yetki sınırları geçerlidir."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nDevir sınırlıdır; kurum risk toleransı ve yetki sınırları geçerlidir.\n\n💼 Gerçek iş hayatında\nKabul tutanağını yetki matrisiyle karşılaştırmak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Yetki devrinin sınırı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 24,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-025",
+      "number": 25,
+      "domain": 1,
+      "kind": "multi_select",
+      "topic": "Yönetişim sonucu",
+      "prompt": "Bu vakada uygun olan iki tamamlayıcı adımı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 25/100\n\nKomite her ay toplanıyor fakat kritik riskler sahipsiz ve aynı kararlar sürekli erteleniyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Yeni komiteler kurarak sahipliği belirsiz bırakmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Yönetişim etkinliği alınan ve izlenen kararlarla ölçülür."
+        },
+        {
+          "id": "a",
+          "text": "Toplantı sıklığı yerine karar ve aksiyon etkinliğini değerlendirmek",
+          "feedback": "Yönetişim etkinliği alınan ve izlenen kararlarla ölçülür."
+        },
+        {
+          "id": "b",
+          "text": "Toplantı adedini yeterli yönetişim başarısı saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Yönetişim etkinliği alınan ve izlenen kararlarla ölçülür."
+        },
+        {
+          "id": "d",
+          "text": "Karar sahipleri vade ve kapanış kanıtını örneklemek",
+          "feedback": "Bu doğrulama kararın uygulanması ve etkinliği için gerekli kanıtı sağlar."
+        }
+      ],
+      "answer": [
+        "a",
+        "d"
+      ],
+      "explanation": "🧠 Neden doğru?\nYönetişim etkinliği alınan ve izlenen kararlarla ölçülür.\n\n💼 Gerçek iş hayatında\nKarar sahipleri vade ve kapanış kanıtını örneklemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Yönetişim sonucu"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 25,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-026",
+      "number": 26,
+      "domain": 2,
+      "kind": "choice",
+      "topic": "Risk senaryosu",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 26/100\n\nRisk kaydında yalnızca fidye yazılımı kelimesi var; etkilenen hizmet ve sonuç yazılmamış. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tehdit varlık zafiyet ve iş sonucuyla senaryoyu somutlaştırmak",
+          "feedback": "Risk senaryosu karar verilebilir iş bağlamı içermelidir."
+        },
+        {
+          "id": "c",
+          "text": "Tüm risklere aynı kayıp tutarını yazmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Risk senaryosu karar verilebilir iş bağlamı içermelidir."
+        },
+        {
+          "id": "b",
+          "text": "Tehdit adını tek başına risk değerlendirmesi saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Risk senaryosu karar verilebilir iş bağlamı içermelidir."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nRisk senaryosu karar verilebilir iş bağlamı içermelidir.\n\n💼 Gerçek iş hayatında\nSenaryonun varlık ve iş etkisiyle izlenebilirliğini kontrol etmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Risk senaryosu"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 26,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-027",
+      "number": 27,
+      "domain": 2,
+      "kind": "scenario",
+      "topic": "Doğal ve artık risk",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 27/100\n\nKontrol kurulmadan önceki risk puanı ile kontrol sonrası kalan risk aynı sütunda tutuluyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Kurulu kontrol sayısını doğrudan artık risk puanı saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Kontrolün etkisi ayrı başlangıç ve sonuç değerlendirmesiyle anlaşılır."
+        },
+        {
+          "id": "c",
+          "text": "Doğal riski her koşulda sıfırlamak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Kontrolün etkisi ayrı başlangıç ve sonuç değerlendirmesiyle anlaşılır."
+        },
+        {
+          "id": "a",
+          "text": "Kontrol öncesi riskle kontrol sonrası kalan riski ayırmak",
+          "feedback": "Kontrolün etkisi ayrı başlangıç ve sonuç değerlendirmesiyle anlaşılır."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nKontrolün etkisi ayrı başlangıç ve sonuç değerlendirmesiyle anlaşılır.\n\n💼 Gerçek iş hayatında\nKontrol etkinlik varsayımlarını kanıtla doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Doğal ve artık risk"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 27,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-028",
+      "number": 28,
+      "domain": 2,
+      "kind": "sentence_order",
+      "topic": "Tehdit ve zafiyet",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 28/100\n\nHerkese açık yönetim arayüzü için raporda yalnızca saldırgan sayısı ölçülüyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s0",
+          "text": "Varlığı ve erişim yüzeyini belirlemek",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. Tehdit potansiyeli teknik zafiyet ve bağlamla birlikte risk yaratır."
+        },
+        {
+          "id": "s3",
+          "text": "Kontrol etkinliği ve kalan maruziyeti izlemek",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. Tehdit potansiyeli teknik zafiyet ve bağlamla birlikte risk yaratır."
+        },
+        {
+          "id": "s2",
+          "text": "Uygun tedavi ve karar sahibini belirlemek",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. Tehdit potansiyeli teknik zafiyet ve bağlamla birlikte risk yaratır."
+        },
+        {
+          "id": "s1",
+          "text": "Zafiyet, tehdit ve iş etkisini değerlendirmek",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. Tehdit potansiyeli teknik zafiyet ve bağlamla birlikte risk yaratır."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nTehdit potansiyeli teknik zafiyet ve bağlamla birlikte risk yaratır.\n\n💼 Gerçek iş hayatında\nErişim sınırı ve kontrol kapsamını test etmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Tehdit ve zafiyet"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 28,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-029",
+      "number": 29,
+      "domain": 2,
+      "kind": "drag_select",
+      "topic": "Varlık kritiklik analizi",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 29/100\n\nİki sunucu aynı CVSS puanında; biri ödemeyi yürütüyor diğeri izole test ortamında. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Aynı CVSS için her zaman aynı iş riski yazmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Teknik puan iş riskinin tamamını göstermez."
+        },
+        {
+          "id": "a",
+          "text": "Teknik önem derecesini iş kritiklik ve maruziyetle önceliklendirmek",
+          "feedback": "Teknik puan iş riskinin tamamını göstermez."
+        },
+        {
+          "id": "c",
+          "text": "Sadece en kolay yamalananı en kritik saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Teknik puan iş riskinin tamamını göstermez."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nTeknik puan iş riskinin tamamını göstermez.\n\n💼 Gerçek iş hayatında\nBağımlılık ve erişilebilirlik verilerini doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Varlık kritiklik analizi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 29,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-030",
+      "number": 30,
+      "domain": 2,
+      "kind": "fill_blank",
+      "topic": "Nicel kayıp",
+      "prompt": "Bu karar hangi temel kavramı uygular? Beklenen kavramın Türkçe adını yaz: “Yıllık beklenen kaybı 40000 TRY olarak hesaplamak”.",
+      "context": "CISM yönetici simülasyonu · Vaka 30/100\n\nBir senaryoda olay başına beklenen kayıp 200000 TRY ve yıllık olay sıklığı 0.2 olarak tahminleniyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [],
+      "answer": [
+        "yıllık beklenen kayıp"
+      ],
+      "explanation": "🧠 Neden doğru?\nBeklenen yıllık kayıp olay kaybı ile yıllık sıklığın çarpımıdır; kesin tahmin değildir.\n\n💼 Gerçek iş hayatında\nSıklık ve kayıp varsayımlarının dayanağını incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Nicel kayıp"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 30,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-031",
+      "number": 31,
+      "domain": 2,
+      "kind": "choice",
+      "topic": "Nitel ölçek",
+      "prompt": "“Bütün puanları ortalamakla tutarlılık sağlamak” yaklaşımı bu vaka için uygundur. Doğru mu, yanlış mı?",
+      "context": "CISM yönetici simülasyonu · Vaka 31/100\n\nDepartmanlar yüksek olasılığı farklı yorumluyor ve puanlar karşılaştırılamıyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "dogru",
+          "text": "Doğru",
+          "feedback": "Tutarlı ölçek risk kararlarının karşılaştırılmasını sağlar."
+        },
+        {
+          "id": "yanlis",
+          "text": "Yanlış",
+          "feedback": "Tutarlı ölçek risk kararlarının karşılaştırılmasını sağlar."
+        }
+      ],
+      "answer": [
+        "yanlis"
+      ],
+      "explanation": "🧠 Neden doğru?\nTutarlı ölçek risk kararlarının karşılaştırılmasını sağlar.\n\n💼 Gerçek iş hayatında\nÖrnek senaryolar üzerinde puanlama tutarlılığını sınamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Nitel ölçek"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 31,
+      "card_pages": [],
+      "presentation": "true_false"
+    },
+    {
+      "external_id": "cism-manager-v1-032",
+      "number": 32,
+      "domain": 2,
+      "kind": "scenario",
+      "topic": "Kontrol etkinliği",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 32/100\n\nRisk modeli MFA'nın bütün hesaplarda çalıştığını varsayıyor; ayrıcalıklı hesaplar hariç tutulmuş. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "c",
+          "text": "İstisnaları risk modelinden silmek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Yanlış etkinlik varsayımı kalan riski olduğundan küçük gösterir."
+        },
+        {
+          "id": "b",
+          "text": "Politika varlığını yüzde yüz kapsama eşitlemek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Yanlış etkinlik varsayımı kalan riski olduğundan küçük gösterir."
+        },
+        {
+          "id": "a",
+          "text": "Artık riski gerçek kontrol kapsamıyla yeniden değerlendirmek",
+          "feedback": "Yanlış etkinlik varsayımı kalan riski olduğundan küçük gösterir."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nYanlış etkinlik varsayımı kalan riski olduğundan küçük gösterir.\n\n💼 Gerçek iş hayatında\nİstisna ve kullanım kanıtlarını risk varsayımıyla eşleştirmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Kontrol etkinliği"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 32,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-033",
+      "number": 33,
+      "domain": 2,
+      "kind": "sentence_order",
+      "topic": "Risk kabulü",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 33/100\n\nİş sahibi gerekçeli kabul istiyor ancak risk kurumun toleransını aşıyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s2",
+          "text": "Üst yönetime gerekçeli tedavi ve kabul seçeneklerini sunmak",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. Risk sahipliği sınırsız yetki anlamına gelmez."
+        },
+        {
+          "id": "s3",
+          "text": "Kararı, süreyi ve kalan risk izlemesini kaydetmek",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. Risk sahipliği sınırsız yetki anlamına gelmez."
+        },
+        {
+          "id": "s1",
+          "text": "Karar yetkisi ve eskalasyon düzeyini belirlemek",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. Risk sahipliği sınırsız yetki anlamına gelmez."
+        },
+        {
+          "id": "s0",
+          "text": "Riskin kurum toleransını aştığını doğrulamak",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. Risk sahipliği sınırsız yetki anlamına gelmez."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nRisk sahipliği sınırsız yetki anlamına gelmez.\n\n💼 Gerçek iş hayatında\nTolerans eşiği ve karar düzeyini doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Risk kabulü"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 33,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-034",
+      "number": 34,
+      "domain": 2,
+      "kind": "drag_select",
+      "topic": "Risk transferi",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 34/100\n\nSiber sigorta alındıktan sonra yönetim olay riskinin tamamen bittiğini düşünüyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Kapsam dışı ve operasyonel kalan riskleri değerlendirmek",
+          "feedback": "Transfer bazı mali sonuçları paylaşır; hizmet ve itibar riskini tamamen kaldırmaz."
+        },
+        {
+          "id": "b",
+          "text": "Sigortayı tüm kontrol gereksinimlerinin yerine geçirmek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Transfer bazı mali sonuçları paylaşır; hizmet ve itibar riskini tamamen kaldırmaz."
+        },
+        {
+          "id": "c",
+          "text": "Poliçe tutarını kalan risk sıfır diye raporlamak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Transfer bazı mali sonuçları paylaşır; hizmet ve itibar riskini tamamen kaldırmaz."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nTransfer bazı mali sonuçları paylaşır; hizmet ve itibar riskini tamamen kaldırmaz.\n\n💼 Gerçek iş hayatında\nPoliçe istisnaları ve kalan sorumlulukları incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Risk transferi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 34,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-035",
+      "number": 35,
+      "domain": 2,
+      "kind": "multi_select",
+      "topic": "Riskten kaçınma",
+      "prompt": "Bu vaka için doğru olan iki amaç–uygulama eşleştirmesini seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 35/100\n\nHizmetin hassas veri toplayan özelliği yeterli iş değeri üretmiyor ve risk kabul sınırının üstünde. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "d",
+          "text": "Doğrulama kanıtı → İş faydası ve bağımlılıkların karar öncesi analizini doğrulamak",
+          "feedback": "Bu doğrulama kararın uygulanması ve etkinliği için gerekli kanıtı sağlar."
+        },
+        {
+          "id": "b",
+          "text": "Etkin risk yönetimi → Gereksiz özelliği tüm kontrollerden muaf tutmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Faaliyeti durdurmak ilgili maruziyetten kaçınma seçeneğidir."
+        },
+        {
+          "id": "a",
+          "text": "Uygun karar → Özelliği kaldırma seçeneğini iş sahibiyle değerlendirmek",
+          "feedback": "Faaliyeti durdurmak ilgili maruziyetten kaçınma seçeneğidir."
+        },
+        {
+          "id": "c",
+          "text": "Etkin risk yönetimi → Sigorta alınca iş gerekçesini incelememek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Faaliyeti durdurmak ilgili maruziyetten kaçınma seçeneğidir."
+        }
+      ],
+      "answer": [
+        "a",
+        "d"
+      ],
+      "explanation": "🧠 Neden doğru?\nFaaliyeti durdurmak ilgili maruziyetten kaçınma seçeneğidir.\n\n💼 Gerçek iş hayatında\nİş faydası ve bağımlılıkların karar öncesi analizini doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Riskten kaçınma"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 35,
+      "card_pages": [],
+      "presentation": "pair_matching"
+    },
+    {
+      "external_id": "cism-manager-v1-036",
+      "number": 36,
+      "domain": 2,
+      "kind": "choice",
+      "topic": "Risk azaltma",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 36/100\n\nMüşteri destek hesabı geniş veri erişimine sahip; hizmetin devam etmesi gerekiyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rol kapsamını ihtiyaca indirip erişimi izlemek",
+          "feedback": "Azaltma faaliyeti sürdürürken olasılığı veya etkiyi düşürür."
+        },
+        {
+          "id": "c",
+          "text": "Sadece risk kaydını kapatmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Azaltma faaliyeti sürdürürken olasılığı veya etkiyi düşürür."
+        },
+        {
+          "id": "b",
+          "text": "Hizmeti gerekçesiz kalıcı durdurmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Azaltma faaliyeti sürdürürken olasılığı veya etkiyi düşürür."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nAzaltma faaliyeti sürdürürken olasılığı veya etkiyi düşürür.\n\n💼 Gerçek iş hayatında\nYeni yetki sınırı ve log kapsamını test etmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Risk azaltma"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 36,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-037",
+      "number": 37,
+      "domain": 2,
+      "kind": "scenario",
+      "topic": "Risk göstergesi",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 37/100\n\nKritik yamaların gecikme oranı üç aydır yükseliyor ama hiçbir eşik veya sorumlu yok. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Eşik ve eskalasyonla erken uyarı göstergesi tanımlamak",
+          "feedback": "KRI karar veya müdahale tetiklediğinde değer taşır."
+        },
+        {
+          "id": "b",
+          "text": "Trend grafiğini aksiyon olmadan arşivlemek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. KRI karar veya müdahale tetiklediğinde değer taşır."
+        },
+        {
+          "id": "c",
+          "text": "Yalnızca kapanan toplam biletleri göstermek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. KRI karar veya müdahale tetiklediğinde değer taşır."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nKRI karar veya müdahale tetiklediğinde değer taşır.\n\n💼 Gerçek iş hayatında\nEşik ihlalinde gerçek eskalasyon kaydını doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Risk göstergesi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 37,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-038",
+      "number": 38,
+      "domain": 2,
+      "kind": "sentence_order",
+      "topic": "Risk yeniden değerlendirme",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 38/100\n\nTedarikçi yeni ülkede alt işleyen kullanmaya başladı; risk değerlendirmesi iki yıllık. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s0",
+          "text": "Önemli tedarikçi değişikliğini belirlemek",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. Önemli değişiklikler periyodik tarihten bağımsız inceleme gerektirir."
+        },
+        {
+          "id": "s1",
+          "text": "Yeni veri akışları ve yükümlülükleri analiz etmek",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. Önemli değişiklikler periyodik tarihten bağımsız inceleme gerektirir."
+        },
+        {
+          "id": "s2",
+          "text": "Risk sahibiyle güncel tedavi kararını almak",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. Önemli değişiklikler periyodik tarihten bağımsız inceleme gerektirir."
+        },
+        {
+          "id": "s3",
+          "text": "Kontrolleri ve değişiklik sonrası riski izlemek",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. Önemli değişiklikler periyodik tarihten bağımsız inceleme gerektirir."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nÖnemli değişiklikler periyodik tarihten bağımsız inceleme gerektirir.\n\n💼 Gerçek iş hayatında\nVeri akışı ve yeni yükümlülükleri doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Risk yeniden değerlendirme"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 38,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-039",
+      "number": 39,
+      "domain": 2,
+      "kind": "drag_select",
+      "topic": "Yoğunlaşma riski",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 39/100\n\nÜç kritik hizmet aynı bulut bölgesine ve aynı kimlik sağlayıcısına bağlı. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Her sözleşmeyi ayrı görüp ortak bağımlılığı yok saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Tekil riskler ortak hata noktalarında birlikte gerçekleşebilir."
+        },
+        {
+          "id": "a",
+          "text": "Ortak bağımlılık ve birleşik kesinti etkisini değerlendirmek",
+          "feedback": "Tekil riskler ortak hata noktalarında birlikte gerçekleşebilir."
+        },
+        {
+          "id": "c",
+          "text": "Üç sözleşmeyi üç bağımsız alternatif saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Tekil riskler ortak hata noktalarında birlikte gerçekleşebilir."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nTekil riskler ortak hata noktalarında birlikte gerçekleşebilir.\n\n💼 Gerçek iş hayatında\nBağımlılık haritasını ve alternatiflerin bağımsızlığını test etmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Yoğunlaşma riski"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 39,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-040",
+      "number": 40,
+      "domain": 2,
+      "kind": "fill_blank",
+      "topic": "Belirsizlik",
+      "prompt": "Bu karar hangi temel kavramı uygular? Beklenen kavramın Türkçe adını yaz: “Varsayımları aralıkları ve belirsizliği açıkça raporlamak”.",
+      "context": "CISM yönetici simülasyonu · Vaka 40/100\n\nYeni teknoloji için kayıp verisi az; yönetim tek kesin risk rakamı istiyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [],
+      "answer": [
+        "belirsizlik"
+      ],
+      "explanation": "🧠 Neden doğru?\nBelirsizlik açıklanmalı ve karar bağlamına dahil edilmelidir.\n\n💼 Gerçek iş hayatında\nDuyarlılık analizi ve varsayım kaynaklarını incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Belirsizlik"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 40,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-041",
+      "number": 41,
+      "domain": 2,
+      "kind": "choice",
+      "topic": "Tedarikçi risk sahibi",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 41/100\n\nDış hizmete geçilince iş birimi risk kayıtlarını tedarikçinin üstlenmesini istiyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Kurumda hesap verebilir risk sahibi tutmak",
+          "feedback": "Dış kaynak kullanımı kurumun iş riski sorumluluğunu kaldırmaz."
+        },
+        {
+          "id": "b",
+          "text": "Hizmet devrini tüm sorumluluğun devri saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Dış kaynak kullanımı kurumun iş riski sorumluluğunu kaldırmaz."
+        },
+        {
+          "id": "c",
+          "text": "Tedarikçinin kendi derecesini tek karar girdisi yapmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Dış kaynak kullanımı kurumun iş riski sorumluluğunu kaldırmaz."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nDış kaynak kullanımı kurumun iş riski sorumluluğunu kaldırmaz.\n\n💼 Gerçek iş hayatında\nSözleşme sorumlulukları ve kurum içi sahipliği doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Tedarikçi risk sahibi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 41,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-042",
+      "number": 42,
+      "domain": 2,
+      "kind": "scenario",
+      "topic": "Risk portföyü",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 42/100\n\nTek başına orta seviyedeki beş açık aynı ödeme sürecinin farklı kontrollerini etkiliyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Her açığı bağımsız kabul edip toplam etkiyi dışlamak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Risklerin etkileşimi tekil derecelerinden farklı sonuç doğurabilir."
+        },
+        {
+          "id": "a",
+          "text": "Bileşik etki ve kontrol bağımlılıklarını değerlendirmek",
+          "feedback": "Risklerin etkileşimi tekil derecelerinden farklı sonuç doğurabilir."
+        },
+        {
+          "id": "c",
+          "text": "Bulgu sayısını risk tutarına eşitlemek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Risklerin etkileşimi tekil derecelerinden farklı sonuç doğurabilir."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nRisklerin etkileşimi tekil derecelerinden farklı sonuç doğurabilir.\n\n💼 Gerçek iş hayatında\nSenaryo zinciri ve ortak kontrol zayıflıklarını incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Risk portföyü"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 42,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-043",
+      "number": 43,
+      "domain": 2,
+      "kind": "sentence_order",
+      "topic": "Karar kayıtları",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 43/100\n\nYüksek risk sözlü olarak kabul edilmiş; vade gerekçe ve imza yok. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Açıkların ortak neden ve birleşik iş etkisini analiz etmek",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. İzlenebilir karar hesap verebilirlik ve tekrar değerlendirmeyi sağlar."
+        },
+        {
+          "id": "s3",
+          "text": "Kalan riski ve kontrol bağımlılıklarını yeniden test etmek",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. İzlenebilir karar hesap verebilirlik ve tekrar değerlendirmeyi sağlar."
+        },
+        {
+          "id": "s2",
+          "text": "Bileşik risk için sahipli tedavi seçeneklerini belirlemek",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. İzlenebilir karar hesap verebilirlik ve tekrar değerlendirmeyi sağlar."
+        },
+        {
+          "id": "s0",
+          "text": "Ödeme sürecini etkileyen kontrol açıklarını birlikte haritalamak",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. İzlenebilir karar hesap verebilirlik ve tekrar değerlendirmeyi sağlar."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nİzlenebilir karar hesap verebilirlik ve tekrar değerlendirmeyi sağlar.\n\n💼 Gerçek iş hayatında\nKabul yetkisi süre ve telafi kontrolünü doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Karar kayıtları"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 43,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-044",
+      "number": 44,
+      "domain": 2,
+      "kind": "drag_select",
+      "topic": "Tehdit istihbaratı",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 44/100\n\nSektörde aktif istismar var ancak kurumun ilgili ürün kullanıp kullanmadığı bilinmiyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "İstihbaratı kurum varlık ve maruziyetiyle ilişkilendirmek",
+          "feedback": "İstihbarat bağlama çevrildiğinde eyleme dönüşür."
+        },
+        {
+          "id": "c",
+          "text": "Haber eski diye varlık eşleştirmeden kapatmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. İstihbarat bağlama çevrildiğinde eyleme dönüşür."
+        },
+        {
+          "id": "b",
+          "text": "Her tehdit haberini aynı kritik seviyede açmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. İstihbarat bağlama çevrildiğinde eyleme dönüşür."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nİstihbarat bağlama çevrildiğinde eyleme dönüşür.\n\n💼 Gerçek iş hayatında\nÜrün sürümü erişim ve telafi kontrolünü doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Tehdit istihbaratı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 44,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-045",
+      "number": 45,
+      "domain": 2,
+      "kind": "multi_select",
+      "topic": "Risk iştahı izleme",
+      "prompt": "Bu vakada uygun olan iki tamamlayıcı adımı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 45/100\n\nArtık risk puanı onaylı sınırı aştı; tedavi planı altı ay sonraya bırakılmış. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Plan tarihi var diye sınır aşımını gizlemek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Tedavi planı mevcut maruziyeti tek başına kabul edilebilir kılmaz."
+        },
+        {
+          "id": "a",
+          "text": "Sınır aşımını yetkili yönetim ve ara önlemlerle ele almak",
+          "feedback": "Tedavi planı mevcut maruziyeti tek başına kabul edilebilir kılmaz."
+        },
+        {
+          "id": "c",
+          "text": "Riski araç sayısıyla yeniden adlandırmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Tedavi planı mevcut maruziyeti tek başına kabul edilebilir kılmaz."
+        },
+        {
+          "id": "d",
+          "text": "Ara önlemler ve yetkili kabul kaydını incelemek",
+          "feedback": "Bu doğrulama kararın uygulanması ve etkinliği için gerekli kanıtı sağlar."
+        }
+      ],
+      "answer": [
+        "a",
+        "d"
+      ],
+      "explanation": "🧠 Neden doğru?\nTedavi planı mevcut maruziyeti tek başına kabul edilebilir kılmaz.\n\n💼 Gerçek iş hayatında\nAra önlemler ve yetkili kabul kaydını incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Risk iştahı izleme"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 45,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-046",
+      "number": 46,
+      "domain": 2,
+      "kind": "choice",
+      "topic": "Tedavi planı",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 46/100\n\nKritik risk için aksiyon sahibi IT olarak yazılı; tarih ve başarı ölçütü boş. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hesap verebilir kişi vade ve ölçülebilir sonuç belirlemek",
+          "feedback": "Risk tedavisi test edilebilir ve izlenebilir olmalıdır."
+        },
+        {
+          "id": "c",
+          "text": "Sorumluluğu tüm çalışanlara belirsizce dağıtmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Risk tedavisi test edilebilir ve izlenebilir olmalıdır."
+        },
+        {
+          "id": "b",
+          "text": "Plan kaydı açılmasını risk kapanışı saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Risk tedavisi test edilebilir ve izlenebilir olmalıdır."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nRisk tedavisi test edilebilir ve izlenebilir olmalıdır.\n\n💼 Gerçek iş hayatında\nKapanış ölçütünü kontrol kanıtıyla eşleştirmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Tedavi planı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 46,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-047",
+      "number": 47,
+      "domain": 2,
+      "kind": "scenario",
+      "topic": "Artık risk onayı",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 47/100\n\nYeni kontrol kurulmuş ama çalışması test edilmeden risk düşük seviyeye indirilmiş. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Satıcının ürün puanını kurum riski diye kullanmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Kontrol varlığı başarıyla işlemesiyle aynı değildir."
+        },
+        {
+          "id": "b",
+          "text": "Kurulum faturasını etkinlik kanıtı saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Kontrol varlığı başarıyla işlemesiyle aynı değildir."
+        },
+        {
+          "id": "a",
+          "text": "Etkinlik testinden sonra kalan riski doğrulamak",
+          "feedback": "Kontrol varlığı başarıyla işlemesiyle aynı değildir."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nKontrol varlığı başarıyla işlemesiyle aynı değildir.\n\n💼 Gerçek iş hayatında\nTest sonuçları ve kontrol kapsamını incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Artık risk onayı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 47,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-048",
+      "number": 48,
+      "domain": 2,
+      "kind": "sentence_order",
+      "topic": "Risk ve uyum ayrımı",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 48/100\n\nDenetimde mevzuat kontrolü uygun çıktı; yönetim bütün siber risklerin kapandığını düşünüyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s3",
+          "text": "Tedavi kararlarını ve artık riski izlemek",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. Uyum önemli bir girdi olsa da tüm risk senaryolarını kapsamaz."
+        },
+        {
+          "id": "s0",
+          "text": "Uyum incelemesinin kapsamını ve sınırlarını belirlemek",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. Uyum önemli bir girdi olsa da tüm risk senaryolarını kapsamaz."
+        },
+        {
+          "id": "s2",
+          "text": "Kalan risk senaryolarını iş sahibiyle değerlendirmek",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. Uyum önemli bir girdi olsa da tüm risk senaryolarını kapsamaz."
+        },
+        {
+          "id": "s1",
+          "text": "Kapsam dışı tehdit ve iş bağımlılıklarını tanımlamak",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. Uyum önemli bir girdi olsa da tüm risk senaryolarını kapsamaz."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nUyum önemli bir girdi olsa da tüm risk senaryolarını kapsamaz.\n\n💼 Gerçek iş hayatında\nKapsam dışı tehdit ve bağımlılıkları gözden geçirmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Risk ve uyum ayrımı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 48,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-049",
+      "number": 49,
+      "domain": 2,
+      "kind": "drag_select",
+      "topic": "Yapay zeka riski",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 49/100\n\nDestek ekibi hassas müşteri kayıtlarını onaysız genel bir yapay zeka hizmetine aktarıyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Veri akışı kullanım amacı ve sağlayıcı kontrollerini değerlendirmek",
+          "feedback": "Yeni kullanım veri ve tedarikçi riskini değiştirir."
+        },
+        {
+          "id": "b",
+          "text": "Hizmet popüler diye güvenli kabul etmek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Yeni kullanım veri ve tedarikçi riskini değiştirir."
+        },
+        {
+          "id": "c",
+          "text": "Veri paylaşımını yalnızca çalışan eğitimine bırakmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Yeni kullanım veri ve tedarikçi riskini değiştirir."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nYeni kullanım veri ve tedarikçi riskini değiştirir.\n\n💼 Gerçek iş hayatında\nİzinler saklama ve kurumsal kullanım şartlarını doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Yapay zeka riski"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 49,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-050",
+      "number": 50,
+      "domain": 2,
+      "kind": "fill_blank",
+      "topic": "Risk bildirimi",
+      "prompt": "Bu karar hangi temel kavramı uygular? Beklenen kavramın Türkçe adını yaz: “Teknik bulguyu iş kaybı senaryosu ve karar seçeneklerine çevirmek”.",
+      "context": "CISM yönetici simülasyonu · Vaka 50/100\n\nTeknik ekip açığı kritik diye sınıflandırdı fakat iş sahibi müşteri etkisini anlamıyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [],
+      "answer": [
+        "risk raporlama"
+      ],
+      "explanation": "🧠 Neden doğru?\nRisk iletişimi hedef kitlenin kararını desteklemelidir.\n\n💼 Gerçek iş hayatında\nİş sahibinin anladığı etki ve karar kaydını kontrol etmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Risk bildirimi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 50,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-051",
+      "number": 51,
+      "domain": 3,
+      "kind": "choice",
+      "topic": "Program yol haritası",
+      "prompt": "“Hedef bağımlılık kaynak ve kilometre taşlarıyla program yol haritası kurmak” yaklaşımı bu vaka için uygundur. Doğru mu, yanlış mı?",
+      "context": "CISM yönetici simülasyonu · Vaka 51/100\n\nGüvenlik girişimleri stratejiyle bağsız ve ekipler aynı kontrolleri tekrar satın alıyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "dogru",
+          "text": "Doğru",
+          "feedback": "Program stratejiyi koordine edilmiş uygulamaya dönüştürür."
+        },
+        {
+          "id": "yanlis",
+          "text": "Yanlış",
+          "feedback": "Program stratejiyi koordine edilmiş uygulamaya dönüştürür."
+        }
+      ],
+      "answer": [
+        "dogru"
+      ],
+      "explanation": "🧠 Neden doğru?\nProgram stratejiyi koordine edilmiş uygulamaya dönüştürür.\n\n💼 Gerçek iş hayatında\nGirişimlerin stratejik hedeflerle izlenebilirliğini incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Program yol haritası"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 51,
+      "card_pages": [],
+      "presentation": "true_false"
+    },
+    {
+      "external_id": "cism-manager-v1-052",
+      "number": 52,
+      "domain": 3,
+      "kind": "scenario",
+      "topic": "Veri sınıflandırma",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 52/100\n\nMühendisler her dosyayı aynı seviyede etiketliyor; kritik tasarım verisi ayırt edilmiyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "İş sahibiyle etki temelli sınıflandırma ve işleme kuralları tanımlamak",
+          "feedback": "Sınıflandırma iş değerine ve hassasiyete dayanır."
+        },
+        {
+          "id": "c",
+          "text": "Etiketi teknik uzantıya göre otomatik kesinleştirmek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Sınıflandırma iş değerine ve hassasiyete dayanır."
+        },
+        {
+          "id": "b",
+          "text": "Bütün dosyaları düşük riskli varsaymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Sınıflandırma iş değerine ve hassasiyete dayanır."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nSınıflandırma iş değerine ve hassasiyete dayanır.\n\n💼 Gerçek iş hayatında\nEtiket ile saklama erişim ve aktarım kurallarını karşılaştırmak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Veri sınıflandırma"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 52,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-053",
+      "number": 53,
+      "domain": 3,
+      "kind": "sentence_order",
+      "topic": "Kontrol seçimi",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 53/100\n\nYeni müşteri portalı için en çok özelliği olan ürün öneriliyor ancak risk senaryoları yok. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s3",
+          "text": "Kontrolün işletim etkinliğini doğrulamak",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. Kontroller belirlenmiş riske uygun ve orantılı seçilir."
+        },
+        {
+          "id": "s2",
+          "text": "Uygun kontrol tasarımını onaylayıp uygulamak",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. Kontroller belirlenmiş riske uygun ve orantılı seçilir."
+        },
+        {
+          "id": "s0",
+          "text": "Portalın iş gereksinimleri ve risk senaryolarını belirlemek",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. Kontroller belirlenmiş riske uygun ve orantılı seçilir."
+        },
+        {
+          "id": "s1",
+          "text": "Kontrol alternatiflerinin risk azaltımını ve maliyetini karşılaştırmak",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. Kontroller belirlenmiş riske uygun ve orantılı seçilir."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nKontroller belirlenmiş riske uygun ve orantılı seçilir.\n\n💼 Gerçek iş hayatında\nKontrol amacı ve risk eşleşmesini doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Kontrol seçimi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 53,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-054",
+      "number": 54,
+      "domain": 3,
+      "kind": "drag_select",
+      "topic": "Kontrol katmanları",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 54/100\n\nKimlik avı riskine karşı yalnızca yıllık farkındalık eğitimi planlanıyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Tek bir ürünün bütün riskleri ortadan kaldırdığını varsaymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Bağımsız katmanlar tek kontrol başarısızlığının etkisini azaltır."
+        },
+        {
+          "id": "a",
+          "text": "Teknik önleme algılama ve insan kontrollerini birlikte tasarlamak",
+          "feedback": "Bağımsız katmanlar tek kontrol başarısızlığının etkisini azaltır."
+        },
+        {
+          "id": "b",
+          "text": "Eğitim tamamlanınca teknik korumayı kaldırmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Bağımsız katmanlar tek kontrol başarısızlığının etkisini azaltır."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nBağımsız katmanlar tek kontrol başarısızlığının etkisini azaltır.\n\n💼 Gerçek iş hayatında\nKatmanların ortak hata noktalarını incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Kontrol katmanları"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 54,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-055",
+      "number": 55,
+      "domain": 3,
+      "kind": "multi_select",
+      "topic": "Kaynak yetkinliği",
+      "prompt": "Bu vaka için doğru olan iki amaç–uygulama eşleştirmesini seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 55/100\n\nSOC aracı alındı fakat olay analiz edecek eğitimli personel ve vardiya yok. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "d",
+          "text": "Doğrulama kanıtı → Yetkinlik matrisi vardiya ve eskalasyonu doğrulamak",
+          "feedback": "Bu doğrulama kararın uygulanması ve etkinliği için gerekli kanıtı sağlar."
+        },
+        {
+          "id": "b",
+          "text": "Etkin risk yönetimi → Lisans sayısını yeterli kapasite saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Araç yetkinlik ve işletim süreci olmadan beklenen sonucu üretmez."
+        },
+        {
+          "id": "a",
+          "text": "Uygun karar → İnsan süreç ve teknoloji gereksinimlerini birlikte planlamak",
+          "feedback": "Araç yetkinlik ve işletim süreci olmadan beklenen sonucu üretmez."
+        },
+        {
+          "id": "c",
+          "text": "Etkin risk yönetimi → Analiz sorumluluğunu adsız ortak posta kutusuna bırakmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Araç yetkinlik ve işletim süreci olmadan beklenen sonucu üretmez."
+        }
+      ],
+      "answer": [
+        "a",
+        "d"
+      ],
+      "explanation": "🧠 Neden doğru?\nAraç yetkinlik ve işletim süreci olmadan beklenen sonucu üretmez.\n\n💼 Gerçek iş hayatında\nYetkinlik matrisi vardiya ve eskalasyonu doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Kaynak yetkinliği"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 55,
+      "card_pages": [],
+      "presentation": "pair_matching"
+    },
+    {
+      "external_id": "cism-manager-v1-056",
+      "number": 56,
+      "domain": 3,
+      "kind": "choice",
+      "topic": "Güvenlik gereksinimi",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 56/100\n\nSatın alma sözleşmesi imzalandıktan sonra kritik güvenlik şartlarının eksik olduğu fark ediliyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Güvenlik gereksinimlerini tedarik yaşam döngüsüne erken dahil etmek",
+          "feedback": "Erken entegrasyon pahalı sonradan değişiklikleri azaltır."
+        },
+        {
+          "id": "c",
+          "text": "Tedarikçinin varsayılan şartlarını kurum gereksinimi saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Erken entegrasyon pahalı sonradan değişiklikleri azaltır."
+        },
+        {
+          "id": "b",
+          "text": "Her koşulu yalnızca sözleşme bittikten sonra değerlendirmek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Erken entegrasyon pahalı sonradan değişiklikleri azaltır."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nErken entegrasyon pahalı sonradan değişiklikleri azaltır.\n\n💼 Gerçek iş hayatında\nSatın alma kapıları ve şartname onayını örneklemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Güvenlik gereksinimi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 56,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-057",
+      "number": 57,
+      "domain": 3,
+      "kind": "scenario",
+      "topic": "Güvenlik farkındalığı",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 57/100\n\nFinans ve geliştiriciler aynı genel eğitim slaytını alıyor; görev riskleri farklı. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Eğitimi yalnızca teknik ekibe vermek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Rol temelli içerik gerçek karar ve davranışları hedefler."
+        },
+        {
+          "id": "a",
+          "text": "Role ve riske uygun eğitim ve davranış ölçümü uygulamak",
+          "feedback": "Rol temelli içerik gerçek karar ve davranışları hedefler."
+        },
+        {
+          "id": "b",
+          "text": "Tek içerik tamamlanma oranını bütün roller için yeterli saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Rol temelli içerik gerçek karar ve davranışları hedefler."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nRol temelli içerik gerçek karar ve davranışları hedefler.\n\n💼 Gerçek iş hayatında\nRole özgü senaryo ve bildirim başarısını ölçmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Güvenlik farkındalığı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 57,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-058",
+      "number": 58,
+      "domain": 3,
+      "kind": "sentence_order",
+      "topic": "Kontrol testi",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 58/100\n\nYeni erişim kontrolü satın alındı; uygun olmayan örnek işlemle test edilmedi. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s0",
+          "text": "Kontrol amacını ve başarı ölçütünü belirlemek",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. Test gerçek kontrol amacının karşılandığını göstermelidir."
+        },
+        {
+          "id": "s1",
+          "text": "Temsilî olumlu ve olumsuz testleri tasarlamak",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. Test gerçek kontrol amacının karşılandığını göstermelidir."
+        },
+        {
+          "id": "s2",
+          "text": "Testleri yetkili ortamda uygulayıp kanıt toplamak",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. Test gerçek kontrol amacının karşılandığını göstermelidir."
+        },
+        {
+          "id": "s3",
+          "text": "İstisnaları değerlendirip yeniden test planlamak",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. Test gerçek kontrol amacının karşılandığını göstermelidir."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nTest gerçek kontrol amacının karşılandığını göstermelidir.\n\n💼 Gerçek iş hayatında\nOlumlu ve olumsuz test senaryolarını incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Kontrol testi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 58,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-059",
+      "number": 59,
+      "domain": 3,
+      "kind": "drag_select",
+      "topic": "Tedarikçi izleme",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 59/100\n\nTedarikçi seçerken inceleme yapılmış ancak üç yıldır performans ve risk gözden geçirilmemiş. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "b",
+          "text": "İlk seçim onayını ömür boyu güvence saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Hizmet ve tehdit koşulları sözleşme boyunca değişir."
+        },
+        {
+          "id": "a",
+          "text": "Risk düzeyine göre sürekli tedarikçi izleme kurmak",
+          "feedback": "Hizmet ve tehdit koşulları sözleşme boyunca değişir."
+        },
+        {
+          "id": "c",
+          "text": "Yalnızca fatura zamanını ölçmek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Hizmet ve tehdit koşulları sözleşme boyunca değişir."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nHizmet ve tehdit koşulları sözleşme boyunca değişir.\n\n💼 Gerçek iş hayatında\nSLA istisna ve güvence raporlarını periyodik değerlendirmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Tedarikçi izleme"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 59,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-060",
+      "number": 60,
+      "domain": 3,
+      "kind": "fill_blank",
+      "topic": "Güvenli geliştirme",
+      "prompt": "Bu karar hangi temel kavramı uygular? Beklenen kavramın Türkçe adını yaz: “Geliştirme yaşam döngüsüne güvenlik kapıları eklemek”.",
+      "context": "CISM yönetici simülasyonu · Vaka 60/100\n\nKod incelemesi yok ve güvenlik testi sadece yılda bir üretimde yapılıyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [],
+      "answer": [
+        "güvenli geliştirme"
+      ],
+      "explanation": "🧠 Neden doğru?\nErken kontroller kusuru yayından önce bulma fırsatı sağlar.\n\n💼 Gerçek iş hayatında\nKod incelemesi bağımlılık ve sürüm kapısı kanıtlarını test etmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Güvenli geliştirme"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 60,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-061",
+      "number": 61,
+      "domain": 3,
+      "kind": "choice",
+      "topic": "Erişim programı",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 61/100\n\nKullanıcı işe giriş süreçleri var ama görev değişikliğinde eski roller kaldırılmıyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Yalnızca yeni hesap açma hızını ölçmek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Yetki birikimi görev değişiminde en az ayrıcalık ilkesini bozar."
+        },
+        {
+          "id": "a",
+          "text": "Katılan değişen ayrılan yaşam döngüsünü bütünlemek",
+          "feedback": "Yetki birikimi görev değişiminde en az ayrıcalık ilkesini bozar."
+        },
+        {
+          "id": "b",
+          "text": "Yeni rol eklendiğinde eski rolü otomatik uygun saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Yetki birikimi görev değişiminde en az ayrıcalık ilkesini bozar."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nYetki birikimi görev değişiminde en az ayrıcalık ilkesini bozar.\n\n💼 Gerçek iş hayatında\nHR rol değişimi ve fiili izinleri mutabık hale getirmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Erişim programı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 61,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-062",
+      "number": 62,
+      "domain": 3,
+      "kind": "scenario",
+      "topic": "Konfigürasyon standardı",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 62/100\n\nStandart mevcut ama sunucuların fiili ayarlarıyla karşılaştırma yapılmıyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Temel yapılandırma ve sapma izlemesini işletmek",
+          "feedback": "Standart ancak uygulanıp izlendiğinde kontrol olur."
+        },
+        {
+          "id": "b",
+          "text": "Belge onayını fiili uyum kanıtı saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Standart ancak uygulanıp izlendiğinde kontrol olur."
+        },
+        {
+          "id": "c",
+          "text": "Bütün istisnaları kayıt açmadan kabul etmek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Standart ancak uygulanıp izlendiğinde kontrol olur."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nStandart ancak uygulanıp izlendiğinde kontrol olur.\n\n💼 Gerçek iş hayatında\nBağımsız yapılandırma çıktılarıyla örnek test yapmak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Konfigürasyon standardı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 62,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-063",
+      "number": 63,
+      "domain": 3,
+      "kind": "sentence_order",
+      "topic": "Ölçüt dengesi",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 63/100\n\nYama ekibi yalnızca kurduğu yama sayısıyla ölçülüyor; kritik gecikmeler görünmüyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s2",
+          "text": "Faaliyet ve risk sonuçlarını birlikte raporlamak",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. Faaliyet hacmi kritik maruziyetin azaldığını göstermeyebilir."
+        },
+        {
+          "id": "s3",
+          "text": "Eşik ihlallerine yönelik aksiyonları izlemek",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. Faaliyet hacmi kritik maruziyetin azaldığını göstermeyebilir."
+        },
+        {
+          "id": "s0",
+          "text": "Yama metriğinin payda ve kapsamını doğrulamak",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. Faaliyet hacmi kritik maruziyetin azaldığını göstermeyebilir."
+        },
+        {
+          "id": "s1",
+          "text": "Kritiklik ve gecikmeye göre maruziyeti ayrıştırmak",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. Faaliyet hacmi kritik maruziyetin azaldığını göstermeyebilir."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nFaaliyet hacmi kritik maruziyetin azaldığını göstermeyebilir.\n\n💼 Gerçek iş hayatında\nKritiklik ve gecikme dağılımını doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Ölçüt dengesi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 63,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-064",
+      "number": 64,
+      "domain": 3,
+      "kind": "drag_select",
+      "topic": "Veri kaybı kontrolü",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 64/100\n\nDLP kuralları tüm yöneticileri süresiz hariç tutuyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "İstisnaları risk sahipliği süre ve telafi kontrolleriyle yönetmek",
+          "feedback": "Geniş istisna kapsamı kontrolün risk azaltımını zayıflatır."
+        },
+        {
+          "id": "c",
+          "text": "Sadece alt kademe çalışan alarmlarını incelemek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Geniş istisna kapsamı kontrolün risk azaltımını zayıflatır."
+        },
+        {
+          "id": "b",
+          "text": "Unvanı otomatik güvence saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Geniş istisna kapsamı kontrolün risk azaltımını zayıflatır."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nGeniş istisna kapsamı kontrolün risk azaltımını zayıflatır.\n\n💼 Gerçek iş hayatında\nİstisna onayı ve yüksek riskli veri akışlarını test etmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Veri kaybı kontrolü"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 64,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-065",
+      "number": 65,
+      "domain": 3,
+      "kind": "multi_select",
+      "topic": "Program iletişimi",
+      "prompt": "Bu vakada uygun olan iki tamamlayıcı adımı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 65/100\n\nİş birimleri yeni güvenlik sürecinin nedenini bilmiyor ve alternatif yollar kullanıyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Uyumsuzluğu nedenini araştırmadan cezayla çözmek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Anlaşılır ve iş bağlamına uygun iletişim benimsemeyi destekler."
+        },
+        {
+          "id": "b",
+          "text": "Sadece politika bağlantısını toplu e-postalamak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Anlaşılır ve iş bağlamına uygun iletişim benimsemeyi destekler."
+        },
+        {
+          "id": "d",
+          "text": "Geri bildirim ve gerçek kullanım verisini incelemek",
+          "feedback": "Bu doğrulama kararın uygulanması ve etkinliği için gerekli kanıtı sağlar."
+        },
+        {
+          "id": "a",
+          "text": "Paydaşlara amaç sorumluluk ve uygulanabilir adımları anlatmak",
+          "feedback": "Anlaşılır ve iş bağlamına uygun iletişim benimsemeyi destekler."
+        }
+      ],
+      "answer": [
+        "a",
+        "d"
+      ],
+      "explanation": "🧠 Neden doğru?\nAnlaşılır ve iş bağlamına uygun iletişim benimsemeyi destekler.\n\n💼 Gerçek iş hayatında\nGeri bildirim ve gerçek kullanım verisini incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Program iletişimi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 65,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-066",
+      "number": 66,
+      "domain": 3,
+      "kind": "choice",
+      "topic": "Varlık envanteri",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 66/100\n\nBulut ekibi geçici kaynak açıyor; merkezi envanterde bu varlıklar görünmüyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Dinamik keşif ve sahiplik mutabakatı kurmak",
+          "feedback": "Envanter yeni ve geçici varlıkları da kapsamalıdır."
+        },
+        {
+          "id": "c",
+          "text": "Geçici kaynakları her koşulda risksiz saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Envanter yeni ve geçici varlıkları da kapsamalıdır."
+        },
+        {
+          "id": "b",
+          "text": "Yıllık Excel listesini tek doğru evren saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Envanter yeni ve geçici varlıkları da kapsamalıdır."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nEnvanter yeni ve geçici varlıkları da kapsamalıdır.\n\n💼 Gerçek iş hayatında\nBulut hesapları ve merkezi kayıtları karşılaştırmak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Varlık envanteri"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 66,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-067",
+      "number": 67,
+      "domain": 3,
+      "kind": "scenario",
+      "topic": "Anahtar yönetimi",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 67/100\n\nŞifreleme anahtarları verilerle aynı hesap ve depoda tutuluyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Anahtar erişimi yaşam döngüsü ve görev ayrılığını yönetmek",
+          "feedback": "Şifreleme güvenliği anahtarların korunmasına da bağlıdır."
+        },
+        {
+          "id": "c",
+          "text": "Anahtar kopyalarını tüm geliştiricilere vermek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Şifreleme güvenliği anahtarların korunmasına da bağlıdır."
+        },
+        {
+          "id": "b",
+          "text": "Algoritma güçlü diye anahtar riskini yok saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Şifreleme güvenliği anahtarların korunmasına da bağlıdır."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nŞifreleme güvenliği anahtarların korunmasına da bağlıdır.\n\n💼 Gerçek iş hayatında\nAnahtar rolleri rotasyon ve kullanım izlerini test etmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Anahtar yönetimi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 67,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-068",
+      "number": 68,
+      "domain": 3,
+      "kind": "sentence_order",
+      "topic": "Günlükleme kapsamı",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 68/100\n\nMerkezi log sistemi var ama kritik uygulamanın ayrıcalık değişikliklerini almıyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s0",
+          "text": "Kritik olay ve varlık gereksinimlerini belirlemek",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. Algılama kapsamı kritik olay ve varlıklarla eşleşmelidir."
+        },
+        {
+          "id": "s3",
+          "text": "Örnek ayrıcalık olayını uçtan uca test etmek",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. Algılama kapsamı kritik olay ve varlıklarla eşleşmelidir."
+        },
+        {
+          "id": "s1",
+          "text": "Toplanan logların bu gereksinimlerle kapsamını eşleştirmek",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. Algılama kapsamı kritik olay ve varlıklarla eşleşmelidir."
+        },
+        {
+          "id": "s2",
+          "text": "Eksik kaynakları ve bütünlük kontrollerini uygulamak",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. Algılama kapsamı kritik olay ve varlıklarla eşleşmelidir."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nAlgılama kapsamı kritik olay ve varlıklarla eşleşmelidir.\n\n💼 Gerçek iş hayatında\nÖrnek ayrıcalık olayının uçtan uca izini test etmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Günlükleme kapsamı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 68,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-069",
+      "number": 69,
+      "domain": 3,
+      "kind": "drag_select",
+      "topic": "Fiziksel kontrol",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 69/100\n\nVeri merkezi kart geçişleri var ancak ziyaretçi eşliği ve çıkış kaydı yok. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Ziyaretçileri çalışan hesabıyla içeri almak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Tek geçiş kontrolü tüm erişim zincirini kapsamaz."
+        },
+        {
+          "id": "a",
+          "text": "Fiziksel erişimin yaşam döngüsü ve ziyaretçi izlemesini tamamlamak",
+          "feedback": "Tek geçiş kontrolü tüm erişim zincirini kapsamaz."
+        },
+        {
+          "id": "b",
+          "text": "Kart okuyucuyu bütün fiziksel güvenlik saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Tek geçiş kontrolü tüm erişim zincirini kapsamaz."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nTek geçiş kontrolü tüm erişim zincirini kapsamaz.\n\n💼 Gerçek iş hayatında\nZiyaretçi yetkisi eşlik ve kayıt örneklerini incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Fiziksel kontrol"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 69,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-070",
+      "number": 70,
+      "domain": 3,
+      "kind": "fill_blank",
+      "topic": "Bütçe kesintisi",
+      "prompt": "Bu karar hangi temel kavramı uygular? Beklenen kavramın Türkçe adını yaz: “Risk ve hizmet etkisine göre yeniden önceliklendirmek”.",
+      "context": "CISM yönetici simülasyonu · Vaka 70/100\n\nBütçe yüzde 15 azaltılacak; yönetim her kontrolden aynı oranda kesinti istiyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [],
+      "answer": [
+        "risk temelli kaynak tahsisi"
+      ],
+      "explanation": "🧠 Neden doğru?\nKontrol azaltımının etkisi ve bağımlılıkları farklıdır.\n\n💼 Gerçek iş hayatında\nKalan risk ve alternatiflerin yetkili onayını doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Bütçe kesintisi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 70,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-071",
+      "number": 71,
+      "domain": 3,
+      "kind": "choice",
+      "topic": "Denetim bulgusu takibi",
+      "prompt": "“Done etiketiyle bütün bulguları kapatmak” yaklaşımı bu vaka için uygundur. Doğru mu, yanlış mı?",
+      "context": "CISM yönetici simülasyonu · Vaka 71/100\n\nBulgular kapatılıyor ama yalnızca aksiyon sahibi beyanıyla; yeniden test yok. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "dogru",
+          "text": "Doğru",
+          "feedback": "Düzeltmenin amaçlanan sonucu ürettiği kanıtlanmalıdır."
+        },
+        {
+          "id": "yanlis",
+          "text": "Yanlış",
+          "feedback": "Düzeltmenin amaçlanan sonucu ürettiği kanıtlanmalıdır."
+        }
+      ],
+      "answer": [
+        "yanlis"
+      ],
+      "explanation": "🧠 Neden doğru?\nDüzeltmenin amaçlanan sonucu ürettiği kanıtlanmalıdır.\n\n💼 Gerçek iş hayatında\nTest sonucu ve sürdürülebilirliği doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Denetim bulgusu takibi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 71,
+      "card_pages": [],
+      "presentation": "true_false"
+    },
+    {
+      "external_id": "cism-manager-v1-072",
+      "number": 72,
+      "domain": 3,
+      "kind": "scenario",
+      "topic": "Politika istisna ölçümü",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 72/100\n\nİstisna sayısı azalırken vadesi geçen kritik istisnalar artıyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sayıya ek yaş kritiklik ve kapanış etkinliğini ölçmek",
+          "feedback": "Tek toplam ölçüt risk dağılımını gizleyebilir."
+        },
+        {
+          "id": "b",
+          "text": "Toplam azaldığı için riski düşük ilan etmek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Tek toplam ölçüt risk dağılımını gizleyebilir."
+        },
+        {
+          "id": "c",
+          "text": "Vadesi geçenleri listeden çıkararak oranı düzeltmek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Tek toplam ölçüt risk dağılımını gizleyebilir."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nTek toplam ölçüt risk dağılımını gizleyebilir.\n\n💼 Gerçek iş hayatında\nVade ve maruziyet trendlerini doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Politika istisna ölçümü"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 72,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-073",
+      "number": 73,
+      "domain": 3,
+      "kind": "sentence_order",
+      "topic": "Bulut kontrol paylaşımı",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 73/100\n\nEkip yönetilen veritabanında kullanıcı yetkilerinin sağlayıcıya ait olduğunu sanıyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s2",
+          "text": "Sorumlu ekiplerle müşteri kontrollerini uygulamak",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. Hizmet modeli müşterinin yapılandırma sorumluluğunu kaldırmaz."
+        },
+        {
+          "id": "s1",
+          "text": "Müşteriye kalan rol ve log kontrol gereksinimlerini tanımlamak",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. Hizmet modeli müşterinin yapılandırma sorumluluğunu kaldırmaz."
+        },
+        {
+          "id": "s0",
+          "text": "Yönetilen hizmet modelindeki sorumlulukları belirlemek",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. Hizmet modeli müşterinin yapılandırma sorumluluğunu kaldırmaz."
+        },
+        {
+          "id": "s3",
+          "text": "Sağlayıcı güvencesi ve müşteri etkinliğini ayrı test etmek",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. Hizmet modeli müşterinin yapılandırma sorumluluğunu kaldırmaz."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nHizmet modeli müşterinin yapılandırma sorumluluğunu kaldırmaz.\n\n💼 Gerçek iş hayatında\nSorumluluk matrisi ve müşteri kontrollerini test etmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Bulut kontrol paylaşımı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 73,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-074",
+      "number": 74,
+      "domain": 3,
+      "kind": "drag_select",
+      "topic": "Güvenlik otomasyonu",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 74/100\n\nOtomatik engelleme kuralı iş işlemlerini durduruyor; hata ölçümü ve geri alma yok. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Otomasyon için doğrulama etki izleme ve geri dönüş tasarlamak",
+          "feedback": "Otomasyon yanlış pozitif ve iş etkisini de yönetmelidir."
+        },
+        {
+          "id": "c",
+          "text": "Otomatik olduğu için insan gözetimini kaldırmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Otomasyon yanlış pozitif ve iş etkisini de yönetmelidir."
+        },
+        {
+          "id": "b",
+          "text": "Her alarmda geri dönüşsüz otomatik hesap silmek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Otomasyon yanlış pozitif ve iş etkisini de yönetmelidir."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nOtomasyon yanlış pozitif ve iş etkisini de yönetmelidir.\n\n💼 Gerçek iş hayatında\nYetki sınırı kontrollü test ve geri alma kanıtını incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Güvenlik otomasyonu"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 74,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-075",
+      "number": 75,
+      "domain": 3,
+      "kind": "multi_select",
+      "topic": "Program olgunluğu",
+      "prompt": "Bu vaka için doğru olan iki amaç–uygulama eşleştirmesini seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 75/100\n\nOlgunluk puanı yükseldi ama aynı kritik hizmet kesintileri tekrarlanıyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Etkin risk yönetimi → Puan artışını bütün risklerin azaldığı saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Süreç olgunluğu ile sonuç etkinliği aynı ölçüm değildir."
+        },
+        {
+          "id": "a",
+          "text": "Uygun karar → Olgunluk ölçümünü gerçek risk sonuçlarıyla birlikte değerlendirmek",
+          "feedback": "Süreç olgunluğu ile sonuç etkinliği aynı ölçüm değildir."
+        },
+        {
+          "id": "d",
+          "text": "Doğrulama kanıtı → Kayıp senaryoları ve kontrol sonuçlarını karşılaştırmak",
+          "feedback": "Bu doğrulama kararın uygulanması ve etkinliği için gerekli kanıtı sağlar."
+        },
+        {
+          "id": "c",
+          "text": "Etkin risk yönetimi → Kesintileri olgunluk raporundan çıkarmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Süreç olgunluğu ile sonuç etkinliği aynı ölçüm değildir."
+        }
+      ],
+      "answer": [
+        "a",
+        "d"
+      ],
+      "explanation": "🧠 Neden doğru?\nSüreç olgunluğu ile sonuç etkinliği aynı ölçüm değildir.\n\n💼 Gerçek iş hayatında\nKayıp senaryoları ve kontrol sonuçlarını karşılaştırmak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Program olgunluğu"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 75,
+      "card_pages": [],
+      "presentation": "pair_matching"
+    },
+    {
+      "external_id": "cism-manager-v1-076",
+      "number": 76,
+      "domain": 4,
+      "kind": "choice",
+      "topic": "Olay tanımı",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 76/100\n\nSOC her teknik hatayı kritik olay sayıyor; gerçek olaylar gürültüde kayboluyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ortak olay tanımı sınıflandırma ve eskalasyon kriteri oluşturmak",
+          "feedback": "Tutarlı sınıflandırma kaynakların doğru olaya yönelmesini sağlar."
+        },
+        {
+          "id": "b",
+          "text": "Bütün alarmları aynı öncelikte ele almak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Tutarlı sınıflandırma kaynakların doğru olaya yönelmesini sağlar."
+        },
+        {
+          "id": "c",
+          "text": "Daha az alarm için kritik kayıtları tümden kapatmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Tutarlı sınıflandırma kaynakların doğru olaya yönelmesini sağlar."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nTutarlı sınıflandırma kaynakların doğru olaya yönelmesini sağlar.\n\n💼 Gerçek iş hayatında\nİş etkisi ve örnek olay sınıflarını kalibre etmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Olay tanımı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 76,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-077",
+      "number": 77,
+      "domain": 4,
+      "kind": "scenario",
+      "topic": "İş etkisi önceliği",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 77/100\n\nMüşteri ödemesi durdu; aynı anda düşük etkili bir test sunucusunda kötü amaçlı dosya bulundu. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Önceliği kritik iş etkisi ve olay yayılımına göre belirlemek",
+          "feedback": "Müdahale önceliği iş etkisi ve güvenilir olay bağlamını kapsar."
+        },
+        {
+          "id": "c",
+          "text": "Sadece teknik önem puanına göre karar vermek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Müdahale önceliği iş etkisi ve güvenilir olay bağlamını kapsar."
+        },
+        {
+          "id": "b",
+          "text": "En yeni alarmı her koşulda önce ele almak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Müdahale önceliği iş etkisi ve güvenilir olay bağlamını kapsar."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nMüdahale önceliği iş etkisi ve güvenilir olay bağlamını kapsar.\n\n💼 Gerçek iş hayatında\nHizmet bağımlılıkları ve etki doğrulamasını yapmak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "İş etkisi önceliği"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 77,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-078",
+      "number": 78,
+      "domain": 4,
+      "kind": "sentence_order",
+      "topic": "Müdahale yetkisi",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 78/100\n\nOlay ekibi kritik sunucuyu izole etmek istiyor ancak yetki ve karar sahibi tanımlanmamış. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s3",
+          "text": "Yayılımı ve iş hizmetinin durumunu izlemek",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. Hızlı müdahale önceden tanımlı yetki ve sınırlar gerektirir."
+        },
+        {
+          "id": "s2",
+          "text": "Onaylı müdahaleyi kanıtı koruyarak uygulamak",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. Hızlı müdahale önceden tanımlı yetki ve sınırlar gerektirir."
+        },
+        {
+          "id": "s1",
+          "text": "Yetkili karar sahibi ve eskalasyon yolunu doğrulamak",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. Hızlı müdahale önceden tanımlı yetki ve sınırlar gerektirir."
+        },
+        {
+          "id": "s0",
+          "text": "İzolasyon seçenekleri ve kritik iş etkisini belirlemek",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. Hızlı müdahale önceden tanımlı yetki ve sınırlar gerektirir."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nHızlı müdahale önceden tanımlı yetki ve sınırlar gerektirir.\n\n💼 Gerçek iş hayatında\nPlan ve tatbikatta karar zincirini doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Müdahale yetkisi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 78,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-079",
+      "number": 79,
+      "domain": 4,
+      "kind": "drag_select",
+      "topic": "Delil koruma",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 79/100\n\nŞüpheli sunucu hemen yeniden kurulmak isteniyor; olayın kapsamı henüz bilinmiyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Bütün diskleri kanıt almadan silmek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Müdahale kanıt ihtiyacını ve hizmet riskini yetkili kararla dengeler."
+        },
+        {
+          "id": "c",
+          "text": "Kanıt için kritik hizmeti koşulsuz sonsuza dek durdurmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Müdahale kanıt ihtiyacını ve hizmet riskini yetkili kararla dengeler."
+        },
+        {
+          "id": "a",
+          "text": "İş etkisini gözeterek gerekli kanıtı koruma kararını koordine etmek",
+          "feedback": "Müdahale kanıt ihtiyacını ve hizmet riskini yetkili kararla dengeler."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nMüdahale kanıt ihtiyacını ve hizmet riskini yetkili kararla dengeler.\n\n💼 Gerçek iş hayatında\nToplama bütünlük ve kayıt zincirini doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Delil koruma"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 79,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-080",
+      "number": 80,
+      "domain": 4,
+      "kind": "fill_blank",
+      "topic": "İletişim planı",
+      "prompt": "Bu karar hangi temel kavramı uygular? Beklenen kavramın Türkçe adını yaz: “Onaylı paydaş ve mesaj akışını devreye almak”.",
+      "context": "CISM yönetici simülasyonu · Vaka 80/100\n\nMüşteriler sosyal medyadan olayı öğreniyor; kurumda tek yetkili açıklama kanalı yok. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [],
+      "answer": [
+        "olay iletişimi"
+      ],
+      "explanation": "🧠 Neden doğru?\nKoordineli iletişim doğruluk tutarlılık ve zamanlamayı destekler.\n\n💼 Gerçek iş hayatında\nHukuk iletişim ve iş sahiplerinin rolünü doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "İletişim planı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 80,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-081",
+      "number": 81,
+      "domain": 4,
+      "kind": "choice",
+      "topic": "Yasal bildirim",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 81/100\n\nPotansiyel veri olayı birden fazla ülke ve müşteri sözleşmesini etkiliyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Her ülke için tek ezber süreyi kullanmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Bildirim kararı yetki alanı sözleşme ve olay bilgisine göre verilir."
+        },
+        {
+          "id": "c",
+          "text": "Teknik inceleme bitene kadar bütün yükümlülükleri yok saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Bildirim kararı yetki alanı sözleşme ve olay bilgisine göre verilir."
+        },
+        {
+          "id": "a",
+          "text": "Hukukla uygulanabilir bildirim yükümlülüklerini ve süre başlangıcını belirlemek",
+          "feedback": "Bildirim kararı yetki alanı sözleşme ve olay bilgisine göre verilir."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nBildirim kararı yetki alanı sözleşme ve olay bilgisine göre verilir.\n\n💼 Gerçek iş hayatında\nBildirim kararının dayanak ve zaman çizelgesini incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Yasal bildirim"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 81,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-082",
+      "number": 82,
+      "domain": 4,
+      "kind": "scenario",
+      "topic": "Tatbikat amacı",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 82/100\n\nEkip masa başı tatbikatını gerçek sistem kurtarma testi olarak raporluyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tatbikat türü ve kanıtladığı yeteneği açıkça ayırmak",
+          "feedback": "Masa başı karar ve rol pratiği sağlar; teknik kurtarmayı tek başına kanıtlamaz."
+        },
+        {
+          "id": "c",
+          "text": "Masa başı çalışmayı yararsız diye tümden bırakmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Masa başı karar ve rol pratiği sağlar; teknik kurtarmayı tek başına kanıtlamaz."
+        },
+        {
+          "id": "b",
+          "text": "Katılım imzasını teknik kurtarma başarısı saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Masa başı karar ve rol pratiği sağlar; teknik kurtarmayı tek başına kanıtlamaz."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nMasa başı karar ve rol pratiği sağlar; teknik kurtarmayı tek başına kanıtlamaz.\n\n💼 Gerçek iş hayatında\nTest hedefleri ve gözlemlenen kanıtları karşılaştırmak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Tatbikat amacı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 82,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-083",
+      "number": 83,
+      "domain": 4,
+      "kind": "sentence_order",
+      "topic": "Olaydan öğrenme",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 83/100\n\nFidye olayı kapandı; aynı erişim yolu açık ve kök neden incelemesi yapılmadı. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Kök neden ve katkıda bulunan kontrol açıklarını analiz etmek",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. Öğrenilen dersler kontrol ve süreçte kalıcı iyileşmeye dönüşmelidir."
+        },
+        {
+          "id": "s2",
+          "text": "Düzeltici aksiyonlara sorumlu ve vade atamak",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. Öğrenilen dersler kontrol ve süreçte kalıcı iyileşmeye dönüşmelidir."
+        },
+        {
+          "id": "s0",
+          "text": "Olay kapanış kanıtını ve zaman çizelgesini toplamak",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. Öğrenilen dersler kontrol ve süreçte kalıcı iyileşmeye dönüşmelidir."
+        },
+        {
+          "id": "s3",
+          "text": "Aksiyonları yeniden test edip risk değerlendirmesini güncellemek",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. Öğrenilen dersler kontrol ve süreçte kalıcı iyileşmeye dönüşmelidir."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nÖğrenilen dersler kontrol ve süreçte kalıcı iyileşmeye dönüşmelidir.\n\n💼 Gerçek iş hayatında\nAksiyon sahibi vade ve yeniden test kanıtını doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "beginner",
+      "goals": [
+        "Olaydan öğrenme"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 83,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-084",
+      "number": 84,
+      "domain": 4,
+      "kind": "drag_select",
+      "topic": "Kurtarma önceliği",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 84/100\n\nBT önce en kolay sunucuyu açıyor; ödeme hizmetinin kimlik bağımlılığı hâlâ kapalı. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "c",
+          "text": "İş kabulünü teknik erişilebilirlikle otomatik eşitlemek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Kurtarma iş hizmetini ve bağımlılıklarını birlikte ele alır."
+        },
+        {
+          "id": "a",
+          "text": "BIA ve kritik hizmet bağımlılıklarına göre kurtarma sırası kurmak",
+          "feedback": "Kurtarma iş hizmetini ve bağımlılıklarını birlikte ele alır."
+        },
+        {
+          "id": "b",
+          "text": "Sunucu sayısı en hızlı artacak sırayı seçmek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Kurtarma iş hizmetini ve bağımlılıklarını birlikte ele alır."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nKurtarma iş hizmetini ve bağımlılıklarını birlikte ele alır.\n\n💼 Gerçek iş hayatında\nİş kabulü ve uçtan uca hizmet testini doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Kurtarma önceliği"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 84,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-085",
+      "number": 85,
+      "domain": 4,
+      "kind": "multi_select",
+      "topic": "Tedarikçi olayı",
+      "prompt": "Bu vakada uygun olan iki tamamlayıcı adımı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 85/100\n\nDış sağlayıcı şüpheli erişim bildirdi; kurum yalnızca sağlayıcının kapanış e-postasını bekliyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Sağlayıcının teknik puanını tek iş etkisi saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Tedarikçi olayı kurum verisi ve hizmetini etkileyebilir."
+        },
+        {
+          "id": "b",
+          "text": "Dış hizmet olduğu için kurum planını devre dışı bırakmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Tedarikçi olayı kurum verisi ve hizmetini etkileyebilir."
+        },
+        {
+          "id": "a",
+          "text": "Kurum etkisini ve koordineli müdahale sorumluluklarını değerlendirmek",
+          "feedback": "Tedarikçi olayı kurum verisi ve hizmetini etkileyebilir."
+        },
+        {
+          "id": "d",
+          "text": "Sözleşme kanıt erişimi ve ortak iletişim akışını doğrulamak",
+          "feedback": "Bu doğrulama kararın uygulanması ve etkinliği için gerekli kanıtı sağlar."
+        }
+      ],
+      "answer": [
+        "a",
+        "d"
+      ],
+      "explanation": "🧠 Neden doğru?\nTedarikçi olayı kurum verisi ve hizmetini etkileyebilir.\n\n💼 Gerçek iş hayatında\nSözleşme kanıt erişimi ve ortak iletişim akışını doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Tedarikçi olayı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 85,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-086",
+      "number": 86,
+      "domain": 4,
+      "kind": "choice",
+      "topic": "İzolasyon dengesi",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 86/100\n\nŞüpheli üretim ağı izolasyonu ödeme hizmetini de durduracak; alternatif kanal mevcut. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Güvenlik ve iş etkisini yetkili karar ve alternatif hizmetle dengelemek",
+          "feedback": "Müdahale kararı yayılım ve hizmet sonuçlarını birlikte yönetir."
+        },
+        {
+          "id": "b",
+          "text": "Her koşulda bütün ağı süresiz kapatmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Müdahale kararı yayılım ve hizmet sonuçlarını birlikte yönetir."
+        },
+        {
+          "id": "c",
+          "text": "İş etkisi var diye yayılım riskini tamamen yok saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Müdahale kararı yayılım ve hizmet sonuçlarını birlikte yönetir."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nMüdahale kararı yayılım ve hizmet sonuçlarını birlikte yönetir.\n\n💼 Gerçek iş hayatında\nKarar yetkisi ve alternatif işleyiş hazırlığını doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "İzolasyon dengesi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 86,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-087",
+      "number": 87,
+      "domain": 4,
+      "kind": "scenario",
+      "topic": "Olay performansı",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 87/100\n\nMTTR düşüyor ama yeniden açılan olay oranı yükseliyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Sadece kısa kapanış süresini başarı saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Hızlı etiket kapatma kalıcı çözüm anlamına gelmez."
+        },
+        {
+          "id": "c",
+          "text": "Yeniden açılan olayları rapordan çıkarmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Hızlı etiket kapatma kalıcı çözüm anlamına gelmez."
+        },
+        {
+          "id": "a",
+          "text": "Hız ölçütlerini çözüm kalitesi ve tekrar oranıyla dengelemek",
+          "feedback": "Hızlı etiket kapatma kalıcı çözüm anlamına gelmez."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nHızlı etiket kapatma kalıcı çözüm anlamına gelmez.\n\n💼 Gerçek iş hayatında\nKapanış ölçütü tekrar ve iş kabulünü incelemek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Olay performansı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 87,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-088",
+      "number": 88,
+      "domain": 4,
+      "kind": "sentence_order",
+      "topic": "Kanıt zinciri",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 88/100\n\nAnalist disk kopyasını tedarikçiye verdi ancak transfer kaydı ve hash doğrulaması yok. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s0",
+          "text": "MTTR ve yeniden açılma metriğinin tanımını doğrulamak",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. İzlenebilirlik kanıtın güvenilirliğini destekler."
+        },
+        {
+          "id": "s3",
+          "text": "Tekrar oranı ve iş etkisindeki değişimi izlemek",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. İzlenebilirlik kanıtın güvenilirliğini destekler."
+        },
+        {
+          "id": "s2",
+          "text": "Kapanış kriterlerini ve iyileştirme aksiyonlarını belirlemek",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. İzlenebilirlik kanıtın güvenilirliğini destekler."
+        },
+        {
+          "id": "s1",
+          "text": "Hız ve çözüm kalitesi eğilimlerini birlikte analiz etmek",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. İzlenebilirlik kanıtın güvenilirliğini destekler."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nİzlenebilirlik kanıtın güvenilirliğini destekler.\n\n💼 Gerçek iş hayatında\nHash ve teslim kayıtlarını bağımsız kontrol etmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Kanıt zinciri"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 88,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-089",
+      "number": 89,
+      "domain": 4,
+      "kind": "drag_select",
+      "topic": "Kriz ve olay",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 89/100\n\nTeknik olay ekibi ödeme kesintisini gideriyor fakat iş sürekliliği kararları sahipsiz. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Teknik liderin bütün kurumsal kararları tek başına vermesi",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Teknik kontrol ve kurumsal kriz yönetimi farklı ama bağlantılı görevlerdir."
+        },
+        {
+          "id": "a",
+          "text": "Teknik müdahale ile kriz ve iş sürekliliği rollerini koordine etmek",
+          "feedback": "Teknik kontrol ve kurumsal kriz yönetimi farklı ama bağlantılı görevlerdir."
+        },
+        {
+          "id": "c",
+          "text": "İş süreçlerini teknik çözüm bitene kadar yok saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Teknik kontrol ve kurumsal kriz yönetimi farklı ama bağlantılı görevlerdir."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nTeknik kontrol ve kurumsal kriz yönetimi farklı ama bağlantılı görevlerdir.\n\n💼 Gerçek iş hayatında\nEskalasyon ve iş karar sahiplerini tatbikatta doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Kriz ve olay"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 89,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-090",
+      "number": 90,
+      "domain": 4,
+      "kind": "fill_blank",
+      "topic": "Yedek güvenliği",
+      "prompt": "Bu karar hangi temel kavramı uygular? Beklenen kavramın Türkçe adını yaz: “Üretimden bağımsız ve değişmez kurtarma kopyalarını doğrulamak”.",
+      "context": "CISM yönetici simülasyonu · Vaka 90/100\n\nÜretim yönetici hesabı ele geçirildi; aynı hesap bütün yedekleri silebiliyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [],
+      "answer": [
+        "kurtarma dayanıklılığı"
+      ],
+      "explanation": "🧠 Neden doğru?\nOrtak güven sınırı kurtarma kaynaklarını da etkiler.\n\n💼 Gerçek iş hayatında\nAyrı yetki ve değişmezlik kontrollerini test etmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Yedek güvenliği"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 90,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-091",
+      "number": 91,
+      "domain": 4,
+      "kind": "choice",
+      "topic": "Olay hazırlığı",
+      "prompt": "“İletişim ve rol bilgilerinin güncelliğini düzenli doğrulamak” yaklaşımı bu vaka için uygundur. Doğru mu, yanlış mı?",
+      "context": "CISM yönetici simülasyonu · Vaka 91/100\n\nPlanın iletişim listesi iki yıllık; ana ekip üyeleri kurumdan ayrılmış. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "dogru",
+          "text": "Doğru",
+          "feedback": "İşleyen hazırlık güncel kişi ve erişim bilgisi gerektirir."
+        },
+        {
+          "id": "yanlis",
+          "text": "Yanlış",
+          "feedback": "İşleyen hazırlık güncel kişi ve erişim bilgisi gerektirir."
+        }
+      ],
+      "answer": [
+        "dogru"
+      ],
+      "explanation": "🧠 Neden doğru?\nİşleyen hazırlık güncel kişi ve erişim bilgisi gerektirir.\n\n💼 Gerçek iş hayatında\nArama zinciri ve alternatif kişileri tatbik etmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Olay hazırlığı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 91,
+      "card_pages": [],
+      "presentation": "true_false"
+    },
+    {
+      "external_id": "cism-manager-v1-092",
+      "number": 92,
+      "domain": 4,
+      "kind": "scenario",
+      "topic": "Yanlış pozitif",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 92/100\n\nSistem şüpheli oturumu bildirdi; kimlik ve davranış bağlamı kontrol edilmeden kesin ihlal ilan ediliyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Alarmı kanıt ve bağlamla doğrulayıp sınıflandırmak",
+          "feedback": "Alarm göstergedir; sonuç için doğrulama ve sınıflandırma gerekir."
+        },
+        {
+          "id": "c",
+          "text": "Yanlış pozitif olabilir diye bütün alarmları kapatmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Alarm göstergedir; sonuç için doğrulama ve sınıflandırma gerekir."
+        },
+        {
+          "id": "b",
+          "text": "Her alarmı doğrulanmış ihlal olarak açıklamak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Alarm göstergedir; sonuç için doğrulama ve sınıflandırma gerekir."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nAlarm göstergedir; sonuç için doğrulama ve sınıflandırma gerekir.\n\n💼 Gerçek iş hayatında\nBağımsız log ve oturum verisini ilişkilendirmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Yanlış pozitif"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 92,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-093",
+      "number": 93,
+      "domain": 4,
+      "kind": "sentence_order",
+      "topic": "Tehdit avı",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 93/100\n\nKurumsal IOC eşleşmesi var ancak yalnızca tek cihaz incelenmiş. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s2",
+          "text": "Doğrulanan yayılıma uygun müdahaleyi koordine etmek",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. Gözlenen gösterge olayın kapsamını tek başına belirlemez."
+        },
+        {
+          "id": "s1",
+          "text": "İlişkili kimlik, ağ ve cihaz kapsamını araştırmak",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. Gözlenen gösterge olayın kapsamını tek başına belirlemez."
+        },
+        {
+          "id": "s3",
+          "text": "Temizliği ve ek kalıcı erişim olmadığını doğrulamak",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. Gözlenen gösterge olayın kapsamını tek başına belirlemez."
+        },
+        {
+          "id": "s0",
+          "text": "Güvenilir IOC ve olay göstergelerini doğrulamak",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. Gözlenen gösterge olayın kapsamını tek başına belirlemez."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nGözlenen gösterge olayın kapsamını tek başına belirlemez.\n\n💼 Gerçek iş hayatında\nKimlik ağ ve uç nokta kanıtlarını ilişkilendirmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "intermediate",
+      "goals": [
+        "Tehdit avı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 93,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-094",
+      "number": 94,
+      "domain": 4,
+      "kind": "drag_select",
+      "topic": "İyileştirme finansmanı",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 94/100\n\nTatbikat kritik iletişim boşluğu buldu; kaynak ve sorumlu atanmadı. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Öğrenilen dersi sahipli ve bütçeli aksiyona dönüştürmek",
+          "feedback": "Testin değeri bulunan açığın giderilmesiyle tamamlanır."
+        },
+        {
+          "id": "c",
+          "text": "Eksikliği sadece rapor ekinde bırakmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Testin değeri bulunan açığın giderilmesiyle tamamlanır."
+        },
+        {
+          "id": "b",
+          "text": "Tatbikat yapıldığı için bulguyu kapatmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Testin değeri bulunan açığın giderilmesiyle tamamlanır."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nTestin değeri bulunan açığın giderilmesiyle tamamlanır.\n\n💼 Gerçek iş hayatında\nAksiyon vadesi ve takip testini doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "İyileştirme finansmanı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 94,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-095",
+      "number": 95,
+      "domain": 4,
+      "kind": "multi_select",
+      "topic": "RTO yorumlama",
+      "prompt": "Bu vaka için doğru olan iki amaç–uygulama eşleştirmesini seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 95/100\n\nTeknik geri yükleme 3 saat ama iş hizmeti 7 saatte doğrulandı; hedef 4 saat. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Uygun karar → İşlevsel hizmet dönüşünü kurtarma hedefiyle karşılaştırmak",
+          "feedback": "Kurtarma hedefi iş hizmetinin kullanılabilirliğine dayanır."
+        },
+        {
+          "id": "d",
+          "text": "Doğrulama kanıtı → Başlangıç bitiş ve iş kabul kayıtlarını doğrulamak",
+          "feedback": "Bu doğrulama kararın uygulanması ve etkinliği için gerekli kanıtı sağlar."
+        },
+        {
+          "id": "b",
+          "text": "Etkin risk yönetimi → Yalnızca teknik restore süresini başarı saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Kurtarma hedefi iş hizmetinin kullanılabilirliğine dayanır."
+        },
+        {
+          "id": "c",
+          "text": "Etkin risk yönetimi → Hedefi testten sonra 8 saate çıkarmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Kurtarma hedefi iş hizmetinin kullanılabilirliğine dayanır."
+        }
+      ],
+      "answer": [
+        "a",
+        "d"
+      ],
+      "explanation": "🧠 Neden doğru?\nKurtarma hedefi iş hizmetinin kullanılabilirliğine dayanır.\n\n💼 Gerçek iş hayatında\nBaşlangıç bitiş ve iş kabul kayıtlarını doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "RTO yorumlama"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 95,
+      "card_pages": [],
+      "presentation": "pair_matching"
+    },
+    {
+      "external_id": "cism-manager-v1-096",
+      "number": 96,
+      "domain": 4,
+      "kind": "choice",
+      "topic": "RPO yorumlama",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 96/100\n\nİş en fazla 1 saat veri kaybını kabul ediyor; son güvenilir kopya 20 saat önce. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "b",
+          "text": "Başarılı restore ile veri kaybı hedefini otomatik sağlanmış saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. RPO kurtarılan verinin kabul edilebilir yaşını sınırlar."
+        },
+        {
+          "id": "a",
+          "text": "Veri kaybı penceresini onaylı hedefle karşılaştırmak",
+          "feedback": "RPO kurtarılan verinin kabul edilebilir yaşını sınırlar."
+        },
+        {
+          "id": "c",
+          "text": "RPO'yu sistem açılma süresi olarak yorumlamak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. RPO kurtarılan verinin kabul edilebilir yaşını sınırlar."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nRPO kurtarılan verinin kabul edilebilir yaşını sınırlar.\n\n💼 Gerçek iş hayatında\nKopya zamanı işlem kayıtları ve mutabakatı kontrol etmek. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "RPO yorumlama"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 96,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-097",
+      "number": 97,
+      "domain": 4,
+      "kind": "scenario",
+      "topic": "Olay bilgi paylaşımı",
+      "prompt": "Bilgi güvenliği yöneticisi olarak en uygun yaklaşım hangisidir?",
+      "context": "CISM yönetici simülasyonu · Vaka 97/100\n\nMüşteri kimlikleri içeren ham olay kayıtları geniş bir dış gruba gönderilmek isteniyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "c",
+          "text": "Bütün iş birliğini gerekçesiz durdurmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. İş birliği gizlilik ve veri kullanım sınırlarıyla yürütülür."
+        },
+        {
+          "id": "b",
+          "text": "İyi niyetli grup olduğu için tüm veriyi göndermek",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. İş birliği gizlilik ve veri kullanım sınırlarıyla yürütülür."
+        },
+        {
+          "id": "a",
+          "text": "Paylaşımı amaç yetki ve gerekli en az veriyle sınırlandırmak",
+          "feedback": "İş birliği gizlilik ve veri kullanım sınırlarıyla yürütülür."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nİş birliği gizlilik ve veri kullanım sınırlarıyla yürütülür.\n\n💼 Gerçek iş hayatında\nAnonimleştirme paylaşım yetkisi ve kanalı doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Olay bilgi paylaşımı"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 97,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-098",
+      "number": 98,
+      "domain": 4,
+      "kind": "sentence_order",
+      "topic": "Olay aracı kesintisi",
+      "prompt": "Vakayı yönetmek için adımları ilk yapılacak olandan son yapılacak olana sırala.",
+      "context": "CISM yönetici simülasyonu · Vaka 98/100\n\nAna e-posta ve kimlik sistemi olayın parçası; iletişim planı yalnızca bunlara bağlı. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "s1",
+          "text": "Önceden yetkilendirilmiş bağımsız kanalı devreye almak",
+          "feedback": "Bu vakada doğru süreçte 2. adımdır. Müdahale altyapısı olaydan bağımsız çalışabilmelidir."
+        },
+        {
+          "id": "s3",
+          "text": "Karar kayıtlarını koruyup normal kanala dönüşü doğrulamak",
+          "feedback": "Bu vakada doğru süreçte 4. adımdır. Müdahale altyapısı olaydan bağımsız çalışabilmelidir."
+        },
+        {
+          "id": "s0",
+          "text": "Olaydan etkilenen iletişim ve kimlik kanallarını belirlemek",
+          "feedback": "Bu vakada doğru süreçte 1. adımdır. Müdahale altyapısı olaydan bağımsız çalışabilmelidir."
+        },
+        {
+          "id": "s2",
+          "text": "Paydaş kimliklerini doğrulayıp güvenli koordinasyonu yürütmek",
+          "feedback": "Bu vakada doğru süreçte 3. adımdır. Müdahale altyapısı olaydan bağımsız çalışabilmelidir."
+        }
+      ],
+      "answer": [
+        "s0",
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "explanation": "🧠 Neden doğru?\nMüdahale altyapısı olaydan bağımsız çalışabilmelidir.\n\n💼 Gerçek iş hayatında\nAlternatif kanalın erişim ve tatbikat kanıtını doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Olay aracı kesintisi"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 98,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-099",
+      "number": 99,
+      "domain": 4,
+      "kind": "drag_select",
+      "topic": "Kurtarma bütünlüğü",
+      "prompt": "Karar kartları arasından bu vaka için en uygun olanı seç.",
+      "context": "CISM yönetici simülasyonu · Vaka 99/100\n\nSistem yedekten açıldı ama aynı zararlı hesabın hâlâ etkin olduğu görülüyor. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Üretime dönüşten önce tehdit temizliği ve bütünlüğü doğrulamak",
+          "feedback": "Kurtarma tekrar bulaşmayı ve kalıcı erişimi dışlamalıdır."
+        },
+        {
+          "id": "b",
+          "text": "Sistem açıldığı için olayı koşulsuz kapatmak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Kurtarma tekrar bulaşmayı ve kalıcı erişimi dışlamalıdır."
+        },
+        {
+          "id": "c",
+          "text": "Kullanıcı sayısını başarı ölçütü saymak",
+          "feedback": "Bu karar vakadaki yönetim amacını karşılamaz. Kurtarma tekrar bulaşmayı ve kalıcı erişimi dışlamalıdır."
+        }
+      ],
+      "answer": [
+        "a"
+      ],
+      "explanation": "🧠 Neden doğru?\nKurtarma tekrar bulaşmayı ve kalıcı erişimi dışlamalıdır.\n\n💼 Gerçek iş hayatında\nKimlik yapılandırma ve izleme doğrulamasını yapmak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Kurtarma bütünlüğü"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 99,
+      "card_pages": []
+    },
+    {
+      "external_id": "cism-manager-v1-100",
+      "number": 100,
+      "domain": 4,
+      "kind": "fill_blank",
+      "topic": "Olay liderliği",
+      "prompt": "Bu karar hangi temel kavramı uygular? Beklenen kavramın Türkçe adını yaz: “Yetkili olay koordinatörü ve ortak durum görünümü kurmak”.",
+      "context": "CISM yönetici simülasyonu · Vaka 100/100\n\nİki ekip farklı öncelikler veriyor; merkezi olay sorumlusu yok. Elindeki bilgileri kullanarak iş riskini, yetkiyi ve kontrol amacını birlikte değerlendir.",
+      "options": [],
+      "answer": [
+        "olay koordinasyonu"
+      ],
+      "explanation": "🧠 Neden doğru?\nNet komuta ve iletişim çakışan eylemleri azaltır.\n\n💼 Gerçek iş hayatında\nKarar kaydı görev sahipliği ve durum güncellemesini doğrulamak. Kararı ilgili iş/risk sahibiyle kayıt altına al; etkisini ve kalan riski izle.",
+      "hint": "Teknik aracın varlığından önce iş hedefini, risk karar yetkisini ve eldeki kanıtı düşün.",
+      "difficulty": "advanced",
+      "goals": [
+        "Olay liderliği"
+      ],
+      "base_xp": 10,
+      "premium": true,
+      "published": true,
+      "order": 100,
+      "card_pages": []
+    }
+  ]
+}

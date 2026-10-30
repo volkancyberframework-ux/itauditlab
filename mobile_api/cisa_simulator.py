@@ -15,6 +15,11 @@ def is_cisa(path):
     return (path.preferences or {}).get(KEY, {}).get('enabled') is True
 
 
+def is_simulation(path):
+    from .cism_manager import is_cism
+    return is_cisa(path) or is_cism(path)
+
+
 def load_package():
     from .models import Question
     data = json.loads((ROOT / 'package.json').read_text())
@@ -141,6 +146,9 @@ def evaluation(session):
     """Latest attempt per question; no diagnosis or career suitability verdict."""
     from .models import QuestionAttempt
     from .models import Question
+    from .cism_manager import is_cism, evaluation as cism_evaluation
+    if is_cism(session.path):
+        return cism_evaluation(session)
     attempts = QuestionAttempt.objects.filter(session__path=session.path,session__user=session.user,session__is_archived=False).select_related('question__module').order_by('created_at','pk')
     latest = {a.question_id:a for a in attempts}
     summaries = []

@@ -11,6 +11,8 @@ from mobile_api.ad_auditor import KEY,is_ad,feedback
 from mobile_api.linux_auditor import is_linux
 from mobile_api.database_auditor import is_database
 from mobile_api.network_auditor import is_network
+from mobile_api.grc_bootcamp import is_grc
+from mobile_api.cism_manager import is_cism
 from mobile_api.levels import level_data
 
 def web_paths(user):
@@ -27,14 +29,17 @@ def web_path_data(path,user):
     if is_linux(path):value.update(direct_start=True,session_size=16,web_only=False)
     if is_database(path):value.update(direct_start=True,session_size=11,web_only=False,show_path_percentage=True)
     if is_network(path):value.update(direct_start=True,session_size=11,web_only=False,show_path_percentage=True)
+    if is_grc(path):value.update(direct_start=True,session_size=16,web_only=False,show_path_percentage=True)
+    if is_cism(path):value.update(direct_start=True,session_size=25,web_only=False,show_path_percentage=True)
     return value
 
 def enrich(state,session,request):
     path=session.path;state['path']=web_path_data(path,request.user)
     q=state.get('question')
-    if q and (is_linux(path) or is_database(path) or is_network(path)):
+    if q and (is_linux(path) or is_database(path) or is_network(path) or is_grc(path)):
         model=Question.objects.get(pk=q['id'])
         q.update(hint=model.hint,chapter=model.module.title,number=model.order,synthetic_image=True)
+        if is_grc(path):q['image_alt']='GRC bootcamp denetim kanıtı: '+model.goals[0]
         if is_network(path):q['image_alt']='Ağ denetimi kanıtı: '+model.goals[0]
     if q and is_ad(path):
         model=Question.objects.get(pk=q['id'])

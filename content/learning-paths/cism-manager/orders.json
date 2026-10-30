@@ -1,0 +1,22 @@
+{
+"3":["Belge amaçlarını ve bağlayıcı gereksinimleri belirlemek","Politika, standart ve prosedür hiyerarşisini tasarlamak","Sahipleri ve uygun onayları atamak","Belgeleri yayımlayıp sürüm ve uygulamayı izlemek"],
+"8":["Çalışanların bildirim yapmasını engelleyen nedenleri araştırmak","Yönetimle cezalandırıcı teşvikleri ve örnek davranışı ele almak","Güvenli bildirim kanalını ve geri bildirim sürecini uygulamak","Bildirim kalitesi ve gecikme değişimini ölçmek"],
+"13":["İş hedefleri ve yükümlülükleri belirlemek","Çerçeveleri kapsam ve risk ihtiyaçlarıyla karşılaştırmak","Seçilen kontrolleri gerekçeleriyle uyarlayıp onaylatmak","Uygulama ve kontrol etkinliğini gözden geçirmek"],
+"18":["Yeni veri akışlarını ve güven sınırlarını belirlemek","Kiracı izolasyonu için tehdit ve riskleri değerlendirmek","Mimari güvenlik gereksinimlerini onaylayıp tasarıma katmak","İzolasyon ve veri erişimini uygulamada doğrulamak"],
+"23":["Riskin etkilediği iş sürecini ve karar yetkisini belirlemek","Güvenlik ekibinin analiz ve önerisini hazırlamak","Yetkili iş sahibinin tedavi veya kabul kararını kaydetmek","Kalan risk ve aksiyon durumunu izlemek"],
+"28":["Varlığı ve erişim yüzeyini belirlemek","Zafiyet, tehdit ve iş etkisini değerlendirmek","Uygun tedavi ve karar sahibini belirlemek","Kontrol etkinliği ve kalan maruziyeti izlemek"],
+"33":["Riskin kurum toleransını aştığını doğrulamak","Karar yetkisi ve eskalasyon düzeyini belirlemek","Üst yönetime gerekçeli tedavi ve kabul seçeneklerini sunmak","Kararı, süreyi ve kalan risk izlemesini kaydetmek"],
+"38":["Önemli tedarikçi değişikliğini belirlemek","Yeni veri akışları ve yükümlülükleri analiz etmek","Risk sahibiyle güncel tedavi kararını almak","Kontrolleri ve değişiklik sonrası riski izlemek"],
+"43":["Ödeme sürecini etkileyen kontrol açıklarını birlikte haritalamak","Açıkların ortak neden ve birleşik iş etkisini analiz etmek","Bileşik risk için sahipli tedavi seçeneklerini belirlemek","Kalan riski ve kontrol bağımlılıklarını yeniden test etmek"],
+"48":["Uyum incelemesinin kapsamını ve sınırlarını belirlemek","Kapsam dışı tehdit ve iş bağımlılıklarını tanımlamak","Kalan risk senaryolarını iş sahibiyle değerlendirmek","Tedavi kararlarını ve artık riski izlemek"],
+"53":["Portalın iş gereksinimleri ve risk senaryolarını belirlemek","Kontrol alternatiflerinin risk azaltımını ve maliyetini karşılaştırmak","Uygun kontrol tasarımını onaylayıp uygulamak","Kontrolün işletim etkinliğini doğrulamak"],
+"58":["Kontrol amacını ve başarı ölçütünü belirlemek","Temsilî olumlu ve olumsuz testleri tasarlamak","Testleri yetkili ortamda uygulayıp kanıt toplamak","İstisnaları değerlendirip yeniden test planlamak"],
+"63":["Yama metriğinin payda ve kapsamını doğrulamak","Kritiklik ve gecikmeye göre maruziyeti ayrıştırmak","Faaliyet ve risk sonuçlarını birlikte raporlamak","Eşik ihlallerine yönelik aksiyonları izlemek"],
+"68":["Kritik olay ve varlık gereksinimlerini belirlemek","Toplanan logların bu gereksinimlerle kapsamını eşleştirmek","Eksik kaynakları ve bütünlük kontrollerini uygulamak","Örnek ayrıcalık olayını uçtan uca test etmek"],
+"73":["Yönetilen hizmet modelindeki sorumlulukları belirlemek","Müşteriye kalan rol ve log kontrol gereksinimlerini tanımlamak","Sorumlu ekiplerle müşteri kontrollerini uygulamak","Sağlayıcı güvencesi ve müşteri etkinliğini ayrı test etmek"],
+"78":["İzolasyon seçenekleri ve kritik iş etkisini belirlemek","Yetkili karar sahibi ve eskalasyon yolunu doğrulamak","Onaylı müdahaleyi kanıtı koruyarak uygulamak","Yayılımı ve iş hizmetinin durumunu izlemek"],
+"83":["Olay kapanış kanıtını ve zaman çizelgesini toplamak","Kök neden ve katkıda bulunan kontrol açıklarını analiz etmek","Düzeltici aksiyonlara sorumlu ve vade atamak","Aksiyonları yeniden test edip risk değerlendirmesini güncellemek"],
+"88":["MTTR ve yeniden açılma metriğinin tanımını doğrulamak","Hız ve çözüm kalitesi eğilimlerini birlikte analiz etmek","Kapanış kriterlerini ve iyileştirme aksiyonlarını belirlemek","Tekrar oranı ve iş etkisindeki değişimi izlemek"],
+"93":["Güvenilir IOC ve olay göstergelerini doğrulamak","İlişkili kimlik, ağ ve cihaz kapsamını araştırmak","Doğrulanan yayılıma uygun müdahaleyi koordine etmek","Temizliği ve ek kalıcı erişim olmadığını doğrulamak"],
+"98":["Olaydan etkilenen iletişim ve kimlik kanallarını belirlemek","Önceden yetkilendirilmiş bağımsız kanalı devreye almak","Paydaş kimliklerini doğrulayıp güvenli koordinasyonu yürütmek","Karar kayıtlarını koruyup normal kanala dönüşü doğrulamak"]
+}

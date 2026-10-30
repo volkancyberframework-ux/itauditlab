@@ -206,7 +206,7 @@ def paths(user):
     qs = LearningPath.objects.filter(published=True, owner=None)
     if not premium(user):
         free_id = MobileSettings.objects.filter(pk=1).values_list("free_path_id", flat=True).first()
-        qs = qs.filter(Q(pk=free_id) | Q(preferences__web_all_types_demo=True))
+        qs = qs.filter(Q(pk=free_id) | Q(preferences__web_all_types_demo=True)).filter(Q(preferences__paid_only__isnull=True) | Q(preferences__paid_only=False))
     return qs
 
 
@@ -217,6 +217,12 @@ def accessible_questions(path, user):
 
 
 def session_size(path):
+    from .grc_bootcamp import is_grc
+    from .cism_manager import is_cism
+    if is_grc(path):
+        return 16
+    if is_cism(path):
+        return 25
     from .network_auditor import is_network
     if is_network(path):
         return 11
@@ -226,7 +232,7 @@ def session_size(path):
     from .linux_auditor import is_linux
     if is_linux(path):
         return 16
-    from .cisa_simulator import is_cisa
+    from .cisa_simulator import is_simulation as is_cisa
     if is_cisa(path):
         return 20
     return 10 if path.preferences.get("demo_all_types") is True else 8
@@ -311,7 +317,8 @@ def render_text(text, user, path):
 
 
 def question_data(q, session, request):
-    from .cisa_simulator import is_cisa
+    from .grc_bootcamp import is_grc
+    from .cisa_simulator import is_simulation as is_cisa
     audio = []
     if q.intro:
         audio.append(request.build_absolute_uri(f"/api/mobile/v1/audio/{q.intro_id}/"))
@@ -331,7 +338,7 @@ def question_data(q, session, request):
         "kind": q.kind,
         "prompt": render_text(q.prompt, request.user, session.path),
         "context": render_text(q.context, request.user, session.path),
-        "options": [{"id": o["id"], "text": o["text"]} for o in options(q)[0]] if is_cisa(session.path) else options(q)[0],
+        "options": [{"id": o["id"], "text": o["text"]} for o in options(q)[0]] if is_cisa(session.path) or is_grc(session.path) else options(q)[0],
         "image": (
             request.build_absolute_uri(f"/api/mobile/v1/questions/{q.pk}/image/")
             if q.image
@@ -344,7 +351,7 @@ def question_data(q, session, request):
 
 
 def session_data(session, request):
-    from .cisa_simulator import is_cisa, evaluation
+    from .cisa_simulator import is_simulation as is_cisa, evaluation
     answered = set(session.attempts.values_list("question_id", flat=True))
     remaining = [pk for pk in session.questions if pk not in answered]
     q = (
@@ -407,18 +414,18 @@ class Sessions(MobileView):
         if not p:
             raise ValidationError("Öğrenme yolu bulunamadı.")
         qs = accessible_questions(p, request.user)
-        from .cisa_simulator import is_cisa
+        from .cisa_simulator import is_simulation as is_cisa
         from .linux_auditor import is_linux
         from .database_auditor import is_database
         from .network_auditor import is_network
-        if is_cisa(p) or is_linux(p) or is_database(p) or is_network(p):
+        if is_cisa(p) or is_linux(p) or is_database(p) or is_network(p) or (p.preferences or {}).get("grc_bootcamp_v1", {}).get("enabled"):
             active = LearningSession.objects.filter(user=request.user,path=p,is_archived=False,completed_at=None).order_by('-created_at').first()
             if active:
                 return Response(session_data(active,request),status=201)
         progress = UserPathProgress.objects.filter(user=request.user, path=p).first()
         if progress:
             qs = qs.exclude(pk__in=progress.completed.values("pk"))
-        if is_cisa(p) or is_linux(p) or is_database(p) or is_network(p):
+        if is_cisa(p) or is_linux(p) or is_database(p) or is_network(p) or (p.preferences or {}).get("grc_bootcamp_v1", {}).get("enabled"):
             first = qs.first()
             if first:
                 qs = qs.filter(module_id=first.module_id)
@@ -447,12 +454,12 @@ class SessionDetail(MobileView):
 
 class Answer(MobileView):
     def feedback(self,q,session,submitted,correct,request):
-        from .cisa_simulator import is_cisa, explanation
+        from .cisa_simulator import is_simulation as is_cisa, explanation
         value = explanation(q,submitted,correct) if is_cisa(session.path) else q.explanation
         return render_text(value,request.user,session.path)
 
     def post(self, request, pk):
-        from .cisa_simulator import is_cisa
+        from .cisa_simulator import is_simulation as is_cisa
         with transaction.atomic():
             # Lock user as well as session: XP remains consistent across simultaneous sessions.
             get_user_model().objects.select_for_update().get(pk=request.user.pk)
@@ -542,7 +549,7 @@ class Answer(MobileView):
             progress, _ = UserPathProgress.objects.get_or_create(
                 user=request.user, path=s.path
             )
-            from .cisa_simulator import is_cisa
+            from .cisa_simulator import is_simulation as is_cisa
             if correct or is_cisa(s.path):
                 progress.completed.add(q)
             progress.save()
