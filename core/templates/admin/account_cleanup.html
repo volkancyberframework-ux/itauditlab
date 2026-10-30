@@ -1,0 +1,7 @@
+{% extends 'admin/base_site.html' %}
+{% block content %}
+<p>Program Enrollment kaydı olan tüm hesaplar (bitmiş / pasif dahil), ücretli mobil üyelik veya ödeme kaydı olanlar, yönetici hesapları ve guler.volkan@yahoo.com / volkancyberframework@gmail.com korunur. Yalnızca aktif hesaplar işlenir.</p>
+{% if finished %}<h2>Silinen hesap sayısı: {{ deleted|length }}</h2><ul>{% for email in deleted %}<li>{{ email }}</li>{% endfor %}</ul><h2>Atlanan hesap sayısı: {{ skipped|length }}</h2><ul>{% for email, reason in skipped %}<li>{{ email }} — {{ reason }}</li>{% endfor %}</ul>
+{% elif review %}<h2>Kalıcı olarak silinecek hesap sayısı: {{ selected|length }}</h2><p>Bu hesapların ders erişimleri ve mobil ilerleme kayıtları da silinir. Ders kanıtı: {{ evidence_count }}. Mobil hesap silme talebi: {{ deletion_request_count }}. Ödeme kayıtları silinmez; başka korunan ilişkiler varsa ilgili hesap atlanır.</p><h3>Korunan hesap sayısı: {{ protected|length }}</h3><ul>{% for user in protected %}<li>{{ user.email }} ({{ user.username }})</li>{% endfor %}</ul><form method="post">{% csrf_token %}<input type="hidden" name="token" value="{{ token }}"><button type="submit" name="confirm" value="yes">Onaylanan hesapları kalıcı olarak sil</button></form><h3>Silinecek hesaplar</h3><ul>{% for user in selected %}<li>{{ user.email }} ({{ user.username }})</li>{% endfor %}</ul>
+{% else %}<form method="post">{% csrf_token %}{{ form.as_p }}<button type="submit">Silme önizlemesini hazırla</button></form>{% endif %}
+{% endblock %}

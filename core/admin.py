@@ -597,6 +597,7 @@ class CustomUserAdmin(UserAdmin):
     def get_urls(self):
         urls = super().get_urls()
         custom_urls = [
+            path("guarded-cleanup/", self.admin_site.admin_view(self.guarded_cleanup), name="guarded_account_cleanup"),
             path("create-mobile-user/", self.admin_site.admin_view(self.create_mobile_user), name="create_mobile_user"),
             path(
                 "quick-create-student/",
@@ -605,6 +606,10 @@ class CustomUserAdmin(UserAdmin):
             ),
         ]
         return custom_urls + urls
+
+    def guarded_cleanup(self, request):
+        from .account_cleanup import cleanup_view
+        return cleanup_view(self, request)
 
     def create_mobile_user(self, request):
         from django.core.exceptions import PermissionDenied
