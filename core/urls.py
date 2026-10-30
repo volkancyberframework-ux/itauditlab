@@ -62,3 +62,6 @@ urlpatterns += [
     path('program-uyarisi/okudum/', progress_views.acknowledge, name='program_progress_ack'),
     path('program-uyarisi/<int:pk>/onay/', progress_views.confirm, name='program_progress_confirm'),
 ]
+
+from .contact_notice import contact_notice
+urlpatterns += [path('iletisim-duyurusu/', contact_notice, name='contact_change_notice')]

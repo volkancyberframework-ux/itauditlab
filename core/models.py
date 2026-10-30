@@ -653,3 +653,10 @@ from django.contrib.auth.signals import user_logged_in
 def reset_program_progress_warning(sender, request, user, **kwargs):
     if request is not None:
         request.session.pop('program_progress_ack', None)
+
+
+class ContactChangeNotice(models.Model):
+    """Frozen recipient list for the October 2026 contact announcement."""
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    acknowledged_at = models.DateTimeField(null=True, blank=True)
