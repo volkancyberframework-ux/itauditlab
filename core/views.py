@@ -116,6 +116,10 @@ def custom_login_view(request):
 
         user_obj = User.objects.filter(email__iexact=email).first()
 
+        from .account_inactivity import inactivity_message, touch_access
+        if user_obj and inactivity_message(user_obj) and user_obj.check_password(password):
+            return render(request, 'login.html', {'error': inactivity_message(user_obj)})
+
         if user_obj:
             user = authenticate(
                 request,
@@ -125,7 +129,7 @@ def custom_login_view(request):
         else:
             user = None
 
-        if user is not None:
+        if user is not None and touch_access(user, force=True):
             login(request, user)
 
             if getattr(user, "is_first_login", False):

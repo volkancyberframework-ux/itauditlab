@@ -9,6 +9,9 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 
 def check_mobile_access(user):
+    from core.account_inactivity import inactivity_message
+    if inactivity_message(user):
+        raise PermissionDenied(inactivity_message(user))
     if not user or not user.is_active or not user.is_mobile:
         raise PermissionDenied("Bu hesap için mobil erişim açık değil.")
     if not user.mobile_email_verified:
@@ -22,6 +25,9 @@ class MobileAccessPermission(BasePermission):
         check_mobile_access(request.user)
         if request.user.mobile_must_change_password and not getattr(view, 'allow_initial_password', False):
             raise PermissionDenied("İlk giriş şifreni yenileyerek devam et.")
+        if not request.path.rstrip('/').endswith(('/auth/refresh', '/auth/logout')):
+            from core.account_inactivity import touch_access
+            touch_access(request.user)
         return True
 
 

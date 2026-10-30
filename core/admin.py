@@ -549,7 +549,7 @@ class MobileMembershipFilter(admin.SimpleListFilter):
 
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
-    readonly_fields = UserAdmin.readonly_fields + ("mobile_paid_tick", "mobile_free_tick")
+    readonly_fields = UserAdmin.readonly_fields + ("mobile_paid_tick", "mobile_free_tick", "last_account_access_at", "inactivity_disabled_at")
     @admin.display(boolean=True, description="Ücretli mobil")
     def mobile_paid_tick(self, obj):
         return obj.mobile_paid
@@ -572,6 +572,7 @@ class CustomUserAdmin(UserAdmin):
     change_list_template = "admin/customuser_changelist.html"
 
     fieldsets = UserAdmin.fieldsets + (
+        ('Hesap erişim durumu', {'fields': ('last_account_access_at', 'inactivity_disabled_at')}),
         (_("Mobile access"), {
             "fields": ("is_mobile", "mobile_paid_tick", "mobile_free_tick", "mobile_full_access", "mobile_paid_until", "mobile_last_date", "mobile_must_change_password", "mobile_email_verified")
         }),
@@ -805,6 +806,16 @@ class ProgramProgressViolationAdmin(admin.ModelAdmin):
     list_display = ('email', 'course_title', 'created_at', 'instant_sent_at', 'morning_sent_at')
     search_fields = ('email', 'course_title')
     readonly_fields = tuple(field.name for field in ProgramProgressViolation._meta.fields)
+    def has_add_permission(self, request): return False
+    def has_change_permission(self, request, obj=None): return False
+    def has_delete_permission(self, request, obj=None): return False
+
+
+from .models import AccountInactivityRun
+@admin.register(AccountInactivityRun)
+class AccountInactivityRunAdmin(admin.ModelAdmin):
+    list_display = ('reporting_date', 'checked_count', 'completed_at')
+    readonly_fields = ('reporting_date', 'checked_count', 'disabled_user_ids', 'completed_at')
     def has_add_permission(self, request): return False
     def has_change_permission(self, request, obj=None): return False
     def has_delete_permission(self, request, obj=None): return False
