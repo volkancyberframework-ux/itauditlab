@@ -203,8 +203,7 @@ def run_daily_programs(run_date=None):
 
 def format_daily_program_summary(stats, run_date, *, include_student_details=True):
     missing = stats.get('pdf_missing', [])
-    unverified = stats.get('pdf_unverified', [])
-    status = ('🚨 Kontrol gerekli' if missing else '⚠️ Kısmi hata' if stats['failed'] or unverified else '✅ Başarılı')
+    status = ('🚨 Kontrol gerekli' if missing else '⚠️ Kısmi hata' if stats['failed'] else '✅ Başarılı')
     lines = [
         f"{status} — Günlük GRC Ustası programı",
         f"📅 {run_date:%d.%m.%Y}",
@@ -214,17 +213,13 @@ def format_daily_program_summary(stats, run_date, *, include_student_details=Tru
         f"❌ Hata: {stats['failed']}",
     ]
     if stats.get('pdf_checked'):
-        lines.append(f"📎 Bugün açılan derslerde PDF kontrolü: {stats['pdf_checked']} ders")
-        if not missing and not unverified:
-            lines.append('✅ Açılan derslerin PDF ekleri kontrol edildi.')
+        lines.append(f"📎 Bugün açılan derslerde ek dosya alanı kontrolü: {stats['pdf_checked']} ders")
+        if not missing:
+            lines.append('✅ Açılan derslerin ek dosya alanları dolu.')
     if missing:
-        lines.extend(['', '🚨 PDF EKSİĞİ — Bugün açılan dersler'])
+        lines.extend(['', '🚨 EK DOSYA EKSİĞİ — Bugün açılan dersler'])
         for item in missing:
-            lines.append(f"🚨 Course ID: {item['course_id']} — {item['course']} — Bu derste PDF yok. {item['reason']}")
-    if unverified:
-        lines.extend(['', '⚠️ PDF KONTROLÜ DOĞRULANAMADI'])
-        for item in unverified:
-            lines.append(f"⚠️ Course ID: {item['course_id']} — {item['course']} — {item['reason']}")
+            lines.append(f"🚨 Course ID: {item['course_id']} — {item['course']} — Bu dersin ek dosya alanı boş. {item['reason']}")
     if stats.get('mobile_kpi_report'):
         lines.extend(['', stats['mobile_kpi_report']])
     if stats['details'] and include_student_details:

@@ -1,17 +1,11 @@
-# Sabah açılan derslerde PDF kontrolü
+# Sabah açılan derslerde ek dosya alanı kontrolü
 
-Mevcut `python manage.py run_daily_programs` akışında çalışır. Yeni bir zamanlayıcı veya alıcı yoktur. Takvim `render.yaml` içinde 02:00 UTC / 05:00 İstanbul olarak tanımlıdır; mevcut üretim zamanlaması değiştirilmez.
+Mevcut 05.00 Türkiye saati `run_daily_programs` akışında, o gün erişime açılan derslerin `Course.attachment` alanı kontrol edilir. Aynı ders birden fazla öğrenciye açılırsa tek kez raporlanır; aynı gün tekrar çalıştırmada alan yeniden değerlendirilir. Önceki günün e-posta tekrarları yeni ders sayılmaz.
 
-O çalışmada yeni erişim verilen dersler ve aynı yerel günde daha önce açılmış ProgramRelease kayıtları kontrol edilir. Böylece aynı gün yeniden çalıştırmada Telegram/erişim kontrolü yeniden yapılabilir; bir önceki günün yalnız e-posta tekrarı bugünün PDF alarmına eklenmez. Aynı course birden çok öğrenci/programda açılsa da tek kontrol ve tek uyarı satırı olur. Alarmda Course.pk ve Course gerçek adı kullanılır; e-posta başlığı takma adı kullanılmaz.
+- Alan boşsa: `🚨 Course ID: … — Ders adı — Bu dersin ek dosya alanı boş. Derse ek dosya yüklenmemiş.`
+- Alan doluysa yeterlidir. PDF, Word, Excel, ZIP, görsel, video veya uzantısız dosyalar kabul edilir.
+- Dosya indirilmez; uzantısı, içeriği, storage varlığı veya HTTP erişimi kontrol edilmez. Dolu bir alan, uzak dosya erişimi sorununda da eksik eki tetiklemez.
 
-- Ek alanı boşsa: `🚨 Course ID: … — Ders adı — Bu derste PDF yok. Derse ek dosya yüklenmemiş.`
-- Dosya 404/410 ise: aynı alarm; dosya bulunamadığı açıklanır.
-- PDF adı taşısa da PDF başlığı yoksa: PDF formatında değil alarmı.
-- Timeout, 5xx, erişim/redirect veya HTML sayfası sonucu: PDF yok denmez; `⚠️ PDF KONTROLÜ DOĞRULANAMADI` ayrı bölümünde Course ID/ad gösterilir.
-- PDF dosyasının başlığı doğrulanır; tüm PDF içeriği veya tam yapısal bütünlüğü analiz edilmez.
+Uyarı mevcut Telegram günlük raporunun ve e-posta özetinin ek kontrolü bölümündedir. Öğrenci bazlı detaylar Telegram'a geri eklenmez; diğer raporların kapsamı ve ders açma/e-posta akışları değişmez.
 
-Scheduled worker'ın web servisine ait `/data/media` diski yoktur. Bu nedenle `storage.exists()` ile yanlış eksik alarmı üretmek yerine, öğrencinin kullandığı storage URL'sinden ilk en fazla 1024 bayt kontrol edilir. Range ve streaming kullanılır; dosya bütünü indirilmez. En fazla dört paralel kontrol ve bağlantı/okuma timeout'u vardır. URL/token veya ham istisna metni rapora yazılmaz. PDF kontrolündeki erişim hataları öğrenci erişimi ve e-posta akışını durdurmaz.
-
-Uyarı, `format_daily_program_summary` ile oluşturulan mevcut Telegram raporunun içinde, öğrenci detaylarından önce yer alır. Mevcut e-posta özetinin aynı mesajı kullanması korunur. Kullanıcıya yeni mesaj türü veya öğrencilere ayrı PDF uyarısı gönderilmez.
-
-Doğrulama: `python manage.py test core.test_course_pdf_checks core.tests.DailyProgramAutomationTests core.test_weekly_notifications`. Testlerde Telegram, SMTP ve dosya HTTP erişimi mock edilir; gerçek alıcılara test mesajı gönderilmez.
+Geriye dönük iç çağrı uyumu için `course_pdf_checks` modül/fonksiyon isimleri ve `pdf_checked`, `pdf_missing`, `pdf_unverified` istatistik anahtarları korunur. Bunlar artık yalnızca alan doluluğunu ifade eder; `pdf_unverified` boş döner. Kullanıcıya gösterilen metinde PDF zorunluluğu veya HTTP doğrulama uyarısı bulunmaz.

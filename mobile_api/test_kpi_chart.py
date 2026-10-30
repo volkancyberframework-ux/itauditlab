@@ -96,7 +96,7 @@ class ChannelSummaryTests(TestCase):
         full=format_daily_program_summary(stats,date(2026,10,30))
         short=format_daily_program_summary(stats,date(2026,10,30),include_student_details=False)
         self.assertIn('private@example.test',full);self.assertNotIn('private@example.test',short)
-        self.assertIn('Bu derste PDF yok.',short);self.assertIn('Mobil KPI test özeti',short)
+        self.assertIn('Bu dersin ek dosya alanı boş.',short);self.assertIn('Mobil KPI test özeti',short)
         self.assertNotIn('yeni içerik bulunmuyor',short)
         self.assertEqual(len(stats['details']),1)
 

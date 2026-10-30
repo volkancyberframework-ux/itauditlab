@@ -177,7 +177,7 @@ class MobileDailyKPITests(TestCase):
              patch('core.student_monitoring.capture_snapshot',return_value=(MagicMock(reporting_date=self.report_date),True)):
             call_command('run_daily_programs',stdout=StringIO())
         notify.assert_called_once();text=notify.call_args.args[0]
-        self.assertLess(text.index('PDF EKSİĞİ'),text.index('MOBİL — GÜNLÜK KPI'))
+        self.assertLess(text.index('EK DOSYA EKSİĞİ'),text.index('MOBİL — GÜNLÜK KPI'))
         self.assertNotIn('Açılan içerik detayları',text)
         self.assertNotIn('student@example.test',text)
         self.assertIn('Açılan içerik detayları',email.call_args.args[0])
