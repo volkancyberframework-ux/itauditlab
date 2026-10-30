@@ -365,6 +365,10 @@ class ProgramEnrollment(models.Model):
     )
     start_date = models.DateField()
     is_active = models.BooleanField(default=True)
+    progress_warning_enabled = models.BooleanField(
+        'Önceki ders uyarısı ve ilk ihlalde hesap kapatma', default=False,
+        help_text='Dersler takviminde açılmaya devam eder. Tamamlanmadığı doğrulanmış önceki dersler varken öğrenci ikinci uyarıyı onaylayarak yeni derse geçerse ana hesabı kapatılır. Bilinmeyen tamamlanma durumu ihlal sayılmaz.',
+    )
     welcome_sent_at = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -623,3 +627,29 @@ class WeeklyTelegramSchedule(models.Model):
 
     def __str__(self):
         return 'Haftalık Telegram bildirimleri'
+
+
+class ProgramProgressViolation(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)
+    email = models.EmailField()
+    course_id_snapshot = models.PositiveIntegerField()
+    course_title = models.CharField(max_length=255)
+    programs = models.JSONField(default=list)
+    confirmation_id = models.UUIDField(unique=True)
+    warning_version = models.CharField(max_length=30, default='2026-10-30-v1')
+    created_at = models.DateTimeField(auto_now_add=True, db_index=True)
+    instant_sent_at = models.DateTimeField(null=True, blank=True)
+    morning_sent_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Program ilerleme ihlali'
+        verbose_name_plural = 'Program ilerleme ihlalleri'
+        ordering = ['-created_at', '-pk']
+
+
+from django.contrib.auth.signals import user_logged_in
+
+@receiver(user_logged_in)
+def reset_program_progress_warning(sender, request, user, **kwargs):
+    if request is not None:
+        request.session.pop('program_progress_ack', None)

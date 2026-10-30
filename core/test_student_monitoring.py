@@ -17,7 +17,7 @@ class MonitoringTests(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.now = datetime(2026, 10, 20, 12, tzinfo=dt_timezone.utc)
-        cls.user = CustomUser.objects.create_user(username='izlenen', email='ogrenci@example.com', first_name='Öğrenci', last_name='Yılmaz')
+        cls.user = CustomUser.objects.create_user(username='izlenen', email='ogrenci@example.com', is_first_login=False, first_name='Öğrenci', last_name='Yılmaz')
         cls.admin = CustomUser.objects.create_superuser(username='yonetici', email='yonetici@example.com', password='test')
         cls.program = LearningProgram.objects.create(name='Program A', slug='monitor-test-a')
         cls.courses = [Course.objects.create(turkish_name=f'Ders {i}', duration=timedelta(hours=1), difficulty='Beginner', description='Ders', course_type='test') for i in range(3)]

@@ -350,11 +350,11 @@ class ProgramEnrollmentAdminForm(forms.ModelForm):
 @admin.register(ProgramEnrollment)
 class ProgramEnrollmentAdmin(admin.ModelAdmin):
     form = ProgramEnrollmentAdminForm
-    list_display = ("user", "program", "start_date", "is_active", "welcome_sent_at", "progress")
-    list_filter = ("program", "is_active", "start_date")
+    list_display = ("user", "program", "start_date", "is_active", "progress_warning_enabled", "welcome_sent_at", "progress")
+    list_filter = ("program", "is_active", "progress_warning_enabled", "start_date")
     search_fields = ("user__email", "user__first_name", "user__last_name")
     autocomplete_fields = ("user", "program")
-    list_editable = ("is_active",)
+    list_editable = ("is_active", "progress_warning_enabled",)
     date_hierarchy = "start_date"
     change_list_template = "admin/program_enrollment_changelist.html"
 
@@ -791,3 +791,15 @@ GRC Ustası
 from . import monitoring_admin  # noqa: E402,F401
 from . import business_network_admin  # noqa: E402,F401
 from . import weekly_notifications_admin  # noqa: E402,F401
+
+
+from .models import ProgramProgressViolation
+
+@admin.register(ProgramProgressViolation)
+class ProgramProgressViolationAdmin(admin.ModelAdmin):
+    list_display = ('email', 'course_title', 'created_at', 'instant_sent_at', 'morning_sent_at')
+    search_fields = ('email', 'course_title')
+    readonly_fields = tuple(field.name for field in ProgramProgressViolation._meta.fields)
+    def has_add_permission(self, request): return False
+    def has_change_permission(self, request, obj=None): return False
+    def has_delete_permission(self, request, obj=None): return False

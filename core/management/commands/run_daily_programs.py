@@ -63,6 +63,12 @@ class Command(BaseCommand):
             self.stdout.write('Haftalık Telegram notu gönderildi.' if sent else 'Haftalık Telegram notu boş veya zaten gönderilmiş.')
         except Exception as exc:
             self.stderr.write(self.style.WARNING(f'Haftalık Telegram notu gönderilemedi: {exc}'))
+        try:
+            from core.progress_guard import send_morning_violations
+            count = send_morning_violations(run_date)
+            self.stdout.write(f'Program ihlali sabah bildirimi: {count}')
+        except Exception as exc:
+            self.stderr.write(self.style.WARNING(f'Program ihlali bildirimi gönderilemedi: {type(exc).__name__}'))
         # Persist monitoring independently of normal course-release email delivery.
         from core.student_monitoring import capture_snapshot
         snapshot, created = capture_snapshot()

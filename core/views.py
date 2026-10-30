@@ -281,10 +281,15 @@ def course_single(request, pk):
             # send them to the list; you can keep the tab anchor if you like
             return redirect("dashboard_student")
 
-        if enrollment and not enrollment.orientation_seen:
-            show_orientation = True
-            enrollment.orientation_seen = True
-            enrollment.save(update_fields=["orientation_seen"])
+    from .progress_views import guard_response
+    warning = guard_response(request, course)
+    if warning is not None:
+        return warning
+
+    if enrollment and not enrollment.orientation_seen:
+        show_orientation = True
+        enrollment.orientation_seen = True
+        enrollment.save(update_fields=["orientation_seen"])
 
     # An authorized student visit counts as access/completion under CORE monitoring.
     from .models import LessonEvidence
@@ -478,6 +483,11 @@ def course_random_question(request, pk):
     if callable(has_access) and not has_access(course):
         return HttpResponseForbidden("No access to this test.")
 
+    from .progress_guard import blockers
+    if blockers(request.user, course):
+        return JsonResponse({'ok': False, 'error': 'Önceki ders uyarısını incelemelisiniz.',
+                             'warning_url': reverse('course_single', args=[course.pk])}, status=409)
+
     qs = TestQuestion.objects.filter(course=course, is_active=True).prefetch_related("options")
     if not qs.exists():
         return JsonResponse({"ok": True, "question": None})
@@ -511,6 +521,10 @@ def dashboard_student(request):
             messages.error(request, "Enroll olamadınız. Uygun Katıl seviyesine yükseltin.")
             return redirect('/dashboard-student/#allCourses')
 
+        from .progress_views import guard_response
+        warning = guard_response(request, course)
+        if warning is not None:
+            return warning
         item, _ = Enrollment.objects.get_or_create(user=user, course=course)
         if item.is_automatic:
             item.is_automatic = False

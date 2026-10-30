@@ -55,3 +55,10 @@ urlpatterns = [
     path("kamplar/odeme-basarili/", views.bootcamp_payment_success, name="bootcamp_payment_success"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+from . import progress_views
+urlpatterns += [
+    path('program-uyarisi/okudum/', progress_views.acknowledge, name='program_progress_ack'),
+    path('program-uyarisi/<int:pk>/onay/', progress_views.confirm, name='program_progress_confirm'),
+]

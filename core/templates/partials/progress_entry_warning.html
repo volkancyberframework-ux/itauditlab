@@ -1,0 +1,27 @@
+{% if show_progress_entry_warning %}
+<div class="modal fade" id="programProgressEntryModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="programProgressEntryTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header"><h2 class="modal-title h4" id="programProgressEntryTitle">⚠️ Önce elinizdeki dersleri tamamlayın</h2></div>
+      <div class="modal-body">
+        <p>Bu interaktif bir programdır. Önceki derslerinizi ve uygulamalarınızı tamamlamadan yeni derslere geçmeyin.</p>
+        <p>Dersler takviminizde açılmaya devam eder. Tamamlanmadığı doğrulanmış önceki dersleriniz varken yeni bir derse geçmek istediğinizde ikinci bir uyarı gösterilir.</p>
+        <p><strong>İkinci uyarıya rağmen devam etmeyi onaylarsanız ilk ihlalde hesabınız devre dışı bırakılır ve tüm ana platform erişiminiz durur.</strong></p>
+        <p>Satın alma sırasında onayladığınız sözleşmedeki iade ve cayma koşullarını <a href="{% url 'terms_and_conditions' %}" target="_blank" rel="noopener">buradan inceleyin</a>. Bu uyarı yasal haklarınızı ortadan kaldırmaz.</p>
+        <p class="small mb-0">Bu kuralın etkin olduğu programlar: {% for enrollment in progress_warning_programs %}{{ enrollment.program.name }}{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
+      </div>
+      <div class="modal-footer">
+        <form method="post" action="{% url 'program_progress_ack' %}">{% csrf_token %}<input type="hidden" name="acknowledged" value="yes"><button class="btn btn-primary" type="submit">Anladım, mevcut derslerime dön</button></form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const element = document.getElementById('programProgressEntryModal');
+  // Avoid stacking the orientation dialog with this mandatory entry warning.
+  document.querySelectorAll('.modal.show').forEach(function (modal) { bootstrap.Modal.getInstance(modal)?.hide(); });
+  new bootstrap.Modal(element).show();
+});
+</script>
+{% endif %}
