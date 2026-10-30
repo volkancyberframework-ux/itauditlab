@@ -173,6 +173,7 @@
 
         document.addEventListener('show.bs.modal', function (ev) {
           const modal = ev.target;
+          if (modal.matches('.course-video-modal')) return;
           let targetSrc = null;
           let iframe = modal.querySelector('iframe[data-src]');
           if (!iframe) {
@@ -195,6 +196,7 @@
 
         document.addEventListener('hidden.bs.modal', function (ev) {
           const modal = ev.target;
+          if (modal.matches('.course-video-modal')) return;
           const iframe = modal.querySelector('iframe');
           if (!iframe) return;
           try { iframe.src = 'about:blank'; } catch (e) {}

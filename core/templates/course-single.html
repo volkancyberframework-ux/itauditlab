@@ -2,6 +2,9 @@
 {% load static %}
 {% block content %}
 
+    <link rel="stylesheet" href="{% static 'css/course-video.css' %}?v=20261030">
+    <script defer src="{% static 'js/vendor/bunny-playerjs.min.js' %}"></script>
+    <script defer src="{% static 'js/course-video.js' %}?v=20261030"></script>
     <main class="student-course-page">
       <!-- Page header -->
       <!-- Page header -->
@@ -324,20 +327,20 @@
                                           </a>
 
                                           <!-- Video Modal -->
-                                          <div class="modal fade" id="videoModal{{ sub.id }}" tabindex="-1"
+                                          <div class="modal fade course-video-modal" id="videoModal{{ sub.id }}" tabindex="-1" data-bs-backdrop="static"
                                                aria-labelledby="videoModalLabel{{ sub.id }}" aria-hidden="true">
                                             <div class="modal-dialog modal-xl modal-dialog-centered">
                                               <div class="modal-content">
                                                 <div class="modal-header">
                                                   <h5 class="modal-title" id="videoModalLabel{{ sub.id }}">{{ sub.small_title }}</h5>
-                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                                                  <button type="button" class="btn btn-outline-light course-video-close" data-bs-dismiss="modal" aria-label="Videoyu kapat">Kapat <span aria-hidden="true">×</span></button>
                                                 </div>
                                                 <div class="modal-body p-0">
                                                   {% if sub.bunny_iframe_url %}
                                                     <iframe
                                                       data-src="{{ sub.bunny_iframe_url }}"
                                                       src=""
-                                                      style="border:0; width:100%; height:100vh; max-height:100vh;"
+                                                      title="{{ sub.small_title|default:'Ders videosu' }}"
                                                       allow="autoplay; fullscreen; picture-in-picture"
                                                       allowfullscreen>
                                                     </iframe>
@@ -359,19 +362,7 @@
                             </div>
                           </div>
 
-                          <script>
-                            // Lazy-load Bunny iframe when modal opens; stop it when closes
-                            document.addEventListener('shown.bs.modal', function (ev) {
-                              const modal = ev.target;
-                              const iframe = modal.querySelector('iframe[data-src]');
-                              if (iframe && !iframe.src) iframe.src = iframe.dataset.src;
-                            });
-                            document.addEventListener('hidden.bs.modal', function (ev) {
-                              const modal = ev.target;
-                              const iframe = modal.querySelector('iframe');
-                              if (iframe) iframe.src = '';
-                            });
-                          </script>
+
                         {% endif %}
 
 
@@ -434,14 +425,18 @@
                         </a>
                       </div>
 
-                      <div class="modal fade" id="previewModal" tabindex="-1" aria-hidden="true">
+                      <div class="modal fade course-video-modal" id="previewModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="previewVideoTitle" aria-hidden="true">
                         <div class="modal-dialog modal-lg modal-dialog-centered">
                           <div class="modal-content bg-dark">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="previewVideoTitle">{{ course.turkish_name|default:course.english_name }}</h5>
+                              <button type="button" class="btn btn-outline-light course-video-close" data-bs-dismiss="modal" aria-label="Videoyu kapat">Kapat <span aria-hidden="true">×</span></button>
+                            </div>
                             <div class="modal-body p-0 bg-dark">
                               <iframe
                                 id="previewIframe"
                                 src=""
-                                style="border:0; width:100%; height:80vh;"
+                                title="{{ course.turkish_name|default:course.english_name }}"
                                 allow="autoplay; fullscreen; picture-in-picture"
                                 allowfullscreen>
                               </iframe>

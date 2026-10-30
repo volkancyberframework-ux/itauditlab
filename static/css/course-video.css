@@ -1,0 +1,14 @@
+.course-video-modal .modal-dialog{width:calc(100% - 2rem);max-width:1200px;margin:1rem auto;min-height:calc(100% - 2rem)}
+.course-video-modal .modal-content{background:#081522;color:#f2f6fa;border:1px solid #29445c;border-radius:16px;overflow:hidden;box-shadow:0 24px 90px #0009}
+.course-video-modal .modal-header{gap:1rem;padding:1rem 1.25rem;border-bottom:1px solid #29445c;align-items:center}
+.course-video-modal .modal-title{color:#f2f6fa;font-size:1rem;line-height:1.5;margin:0}
+.course-video-modal .course-video-close{flex-shrink:0;min-height:44px;min-width:88px;border-radius:10px;display:flex;align-items:center;justify-content:center;gap:12px}
+.course-video-close span{font-size:1.5rem;line-height:1}
+.course-video-modal .modal-body{background:#000}
+.course-video-modal iframe{display:block;border:0;width:100%;height:auto;aspect-ratio:16/9;max-height:calc(100dvh - 120px)}
+.course-video-modal .modal-body p{color:#dce7f1!important}
+@media(max-width:575.98px){.course-video-modal .modal-dialog{width:calc(100% - 1rem);margin:.5rem auto;min-height:calc(100% - 1rem)}.course-video-modal .modal-header{padding:.75rem;gap:.75rem}.course-video-modal .modal-title{font-size:.9rem}.course-video-modal .modal-content{border-radius:12px}}
+@media(prefers-reduced-motion:reduce){.course-video-modal.fade .modal-dialog{transition:none}}
+.student-shell .course-video-modal .modal-content{background:#081522;color:#f2f6fa}
+.course-video-modal .course-video-close{margin-left:auto;color:#f2f6fa;background:#172e43;border:1px solid #54738e}
+.course-video-modal .course-video-close:hover,.course-video-modal .course-video-close:focus-visible{color:#fff;background:#234a6b;border-color:#8ccaff;box-shadow:0 0 0 3px #31a4ff40}
