@@ -130,7 +130,7 @@ def deliver_instant(event_id):
 
 
 def send_morning_violations(run_date):
-    cutoff = datetime.combine(run_date, time.min, tzinfo=ZoneInfo('Europe/Istanbul'))
+    cutoff = datetime.combine(run_date, time(5, 0), tzinfo=ZoneInfo('Europe/Istanbul'))
     ids = list(ProgramProgressViolation.objects.filter(created_at__lt=cutoff, morning_sent_at__isnull=True).values_list('pk', flat=True))
     sent = 0
     for pk in ids:

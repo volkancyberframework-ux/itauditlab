@@ -200,3 +200,14 @@ class ProgressGuardTests(TestCase):
         token=issue_confirmation(other,self.new,blockers(self.user,self.new))
         self.assertEqual(self.confirm(confirmation_token=token).status_code,400)
         self.user.refresh_from_db();self.assertTrue(self.user.is_active)
+
+    @patch('core.progress_guard.telegram', return_value=True)
+    def test_after_midnight_event_is_included_in_same_mornings_report(self, send):
+        from datetime import datetime, time
+        from zoneinfo import ZoneInfo
+        event = self.make_event()
+        today = timezone.localdate()
+        ProgramProgressViolation.objects.filter(pk=event.pk).update(
+            created_at=datetime.combine(today, time(2, 30), tzinfo=ZoneInfo('Europe/Istanbul')))
+        self.assertEqual(send_morning_violations(today), 1)
+        self.assertEqual(send.call_count, 2)

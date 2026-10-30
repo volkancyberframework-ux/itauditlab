@@ -17,7 +17,7 @@ Onay kullanıcıya, derse, uyarı sürümüne ve eksik derslerin anlık listesin
 
 İşlem tamamlanınca mevcut yönetici Telegram kanalına “🚨 ALARM ALARM ALARM — ANLIK PROGRAM İHLALİ” gönderilir. Kullanıcı e-postası, hedef Course ID/adı, program kayıt ID’si, eksik dersler, Türkiye saati ve ihlal kayıt numarası yer alır. Gönderim hatası hesap durumunu geri almaz; olay veritabanında korunur, sır/gönderim URL’si loglanmaz.
 
-Mevcut 05.00 Türkiye saati run_daily_programs komutu, önceki günlerden bildirilmeyen olayları ayrı sabah mesajı olarak gönderir. Başarısız anlık bildirimler de yeniden denenir. Başarı zamanı ancak Telegram API ok=true dönerse kaydedilir. Mevcut ders/PDF/KPI/görüşme/haftalık raporların içerikleri değiştirilmedi.
+Mevcut 05.00 Türkiye saati run_daily_programs komutu, o sabah 05.00 öncesinde oluşmuş, henüz bildirilmeyen olayları ayrı sabah mesajı olarak gönderir. Başarısız anlık bildirimler de yeniden denenir. Başarı zamanı ancak Telegram API ok=true dönerse kaydedilir. Mevcut ders/PDF/KPI/görüşme/haftalık raporların içerikleri değiştirilmedi.
 
 İhlal kayıtları yönetimde **Program ilerleme ihlalleri** bölümünde salt okunur görünür. Kayıt e-posta ve ders/program bilgilerini anlık görüntü olarak korur. Yeniden açma için kullanıcı yönetiminden hesap etkinleştirilmeli, tamamlanma kanıtları ve program uyarı işareti değerlendirilmelidir; otomatik geri açma yapılmaz.
 
@@ -25,4 +25,4 @@ Mevcut 05.00 Türkiye saati run_daily_programs komutu, önceki günlerden bildir
 
 ## Doğrulama
 
-21 yeni akış/güvenlik testi ve ilgili giriş, program takvimi, izleme, PDF, haftalık rapor ve mobil KPI testleriyle toplam 120 test geçti. Önceden ilk girişe yönlenen izleme testi kullanıcısının fixture’ı normal öğrenci oturumunu yansıtacak şekilde düzeltildi. İki uyarı ekranı gerçek şablonlardan örnek verilerle görsel olarak incelendi. Canlı öğrenci hesabında kapatma denemesi veya gerçek Telegram test alarmı yapılmadı.
+22 yeni akış/güvenlik testi ve ilgili giriş, program takvimi, izleme, PDF, haftalık rapor ve mobil KPI testleriyle toplam 121 test geçti. Önceden ilk girişe yönlenen izleme testi kullanıcısının fixture’ı normal öğrenci oturumunu yansıtacak şekilde düzeltildi. İki uyarı ekranı gerçek şablonlardan örnek verilerle görsel olarak incelendi. Canlı öğrenci hesabında kapatma denemesi veya gerçek Telegram test alarmı yapılmadı.
