@@ -74,3 +74,27 @@ class CleanupTests(TestCase):
         self.assertEqual(deleted,[]);self.assertEqual(len(skipped),1)
         self.assertTrue(LessonEvidence.objects.filter(pk=evidence.pk).exists())
         self.assertTrue(get_user_model().objects.filter(pk=self.user.pk).exists())
+
+    def test_mobile_attempts_with_protected_xp_ledger_delete_in_dependency_order(self):
+        from mobile_api.models import LearningPath, LearningSession, Question, QuestionAttempt, XPTransaction
+        path=LearningPath.objects.create(title='Cleanup')
+        session=LearningSession.objects.create(user=self.user,path=path)
+        question=Question.objects.create(kind='choice',prompt='Cleanup')
+        attempt=QuestionAttempt.objects.create(session=session,question=question,answer=[],is_correct=True)
+        XPTransaction.objects.create(user=self.user,attempt=attempt,amount=10,reason='answer')
+        deleted,skipped=delete_reviewed(self.admin,[self.user.pk])
+        self.assertEqual(deleted,['cleanup@test.com']);self.assertEqual(skipped,[])
+        self.assertFalse(QuestionAttempt.objects.filter(pk=attempt.pk).exists())
+        self.assertTrue(Question.objects.filter(pk=question.pk).exists())
+
+    def test_unpaid_checkout_is_retained_and_paid_bootcamp_grant_is_protected(self):
+        from mobile_api.models import MobileCheckoutRequest, BootcampMobileGrant
+        checkout=MobileCheckoutRequest.objects.create(user=self.user,email=self.user.email)
+        self.assertTrue(eligible(self.user))
+        grant=BootcampMobileGrant.objects.create(user=self.user,product='bootcamp',amount_minor=100,currency='usd',fulfilled_at=timezone.now())
+        self.assertFalse(eligible(self.user))
+        grant.fulfilled_at=None;grant.save()
+        deleted,skipped=delete_reviewed(self.admin,[self.user.pk])
+        self.assertEqual(deleted,['cleanup@test.com'])
+        checkout.refresh_from_db();grant.refresh_from_db()
+        self.assertIsNone(checkout.user_id);self.assertIsNone(grant.user_id)

@@ -12,7 +12,7 @@ from django.db.models.deletion import ProtectedError
 from django.shortcuts import render
 from django.utils import timezone
 from .models import CustomUser, LessonEvidence
-from mobile_api.models import AccountDeletionRequest, Subscription, MobilePayment, MobileCheckoutRequest
+from mobile_api.models import AccountDeletionRequest, Subscription, MobilePayment, MobileCheckoutRequest, XPTransaction, BootcampMobileGrant
 
 OWNERS = {'guler.volkan@yahoo.com', 'volkancyberframework@gmail.com'}
 SALT = 'core.guarded-account-cleanup.v1'
@@ -35,7 +35,8 @@ def eligible(user):
             or user.mobile_full_access or (user.mobile_paid_until and user.mobile_paid_until > timezone.now())):
         return False
     return not (user.learning_programs.exists() or Subscription.objects.filter(user=user).exists()
-                or MobilePayment.objects.filter(user=user).exists() or MobileCheckoutRequest.objects.filter(user=user).exists())
+                or MobilePayment.objects.filter(user=user).exists()
+                or BootcampMobileGrant.objects.filter(user=user, fulfilled_at__isnull=False).exists())
 
 
 def delete_reviewed(actor, ids):
@@ -57,6 +58,11 @@ def delete_reviewed(actor, ids):
                     content_type_id=ContentType.objects.get_for_model(CustomUser).pk,
                     object_id=user.pk, object_repr=str(user), action_flag=DELETION,
                     change_message='Onaylı hesap temizliği: program kaydı, ücretli mobil ve sahip hesapları korunarak silindi.')
+                # XP points protect their attempt; remove the user's ledger first.
+                XPTransaction.objects.filter(user=user).delete()
+                # Retain unpaid checkout history without retaining the free account.
+                MobileCheckoutRequest.objects.filter(user=user).update(user=None)
+                BootcampMobileGrant.objects.filter(user=user, fulfilled_at__isnull=True).update(user=None)
                 user.delete()
                 deleted.append(email)
         except ProtectedError:
