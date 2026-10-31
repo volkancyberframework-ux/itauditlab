@@ -677,6 +677,10 @@ class ContactChangeNotice(models.Model):
 
 
 class AccountInactivityRun(models.Model):
+    disabled_accounts = models.JSONField(default=list)
+    telegram_parts_sent = models.PositiveIntegerField(default=0)
+    telegram_sent_at = models.DateTimeField(null=True, blank=True)
+    telegram_error = models.CharField(max_length=160, blank=True)
     reporting_date = models.DateField(unique=True)
     checked_count = models.PositiveIntegerField(default=0)
     disabled_user_ids = models.JSONField(default=list)

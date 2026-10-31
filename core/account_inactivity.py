@@ -66,6 +66,7 @@ def run_due_check(*, now=None):
     users = get_user_model().objects.select_for_update().filter(is_active=True).exclude(
         Q(email__iexact=OWNERS[0]) | Q(email__iexact=OWNERS[1]))
     disabled = []
+    accounts = []
     cutoff = now - timedelta(days=20)
     for user in users:
         run.checked_count += 1
@@ -78,7 +79,12 @@ def run_due_check(*, now=None):
         for token in OutstandingToken.objects.filter(user=user, expires_at__gt=now):
             BlacklistedToken.objects.get_or_create(token=token)
         disabled.append(user.pk)
+        no_access = user.last_login is None and user.last_account_access_at in (None, user.date_joined)
+        accounts.append({'user_id': user.pk, 'email': user.email,
+                         'last_access_at': None if no_access else latest.isoformat(),
+                         'account_created_at': user.date_joined.isoformat()})
     run.disabled_user_ids = disabled
+    run.disabled_accounts = accounts
     run.completed_at = now
-    run.save(update_fields=['checked_count', 'disabled_user_ids', 'completed_at'])
+    run.save(update_fields=['checked_count', 'disabled_user_ids', 'disabled_accounts', 'completed_at'])
     return run

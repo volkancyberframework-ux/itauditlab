@@ -814,8 +814,8 @@ class ProgramProgressViolationAdmin(admin.ModelAdmin):
 from .models import AccountInactivityRun
 @admin.register(AccountInactivityRun)
 class AccountInactivityRunAdmin(admin.ModelAdmin):
-    list_display = ('reporting_date', 'checked_count', 'completed_at')
-    readonly_fields = ('reporting_date', 'checked_count', 'disabled_user_ids', 'completed_at')
+    list_display = ('reporting_date', 'checked_count', 'completed_at', 'telegram_sent_at')
+    readonly_fields = ('reporting_date', 'checked_count', 'disabled_user_ids', 'disabled_accounts', 'completed_at', 'telegram_parts_sent', 'telegram_sent_at', 'telegram_error')
     def has_add_permission(self, request): return False
     def has_change_permission(self, request, obj=None): return False
     def has_delete_permission(self, request, obj=None): return False
