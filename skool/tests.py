@@ -598,7 +598,7 @@ class AdminAndTelegramTests(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_staff_can_view_private_answers(self):
-        staff = get_user_model().objects.create_user(username="admin", email="admin@example.com", password="pass", is_staff=True)
+        staff = get_user_model().objects.create_user(username="admin", email="admin@example.com", password="pass", is_staff=True, is_first_login=False)
         invitation, _ = SkoolInvitation.create_invitation("Test Kişi")
         invitation.status = "claimed"; invitation.save()
         user = SkoolUser.objects.create(invitation=invitation, full_name="Test Kişi")

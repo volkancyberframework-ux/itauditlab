@@ -1,10 +1,14 @@
 from django.urls import path
 
-from . import views, guest_views
+from . import views, guest_views, meeting_alarms
 
 app_name = "skool"
 
 urlpatterns = [
+    path('admin/skool/gorusme-alarmlari/', meeting_alarms.today, name='meeting_alarms_today'),
+    path('gorusme-alarmlari/kurulum/', meeting_alarms.setup, name='meeting_alarms_setup'),
+    path('gorusme-alarmlari/<str:token>/veri/', meeting_alarms.meeting_alarms_data, name='meeting_alarms_data'),
+    path('gorusme-alarmlari/<str:token>/', meeting_alarms.meeting_alarms, name='meeting_alarms'),
     path("skooltoplulugu/misafir/", guest_views.guest_login, name="guest_login"),
     path("skooltoplulugu/misafir/sifre/", guest_views.guest_password_change, name="guest_password_change"),
     path("skooltoplulugu", views.onboarding, name="onboarding"),
