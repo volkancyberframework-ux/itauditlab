@@ -112,7 +112,6 @@ MIDDLEWARE = [
 
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'core.account_inactivity.AccountAccessMiddleware',
     'core.middleware.FirstLoginPasswordMiddleware',
     'core.contact_notice.ContactNoticeMiddleware',
     'landing.language.PublicLanguageMiddleware',

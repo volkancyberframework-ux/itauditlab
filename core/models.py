@@ -426,17 +426,6 @@ class CustomUser(AbstractUser):
     last_account_access_at = models.DateTimeField('Son doğrulanmış hesap erişimi', null=True, blank=True, db_index=True)
     inactivity_disabled_at = models.DateTimeField('20 gün hareketsizlik nedeniyle pasife alınma', null=True, blank=True)
 
-    def save(self, *args, **kwargs):
-        if self.pk and self.is_active and (kwargs.get("update_fields") is None or "is_active" in kwargs["update_fields"]):
-            previous = type(self).objects.filter(pk=self.pk).values('is_active').first()
-            if previous and not previous['is_active']:
-                from django.utils import timezone
-                self.inactivity_disabled_at = None
-                self.last_account_access_at = timezone.now()
-                if kwargs.get('update_fields') is not None:
-                    kwargs['update_fields'] = set(kwargs['update_fields']) | {'inactivity_disabled_at', 'last_account_access_at'}
-        return super().save(*args, **kwargs)
-
     is_mobile = models.BooleanField(
         "Mobile", default=False, db_index=True,
         help_text="Bu hesabın mobil uygulamaya giriş yapmasına izin verir.",

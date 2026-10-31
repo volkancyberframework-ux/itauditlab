@@ -56,18 +56,12 @@ class Login(MobileView):
         users = list(get_user_model().objects.filter(email__iexact=email, is_mobile=True)[:2])
         # Legacy emails are not unique. Fail closed until the administrator resolves duplicates.
         username = users[0].get_username() if len(users) == 1 else "__mobile_invalid__"
-        from core.account_inactivity import inactivity_message, touch_access
-        if len(users) == 1 and inactivity_message(users[0]) and users[0].check_password(password):
-            return Response({'detail': inactivity_message(users[0])}, status=403)
         user = authenticate(request=request, username=username, password=password)
         if not user or len(users) != 1:
             return Response(
                 {"detail": "E-posta veya şifreyi kontrol eder misin?"}, status=401
             )
         check_mobile_access(user)
-        if not touch_access(user, force=True):
-            user.refresh_from_db()
-            return Response({'detail': inactivity_message(user) or 'Bu hesap için erişim açık değil.'}, status=403)
         refresh = RefreshToken.for_user(user)
         return Response({"access": str(refresh.access_token), "refresh": str(refresh)})
 
