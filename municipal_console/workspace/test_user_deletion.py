@@ -34,3 +34,26 @@ class UserDeletionTests(TestCase):
         records[-1].refresh_from_db()
         self.assertEqual(records[-1].attempts, 0)
         self.assertEqual(user_label(None), 'Silinmiş kullanıcı')
+
+    @override_settings(STORAGES={'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'}, 'staticfiles': {'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage'}})
+    def test_console_and_history_render_after_actor_deleted(self):
+        from accounts.privacy import PRIVACY_VERSION
+        from django.utils import timezone
+        admin = get_user_model().objects.create_superuser('owner@example.test', 'test-password',
+            must_change_password=False, privacy_accepted_at=timezone.now(), privacy_version=PRIVACY_VERSION)
+        removed = get_user_model().objects.create_user('deleted@example.test', 'test-password')
+        org = Organization.objects.create(name='GRC', slug='grc', subdomain='grcustasi')
+        audit = Audit.objects.create(organization=org, title='Audit')
+        control = Control.objects.create(audit=audit, code='TEST-1', title='Control', risk='high')
+        Activity.objects.create(audit=audit, actor=removed, action='Old action', role='auditor')
+        ResponseRevision.objects.create(control=control, actor=removed, status='partial', explanation='Evidence')
+        Suggestion.objects.create(audit=audit, author=removed, title='Suggestion')
+        finding = Finding.objects.create(audit=audit, title='Finding')
+        FindingUpdate.objects.create(finding=finding, actor=removed, role='it', action='plan')
+        removed.delete()
+        self.client.force_login(admin, backend='django.contrib.auth.backends.ModelBackend')
+        for path in ['/console/', f'/console/{audit.pk}/controls/{control.pk}/']:
+            with self.subTest(path=path):
+                response = self.client.get(path, HTTP_HOST='grcustasi.grcustasi.com')
+                self.assertEqual(response.status_code, 200)
+                self.assertContains(response, 'Silinmiş kullanıcı')
