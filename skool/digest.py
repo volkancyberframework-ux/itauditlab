@@ -1,9 +1,10 @@
-from datetime import timedelta
+from datetime import datetime, time, timedelta
 from zoneinfo import ZoneInfo
 
 from django.utils import timezone
 
-from core.models import MentorshipRequest
+from core.models import MentorshipRequest, StudentMeetingBooking
+from skool.models import MeetingBooking
 from skool.services import send_telegram
 
 
@@ -11,10 +12,16 @@ def send_daily_meeting_digest(report_date=None):
     """Skool ve normal öğrenci görüşmelerini tek günlük Telegram özetinde birleştirir."""
     report_timezone = ZoneInfo("Europe/Istanbul")
     report_date = report_date or timezone.now().astimezone(report_timezone).date()
+    start = datetime.combine(report_date, time.min, tzinfo=report_timezone)
+    end = start + timedelta(days=1)
     key = f"meeting-digest:{report_date.isoformat()}"
 
-    from .meeting_alarms import day_bookings, meeting_alarm_link
-    skool_bookings, student_bookings = day_bookings(report_date)
+    skool_bookings = list(MeetingBooking.objects.filter(
+        status="active", slot__start_at_utc__gte=start, slot__start_at_utc__lt=end,
+    ).select_related("user", "slot").order_by("slot__start_at_utc"))
+    student_bookings = list(StudentMeetingBooking.objects.filter(
+        status="active", slot__start_at_utc__gte=start, slot__start_at_utc__lt=end,
+    ).select_related("user", "request", "slot").order_by("slot__start_at_utc"))
 
     total = len(skool_bookings) + len(student_bookings)
     if total:
@@ -56,7 +63,4 @@ def send_daily_meeting_digest(report_date=None):
             )
         message = "\n".join(lines)
 
-    if total:
-        markup={'inline_keyboard':[[{'text':'⏰ Tüm görüşmelere alarm kur','url':meeting_alarm_link(report_date)}]]}
-        return send_telegram(message,idempotency_key=key,reply_markup=markup)
     return send_telegram(message, idempotency_key=key)

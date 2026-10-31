@@ -1,5 +1,4 @@
 import itertools
-import json
 import logging
 import secrets
 from datetime import datetime, time, timedelta
@@ -51,7 +50,7 @@ def earliest_repeat_booking_date(user, display_zone=None):
     return latest.slot.start_at_utc.astimezone(zone).date() + timedelta(days=REPEAT_BOOKING_WAIT_DAYS)
 
 
-def send_telegram(text, *, idempotency_key=None, reply_markup=None):
+def send_telegram(text, *, idempotency_key=None):
     reserved_log = None
     if idempotency_key:
         reserved_log, created = NotificationLog.objects.get_or_create(
@@ -70,13 +69,10 @@ def send_telegram(text, *, idempotency_key=None, reply_markup=None):
         if reserved_log:
             reserved_log.delete()
         return False
-    data={"chat_id": chat_id, "text": text, "disable_web_page_preview": True}
-    if reply_markup is not None:
-        data["reply_markup"]=json.dumps(reply_markup,ensure_ascii=False)
     try:
         response = requests.post(
             f"https://api.telegram.org/bot{token}/sendMessage",
-            data=data, timeout=10,
+            data={"chat_id": chat_id, "text": text, "disable_web_page_preview": True}, timeout=10,
         )
         response.raise_for_status()
     except requests.RequestException:
