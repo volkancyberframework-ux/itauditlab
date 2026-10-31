@@ -128,3 +128,67 @@ class MeetingAlarmTests(TestCase):
         owner=get_user_model().objects.create_user('owner',email='guler.volkan@yahoo.com',is_staff=True,is_superuser=True,is_first_login=False)
         self.client.force_login(owner);result=self.client.get(url)
         self.assertEqual(result.status_code,302);self.assertTrue(result['Location'].startswith('https://www.grcustasi.com/gorusme-alarmlari/'))
+
+    def create_auto_link(self):
+        from .models import MeetingAlarmDevice
+        owner=get_user_model().objects.create_user('alarm-owner',email='guler.volkan@yahoo.com',is_staff=True,is_superuser=True,is_first_login=False)
+        self.client.force_login(owner)
+        setup=reverse('skool:meeting_alarms_automatic_setup')
+        response=self.client.post(setup,{'action':'create'})
+        self.assertEqual(response.status_code,200)
+        return owner,setup,response.context['feed_url'],MeetingAlarmDevice.objects.get()
+
+    def test_auto_feed_scoped_random_hashed_and_read_only(self):
+        owner,setup,link,device=self.create_auto_link()
+        from django.test import Client
+        raw=urlparse(link).path.split('/')[-3]
+        self.assertEqual(len(raw),43);self.assertNotEqual(raw,device.token_hash)
+        response=Client().get(urlparse(link).path)
+        self.assertEqual(response.status_code,200)
+        self.assertEqual(len(response.json()['alarms']),2)
+        self.assertIn('no-store',response['Cache-Control'])
+        self.assertNotIn('private@example.test',response.content.decode())
+        self.assertEqual(MeetingBooking.objects.count(),1)
+        self.assertEqual(Client().post(urlparse(link).path).status_code,405)
+
+    def test_auto_feed_reads_todays_data_without_daily_telegram_input(self):
+        owner,setup,link,device=self.create_auto_link()
+        with patch('django.utils.timezone.now',return_value=self.now+timedelta(days=1)):
+            response=self.client.get(urlparse(link).path)
+            self.assertEqual(response.status_code,200)
+            self.assertEqual(response.json()['date'],'2026-11-01')
+            self.assertEqual(response.json()['alarms'],[])
+
+    def test_auto_feed_rotation_and_revoke(self):
+        owner,setup,link,device=self.create_auto_link()
+        replacement=self.client.post(setup,{'action':'create'}).context['feed_url']
+        self.assertNotEqual(link,replacement)
+        self.assertEqual(self.client.get(urlparse(link).path).status_code,404)
+        self.assertEqual(self.client.get(urlparse(replacement).path).status_code,200)
+        self.client.post(setup,{'action':'revoke'})
+        self.assertEqual(self.client.get(urlparse(replacement).path).status_code,404)
+
+    def test_auto_feed_expiry_and_owner_disable(self):
+        owner,setup,link,device=self.create_auto_link()
+        device.expires_at=self.now-timedelta(seconds=1);device.save()
+        self.assertEqual(self.client.get(urlparse(link).path).status_code,404)
+        device.expires_at=self.now+timedelta(days=10);device.save()
+        owner.is_active=False;owner.save()
+        self.assertEqual(self.client.get(urlparse(link).path).status_code,404)
+        self.assertEqual(self.client.get(reverse('skool:meeting_alarms_automatic_data',args=['x'*43])).status_code,404)
+
+    def test_auto_provisioning_only_owner_post_with_csrf(self):
+        from .models import MeetingAlarmDevice
+        from django.test import Client
+        setup=reverse('skool:meeting_alarms_automatic_setup')
+        self.assertEqual(self.client.get(setup).status_code,302)
+        other=get_user_model().objects.create_user('otherauto',email='other@example.test',is_staff=True,is_superuser=True,is_first_login=False)
+        self.client.force_login(other)
+        self.assertEqual(self.client.post(setup,{'action':'create'}).status_code,403)
+        self.assertFalse(MeetingAlarmDevice.objects.exists())
+        other.email='volkancyberframework@gmail.com';other.save()
+        guarded=Client(enforce_csrf_checks=True);guarded.force_login(other)
+        self.assertEqual(guarded.post(setup,{'action':'create'}).status_code,403)
+        self.assertEqual(self.client.get(setup).status_code,200)
+        self.assertFalse(MeetingAlarmDevice.objects.exists())
+        self.assertEqual(self.client.post(setup,{'action':'unknown'}).status_code,400)

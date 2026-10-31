@@ -301,3 +301,12 @@ class SkoolGuestAccount(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class MeetingAlarmDevice(models.Model):
+    """Revocable, read-only access to today's alarm times; never stores raw keys."""
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    token_hash = models.CharField(max_length=64, unique=True, editable=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+    revoked_at = models.DateTimeField(null=True, blank=True)

@@ -3,12 +3,13 @@ from datetime import date, datetime, time, timedelta
 from urllib.parse import urlencode, quote
 from zoneinfo import ZoneInfo
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.core import signing
 from django.http import Http404, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils import timezone
-from django.views.decorators.http import require_safe
+from django.views.decorators.http import require_safe, require_http_methods
 from core.models import StudentMeetingBooking
 from .models import MeetingBooking
 
@@ -113,3 +114,52 @@ def today(request):
     if not request.user.is_superuser or request.user.email.strip().casefold() not in {'guler.volkan@yahoo.com','volkancyberframework@gmail.com'}:
         raise PermissionDenied
     return private(redirect(meeting_alarm_link(timezone.now().astimezone(ZONE).date())))
+
+
+def is_owner(user):
+    return user.is_authenticated and user.is_active and user.is_superuser and user.email.strip().casefold() in {'guler.volkan@yahoo.com','volkancyberframework@gmail.com'}
+
+
+@require_http_methods(['GET','POST'])
+def automatic_setup(request):
+    from django.core.exceptions import PermissionDenied
+    from django.shortcuts import redirect
+    from django.db import transaction
+    from .models import MeetingAlarmDevice
+    import hashlib, secrets
+    if not request.user.is_authenticated:
+        return redirect('/login/?next='+quote(request.path,safe=''))
+    if not is_owner(request.user):
+        raise PermissionDenied
+    context = {'active_count': MeetingAlarmDevice.objects.filter(owner=request.user,revoked_at__isnull=True,expires_at__gt=timezone.now()).count()}
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        if action not in {'create','revoke'}:
+            return private(JsonResponse({'error':'Geçersiz işlem.'},status=400))
+        now = timezone.now()
+        with transaction.atomic():
+            # Serialize provisioning for one owner; replacement invalidates old URLs.
+            get_user_model().objects.select_for_update().get(pk=request.user.pk)
+            MeetingAlarmDevice.objects.filter(owner=request.user,revoked_at__isnull=True).update(revoked_at=now)
+            if action == 'create':
+                raw = secrets.token_urlsafe(32)
+                expires = now+timedelta(days=365)
+                MeetingAlarmDevice.objects.create(owner=request.user,token_hash=hashlib.sha256(raw.encode()).hexdigest(),expires_at=expires)
+                context['feed_url'] = getattr(settings,'PUBLIC_BASE_URL','https://www.grcustasi.com').rstrip('/')+reverse('skool:meeting_alarms_automatic_data',args=[raw])
+                context['expires'] = expires
+                context['active_count'] = 1
+            else:
+                context.update(revoked=True,active_count=0)
+    return private(render(request,'skool/meeting_alarms_automatic.html',context))
+
+
+@require_safe
+def automatic_data(request, token):
+    import hashlib
+    from .models import MeetingAlarmDevice
+    if len(token) != 43:
+        raise Http404
+    device = MeetingAlarmDevice.objects.select_related('owner').filter(token_hash=hashlib.sha256(token.encode()).hexdigest(),revoked_at__isnull=True,expires_at__gt=timezone.now()).first()
+    if device is None or not is_owner(device.owner):
+        raise Http404
+    return private(JsonResponse(alarm_payload(timezone.now().astimezone(ZONE).date()),json_dumps_params={'ensure_ascii':False}))

@@ -5,6 +5,8 @@ from . import views, guest_views, meeting_alarms
 app_name = "skool"
 
 urlpatterns = [
+    path('admin/skool/gorusme-alarmlari/otomatik/', meeting_alarms.automatic_setup, name='meeting_alarms_automatic_setup'),
+    path('gorusme-alarmlari/otomatik/<str:token>/veri/', meeting_alarms.automatic_data, name='meeting_alarms_automatic_data'),
     path('admin/skool/gorusme-alarmlari/', meeting_alarms.today, name='meeting_alarms_today'),
     path('gorusme-alarmlari/kurulum/', meeting_alarms.setup, name='meeting_alarms_setup'),
     path('gorusme-alarmlari/<str:token>/veri/', meeting_alarms.meeting_alarms_data, name='meeting_alarms_data'),
