@@ -27,6 +27,8 @@
       <p><b>{{ mentorship_request.course.turkish_name|default:mentorship_request.course.english_name }}</b></p>
       <div class="notice"><b>Görüşme nedenin</b><br>{{ mentorship_request.reason }}</div>
 
+      {% include "skool/booking_notice.html" %}
+
       {% if booking %}
         <div class="success">
           <div class="success-icon">✓</div>
@@ -36,7 +38,7 @@
             <strong>{{ booking.slot.start_at_utc|date:"H:i" }}–{{ booking.slot.end_at_utc|date:"H:i" }}</strong>
             <span>Türkiye saati</span>
           </div>
-          <p>Talebin ve kayıtlı e-posta adresin Volkan’a iletildi. Volkan sana dönecek.</p>
+          <p>Görüşme tarihini, saatini ve aşağıdaki bağlantıyı kaydetmeyi unutma.</p>
           <a class="primary link" href="{{ booking.meeting_url }}" rel="noopener">Görüşme bağlantısını aç →</a>
         </div>
       {% else %}

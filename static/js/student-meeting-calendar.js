@@ -51,7 +51,8 @@
   }
 
   async function book(slot) {
-    if (!confirm(`${slot.date} • ${slot.start}–${slot.end} görüşmesini planlamak istiyor musun?`)) return;
+    const notice = document.querySelector('.booking-notice')?.innerText || '';
+    if (!confirm(`${slot.date} • ${slot.start}–${slot.end} görüşmesini planlamak istiyor musun?\n\n${notice}`)) return;
     try {
       const response = await fetch(cfg.bookUrl, {
         method: 'POST',
