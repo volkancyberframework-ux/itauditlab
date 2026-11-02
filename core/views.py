@@ -146,6 +146,9 @@ def custom_login_view(request):
                             request.session["first_login_telegram_sent"] = True
                         except requests.RequestException:
                             logger.exception("İlk giriş Telegram bildirimi gönderilemedi.")
+                from .service_consent import needs_service_consent
+                if needs_service_consent(user):
+                    return redirect('first_login_service_consent')
                 return render(request, "login.html", {
                     "show_password_change_popup": True
                 })

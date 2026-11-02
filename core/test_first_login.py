@@ -11,6 +11,8 @@ class FirstLoginPasswordTests(TestCase):
             username='password-required', email='required@example.com',
             password=self.old_password, is_first_login=True,
         )
+        from .models import FirstLoginServiceConsent
+        FirstLoginServiceConsent.objects.create(user=self.user, version='2026-11-02-v1', notice_text='Previously accepted service notice', immediate_performance=True, no_refund_acknowledged=True)
         self.change_url = reverse('force_password_change_popup')
         self.client.force_login(self.user)
 

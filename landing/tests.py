@@ -260,8 +260,7 @@ class LandingTests(TestCase):
             response = self.client.post(reverse('login'), {
                 'email': user.email, 'password': 'secret123',
             })
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(response.context['show_password_change_popup'])
+        self.assertRedirects(response, reverse('first_login_service_consent'), fetch_redirect_response=False)
         self.assertEqual(str(self.client.session['_auth_user_id']), str(user.pk))
         post.assert_called_once()
 

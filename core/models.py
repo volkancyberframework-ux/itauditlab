@@ -678,3 +678,19 @@ class AccountInactivityRun(models.Model):
     class Meta:
         verbose_name = 'Günlük hesap hareketsizlik kontrolü'
         verbose_name_plural = 'Günlük hesap hareketsizlik kontrolleri'
+
+
+class FirstLoginServiceConsent(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='first_login_service_consent')
+    version = models.CharField('Bildirim sürümü', max_length=32)
+    notice_text = models.TextField('Onaylanan metin')
+    immediate_performance = models.BooleanField('Anında ifa talebi')
+    no_refund_acknowledged = models.BooleanField('Cayma ve iade bildirimi onayı')
+    accepted_at = models.DateTimeField('Onay zamanı', auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'İlk giriş hizmet onayı'
+        verbose_name_plural = 'İlk giriş hizmet onayları'
+
+    def __str__(self):
+        return f'{self.user} · {self.version}'

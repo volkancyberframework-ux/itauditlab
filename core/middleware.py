@@ -128,6 +128,11 @@ class FirstLoginPasswordMiddleware:
             return None
         if getattr(request, 'urlconf', None) == 'mobile_web.urls':
             return None
-        if match.view_name in {'force_password_change_popup', 'logout'}:
+        if match.view_name in {'logout', 'landing:legal', 'terms_and_conditions'}:
+            return None
+        from .service_consent import needs_service_consent
+        if needs_service_consent(request.user) and match.view_name != 'first_login_service_consent':
+            return redirect('first_login_service_consent')
+        if match.view_name in {'force_password_change_popup', 'first_login_service_consent'}:
             return None
         return redirect('force_password_change_popup')

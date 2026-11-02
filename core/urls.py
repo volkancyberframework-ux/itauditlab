@@ -2,6 +2,7 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import RedirectView
+from .service_consent import service_consent
 from . import views
 from .views import (
     landing_page,
@@ -15,6 +16,7 @@ from . import views_store
 
 
 urlpatterns = [
+    path('ilk-giris-onayi/', service_consent, name='first_login_service_consent'),
     #path("akademi/", views.akademi, name="akademi"),
     path(
         "membership/checkout/<str:plan>/",

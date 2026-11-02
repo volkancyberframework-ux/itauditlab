@@ -23,7 +23,7 @@ class ContactNoticeMiddleware:
             return None
         if getattr(request, 'urlconf', None) == 'mobile_web.urls':
             return None
-        if match.view_name in {'contact_change_notice', 'logout', 'login', 'force_password_change_popup'}:
+        if match.view_name in {'contact_change_notice', 'logout', 'login', 'force_password_change_popup', 'first_login_service_consent', 'landing:legal', 'terms_and_conditions'}:
             return None
         if ContactChangeNotice.objects.filter(user=user, acknowledged_at__isnull=True).exists():
             return redirect('contact_change_notice')
