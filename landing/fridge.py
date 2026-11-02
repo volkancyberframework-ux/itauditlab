@@ -7,7 +7,6 @@ from uuid import uuid4
 from django.conf import settings
 from django.core import signing
 from django.core.cache.backends.locmem import LocMemCache
-from django.core.mail import get_connection, send_mail
 from django.http import HttpResponse, JsonResponse
 from django.middleware.csrf import get_token
 from django.template.loader import get_template
@@ -15,6 +14,7 @@ from django.utils import timezone
 from django.utils.crypto import salted_hmac
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_GET, require_POST
+from skool.services import send_telegram
 
 logger = logging.getLogger(__name__)
 _cache = LocMemCache('fridge-demo-only', {})
@@ -84,20 +84,18 @@ def confirm(request):
     expires = (now + timedelta(days=10)).strftime('%d.%m.%Y %H:%M')
     code = reward_code(signed['id'], 60)
     try:
-        sent = send_mail(
-            'GRC Ustası | Buzdolabı simülasyonu tamamlandı',
+        sent = send_telegram(
+            '🧊 GRC Ustası | Buzdolabı simülasyonu tamamlandı\n\n'
             f'Bir ziyaretçi /buzdolabi demosunda sıcaklığı değiştirdi ve onayladı.\n'
             f'Demo hesabı: volkanadmin (gerçek kullanıcı değildir)\nÖnceki sıcaklık: -5°C\nYeni sıcaklık: {value:g}°C\n'
             f'Zaman: {now:%d.%m.%Y %H:%M} (Türkiye)\nÖdül: 15 dakika birebir görüşme + %60 bootcamp indirimi\nÖdül kodu: {code}\nİndirim son tarihi: {expires}\n'
-            'Bu yalnızca bir simülasyondur. Gerçek cihaz veya kullanıcı kaydı değiştirilmedi.',
-            settings.DEFAULT_FROM_EMAIL, ['volkan@grcustasi.com'], fail_silently=False,
-            connection=get_connection(timeout=10),
+            'Bu yalnızca bir simülasyondur. Gerçek cihaz veya kullanıcı kaydı değiştirilmedi.'
         )
-        if sent != 1:
-            raise RuntimeError('Email not accepted')
+        if not sent:
+            raise RuntimeError('Telegram notification not accepted')
     except Exception:
         _cache.delete(key)
-        logger.warning('Fridge demo email could not be sent; visitor may retry.')
+        logger.warning('Fridge demo Telegram notification could not be sent; visitor may retry.')
         return JsonResponse({'error': 'Bildirim şu anda iletilemedi. Lütfen tekrar deneyin.'}, status=503)
     return JsonResponse({'ok': True, 'temperature': value, 'expires': expires, 'code': code})
 

@@ -9,6 +9,9 @@ from .fridge import _cache
 class FridgeDemoTests(TestCase):
     def setUp(self):
         _cache.clear()
+        telegram_patch = patch('landing.fridge.send_telegram', return_value=True)
+        self.telegram = telegram_patch.start()
+        self.addCleanup(telegram_patch.stop)
 
     def payload(self, **changes):
         from django.core import signing
@@ -33,12 +36,13 @@ class FridgeDemoTests(TestCase):
             response = self.post(self.payload())
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.json()['ok'])
-        self.assertEqual(len(mail.outbox), 1)
-        self.assertEqual(mail.outbox[0].to, ['volkan@grcustasi.com'])
-        self.assertIn('Yeni sıcaklık: -2°C', mail.outbox[0].body)
+        self.assertEqual(len(mail.outbox), 0)
+        self.telegram.assert_called_once()
+        message = self.telegram.call_args.args[0]
+        self.assertIn('Yeni sıcaklık: -2°C', message)
         self.assertRegex(response.json()['code'], r'^GRC60-[A-F0-9]{12}$')
-        self.assertIn(response.json()['code'], mail.outbox[0].body)
-        self.assertIn('15 dakika birebir görüşme', mail.outbox[0].body)
+        self.assertIn(response.json()['code'], message)
+        self.assertIn('15 dakika birebir görüşme', message)
 
     def test_unchanged_or_invalid_temperature_does_not_notify(self):
         for value in [-5, True, 16, -31, '3', None, float('nan')]:
@@ -55,14 +59,15 @@ class FridgeDemoTests(TestCase):
         data = self.payload()
         self.assertEqual(self.post(data).status_code, 200)
         self.assertEqual(self.post(data).status_code, 409)
-        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(len(mail.outbox), 0)
+        self.telegram.assert_called_once()
 
-    @patch('landing.fridge.send_mail', side_effect=RuntimeError('mail offline'))
-    def test_failed_mail_allows_retry(self, send):
+    @patch('landing.fridge.send_telegram', side_effect=RuntimeError('telegram offline'))
+    def test_failed_telegram_allows_retry(self, send):
         data = self.payload()
         self.assertEqual(self.post(data).status_code, 503)
         send.side_effect = None
-        send.return_value = 1
+        send.return_value = True
         self.assertEqual(self.post(data).status_code, 200)
 
     def test_csrf_required(self):
@@ -92,3 +97,21 @@ class FridgeDemoTests(TestCase):
         self.assertEqual(reward_code('demo-one', 60), reward_code('demo-one', 60))
         self.assertNotEqual(reward_code('demo-one', 60), reward_code('demo-two', 60))
         self.assertNotEqual(reward_code('demo-one', 25), reward_code('demo-one', 60))
+
+    def test_missing_telegram_configuration_allows_retry_without_email(self):
+        self.telegram.return_value = False
+        data = self.payload()
+        self.assertEqual(self.post(data).status_code, 503)
+        self.assertEqual(len(mail.outbox), 0)
+        self.telegram.return_value = True
+        self.assertEqual(self.post(data).status_code, 200)
+
+    @override_settings(GRCUSTASI_TELEGRAM_BOT_TOKEN='demo-test-token', GRCUSTASI_TELEGRAM_ADMIN_CHAT_ID='123')
+    def test_real_telegram_helper_does_not_query_database(self):
+        from skool.services import send_telegram
+        with patch('landing.fridge.send_telegram', wraps=send_telegram), patch('skool.services.requests.post') as post:
+            with self.assertNumQueries(0):
+                response = self.post(self.payload())
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(post.call_args.kwargs['data']['chat_id'], '123')
+        self.assertEqual(len(mail.outbox), 0)
