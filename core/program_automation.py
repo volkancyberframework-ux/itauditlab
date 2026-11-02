@@ -6,6 +6,7 @@ import requests
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.utils import timezone
+from django.utils.html import strip_tags
 
 from .models import Course, Enrollment, ProgramEnrollment, ProgramRelease
 
@@ -59,7 +60,12 @@ def send_release_email(enrollment, releases):
     content = (
         "<p>Programındaki yeni içerikler hesabına tanımlandı ve erişime açıldı.</p>"
         f'<ul style="padding-left:22px;margin:22px 0">{items}</ul>'
-        "<p>İçerikleri dikkatlice incelemeni, ekleri kontrol etmeni, notlarını çıkarmanı ve gerçek bir denetçi gibi kanıt–risk–öneri ilişkisi kurmanı bekliyorum.</p>"
+        "<p>Yeni açılan derslere girin ve çalışın. Ekleri inceleyin, notlarınızı alın ve "
+        "derslerde belirtilen gereksinimleri verilen süre içinde tamamlayın.</p>"
+        '<div style="margin:24px 0;padding:18px 20px;background:#eff6ff;border-left:4px solid #2563eb;border-radius:8px">'
+        '<p style="margin:0 0 10px"><strong>Sorularınız için: Volkan’a Sor</strong></p>'
+        '<p style="margin:0">Derslerle ilgili soru sormak isterseniz ders sayfasındaki <strong>“Volkan’a Sor”</strong> '
+        'butonunu kullanın. Dilerseniz yazılı sorunuzu iletin, dilerseniz birebir görüşme planlayın.</p></div>'
         '<p><a href="https://www.grcustasi.com/dashboard-student/" style="display:inline-block;background:#2563eb;color:#fff;text-decoration:none;padding:12px 20px;border-radius:8px">İçeriklere git</a></p>'
     )
     subject = "Yeni eğitim içeriklerin erişime açıldı"
@@ -71,7 +77,7 @@ def _send_email(recipient, subject, html_body):
         raise RuntimeError("EMAIL_HOST_USER veya EMAIL_HOST_PASSWORD tanımlı değil")
     message = EmailMultiAlternatives(
         subject=subject,
-        body="Yeni eğitim içerikleriniz açıldı. Detaylar için https://www.grcustasi.com adresini ziyaret edin.",
+        body=html.unescape(strip_tags(html_body.replace("</p>", "</p>\n\n").replace("</li>", "</li>\n").replace("<br>", "\n"))).strip(),
         from_email=_from_email(),
         to=[recipient],
     )
