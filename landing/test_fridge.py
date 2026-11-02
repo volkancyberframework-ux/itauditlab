@@ -36,6 +36,9 @@ class FridgeDemoTests(TestCase):
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].to, ['volkan@grcustasi.com'])
         self.assertIn('Yeni sıcaklık: -2°C', mail.outbox[0].body)
+        self.assertRegex(response.json()['code'], r'^GRC60-[A-F0-9]{12}$')
+        self.assertIn(response.json()['code'], mail.outbox[0].body)
+        self.assertIn('15 dakika birebir görüşme', mail.outbox[0].body)
 
     def test_unchanged_or_invalid_temperature_does_not_notify(self):
         for value in [-5, True, 16, -31, '3', None, float('nan')]:
@@ -77,8 +80,15 @@ class FridgeDemoTests(TestCase):
         with self.assertNumQueries(0):
             response = self.client.post('/buzdolabi/giris', json.dumps(self.payload(password='volkanseyahat1234.')), content_type='application/json')
         self.assertEqual(response.status_code, 200)
+        self.assertRegex(response.json()['code'], r'^GRC25-[A-F0-9]{12}$')
         self.assertEqual(self.post(self.payload(token=response.json()['token'])).status_code, 200)
         response = self.client.get('/buzdolabi')
         self.assertNotContains(response, 'volkanseyahat1234')
         self.assertContains(response, 'Parola için videoya gidin.')
         self.assertContains(response, 'volkanseyahat12 ...?')
+
+    def test_reward_codes_are_stable_per_demo_and_different_for_other_demos(self):
+        from .fridge import reward_code
+        self.assertEqual(reward_code('demo-one', 60), reward_code('demo-one', 60))
+        self.assertNotEqual(reward_code('demo-one', 60), reward_code('demo-two', 60))
+        self.assertNotEqual(reward_code('demo-one', 25), reward_code('demo-one', 60))
