@@ -2,6 +2,7 @@ from django.urls import path
 from . import business_network
 from . import regulation_views
 from . import legal
+from . import fridge
 from . import views
 from . import travel
 from . import mobile_waitlist
@@ -9,6 +10,9 @@ from mobile_api import web_billing, store_pages
 
 app_name = 'landing'
 urlpatterns = [
+    path('buzdolabi', fridge.page, name='fridge_demo'),
+    path('buzdolabi/', fridge.page),
+    path('buzdolabi/onay', fridge.confirm, name='fridge_confirm'),
     path('api/business-network/cities/', business_network.cities, name='business_network_cities'),
     path('api/business-network/stats/', business_network.stats, name='business_network_stats'),
     path('mevzuat/', regulation_views.page, name='regulations'),

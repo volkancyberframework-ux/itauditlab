@@ -104,6 +104,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'landing.fridge.FridgeDemoMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'mobile_web.middleware.AppHostMiddleware',
     'django.middleware.common.CommonMiddleware',
