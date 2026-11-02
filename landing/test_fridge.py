@@ -45,7 +45,7 @@ class FridgeDemoTests(TestCase):
         self.assertIn('15 dakika birebir görüşme', message)
 
     def test_unchanged_or_invalid_temperature_does_not_notify(self):
-        for value in [-5, True, 16, -31, '3', None, float('nan')]:
+        for value in [-5, True, 50.5, 51, -31, '3', None, float('nan')]:
             with self.subTest(value=value):
                 self.assertEqual(self.post(self.payload(temperature=value)).status_code, 400)
         self.assertEqual(len(mail.outbox), 0)
@@ -115,3 +115,10 @@ class FridgeDemoTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(post.call_args.kwargs['data']['chat_id'], '123')
         self.assertEqual(len(mail.outbox), 0)
+
+    def test_fifty_degrees_is_accepted(self):
+        with self.assertNumQueries(0):
+            response = self.post(self.payload(temperature=50))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['temperature'], 50)
+        self.assertIn('Yeni sıcaklık: 50°C', self.telegram.call_args.args[0])

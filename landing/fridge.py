@@ -66,7 +66,7 @@ def confirm(request):
         value = data.get('temperature')
         if isinstance(value, bool) or not isinstance(value, (float, int)):
             raise ValueError
-        if not math.isfinite(value) or not -30 <= value <= 15 or value == -5:
+        if not math.isfinite(value) or not -30 <= value <= 50 or value == -5:
             raise ValueError
     except (ValueError, TypeError, signing.BadSignature):
         return JsonResponse({'error': 'Geçerli bir sıcaklık seçin. Oturum süresi dolduysa sayfayı yenileyin.'}, status=400)

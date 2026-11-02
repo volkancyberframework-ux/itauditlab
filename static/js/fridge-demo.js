@@ -33,7 +33,7 @@
     const value = Number($('temperature').value);
     const error = $('temperature-error');
     error.hidden = true;
-    if (!authenticated || !Number.isFinite(value) || value < -30 || value > 15 || value === -5) {
+    if (!authenticated || !Number.isFinite(value) || value < -30 || value > 50 || value === -5) {
       error.textContent = 'Başlangıç sıcaklığı −5°C. Demoyu tamamlamak için farklı bir sıcaklık seçin.'; error.hidden = false; return;
     }
     $('apply').disabled = true; $('apply').textContent = 'Onaylanıyor…';
