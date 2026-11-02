@@ -63,9 +63,8 @@ def send_release_email(enrollment, releases):
         "<p>Yeni açılan derslere gir ve çalış. Ekleri incele, notlarını al ve "
         "derslerde belirtilen gereksinimleri verilen süre içinde tamamla.</p>"
         '<div style="margin:24px 0;padding:18px 20px;background:#eff6ff;border-left:4px solid #2563eb;border-radius:8px">'
-        '<p style="margin:0 0 10px"><strong>Soruların için: Volkan’a Sor</strong></p>'
-        '<p style="margin:0">Derslerle ilgili soru sormak istersen ders sayfasındaki <strong>“Volkan’a Sor”</strong> '
-        'butonunu kullan. Dilersen yazılı sorunu ilet, dilersen birebir görüşme planla.</p></div>'
+        '<p style="margin:0 0 10px"><strong>Soruların için, dersin içindeki ‘Volkan’a Sor’ butonunu kullan.</strong></p>'
+        '<p style="margin:0">Dilersen yazılı sorunu ilet, dilersen birebir görüşme planla.</p></div>'
         '<p><a href="https://www.grcustasi.com/dashboard-student/" style="display:inline-block;background:#2563eb;color:#fff;text-decoration:none;padding:12px 20px;border-radius:8px">İçeriklere git</a></p>'
     )
     subject = "Yeni eğitim içeriklerin erişime açıldı"
