@@ -13,7 +13,7 @@ class FridgeDemoTests(TestCase):
     def payload(self, **changes):
         from django.core import signing
         from uuid import uuid4
-        return {'token': signing.dumps({'id': uuid4().hex}, salt='fridge-demo-v1'),
+        return {'token': signing.dumps({'id': uuid4().hex, 'authenticated': True}, salt='fridge-demo-v1'),
                 'username': 'volkanadmin', 'password': 'volkanseyahat1234', 'temperature': -2, **changes}
 
     def post(self, data):
@@ -44,7 +44,7 @@ class FridgeDemoTests(TestCase):
         self.assertEqual(len(mail.outbox), 0)
 
     def test_fake_auth_and_bad_token_do_not_notify(self):
-        self.assertEqual(self.post(self.payload(password='wrong')).status_code, 403)
+        self.assertEqual(self.client.post('/buzdolabi/giris', json.dumps(self.payload(password='wrong')), content_type='application/json').status_code, 403)
         self.assertEqual(self.post(self.payload(token='invalid')).status_code, 400)
         self.assertEqual(len(mail.outbox), 0)
 
@@ -72,3 +72,13 @@ class FridgeDemoTests(TestCase):
         self.assertEqual(self.client.get('/buzdolabi/onay').status_code, 405)
         self.assertEqual(self.client.post('/buzdolabi').status_code, 405)
         self.assertEqual(self.client.post('/buzdolabi/onay', '[]', content_type='application/json').status_code, 400)
+
+    def test_login_uses_video_password_with_final_period_without_database(self):
+        with self.assertNumQueries(0):
+            response = self.client.post('/buzdolabi/giris', json.dumps(self.payload(password='volkanseyahat1234.')), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(self.post(self.payload(token=response.json()['token'])).status_code, 200)
+        response = self.client.get('/buzdolabi')
+        self.assertNotContains(response, 'volkanseyahat1234')
+        self.assertContains(response, 'Parola için videoya gidin.')
+        self.assertContains(response, 'volkanseyahat12 ...?')

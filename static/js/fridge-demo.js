@@ -3,11 +3,21 @@
   const $ = id => document.getElementById(id);
   let authenticated = false;
   $('fridge-grid').innerHTML = Array.from({length: 6}, (_, i) => `<article class="fridge"><small>SOĞUTUCU ${String(i+1).padStart(2,'0')}</small><div class="temp">−5°C</div><span class="status">● Hedef sıcaklıkta</span></article>`).join('');
-  $('demo-login').addEventListener('submit', event => {
+  $('demo-login').addEventListener('submit', async event => {
     event.preventDefault();
-    authenticated = $('username').value.trim() === 'volkanadmin' && $('password').value === 'volkanseyahat1234';
-    $('login-error').hidden = authenticated;
-    if (authenticated) { $('login-view').hidden = true; $('panel-view').hidden = false; $('temperature').focus(); }
+    const button = $('demo-login').querySelector('button');
+    button.disabled = true;
+    try {
+      const response = await fetch('/buzdolabi/giris', {method:'POST',headers:{'Content-Type':'application/json','X-CSRFToken':$('csrf-token').value},body:JSON.stringify({token:$('demo-token').value,username:$('username').value.trim(),password:$('password').value})});
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Giriş yapılamadı.');
+      $('demo-token').value = data.token;
+      $('password').value = '';
+      authenticated = true;
+      $('login-error').hidden = true;
+      $('login-view').hidden = true; $('panel-view').hidden = false; $('temperature').focus();
+    } catch (error) { $('login-error').textContent = error.message; $('login-error').hidden = false; }
+    finally { button.disabled = false; }
   });
   $('reset').addEventListener('click', () => window.location.reload());
   $('temperature-form').addEventListener('submit', async event => {
@@ -20,7 +30,7 @@
     }
     $('apply').disabled = true; $('apply').textContent = 'Onaylanıyor…';
     try {
-      const response = await fetch('/buzdolabi/onay', {method: 'POST', headers: {'Content-Type':'application/json','X-CSRFToken':$('csrf-token').value}, body: JSON.stringify({token:$('demo-token').value, temperature:value, username:'volkanadmin',password:'volkanseyahat1234'})});
+      const response = await fetch('/buzdolabi/onay', {method: 'POST', headers: {'Content-Type':'application/json','X-CSRFToken':$('csrf-token').value}, body: JSON.stringify({token:$('demo-token').value, temperature:value})});
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'İşlem tamamlanamadı.');
       document.querySelectorAll('.fridge .temp').forEach(el => {el.textContent = `${value}°C`;});

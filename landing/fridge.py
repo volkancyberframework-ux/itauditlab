@@ -34,6 +34,23 @@ def page(request):
 
 @require_POST
 @csrf_protect
+def login(request):
+    if len(request.body) > 4096:
+        return JsonResponse({'error': 'İstek çok büyük.'}, status=400)
+    try:
+        data = json.loads(request.body)
+        if not isinstance(data, dict):
+            raise ValueError
+        signed = signing.loads(data.get('token', ''), salt=SALT, max_age=3600)
+    except (ValueError, TypeError, signing.BadSignature):
+        return JsonResponse({'error': 'Sayfayı yenileyip tekrar deneyin.'}, status=400)
+    if data.get('username') != 'volkanadmin' or data.get('password') != 'volkanseyahat1234.':
+        return JsonResponse({'error': 'Demo giriş bilgilerini kontrol edin. Parola için videoya gidin.'}, status=403)
+    return JsonResponse({'token': signing.dumps({'id': signed['id'], 'authenticated': True}, salt=SALT)})
+
+
+@require_POST
+@csrf_protect
 def confirm(request):
     if len(request.body) > 4096:
         return JsonResponse({'error': 'İstek çok büyük.'}, status=400)
@@ -49,7 +66,7 @@ def confirm(request):
             raise ValueError
     except (ValueError, TypeError, signing.BadSignature):
         return JsonResponse({'error': 'Geçerli bir sıcaklık seçin. Oturum süresi dolduysa sayfayı yenileyin.'}, status=400)
-    if data.get('username') != 'volkanadmin' or data.get('password') != 'volkanseyahat1234':
+    if signed.get('authenticated') is not True:
         return JsonResponse({'error': 'Demo giriş bilgileri geçersiz.'}, status=403)
     ip = request.META.get('HTTP_CF_CONNECTING_IP') or request.META.get('REMOTE_ADDR', '')
     rate_key = 'fridge-rate:' + salted_hmac(SALT, ip).hexdigest()
@@ -88,6 +105,8 @@ class FridgeDemoMiddleware:
     def __call__(self, request):
         if request.path_info in ('/buzdolabi', '/buzdolabi/'):
             return page(request)
+        if request.path_info == '/buzdolabi/giris':
+            return login(request)
         if request.path_info == '/buzdolabi/onay':
             return confirm(request)
         return self.get_response(request)

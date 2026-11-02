@@ -12,6 +12,7 @@ app_name = 'landing'
 urlpatterns = [
     path('buzdolabi', fridge.page, name='fridge_demo'),
     path('buzdolabi/', fridge.page),
+    path('buzdolabi/giris', fridge.login, name='fridge_login'),
     path('buzdolabi/onay', fridge.confirm, name='fridge_confirm'),
     path('api/business-network/cities/', business_network.cities, name='business_network_cities'),
     path('api/business-network/stats/', business_network.stats, name='business_network_stats'),
