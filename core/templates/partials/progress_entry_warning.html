@@ -7,7 +7,7 @@
         <p>Bu interaktif bir programdır. Önceki derslerinizi ve uygulamalarınızı tamamlamadan yeni derslere geçmeyin.</p>
         <p>Dersler takviminizde açılmaya devam eder. Tamamlanmadığı doğrulanmış önceki dersleriniz varken yeni bir derse geçmek istediğinizde ikinci bir uyarı gösterilir.</p>
         <p><strong>İkinci uyarıya rağmen devam etmeyi onaylarsanız ilk ihlalde hesabınız devre dışı bırakılır ve tüm ana platform erişiminiz durur.</strong></p>
-        <p>Satın alma sırasında onayladığınız sözleşmedeki iade ve cayma koşullarını <a href="{% url 'terms_and_conditions' %}" target="_blank" rel="noopener">buradan inceleyin</a>. Bu uyarı yasal haklarınızı ortadan kaldırmaz.</p>
+        <p><strong>Ücret iadesi yoktur.</strong> Satın alma ve katılım koşullarını <a href="{% url 'terms_and_conditions' %}" target="_blank" rel="noopener">buradan inceleyebilirsiniz</a>.</p>
         <p class="small mb-0">Bu kuralın etkin olduğu programlar: {% for enrollment in progress_warning_programs %}{{ enrollment.program.name }}{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
       </div>
       <div class="modal-footer">

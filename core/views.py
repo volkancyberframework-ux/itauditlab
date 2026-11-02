@@ -214,11 +214,9 @@ def landing_page(request):
     })
 
 def terms_and_conditions(request):
-    """
-    Render the Terms & Conditions page for ITAuditLab.
-    Uses the shared _terms_body.html partial so the content matches the modal.
-    """
-    return render(request, "terms_page.html")
+    # Keep the legacy address pointed at the single, current policy.
+    return redirect('landing:legal', slug='kullanim')
+
 
 def pricing_view(request):
     return render(request, 'pricing.html')

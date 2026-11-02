@@ -50,11 +50,11 @@ DOCUMENTS = {
 ('İsteğe bağlı analitik', 'grc_vid: birinci taraf ziyaretçi ölçüm çerezi; yalnızca analitik izninden sonra oluşturulur, süre 2 yıl. Rastgele ziyaretçi kimliği kullanılır; veritabanında özetlenmiş kimlik ve ziyaret tarihleri tutulur. İzin geri alındığında çerez silinir ve yeni analitik kayıt yapılmaz. Önceden işlenen verilerle ilgili haklarınızı KVKK iletişim adresinden kullanabilirsiniz.'),
 ('Tarayıcı depolaması ve dış hizmetler', 'grc-theme tema seçiminizi; grc-newsletter-seen-v1 bülten penceresini kapatma tercihinizi; grc-cookie-choice-v1 çerez seçiminizin yerel gösterimini tutar. Tarayıcı verilerini temizleyene kadar veya çerez tercihi için 180 gün saklanır. Bunlar reklam takibi için kullanılmaz. Stripe/Skool gibi dış hizmetlere geçtiğinizde o hizmetin çerez politikası uygulanır.'),
 ]),
-'kullanim': ('Kullanım ve Tüketici Bilgilendirmesi', [
+'kullanim': ('Kullanım ve İade Koşulları', [
 ('Hizmet kapsamı', 'GRC Ustası eğitim, kariyer desteği ve kurumsal danışmanlık sunar. Program içeriği, süre ve bedel ilgili ürün sayfasında gösterilir. İşe yerleşme, gelir, sınav başarısı, vize veya bağımsız sertifikasyon garantisi verilmez. İçerikler izinsiz çoğaltılamaz; laboratuvar çalışmaları yalnızca yetkili ve hukuka uygun ortamlarda yapılmalıdır.'),
-('Ödeme öncesi bilgiler', 'Satın almadan önce hizmet sağlayıcının resmi kimlik ve adresi, hizmetin kapsamı, toplam bedel ve vergiler, ifa tarihi, cayma/iptal koşulları ile uyuşmazlık başvuru yolları size sunulmalıdır. Bu sayfa, ürüne ve siparişe özel ön bilgilendirme formu veya mesafeli sözleşmenin yerine geçmez. Sorularınız için volkan@grcustasi.com adresine yazabilirsiniz.'),
-('Cayma, iptal ve iade', 'Tüketici işlemlerinde 6502 sayılı Kanun ve Mesafeli Sözleşmeler Yönetmeliği kapsamındaki emredici haklarınız saklıdır. Uygulanabilir işlemlerde hizmet sözleşmesinin kurulmasından itibaren 14 günlük cayma hakkı bulunur. Dijital içerik veya erken ifa gibi istisnalar yalnızca mevzuattaki şartlar ve gerekli ön bilgilendirme/onay sağlandığında uygulanabilir. Genel bir “hiçbir koşulda iade yok” kaydı kanuni haklarınızı ortadan kaldırmaz. Cayma veya iade talebinizi iletişim adresimize iletebilirsiniz.'),
-('Uyuşmazlıklar', 'Tüketiciler, güncel parasal sınır ve görev kurallarına göre tüketici hakem heyetlerine veya tüketici mahkemelerine başvurabilir. Mevzuatın gerektirdiği hallerde dava öncesi arabuluculuk uygulanır.'),
+('Ödeme öncesi bilgiler', 'Satın almadan önce hizmetin kapsamını, toplam bedelini, süresini ve katılım koşullarını incele. Soruların için volkan@grcustasi.com adresine yazabilirsin.'),
+('Ücret iadesi', 'GRC Ustası web sitesi üzerinden satın alınan eğitim, bootcamp ve danışmanlık hizmetlerinde ücret iadesi yapılmaz. Satın almadan önce program içeriğini, bedelini ve katılım koşullarını incele.'),
+('İletişim', 'Hizmet ve satın alma koşullarıyla ilgili soruların için volkan@grcustasi.com adresine yazabilirsin.'),
 ]),
 }
 

@@ -8,7 +8,7 @@
     <p>Bu interaktif bir programdır. Önce aşağıdaki dersleri ve uygulamalarını tamamlayın. Tamamladıysanız inceleme için Volkan ile iletişime geçin.</p>
     {% for finding in findings %}<section class="my-3"><h2 class="h5">{{ finding.program }}</h2><ul>{% for lesson in finding.incomplete %}<li><a href="{% url 'course_single' lesson.course_id %}">{{ lesson.title }}</a></li>{% endfor %}</ul></section>{% endfor %}
     <div class="alert alert-danger"><strong>Bu uyarıya rağmen devam ederseniz hesabınız hemen devre dışı bırakılır.</strong> Bu yalnızca ilgili dersin değil, ana platformdaki hesabınızın erişimini durdurur. İşlem yönetime anlık olarak ve ertesi sabah bildirilir.</div>
-    <p>Satın alırken onayladığınız sözleşmedeki <a href="{% url 'terms_and_conditions' %}" target="_blank" rel="noopener">iade ve cayma koşullarını inceleyin</a>. Bu uyarı yasal haklarınızı ortadan kaldırmaz.</p>
+    <p><strong>Ücret iadesi yoktur.</strong> Satın alma ve katılım koşullarını <a href="{% url 'terms_and_conditions' %}" target="_blank" rel="noopener">buradan inceleyebilirsiniz</a>.</p>
     <a href="{% url 'dashboard_student' %}" class="btn btn-primary mb-4">Vazgeç, mevcut derslerime dön</a>
     <form method="post" action="{% url 'program_progress_confirm' course.pk %}">{% csrf_token %}
       <input type="hidden" name="confirmation_token" value="{{ confirmation_token }}">
