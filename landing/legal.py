@@ -63,4 +63,5 @@ def document(request, slug):
     if slug not in DOCUMENTS:
         raise Http404
     title, sections = DOCUMENTS[slug]
-    return render(request, 'landing/legal.html', {'title': title, 'sections': sections, 'version': CONSENT_VERSION})
+    version = '2026-11-02' if slug == 'kullanim' else CONSENT_VERSION
+    return render(request, 'landing/legal.html', {'title': title, 'sections': sections, 'version': version})
