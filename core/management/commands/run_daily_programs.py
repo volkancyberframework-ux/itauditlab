@@ -16,6 +16,11 @@ class Command(BaseCommand):
     help = "Vadesi gelen program içeriklerini açar, mail ve Telegram özeti gönderir."
 
     def handle(self, *args, **options):
+        try:
+            from mobile_api.program_mail import drain
+            self.stdout.write(f'Mobil program e-postası gönderildi: {drain()}')
+        except Exception as exc:
+            self.stderr.write(f'Mobil program e-postaları bekliyor: {type(exc).__name__}')
         run_date = timezone.localdate()
         stats = run_daily_programs(run_date)
         mobile_report = None

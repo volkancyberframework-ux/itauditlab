@@ -35,3 +35,25 @@ def workshop_voice(sender, instance, created, raw=False, **kwargs):
 @receiver(post_delete, sender=WorkshopVoice, dispatch_uid='workshop_voice_cleanup')
 def workshop_voice_cleanup(sender, instance, **kwargs):
     instance.file.delete(save=False)
+
+
+from django.db import transaction
+from django.db.models.signals import m2m_changed
+from .models import LearningPath, Question
+
+
+def schedule_program_announcements(sender, instance, raw=False, **kwargs):
+    if raw:
+        return
+    from .program_mail import announce_available
+    transaction.on_commit(announce_available, robust=True)
+
+
+post_save.connect(schedule_program_announcements, sender=LearningPath, dispatch_uid='mobile_path_email')
+post_save.connect(schedule_program_announcements, sender=Question, dispatch_uid='mobile_question_path_email')
+
+
+@receiver(m2m_changed, sender=Question.paths.through, dispatch_uid='mobile_path_content_email')
+def path_content_email(sender, instance, action, **kwargs):
+    if action == 'post_add':
+        schedule_program_announcements(sender, instance)

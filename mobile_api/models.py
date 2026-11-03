@@ -465,3 +465,21 @@ class MobileDailyKPI(models.Model):
         ordering = ['-report_date']
         verbose_name = 'Mobil günlük KPI raporu'
         verbose_name_plural = 'Mobil günlük KPI raporları'
+
+
+class ProgramEmailCampaign(models.Model):
+    key = models.CharField(max_length=120, unique=True)
+    path = models.ForeignKey(LearningPath, null=True, blank=True, on_delete=models.SET_NULL)
+    titles = models.JSONField(default=list)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+class ProgramEmailDelivery(models.Model):
+    campaign = models.ForeignKey(ProgramEmailCampaign, on_delete=models.CASCADE)
+    email = models.EmailField()
+    name = models.CharField(max_length=150, blank=True)
+    sent_at = models.DateTimeField(null=True, blank=True)
+    last_error = models.CharField(max_length=200, blank=True)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['campaign', 'email'], name='mobile_program_email_unique')]

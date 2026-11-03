@@ -1,0 +1,9 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<p>Aktif ve e-postası doğrulanmış mobil hesap: {{ recipients }}. Aynı adreslere tekrar gönderilmez.</p>
+<ul>{% for title in titles %}<li>{{ title }}</li>{% endfor %}</ul>
+<p>Gönderilen: {{ sent }} · Bekleyen: {{ pending }}</p>
+{% if batch_sent != None %}<p>Bu işlemde gönderilen: {{ batch_sent }}</p>{% endif %}
+<form method="post">{% csrf_token %}<button type="submit">Mevcut program duyurusunu gönder / bekleyenlere devam et</button></form>
+<p>Her işlem en fazla 5 alıcıya gönderir. Gönderim kayıtları yönetim panelinde saklanır.</p>
+{% endblock %}

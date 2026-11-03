@@ -494,3 +494,63 @@ class MobileDailyKPIAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+
+from .models import ProgramEmailCampaign, ProgramEmailDelivery
+
+
+@admin.register(ProgramEmailCampaign)
+class ProgramEmailCampaignAdmin(admin.ModelAdmin):
+    def get_urls(self):
+        from django.urls import path
+        return [path('catalogue/', self.admin_site.admin_view(self.catalogue), name='mobile_program_catalogue')] + super().get_urls()
+
+    def catalogue(self, request):
+        from django.core.exceptions import PermissionDenied
+        from django.template.response import TemplateResponse
+        from .program_mail import CATALOGUE_KEY, public_paths, recipients, prepare_campaign, drain
+        if not self.has_change_permission(request):
+            raise PermissionDenied
+        campaign = ProgramEmailCampaign.objects.filter(key=CATALOGUE_KEY).first()
+        batch_sent = None
+        if request.method == 'POST':
+            campaign = prepare_campaign(CATALOGUE_KEY, public_paths())
+            if campaign:
+                batch_sent = drain(campaign, limit=5)
+        rows = ProgramEmailDelivery.objects.filter(campaign=campaign) if campaign else ProgramEmailDelivery.objects.none()
+        return TemplateResponse(request, 'admin/mobile_program_catalogue.html', {
+            **self.admin_site.each_context(request), 'title': 'Mobil program duyurusu',
+            'titles': list(public_paths().values_list('title', flat=True)),
+            'recipients': recipients().count(), 'sent': rows.filter(sent_at__isnull=False).count(),
+            'pending': rows.filter(sent_at=None).count(), 'batch_sent': batch_sent,
+        })
+
+    list_display = ['key', 'created_at']
+    readonly_fields = ['key', 'path', 'titles', 'created_at']
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(ProgramEmailDelivery)
+class ProgramEmailDeliveryAdmin(admin.ModelAdmin):
+    list_display = ['email', 'campaign', 'sent_at', 'last_error']
+    list_filter = ['campaign', 'sent_at']
+    search_fields = ['email', 'name']
+    readonly_fields = ['campaign', 'email', 'name', 'sent_at', 'last_error']
+    actions = ['retry_pending']
+
+    @admin.action(description='Seçili bekleyen e-postaları yeniden gönder')
+    def retry_pending(self, request, queryset):
+        from .program_mail import deliver
+        sent = sum(deliver(pk) for pk in queryset.filter(sent_at=None).values_list('pk', flat=True))
+        self.message_user(request, f'{sent} e-posta gönderildi.')
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
