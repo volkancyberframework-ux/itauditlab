@@ -1,8 +1,26 @@
 {% extends 'landing/chip_base.html' %}{% block content %}
-{% if test %}<aside class="test-banner">TEST ORTAMI · Gerçek para tahsil edilmez; gerçek ortaklık hakkı oluşmaz.</aside>{% endif %}
-<section class="hero"><div><p class="eyebrow">43 KATILIM · TOPLAM %2 PAY</p><h1>Bir çip fiyatına<br>Siberkobi’ye <em>ortak ol.</em></h1><p class="intro">Skool Topluluğuna Özel Siberkobi Çip Satın Alımı</p><p>Her katılım <strong>399 EUR.</strong> Hesaplanan şirket payın, ödeme onayından sonra kayıtlanan sırana göre belirlenir.</p><div class="chips"><span>1. katılım <strong>%0,50</strong></span><span>2. katılım <strong>%0,25</strong></span><span>3. katılım <strong>%0,25</strong></span></div></div><div class="panel checkout"><p class="eyebrow">KATILIM BEDELİ</p><div class="price">399 <span>EUR</span></div><div class="counter"><strong>{{ campaign.confirmed_count }}<span> / 43</span></strong><span>Onaylanan katılım</span></div><p>{{ remaining }} kontenjan kullanılabilir{% if pending %} · {{ pending }} ödeme aşamasında{% endif %}.</p>{% if next_share %}<p>Şu anki sıradaki katılım için: <strong>%{{ next_share }}</strong><br><small>Ödeme tamamlanana kadar sıra ve oran değişebilir.</small></p>{% endif %}
-{% if cancelled %}<p class="notice">Ödeme tamamlanmadı. Katılım sıran henüz oluşmadı.</p>{% endif %}
-{% if available %}<form action="{{ checkout_url }}" method="post">{% csrf_token %}<label class="ack"><input type="checkbox" name="acknowledge" value="chip-disclosure-v1" required><span>399 EUR katılım bedelini, sıra/pay hesabını ve hakların ilgili sözleşmeler ile hukuki işlemler tamamlandıktan sonra kesinleşeceğini okudum.</span></label><button type="submit">{% if test %}Stripe test ödemesine geç{% else %}399 EUR · Stripe ile devam et{% endif %} <span>↗</span></button></form><p class="small">Ödeme için Stripe’a yönlendirileceksin. Ödeme onaylandıktan sonra sıranı ve hesaplanan pay oranını göreceksin.</p>{% else %}<div class="closed">Bağlantı şu anda kapalı</div><p class="small">Bu bağlantı üzerinden şu anda ödeme alınmıyor.</p>{% endif %}</div></section>
-<section class="steps"><article><span>01</span><h3>Stripe ile öde</h3><p>E-posta ve ödeme bilgilerini Stripe ekranında gir.</p></article><article><span>02</span><h3>Sıranı ve payını gör</h3><p>Ödemen sistemde doğrulandığında sıran ve pay oranın kaydedilir. Her başarılı 399 EUR ödeme bir katılımdır.</p></article><article><span>03</span><h3>Kaydın e-postana gelsin</h3><p>Kişisel sonuç bağlantın e-postana gönderilir. Önceki katılımcıları maskeli olarak görebilirsin.</p></article></section>
-<section class="allocation"><div><p class="eyebrow">DAĞILIM NASIL HESAPLANIYOR?</p><h2>İlk 3 katılıma %1.<br>Sonraki 40 katılıma %1.</h2><p>4. sıradan itibaren her pay bir öncekinin %90’ıdır. Böylece toplam şirket payının %2’si, 43 katılıma dağıtılacak şekilde hesaplanır.</p><div class="formula">P(n) = %1 × 0,1 × 0,9<sup>n−4</sup> / (1 − 0,9<sup>40</sup>)</div><p class="small">Tablo 8 ondalık basamakla gösterilir. Hesaplar yüksek hassasiyetle saklanır. Sonucun ekranda görünmesi tek başına hukuki hisse devri oluşturmaz.</p></div><details><summary>43 sıranın tamamını ve paylarını göster</summary><table><thead><tr><th>Sıra</th><th>Şirket payı</th></tr></thead><tbody>{% for position,share in formula_rows %}<tr><td>{{ position }}.</td><td>%{{ share }}</td></tr>{% endfor %}</tbody></table></details></section>
+<section class="compact-checkout">
+{% if test %}<aside class="test-banner">TEST · Gerçek ödeme veya ortaklık hakkı yok.</aside>{% endif %}
+<div class="panel checkout">
+<h1>Bir çip fiyatına<br>Siberkobi’ye <em>ortak ol.</em></h1>
+<div class="price">399 <span>EUR</span></div>
+<p class="purchase-disclosure">Hisse/kâr payı katılımıdır. Payın, ödemenin sistemde doğrulandığı sıraya göre değişir; kesin sıranı ve hesaplanan payını ödeme sonrasında görürsün.</p>
+<details class="payment-terms"><summary>Pay dağılımı ve katılım koşulları</summary>
+<p>43 katılıma toplam %2 şirket payı hesaplanır. İlk üç sıra için oranlar sırasıyla %0,50, %0,25 ve %0,25’tir. Kalan %1, sonraki 40 sıraya geometrik olarak dağıtılır.</p>
+<p>4. sıradan itibaren her pay, bir öncekinin %90’ıdır. Ödeme sayfasını açmak sıra veya oranı sabitlemez. Her başarılı 399 EUR ödeme bir katılımdır.</p>
+<div class="formula">P(n) = %1 × 0,1 × 0,9<sup>n−4</sup> / (1 − 0,9<sup>40</sup>)</div>
+<p>Gerçek hisse veya kâr paylaşımı hakları ilgili sözleşmeler ve gerekli hukuki işlemler tamamlandıktan sonra kesinleşir. Ekrandaki hesaplama tek başına hukuki hisse devri oluşturmaz. Yatırım getirisi garanti değildir.</p>
+<table><thead><tr><th>Sıra</th><th>Hesaplanan şirket payı</th></tr></thead><tbody>{% for position,share in formula_rows %}<tr><td>{{ position }}.</td><td>%{{ share }}</td></tr>{% endfor %}</tbody></table>
+<p class="small">Oranlar 8 ondalık basamakla gösterilir; hesaplamada formül esas alınır.</p>
+</details>
+{% if cancelled %}<p class="notice">Ödeme tamamlanmadı.</p>{% endif %}
+{% if available %}
+<form action="{{ checkout_url }}" method="post">{% csrf_token %}
+<label class="ack"><input type="checkbox" name="acknowledge" value="chip-disclosure-v1" required><span>399 EUR bedeli, sıra/pay dağılımını ve yukarıdaki katılım koşullarını okudum.</span></label>
+<button type="submit">{% if test %}Stripe test ödemesine geç{% else %}Ödemeye geç · 399 EUR{% endif %}<span>↗</span></button>
+</form>
+<p class="small payment-redirect">Ödeme için Stripe’a yönlendirileceksin.</p>
+{% else %}<div class="closed">Ödeme bağlantısı şu anda kapalı</div>{% endif %}
+</div>
+</section>
 {% endblock %}
