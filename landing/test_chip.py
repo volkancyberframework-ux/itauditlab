@@ -53,7 +53,7 @@ class ChipRequestTests(TestCase):
         self.assertEqual(item.provisional_percent, Decimal('.5'))
         response = self.client.get(response['Location'])
         self.assertContains(response, 'ödeme onayı değildir')
-        self.assertNotContains(response, '%0,50000000')
+        self.assertContains(response, '%0,50000000')
         self.assertContains(response, 'YAKLAŞIK SIRANIZ')
         self.assertContains(response, 'Kesin pay tutarınız size e-posta olarak gönderilecektir.')
         self.assertEqual(ChipPurchase.objects.count(), 0)
@@ -217,3 +217,18 @@ class ChipRequestTests(TestCase):
         self.assertIsNotNone(item.telegram_sent_at)
         self.assertEqual(item.notification_error, '')
         self.assertEqual(len(mail.outbox), 1)
+
+
+    def test_existing_first_two_receipts_show_percentages_without_reordering(self):
+        first = self.submit('first@example.com')
+        second = self.submit('second@example.com')
+        rows_before = list(ChipParticipationRequest.objects.order_by('start_position').values_list('pk', 'start_position', 'provisional_percent'))
+        self.assertContains(self.client.get(first['Location']), '%0,50000000')
+        response = self.client.get(second['Location'])
+        self.assertContains(response, '%0,25000000')
+        self.assertContains(response, 'siberkobi-hisse-dagilimi.png')
+        self.assertContains(response, 'Hisse dağılım tablosu')
+        self.assertContains(response, 'Kesin payınız ödeme doğrulaması sonrasında bildirilecektir.')
+        self.assertEqual(rows_before, list(ChipParticipationRequest.objects.order_by('start_position').values_list('pk', 'start_position', 'provisional_percent')))
+        self.round.refresh_from_db()
+        self.assertEqual(self.round.requested_units, 2)

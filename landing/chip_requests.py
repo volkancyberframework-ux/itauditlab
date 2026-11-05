@@ -118,9 +118,9 @@ def item_data(item):
     for other in previous:
         for position in range(other.start_position, other.end_position + 1):
             rows.append({'position': position, 'email': item.email if other.pk == item.pk else mask_email(other.email),
-                'self': other.pk == item.pk})
+                'share': percent_text(share_percent(position)), 'self': other.pk == item.pk})
     return {'archived': False, 'quantity': item.quantity, 'first': item.start_position, 'last': item.end_position,
-        'email': item.email, 'rows': rows, 'payment_verified': False}
+        'share': percent_text(item.provisional_percent), 'email': item.email, 'rows': rows, 'payment_verified': False}
 
 
 @never_cache
@@ -155,7 +155,7 @@ def notify(pk):
         rank = str(item.start_position) if item.quantity == 1 else f'{item.start_position}–{item.end_position}'
         link = settings.PUBLIC_BASE_URL.rstrip('/') + reverse('landing:chip_receipt', args=[item.pk])
         text = (f'{label}Siberkobi kaydınız alındı.\n\nE-posta: {item.email}\nYaklaşık sıranız: {rank}\n\n'
-            'Kesin pay tutarınız size e-posta olarak gönderilecektir. Bu sistem yalnızca yaklaşık sıranızı gösterir. '
+            'Kesin pay tutarınız size e-posta olarak gönderilecektir. Bu sistem yaklaşık sıranızı ve hesaplanan geçici pay oranınızı gösterir. '
             'Ödeme sistemi üzerinden doğrulama yapıldıktan sonra final liste paylaşılacaktır.\n\n'
             'Bu kayıt ödeme onayı değildir ve kesin ortaklık hakkı oluşturmaz.\n\n'
             f'Kaydınızı görüntüleyin: {link}')

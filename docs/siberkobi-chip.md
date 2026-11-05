@@ -2,9 +2,9 @@
 
 `/siberkobi-cip/` yalnızca ödeme sırasında kullanılan e-posta adresini alır. Kullanıcıdan çip adedi istenmez; istemcinin quantity parametresi yok sayılır ve her yeni kayıt bir yaklaşık sıra oluşturur. Önceden oluşturulmuş çoklu kayıtlar değiştirilmez.
 
-Sayfa, sonuç ekranı ve kayıt e-postası şu açıklamayı kullanır: “Kesin pay tutarınız size e-posta olarak gönderilecektir. Bu sistem yalnızca yaklaşık sıranızı gösterir. Ödeme sistemi üzerinden doğrulama yapıldıktan sonra final liste paylaşılacaktır.”
+Sayfa, sonuç ekranı ve kayıt e-postası şu açıklamayı kullanır: “Kesin pay tutarınız size e-posta olarak gönderilecektir. Bu sistem yaklaşık sıranızı ve hesaplanan geçici pay oranınızı gösterir. Ödeme sistemi üzerinden doğrulama yapıldıktan sonra final liste paylaşılacaktır.”
 
-Ekranda ve genel durum yanıtında hesaplanan yüzde gösterilmez. Bu sürüm ödeme doğrulaması veya final pay dağıtımı yapmaz; doğrulama ve kesin listenin gönderimi ayrı bir süreçtir. Kayıt e-postası yalnızca yaklaşık sıra bilgisidir. Telegram mesajı da ödeme doğrulanmadığını belirtir. Eski pay hesapları geçmişi korumak için veritabanında tutulur, kesinleşmiş pay olarak sunulmaz.
+Sonuç ekranında ve özel durum yanıtında kayıt sırasına göre hesaplanan geçici yüzde gösterilir. İlk iki sıra için oranlar %0,50 ve %0,25’tir. Kullanıcının sağladığı dağılım infografiği sonuç ekranına eklenmiştir. Bu sürüm ödeme doğrulaması veya final pay dağıtımı yapmaz; doğrulama ve kesin listenin gönderimi ayrı bir süreçtir. Kayıt e-postası yaklaşık sıra bilgisidir; özel sonuç bağlantısında geçici pay oranı ve tablo görüntülenir. Telegram mesajı da ödeme doğrulanmadığını belirtir. Eski pay hesapları geçmişi korumak için veritabanında tutulur, kesinleşmiş pay olarak sunulmaz.
 
 Ödeme alma ve Stripe yönlendirmesi kaldırılmıştır. Önceki `/checkout/<mode>/` ve `/webhook/<mode>/` adresleri ödeme başlatmaz. Gerçek ödeme defteri ve onay sayacı değişmez.
 
