@@ -1,13 +1,11 @@
 {% extends 'landing/chip_base.html' %}{% block content %}
-<section class="compact-checkout">{% if test %}<aside class="test-banner">TEST TALEBİ · Ödeme alınmaz.</aside>{% endif %}<div class="panel checkout">
-<p class="eyebrow">SİBERKOBİ · KATILIM TALEBİ</p><h1>Payını <em>öğren.</em></h1>
-<p>Ödeme sırasında kullandığın e-posta adresini gir.</p>
+<section class="compact-checkout">{% if test %}<aside class="test-banner">TEST KAYDI · Ödeme alınmaz.</aside>{% endif %}<div class="panel checkout">
+<p class="eyebrow">SİBERKOBİ · KATILIM KAYDI</p><h1>Sıranızı <em>öğrenin.</em></h1>
+<p>Ödeme sırasında kullandığınız e-posta adresini girin.</p>
 {% if error %}<p class="notice" role="alert">{{ error }}</p>{% endif %}
 {% if round.enabled and remaining > 0 %}<form action="{{ submit_url }}" method="post">{% csrf_token %}<input type="hidden" name="nonce" value="{{ nonce }}"><input type="hidden" name="generation" value="{{ round.generation }}">
-<label class="request-label" for="chip-email">E-posta adresin</label><input class="request-input" id="chip-email" name="email" type="email" maxlength="254" autocomplete="email" required value="{{ email|default:'' }}" placeholder="ornek@eposta.com">
-<label class="request-label" for="chip-quantity">Çip adedi</label><input class="request-input" id="chip-quantity" name="quantity" type="number" min="1" max="{{ remaining }}" value="1" required>
-<p class="small">Dilersen birden fazla çip için talep oluşturabilirsin.</p>
-<p class="purchase-disclosure">Bu form yeni katılım talebi oluşturur; ödeme doğrulaması yapmaz. Göreceğin sıra ve pay geçicidir, kesin ortaklık hakkı oluşturmaz.</p>
-<button type="submit">Talep oluştur ve payını gör <span>→</span></button><p class="small payment-redirect">Talep bilgilerin e-posta adresine de gönderilir.</p></form>
-{% else %}<div class="closed">Bu dönem için yeni talep alınmıyor.</div>{% endif %}</div></section>
+<label class="request-label" for="chip-email">E-posta adresiniz</label><input class="request-input" id="chip-email" name="email" type="email" maxlength="254" autocomplete="email" required value="{{ email|default:'' }}" placeholder="ornek@eposta.com">
+<p class="purchase-disclosure">Kesin pay tutarınız size e-posta olarak gönderilecektir. Bu sistem yalnızca yaklaşık sıranızı gösterir. Ödeme sistemi üzerinden doğrulama yapıldıktan sonra final liste paylaşılacaktır.</p>
+<button type="submit">Sıramı gör <span>→</span></button></form>
+{% else %}<div class="closed">Bu dönem için yeni kayıt alınmıyor.</div>{% endif %}</div></section>
 {% endblock %}

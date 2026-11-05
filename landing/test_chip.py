@@ -28,12 +28,12 @@ class ChipRequestTests(TestCase):
     def submit(self, email='volkan@example.com', quantity=1):
         return self.client.post(self.submit_url, self.form(email, quantity))
 
-    def test_page_has_email_quantity_and_no_checkout(self):
+    def test_page_has_only_email_and_final_list_notice(self):
         response = self.client.get(self.url)
-        self.assertContains(response, 'Ödeme sırasında kullandığın e-posta adresini gir.')
+        self.assertContains(response, 'Ödeme sırasında kullandığınız e-posta adresini girin.')
         self.assertContains(response, 'name="email"')
-        self.assertContains(response, 'name="quantity"')
-        self.assertContains(response, 'ödeme doğrulaması yapmaz')
+        self.assertNotContains(response, 'name="quantity"')
+        self.assertContains(response, 'Ödeme sistemi üzerinden doğrulama yapıldıktan sonra final liste paylaşılacaktır.')
         self.assertNotContains(response, '399')
         self.assertNotContains(response, 'Stripe')
         self.assertNotContains(response, '/checkout/')
@@ -52,21 +52,21 @@ class ChipRequestTests(TestCase):
         self.assertEqual(item.start_position, 1)
         self.assertEqual(item.provisional_percent, Decimal('.5'))
         response = self.client.get(response['Location'])
-        self.assertContains(response, 'Ödeme doğrulanmadı')
-        self.assertContains(response, '%0,50000000')
+        self.assertContains(response, 'ödeme onayı değildir')
+        self.assertNotContains(response, '%0,50000000')
+        self.assertContains(response, 'YAKLAŞIK SIRANIZ')
+        self.assertContains(response, 'Kesin pay tutarınız size e-posta olarak gönderilecektir.')
         self.assertEqual(ChipPurchase.objects.count(), 0)
         self.assertEqual(ChipCampaign.objects.get(mode='live').confirmed_count, 0)
 
-    def test_multiple_units_and_multiple_requests_same_email(self):
-        self.submit(quantity=2)
+    def test_client_cannot_choose_quantity(self):
+        self.submit(quantity=43)
         response = self.submit(quantity=2)
         rows = list(ChipParticipationRequest.objects.order_by('created_at'))
-        self.assertEqual((rows[0].start_position, rows[0].end_position), (1, 2))
-        self.assertEqual(rows[0].provisional_percent, Decimal('.75'))
-        self.assertEqual((rows[1].start_position, rows[1].end_position), (3, 4))
-        self.assertAlmostEqual(rows[1].provisional_percent, share_percent(3)+share_percent(4), places=14)
-        self.assertContains(self.client.get(response['Location']), '2 ÇİP')
-        self.round.refresh_from_db(); self.assertEqual(self.round.requested_units, 4)
+        self.assertEqual([row.quantity for row in rows], [1, 1])
+        self.assertEqual([row.start_position for row in rows], [1, 2])
+        self.assertNotContains(self.client.get(response['Location']), 'ÇİP')
+        self.round.refresh_from_db(); self.assertEqual(self.round.requested_units, 2)
 
     def test_duplicate_submit_is_idempotent_and_notifies_once(self):
         form = self.form()
@@ -80,18 +80,19 @@ class ChipRequestTests(TestCase):
         self.assertEqual(telegram.call_count, 1)
         self.assertIn('ÖDEME DOĞRULANMADI', telegram.call_args.args[0])
         self.assertIn('ödeme onayı değildir', mail.outbox[0].body)
+        self.assertIn('final liste paylaşılacaktır', mail.outbox[0].body)
+        self.assertNotIn('Çip adedi', mail.outbox[0].body)
+        self.assertNotIn('%', mail.outbox[0].body)
 
     def test_capacity_and_exact_formula_total(self):
-        response = self.submit(quantity=43)
-        self.assertEqual(response.status_code, 302)
-        item = ChipParticipationRequest.objects.get()
-        self.assertEqual(item.provisional_percent, Decimal('2'))
+        self.round.requests.create(generation=self.round.generation, nonce=uuid.uuid4(), email='historical@example.com',
+            quantity=43, start_position=1, provisional_percent=Decimal('2'))
+        self.round.requested_units = 43; self.round.save()
         self.assertEqual(self.submit().status_code, 409)
         self.assertEqual(sum(share_percent(n) for n in range(1, 44)), Decimal('2'))
-        self.assertEqual(f'{share_percent(4):.8f}', '0.10150026')
 
     def test_invalid_input_and_unissued_nonce_do_not_consume_counter(self):
-        for email,qty in [('invalid', 1), ('test@example.com', 0), ('test@example.com', -1), ('test@example.com', 44), ('test@example.com', 'a')]:
+        for email,qty in [('invalid', 1), ('', 1)]:
             self.assertEqual(self.submit(email, qty).status_code, 400)
         form = self.form(); form['nonce'] = str(uuid.uuid4())
         self.assertEqual(self.client.post(self.submit_url, form).status_code, 400)

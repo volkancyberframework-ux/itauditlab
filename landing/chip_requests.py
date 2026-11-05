@@ -53,12 +53,9 @@ def submit(request, mode):
     email = request.POST.get('email', '').strip().lower()
     try:
         validate_email(email)
-        quantity_raw = request.POST.get('quantity', '1')
-        if len(email) > 254 or len(quantity_raw) > 2:
+        if len(email) > 254:
             raise ValueError
-        quantity = int(quantity_raw)
-        if not 1 <= quantity <= CAPACITY:
-            raise ValueError
+        quantity = 1  # Email-only registration; client-supplied quantities are ignored.
         nonce = uuid.UUID(request.POST.get('nonce', ''))
         generation = uuid.UUID(request.POST.get('generation', ''))
         if generation != round.generation:
@@ -66,7 +63,7 @@ def submit(request, mode):
         if str(nonce) not in request.session.get('chip_request_nonces', []):
             raise ValueError
     except (ValidationError, ValueError, TypeError, AttributeError):
-        return invalid(request, mode, 'Geçerli e-posta ve 1–43 arasında çip adedi gir. Sayfa eskiyse yenileyip tekrar dene.')
+        return invalid(request, mode, 'Geçerli bir e-posta adresi girin. Sayfa eskiyse yenileyip tekrar deneyin.')
     existing = round.requests.filter(generation=round.generation, nonce=nonce).first()
     if existing:
         return redirect('landing:chip_receipt', token=existing.pk)
@@ -103,9 +100,9 @@ def item_data(item):
     for other in previous:
         for position in range(other.start_position, other.end_position + 1):
             rows.append({'position': position, 'email': item.email if other.pk == item.pk else mask_email(other.email),
-                'share': percent_text(share_percent(position)), 'self': other.pk == item.pk})
+                'self': other.pk == item.pk})
     return {'archived': False, 'quantity': item.quantity, 'first': item.start_position, 'last': item.end_position,
-        'share': percent_text(item.provisional_percent), 'email': item.email, 'rows': rows, 'payment_verified': False}
+        'email': item.email, 'rows': rows, 'payment_verified': False}
 
 
 @never_cache
@@ -139,10 +136,11 @@ def notify(pk):
         label = '[TEST] ' if item.round.mode == 'test' else ''
         rank = str(item.start_position) if item.quantity == 1 else f'{item.start_position}–{item.end_position}'
         link = settings.PUBLIC_BASE_URL.rstrip('/') + reverse('landing:chip_receipt', args=[item.pk])
-        text = (f'{label}Siberkobi katılım talebin alındı.\n\nE-posta: {item.email}\nÇip adedi: {item.quantity}\n'
-            f'Talep sıran: {rank}\nHesaplanan geçici pay: %{percent_text(item.provisional_percent)}\n\n'
-            'Bu kayıt ödeme onayı değildir. Talep sırası ödeme sırası değildir; kesin ortaklık veya kâr payı hakkı oluşturmaz.\n\n'
-            f'Talebini gör: {link}')
+        text = (f'{label}Siberkobi kaydınız alındı.\n\nE-posta: {item.email}\nYaklaşık sıranız: {rank}\n\n'
+            'Kesin pay tutarınız size e-posta olarak gönderilecektir. Bu sistem yalnızca yaklaşık sıranızı gösterir. '
+            'Ödeme sistemi üzerinden doğrulama yapıldıktan sonra final liste paylaşılacaktır.\n\n'
+            'Bu kayıt ödeme onayı değildir ve kesin ortaklık hakkı oluşturmaz.\n\n'
+            f'Kaydınızı görüntüleyin: {link}')
         errors = []
         if not item.email_sent_at:
             try:
@@ -156,7 +154,7 @@ def notify(pk):
             key = f'chip-request-{item.pk}'
             try:
                 sent = send_telegram(f'{label}📝 Siberkobi katılım talebi — ÖDEME DOĞRULANMADI\n{item.email}\n'
-                    f'Adet: {item.quantity}\nTalep sırası: {rank}\nGeçici pay: %{percent_text(item.provisional_percent)}', idempotency_key=key)
+                    f'Yaklaşık kayıt sırası: {rank}\nKesin pay ve final liste ödeme doğrulamasından sonra paylaşılacak.', idempotency_key=key)
                 if not sent and not NotificationLog.objects.filter(key=key, detail__status='sent').exists():
                     raise RuntimeError
                 item.telegram_sent_at = timezone.now()

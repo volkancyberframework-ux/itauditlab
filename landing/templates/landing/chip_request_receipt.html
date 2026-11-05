@@ -1,5 +1,8 @@
 {% extends 'landing/chip_base.html' %}{% block content %}<section class="panel receipt">
-{% if data.archived %}<h1>Bu talep dönemi arşivlendi.</h1><p>Eski talebin yeni sayaca dahil değildir.</p>
-{% else %}<p class="eyebrow">SİBERKOBİ · KATILIM TALEBİN</p><h1>Talebin <em>alındı.</em></h1><p class="notice">Ödeme doğrulanmadı. Talep sırası ödeme sırası değildir. Aşağıdaki geçici hesaplama kesin hisse veya kâr payı hakkı oluşturmaz.</p>
-<div class="result-grid"><div><span>TALEP SIRAN{% if item.quantity > 1 %} ({{ item.quantity }} ÇİP){% endif %}</span><strong>{{ data.first }}{% if item.quantity > 1 %}–{{ data.last }}{% endif %}.</strong></div><div><span>TOPLAM GEÇİCİ PAY</span><strong>%{{ data.share }}</strong></div></div>
-<p>E-posta adresin: <strong>{{ data.email }}</strong></p><div class="table-wrap"><table><thead><tr><th>Talep sırası</th><th>E-posta</th><th>Geçici pay</th></tr></thead><tbody>{% for row in data.rows %}<tr {% if row.self %}class="self"{% endif %}><td>{{ row.position }}.</td><td>{{ row.email }}{% if row.self %} · Sen{% endif %}</td><td>%{{ row.share }}</td></tr>{% endfor %}</tbody></table></div><p class="small">Bu özel bağlantıyı başkalarıyla paylaşma.</p>{% endif %}<p><a href="{{ back_url }}">Yeni katılım talebi oluştur →</a></p></section>{% endblock %}
+{% if data.archived %}<h1>Bu kayıt dönemi arşivlendi.</h1><p>Eski kaydınız yeni sayaca dahil değildir.</p>
+{% else %}<p class="eyebrow">SİBERKOBİ · KATILIM KAYDINIZ</p><h1>Kaydınız <em>alındı.</em></h1>
+<div class="result-grid request-rank"><div><span>YAKLAŞIK SIRANIZ</span><strong>{{ data.first }}{% if data.last != data.first %}–{{ data.last }}{% endif %}.</strong></div></div>
+<p>E-posta adresiniz: <strong>{{ data.email }}</strong></p>
+<p class="notice">Kesin pay tutarınız size e-posta olarak gönderilecektir. Bu sistem yalnızca yaklaşık sıranızı gösterir. Ödeme sistemi üzerinden doğrulama yapıldıktan sonra final liste paylaşılacaktır.</p>
+<p class="small">Bu kayıt ödeme onayı değildir ve kesin ortaklık hakkı oluşturmaz.</p>
+<div class="table-wrap"><table><thead><tr><th>Yaklaşık kayıt sırası</th><th>E-posta</th></tr></thead><tbody>{% for row in data.rows %}<tr {% if row.self %}class="self"{% endif %}><td>{{ row.position }}.</td><td>{{ row.email }}{% if row.self %} · Siz{% endif %}</td></tr>{% endfor %}</tbody></table></div><p class="small">Bu özel bağlantıyı başkalarıyla paylaşmayın.</p>{% endif %}<p><a href="{{ back_url }}">Kayıt sayfasına dön →</a></p></section>{% endblock %}
