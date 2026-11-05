@@ -13,6 +13,7 @@ app_name = 'landing'
 urlpatterns = [
     path('siberkobi-cip/', chip_requests.page, name='chip_page'),
     path('siberkobi-cip/test/', chip_requests.page, {'mode': 'test'}, name='chip_test'),
+    path('siberkobi-cip/csrf/', chip_requests.csrf_token, name='chip_csrf'),
     path('siberkobi-cip/talep/<str:mode>/', chip_requests.submit, name='chip_request_submit'),
     path('siberkobi-cip/checkout/<str:mode>/', chip_requests.removed_payment, name='chip_checkout'),
     path('siberkobi-cip/webhook/<str:mode>/', chip_requests.removed_payment, name='chip_webhook'),

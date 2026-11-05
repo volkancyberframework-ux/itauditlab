@@ -12,6 +12,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
 from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.middleware.csrf import get_token
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
 from .chip import share_percent, percent_text, protected, mask_email
 from .chip_models import ChipRequestRound, ChipParticipationRequest
@@ -35,14 +37,30 @@ def context(request, mode, **extra):
         'submit_url': reverse('landing:chip_request_submit', args=[mode]), 'nonce': nonce, **extra}
 
 
+def form_response(response):
+    protected(response)
+    # Safari may omit Origin on native form posts; HTTPS CSRF still needs Referer.
+    # Send only the origin, never private receipt paths or query strings.
+    response['Referrer-Policy'] = 'strict-origin'
+    return response
+
+
 @never_cache
+@ensure_csrf_cookie
 @require_GET
 def page(request, mode='live'):
-    return protected(render(request, 'landing/chip.html', context(request, mode)))
+    return form_response(render(request, 'landing/chip.html', context(request, mode)))
+
+
+@never_cache
+@ensure_csrf_cookie
+@require_GET
+def csrf_token(request):
+    return protected(JsonResponse({'token': get_token(request)}))
 
 
 def invalid(request, mode, message, status=400):
-    return protected(render(request, 'landing/chip.html', context(request, mode,
+    return form_response(render(request, 'landing/chip.html', context(request, mode,
         error=message, email=request.POST.get('email', '')[:254]), status=status))
 
 

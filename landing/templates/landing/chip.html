@@ -1,11 +1,11 @@
-{% extends 'landing/chip_base.html' %}{% block content %}
+{% extends 'landing/chip_base.html' %}{% load static %}{% block extra_head %}<meta name="referrer" content="strict-origin">{% endblock %}{% block content %}
 <section class="compact-checkout">{% if test %}<aside class="test-banner">TEST KAYDI · Ödeme alınmaz.</aside>{% endif %}<div class="panel checkout">
 <p class="eyebrow">SİBERKOBİ · KATILIM KAYDI</p><h1>Sıranızı <em>öğrenin.</em></h1>
 <p>Ödeme sırasında kullandığınız e-posta adresini girin.</p>
 {% if error %}<p class="notice" role="alert">{{ error }}</p>{% endif %}
-{% if round.enabled and remaining > 0 %}<form action="{{ submit_url }}" method="post">{% csrf_token %}<input type="hidden" name="nonce" value="{{ nonce }}"><input type="hidden" name="generation" value="{{ round.generation }}">
+{% if round.enabled and remaining > 0 %}<form id="chip-request-form" action="{{ submit_url }}" method="post" data-csrf-url="{% url 'landing:chip_csrf' %}">{% csrf_token %}<input type="hidden" name="nonce" value="{{ nonce }}"><input type="hidden" name="generation" value="{{ round.generation }}">
 <label class="request-label" for="chip-email">E-posta adresiniz</label><input class="request-input" id="chip-email" name="email" type="email" maxlength="254" autocomplete="email" required value="{{ email|default:'' }}" placeholder="ornek@eposta.com">
 <p class="purchase-disclosure">Kesin pay tutarınız size e-posta olarak gönderilecektir. Bu sistem yalnızca yaklaşık sıranızı gösterir. Ödeme sistemi üzerinden doğrulama yapıldıktan sonra final liste paylaşılacaktır.</p>
-<button type="submit">Sıramı gör <span>→</span></button></form>
-{% else %}<div class="closed">Bu dönem için yeni kayıt alınmıyor.</div>{% endif %}</div></section>
+<p id="chip-request-error" class="notice" role="alert" hidden></p><button id="chip-request-button" type="submit">Sıramı gör <span>→</span></button></form>
+{% else %}<div class="closed">Bu dönem için yeni kayıt alınmıyor.</div>{% endif %}</div></section><script src="{% static 'js/siberkobi-chip-request.js' %}" defer></script>
 {% endblock %}

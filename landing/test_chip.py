@@ -160,3 +160,60 @@ class ChipRequestTests(TestCase):
         self.assertEqual(self.client.get(route).status_code, 403)
         user.is_superuser = True; user.save()
         self.assertEqual(self.client.get(route).status_code, 200)
+
+    def secure_form(self, client, host='www.grcustasi.com'):
+        response = client.get(self.url, secure=True, HTTP_HOST=host)
+        data = {'email': 'csrf-test@example.com', 'nonce': response.context['nonce'],
+                'generation': str(response.context['round'].generation)}
+        token = client.get(reverse('landing:chip_csrf'), secure=True, HTTP_HOST=host).json()['token']
+        return response, {**data, 'csrfmiddlewaretoken': token}
+
+    def test_https_form_with_origin_only_referer_and_no_origin(self):
+        from django.test import override_settings
+        with override_settings(ALLOWED_HOSTS=['www.grcustasi.com', 'grcustasi.com']):
+            for host in ['www.grcustasi.com', 'grcustasi.com']:
+                client = Client(enforce_csrf_checks=True)
+                response, data = self.secure_form(client, host)
+                self.assertEqual(response['Referrer-Policy'], 'strict-origin')
+                self.assertContains(response, 'name="referrer" content="strict-origin"')
+                self.assertContains(response, 'siberkobi-chip-request.js')
+                # Preserve source and token validation instead of exempting the form.
+                self.assertEqual(client.post(self.submit_url, data, secure=True, HTTP_HOST=host).status_code, 403)
+                self.assertEqual(client.post(self.submit_url, data, secure=True, HTTP_HOST=host,
+                    HTTP_REFERER='https://untrusted.example/').status_code, 403)
+                result = client.post(self.submit_url, data, secure=True, HTTP_HOST=host,
+                    HTTP_REFERER='https://' + host + '/')
+                self.assertEqual(result.status_code, 302)
+
+    def test_token_refresh_after_another_tab_rotates_cookie(self):
+        from django.test import override_settings, RequestFactory
+        from django.middleware.csrf import rotate_token
+        from django.conf import settings
+        with override_settings(ALLOWED_HOSTS=['www.grcustasi.com']):
+            client = Client(enforce_csrf_checks=True)
+            _, data = self.secure_form(client)
+            rotated = RequestFactory().get('/')
+            rotate_token(rotated)
+            client.cookies[settings.CSRF_COOKIE_NAME] = rotated.META['CSRF_COOKIE']
+            kwargs = {'secure': True, 'HTTP_HOST': 'www.grcustasi.com', 'HTTP_REFERER': 'https://www.grcustasi.com/'}
+            self.assertEqual(client.post(self.submit_url, data, **kwargs).status_code, 403)
+            response = client.get(reverse('landing:chip_csrf'), secure=True, HTTP_HOST='www.grcustasi.com')
+            self.assertIn('no-store', response['Cache-Control'])
+            data['csrfmiddlewaretoken'] = response.json()['token']
+            self.assertEqual(client.post(self.submit_url, data, **kwargs).status_code, 302)
+
+    def test_telegram_failure_is_recorded_and_retried_without_second_email(self):
+        self.submit(); item = ChipParticipationRequest.objects.get()
+        with patch('skool.services.send_telegram', return_value=False):
+            notify(item.pk)
+        item.refresh_from_db()
+        self.assertIn('Telegram bekliyor', item.notification_error)
+        self.assertIsNone(item.telegram_sent_at)
+        self.assertIsNotNone(item.email_sent_at)
+        with patch('skool.services.send_telegram', return_value=True) as telegram:
+            notify(item.pk)
+        item.refresh_from_db()
+        self.assertEqual(telegram.call_count, 1)
+        self.assertIsNotNone(item.telegram_sent_at)
+        self.assertEqual(item.notification_error, '')
+        self.assertEqual(len(mail.outbox), 1)
