@@ -259,3 +259,10 @@ APPLE_BUNDLE_ID = 'com.grcustasi.grcUstasi'
 APPLE_APP_ID = 6819632974
 APPLE_MONTHLY_PRODUCT_ID = 'grcustasi_premium_monthly'
 APPLE_ALLOW_SANDBOX = config('APPLE_ALLOW_SANDBOX', default=True, cast=bool)
+
+# Chip payments use explicit keys. Existing education-payment keys are never reused.
+CHIP_STRIPE_TEST_KEY = config('CHIP_STRIPE_TEST_KEY', default='')
+CHIP_STRIPE_LIVE_KEY = config('CHIP_STRIPE_LIVE_KEY', default='')
+CHIP_STRIPE_TEST_WEBHOOK_SECRET = config('CHIP_STRIPE_TEST_WEBHOOK_SECRET', default='')
+CHIP_STRIPE_LIVE_WEBHOOK_SECRET = config('CHIP_STRIPE_LIVE_WEBHOOK_SECRET', default='')
+CHIP_LIVE_PAYMENTS_ENABLED = config('CHIP_LIVE_PAYMENTS_ENABLED', default=False, cast=bool)

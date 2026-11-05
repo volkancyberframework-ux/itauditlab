@@ -391,3 +391,5 @@ class LegalRevision(models.Model):
         ordering = ('-created_at',)
         verbose_name = 'Mevzuat revizyonu'
         verbose_name_plural = 'Mevzuat revizyon geçmişi'
+
+from .chip_models import ChipCampaign, ChipPurchase

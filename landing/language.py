@@ -30,7 +30,8 @@ class PublicLanguageMiddleware:
         response = self.get_response(request)
         match = getattr(request, 'resolver_match', None)
         public = match and (
-            (match.namespace == 'landing' and match.url_name != 'traffic_dashboard')
+            (match.namespace == 'landing' and match.url_name != 'traffic_dashboard'
+             and not (match.url_name or '').startswith('chip_'))
             or match.view_name == 'login'
         )
         if (not public or response.streaming or response.status_code >= 400

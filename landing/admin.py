@@ -156,3 +156,5 @@ class LegalRegulationAdmin(admin.ModelAdmin):
         LegalRevision.objects.create(regulation=obj,actor=request.user.get_username(),snapshot=snapshot)
     def has_delete_permission(self, request, obj=None):
         return False
+
+from . import chip_admin

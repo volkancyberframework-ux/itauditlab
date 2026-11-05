@@ -21,6 +21,11 @@ class Command(BaseCommand):
             self.stdout.write(f'Mobil program e-postası gönderildi: {drain()}')
         except Exception as exc:
             self.stderr.write(f'Mobil program e-postaları bekliyor: {type(exc).__name__}')
+        try:
+            from django.core.management import call_command
+            call_command('reconcile_siberkobi_chips', stdout=self.stdout, stderr=self.stderr)
+        except Exception as exc:
+            self.stderr.write(f'Siberkobi ödeme/bildirim kontrolü bekliyor: {type(exc).__name__}')
         run_date = timezone.localdate()
         stats = run_daily_programs(run_date)
         mobile_report = None
