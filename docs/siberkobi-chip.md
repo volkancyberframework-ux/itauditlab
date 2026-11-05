@@ -1,48 +1,35 @@
-# Siberkobi çip katılımı
+# Siberkobi katılım talepleri — ödeme alınmaz
 
-## Mevcut durum
+## Aktif akış
 
-Uygulama gerçek tahsilata kapalı hazırlanmıştır. Test ve gerçek ödeme defterleri ayrıdır. Mevcut eğitim ödemelerinin Stripe anahtarları kullanılmaz. Gerçek hisse/kâr payı içeren işlem, ödeme sağlayıcısına yalnızca dijital topluluk erişimi olarak tanıtılmaz. Ürün adı ve Stripe açıklaması gerçek niteliği açıklar.
+`/siberkobi-cip/` e-posta ve çip adedi alan bir talep formudur. Yeni kayıt **beyan edilen katılım talebidir**, ödeme onayı veya kesin ortaklık kaydı değildir. Form bunu gönderimden önce açıklar; sonuç ekranı, e-posta ve Telegram mesajı da aynı durumu belirtir.
 
-- Paylaşılacak tek adres: `/siberkobi-cip/`.
-- Test adresi: `/siberkobi-cip/test/`.
-- Yönetim: `/bulamazsinki/landing/chipcampaign/`.
-- Kayıtlar: `/bulamazsinki/landing/chippurchase/`.
-- Test sıfırlama: `/bulamazsinki/landing/chipcampaign/test-reset/` (yalnızca süper kullanıcı, CSRF ve yazılı onay).
+- Yeni talep: `POST /siberkobi-cip/talep/live/`.
+- Özel sonuç: `/siberkobi-cip/sonuc/<rastgele-UUID>/`.
+- Aynı e-posta birden fazla talep oluşturabilir. Bir talepte birden fazla çip seçilebilir.
+- Her çip talebi bir sıra tüketir. Aynı kişinin birden fazla çipi varsa oranları toplanır.
+- Dönem başına 43 çip talebi, formun gönderilip veritabanına kaydedildiği sırayla numaralanır. Bu sıra **ödeme sırası değildir**.
+- İlk üç sıra için %0,50 / %0,25 / %0,25; sonraki 40 sıra için ilk görseldeki geometrik formül kullanılır. Formülün 4. sıra sonucu %0,10150026’dır. Tam dağıtım %2 olacak şekilde 20 basamakla saklanır; ekranda 8 basamak gösterilir.
+- Talep sayacı ve kayıtlar `ChipRequestRound` / `ChipParticipationRequest` tablolarındadır. Eski `ChipCampaign` / `ChipPurchase` ödeme defteri değiştirilmez.
 
-## Stripe test kurulumu
+## Ödeme kaldırıldı
 
-1. `python manage.py migrate --noinput`.
-2. Ortamda `CHIP_STRIPE_TEST_KEY` ve `CHIP_STRIPE_TEST_WEBHOOK_SECRET` tanımlanır. İkisi de Stripe test ortamına ait olmalı.
-3. Test webhook hedefi: `https://www.grcustasi.com/siberkobi-cip/webhook/test/`.
-4. Olaylar: `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `checkout.session.expired`.
-5. Yönetimde **Test** kampanyasında “Bağlantı açık” işaretlenir.
-6. Stripe'ın test kartıyla, Stripe test ekranında ödeme denenir. Gerçek kartla gerçek ödeme yapılmaz. Test bildirimleri açıkça `[TEST]` etiketlidir; ödeme e-postasına ve mevcut yönetici Telegram hedefine gider.
+Bu özellik için ödeme butonu, ücret gösterimi ve Stripe yönlendirmesi kaldırılmıştır. Eski `/checkout/<mode>/` ve `/webhook/<mode>/` adresleri 410 döndürür; Stripe API çağrısı yapmaz. Yeni form için Stripe anahtarı veya webhook gerekmez. `CHIP_LIVE_PAYMENTS_ENABLED` bu formu etkilemez ve eski ödeme URL’sini açmaz. Önceki ödeme kayıtları yalnızca geçmişi korumak için tutulur.
 
-## Tahsis ve kapasite
+E-posta tek başına ödeme kanıtı sayılmaz. Bu form geçmiş ödemeleri e-posta adresiyle aramaz, başka bir kişinin özel kaydını açıklamaz ve girilen e-postanın sahibini doğruladığını iddia etmez. Her yeni talep yeni ve tahmin edilemez bir sonuç bağlantısı üretir.
 
-39900 euro cent, tek adet, kartla ödeme; fiyat ve ürün açıklaması sunucuda belirlenir. Ödeme Stripe'tan doğrulanmadan sıra/pay oluşturulmaz. Sıra, ödemenin uygulamada doğrulanıp veritabanına kaydedildiği sıradır; ödeme oturumu açılış sırası değildir. Sağlayıcının geciken olaylarının evrensel kronolojik sırası vaat edilmez. Kampanya satırına PostgreSQL `SELECT FOR UPDATE` kilidi ve benzersiz sıra/session/payment-intent kısıtları uygulanır.
+## Bildirimler
 
-İlk üç pay yüzde 0.5, 0.25, 0.25. Sonraki 40 pay görseldeki formülle 20 ondalık basamakla saklanır; son payda yalnızca 20 basamak yuvarlama artığı düzeltilerek toplam tam %2 tutulur. Gösterim 8 basamaktır. Görselde 4. sıra %0,10150018 yazsa da formül %0,10150026 verir; formül esas alınmıştır. Üretim veritabanı PostgreSQL NUMERIC olmalıdır; SQLite'ın kayan noktalı saklaması finansal defter için uygun değildir.
+Katılımcıya talep sırası/adet/geçici pay ve özel bağlantı e-postayla gider. Yönetici Telegram mesajında açıkça “KATILIM TALEBİ — ÖDEME DOĞRULANMADI” durumu görülür. E-posta ve Telegram başarı zamanları ayrı tutulur; başarısız bildirimler yönetim panelinden ve günlük görevden tekrar denenir.
 
-43 kontenjan, onaylanmış ödemeler **ve** açık Stripe oturumları birlikte sayılarak korunur. Açık oturum 31 dakika tutulur. Bir yer, yalnızca doğrulanmış `expired` Stripe durumu/olayıyla bırakılır; yerel süre geçmesi tek başına yeterli değildir. İlk Stripe yanıtı kaybolursa aynı idempotency anahtarı tekrar kullanılabilir. Mutabakat görevi kayıp yanıtta Stripe oturumlarını metadata ile tarar. Belirsiz ödemeler kontenjanı tüketmeye devam eder; ikinci ödeme istenmez.
+`python manage.py reconcile_siberkobi_chips` artık yalnızca bekleyen **talep bildirimlerini** dener; ödeme almaz ve Stripe’tan ödeme kontrolü yapmaz. Normal tekrar gönderimlerinde aynı bildirim yeniden üretilmez; harici sağlayıcı kabulü ile yerel kayıt arasındaki çökme aralığında mutlak exactly-once garantisi verilemez.
 
-Her başarılı 399 EUR ödeme bir çip/katılımdır; aynı e-postanın ikinci kez alımına otomatik engel konulmamıştır. İstenirse iş kuralı ayrı tanımlanmalıdır.
+## Yönetim ve sıfırlama
 
-Kapatma yeni ödeme başlatılmasını durdurur; daha önce başlatılmış geçerli oturumların başarılı ödemeleri kayıtlanır. Gerçek hakların kesinleşmesi sözleşme/hukuki işlemlere bağlıdır; ekrandaki hesaplama hukuki hisse devri yerine geçmez.
+- Talepler: `/bulamazsinki/landing/chipparticipationrequest/`.
+- Talep dönemleri ve formu kapatma: `/bulamazsinki/landing/chiprequestround/`.
+- Sıfırlama/arşivleme: `/bulamazsinki/landing/chiprequestround/archive/`.
 
-## Bildirim ve mutabakat
+Yalnızca süper kullanıcı CSRF korumalı formda “TALEPLERİ ARŞİVLE” onayıyla yeni dönem başlatabilir. Eski kayıtlar silinmez, eski sonuç bağlantıları arşiv durumunu gösterir ve eski form sekmeleri yeniden gönderilemez. Gerçek ödeme kayıtları ve onaylanmış hak sahipliği sayacı değişmez. Test talepleri ayrı bir dönemdedir.
 
-Doğrulanan ödeme sonrası katılımcıya sıra/pay/özel sonuç bağlantısı e-postayla gider. Yöneticiye ad, e-posta, sıra, yüzde ve tutar mevcut Telegram botuyla gider. İki kanalın başarı zamanları ayrı tutulur. Normal tekrar olayları ikinci tahsis ya da ikinci bildirim üretmez. Harici SMTP/Telegram kabulü ile yerel kayıt arasındaki çökme aralığında mutlak exactly-once garantisi verilemez.
-
-`python manage.py reconcile_siberkobi_chips` yalnızca mevcut ödemeleri kontrol eder ve bekleyen bildirimleri dener; yeni kart tahsilatı oluşturmaz. Mevcut `run_daily_programs` de bunu çalıştırır. Hızlı operasyon için komut ayrıca çalıştırılabilir. Yönetimde seçili ödemelerin bildirimleri tekrar denenebilir.
-
-Özel sonuç bağlantısı rastgele UUID içerir, arama motoruna ve önbelleğe kapalıdır, referrer göndermez. Kişi kendi ödeme e-postasını açık, önceki kişilerin isim/e-postalarını maskeli görür. Kendisinden sonraki katılımlar özel listesine eklenmez.
-
-## Test sıfırlama
-
-Sıfırlama eski test neslini arşivler, sayacı sıfırlar ve test bağlantısını kapatır. Önceki test ödemeleri/bildirimler silinmez, gönderilmiş e-postalar geri alınmaz. Eski test nesline geç gelen webhook yeni sayaca eklenmez. Stripe'taki test kayıtları aynen kalır. Gerçek ödeme defterini sıfırlayan/silen bir işlem yoktur.
-
-## Gerçek ödeme
-
-Gerekli sağlayıcı uygunluğu ve şirket/katılım metinleri netleştirildikten sonra ayrı `CHIP_STRIPE_LIVE_KEY`, `CHIP_STRIPE_LIVE_WEBHOOK_SECRET`, `CHIP_LIVE_PAYMENTS_ENABLED=True` ve yönetimde **Gerçek ödeme** kampanyasının açık olması gerekir. Webhook hedefi `/siberkobi-cip/webhook/live/`. Varsayılanlar kapalıdır. Sağlayıcı anahtarları dokümana veya kaynak koduna yazılmaz.
+43 sınırı PostgreSQL satır kilidiyle; tekrar gönderim ise dönem ve tarayıcıya verilen nonce üzerindeki benzersiz kısıtla korunur. CSRF, geçerli e-posta/adet kontrolü ve IP/e-posta başına istek sınırlaması uygulanır. Yeni sonuç sayfasında yalnızca mevcut talep ve öncekiler görünür; önceki e-postalar maskelidir. Özel bağlantı önbelleğe ve arama motoruna kapalıdır.

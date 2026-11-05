@@ -1,26 +1,13 @@
 {% extends 'landing/chip_base.html' %}{% block content %}
-<section class="compact-checkout">
-{% if test %}<aside class="test-banner">TEST · Gerçek ödeme veya ortaklık hakkı yok.</aside>{% endif %}
-<div class="panel checkout">
-<h1>Bir çip fiyatına<br>Siberkobi’ye <em>ortak ol.</em></h1>
-<div class="price">399 <span>EUR</span></div>
-<p class="purchase-disclosure">Hisse/kâr payı katılımıdır. Payın, ödemenin sistemde doğrulandığı sıraya göre değişir; kesin sıranı ve hesaplanan payını ödeme sonrasında görürsün.</p>
-<details class="payment-terms"><summary>Pay dağılımı ve katılım koşulları</summary>
-<p>43 katılıma toplam %2 şirket payı hesaplanır. İlk üç sıra için oranlar sırasıyla %0,50, %0,25 ve %0,25’tir. Kalan %1, sonraki 40 sıraya geometrik olarak dağıtılır.</p>
-<p>4. sıradan itibaren her pay, bir öncekinin %90’ıdır. Ödeme sayfasını açmak sıra veya oranı sabitlemez. Her başarılı 399 EUR ödeme bir katılımdır.</p>
-<div class="formula">P(n) = %1 × 0,1 × 0,9<sup>n−4</sup> / (1 − 0,9<sup>40</sup>)</div>
-<p>Gerçek hisse veya kâr paylaşımı hakları ilgili sözleşmeler ve gerekli hukuki işlemler tamamlandıktan sonra kesinleşir. Ekrandaki hesaplama tek başına hukuki hisse devri oluşturmaz. Yatırım getirisi garanti değildir.</p>
-<table><thead><tr><th>Sıra</th><th>Hesaplanan şirket payı</th></tr></thead><tbody>{% for position,share in formula_rows %}<tr><td>{{ position }}.</td><td>%{{ share }}</td></tr>{% endfor %}</tbody></table>
-<p class="small">Oranlar 8 ondalık basamakla gösterilir; hesaplamada formül esas alınır.</p>
-</details>
-{% if cancelled %}<p class="notice">Ödeme tamamlanmadı.</p>{% endif %}
-{% if available %}
-<form action="{{ checkout_url }}" method="post">{% csrf_token %}
-<label class="ack"><input type="checkbox" name="acknowledge" value="chip-disclosure-v1" required><span>399 EUR bedeli, sıra/pay dağılımını ve yukarıdaki katılım koşullarını okudum.</span></label>
-<button type="submit">{% if test %}Stripe test ödemesine geç{% else %}Ödemeye geç · 399 EUR{% endif %}<span>↗</span></button>
-</form>
-<p class="small payment-redirect">Ödeme için Stripe’a yönlendirileceksin.</p>
-{% else %}<div class="closed">Ödeme bağlantısı şu anda kapalı</div>{% endif %}
-</div>
-</section>
+<section class="compact-checkout">{% if test %}<aside class="test-banner">TEST TALEBİ · Ödeme alınmaz.</aside>{% endif %}<div class="panel checkout">
+<p class="eyebrow">SİBERKOBİ · KATILIM TALEBİ</p><h1>Payını <em>öğren.</em></h1>
+<p>Ödeme sırasında kullandığın e-posta adresini gir.</p>
+{% if error %}<p class="notice" role="alert">{{ error }}</p>{% endif %}
+{% if round.enabled and remaining > 0 %}<form action="{{ submit_url }}" method="post">{% csrf_token %}<input type="hidden" name="nonce" value="{{ nonce }}"><input type="hidden" name="generation" value="{{ round.generation }}">
+<label class="request-label" for="chip-email">E-posta adresin</label><input class="request-input" id="chip-email" name="email" type="email" maxlength="254" autocomplete="email" required value="{{ email|default:'' }}" placeholder="ornek@eposta.com">
+<label class="request-label" for="chip-quantity">Çip adedi</label><input class="request-input" id="chip-quantity" name="quantity" type="number" min="1" max="{{ remaining }}" value="1" required>
+<p class="small">Dilersen birden fazla çip için talep oluşturabilirsin.</p>
+<p class="purchase-disclosure">Bu form yeni katılım talebi oluşturur; ödeme doğrulaması yapmaz. Göreceğin sıra ve pay geçicidir, kesin ortaklık hakkı oluşturmaz.</p>
+<button type="submit">Talep oluştur ve payını gör <span>→</span></button><p class="small payment-redirect">Talep bilgilerin e-posta adresine de gönderilir.</p></form>
+{% else %}<div class="closed">Bu dönem için yeni talep alınmıyor.</div>{% endif %}</div></section>
 {% endblock %}

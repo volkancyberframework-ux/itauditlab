@@ -393,3 +393,4 @@ class LegalRevision(models.Model):
         verbose_name_plural = 'Mevzuat revizyon geçmişi'
 
 from .chip_models import ChipCampaign, ChipPurchase
+from .chip_models import ChipRequestRound, ChipParticipationRequest

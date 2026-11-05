@@ -25,7 +25,7 @@ class Command(BaseCommand):
             from django.core.management import call_command
             call_command('reconcile_siberkobi_chips', stdout=self.stdout, stderr=self.stderr)
         except Exception as exc:
-            self.stderr.write(f'Siberkobi ödeme/bildirim kontrolü bekliyor: {type(exc).__name__}')
+            self.stderr.write(f'Siberkobi talep bildirimi kontrolü bekliyor: {type(exc).__name__}')
         run_date = timezone.localdate()
         stats = run_daily_programs(run_date)
         mobile_report = None

@@ -54,3 +54,57 @@ class ChipPurchaseAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+
+from .chip_models import ChipRequestRound, ChipParticipationRequest
+
+
+@admin.register(ChipRequestRound)
+class ChipRequestRoundAdmin(admin.ModelAdmin):
+    change_form_template = 'admin/chip_request_round.html'
+    list_display = ['mode', 'enabled', 'requested_units']
+    readonly_fields = ['mode', 'generation', 'requested_units']
+    fields = ['mode', 'enabled', 'generation', 'requested_units']
+
+    def get_urls(self):
+        return [path('archive/', self.admin_site.admin_view(self.archive), name='chip_request_archive')] + super().get_urls()
+
+    def archive(self, request):
+        if not request.user.is_superuser:
+            raise PermissionDenied
+        done = False
+        if request.method == 'POST' and request.POST.get('confirm') == 'TALEPLERİ ARŞİVLE' and request.POST.get('mode') in ('live', 'test'):
+            from .chip_requests import archive_round
+            archive_round(request.POST['mode'])
+            done = True
+            self.message_user(request, 'Talep sayacı sıfırlandı; eski talepler arşivlendi. Ödeme kayıtları değişmedi.')
+        return TemplateResponse(request, 'admin/chip_request_archive.html', {
+            **self.admin_site.each_context(request), 'title': 'Talep dönemini arşivle', 'done': done})
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(ChipParticipationRequest)
+class ChipParticipationRequestAdmin(admin.ModelAdmin):
+    list_display = ['email', 'round', 'quantity', 'start_position', 'provisional_percent', 'created_at', 'notification_error']
+    list_filter = ['round__mode', 'generation']
+    search_fields = ['email']
+    readonly_fields = [field.name for field in ChipParticipationRequest._meta.fields]
+    actions = ['retry_request_notifications']
+
+    @admin.action(description='Bekleyen talep bildirimlerini yeniden dene')
+    def retry_request_notifications(self, request, queryset):
+        from .chip_requests import notify
+        for pk in queryset.values_list('pk', flat=True):
+            notify(pk)
+        self.message_user(request, 'Talep bildirimleri kontrol edildi. Bu kayıtlar ödeme onayı değildir.')
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False

@@ -3,7 +3,7 @@ from . import business_network
 from . import regulation_views
 from . import legal
 from . import fridge
-from . import chip
+from . import chip_requests
 from . import views
 from . import travel
 from . import mobile_waitlist
@@ -11,12 +11,13 @@ from mobile_api import web_billing, store_pages
 
 app_name = 'landing'
 urlpatterns = [
-    path('siberkobi-cip/', chip.page, name='chip_page'),
-    path('siberkobi-cip/test/', chip.page, {'mode': 'test'}, name='chip_test'),
-    path('siberkobi-cip/checkout/<str:mode>/', chip.checkout, name='chip_checkout'),
-    path('siberkobi-cip/webhook/<str:mode>/', chip.webhook, name='chip_webhook'),
-    path('siberkobi-cip/sonuc/<uuid:token>/', chip.receipt, name='chip_receipt'),
-    path('siberkobi-cip/durum/<uuid:token>/', chip.status, name='chip_status'),
+    path('siberkobi-cip/', chip_requests.page, name='chip_page'),
+    path('siberkobi-cip/test/', chip_requests.page, {'mode': 'test'}, name='chip_test'),
+    path('siberkobi-cip/talep/<str:mode>/', chip_requests.submit, name='chip_request_submit'),
+    path('siberkobi-cip/checkout/<str:mode>/', chip_requests.removed_payment, name='chip_checkout'),
+    path('siberkobi-cip/webhook/<str:mode>/', chip_requests.removed_payment, name='chip_webhook'),
+    path('siberkobi-cip/sonuc/<uuid:token>/', chip_requests.receipt, name='chip_receipt'),
+    path('siberkobi-cip/durum/<uuid:token>/', chip_requests.status, name='chip_status'),
     path('buzdolabi', fridge.page, name='fridge_demo'),
     path('buzdolabi/', fridge.page),
     path('buzdolabi/giris', fridge.login, name='fridge_login'),
