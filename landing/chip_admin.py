@@ -90,7 +90,7 @@ class ChipRequestRoundAdmin(admin.ModelAdmin):
 
 @admin.register(ChipParticipationRequest)
 class ChipParticipationRequestAdmin(admin.ModelAdmin):
-    list_display = ['email', 'round', 'quantity', 'start_position', 'provisional_percent', 'created_at', 'notification_error']
+    list_display = ['display_name', 'email', 'round', 'quantity', 'start_position', 'provisional_percent', 'duplicate_of', 'created_at', 'notification_error']
     list_filter = ['round__mode', 'generation']
     search_fields = ['email']
     readonly_fields = [field.name for field in ChipParticipationRequest._meta.fields]

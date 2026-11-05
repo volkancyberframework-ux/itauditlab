@@ -71,6 +71,8 @@ class ChipParticipationRequest(models.Model):
     generation = models.UUIDField(editable=False)
     nonce = models.UUIDField(editable=False)
     email = models.EmailField()
+    display_name = models.CharField(max_length=160, blank=True)
+    duplicate_of = models.ForeignKey('self', null=True, blank=True, on_delete=models.PROTECT, related_name='duplicate_links', editable=False)
     quantity = models.PositiveSmallIntegerField()
     start_position = models.PositiveSmallIntegerField(editable=False)
     provisional_percent = models.DecimalField(max_digits=23, decimal_places=20, editable=False)
@@ -85,7 +87,8 @@ class ChipParticipationRequest(models.Model):
         ordering = ['created_at', 'id']
         constraints = [
             models.UniqueConstraint(fields=['round', 'generation', 'nonce'], name='chip_request_idempotent'),
-            models.UniqueConstraint(fields=['round', 'generation', 'start_position'], name='chip_request_start_unique'),
+            models.UniqueConstraint(fields=['round', 'generation', 'start_position'], condition=models.Q(duplicate_of__isnull=True), name='chip_request_start_unique'),
+            models.UniqueConstraint(fields=['round', 'generation', 'email'], condition=models.Q(duplicate_of__isnull=True), name='chip_request_email_once'),
             models.CheckConstraint(check=models.Q(quantity__gte=1, quantity__lte=43, start_position__gte=1) & models.Q(start_position__lte=44-models.F('quantity')), name='chip_request_position_range'),
         ]
 

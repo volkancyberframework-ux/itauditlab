@@ -61,7 +61,7 @@ class ChipRequestTests(TestCase):
 
     def test_client_cannot_choose_quantity(self):
         self.submit(quantity=43)
-        response = self.submit(quantity=2)
+        response = self.submit('second@example.com', quantity=2)
         rows = list(ChipParticipationRequest.objects.order_by('created_at'))
         self.assertEqual([row.quantity for row in rows], [1, 1])
         self.assertEqual([row.start_position for row in rows], [1, 2])
@@ -163,7 +163,7 @@ class ChipRequestTests(TestCase):
 
     def secure_form(self, client, host='www.grcustasi.com'):
         response = client.get(self.url, secure=True, HTTP_HOST=host)
-        data = {'email': 'csrf-test@example.com', 'nonce': response.context['nonce'],
+        data = {'email': 'csrf-'+host.replace('.', '-')+'@example.com', 'nonce': response.context['nonce'],
                 'generation': str(response.context['round'].generation)}
         token = client.get(reverse('landing:chip_csrf'), secure=True, HTTP_HOST=host).json()['token']
         return response, {**data, 'csrfmiddlewaretoken': token}
@@ -232,3 +232,40 @@ class ChipRequestTests(TestCase):
         self.assertEqual(rows_before, list(ChipParticipationRequest.objects.order_by('start_position').values_list('pk', 'start_position', 'provisional_percent')))
         self.round.refresh_from_db()
         self.assertEqual(self.round.requested_units, 2)
+
+
+    def test_email_reentry_keeps_same_position_and_counter(self):
+        original = self.submit('oktay@example.com')
+        again = self.submit('OKTAY@example.com')
+        self.assertEqual(original['Location'], again['Location'])
+        self.assertEqual(ChipParticipationRequest.objects.count(), 1)
+        self.round.refresh_from_db()
+        self.assertEqual(self.round.requested_units, 1)
+
+    def test_other_browser_recovers_private_link_by_email_without_disclosing_it(self):
+        original = self.submit('oktay@example.com')
+        other = Client()
+        page = other.get(self.url)
+        result = other.post(self.submit_url, {'email': 'oktay@example.com', 'nonce': page.context['nonce'],
+            'generation': str(self.round.generation)})
+        self.assertEqual(result.status_code, 200)
+        self.assertNotContains(result, original['Location'])
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, ['oktay@example.com'])
+        self.assertIn(original['Location'], mail.outbox[0].body)
+        self.assertEqual(ChipParticipationRequest.objects.count(), 1)
+
+    def test_old_duplicate_url_shows_canonical_position_and_share(self):
+        original = self.submit('oktay@example.com')
+        canonical = ChipParticipationRequest.objects.get()
+        duplicate = self.round.requests.create(generation=self.round.generation, nonce=uuid.uuid4(),
+            email=canonical.email, quantity=1, start_position=2, provisional_percent=share_percent(2), duplicate_of=canonical)
+        response = self.client.get(reverse('landing:chip_receipt', args=[duplicate.pk]))
+        self.assertContains(response, '%0,50000000')
+        self.assertNotContains(response, '%0,25000000')
+        with patch('skool.services.send_telegram') as telegram:
+            notify(duplicate.pk)
+            telegram.assert_not_called()
+        with self.assertRaises(IntegrityError), transaction.atomic():
+            self.round.requests.create(generation=self.round.generation, nonce=uuid.uuid4(), email=canonical.email,
+                quantity=1, start_position=3, provisional_percent=share_percent(3))
