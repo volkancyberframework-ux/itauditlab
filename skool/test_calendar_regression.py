@@ -63,3 +63,24 @@ class CalendarRegressionTests(TestCase):
         for language in ('tr','en','fr','es','ja','zh-hans','vi','ar'):
             with translation.override(language), timezone.override('America/New_York'):
                 self.assertEqual(expected,[(s.pk,s.start_at_utc) for s in published_slots()])
+
+    def test_booking_boundary_rolls_from_seventh_to_eighth_in_istanbul(self):
+        from .services import earliest_repeat_booking_date
+        # Istanbul has reached the 7th while UTC is still on the 6th.
+        with patch('django.utils.timezone.now', return_value=datetime(2026, 11, 6, 22, tzinfo=dt_timezone.utc)):
+            self.assertEqual(earliest_repeat_booking_date(None, ZoneInfo('Europe/Istanbul')), date(2026, 11, 8))
+            ensure_upcoming_slots(days=2)
+            slots = published_slots()
+            self.assertTrue(any(s.start_at_utc.astimezone(ZoneInfo('Europe/Istanbul')).date() == date(2026,11,8) for s in slots))
+            self.assertTrue(all(s.start_at_utc.astimezone(ZoneInfo('Europe/Istanbul')).date() >= date(2026,11,8) for s in slots))
+
+    def test_stale_available_slots_do_not_block_replacement_schedule(self):
+        day = date(2026,10,22)
+        for hour in (8, 10, 12):
+            start = datetime(2026,10,22,hour,tzinfo=dt_timezone.utc)
+            MeetingSlot.objects.create(availability=self.vietnam, local_date=day,
+                start_at_utc=start, end_at_utc=start+timedelta(minutes=90))
+        ensure_upcoming_slots(days=1)
+        slots = [s for s in published_slots() if s.local_date == day]
+        self.assertEqual(len(slots), 3)
+        self.assertTrue(all(s.availability_id == self.ankara.pk for s in slots))

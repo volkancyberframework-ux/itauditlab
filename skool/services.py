@@ -16,7 +16,6 @@ from .models import (
 )
 
 logger = logging.getLogger(__name__)
-REPEAT_BOOKING_WAIT_DAYS = 14
 
 
 def finalize_expired_bookings(user=None):
@@ -37,17 +36,9 @@ def finalize_expired_bookings(user=None):
 
 
 def earliest_repeat_booking_date(user, display_zone=None):
-    """Return the first selectable Istanbul date after the latest completed meeting."""
-    latest = (
-        MeetingBooking.objects.filter(user=user, status="completed")
-        .select_related("slot")
-        .order_by("-slot__start_at_utc")
-        .first()
-    )
-    if latest is None:
-        return None
+    """Every booking starts tomorrow in the calendar's display timezone."""
     zone = display_zone or ZoneInfo(SkoolSettings.load().display_timezone)
-    return latest.slot.start_at_utc.astimezone(zone).date() + timedelta(days=REPEAT_BOOKING_WAIT_DAYS)
+    return timezone.localdate(timezone=zone) + timedelta(days=1)
 
 
 def send_telegram(text, *, idempotency_key=None):
@@ -102,7 +93,12 @@ def generate_slots(availability, local_date):
     with transaction.atomic():
         locked = TravelAvailability.objects.select_for_update().get(pk=availability.pk)
         existing = list(locked.slots.filter(local_date=local_date).order_by("start_at_utc"))
-        occupied = list(MeetingSlot.objects.filter(local_date=local_date).exclude(availability=locked)) + existing
+        # Stale unreserved slots from another travel schedule must not block
+        # generation for the authoritative schedule. Reservations/closures stay intact.
+        occupied = list(MeetingSlot.objects.filter(local_date=local_date).exclude(
+            availability=locked).exclude(status="available")) + [
+                slot for slot in existing if slot.status != "available" or slot_is_current(slot)
+            ]
         valid = [slot for slot in existing if slot_is_current(slot)]
         if len(valid) >= 3:
             return valid[:3]
@@ -221,7 +217,7 @@ def reserve_slot(user, slot_id):
         slot_display_date = slot.start_at_utc.astimezone(display_zone).date()
         if earliest_repeat_date and slot_display_date < earliest_repeat_date:
             raise ValueError(
-                "İkinci ve sonraki görüşmeler, önceki görüşmeden en erken 14 gün sonrasına planlanabilir."
+                "Görüşmeler yarından itibaren planlanabilir."
             )
         validate_bookable_slot(slot)
         if AvailabilityException.objects.filter(

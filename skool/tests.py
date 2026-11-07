@@ -435,7 +435,7 @@ class BookingTests(TestCase):
         with self.assertRaises(ValueError):
             reserve_slot(self.user, slots[1].pk)
 
-    def test_repeat_booking_requires_fourteen_days_after_previous_meeting(self):
+    def test_repeat_booking_starts_tomorrow_after_previous_meeting(self):
         display_zone = ZoneInfo("Europe/Istanbul")
         first_date = timezone.localdate(timezone=display_zone) - timedelta(days=1)
         first_start = datetime.combine(first_date, time(10), tzinfo=display_zone).astimezone(ZoneInfo("UTC"))
@@ -452,7 +452,7 @@ class BookingTests(TestCase):
             status="completed",
             meeting_url="https://meet.google.com/test",
         )
-        earliest_date = first_date + timedelta(days=14)
+        earliest_date = timezone.localdate(timezone=display_zone) + timedelta(days=1)
         self.assertEqual(earliest_repeat_booking_date(self.user, display_zone), earliest_date)
 
         too_early_start = datetime.combine(
@@ -464,7 +464,7 @@ class BookingTests(TestCase):
             start_at_utc=too_early_start,
             end_at_utc=too_early_start + timedelta(minutes=90),
         )
-        with self.assertRaisesMessage(ValueError, "en erken 14 gün"):
+        with self.assertRaisesMessage(ValueError, "yarından itibaren"):
             reserve_slot(self.user, too_early_slot.pk)
 
         # The selectable slot must also belong to the active travel date range.
@@ -480,7 +480,7 @@ class BookingTests(TestCase):
         booking = reserve_slot(self.user, allowed_slot.pk)
         self.assertEqual(booking.slot_id, allowed_slot.pk)
 
-    def test_slots_api_hides_dates_inside_repeat_booking_wait(self):
+    def test_slots_api_starts_tomorrow_after_previous_meeting(self):
         display_zone = ZoneInfo("Europe/Istanbul")
         first_date = timezone.localdate(timezone=display_zone) - timedelta(days=1)
         first_start = datetime.combine(first_date, time(10), tzinfo=display_zone).astimezone(ZoneInfo("UTC"))
@@ -495,7 +495,7 @@ class BookingTests(TestCase):
             user=self.user, slot=first_slot, status="completed",
             meeting_url="https://meet.google.com/test",
         )
-        earliest_date = first_date + timedelta(days=14)
+        earliest_date = timezone.localdate(timezone=display_zone) + timedelta(days=1)
         self.availability.end_date = earliest_date + timedelta(days=2)
         self.availability.save(update_fields=("end_date",))
         generate_slots(self.availability, earliest_date - timedelta(days=1))
