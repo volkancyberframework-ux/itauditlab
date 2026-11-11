@@ -387,9 +387,13 @@ def student_meeting_calendar(request, request_id):
     booking = StudentMeetingBooking.objects.filter(
         request=item, status="active"
     ).select_related("slot__availability").first()
+    from skool.services import earliest_repeat_booking_date
     return render(request, "student-meeting-calendar.html", {
         "mentorship_request": item,
         "booking": booking,
+        "repeat_booking_available_date": earliest_repeat_booking_date(
+            request.user, booking_model=StudentMeetingBooking
+        ),
     })
 
 
@@ -398,10 +402,11 @@ def student_meeting_slots(request, request_id):
     get_object_or_404(
         MentorshipRequest, pk=request_id, user=request.user, request_type="meeting"
     )
-    from skool.services import ensure_upcoming_slots, published_slots
+    from skool.services import ensure_upcoming_slots, published_slots, earliest_repeat_booking_date
     from zoneinfo import ZoneInfo
     ensure_upcoming_slots()
-    slots = [slot for slot in published_slots() if slot.status == "available"]
+    earliest_date = earliest_repeat_booking_date(request.user, booking_model=StudentMeetingBooking)
+    slots = [slot for slot in published_slots(first_date=earliest_date) if slot.status == "available"]
     return JsonResponse({"slots": [
         {
             "id": slot.pk,
@@ -438,7 +443,11 @@ def student_meeting_book(request, request_id):
             ).exists():
                 raise ValueError("Zaten aktif bir görüşmeniz var.")
             slot = MeetingSlot.objects.select_for_update().select_related("availability").get(pk=slot_id)
-            from skool.services import validate_bookable_slot
+            from skool.services import validate_bookable_slot, earliest_repeat_booking_date
+            from zoneinfo import ZoneInfo
+            earliest_date = earliest_repeat_booking_date(request.user, booking_model=StudentMeetingBooking)
+            if earliest_date and slot.start_at_utc.astimezone(ZoneInfo("Europe/Istanbul")).date() < earliest_date:
+                raise ValueError("İkinci ve sonraki görüşmeler, önceki görüşmeden en erken 14 gün sonrasına planlanabilir.")
             validate_bookable_slot(slot)
             booking = StudentMeetingBooking.objects.create(
                 user=request.user, request=item, slot=slot,

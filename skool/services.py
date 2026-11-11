@@ -35,10 +35,17 @@ def finalize_expired_bookings(user=None):
     return updated
 
 
-def earliest_repeat_booking_date(user, display_zone=None):
-    """Every booking starts tomorrow in the calendar's display timezone."""
+def earliest_repeat_booking_date(user, display_zone=None, *, booking_model=None):
+    """First selectable date: tomorrow, and at least 14 days after the last meeting."""
     zone = display_zone or ZoneInfo(SkoolSettings.load().display_timezone)
-    return timezone.localdate(timezone=zone) + timedelta(days=1)
+    tomorrow = timezone.localdate(timezone=zone) + timedelta(days=1)
+    model = booking_model or MeetingBooking
+    latest = (model.objects.filter(user=user).filter(
+        Q(status="completed") | Q(status="active", slot__end_at_utc__lte=timezone.now())
+    ).select_related("slot").order_by("-slot__start_at_utc").first())
+    if latest is None:
+        return tomorrow
+    return max(tomorrow, latest.slot.start_at_utc.astimezone(zone).date() + timedelta(days=14))
 
 
 def send_telegram(text, *, idempotency_key=None):
@@ -217,7 +224,7 @@ def reserve_slot(user, slot_id):
         slot_display_date = slot.start_at_utc.astimezone(display_zone).date()
         if earliest_repeat_date and slot_display_date < earliest_repeat_date:
             raise ValueError(
-                "Görüşmeler yarından itibaren planlanabilir."
+                "İkinci ve sonraki görüşmeler, önceki görüşmeden en erken 14 gün sonrasına planlanabilir."
             )
         validate_bookable_slot(slot)
         if AvailabilityException.objects.filter(
@@ -241,6 +248,9 @@ def reschedule_booking(user, new_slot_id):
         if booking.slot.start_at_utc <= timezone.now() + timedelta(hours=24):
             raise ValueError("Görüşmenize 24 saatten az kaldığı için sistem üzerinden değişiklik yapılamıyor.")
         new_slot = MeetingSlot.objects.select_for_update().get(pk=new_slot_id)
+        earliest_date = earliest_repeat_booking_date(user, ISTANBUL)
+        if new_slot.start_at_utc.astimezone(ISTANBUL).date() < earliest_date:
+            raise ValueError("İkinci ve sonraki görüşmeler, önceki görüşmeden en erken 14 gün sonrasına planlanabilir.")
         validate_bookable_slot(new_slot)
         old_slot = MeetingSlot.objects.select_for_update().get(pk=booking.slot_id)
         new_slot.status = "booked"

@@ -29,6 +29,9 @@
 
       {% include "skool/booking_notice.html" %}
 
+      {% if repeat_booking_available_date %}
+        <div class="notice"><b>Görüşmeler arasında en az 14 gün bulunur.</b><br>Yeni randevunuzu {{ repeat_booking_available_date|date:"d F Y" }} tarihinden itibaren planlayabilirsiniz.</div>
+      {% endif %}
       {% if booking %}
         <div class="success">
           <div class="success-icon">✓</div>
