@@ -510,3 +510,9 @@ class MonitoringTests(TestCase):
                 dashboard_students(config)
         finally:
             cache.clear()
+
+    def test_dashboard_refresh_button_posts_to_cache_invalidation(self):
+        self.client.force_login(self.admin)
+        response = self.client.get(reverse('admin:core_student_monitoring'))
+        self.assertContains(response, 'method="post" action="' + reverse('admin:core_monitoring_refresh') + '"')
+        self.assertNotContains(response, '<form method="get"><button>Verileri yenile</button>')
