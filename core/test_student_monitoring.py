@@ -400,3 +400,113 @@ class MonitoringTests(TestCase):
         response = self.client.post(reverse('admin:core_monitoring_bulk_drafts'), {'dispatch': '1'})
         self.assertEqual(response.context['skipped_count'], 1)
         self.assertEqual(StudentIntervention.objects.count(), 0)
+
+    def test_detail_and_draft_calculate_only_selected_student(self):
+        self.client.force_login(self.admin)
+        with patch('core.monitoring_views.current_students', wraps=current_students) as calculate:
+            response = self.client.get(reverse('admin:core_monitoring_student', args=[self.user.pk]))
+        self.assertEqual(response.status_code, 200)
+        calculate.assert_called_once_with(student_ids=[self.user.pk])
+        with patch('core.student_monitoring.current_students', wraps=current_students) as calculate:
+            create_draft(self.user, self.admin)
+        self.assertEqual(calculate.call_args.kwargs['student_ids'], [self.user.pk])
+
+    def test_dashboard_cache_is_compact_and_refresh_recalculates(self):
+        from django.core.cache import cache
+        from .student_monitoring import dashboard_students
+        cache.clear()
+        config = configuration()
+        try:
+            first = dashboard_students(config)
+            self.assertNotIn('title', first[0]['programs'][0]['lessons'][0])
+            with patch('core.student_monitoring.current_students', side_effect=AssertionError('cache miss')):
+                self.assertEqual(dashboard_students(config), first)
+            self.client.force_login(self.admin)
+            self.assertEqual(self.client.post(reverse('admin:core_monitoring_refresh')).status_code, 302)
+            with patch('core.student_monitoring.current_students', wraps=current_students) as calculate:
+                dashboard_students(config)
+            self.assertTrue(calculate.called)
+            config.days += 1
+            with patch('core.student_monitoring.current_students', wraps=current_students) as calculate:
+                dashboard_students(config)
+            self.assertTrue(calculate.called)
+        finally:
+            cache.clear()
+
+    def test_dashboard_batches_students_before_loading_lessons(self):
+        from django.core.cache import cache
+        from .student_monitoring import dashboard_students
+        cache.clear()
+        for i in range(100):
+            user = CustomUser.objects.create_user(username=f'batch-{i}')
+            ProgramEnrollment.objects.create(user=user, program=self.program, start_date=self.enrollment.start_date)
+        config = configuration()
+        try:
+            with patch('core.student_monitoring.current_students', return_value=[]) as calculate:
+                dashboard_students(config)
+            batches = [call.kwargs['student_ids'] for call in calculate.call_args_list]
+            self.assertEqual([len(batch) for batch in batches], [100, 1])
+            self.assertEqual(len(set(sum(batches, []))), 101)
+        finally:
+            cache.clear()
+
+    def test_default_history_does_not_select_students_json(self):
+        from django.db import connection
+        from django.test.utils import CaptureQueriesContext
+        capture_snapshot()
+        self.client.force_login(self.admin)
+        with CaptureQueriesContext(connection) as queries:
+            response = self.client.get(reverse('admin:core_student_monitoring'))
+        self.assertEqual(response.status_code, 200)
+        history_queries = [q['sql'] for q in queries if 'core_dailymonitoringsnapshot' in q['sql']]
+        self.assertTrue(history_queries)
+        for sql in history_queries:
+            self.assertNotIn('"students"', sql)
+        response = self.client.get(reverse('admin:core_student_monitoring'), {'search': self.user.email})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['history'][0]['students'], 1)
+
+    def test_compact_dashboard_keeps_shared_course_filter_totals(self):
+        from django.core.cache import cache
+        from .student_monitoring import dashboard_students, metrics, filter_students
+        cache.clear()
+        p = LearningProgram.objects.create(name='Shared', slug='compact-shared')
+        LearningProgramStep.objects.create(program=p, course=self.courses[0], day_offset=0)
+        ProgramEnrollment.objects.create(user=self.user, program=p, start_date=self.enrollment.start_date)
+        config = configuration()
+        try:
+            compact = dashboard_students(config)
+            full = current_students(config)
+            for filters in [{}, {'program_id': p.pk}, {'enrollment_status': ''}, {'search': self.user.email}]:
+                self.assertEqual(metrics(filter_students(compact, config, **filters)),
+                                 metrics(filter_students(full, config, **filters)))
+        finally:
+            cache.clear()
+
+    def test_dashboard_cache_detects_changes_from_other_workers(self):
+        from django.core.cache import cache
+        from .student_monitoring import dashboard_students
+        cache.clear()
+        config = configuration()
+        try:
+            dashboard_students(config)
+            # Another worker writes the audit without touching this local cache.
+            MonitoringAudit.objects.create(action='monitoring_refreshed')
+            with patch('core.student_monitoring.current_students', wraps=current_students) as calculate:
+                dashboard_students(config)
+            self.assertTrue(calculate.called)
+        finally:
+            cache.clear()
+
+    def test_warm_dashboard_avoids_all_progress_queries(self):
+        from django.core.cache import cache
+        from .student_monitoring import dashboard_students
+        cache.clear()
+        config = configuration()
+        try:
+            dashboard_students(config)
+            # Only the indexed audit revision is checked; no lessons/visits loaded.
+            with self.assertNumQueries(1):
+                dashboard_students(config)
+        finally:
+            cache.clear()

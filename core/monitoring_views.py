@@ -15,7 +15,7 @@ from .models import (CustomUser, LearningProgram, LearningProgramStep, ProgramEn
     MonitoringSettings, LessonEvidence, EnrollmentMonitoringPolicy, MonitoringPause,
     MonitoringLessonOverride, StudentIntervention, DailyMonitoringSnapshot, MonitoringAudit)
 from .student_monitoring import (configuration, current_students, filter_students, metrics,
-    settings_data, audit, capture_snapshot, create_draft, prepare_all_drafts, mailto)
+    settings_data, audit, capture_snapshot, create_draft, prepare_all_drafts, mailto, dashboard_students)
 
 
 def authorized(write=False):
@@ -69,7 +69,7 @@ def dashboard(request):
     data = form.cleaned_data if valid else {}
     program_id = data['program'].pk if data.get('program') else ''
     filters = dict(program_id=program_id, enrollment_status=data.get('enrollment_status', 'active'), warning_status=data.get('warning_status', ''), search=data.get('search', ''))
-    rows = filter_students([r for r in current_students(config) if r.get('console_pending', True)], config, **filters)
+    rows = filter_students([r for r in dashboard_students(config) if r.get('console_pending', True)], config, **filters)
     totals = metrics(rows)
     key = data.get('sort') or '-overdue'
     known_rows = [r for r in rows if r[key.lstrip('-')] is not None]
@@ -78,19 +78,30 @@ def dashboard(request):
     rows = known_rows + unknown_rows
     today = timezone.localdate()
     start, end = data.get('start') or today - timedelta(days=29), data.get('end') or today
-    snapshots = DailyMonitoringSnapshot.objects.filter(reporting_date__range=(start, end))
-    history = []
-    for snap in snapshots:
-        saved_config = SimpleNamespace(**snap.settings_snapshot)
-        selected = filter_students(snap.students, saved_config, **filters)
-        daily = metrics(selected)
-        daily['warnings_today'] = sum(r.get('warnings_today', 0) for r in selected)
-        daily['resolved_today'] = sum(r.get('resolved_today', 0) for r in selected)
-        history.append({'date': snap.reporting_date.isoformat(), **daily})
-    comparisons = []
-    for days, label in [(0, 'Bugün'), (1, 'Dün'), (7, '7 gün önce'), (30, '30 gün önce')]:
-        snap = DailyMonitoringSnapshot.objects.filter(reporting_date=today-timedelta(days=days)).first()
-        comparisons.append({'label': label, 'date': today-timedelta(days=days), 'metrics': metrics(filter_students(snap.students, SimpleNamespace(**snap.settings_snapshot), **filters)) if snap else None})
+    # Unfiltered history already has saved totals; avoid loading students JSON.
+    filtered_history = filters != dict(
+        program_id='', enrollment_status='active', warning_status='', search='')
+    fields = ['reporting_date', 'metrics']
+    if filtered_history:
+        fields += ['students', 'settings_snapshot']
+    def historical_metrics(snap):
+        if not filtered_history:
+            return snap.metrics
+        selected = filter_students(snap.students, SimpleNamespace(**snap.settings_snapshot), **filters)
+        return {**metrics(selected),
+            'warnings_today': sum(r.get('warnings_today', 0) for r in selected),
+            'resolved_today': sum(r.get('resolved_today', 0) for r in selected)}
+    start = max(start, end - timedelta(days=365))
+    snapshots = DailyMonitoringSnapshot.objects.filter(reporting_date__range=(start, end)).only(*fields)
+    history = [{'date': snap.reporting_date.isoformat(), **historical_metrics(snap)}
+               for snap in snapshots.iterator(chunk_size=1)]
+    comparison_days = [(days, label, today-timedelta(days=days)) for days, label in
+                       [(0, 'Bugün'), (1, 'Dün'), (7, '7 gün önce'), (30, '30 gün önce')]]
+    saved = {snap.reporting_date: historical_metrics(snap) for snap in
+             DailyMonitoringSnapshot.objects.filter(reporting_date__in=[d for _, _, d in comparison_days])
+             .only(*fields).iterator(chunk_size=1)}
+    comparisons = [{'label': label, 'date': day, 'metrics': saved.get(day)}
+                   for _, label, day in comparison_days]
     page = Paginator(rows, 30).get_page(request.GET.get('page'))
     query = request.GET.copy()
     query.pop('page', None)
@@ -125,7 +136,7 @@ def refresh(request):
 @authorized()
 def student_detail(request, student_id):
     student = get_object_or_404(CustomUser, pk=student_id)
-    row = next((r for r in current_students() if r['id'] == student_id), None)
+    row = next((r for r in current_students(student_ids=[student_id]) if r['id'] == student_id), None)
     if not row:
         return HttpResponseBadRequest('Öğrencinin program kaydı bulunmuyor.')
     return render(request, 'admin/monitoring/student.html', context(request, student=student, row=row,
@@ -183,7 +194,7 @@ def intervention_action(request, intervention_id):
         if action == 'sent':
             if request.POST.get('confirm_sent') != 'on':
                 return HttpResponseBadRequest('Elle gönderildi olarak işaretlemek için açık onay gereklidir.')
-            obj.progress_snapshot['marked_sent'] = next((r for r in current_students() if r['id'] == obj.student_id), {})
+            obj.progress_snapshot['marked_sent'] = next((r for r in current_students(student_ids=[obj.student_id]) if r['id'] == obj.student_id), {})
             obj.monitoring_settings['marked_sent'] = settings_data(configuration())
             obj.status = 'sent'
             obj.marked_sent_at = timezone.now()

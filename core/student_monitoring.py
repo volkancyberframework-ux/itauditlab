@@ -3,6 +3,7 @@ from collections import defaultdict
 from datetime import datetime, time, timedelta
 from urllib.parse import urlencode, quote
 from zoneinfo import ZoneInfo
+from django.core.cache import cache
 from django.db import transaction
 from django.db.models import Max, Prefetch, Count
 from django.forms.models import model_to_dict
@@ -11,6 +12,14 @@ from .models import (ProgramEnrollment, ProgramRelease, Enrollment, CustomUser,
     LearningProgramStep, PageVisit, MonitoringSettings, LessonEvidence,
     StudentIntervention, MonitoringAudit, DailyMonitoringSnapshot)
 
+DASHBOARD_CACHE_KEY = 'core:monitoring:rows:v2'
+DASHBOARD_CACHE_SECONDS = 60
+
+
+def invalidate_dashboard():
+    cache.delete(DASHBOARD_CACHE_KEY)
+
+
 STATUS_LABELS = {'on_track': 'Takviminde', 'behind': 'Geride', 'critical': 'Kritik', 'unknown': 'Bilinmiyor'}
 
 def settings_data(config):
@@ -18,6 +27,8 @@ def settings_data(config):
 
 
 def audit(actor, action, before=None, after=None, student=None, intervention=None, reason=''):
+    invalidate_dashboard()
+    transaction.on_commit(invalidate_dashboard)
     return MonitoringAudit.objects.create(actor=actor, actor_email=actor.email if actor else '', action=action,
         before=before or {}, after=after or {}, student=student, intervention=intervention, reason=reason)
 
@@ -76,27 +87,57 @@ def aggregate_programs(programs, config):
         'status': status, 'status_label': ('Program tamamlandı' if values and all(x['state'] == 'completed' for x in values) else STATUS_LABELS[status]), 'is_complete': bool(values) and all(x['state'] == 'completed' for x in values)}
 
 
-def current_students(config=None, now=None):
+def current_students(config=None, now=None, student_ids=None):
     config = config or configuration()
     now = now or timezone.now()
     tz = ZoneInfo(config.administrative_timezone)
-    enrollments = list(ProgramEnrollment.objects.select_related('user', 'program', 'monitoring_policy').prefetch_related(
-        Prefetch('program__steps', queryset=LearningProgramStep.objects.select_related('course').defer('course__description').order_by('day_offset', 'order', 'pk')),
-        'releases', 'monitoring_overrides', 'monitoring_pauses').order_by('user_id', 'pk'))
+    queryset = ProgramEnrollment.objects.all()
+    if student_ids is not None:
+        queryset = queryset.filter(user_id__in=student_ids)
+    enrollments = list(queryset.select_related('user', 'program', 'monitoring_policy').only(
+        'id', 'user_id', 'program_id', 'start_date', 'is_active',
+        'user__id', 'user__username', 'user__first_name', 'user__last_name',
+        'user__email', 'user__is_active', 'user__last_login',
+        'program__id', 'program__name', 'program__is_active',
+        'monitoring_policy__id', 'monitoring_policy__enrollment_id', 'monitoring_policy__status',
+    ).prefetch_related(
+        Prefetch('releases', queryset=ProgramRelease.objects.only('id', 'enrollment_id', 'step_id', 'access_granted_at')),
+        'monitoring_overrides', 'monitoring_pauses').order_by('user_id', 'pk'))
+    if not enrollments:
+        return []
+    # Programs are shared: fetch their steps once rather than once per enrollment.
+    steps = defaultdict(list)
+    for step in LearningProgramStep.objects.filter(program_id__in={e.program_id for e in enrollments}).select_related('course').only(
+        'id', 'program_id', 'course_id', 'day_offset', 'order',
+        'course__id', 'course__turkish_name', 'course__english_name', 'course__course_type',
+    ).order_by('day_offset', 'order', 'pk'):
+        steps[step.program_id].append(step)
     user_ids = {e.user_id for e in enrollments}
-    evidence = {(x.user_id, x.course_id): x for x in LessonEvidence.objects.filter(user_id__in=user_ids)}
-    enrolled = {(x.user_id, x.course_id): x for x in Enrollment.objects.filter(user_id__in=user_ids)}
+    evidence = {(x.user_id, x.course_id): x for x in LessonEvidence.objects.filter(user_id__in=user_ids).defer('evidence')}
+    enrolled = {(x.user_id, x.course_id): x for x in Enrollment.objects.filter(user_id__in=user_ids).only('user_id', 'course_id', 'enrolled_at', 'is_automatic')}
     videos = {key: x.enrolled_at for key, x in enrolled.items()}
     test_access = set(CustomUser.allowed_tests.through.objects.filter(customuser_id__in=user_ids).values_list('customuser_id', 'course_id'))
     access_dates = {}
-    for r in ProgramRelease.objects.filter(enrollment__user_id__in=user_ids, access_granted_at__isnull=False).select_related('enrollment', 'step'):
+    for r in ProgramRelease.objects.filter(enrollment__user_id__in=user_ids, access_granted_at__isnull=False).select_related('enrollment', 'step').only('access_granted_at', 'enrollment__user_id', 'step__course_id'):
         key = (r.enrollment.user_id, r.step.course_id)
         access_dates[key] = min(access_dates.get(key, r.access_granted_at), r.access_granted_at)
     visits = {v['user_id']: max(filter(None, [v['latest'], v['seen']])) for v in
         PageVisit.objects.filter(user_id__in=user_ids).values('user_id').annotate(latest=Max('created_at'), seen=Max('last_seen'))}
     interventions = defaultdict(list)
-    for w in StudentIntervention.objects.filter(student_id__in=user_ids).only('id', 'student_id', 'status', 'created_at', 'marked_sent_at', 'progress_snapshot').order_by('-created_at', '-pk'):
+    for w in StudentIntervention.objects.filter(student_id__in=user_ids).only('id', 'student_id', 'status', 'created_at', 'marked_sent_at').order_by('-created_at', '-pk'):
         interventions[w.student_id].append(w)
+    # Only the latest sent snapshot is needed to decide whether to follow up.
+    # Read one at a time and retain course IDs, not full historical lesson JSON.
+    latest_sent = {}
+    for uid, history in interventions.items():
+        sent = [w for w in history if w.marked_sent_at]
+        if sent:
+            latest_sent[uid] = max(sent, key=lambda w: (w.marked_sent_at, w.pk))
+    notified_courses = {}
+    if latest_sent:
+        for pk, snapshot in StudentIntervention.objects.filter(
+                pk__in=[w.pk for w in latest_sent.values()]).values_list('pk', 'progress_snapshot').iterator(chunk_size=1):
+            notified_courses[pk] = overdue_course_ids(snapshot.get('marked_sent', snapshot))
     activities = defaultdict(list)
     for (uid, _), ev in evidence.items():
         if ev.last_accessed_at:
@@ -112,7 +153,7 @@ def current_students(config=None, now=None):
         releases = {x.step_id: x for x in e.releases.all()}
         pauses = list(e.monitoring_pauses.all())
         lessons = []
-        for step in e.program.steps.all():
+        for step in steps[e.program_id]:
             key = (e.user_id, step.course_id)
             ev = evidence.get(key)
             ov = overrides.get(step.pk)
@@ -187,9 +228,37 @@ def current_students(config=None, now=None):
             latest_unresolved = next((w for w in history if w.status in ('sent', 'awaiting', 'responded', 'meeting')), history[0])
             row['warning_status'], row['warning_status_label'] = latest_unresolved.status, latest_unresolved.get_status_display()
         row['open_intervention'] = any(w.status != 'resolved' for w in history)
-        latest_sent = max(sent, key=lambda w: (w.marked_sent_at, w.pk)) if sent else None
-        row['console_pending'] = needs_followup(row, latest_sent)
+        latest = latest_sent.get(row['id'])
+        row['console_pending'] = latest is None or bool(overdue_course_ids(row) - notified_courses[latest.pk])
     return list(rows.values())
+
+
+def dashboard_students(config):
+    payload = cache.get(DASHBOARD_CACHE_KEY)
+    settings = settings_data(config)
+    # Audit IDs also invalidate caches in other Gunicorn workers.
+    revision = MonitoringAudit.objects.order_by('-pk').values_list('pk', flat=True).first()
+    if payload is not None and payload['settings'] == settings and payload['revision'] == revision:
+        return payload['rows']
+    rows = []
+    ids = ProgramEnrollment.objects.order_by('user_id').values_list('user_id', flat=True).distinct()
+    batch = []
+    def collect(student_ids):
+        for row in current_students(config, student_ids=student_ids):
+            for program in row['programs']:
+                program['lessons'] = [{key: lesson[key] for key in (
+                    'course_id', 'exempt', 'required', 'delay_days', 'overdue', 'state', 'available',
+                )} for lesson in program['lessons']]
+            rows.append(row)
+    for student_id in ids.iterator(chunk_size=100):
+        batch.append(student_id)
+        if len(batch) == 100:
+            collect(batch)
+            batch = []
+    if batch:
+        collect(batch)
+    cache.set(DASHBOARD_CACHE_KEY, {'settings': settings, 'revision': revision, 'rows': rows}, DASHBOARD_CACHE_SECONDS)
+    return rows
 
 
 def filter_students(rows, config, program_id='', enrollment_status='active', warning_status='', search=''):
@@ -312,7 +381,7 @@ def create_draft(student, actor, confirm_duplicate=False):
     # Lock the shared student row to serialize duplicate drafts from concurrent tabs.
     CustomUser.objects.select_for_update().get(pk=student.pk)
     config = configuration()
-    row = next((r for r in current_students(config) if r['id'] == student.pk), None)
+    row = next((r for r in current_students(config, student_ids=[student.pk]) if r['id'] == student.pk), None)
     return _create_draft_from_row(student, actor, row, config, confirm_duplicate)
 
 
@@ -386,3 +455,24 @@ def prepare_all_drafts(actor, dispatch=False):
         prepared.append(item)
     audit(actor, 'bulk_drafts_prepared', after={'created': created, 'reused': reused, 'skipped': skipped})
     return prepared, created, reused, skipped
+
+
+# Changes made by admin and program automation should refresh this worker immediately.
+# The shared audit revision handles monitoring mutations in other workers; external
+# activity is visible in all workers within the 60-second cache lifetime.
+from django.db.models.signals import post_save, post_delete, m2m_changed
+from .models import EnrollmentMonitoringPolicy, MonitoringPause, MonitoringLessonOverride, Course
+
+
+def _monitoring_changed(sender, **kwargs):
+    invalidate_dashboard()
+    transaction.on_commit(invalidate_dashboard)
+
+
+for _model in (ProgramEnrollment, ProgramRelease, Enrollment, LessonEvidence,
+               LearningProgramStep, EnrollmentMonitoringPolicy, MonitoringPause,
+               MonitoringLessonOverride, Course, CustomUser, MonitoringSettings, StudentIntervention):
+    post_save.connect(_monitoring_changed, sender=_model, dispatch_uid=f'monitoring-save-{_model._meta.label}')
+    post_delete.connect(_monitoring_changed, sender=_model, dispatch_uid=f'monitoring-delete-{_model._meta.label}')
+m2m_changed.connect(_monitoring_changed, sender=CustomUser.allowed_tests.through,
+                    dispatch_uid='monitoring-test-access')
