@@ -322,6 +322,9 @@ class Enrollment(models.Model):
     orientation_seen = models.BooleanField(default=False)
     is_automatic = models.BooleanField(default=False, help_text="Program otomasyonunun açtığı erişim; öğrencinin kendi kaydı değildir.")
 
+    is_archived = models.BooleanField(default=False, verbose_name="Arşivde", help_text="Öğrencinin listesinden kaldırılmıştır; geçmiş kayıt korunur.")
+    restored_from_access = models.BooleanField(default=False, editable=False, verbose_name="Giriş kanıtından geri getirildi", help_text="Kayıt zamanı gerçek ilk ders erişiminden alınmıştır; özgün enrollment zamanı bilinmez.")
+
     class Meta:
         unique_together = ('user', 'course')
 
@@ -547,39 +550,41 @@ from django.dispatch import receiver
 import requests
 
 
+from django.db.models.signals import pre_save, post_delete
+
+
+@receiver(pre_save, sender=Enrollment)
+def enrollment_previous_state(sender, instance, using, raw=False, **kwargs):
+    fields = kwargs.get("update_fields")
+    if raw or not instance.pk or (fields is not None and not {"is_automatic", "is_archived"}.intersection(fields)):
+        instance._previous_enrollment_state = None
+        return
+    instance._previous_enrollment_state = sender.objects.using(using).filter(
+        pk=instance.pk
+    ).values_list("is_automatic", "is_archived").first()
+
+
 @receiver(post_save, sender=Enrollment)
-def enrollment_telegram_notification(sender, instance, created, **kwargs):
-    if not created:
+def enrollment_telegram_notification(sender, instance, created, using, raw=False, **kwargs):
+    from .enrollment_notifications import schedule_notification
+    if raw or instance.is_automatic or instance.is_archived:
         return
+    previous = getattr(instance, "_previous_enrollment_state", None)
+    if created or (previous and any(previous)):
+        schedule_notification(instance.pk, instance.user_id, instance.course_id, using)
 
-    bot_token = getattr(settings, "TELEGRAM_BOT_TOKEN", "")
-    chat_id = getattr(settings, "TELEGRAM_CHAT_ID", "")
 
-    if not bot_token or not chat_id:
-        return
+@receiver(post_delete, sender=Enrollment)
+def enrollment_deletion_log(sender, instance, using, **kwargs):
+    import logging
+    from functools import partial
+    from django.db import transaction
+    transaction.on_commit(partial(
+        logging.getLogger("django.enrollment").warning,
+        "enrollment_deleted enrollment_id=%s user_id=%s course_id=%s automatic=%s database=%s",
+        instance.pk, instance.user_id, instance.course_id, instance.is_automatic, using,
+    ), using=using)
 
-    try:
-        requests.post(
-            f"https://api.telegram.org/bot{bot_token}/sendMessage",
-            data={
-                "chat_id": chat_id,
-                "text": f"""
-🎓 Yeni Enrollment
-
-👤 Kullanıcı:
-{instance.user.email}
-
-📚 Kurs:
-{instance.course.turkish_name}
-
-🆔 Course ID:
-{instance.course.id}
-"""
-            },
-            timeout=5,
-        )
-    except Exception as e:
-        print("Telegram enrollment notification error:", e)
 
 # Keep CORE's monitoring domain together while registering models in this app.
 from .monitoring_models import (  # noqa: E402,F401

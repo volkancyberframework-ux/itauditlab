@@ -482,7 +482,9 @@ class EnrollmentInline(admin.TabularInline):
     extra = 0
     autocomplete_fields = ("course",)
     verbose_name = "Enrollment"
-    verbose_name_plural = "Enrollments"
+    verbose_name_plural = "Enrollments — aktif kayıtlar ve korunan geçmiş"
+    fields = ("course", "enrolled_at", "orientation_seen", "is_automatic", "is_archived", "restored_from_access")
+    readonly_fields = ("enrolled_at", "restored_from_access")
 
 
 class QuickStudentCreateForm(forms.Form):

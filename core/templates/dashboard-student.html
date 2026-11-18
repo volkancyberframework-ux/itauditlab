@@ -111,10 +111,10 @@
                                               </div>
                                               <div class="col-auto">
                                                 {% if course.id in enrolled_course_ids %}
-                                                  <form method="POST" action="{% url 'unenroll_course' %}" onsubmit="return confirm('Bu eğitimden ayrılmak istediğinize emin misiniz?');">
+                                                  <form method="POST" action="{% url 'unenroll_course' %}" onsubmit="return confirm('Bu eğitimi listenizden kaldırmak istiyor musunuz? Ders geçmişiniz korunacaktır.');">
                                                     {% csrf_token %}
                                                     <input type="hidden" name="course_id" value="{{ course.id }}">
-                                                    <button class="btn btn-outline-danger btn-sm">Eğitimden Ayrıl</button>
+                                                    <button class="btn btn-outline-danger btn-sm">Listemden Kaldır</button>
                                                   </form>
                                                   {% else %}
                                                     <form method="POST"
@@ -171,10 +171,10 @@
                                                 <span>{{ course.preparer.first_name }} {{ course.preparer.last_name }}</span>
                                               </div>
                                               <div class="col-auto">
-                                                <form method="POST" action="{% url 'unenroll_course' %}" onsubmit="return confirm('Bu eğitimden ayrılmak istediğinize emin misiniz?');">
+                                                <form method="POST" action="{% url 'unenroll_course' %}" onsubmit="return confirm('Bu eğitimi listenizden kaldırmak istiyor musunuz? Ders geçmişiniz korunacaktır.');">
                                                   {% csrf_token %}
                                                   <input type="hidden" name="course_id" value="{{ course.id }}">
-                                                  <button class="btn btn-outline-danger btn-sm">Eğitimden Ayrıl</button>
+                                                  <button class="btn btn-outline-danger btn-sm">Listemden Kaldır</button>
                                                 </form>
                                               </div>
                                             </div>

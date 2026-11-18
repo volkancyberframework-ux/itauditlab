@@ -16,7 +16,7 @@ def student_program_calendar(user, today=None):
     ))
     if not enrollments:
         return []
-    enrolled_ids = set(Enrollment.objects.filter(user=user).values_list('course_id', flat=True))
+    enrolled_ids = set(Enrollment.objects.filter(user=user, is_archived=False).values_list('course_id', flat=True))
     test_ids = set(user.allowed_tests.values_list('id', flat=True))
     calendars = []
     for enrollment in enrollments:

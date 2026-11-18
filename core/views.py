@@ -197,7 +197,7 @@ def force_password_change_popup(request):
 def unenroll_course(request):
     if request.method == 'POST':
         course_id = request.POST.get('course_id')
-        Enrollment.objects.filter(user=request.user, course_id=course_id).delete()
+        Enrollment.objects.filter(user=request.user, course_id=course_id).update(is_archived=True)
         # keep the Enrolled tab active after POST
         return redirect('/dashboard-student/#currentlyLearning')
     return redirect('dashboard_student')
@@ -276,7 +276,7 @@ def course_single(request, pk):
             return redirect("dashboard_student")
     else:
         # videos: require enrollment (unless staff)
-        enrollment = Enrollment.objects.filter(user=request.user, course=course).first()
+        enrollment = Enrollment.objects.filter(user=request.user, course=course, is_archived=False).first()
         if not (request.user.is_staff or request.user.is_superuser or enrollment):
             messages.error(request, "Please enroll to access this course.")
             # send them to the list; you can keep the tab anchor if you like
@@ -305,10 +305,12 @@ def course_single(request, pk):
 
     if not request.user.is_staff and not request.user.is_superuser:
         student_enrollment, _ = Enrollment.objects.get_or_create(user=request.user, course=course)
-        if student_enrollment.is_automatic:
+        if student_enrollment.is_automatic or student_enrollment.is_archived:
             student_enrollment.is_automatic = False
+            student_enrollment.is_archived = False
+            student_enrollment.restored_from_access = False
             student_enrollment.enrolled_at = accessed_at
-            student_enrollment.save(update_fields=["is_automatic", "enrolled_at"])
+            student_enrollment.save(update_fields=["is_automatic", "enrolled_at", "is_archived", "restored_from_access"])
 
     # ---- normal view rendering below (unchanged) ----
     sections_qs = course.sections.annotate(
@@ -350,7 +352,7 @@ def course_single(request, pk):
 @require_POST
 def mentorship_request(request, pk):
     course = get_object_or_404(Course, pk=pk)
-    allowed = request.user.is_staff or request.user.is_superuser or Enrollment.objects.filter(user=request.user, course=course).exists()
+    allowed = request.user.is_staff or request.user.is_superuser or Enrollment.objects.filter(user=request.user, course=course, is_archived=False).exists()
     if not allowed:
         return HttpResponseForbidden("Bu eğitim için erişiminiz bulunmuyor.")
     request_type = request.POST.get("request_type", "").strip()
@@ -536,10 +538,12 @@ def dashboard_student(request):
         if warning is not None:
             return warning
         item, _ = Enrollment.objects.get_or_create(user=user, course=course)
-        if item.is_automatic:
+        if item.is_automatic or item.is_archived:
             item.is_automatic = False
+            item.is_archived = False
+            item.restored_from_access = False
             item.enrolled_at = timezone.now()
-            item.save(update_fields=["is_automatic", "enrolled_at"])
+            item.save(update_fields=["is_automatic", "enrolled_at", "is_archived", "restored_from_access"])
         return redirect('/dashboard-student/#currentlyLearning')
 
     # Görünecek kurslar (dil + dashboard_activated)
@@ -558,7 +562,7 @@ def dashboard_student(request):
 
     # Enroll olan kurs ID'leri
     enrolled_course_ids = list(
-        Enrollment.objects.filter(user=user, is_automatic=False).values_list('course_id', flat=True)
+        Enrollment.objects.filter(user=user, is_automatic=False, is_archived=False).values_list('course_id', flat=True)
     )
 
     # Enrolled sekmesi (görünürlük filtresi + ID sıralı)
